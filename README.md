@@ -1,6 +1,20 @@
 # 项目介绍
 
+    应用程序构建基础： 
+        - `electron` 
+        - `react`
+        - `webpack`
 
+
+## 依赖安装
+
+### 依赖介绍
+
+### 安装问题记录
+
+
+
+---
 ## 风格规范
 
 ### 提交规范
@@ -31,18 +45,37 @@
 | base    | 项目基础构建流程                           | `base(git): 配置\更新 git 忽略文件`       |
 
 
+
+---
+
 ## 项目架构
 
 
 ### 目录结构
 
-```txt
-- extend                          ---  不被打包进 asar 的目录                               --- (存放在 `app.asar.unpacked`)
-    - icns                        ---
-- extensions                      ---  用于存放扩展（项目、文件）
-- node_modules.asar.unpacked      ---  用于存放 extend 中 node js script 的依赖项           --- (存放在 `app.asar.unpacked`)
-- (File)    .gitignore            ---  git 忽略配置 
-- (File)    package.json          ---  npm 配置文件
-- (File)    README.md             ---  项目介绍
-- (File)    LICENSE               ---  协议 （MIT）
-```
+> 字符说明
+> - `None` 表示暂无此项
+> - `Ignore` 被 Git 忽略的
+> - `SG` 主动生成目录或文件
+> - `UNG` 被动生成目录或文件
+> - `File` 表示文件类型
+> - `Folder` 表示目录类型
+> - `Pedding` 表示后期可能会变动
+
+
+- **Folder-Ignore-SG** `bin`:  源码经过编译后的输出目录
+- **Folder-Ignore-SG** `app`:  源码经过编译后的输出目录
+- **Folder** `extend`:  不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
+    - **Folder-Pedding** `icns`:  用于存放应用图集文件
+- **Folder** `extensions`:  用于存放应用扩展(项目、文件)，如：react 插件等。
+- **Folder-None** `licenses`:  用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
+- **Folder-Pedding** `node_modules.asar.unpacked`:  用于存放 extend 中 node js script 的依赖项 (存放在 `app.asar.unpacked`)
+- **Folder-Ignore-SG** `private`:  用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。
+    - **Folder-Ignore-SG** `ssl`:  用于存放 `https` 协议所需要的证书文件
+    - **Folder-Ignore-SG** `secret`:  用于存放账户密码等重要文件的目录
+- **File** `.gitattributes`:  Git 版本控制系统中的一个配置文件，用于指定如何处理文件的属性和行为
+- **File** `.gitignore`:  git 忽略配置 
+- **File** `package.json`:  npm 配置文件
+- **File** `README.md`:  项目介绍
+- **File** `LICENSE`:  开源协议 (MIT)
+- **File-None** `LICENSE.rtf`:  软件许可协议条款 (中简版本)
