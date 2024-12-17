@@ -41,6 +41,7 @@
 | del      | 删除代码或文件                     | `del(deprecated): 移除废弃代码`             |
 | assets   | 添加资源                           | `asset(icns): 添加一些 Icns 图标资源`       |
 | base     | 项目基础构建流程                   | `base(git): 配置\更新 git 忽略文件`         |
+| editor   | 编辑器配置与修改                   | `editor(vscode): 配置 vscode`               |
 
 ---
 
