@@ -9,5 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "electron": "^33.2.1"
+  }
 }
