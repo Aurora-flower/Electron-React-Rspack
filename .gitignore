@@ -1,0 +1,11 @@
+
+# ********************************* Folder 
+# 环境生成目录
+bin
+
+# 不被打包的 node_modules 依赖文件
+node_modules.asar.unpacked
+
+
+# 扩展目录 - 暂时不确定的忽略
+extensions

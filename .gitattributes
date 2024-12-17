@@ -1,0 +1,15 @@
+# 表示示所有文本文件的换行符都应使用 LF（Unix 风格的换行符）
+*       text    eol=lf 
+
+# 用于 Git 仓库中指定文件属性，定义仓库中不同文件的处理方式
+*.exe   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.ico   binary
+*.icns  binary
+*.eot   binary
+*.otf   binary
+*.ttf   binary
+*.woff  binary
+*.woff2 binary
