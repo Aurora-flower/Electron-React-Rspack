@@ -27,7 +27,8 @@
 | merge    | 分支合并操作                       | `merge(branch): 合并 develop 分支至 master` |
 | bug      | 修正非功能性问题或小错误           | `bug(syntax): 修正语法错误`                 |
 | del      | 删除代码或文件                     | `del(deprecated): 移除废弃代码`             |
-| asset    | 添加资源                           | `asset(icns): 添加一些 Icns 图标资源`       |
+| assets    | 添加资源                           | `asset(icns): 添加一些 Icns 图标资源`       |
+| base    | 项目基础构建流程                           | `base(git): 配置\更新 git 忽略文件`       |
 
 
 ## 项目架构
