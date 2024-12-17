@@ -35,6 +35,9 @@ node_modules
 # .vscode
 .idea
 
+# 应用配置目录
+local
+
 # 其他输出
 dist
 out

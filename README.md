@@ -60,6 +60,7 @@
 > - `Pedding` 表示后期可能会变动
 
 - **Folder** `.vscode`: vs code 编辑器配置目录
+- **Folder** `.config`: 项目配置目录
 - **Folder-Ignore-SG** `app`: 源码经过编译后的输出目录
 - **Folder-Ignore-SG** `backup`: 用于存放本地临时备份文件
 - **Folder-Ignore-SG** `cache`: 主进程运行缓存目录
@@ -72,7 +73,7 @@
   - **Folder** `extensions`: 用于存放应用扩展插件，如：react 插件等。
   - **Folder** `polyfill`: 用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。
   - **Folder-Pedding** `external`: 外部文件
-  - **Folder-Pedding** `node_modules.asar.unpacked`: 用于存放 extend 中 node js script 的依赖项 (存放在 `app.asar.unpacked`)
+  - **Folder-Pedding** `node_modules.asar.unpacked`: 用于存放 extend 中 node js script 的依赖项
 
 - **Folder** `licenses`: 用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
 
@@ -88,9 +89,14 @@
     - **Folder** `images`: 用于存放图片
 
 - **Folder-Ignore-SG** `release`: 应用程序构建的输出目录。
-- **Folder** `resoures`: 被打包或引入编译的静态文件
+
+- **Folder** `resoures`: 被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
+
   - **Folder** `icon`: 应用图标
-  - **Folder** `.config`: 应用配置
+  - **Folder** `text`: 文本文件
+
+- **Folder-Ignore-SG** `local`: 应用配置目录
+
 - **Folder** `src`: application 源码目录
 - **Folder** `temp`: 临时文件目录，希望在 git 提交历史中，不被意外丢失，但没有什么用处。
 - **Folder** `template`: 各种学习示例目录
