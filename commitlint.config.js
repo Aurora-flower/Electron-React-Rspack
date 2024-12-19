@@ -1,7 +1,6 @@
 module.exports = {
   extends: ["@commitlint/config-conventional"],
   rules: {
-    "header-max-length": [2, "always", 100],
     // type-enum: 定义提交类型
     "type-enum": [
       2,
