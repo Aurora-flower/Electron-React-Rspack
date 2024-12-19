@@ -16,15 +16,24 @@
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.17.0",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@typescript-eslint/parser": "^8.18.1",
     "electron": "^33.2.1",
     "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "globals": "^15.14.0",
     "husky": "^9.1.7",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "typescript-eslint": "^8.18.1"
   },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/a-room-of-jacaranda/er.git"
   }
 }

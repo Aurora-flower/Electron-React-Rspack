@@ -7,6 +7,28 @@
 
 ## 依赖安装
 
+> electron
+> 应用程序
+
+> react
+> 前端库
+
+```shell
+npm install react react-dom
+npm install @types/react @types/react-dom --save-dev
+```
+
+> eslint
+> 语法校验
+
+```shell
+# 命令
+npm init @eslint/config
+
+# 选择后，提示安装 （等价于）
+npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
+```
+
 ### 依赖介绍
 
 ### 安装问题记录

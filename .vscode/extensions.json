@@ -1,11 +1,13 @@
 {
   "recommendations": [
-    "formulahendry.code-runner",
+    "DavidAnson.vscode-markdownlint",
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
     "esbenp.prettier-vscode",
     "ritwickdey.liveserver",
-    "alibaba.tongyi-linma",
-    "mhutchie.git-graph"
+    "Alibaba-Cloud.tongyi-lingma",
+    "mhutchie.git-graph",
+    "formulahendry.code-runner",
+    "rvest.vs-code-prettier-eslint"
   ]
 }
