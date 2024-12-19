@@ -1,0 +1,23 @@
+# package
+node_modules/
+package-lock.json
+
+# temp
+.DS_Store
+
+.private.env
+
+# compile 输出目录
+app
+out
+release
+
+# 私密目录
+backup
+private
+
+# test
+*test*
+
+# other
+~*.*
