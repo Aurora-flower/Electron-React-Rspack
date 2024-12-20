@@ -1,0 +1,90 @@
+[
+  {
+    "version": "0.0.1",
+    "devDependencies": {
+      "@commitlint/cli": {
+        "version": "^19.6.1",
+        "description": {},
+        "changed": [
+          {
+            "type": "outdated",
+            "version": "",
+            "message": ""
+          }
+        ]
+      },
+      "@commitlint/config-conventional": {
+        "version": "^19.6.0",
+        "description": {},
+        "changed": []
+      },
+      "@eslint/js": {
+        "version": "^9.17.0",
+        "description": {},
+        "changed": []
+      },
+      "@types/react": {
+        "version": "^19.0.2",
+        "description": {},
+        "changed": []
+      },
+      "@types/react-dom": {
+        "version": "^19.0.2",
+        "description": {},
+        "changed": []
+      },
+      "@typescript-eslint/parser": {
+        "version": "^8.18.1",
+        "description": {},
+        "changed": []
+      },
+      "electron": {
+        "version": "^33.2.1",
+        "description": {},
+        "changed": []
+      },
+      "eslint": {
+        "version": "^9.17.0",
+        "description": {},
+        "changed": []
+      },
+      "eslint-plugin-react": {
+        "version": "^7.37.2",
+        "description": {},
+        "changed": []
+      },
+      "globals": {
+        "version": "^15.14.0",
+        "description": {},
+        "changed": []
+      },
+      "husky": {
+        "version": "^9.1.7",
+        "description": {},
+        "changed": []
+      },
+      "prettier": {
+        "version": "^3.4.2",
+        "description": {},
+        "changed": []
+      },
+      "typescript-eslint": {
+        "version": "^8.18.1",
+        "description": {},
+        "changed": []
+      }
+    },
+    "dependencies": {
+      "react": {
+        "version": "^19.0.0",
+        "description": {},
+        "changed": []
+      },
+      "react-dom": {
+        "version": "^19.0.0",
+        "description": {},
+        "changed": []
+      }
+    }
+  }
+]

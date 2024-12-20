@@ -24,6 +24,7 @@ module.exports = {
         'release' /* 版本发布相关 */,
         'merge' /* 分支合并操作 */,
         'bug' /* 修正非功能性问题 */,
+        'log' /* 日志类型 */,
         'del' /* 删除 */,
         'assets' /* 资源 */,
         'base' /* 项目基础 */,
