@@ -7,8 +7,15 @@
 
 ## 依赖安装
 
+    - `-D` == `--save-dev` == `devDependencies` == 开发环境
+    - `-S` == `--save` == `dependencies` == 生产环境
+
 > electron
 > 应用程序
+
+```shell
+npm install electron --save-dev
+```
 
 > react
 > 前端库
@@ -27,6 +34,24 @@ npm init @eslint/config
 
 # 选择后，提示安装 （等价于）
 npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
+
+
+# 进一步需求的安装
+npm install -D @typescript-eslint/parser
+```
+
+> prettier
+> 代码风格格式化
+
+```shell
+npm install -D prettier
+```
+
+> husky
+> 提交消息规范、代码校验
+
+```shell
+npm install -D @commitlint/{config-conventional,cli} husky
 ```
 
 ### 依赖介绍
