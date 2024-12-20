@@ -88,11 +88,12 @@ npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
 - **Folder-Ignore-SG** `cache`: 主进程运行缓存目录
 - **Folder** `docs`: 用于学习记录的文档
 
-- **Folder** `extend`: 扩展目录，不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
+- **Folder** `core`: 扩展目录，应用层环境、主逻辑和核心功能，不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
 
   - **Folder** `bin`: 应用程序运行环境目录
     - **Folder** `.cache`: 运行环境的缓存
   - **Folder** `extensions`: 用于存放应用扩展插件，如：react 插件等。
+  - **Folder** `packages`: 包含多个独立的子模块或包
   - **Folder** `polyfill`: 用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。
   - **Folder-Pedding** `external`: 外部文件
   - **Folder-Pedding** `node_modules.asar.unpacked`: 用于存放 extend 中 node js script 的依赖项
@@ -119,7 +120,7 @@ npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
 
 - **Folder-Ignore-SG** `local`: 应用配置目录
 
-- **Folder** `src`: application 源码目录
+- **Folder** `source`: application (src)源码目录
 - **Folder** `temp`: 临时文件目录，希望在 git 提交历史中，不被意外丢失，但没有什么用处。
 - **Folder** `template`: 各种学习示例目录
 - **Folder** `test`: 各种学习示例目录
