@@ -1,68 +1,49 @@
 module.exports = {
-  extends: ["@commitlint/config-conventional"],
+  extends: ['@commitlint/config-conventional'],
   rules: {
     // type-enum: 定义提交类型
-    "type-enum": [
+    'type-enum': [
       2,
-      "always",
+      'always',
       [
-        // 新功能 - 添加新的功能，比如新页面、新接口、新按钮等。
-        "feat",
-        // 修补 bug - 修复代码中的错误或漏洞，比如修正逻辑错误、修复崩溃问题、修补安全漏洞等。
-        "fix",
-        // 文档更新 - 更新或添加文档内容，比如 README 文件、API 文档、注释等。
-        "docs",
-        // 格式 - 修改代码格式，不影响代码运行功能，比如修正缩进、空格、行末符号等。
-        "style",
-        // 重构 - 代码重构，不新增功能也不修复bug，比如优化代码结构、重写方法、提高代码可读性等。
-        "refactor",
-        // 性能优化 - 提高代码性能，比如减少内存使用、提高执行效率、优化算法等。
-        "perf",
-        // 增加测试 -  添加或修改测试代码，比如单元测试、集成测试、端到端测试等。
-        "test",
-        // 工具性依赖的安装与配置 - 如 husky、eslint、prettier 等。
-        "dep",
-        // 构建工具或外部依赖的变动 - 修改构建工具配置或依赖项，比如升级 Webpack、修改 npm 脚本等。
-        "build",
-        // 持续集成相关 - 持续集成配置的修改，比如添加 CI/CD 配置文件、修改构建流程、集成新的CI服务等。
-        "ci",
-        // 其他改动 - 其他不影响代码运行的改动，比如依赖更新、工具配置修改等。
-        "chore",
-        // 回滚 - 回滚之前的提交，比如撤销错误的变更、恢复到之前的版本状态等。
-        "revert",
-        // 工作流改进或更新 - 改进或更新开发工作流，比如自动化发布流程、优化开发工具链等。
-        "workflow",
-        // 代码或模块调整，不明确属于其他类型的更改
-        "mod",
-        // 工作进行中，标记开发进行中的提交。
-        "wip",
-        // 类型定义文件的更改 - 修改或添加类型定义文件，比如增加TypeScript类型定义、修改Flow类型等。
-        "types",
-        // 版本发布相关的改动 - 与版本发布相关的改动，比如更新版本号、生成发布日志等。
-        "release",
-        // 分支合并操作 - 分支合并操作，比如合并开发分支到主分支。
-        "merge",
-        // 修正非功能性问题或小错误 - 修正小错误或非功能性问题，比如拼写错误、注释错误等。
-        "bug",
-        // 删除代码或文件 - 删除不再需要的代码或文件，比如移除废弃的模块、删除无用的配置文件等。
-        "del",
-        // 资源变动 - 添加一些静态资源
-        "assets",
-        // 项目基础搭建 - 项目基础构建流程的变动，比如配置、修改 git 忽略文件等
-        "base",
-        // 编辑器配置与修改，比如配置 vs code 扩展推荐等
-        "editor",
-      ],
+        'feat' /* 新功能 */,
+        'fix' /* 修补 bug */,
+        'docs' /* 文档 */,
+        'style' /* 代码风格 | 样式 */,
+        'refactor' /* 代码重构 */,
+        'perf' /* 性能优化 */,
+        'test' /* 增加测试 */,
+        'build' /* dep - 工具性依赖的安装与配置 | 构建工具相关 */,
+        'ci' /* CI 配置相关 */,
+        'chore' /* 杂项任务 */,
+        'revert' /* 回滚 */,
+        'workflow' /* 工作流 */,
+        'mod' /* 不明确类型的代码或模块调整 */,
+        'wip' /* 开发进行中 */,
+        'types' /* 类型定义文件 */,
+        'release' /* 版本发布相关 */,
+        'merge' /* 分支合并操作 */,
+        'bug' /* 修正非功能性问题 */,
+        'del' /* 删除 */,
+        'assets' /* 资源 */,
+        'base' /* 项目基础 */,
+        'editor' /* 编辑器配置 */
+      ]
     ],
     // subject-case: 定义主题的大小写格式
-    "subject-case": [
+    'subject-case': [
       2,
-      "never",
-      ["sentence-case", "start-case", "pascal-case", "upper-case"],
+      'never',
+      [
+        'sentence-case',
+        'start-case',
+        'pascal-case',
+        'upper-case'
+      ]
     ],
     // subject-full-stop: 定义主题是否以句号结尾
-    "subject-full-stop": [2, "never", "."],
+    'subject-full-stop': [2, 'never', '.'],
     // header-max-length: 定义头部的最大长度
-    "header-max-length": [2, "always", 72],
-  },
+    'header-max-length': [2, 'always', 72]
+  }
 };
