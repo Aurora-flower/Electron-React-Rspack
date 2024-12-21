@@ -1,0 +1,298 @@
+/*
+tsconfig.json
+@link https://www.tslang.cn/docs/handbook/compiler-options.html
+@link https://www.typescriptlang.org/tsconfig/
+*/
+{
+  /* 继承其他配置 */
+  //   "extends": "",
+
+  /* 编译器选项 */
+  "compilerOptions": {
+    /* 
+        启用严格模式 - 启用所有严格类型检查选项
+        启用 --strict 相当于启用：
+        --noImplicitAny, 
+        --noImplicitThis, 
+        --alwaysStrict,
+        --strictNullChecks,
+        --strictFunctionTypes,
+        --strictPropertyInitialization
+    */
+    "strict": true,
+
+    /* 禁用函数参数双向协变检查 */
+    // "strictFunctionTypes": true,
+
+    /* 在表达式和声明上有隐含的 any 类型时报错 */
+    // "noImplicitAny": true,
+
+    /* 当 this 表达式的值为 any 类型的时候，生成一个错误 */
+    // "noImplicitThis": true,
+
+    /* 以严格模式解析并为每个源文件生成 "use strict"语句 */
+    // "alwaysStrict": true,
+
+    /* 确保类的非 undefined 属性已经在构造函数里初始化若要令此选项生效，需要同时启用 --strictNullChecks */
+    // "strictPropertyInitialization": true,
+
+    /* 
+        在严格的 null 检查模式下， null 和 undefined 值不包含在任何类型里，
+        只允许用它们自己和 any来赋值（有个例外， undefined可以赋值到 void） 
+    */
+    // "strictNullChecks": true,
+
+    /* 不对具有  @internal JSDoc 注解的代码生成代码 (实验性) */
+    // "stripInternal": false,
+
+    /* 重定向输出目录 */
+    // "outDir": "",
+
+    /* 仅用来控制输出的目录结构 */
+    // "rootDir": "",
+
+    /* 
+        根（root）文件夹列表，表示运行时组合工程结构的内容 (tsconfig.json 配置)
+        @link https://www.tslang.cn/docs/handbook/module-resolution.html#virtual-directories-with-rootdirs
+    */
+    // "rootDirs": [],
+
+    /* 
+        将输出文件合并为一个文件
+        合并的顺序是根据传入编译器的文件顺序和 ///<reference``>和 import的文件顺序决定的 
+        只有 "AMD"和 "System"能和 --outFile一起使用
+    */
+    // "outFile": "",
+
+    /* 指定 ECMAScript 目标版本 */
+    "target": "ESNext",
+
+    /* 是否允许编译 javascript 文件 */
+    "allowJs": false,
+
+    /* 启用 javascript 检查 - 与 allowJs 配合使用 */
+    // "checkJs": false,
+
+    /* 启用 ES 模块与 CommonJS 模块之间的相容性特性 */
+    "esModuleInterop": true,
+
+    /* 指定类型声明文件所在位置 - 要包含的类型声明文件路径列表 */
+    "typeRoots": ["./types", "./node_modules/@types"],
+
+    /* 指定包含的 @types 类型 - 要包含的类型声明文件名列表 */
+    // "types": ["node", "express", "react", "react-dom", "react-router-dom"],
+
+    /* 允许不报告执行不到的代码错误 */
+    "allowUnreachableCode": true,
+
+    /* 允许不报告未使用的标签错误 */
+    "allowUnusedLabels": true,
+
+    /* 若有未使用的局部变量则抛错 */
+    "noUnusedLocals": true,
+
+    /* 若有未使用的参数则抛错 */
+    "noUnusedParameters": true,
+
+    /* 解析非相对模块名的基准目录 */
+    "baseUrl": ".",
+
+    /* 生成相应的 .d.ts文件 */
+    "declaration": true,
+
+    /* 生成声明文件的输出路径 */
+    // "declarationDir": "dist/types",
+
+    /* 显示诊断信息 */
+    "diagnostics": true,
+
+    /* 显示详细的诊段信息 */
+    "extendedDiagnostics": true,
+
+    /* 禁用 JavaScript 工程体积大小的限制 */
+    // "disableSizeLimit": false,
+
+    /* 在输出文件的开头加入 BOM 头（UTF-8 Byte Order Mark） */
+    // "emitBOM": false,
+
+    /* 给源码里的装饰器声明加上设计类型元数据 (实验性) */
+    // "emitDecoratorMetadata": false,
+
+    /* 启用 ES 装饰器(实验性) */
+    "experimentalDecorators": true,
+
+    /* 
+        禁止对同一个文件的不一致的引用
+        文件名完全匹配，要求所有的导入语句中的文件路径（包括模块和类型声明文件）必须与实际文件系统中的文件名大小写完全匹配
+    */
+    "forceConsistentCasingInFileNames": true,
+
+    /* 从 tslib 导入辅助工具函数（比如 __extends， __rest等） */
+    // "importHelpers": false,
+
+    /* 
+        启用 JSX
+        @link https://www.tslang.cn/docs/handbook/jsx.html
+    */
+    "jsx": "react",
+
+    /* 指定生成目标为 react JSX 时，使用的 JSX 工厂函数，比如 React.createElement 或 h */
+    "jsxFactory": "React.createElement",
+
+    /* 生成单个 sourcemaps 文件，而不是将每 sourcemaps 生成不同的文件 */
+    // "inlineSourceMap": false,
+
+    /*  将代码与 sourcemaps 生成到一个文件中，要求同时设置了 --inlineSourceMap 或 --sourceMap 属性 */
+    // "inlineSources": false,
+
+    /* 将每个文件作为单独的模块 */
+    "isolatedModules": true,
+
+    /* 
+        编译过程中需要引入的库文件的列表
+        默认注入的库为:
+        ► 针对于--target ES5：DOM，ES5，ScriptHost
+        ► 针对于--target ES6：DOM，ES6，DOM.Iterable，ScriptHost
+    */
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "WebWorker",
+      "ScriptHost"
+    ],
+
+    /* 不使用默认的库文件 */
+    "noLib": false,
+
+    /* 打印出编译后生成文件的名字 */
+    // "listEmittedFiles": false,
+
+    /* 编译过程中打印文件名 */
+    // "listFiles": false,
+
+    /*
+        为调试器指定指定 sourcemap 文件的路径，而不是使用生成时的路径
+        当 .map 文件是在运行时指定的，并不同于 js 文件的地址时使用这个标记
+        指定的路径会嵌入到 sourceMap 里告诉调试器到哪里去找它们 
+    */
+    // "mapRoot": "./map",
+
+    /* 生成相应的 .map文件 */
+    "sourceMap": true,
+
+    /* 
+        指定 TypeScript 源文件的路径，以便调试器定位
+        当 TypeScript 文件的位置是在运行时指定时使用此标记
+        路径信息会被加到 sourceMap里 
+    */
+    // "sourceRoot": "./src",
+
+    /* 生成 .d.ts 文件相应的 map 映射文档 */
+    // "declarationMap": true,
+
+    /* 
+        node_modules 依赖的最大搜索深度并加载 JavaScript 文件
+        仅适用于 --allowJs 
+    */
+    // "maxNodeModuleJsDepth": 0,
+
+    /* 指定生成目标模块系统代码 target === "ES6" ? "ES6" : "commonjs" */
+    "module": "ESNext",
+
+    /* 指定模块解析策略 - 决定如何处理模块 module === "AMD" or "System" or "ES6" ? "Classic" : "Node" */
+    "moduleResolution": "node",
+
+    /* 当生成文件时指定行结束符： "crlf"（windows）或 "lf"（unix） */
+    "newLine": "lf",
+
+    /* 不生成输出文件 */
+    // "noEmit": false,
+
+    /* 不在输出文件中生成用户自定义的帮助函数代码，如 __extends */
+    // "noEmitHelpers": false,
+
+    /* 报错时不生成输出文件 */
+    "noEmitOnError": true,
+
+    /* 不截短错误消息 */
+    // "noErrorTruncation": false,
+
+    /* 
+        报告switch语句的fallthrough错误
+        （即，不允许 switch 的 case 语句贯穿）
+        在 switch 语句中，如果一个 case 后面没有 break 并且直接跟着另一个 case，编译器会发出错误 
+    */
+    "noFallthroughCasesInSwitch": true,
+
+    /* 
+        不是函数的所有返回路径都有返回值时报错
+        在函数体中检查是否存在返回值，如果一个函数缺少显式的返回语句，或者某个执行路径没有返回值，TypeScript 将会发出警告或错误
+    */
+    "noImplicitReturns": true,
+
+    /* 模块输出中不包含 "use strict"指令 */
+    // "noImplicitUseStrict": false,
+
+    /* 不把 /// <reference``>或模块导入的文件加到编译文件列表 */
+    // "noResolve": false,
+
+    /* 禁用在函数类型里对泛型签名进行严格检查 */
+    // "noStrictGenericChecks": false,
+
+    /* 	
+        模块名到基于 baseUrl 的路径映射的列表 (tsconfig.json 配置)
+        @link https://www.tslang.cn/docs/handbook/module-resolution.html#path-mapping
+    */
+    "paths": {
+      //   "@e/*": ["./electron/*"],
+      //   "@s/*": ["./src/*"],
+      //   "@/*": ["./electron/*", "./src/*"]
+    },
+
+    /* 保留 const 和 enum 声明 */
+    // "preserveConstEnums": false,
+
+    /* 不把符号链接解析为其真实路径；将符号链接文件视为真正的文件 */
+    // "preserveSymlinks": false,
+
+    /* 保留 watch 模式下过时的控制台输出 */
+    // "preserveWatchOutput": false,
+
+    /* 给错误和消息设置样式，使用颜色和上下文 (实验性) */
+    // "pretty": false,
+
+    /* 
+        编译指定目录下的项目
+        这个目录应该包含一个 tsconfig.json 文件来管理编译 
+    */
+    // "project": "",
+
+    /* 当目标为生成 "react" JSX时，指定 createElement 和 __spread 的调用对象 */
+    // "reactNamespace": "React",
+
+    /* 删除所有注释，除了以 /!*开头的版权信息 */
+    "removeComments": true,
+
+    /* 忽略库的默认声明文件的类型检查 */
+    "skipDefaultLibCheck": true,
+
+    /* 忽略所有的声明文件（ *.d.ts）的类型检查 */
+    "skipLibCheck": true
+
+    /* 阻止对对象字面量的额外属性检查 (实验性) */
+    // "suppressExcessPropertyErrors": false,
+
+    /* 阻止对缺少的属性检查 - 阻止 --noImplicitAny 对缺少索引签名的索引对象报错 */
+    // "suppressImplicitAnyIndexErrors": false,
+
+    /* 生成模块解析日志信息 */
+    // "traceResolution": false
+  },
+
+  /* 指定编译的文件范围 */
+  "include": ["../src/**/*", "../electron/**/*"],
+
+  /* 排除不需要编译的文件夹 */
+  "exclude": ["node_modules", "backup", "app"]
+}

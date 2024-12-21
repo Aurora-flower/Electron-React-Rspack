@@ -1,0 +1,40 @@
+{
+  "exclude": [
+    "app",
+    "test",
+    "backup",
+    "node_modules",
+    "eslint.config.mjs",
+    "commitlint.config.js"
+  ],
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["source/*"],
+      "@type/*": ["types/*"]
+    },
+    "strict": true,
+    "target": "ES6",
+    "allowJs": true,
+    "newLine": "lf",
+    "sourceMap": true,
+    "diagnostics": true,
+    "declaration": true,
+    "module": "CommonJS",
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowUnusedLabels": true,
+    "moduleResolution": "node",
+    "noUnusedParameters": true,
+    "extendedDiagnostics": true,
+    "skipDefaultLibCheck": true,
+    "allowUnreachableCode": true,
+    "experimentalDecorators": true,
+    "jsxFactory": "React.createElement",
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./types", "./node_modules/@types"]
+  }
+}
