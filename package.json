@@ -4,6 +4,7 @@
   "main": "index.js",
   "private": "true",
   "scripts": {
+    "start": "",
     "test": "exit 0",
     "check:out": "npm outdated",
     "preinstall": "echo \"running install\"",

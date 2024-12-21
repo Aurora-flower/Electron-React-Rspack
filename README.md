@@ -10,14 +10,16 @@
     - `-D` == `--save-dev` == `devDependencies` == 开发环境
     - `-S` == `--save` == `dependencies` == 生产环境
 
-> electron
-> 应用程序
+> electron:
+>
+> 桌面应用程序
 
 ```shell
 npm install electron --save-dev
 ```
 
-> react
+> react:
+>
 > 前端库
 
 ```shell
@@ -25,7 +27,8 @@ npm install react react-dom
 npm install @types/react @types/react-dom --save-dev
 ```
 
-> eslint
+> eslint:
+>
 > 语法校验
 
 ```shell
@@ -40,7 +43,8 @@ npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
 npm install -D @typescript-eslint/parser
 ```
 
-> prettier
+> prettier:
+>
 > 代码风格格式化
 
 ```shell
@@ -53,8 +57,6 @@ npm install -D prettier
 ```shell
 npm install -D @commitlint/{config-conventional,cli} husky
 ```
-
-### 依赖介绍
 
 ### 安装问题记录
 
