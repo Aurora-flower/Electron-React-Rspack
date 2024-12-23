@@ -1,18 +1,17 @@
-# 项目介绍
+# Project Introduction
 
-    应用程序构建基础：
-        - `electron`
-        - `react`
-        - `webpack`
+    The goal is to develop an application based on Electron, referencing the architecture of engines like Cocos and editors like VSCode. We aim to learn from well-known applications such as NetEase Cloud Music and Bilibili. The project will cover a wide range of technologies, requiring careful consideration of the overall project structure. This project is mainly for learning purposes. While our technical skills are average, our ambitions are high, "I am a man who aims to become the Pirate King."
 
-## 依赖安装
+[Chinese](./README.zh-CN.md) | **English**
 
-    - `-D` == `--save-dev` == `devDependencies` == 开发环境
-    - `-S` == `--save` == `dependencies` == 生产环境
+## Dependency Installation
+
+    - `-D` == `--save-dev` == `devDependencies` == Development Environment
+    - `-S` == `--save` == `dependencies` == Production Environment
 
 > electron:
 >
-> 桌面应用程序
+> Desktop Application
 
 ```shell
 npm install electron --save-dev
@@ -20,7 +19,7 @@ npm install electron --save-dev
 
 > react:
 >
-> 前端库
+> Frontend Library
 
 ```shell
 npm install react react-dom
@@ -29,21 +28,21 @@ npm install @types/react @types/react-dom --save-dev
 
 > eslint:
 >
-> 语法校验
+> Syntax Checker
 
 ```shell
 npm init @eslint/config
 
-# 选择后，提示安装 （等价于）
+# After selection, it prompts for installation (equivalent to)
 npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
 
-# 进一步需求的安装
+# Further installation requirements
 npm install -D @typescript-eslint/parser
 ```
 
 > gulp:
 >
-> 自动化构建工具
+> Automation Build Tool
 
 ```shell
 npm install -D  gulp
@@ -51,147 +50,147 @@ npm install -D  gulp
 
 > prettier:
 >
-> 代码风格格式化
+> Code Style Formatter
 
 ```shell
 npm install -D prettier
 ```
 
 > husky
-> 提交消息规范、代码校验
+> Commit Message Standardization and Code Validation
 
 ```shell
 npm install -D @commitlint/{config-conventional,cli} husky
 ```
 
-> css 相关 - 实用程序、动画样式
+> CSS related - Utilities, Animation Styles
 
 ```shell
 
 ```
 
-> 2D 渲染库
+> 2D Rendering Library
 
 ```shell
 npm install -S fabric
 ```
 
-> 3D 渲染库
+> 3D Rendering Library
 
 ```shell
 npm install -S three
 ```
 
-### 安装问题记录
+### Installation Issue Records
 
 ---
 
-## 风格规范
+## Style Guidelines
 
-### 提交规范
+### Commit Conventions
 
-| 缩写     | 描述                               | 示例                                        |
-| -------- | ---------------------------------- | ------------------------------------------- |
-| feat     | 添加新功能                         | `feat(user): 添加用户注册功能`              |
-| fix      | 修复代码错误                       | `fix(auth): 修复登录失败问题`               |
-| docs     | 文档更新                           | `docs(readme): 更新 README 文件`            |
-| style    | 代码格式修改，不影响功能           | `style(icons): 统一图标样式`                |
-| refactor | 代码重构，不涉及功能增删           | `refactor(components): 重构组件结构`        |
-| perf     | 性能优化                           | `perf(api): 优化 API 响应速度`              |
-| test     | 增加或修改测试代码                 | `test(unit): 添加单元测试覆盖`              |
-| dep      | 工具性依赖的安装与配置             | `dep(linter): 配置 ESLint 规则`             |
-| build    | 构建工具或外部依赖变动             | `build(webpack): 升级 Webpack 版本`         |
-| ci       | 持续集成配置修改                   | `ci(jenkins): 集成Jenkins持续集成`          |
-| chore    | 不影响代码运行的其他改动           | `chore(dependencies): 更新依赖包版本`       |
-| revert   | 回滚之前的提交                     | `revert: 撤销上一次提交`                    |
-| workflow | 工作流改进或更新                   | `workflow(publish): 自动化发布流程`         |
-| mod      | 代码或模块调整，不明确属于其他类型 | `mod(styles): 调整全局样式`                 |
-| wip      | 工作进行中，标记开发中提交         | `wip: 开发中，暂未完成`                     |
-| types    | 类型定义文件的更改                 | `types(interface): 添加用户接口类型定义`    |
-| release  | 版本发布相关改动                   | `release(version): 发布 v1.0.0 版本`        |
-| merge    | 分支合并操作                       | `merge(branch): 合并 develop 分支至 master` |
-| bug      | 修正非功能性问题或小错误           | `bug(syntax): 修正语法错误`                 |
-| del      | 删除代码或文件                     | `del(deprecated): 移除废弃代码`             |
-| assets   | 添加资源                           | `asset(icns): 添加一些 Icns 图标资源`       |
-| base     | 项目基础构建流程                   | `base(git): 配置\更新 git 忽略文件`         |
-| editor   | 编辑器配置与修改                   | `editor(vscode): 配置 vscode`               |
+| Abbreviation | Description                                                              | Example                                                 |
+| ------------ | ------------------------------------------------------------------------ | ------------------------------------------------------- |
+| feat         | Add new features                                                         | `feat(user): Add user registration feature`             |
+| fix          | Fix code errors                                                          | `fix(auth): Fix login failure issue`                    |
+| docs         | Update documentation                                                     | `docs(readme): Update README file`                      |
+| style        | Modify code style without affecting functionality                        | `style(icons): Unify icon styles`                       |
+| refactor     | Refactor code without adding/removing features                           | `refactor(components): Refactor component structure`    |
+| perf         | Performance optimization                                                 | `perf(api): Optimize API response speed`                |
+| test         | Add or modify test code                                                  | `test(unit): Add unit test coverage`                    |
+| dep          | Install and configure tool dependencies                                  | `dep(linter): Configure ESLint rules`                   |
+| build        | Changes in build tools or external dependencies                          | `build(webpack): Upgrade Webpack version`               |
+| ci           | Modify continuous integration configuration                              | `ci(jenkins): Integrate Jenkins CI`                     |
+| chore        | Other changes that do not affect code execution                          | `chore(dependencies): Update dependency versions`       |
+| revert       | Revert previous commits                                                  | `revert: Revert last commit`                            |
+| workflow     | Improve or update workflows                                              | `workflow(publish): Automate release process`           |
+| mod          | Adjustments in code or modules not clearly belonging to other categories | `mod(styles): Adjust global styles`                     |
+| wip          | Work in progress, mark development commits                               | `wip: In development, not completed yet`                |
+| types        | Changes in type definition files                                         | `types(interface): Add user interface type definitions` |
+| release      | Version release related changes                                          | `release(version): Release v1.0.0 version`              |
+| merge        | Branch merge operations                                                  | `merge(branch): Merge develop branch into master`       |
+| bug          | Fix non-functional issues or minor bugs                                  | `bug(syntax): Fix syntax error`                         |
+| del          | Delete code or files                                                     | `del(deprecated): Remove deprecated code`               |
+| assets       | Add resources                                                            | `asset(icns): Add some Icns icons`                      |
+| base         | Basic project build process                                              | `base(git): Configure/update git ignore file`           |
+| editor       | Editor configuration and modifications                                   | `editor(vscode): Configure vscode`                      |
 
 ---
 
-## 项目架构
+## Project Architecture
 
-### 目录结构
+### Directory Structure
 
-> 字符说明
+> Character Explanation
 >
-> - `None` 表示暂无此项
-> - `Ignore` 被 Git 忽略的
-> - `SG` 主动生成目录或文件
-> - `UNG` 被动生成目录或文件
-> - `File` 表示文件类型
-> - `Folder` 表示目录类型
-> - `Pedding` 表示后期可能会变动（Git 忽略）
+> - `None` means there is no such item
+> - `Ignore` is ignored by Git
+> - `SG` is automatically generated directories or files
+> - `UNG` is manually generated directories or files
+> - `File` indicates file type
+> - `Folder` indicates directory type
+> - `Pedding` indicates potential changes later (ignored by Git)
 
-- **Folder** `.vscode`: vs code 编辑器配置目录
-- **Folder** `.config`: 项目配置目录
-- **Folder-Ignore-SG** `app`: 源码经过编译后的输出目录
-- **Folder-Ignore-SG** `backup`: 用于存放本地临时备份文件
-- **Folder-Ignore-SG** `cache`: 主进程运行缓存目录
-- **Folder** `docs`: 用于学习记录的文档
+- **Folder** `.vscode`: VS Code editor configuration directory
+- **Folder** `.config`: Project configuration directory
+- **Folder-Ignore-SG** `app`: Output directory for source code after compilation
+- **Folder-Ignore-SG** `backup`: Directory for local temporary backup files
+- **Folder-Ignore-SG** `cache`: Main process runtime cache directory
+- **Folder** `docs`: Documentation directory for learning records
 
-- **Folder** `gulp`: gulp 构建工具配置目录
+- **Folder** `gulp`: Gulp build tool configuration directory
 
-  - **Folder** `tasks`: gulp 任务目录
-  - **Folder** `utils`: gulp 辅助工具目录
+  - **Folder** `tasks`: Gulp task directory
+  - **Folder** `utils`: Gulp utility directory
 
-- **Folder** `core`: 扩展目录，应用层环境、主逻辑和核心功能，不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
+- **Folder** `core`: Extension directory, application environment, main logic, and core functionalities, not packed into asar (stored in `app.asar.unpacked`)
 
-  - **Folder** `bin`: 应用程序运行环境目录
-    - **Folder** `.cache`: 运行环境的缓存
-  - **Folder-Pedding** `builtin`: 外部文件目录
-  - **Folder** `extensions`: 用于存放应用扩展插件，如：react 插件等。
-  - **Folder** `packages`: 包含多个独立的子模块或包
-  - **Folder** `polyfill`: 用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。
-  - **Folder-Pedding** `external`: 外部文件目录
-  - **Folder** `internal`: 内部文件，如：模板文件等。
-  - **Folder-Pedding** `node_modules.asar.unpacked`: 用于存放 extend 中 node js script 的依赖项
+  - **Folder** `bin`: Application runtime environment directory
+    - **Folder** `.cache`: Runtime environment cache
+  - **Folder-Pedding** `builtin`: External files directory
+  - **Folder** `extensions`: Directory for application extension plugins, such as React plugins.
+  - **Folder** `packages`: Contains multiple independent sub-modules or packages
+  - **Folder** `polyfill`: Provides missing functions or APIs to support modern JavaScript features or browser functionalities in older environments.
+  - **Folder-Pedding** `external`: External files directory
+  - **Folder** `internal`: Internal files, such as template files.
+  - **Folder-Pedding** `node_modules.asar.unpacked`: Directory for node js script dependencies in `extend`.
 
-- **Folder** `licenses`: 用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
+- **Folder** `licenses`: Directory for software license agreement terms (multi-language versions, e.g., `LICENSE-chs.rtf` Simplified Chinese, `LICENSE-cht.rtf` Traditional Chinese, `LICENSE-jpn.rtf` Japanese, etc.)
 
-- **Folder-Ignore-SG** `private`: 用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。
+- **Folder-Ignore-SG** `private`: Directory for private files that cannot be open-sourced, only providing structure and generation methods.
 
-  - **Folder-Ignore-SG** `ssl`: 用于存放 `https` 协议所需要的证书文件
-  - **Folder-Ignore-SG** `secret`: 用于存放账户密码等重要文件的目录
+  - **Folder-Ignore-SG** `ssl`: Directory for SSL certificate files required by `https` protocol
+  - **Folder-Ignore-SG** `secret`: Directory for important files like account passwords
 
-- **Folder** `public`: 静态资源文件目录，会被网络托管的文件。
+- **Folder** `public`: Static resource files directory, files hosted on the web.
 
-  - **Folder** `assets`: 用于存放静态资源
-    - **Folder** `atlas`: 用于存放 `.icns` 文件
-    - **Folder** `images`: 用于存放图片
+  - **Folder** `assets`: Directory for static resources
+    - **Folder** `atlas`: Directory for `.icns` files
+    - **Folder** `images`: Directory for images
 
-- **Folder-Ignore-SG** `release`: 应用程序构建的输出目录。
+- **Folder-Ignore-SG** `release`: Output directory for application builds.
 
-- **Folder** `resoures`: 被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
+- **Folder** `resources`: Static files included in packaging or compilation (stored in `app.asar.unpacked`)
 
-  - **Folder** `icon`: 应用图标
-  - **Folder** `text`: 文本文件
+  - **Folder** `icon`: Application icons
+  - **Folder** `text`: Text files
 
-- **Folder-Ignore-SG** `local`: 应用配置目录
+- **Folder-Ignore-SG** `local`: Application configuration directory
 
-- **Folder** `source`: application (src)源码目录
+- **Folder** `source`: Source code directory for the application (src)
 
-  - **Folder** `common`: 通用文件，如通用变量、函数等
-  - **Folder** `electron`: 主进程目录
-  - **Folder** `preload`: 预加载进程目录
-  - **Folder** `src`: 渲染进程目录
+  - **Folder** `common`: Common files, such as common variables and functions
+  - **Folder** `electron`: Main process directory
+  - **Folder** `preload`: Preload process directory
+  - **Folder** `src`: Renderer process directory
 
-- **Folder** `temp`: 临时文件目录，希望在 git 提交历史中，不被意外丢失，但没有什么用处。
-- **Folder** `template`: 各种学习示例目录
-- **Folder** `test`: 各种学习示例目录
-- **Folder** `types`: 类型定义目录
-- **File** `.gitattributes`: Git 版本控制系统中的一个配置文件，用于指定如何处理文件的属性和行为
-- **File** `.gitignore`: git 忽略配置
-- **File** `package.json`: npm 配置文件
-- **File** `README.md`: 项目介绍
-- **File** `LICENSE`: 开源协议 (MIT)
-- **File-None** `LICENSE.rtf`: 软件许可协议条款 (中简版本)
+- **Folder** `temp`: Temporary files directory, hoping not to be lost accidentally in git history but not very useful.
+- **Folder** `template`: Various learning example directories
+- **Folder** `test`: Various learning example directories
+- **Folder** `types`: Type definition directory
+- **File** `.gitattributes`: A configuration file in Git version control system used to specify how file attributes and behaviors are handled
+- **File** `.gitignore`: Git ignore configuration
+- **File** `package.json`: npm configuration file
+- **File** `README.md`: Project introduction
+- **File** `LICENSE`: Open-source license (MIT)
+- **File-None** `LICENSE.rtf`: Software license agreement term (Simplified Chinese version)
