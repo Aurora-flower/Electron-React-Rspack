@@ -32,15 +32,21 @@ npm install @types/react @types/react-dom --save-dev
 > 语法校验
 
 ```shell
-# 命令
 npm init @eslint/config
 
 # 选择后，提示安装 （等价于）
 npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
 
-
 # 进一步需求的安装
 npm install -D @typescript-eslint/parser
+```
+
+> gulp:
+>
+> 自动化构建工具
+
+```shell
+npm install -D  gulp
 ```
 
 > prettier:
@@ -124,7 +130,7 @@ npm install -S three
 > - `UNG` 被动生成目录或文件
 > - `File` 表示文件类型
 > - `Folder` 表示目录类型
-> - `Pedding` 表示后期可能会变动
+> - `Pedding` 表示后期可能会变动（Git 忽略）
 
 - **Folder** `.vscode`: vs code 编辑器配置目录
 - **Folder** `.config`: 项目配置目录
@@ -133,14 +139,21 @@ npm install -S three
 - **Folder-Ignore-SG** `cache`: 主进程运行缓存目录
 - **Folder** `docs`: 用于学习记录的文档
 
+- **Folder** `gulp`: gulp 构建工具配置目录
+
+  - **Folder** `tasks`: gulp 任务目录
+  - **Folder** `utils`: gulp 辅助工具目录
+
 - **Folder** `core`: 扩展目录，应用层环境、主逻辑和核心功能，不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
 
   - **Folder** `bin`: 应用程序运行环境目录
     - **Folder** `.cache`: 运行环境的缓存
+  - **Folder-Pedding** `builtin`: 外部文件目录
   - **Folder** `extensions`: 用于存放应用扩展插件，如：react 插件等。
   - **Folder** `packages`: 包含多个独立的子模块或包
   - **Folder** `polyfill`: 用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。
-  - **Folder-Pedding** `external`: 外部文件
+  - **Folder-Pedding** `external`: 外部文件目录
+  - **Folder** `internal`: 内部文件，如：模板文件等。
   - **Folder-Pedding** `node_modules.asar.unpacked`: 用于存放 extend 中 node js script 的依赖项
 
 - **Folder** `licenses`: 用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)

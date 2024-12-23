@@ -1,12 +1,5 @@
 {
-  "exclude": [
-    "app",
-    "test",
-    "backup",
-    "node_modules",
-    "eslint.config.mjs",
-    "commitlint.config.js"
-  ],
+  "include": ["source"],
   "compilerOptions": {
     "jsx": "react",
     "baseUrl": ".",
@@ -36,5 +29,6 @@
     "jsxFactory": "React.createElement",
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./types", "./node_modules/@types"]
-  }
+  },
+  "exclude": ["app", "test", "backup", "node_modules"]
 }

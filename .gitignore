@@ -18,7 +18,8 @@ cache
 # 不被打包的 node_modules 依赖文件
 node_modules.asar.unpacked
 
-# 外部文件
+# 外部文件目录
+builtin
 external
 
 # 隐私目录
@@ -51,6 +52,10 @@ out
 
 # 项目依赖详情文件
 package-lock.json
+
+
+# 主进程调试输出详情
+/log/debug.log
 
 
 # ********************************* Other *********************************

@@ -58,6 +58,14 @@
         "description": {},
         "changed": []
       },
+      "gulp": {
+        "version": "^5.0.0",
+        "description": {
+          "summary": "一个基于 Node.js 的任务自动化构建工具。",
+          "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
+        },
+        "changed": []
+      },
       "husky": {
         "version": "^9.1.7",
         "description": {},
@@ -79,7 +87,7 @@
         "version": "^6.5.3",
         "description": {
           "summary": "一个基于 HTML5 Canvas 的开源 JavaScript 库",
-          "comment": "它封装了 Canvas 的低级 API, 提供了更高层次的 2D 图形操作功能，使得创建交互式图形、图像编辑和其他视觉内容变得更加简单和高效。"
+          "comment": "通过使用插件和流(streams)来简化前端开发中的重复性任务, 如编译代码、优化资源、自动刷新浏览器等。"
         },
         "changed": []
       },

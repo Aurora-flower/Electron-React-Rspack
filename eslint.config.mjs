@@ -10,9 +10,7 @@ import pluginReact from 'eslint-plugin-react';
 
 // ************************** Custom **************************
 // import JS from '@eslint/js';
-// import globals from 'globals';
 // import { fileURLToPath } from 'node:url';
-// import tseslint from 'typescript-eslint';
 // import { dirname, resolve } from 'node:path';
 // import { includeIgnoreFile } from '@eslint/compat';
 
@@ -28,7 +26,7 @@ export default [
     }
   },
   // pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  // ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
 
   // ************************** Custom **************************
