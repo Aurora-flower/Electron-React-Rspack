@@ -75,6 +75,14 @@
       }
     },
     "dependencies": {
+      "fabric": {
+        "version": "^6.5.3",
+        "description": {
+          "summary": "一个基于 HTML5 Canvas 的开源 JavaScript 库",
+          "comment": "它封装了 Canvas 的低级 API, 提供了更高层次的 2D 图形操作功能，使得创建交互式图形、图像编辑和其他视觉内容变得更加简单和高效。"
+        },
+        "changed": []
+      },
       "react": {
         "version": "^19.0.0",
         "description": {},
@@ -83,6 +91,19 @@
       "react-dom": {
         "version": "^19.0.0",
         "description": {},
+        "changed": []
+      },
+      "react-router-dom": {
+        "version": "^7.1.0",
+        "description": {},
+        "changed": []
+      },
+      "three": {
+        "version": "^0.171.0",
+        "description": {
+          "summary": "一个基于 WebGL 的 JavaScript 库，用于在网页中创建和渲染 3D 图形。",
+          "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
+        },
         "changed": []
       }
     }
