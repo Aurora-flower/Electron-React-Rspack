@@ -71,6 +71,14 @@
         "description": {},
         "changed": []
       },
+      "node": {
+        "version": "^23.5.0",
+        "description": {
+          "summary": "一个运行环境，用于执行 js 脚本，负责处理文件、目录、网络、进程等基础功能。",
+          "comment": "为没有此环境的应用程序使用者提供"
+        },
+        "changed": []
+      },
       "prettier": {
         "version": "^3.4.2",
         "description": {},
@@ -78,6 +86,11 @@
       },
       "typescript-eslint": {
         "version": "^8.18.1",
+        "description": {},
+        "changed": []
+      },
+      "webpack": {
+        "version": "^5.97.1",
         "description": {},
         "changed": []
       }

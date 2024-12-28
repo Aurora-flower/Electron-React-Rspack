@@ -1,3 +1,7 @@
+<div align="center"> <a href="https://gitee.com/a-room-of-jacaranda/er.git"> <img width="100" src="./public/favicon.ico"> </a> <br> <br>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="78" height="20" role="img" aria-label="license: MIT"><title>license: MIT</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="78" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="47" height="20" fill="#555"/><rect x="47" width="31" height="20" fill="#97ca00"/><rect width="78" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text aria-hidden="true" x="245" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="370">license</text><text x="245" y="140" transform="scale(.1)" fill="#fff" textLength="370">license</text><text aria-hidden="true" x="615" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="210">MIT</text><text x="615" y="140" transform="scale(.1)" fill="#fff" textLength="210">MIT</text></g></svg>
+
 # 项目介绍
 
     希望基于 Electron 实现一个自己的应用，参考 cocos 引擎、vscode 编辑器的架构，对一些知名应用如 网易云音乐、哔哩哔哩看齐学习。涉及到的东西会比较杂，需要考虑好整体项目结构，主要用于学习使用。技术一般，但志向不一般，"咱是立志做海贼王的男人"。
@@ -8,6 +12,14 @@
 
     - `-D` == `--save-dev` == `devDependencies` == 开发环境
     - `-S` == `--save` == `dependencies` == 生产环境
+
+> node:
+>
+> js 运行环境
+
+```
+npm install -D node
+```
 
 > electron:
 >
@@ -38,14 +50,6 @@ npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
 
 # 进一步需求的安装
 npm install -D @typescript-eslint/parser
-```
-
-> gulp:
->
-> 自动化构建工具
-
-```shell
-npm install -D  gulp
 ```
 
 > prettier:
@@ -79,6 +83,17 @@ npm install -S fabric
 
 ```shell
 npm install -S three
+```
+
+> 工具安装
+
+```shell
+npm install -D plop
+npm install -D webpack
+
+
+# 自动化构建工具
+npm install -D  gulp
 ```
 
 ### 安装问题记录
@@ -138,6 +153,10 @@ npm install -S three
 - **Folder-Ignore-SG** `cache`: 主进程运行缓存目录
 - **Folder** `docs`: 用于学习记录的文档
 
+- **Folder-Pedding** `gen`: 用于生成文档的目录
+
+  - **Folder** `template`: 各种学习示例、模板
+
 - **Folder** `gulp`: gulp 构建工具配置目录
 
   - **Folder** `tasks`: gulp 任务目录
@@ -182,10 +201,10 @@ npm install -S three
   - **Folder** `common`: 通用文件，如通用变量、函数等
   - **Folder** `electron`: 主进程目录
   - **Folder** `preload`: 预加载进程目录
+  - **Folder** `server`: 本地服务器目录
   - **Folder** `src`: 渲染进程目录
 
 - **Folder** `temp`: 临时文件目录，希望在 git 提交历史中，不被意外丢失，但没有什么用处。
-- **Folder** `template`: 各种学习示例目录
 - **Folder** `test`: 各种学习示例目录
 - **Folder** `types`: 类型定义目录
 - **File** `.gitattributes`: Git 版本控制系统中的一个配置文件，用于指定如何处理文件的属性和行为
