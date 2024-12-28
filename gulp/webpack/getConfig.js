@@ -76,12 +76,41 @@ const Entry = {
 };
 
 /**
+ * @summary Webpack 别名
+ */
+const alias = {
+  '@/*': Path.Source.base,
+  '@type/*': Path.Types
+};
+
+/**
+ * @summary Webpack 优化配置
+ * @see {@link https://www.webpackjs.com/configuration/optimization/ Webpack 官方文档-optimization}
+ */
+const optimization = {
+  // runtimeChunk: 'single',
+  // splitChunks: {
+  //   chunks: 'all',
+  //   maxInitialRequests: Infinity,
+  //   minSize: 0,
+  //   cacheGroups: {
+  //     vendorer: {
+  //       test: /[\\/]node_modules[\\/]/
+  //     }
+  //   }
+  // }
+  // minimize: true,
+  // minimizer: []
+};
+
+/**
  * @summary 获取 Webpack 构建配置
  * @param {BuildingEnvironment} mode 构建环境
  */
 function get(mode = BuildingEnvironment.Dev) {
   const baseExtensions = ['.js', '.ts', '.json'];
   const Config = Object.values(AppProcess).map(name => {
+    const isRenderer = name === AppProcess.Renderer;
     const options = {
       mode:
         mode || process.env?.NODE_ENV || BuildingEnvironment.Dev,
@@ -98,28 +127,26 @@ function get(mode = BuildingEnvironment.Dev) {
       devtool: Devtool.NosourcesSourceMap,
       resolve: {
         // mainFields: ['browser', 'module', 'main'],
-        extensions:
-          name === AppProcess.Renderer
-            ? ['.jsx', '.tsx', ...baseExtensions]
-            : baseExtensions,
-        alias: {
-          '@/*': Path.Source.base,
-          '@type/*': Path.Types
-        }
+        extensions: isRenderer
+          ? ['.jsx', '.tsx', ...baseExtensions]
+          : baseExtensions,
+        alias
       },
       externals: {},
       module: {
         rules: []
       },
-      optimization: {},
+      optimization,
       plugins: []
     };
 
-    // name === AppProcess.Renderer &&
+    // isRenderer &&
     //   (options.output.publicPath = '/');
 
     return options;
   });
+
+  console.log(Path.Source.base, Path.Types);
 
   return Config;
 }

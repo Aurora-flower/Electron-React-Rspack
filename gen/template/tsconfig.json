@@ -291,7 +291,7 @@ tsconfig.json
   },
 
   /* 指定编译的文件范围 */
-  "include": ["../src/**/*", "../electron/**/*"],
+  "include": ["./source/**/*", "./electron/**/*"],
 
   /* 排除不需要编译的文件夹 */
   "exclude": ["node_modules", "backup", "app"]
