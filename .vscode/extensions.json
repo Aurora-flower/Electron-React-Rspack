@@ -1,5 +1,7 @@
 {
   "recommendations": [
+    "emmanuelbeziat.vscode-great-icons",
+    "atommaterial.a-file-icon-vscode",
     "DavidAnson.vscode-markdownlint",
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
