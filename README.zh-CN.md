@@ -17,7 +17,7 @@
 >
 > js 运行环境
 
-```
+```shell
 npm install -D node
 ```
 
@@ -89,11 +89,17 @@ npm install -S three
 
 ```shell
 npm install -D plop
-npm install -D webpack
-
 
 # 自动化构建工具
 npm install -D  gulp
+```
+
+> webpack
+
+```shell
+npm install -D webpack
+
+npm install -D mini-css-extract-plugin
 ```
 
 ### 安装问题记录

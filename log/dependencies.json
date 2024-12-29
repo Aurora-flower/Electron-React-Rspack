@@ -71,6 +71,14 @@
         "description": {},
         "changed": []
       },
+      "mini-css-extract-plugin": {
+        "version": "^2.9.2",
+        "description": {
+          "summary": "一个 webpack 插件，用于将 CSS 提取到单独的文件中。",
+          "description": "将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMap 的按需加载。"
+        },
+        "changed": []
+      },
       "node": {
         "version": "^23.5.0",
         "description": {
