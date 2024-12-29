@@ -2,6 +2,16 @@
   {
     "version": "0.0.1",
     "devDependencies": {
+      "@babel/preset-env": {
+        "version": "^7.26.0",
+        "description": {},
+        "changed": []
+      },
+      "@babel/preset-react": {
+        "version": "^7.26.3",
+        "description": {},
+        "changed": []
+      },
       "@commitlint/cli": {
         "version": "^19.6.1",
         "description": {},
@@ -38,6 +48,11 @@
         "description": {},
         "changed": []
       },
+      "babel-loader": {
+        "version": "^9.2.1",
+        "description": {},
+        "changed": []
+      },
       "electron": {
         "version": "^33.2.1",
         "description": {},
@@ -64,6 +79,11 @@
           "summary": "一个基于 Node.js 的任务自动化构建工具。",
           "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
         },
+        "changed": []
+      },
+      "html-webpack-plugin": {
+        "version": "^5.6.3",
+        "description": {},
         "changed": []
       },
       "husky": {

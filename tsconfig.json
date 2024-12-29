@@ -4,8 +4,8 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["source/*"],
-      "@type/*": ["types/*"]
+      "@/*": ["./source/*"],
+      "@type/*": ["./types/*"]
     },
     "strict": true,
     "target": "ES6",

@@ -99,7 +99,14 @@ npm install -D  gulp
 ```shell
 npm install -D webpack
 
-npm install -D mini-css-extract-plugin
+# plugins
+npm install -D html-webpack-plugin mini-css-extract-plugin
+
+# loader
+npm install -D babel-loader ts-loader
+
+npm install -D @babel/preset-env @babel/preset-react
+
 ```
 
 ### 安装问题记录
