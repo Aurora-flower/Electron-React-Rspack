@@ -2,6 +2,7 @@ const {
   AppProcess,
   BuildingEnvironment
 } = require('./constant');
+const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
 const joinPath = require('../utils/joinpath');
 const { WebpakTarget } = require('./webpack-target');
@@ -79,8 +80,8 @@ const Entry = {
  * @summary Webpack 别名
  */
 const alias = {
-  '@/*': Path.Source.base,
-  '@type/*': Path.Types
+  '@': Path.Source.base,
+  '@type': Path.Types
 };
 
 /**
@@ -104,11 +105,20 @@ const optimization = {
 };
 
 /**
+ * @summary 配置外部依赖
+ * 表示排除的依赖项，指定的依赖不会被打包, node 模块默认不会被打包；
+ */
+const externals = {
+  // electron: 'commonjs2 electron'
+};
+
+/**
  * @summary 获取 Webpack 构建配置
  * @param {BuildingEnvironment} mode 构建环境
  */
 function get(mode = BuildingEnvironment.Dev) {
   const baseExtensions = ['.js', '.ts', '.json'];
+  const baseScriptLoader = [Loader.js, Loader.ts];
   const Config = Object.values(AppProcess).map(name => {
     const isRenderer = name === AppProcess.Renderer;
     const options = {
@@ -120,7 +130,7 @@ function get(mode = BuildingEnvironment.Dev) {
       },
       entry: Entry[name],
       output: {
-        publicPath: '/', // 对主进程、预加载进程可能有影响
+        path: Path[name], // 输出目录
         filename: '[name].js', // '[name].[contenthash].js'
         clean: true
       },
@@ -132,21 +142,24 @@ function get(mode = BuildingEnvironment.Dev) {
           : baseExtensions,
         alias
       },
-      externals: {},
+      externals,
       module: {
-        rules: []
+        rules: isRenderer
+          ? [Loader.css].concat(baseScriptLoader)
+          : baseScriptLoader
       },
       optimization,
       plugins: []
     };
 
-    // isRenderer &&
-    //   (options.output.publicPath = '/');
+    isRenderer &&
+      // 对主进程、预加载进程可能有影响
+      (options.output.publicPath = '/');
 
     return options;
   });
 
-  console.log(Path.Source.base, Path.Types);
+  console.log(alias);
 
   return Config;
 }

@@ -2,7 +2,7 @@
 layout: post
 title: 初见 hexo
 date: 2024-06-30 04:40:12
-categories: [初见 hexo]
+categories: [扩展]
 tags: [Hexo]
 ---
 

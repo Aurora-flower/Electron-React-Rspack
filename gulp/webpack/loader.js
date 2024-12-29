@@ -64,39 +64,35 @@ const css = {
 /**
  * @summary 处理 Js | Jsx | Ts | Tsx 文件的 Loader 配置
  */
-const script = {
-  test: /\.(js|jsx)$/,
-  use: [
-    /*
-     * @summary babel-loader 处理 js | jsx 文件
-     * @see https://github.com/babel/babel-loader
-     */
-    {
-      loader: 'babel-loader',
-      options: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react'
-        ] /* 预设 - 用于处理 react 文件 */,
-        cacheDirectory: true,
-        cacheCompression: false,
-        compact: false
-      }
-    },
-
-    /*
-     * @summary ts-loader 处理 ts | tsx 文件
-     * @see https://github.com/TypeStrong/ts-loader
-     */
-    {
-      loader: 'ts-loader',
-      options: {
-        transpileOnly: true
-      }
+const jsParser =
+  /*
+   * @summary babel-loader 处理 js | jsx 文件
+   * @see https://github.com/babel/babel-loader
+   */
+  {
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        '@babel/preset-env',
+        '@babel/preset-react'
+      ] /* 预设 - 用于处理 react 文件 */,
+      cacheDirectory: true,
+      cacheCompression: false,
+      compact: false
     }
-  ],
-  exclude
-};
+  };
+
+const tsParser =
+  /*
+   * @summary ts-loader 处理 ts | tsx 文件
+   * @see https://github.com/TypeStrong/ts-loader
+   */
+  {
+    loader: 'ts-loader',
+    options: {
+      transpileOnly: true
+    }
+  };
 
 /**
  * @summary 处理字体文件的 Loader 配置
@@ -161,7 +157,16 @@ const Loader = {
   css,
 
   /* Js | Jsx | Ts | Tsx 文件处理 */
-  script,
+  js: {
+    test: /\.(js|jsx)$/,
+    use: [jsParser],
+    exclude
+  },
+  ts: {
+    test: /\.(ts|tsx)$/,
+    use: [jsParser, tsParser],
+    exclude
+  },
 
   /* 字体文件处理 */
   font,
@@ -173,4 +178,4 @@ const Loader = {
   text
 };
 
-module.exports = Loader;
+module.exports = { Loader };

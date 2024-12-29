@@ -19,6 +19,7 @@
     "removeComments": true,
     "isolatedModules": true,
     "esModuleInterop": true,
+    "sourceRoot": "./source",
     "allowUnusedLabels": true,
     "moduleResolution": "node",
     "noUnusedParameters": true,
