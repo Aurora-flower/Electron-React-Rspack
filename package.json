@@ -1,7 +1,7 @@
 {
   "name": "er",
   "version": "0.0.1",
-  "main": "",
+  "main": "app/electron/main.js",
   "private": "true",
   "scripts": {
     "test": "exit 0",

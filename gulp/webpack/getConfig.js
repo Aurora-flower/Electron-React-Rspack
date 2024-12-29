@@ -95,13 +95,15 @@ const optimization = {
   //   maxInitialRequests: Infinity,
   //   minSize: 0,
   //   cacheGroups: {
-  //     vendorer: {
-  //       test: /[\\/]node_modules[\\/]/
+  //     vendors: {
+  //       test: /[\\/]node_modules[\\/]/,
+  //       name: 'vendors',
+  //       chunks: 'all'
   //     }
   //   }
   // }
-  // minimize: true,
-  // minimizer: []
+  /* 压缩代码 */
+  minimize: true
 };
 
 /**

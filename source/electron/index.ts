@@ -6,16 +6,16 @@
 import { debugLog } from '@/common/log';
 import { app, BrowserWindow } from 'electron';
 
-const ModuleID = module.id; // 模块路径
+const CWD = process.cwd(); /*  当前工作目录 */
+const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
 
 /**
  * @summary 应用准备就绪后执行的回调
  */
 async function onAppReady() {
   try {
-    console.log(__dirname, process.cwd(), ModuleID, process);
-
     // TODO: 最小宽度 1264
+    debugLog(ModuleID, 'onAppReady', 'start', CWD);
   } catch (error) {
     const msgTitle = 'Failed to start the application';
     const msg =
