@@ -1,15 +1,16 @@
 {
   "recommendations": [
-    "emmanuelbeziat.vscode-great-icons",
-    "atommaterial.a-file-icon-vscode",
-    "DavidAnson.vscode-markdownlint",
+    "antfu.iconify",
+    "mhutchie.git-graph",
+    "ritwickdey.liveserver",
+    "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
-    "esbenp.prettier-vscode",
-    "ritwickdey.liveserver",
-    "Alibaba-Cloud.tongyi-lingma",
-    "mhutchie.git-graph",
     "formulahendry.code-runner",
-    "rvest.vs-code-prettier-eslint"
+    "Alibaba-Cloud.tongyi-lingma",
+    "rvest.vs-code-prettier-eslint",
+    "DavidAnson.vscode-markdownlint",
+    "atommaterial.a-file-icon-vscode",
+    "emmanuelbeziat.vscode-great-icons"
   ]
 }
