@@ -13,7 +13,7 @@ module.exports = {
         'refactor' /* 代码重构 */,
         'perf' /* 性能优化 */,
         'test' /* 增加测试 */,
-        'build' /* dep - 工具性依赖的安装与配置 | 构建工具相关 */,
+        'build' /* 项目基础变动 | 工具性依赖的安装与配置 | 构建工具相关 */,
         'ci' /* CI 配置相关 */,
         'chore' /* 杂项任务 */,
         'revert' /* 回滚 */,
@@ -27,7 +27,6 @@ module.exports = {
         'log' /* 日志类型 */,
         'del' /* 删除 */,
         'assets' /* 资源 */,
-        'base' /* 项目基础 */,
         'editor' /* 编辑器配置 */
       ]
     ],
