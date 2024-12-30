@@ -17,8 +17,12 @@ function getHtmlWebpackPlugin(filePath, outputPath) {
     template: filePath,
     filename: outputPath,
     meta: {
-      'viewport': 'width=device-width, initial-scale=1.0', // shrink-to-fit=no
-      // 开启 CSP
+      'viewport': `
+        width=device-width, initial-scale=1.0, 
+        maximum-scale=1.0, user-scalable=no
+        // shrink-to-fit=no
+        `,
+      /* Content-Security-Policy 策略 */
       'Content-Security-Policy': {
         'http-equiv': 'Content-Security-Policy',
         'content': `
@@ -28,7 +32,7 @@ function getHtmlWebpackPlugin(filePath, outputPath) {
           font-src 'self'; 
           connect-src 'self'; 
           img-src 'self' data:;
-          `
+        `
       }
     }
   };
@@ -90,5 +94,8 @@ function getDotenvPlugin(envpath, option = {}) {
 }
 
 module.exports = {
-  getHtmlWebpackPlugin
+  getDotenvPlugin,
+  getHtmlWebpackPlugin,
+  getCopyWebpackPlugin,
+  getMiniCssExtractPlugin
 };

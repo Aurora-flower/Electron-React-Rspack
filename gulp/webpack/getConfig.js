@@ -5,6 +5,7 @@ const {
 const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
 const joinPath = require('../utils/joinpath');
+const { getDotenvPlugin } = require('./plugins');
 const { WebpakTarget } = require('./webpack-target');
 
 /**
@@ -15,11 +16,13 @@ const CWD = process.cwd();
 /**
  * @summary 定义输入、输出目录与文件路径
  */
-const Path = new Proxy(
+const FolderPath = new Proxy(
   {
-    /* ********************* Folder Path ********************* */
     /* 打包输出位置 */
     App: 'app',
+
+    /* 静态文件目录 */
+    Public: 'public',
 
     /* 类型声明文件目录 */
     Types: 'types',
@@ -35,8 +38,6 @@ const Path = new Proxy(
 
     /* 渲染进程代码存放位置 */
     Renderer: 'renderer'
-
-    /* ********************* File Path ********************* */
   },
   {
     get(target, key) {
@@ -55,7 +56,43 @@ const Path = new Proxy(
           renderer: joinPath(folder, 'src')
         };
       }
+      if (['Public'].includes(key)) {
+        const assets = joinPath(folder, 'assets');
+        return {
+          base: folder,
+          assets,
+          fonts: joinPath(assets, 'fonts'),
+          atlas: joinPath(folder, 'atlas'),
+          images: joinPath(assets, 'images'),
+          styles: joinPath(folder, 'styles')
+        };
+      }
       return folder;
+    }
+  }
+);
+
+const FilePath = new Proxy(
+  {
+    Env: '.env',
+    Page: 'index.html',
+    Favicon: 'favicon.ico'
+  },
+  {
+    get(target, key) {
+      if (!Object.prototype.hasOwnProperty.call(target, key)) {
+        return undefined;
+      }
+
+      if (['Env'].includes(key)) {
+        return {
+          base: joinPath(FolderPath.Config, target[key]),
+          private: joinPath(FolderPath.Config, '.private.env')
+        };
+      } else if (['Config'].includes(key)) {
+        joinPath(FolderPath.Public.base, target[key]);
+      }
+      return target[key];
     }
   }
 );
@@ -65,14 +102,14 @@ const Path = new Proxy(
  */
 const Entry = {
   Main: {
-    main: joinPath(Path.Source.electron, 'index.ts')
+    main: joinPath(FolderPath.Source.electron, 'index.ts')
   },
   Preload: {
-    preload: joinPath(Path.Source.preload, 'index.ts')
+    preload: joinPath(FolderPath.Source.preload, 'index.ts')
   },
   Renderer: {
-    index: joinPath(Path.Source.renderer, 'index.ts'),
-    vendor: joinPath(Path.Source.renderer, 'vendor.ts')
+    index: joinPath(FolderPath.Source.renderer, 'index.ts'),
+    vendor: joinPath(FolderPath.Source.renderer, 'vendor.ts')
   }
 };
 
@@ -80,13 +117,13 @@ const Entry = {
  * @summary Webpack 别名
  */
 const alias = {
-  '@': Path.Source.base,
-  '@type': Path.Types
+  '@': FolderPath.Source.base,
+  '@type': FolderPath.Types
 };
 
 /**
  * @summary Webpack 优化配置
- * @see {@link https://www.webpackjs.com/configuration/optimization/ Webpack 官方文档-optimization}
+ * @see {@link https://www.webpackjs.com/configuration/optimization/}
  */
 const optimization = {
   // runtimeChunk: 'single',
@@ -132,7 +169,7 @@ function get(mode = BuildingEnvironment.Dev) {
       },
       entry: Entry[name],
       output: {
-        path: Path[name], // 输出目录
+        path: FolderPath[name], // 输出目录
         filename: '[name].js', // '[name].[contenthash].js'
         clean: true
       },
@@ -151,12 +188,13 @@ function get(mode = BuildingEnvironment.Dev) {
           : baseScriptLoader
       },
       optimization,
-      plugins: []
+      plugins: [getDotenvPlugin(FilePath.Env.base)]
     };
 
-    isRenderer &&
+    if (isRenderer) {
       // 对主进程、预加载进程可能有影响
-      (options.output.publicPath = '/');
+      options.output.publicPath = '/';
+    }
 
     return options;
   });

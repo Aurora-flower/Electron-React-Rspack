@@ -4,8 +4,8 @@
   "main": "app/electron/main.js",
   "private": "true",
   "scripts": {
-    "test": "exit 0",
-    "dev": "node .",
+    "test": "node . && exit 0",
+    "dev": "gulp dev",
     "start": "electron .",
     "compile": "gulp compile",
     "check:out": "npm outdated",

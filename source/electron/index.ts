@@ -4,9 +4,9 @@
  */
 
 import { debugLog } from '@/common/log';
-import { app, BrowserWindow } from 'electron';
+import { app } from 'electron';
 
-const CWD = process.cwd(); /*  当前工作目录 */
+// const CWD = process.cwd(); /*  当前工作目录 */
 const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
 
 /**
@@ -15,7 +15,12 @@ const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
 async function onAppReady() {
   try {
     // TODO: 最小宽度 1264
-    debugLog(ModuleID, 'onAppReady', 'start', CWD);
+    debugLog(
+      ModuleID,
+      'onAppReady',
+      'start',
+      process.env.IS_DEBUG
+    );
   } catch (error) {
     const msgTitle = 'Failed to start the application';
     const msg =
