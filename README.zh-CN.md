@@ -100,12 +100,14 @@ npm install -D  gulp
 npm install -D webpack
 
 # plugins
-npm install -D html-webpack-plugin mini-css-extract-plugin
+npm install -D html-webpack-plugin copy-webpack-plugin mini-css-extract-plugin
 
 # loader
 npm install -D babel-loader ts-loader
 
 npm install -D @babel/preset-env @babel/preset-react
+
+npm install -D dotenv-webpack
 
 ```
 
