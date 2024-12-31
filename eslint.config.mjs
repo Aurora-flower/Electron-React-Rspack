@@ -7,6 +7,15 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 
+const noUnusedExpressions = [
+  'error',
+  {
+    enforceForJSX: true,
+    allowShortCircuit: true,
+    allowTernary: true
+  }
+];
+
 export default [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   {
@@ -63,7 +72,15 @@ export default [
       '@typescript-eslint/no-require-imports': 'off',
 
       /* 允许使用 switch 语句的 fallthrough */
-      'no-fallthrough': 'off'
+      'no-fallthrough': 'off',
+
+      /* 允许使用没有副作用的表达式  */
+      'no-unused-expressions': noUnusedExpressions,
+      '@typescript-eslint/no-unused-expressions':
+        noUnusedExpressions,
+
+      /* 允许使用 any */
+      '@typescript-eslint/no-explicit-any': 'warn'
     }
   }
 ];
