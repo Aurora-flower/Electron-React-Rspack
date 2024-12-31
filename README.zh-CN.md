@@ -218,10 +218,10 @@ npm install -D dotenv-webpack
   - **Folder** `preload`: 预加载进程目录
   - **Folder** `server`: 本地服务器目录
   - **Folder** `src`: 渲染进程目录
+  - **Folder** `types`: 类型定义目录
 
 - **Folder** `temp`: 临时文件目录，希望在 git 提交历史中，不被意外丢失，但没有什么用处。
 - **Folder** `test`: 各种学习示例目录
-- **Folder** `types`: 类型定义目录
 - **File** `.gitattributes`: Git 版本控制系统中的一个配置文件，用于指定如何处理文件的属性和行为
 - **File** `.gitignore`: git 忽略配置
 - **File** `package.json`: npm 配置文件
