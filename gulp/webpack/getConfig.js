@@ -2,10 +2,13 @@ const {
   AppProcess,
   BuildingEnvironment
 } = require('./constant');
+const {
+  getDotenvPlugin,
+  getHtmlWebpackPlugin
+} = require('./plugins');
 const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
 const joinPath = require('../utils/joinpath');
-const { getDotenvPlugin } = require('./plugins');
 const { WebpakTarget } = require('./webpack-target');
 
 /**
@@ -33,21 +36,41 @@ const FolderPath = new Proxy(
     /* 配置文件目录 */
     Config: '.config',
 
-    /* 主进程、预加载进程代码存放位置 */
+    /* 主进程、预加载进程、渲染进程代码存放位置 */
     Main: 'electron',
+    Preload: 'preload',
+    Renderer: 'renderer',
 
-    /* 渲染进程代码存放位置 */
-    Renderer: 'renderer'
+    /* 模板 html 存放位置 */
+    Static: 'public/index.html'
   },
   {
     get(target, key) {
       const flag = key in target;
       if (!flag) return undefined;
-      if ([AppProcess.Main, AppProcess.Renderer].includes(key)) {
+      if (
+        [
+          AppProcess.Main,
+          AppProcess.Preload,
+          AppProcess.Renderer
+        ].includes(key)
+      ) {
         return joinPath(CWD, target.App, target[key]);
       }
+
+      if (key == 'Static') {
+        return {
+          page: joinPath(
+            CWD,
+            target.App,
+            target.Renderer,
+            target.Static
+          )
+        };
+      }
+
       const folder = joinPath(CWD, target[key]);
-      if (['Source'].includes(key)) {
+      if ('Source' == key) {
         return {
           base: folder,
           electron: joinPath(folder, 'electron'),
@@ -56,7 +79,7 @@ const FolderPath = new Proxy(
           renderer: joinPath(folder, 'src')
         };
       }
-      if (['Public'].includes(key)) {
+      if ('Public' == key) {
         const assets = joinPath(folder, 'assets');
         return {
           base: folder,
@@ -83,16 +106,13 @@ const FilePath = new Proxy(
       if (!Object.prototype.hasOwnProperty.call(target, key)) {
         return undefined;
       }
-
-      if (['Env'].includes(key)) {
+      if ('Env' == key) {
         return {
           base: joinPath(FolderPath.Config, target[key]),
           private: joinPath(FolderPath.Config, '.private.env')
         };
-      } else if (['Config'].includes(key)) {
-        joinPath(FolderPath.Public.base, target[key]);
       }
-      return target[key];
+      return joinPath(FolderPath.Public.base, target[key]);
     }
   }
 );
@@ -105,7 +125,7 @@ const Entry = {
     main: joinPath(FolderPath.Source.electron, 'index.ts')
   },
   Preload: {
-    preload: joinPath(FolderPath.Source.preload, 'index.ts')
+    index: joinPath(FolderPath.Source.preload, 'index.ts')
   },
   Renderer: {
     index: joinPath(FolderPath.Source.renderer, 'index.ts'),
@@ -192,14 +212,18 @@ function get(mode = BuildingEnvironment.Dev) {
     };
 
     if (isRenderer) {
-      // 对主进程、预加载进程可能有影响
-      options.output.publicPath = '/';
+      // 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath
+      // options.output.publicPath = '/';
+      options.plugins.push(
+        getHtmlWebpackPlugin({
+          template: FilePath.Page,
+          filename: FolderPath.Static.page
+        })
+      );
     }
 
     return options;
   });
-
-  console.log(alias);
 
   return Config;
 }

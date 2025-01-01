@@ -15,7 +15,12 @@ function compile(cd) {
       return;
     }
     cd();
-    console.log('构建成功', stats.toString());
+    console.log(
+      '构建成功',
+      // webpackConfig,
+      '\n',
+      stats.toString()
+    );
   });
 }
 

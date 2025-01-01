@@ -9,30 +9,28 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
  * @description 用于生成 HTML 文件
  * @returns {HtmlWebpackPlugin}
  */
-function getHtmlWebpackPlugin(filePath, outputPath) {
+function getHtmlWebpackPlugin({ template, filename }) {
   const inject = 'body'; // boolean | 'body' | 'head'
   const HtmlWebpackPluginOption = {
     inject,
     title: '花楹一间',
-    template: filePath,
-    filename: outputPath,
+    template,
+    filename,
     meta: {
-      'viewport': `
-        width=device-width, initial-scale=1.0, 
-        maximum-scale=1.0, user-scalable=no
-        // shrink-to-fit=no
-        `,
+      // shrink-to-fit=no
+      'viewport':
+        'width=device-width, initial-scale=1.0,' +
+        'maximum-scale=1.0, user-scalable=no',
       /* Content-Security-Policy 策略 */
       'Content-Security-Policy': {
         'http-equiv': 'Content-Security-Policy',
-        'content': `
-          default-src 'self'; 
-          script-src 'self'; 
-          style-src-elem 'self'; 
-          font-src 'self'; 
-          connect-src 'self'; 
-          img-src 'self' data:;
-        `
+        'content':
+          'default-src \'self\';' +
+          'script-src \'self\';' +
+          'style-src-elem \'self\';' +
+          'font-src \'self\';' +
+          'connect-src \'self\';' +
+          'img-src \'self\' data:;'
       }
     }
   };

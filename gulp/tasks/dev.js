@@ -7,15 +7,26 @@ let electronProcess = null;
 
 async function start(done) {
   if (electronProcess) {
-    console.log('终止之前的 Electron 进程');
+    console.log(
+      '终止之前的 Electron 进程',
+      electronProcess?.pid
+    );
     electronProcess.kill();
+
+    // 等待进程完全退出
+    await new Promise(resolve => {
+      electronProcess.on('exit', () => {
+        console.log('之前的 Electron 进程已退出');
+        resolve();
+      });
+    });
   }
-  console.log('Electron running ...');
 
   electronProcess = spawn(electron, ['.'], {
     stdio: 'inherit'
   });
 
+  console.log('Electron running ...', electronProcess?.pid);
   electronProcess.on('close', code => {
     console.log(`子进程退出，退出码 ${code}`);
     electronProcess = null;
@@ -30,9 +41,17 @@ async function start(done) {
 
 // exports.dev = function () {};
 task('dev', function () {
+  const options = {
+    cwd: process.cwd()
+  };
   watch(
-    ['source/**/*'],
-    { ignoreInitial: false, cwd: process.cwd() },
+    ['source/**/*', '!source/electron/**/*'],
+    options,
+    compile
+  );
+  watch(
+    ['source/electron/**/*'],
+    { ignoreInitial: false, ...options },
     series(compile, start)
   );
 });
