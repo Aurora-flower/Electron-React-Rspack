@@ -45,7 +45,7 @@ task('dev', function () {
     cwd: process.cwd()
   };
   watch(
-    ['source/**/*', '!source/electron/**/*'],
+    ['public/**/*', 'source/**/*', '!source/electron/**/*'],
     options,
     compile
   );

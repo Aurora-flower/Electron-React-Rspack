@@ -80,7 +80,10 @@ export default [
         noUnusedExpressions,
 
       /* 允许使用 any */
-      '@typescript-eslint/no-explicit-any': 'warn'
+      '@typescript-eslint/no-explicit-any': 'warn',
+
+      /* 无效 转义 */
+      'no-useless-escape': 'warn'
     }
   }
 ];

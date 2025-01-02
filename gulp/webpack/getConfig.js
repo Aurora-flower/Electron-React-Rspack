@@ -4,7 +4,9 @@ const {
 } = require('./constant');
 const {
   getDotenvPlugin,
-  getHtmlWebpackPlugin
+  getHtmlWebpackPlugin,
+  getCopyWebpackPlugin,
+  getMiniCssExtractPlugin
 } = require('./plugins');
 const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
@@ -33,6 +35,9 @@ const FolderPath = new Proxy(
     /* 源文件目录 */
     Source: 'source',
 
+    /* 输出文件目录 Public */
+    Dist: 'public',
+
     /* 配置文件目录 */
     Config: '.config',
 
@@ -58,13 +63,13 @@ const FolderPath = new Proxy(
         return joinPath(CWD, target.App, target[key]);
       }
 
-      if (key == 'Static') {
+      if (['Static', 'Dist'].includes(key)) {
         return {
           page: joinPath(
             CWD,
             target.App,
             target.Renderer,
-            target.Static
+            target[key]
           )
         };
       }
@@ -177,7 +182,8 @@ const externals = {
  */
 function get(mode = BuildingEnvironment.Dev) {
   const baseExtensions = ['.js', '.ts', '.json'];
-  const baseScriptLoader = [Loader.js, Loader.ts];
+  const baseLoader = [Loader.js, Loader.ts];
+  const basePlugins = [getDotenvPlugin(FilePath.Env.base)];
   const Config = Object.values(AppProcess).map(name => {
     const isRenderer = name === AppProcess.Renderer;
     const options = {
@@ -196,29 +202,39 @@ function get(mode = BuildingEnvironment.Dev) {
       devtool: Devtool.NosourcesSourceMap,
       resolve: {
         // mainFields: ['browser', 'module', 'main'],
-        extensions: isRenderer
-          ? ['.jsx', '.tsx', ...baseExtensions]
-          : baseExtensions,
+        extensions: baseExtensions,
         alias
       },
       externals,
       module: {
-        rules: isRenderer
-          ? [Loader.css].concat(baseScriptLoader)
-          : baseScriptLoader
+        rules: baseLoader
       },
       optimization,
-      plugins: [getDotenvPlugin(FilePath.Env.base)]
+      plugins: basePlugins
     };
 
     if (isRenderer) {
-      // 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath
+      /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
       // options.output.publicPath = '/';
+      options.resolve.extensions = baseExtensions.concat([
+        '.jsx',
+        '.tsx'
+      ]);
+      options.module.rules = baseLoader.concat(Loader.css);
       options.plugins.push(
+        getCopyWebpackPlugin([
+          {
+            from: FolderPath.Public.base,
+            toType: 'dir',
+            to: joinPath(FolderPath.Renderer, 'public')
+            // force: false
+          }
+        ]),
         getHtmlWebpackPlugin({
           template: FilePath.Page,
           filename: FolderPath.Static.page
-        })
+        }),
+        getMiniCssExtractPlugin()
       );
     }
 

@@ -25,12 +25,12 @@ function getHtmlWebpackPlugin({ template, filename }) {
       'Content-Security-Policy': {
         'http-equiv': 'Content-Security-Policy',
         'content':
-          'default-src \'self\';' +
-          'script-src \'self\';' +
-          'style-src-elem \'self\';' +
-          'font-src \'self\';' +
-          'connect-src \'self\';' +
-          'img-src \'self\' data:;'
+          "default-src 'self';" +
+          "script-src 'self';" +
+          "style-src-elem 'self';" +
+          "font-src 'self';" +
+          "connect-src 'self';" +
+          "img-src 'self' data:;"
       }
     }
   };
@@ -57,10 +57,7 @@ function getMiniCssExtractPlugin() {
  * @param option 配置选项
  * @returns  {CopyWebpackPlugin}
  */
-function getCopyWebpackPlugin(
-  patterns, // typeof CopyWebpackPlugin.AdditionalOptions
-  option
-) {
+function getCopyWebpackPlugin(patterns, option) {
   const CopyPluginOption = {
     patterns
   };
