@@ -22,6 +22,8 @@
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.17.0",
+    "@types/koa": "^2.15.0",
+    "@types/koa-static": "^4.0.4",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@typescript-eslint/parser": "^8.18.1",
@@ -45,6 +47,8 @@
   },
   "dependencies": {
     "fabric": "^6.5.3",
+    "koa": "^2.15.3",
+    "koa-static": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.0",

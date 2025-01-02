@@ -10,6 +10,7 @@
 
 ## 依赖安装
 
+    - `i` == 'install'
     - `-D` == `--save-dev` == `devDependencies` == 开发环境
     - `-S` == `--save` == `dependencies` == 生产环境
 
@@ -18,7 +19,7 @@
 > js 运行环境
 
 ```shell
-npm install -D node
+npm install --save-dev node
 ```
 
 > electron:
@@ -46,10 +47,10 @@ npm install @types/react @types/react-dom --save-dev
 npm init @eslint/config
 
 # 选择后，提示安装 （等价于）
-npm install -D eslint globals @eslint/js typescript-eslint eslint-plugin-react
+npm install --save-dev eslint globals @eslint/js typescript-eslint eslint-plugin-react
 
 # 进一步需求的安装
-npm install -D @typescript-eslint/parser
+npm install --save-dev @typescript-eslint/parser
 ```
 
 > prettier:
@@ -57,14 +58,14 @@ npm install -D @typescript-eslint/parser
 > 代码风格格式化
 
 ```shell
-npm install -D prettier
+npm install --save-dev prettier
 ```
 
 > husky
 > 提交消息规范、代码校验
 
 ```shell
-npm install -D @commitlint/{config-conventional,cli} husky
+npm install --save-dev @commitlint/{config-conventional,cli} husky
 ```
 
 > css 相关 - 实用程序、动画样式
@@ -76,39 +77,54 @@ npm install -D @commitlint/{config-conventional,cli} husky
 > 2D 渲染库
 
 ```shell
-npm install -S fabric
+npm install fabric
 ```
 
 > 3D 渲染库
 
 ```shell
-npm install -S three
+npm install three
 ```
 
 > 工具安装
 
 ```shell
-npm install -D plop
+npm install --save-dev plop
 
 # 自动化构建工具
-npm install -D  gulp
+npm install --save-dev  gulp
 ```
 
 > webpack
 
 ```shell
-npm install -D webpack
+npm install --save-dev webpack
 
 # plugins
-npm install -D html-webpack-plugin copy-webpack-plugin mini-css-extract-plugin
+npm install --save-dev html-webpack-plugin copy-webpack-plugin mini-css-extract-plugin
 
 # loader
-npm install -D babel-loader ts-loader
+npm install --save-dev babel-loader ts-loader
 
-npm install -D @babel/preset-env @babel/preset-react
+npm install --save-dev @babel/preset-env @babel/preset-react
 
-npm install -D dotenv-webpack
+npm install --save-dev dotenv-webpack
 
+```
+
+> koa
+>
+> 服务端框架
+
+```shell
+npm install koa
+
+npm install --save-dev @types/koa
+
+# middleware
+npm install koa-static
+
+npm install --save-dev @types/koa-static
 ```
 
 ### 安装问题记录
@@ -128,7 +144,6 @@ npm install -D dotenv-webpack
 | refactor | 代码重构，不涉及功能增删           | `refactor(components): 重构组件结构`        |
 | perf     | 性能优化                           | `perf(api): 优化 API 响应速度`              |
 | test     | 增加或修改测试代码                 | `test(unit): 添加单元测试覆盖`              |
-| dep      | 工具性依赖的安装与配置             | `dep(linter): 配置 ESLint 规则`             |
 | build    | 构建工具或外部依赖变动             | `build(webpack): 升级 Webpack 版本`         |
 | ci       | 持续集成配置修改                   | `ci(jenkins): 集成Jenkins持续集成`          |
 | chore    | 不影响代码运行的其他改动           | `chore(dependencies): 更新依赖包版本`       |
@@ -145,7 +160,7 @@ npm install -D dotenv-webpack
 | base     | 项目基础构建流程                   | `base(git): 配置\更新 git 忽略文件`         |
 | editor   | 编辑器配置与修改                   | `editor(vscode): 配置 vscode`               |
 
----
+<!-- | dep      | 工具性依赖的安装与配置             | `dep(linter): 配置 ESLint 规则`             | -->
 
 ## 项目架构
 
