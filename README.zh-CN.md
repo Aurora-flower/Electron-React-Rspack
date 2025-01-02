@@ -216,7 +216,6 @@ npm install -D dotenv-webpack
   - **Folder** `common`: 通用文件，如通用变量、函数等
   - **Folder** `electron`: 主进程目录
   - **Folder** `preload`: 预加载进程目录
-  - **Folder** `server`: 本地服务器目录
   - **Folder** `src`: 渲染进程目录
   - **Folder** `types`: 类型定义目录
 

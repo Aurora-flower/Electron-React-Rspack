@@ -1,7 +1,7 @@
 /**
- * @summary 文件后缀
+ * @summary 文件后缀的类别区分
  */
-const extensions = {
+export const category = {
   /* 图片 */
   image: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'ico'],
   /* 视频 */
@@ -27,4 +27,7 @@ const extensions = {
   ]
 };
 
-module.exports = { extensions };
+/**
+ * @summary 文件后缀
+ */
+export const extensions = {};

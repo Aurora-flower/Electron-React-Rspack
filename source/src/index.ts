@@ -1,3 +1,8 @@
+/**
+ * @file 渲染进程主入口文件
+ */
+import '@/src/App';
+import '@/src/vendor';
 import { debugLog } from '@/common/log';
 
-debugLog(module.id, 'index', 'hello world ready');
+debugLog(module.id, 'Main Entry', 'hello world');

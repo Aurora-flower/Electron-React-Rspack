@@ -20,3 +20,9 @@
 const Dev = require('./gulp/tasks/dev');
 const Compile = require('./gulp/tasks/compile');
 const Package = require('./gulp/tasks/package');
+
+module.exports = {
+  Dev,
+  Compile,
+  Package
+};
