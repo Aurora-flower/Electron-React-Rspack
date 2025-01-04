@@ -170,7 +170,14 @@
           "summary": "一个基于 HTML5 Canvas 的开源 JavaScript 库",
           "comment": "通过使用插件和流(streams)来简化前端开发中的重复性任务, 如编译代码、优化资源、自动刷新浏览器等。"
         },
-        "changed": []
+        "changed": [
+          {
+            "version": "^6.5.4",
+            "commit": "cf8b11ec",
+            "date": "2025/01/04",
+            "message": ""
+          }
+        ]
       },
       "koa": {
         "version": "^2.15.3",
@@ -195,7 +202,14 @@
       "react-router-dom": {
         "version": "^7.1.0",
         "description": {},
-        "changed": []
+        "changed": [
+          {
+            "version": "^7.1.1",
+            "commit": "cf8b11ec",
+            "date": "2025/01/04",
+            "message": ""
+          }
+        ]
       },
       "three": {
         "version": "^0.171.0",
@@ -203,7 +217,14 @@
           "summary": "一个基于 WebGL 的 JavaScript 库，用于在网页中创建和渲染 3D 图形。",
           "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
         },
-        "changed": []
+        "changed": [
+          {
+            "version": "^0.172.0",
+            "commit": "cf8b11ec",
+            "date": "2025/01/04",
+            "message": ""
+          }
+        ]
       }
     }
   }
