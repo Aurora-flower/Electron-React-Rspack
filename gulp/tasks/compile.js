@@ -1,9 +1,15 @@
 /**
  * @file 执行编译任务
  */
-const { task } = require('gulp');
+const { task, series } = require('gulp');
 const webpack = require('webpack');
+const { rimraf } = require('rimraf');
 const getConfig = require('../webpack/getConfig');
+
+async function clean(cb) {
+  await rimraf('./app');
+  cb();
+}
 
 function compile(cd) {
   const webpackConfig = getConfig();
@@ -24,10 +30,9 @@ function compile(cd) {
   });
 }
 
-task('compile', function (done) {
-  compile(done);
-});
+task('compile', series(clean, compile));
 
 module.exports = {
+  clean,
   compile
 };

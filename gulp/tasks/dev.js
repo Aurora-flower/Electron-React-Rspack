@@ -1,5 +1,5 @@
 const electron = require('electron');
-const { compile } = require('./compile');
+const { clean, compile } = require('./compile');
 const { spawn } = require('node:child_process');
 const { task, series, watch /* parallel */ } = require('gulp');
 
@@ -47,11 +47,11 @@ task('dev', function () {
   watch(
     ['public/**/*', 'source/**/*', '!source/electron/**/*'],
     options,
-    compile
+    series(clean, compile)
   );
   watch(
     ['source/electron/**/*'],
     { ignoreInitial: false, ...options },
-    series(compile, start)
+    series(clean, compile, start)
   );
 });

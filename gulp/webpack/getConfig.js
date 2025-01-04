@@ -35,19 +35,16 @@ const FolderPath = new Proxy(
     /* 源文件目录 */
     Source: 'source',
 
-    /* 输出文件目录 Public */
-    Dist: 'public',
-
     /* 配置文件目录 */
     Config: '.config',
 
     /* 主进程、预加载进程、渲染进程代码存放位置 */
     Main: 'electron',
     Preload: 'preload',
-    Renderer: 'renderer',
+    Renderer: 'public', // renderer | Dist
 
     /* 模板 html 存放位置 */
-    Static: 'public/index.html'
+    Static: 'index.html'
   },
   {
     get(target, key) {
@@ -63,7 +60,7 @@ const FolderPath = new Proxy(
         return joinPath(CWD, target.App, target[key]);
       }
 
-      if (['Static', 'Dist'].includes(key)) {
+      if (['Static'].includes(key)) {
         return {
           page: joinPath(
             CWD,
@@ -215,7 +212,7 @@ function get(mode = BuildingEnvironment.Dev) {
 
     if (isRenderer) {
       /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
-      // options.output.publicPath = '/';
+      options.output.publicPath = '/';
       options.resolve.extensions = baseExtensions.concat([
         '.jsx',
         '.tsx'
@@ -226,7 +223,7 @@ function get(mode = BuildingEnvironment.Dev) {
           {
             from: FolderPath.Public.base,
             toType: 'dir',
-            to: joinPath(FolderPath.Renderer, 'public')
+            to: FolderPath.Renderer
             // force: false
           }
         ]),
