@@ -50,13 +50,13 @@
   },
   "dependencies": {
     "express": "^4.21.2",
-    "fabric": "^6.5.3",
+    "fabric": "^6.5.4",
     "koa": "^2.15.3",
     "koa-static": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.0",
-    "three": "^0.171.0"
+    "react-router-dom": "^7.1.1",
+    "three": "^0.172.0"
   },
   "repository": {
     "type": "git",
