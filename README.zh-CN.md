@@ -93,6 +93,8 @@ npm install --save-dev plop
 
 # 自动化构建工具
 npm install --save-dev  gulp
+
+npm install --save-dev rimraf
 ```
 
 > webpack
@@ -112,14 +114,14 @@ npm install --save-dev dotenv-webpack
 
 ```
 
-> koa
+> koa & express
 >
 > 服务端框架
 
 ```shell
-npm install koa
+npm install koa express
 
-npm install --save-dev @types/koa
+npm install --save-dev @types/koa @types/express
 
 # middleware
 npm install koa-static

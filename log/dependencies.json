@@ -33,6 +33,11 @@
         "description": {},
         "changed": []
       },
+      "@types/express": {
+        "version": "^5.0.0",
+        "description": {},
+        "changed": []
+      },
       "@types/koa": {
         "version": "^2.15.0",
         "description": {},
@@ -132,6 +137,16 @@
         "description": {},
         "changed": []
       },
+      "rimraf": {
+        "version": "^6.0.1",
+        "description": {},
+        "changed": []
+      },
+      "ts-loader": {
+        "version": "^9.5.1",
+        "description": {},
+        "changed": []
+      },
       "typescript-eslint": {
         "version": "^8.18.1",
         "description": {},
@@ -144,6 +159,11 @@
       }
     },
     "dependencies": {
+      "express": {
+        "version": "^4.21.2",
+        "description": {},
+        "changed": []
+      },
       "fabric": {
         "version": "^6.5.3",
         "description": {
