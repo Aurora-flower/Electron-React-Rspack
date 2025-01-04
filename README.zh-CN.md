@@ -177,56 +177,107 @@ npm install --save-dev @types/koa-static
 > - `File` 表示文件类型
 > - `Folder` 表示目录类型
 > - `Pedding` 表示后期可能会变动（Git 忽略）
+> - ⭐️ 表示不被 Git 提交，但重点关注
+
+- **Folder** `.config`: 项目配置目录
+
+  - **File** `.env`: 项目环境变量配置文件 (Base)
 
 - **Folder** `.vscode`: vs code 编辑器配置目录
-- **Folder** `.config`: 项目配置目录
-- **Folder-Ignore-SG** `app`: 源码经过编译后的输出目录
+
+  - **File** `settings.json`: vs code 设置配置文件
+    <!-- - **File** `launch.json`: vs code 调试配置文件 -->
+    <!-- - **File** `tasks.json`: vs code 任务配置文件 -->
+  - **File** `extensions.json`: vs code 扩展配置文件
+
+- **Folder-Ignore-UNG** `app`: 源码经过编译后的输出目录
+
+  - **Folder-Ignore-UNG** `electron`: electron 运行目录
+  - **Folder-Ignore-UNG** `preload`: 预加载进程运行目录
+  - **Folder-Ignore-UNG** `public`: 渲染进程运行目录
+
 - **Folder-Ignore-SG** `backup`: 用于存放本地临时备份文件
-- **Folder-Ignore-SG** `cache`: 主进程运行缓存目录
-- **Folder** `docs`: 用于学习记录的文档
+
+- **Folder-Ignore-UNG** `cache`: 主进程运行缓存目录
+
+  - **Folder-Ignore-UNG** `debug`: 调试输出缓存
+  - **Folder-Ignore-UNG** `local`: 应用配置缓存
+
+- **Folder** `core`: 扩展目录，应用层环境、主逻辑和核心功能，不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
+
+  - **Folder** `bin`: 应用程序运行环境目录
+
+    - **Folder** `.cache`: 运行环境的缓存
+
+  - **Folder-Ignore-SG** `builtin`: 内构建环境目录 (⭐️)
+  - **Folder** `extensions`: 用于存放应用扩展插件，如：react 插件等。
+  - **Folder-Ignore-SG** `external`: 外部文件目录 (⭐️)
+
+    - **Folder-Ignore-Pedding** `Node`: Node 运行环境
+    - **Folder-Ignore-Pedding** `Python`: Python 运行环境
+    - **Folder-Ignore-Pedding** `Svn`: SVN 运行环境
+
+  - **Folder** `lib`: 静态资源与内部文件等（internal）
+
+    - **Folder** `resoures`: 被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
+
+      - **Folder** `icon`: 应用图标
+      - **Folder** `text`: 文本文件
+
+    - **Folder-Ignore-SG** `private`: 用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。(⭐️)
+
+      - **Folder-Ignore-SG** `ssl`: 用于存放 `https` 协议所需要的证书文件
+      - **Folder-Ignore-SG** `secret`: 用于存放账户密码等重要文件的目录
+
+  - **Folder-Pedding** `node_modules.asar.unpacked`: 用于存放 extend 中 node js script 的依赖项
+  - **Folder** `packages`: 包含多个独立的子模块或包
+  - **Folder** `polyfill`: 用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。
+  - **Folder** `scripts`: 用于存放脚本文件。
+
+    - **Folder** `javascript`: 用于存放 js \ nodejs 脚本文件
+    - **Folder** `python`: 用于存放 python 脚本文件
+    - **Folder** `shell`: 用于存放 shell 脚本文件
+
+      - **Folder** `bat`: 用于存放 bat 脚本文件
+      - **Folder** `sh`: 用于存放 sh 脚本文件
 
 - **Folder-Pedding** `gen`: 用于生成文档的目录
 
+  - **Folder** `docs`: 用于学习记录的文档
   - **Folder** `template`: 各种学习示例、模板
 
 - **Folder** `gulp`: gulp 构建工具配置目录
 
   - **Folder** `tasks`: gulp 任务目录
   - **Folder** `utils`: gulp 辅助工具目录
-
-- **Folder** `core`: 扩展目录，应用层环境、主逻辑和核心功能，不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
-
-  - **Folder** `bin`: 应用程序运行环境目录
-    - **Folder** `.cache`: 运行环境的缓存
-  - **Folder-Pedding** `builtin`: 外部文件目录
-  - **Folder** `extensions`: 用于存放应用扩展插件，如：react 插件等。
-  - **Folder** `packages`: 包含多个独立的子模块或包
-  - **Folder** `polyfill`: 用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。
-  - **Folder-Pedding** `external`: 外部文件目录
-  - **Folder** `internal`: 内部文件，如：模板文件等。
-  - **Folder-Pedding** `node_modules.asar.unpacked`: 用于存放 extend 中 node js script 的依赖项
+  - **Folder** `webpack`: webpack 构建工具配置目录
 
 - **Folder** `licenses`: 用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
 
-- **Folder-Ignore-SG** `private`: 用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。
+- **Folder** `log`: 日志文件目录
 
-  - **Folder-Ignore-SG** `ssl`: 用于存放 `https` 协议所需要的证书文件
-  - **Folder-Ignore-SG** `secret`: 用于存放账户密码等重要文件的目录
+  - **File** `dependencies.json`: 依赖包版本信息与变动记录
+  - **File** `CHANGELOG`: 项目更新日志
 
 - **Folder** `public`: 静态资源文件目录，会被网络托管的文件。
 
   - **Folder** `assets`: 用于存放静态资源
+
     - **Folder** `atlas`: 用于存放 `.icns` 文件
+    - **Folder** `fonts`: 用于存放字体文件
     - **Folder** `images`: 用于存放图片
 
-- **Folder-Ignore-SG** `release`: 应用程序构建的输出目录。
+  - **Folder** `javascripts`: 用于存放 js 脚本文件
+  - **Folder** `stylesheets`: 用于存放 css 样式文件
+    <!-- - **Folder** `views`: 用于存放 html 模板文件 -->
+    <!-- - **File** `robots.txt`: 用于控制搜索引擎的抓取行为 -->
+    <!-- - **File** `sitemap.xml`: 用于描述网站地图，帮助搜索引擎快速索引网站内容 -->
+    <!-- - **File** `web.config`: 用于配置网站在 IIS 上的访问权限和缓存策略 -->
+  - **File** `favicon.ico`: 网站 favicon 图标
 
-- **Folder** `resoures`: 被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
+  - **File** `index.html`: 默认首页文件
 
-  - **Folder** `icon`: 应用图标
-  - **Folder** `text`: 文本文件
-
-- **Folder-Ignore-SG** `local`: 应用配置目录
+- **Folder-Ignore-UNG** `release`: 应用程序构建的输出目录。
 
 - **Folder** `source`: application (src)源码目录
 

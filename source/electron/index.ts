@@ -14,7 +14,10 @@ const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
  */
 async function onAppReady() {
   try {
-    createWindow('./app/renderer/public/index.html');
+    // './app/renderer/public/index.html'
+    createWindow('http://localhost:59080/', null, {
+      isRemote: true
+    });
     debugLog(
       ModuleID,
       'onAppReady',

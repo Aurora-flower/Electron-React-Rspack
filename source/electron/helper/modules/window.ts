@@ -2,19 +2,26 @@ import { BrowserWindow } from 'electron';
 
 export function createWindow(
   url: string,
-  options: Electron.BrowserWindowConstructorOptions = {
-    // TODO: 最小宽、高
-
-    webPreferences: {
-      nodeIntegration: true
-    }
-  },
+  options: Electron.BrowserWindowConstructorOptions | null = null,
   params: {
     isDev?: boolean;
     isRemote?: boolean;
   } = {}
 ): Electron.BrowserWindow | null {
   try {
+    if (
+      !options ||
+      typeof options !== 'object' ||
+      Object.keys(options).length === 0
+    ) {
+      options = {
+        // TODO: 最小宽、高
+        webPreferences: {
+          nodeIntegration: true
+        }
+      };
+    }
+
     const win = new BrowserWindow(options);
 
     params?.isRemote ? win.loadURL(url) : win.loadFile(url);
