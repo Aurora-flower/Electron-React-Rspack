@@ -179,9 +179,13 @@ npm install --save-dev @types/koa-static
 > - `Pedding` 表示后期可能会变动（Git 忽略）
 > - ⭐️ 表示不被 Git 提交，但重点关注
 
+#### 项目配置目录
+
 - **Folder** `.config`: 项目配置目录
 
   - **File** `.env`: 项目环境变量配置文件 (Base)
+
+#### VS Code 编辑器配置目录
 
 - **Folder** `.vscode`: vs code 编辑器配置目录
 
@@ -190,18 +194,18 @@ npm install --save-dev @types/koa-static
     <!-- - **File** `tasks.json`: vs code 任务配置文件 -->
   - **File** `extensions.json`: vs code 扩展配置文件
 
-- **Folder-Ignore-UNG** `app`: 源码经过编译后的输出目录
-
-  - **Folder-Ignore-UNG** `electron`: electron 运行目录
-  - **Folder-Ignore-UNG** `preload`: 预加载进程运行目录
-  - **Folder-Ignore-UNG** `public`: 渲染进程运行目录
+#### 本地临时备份文件目录
 
 - **Folder-Ignore-SG** `backup`: 用于存放本地临时备份文件
+
+#### 主进程运行缓存目录
 
 - **Folder-Ignore-UNG** `cache`: 主进程运行缓存目录
 
   - **Folder-Ignore-UNG** `debug`: 调试输出缓存
   - **Folder-Ignore-UNG** `local`: 应用配置缓存
+
+#### 扩展目录
 
 - **Folder** `core`: 扩展目录，应用层环境、主逻辑和核心功能，不被打包进 asar 的目录 (存放在 `app.asar.unpacked`)
 
@@ -241,10 +245,7 @@ npm install --save-dev @types/koa-static
       - **Folder** `bat`: 用于存放 bat 脚本文件
       - **Folder** `sh`: 用于存放 sh 脚本文件
 
-- **Folder-Pedding** `gen`: 用于生成文档的目录
-
-  - **Folder** `docs`: 用于学习记录的文档
-  - **Folder** `template`: 各种学习示例、模板
+#### Gulp 构建工具配置目录
 
 - **Folder** `gulp`: gulp 构建工具配置目录
 
@@ -252,12 +253,14 @@ npm install --save-dev @types/koa-static
   - **Folder** `utils`: gulp 辅助工具目录
   - **Folder** `webpack`: webpack 构建工具配置目录
 
-- **Folder** `licenses`: 用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
+#### 日志文件目录
 
 - **Folder** `log`: 日志文件目录
 
   - **File** `dependencies.json`: 依赖包版本信息与变动记录
   - **File** `CHANGELOG`: 项目更新日志
+
+#### 静态资源文件目录
 
 - **Folder** `public`: 静态资源文件目录，会被网络托管的文件。
 
@@ -277,7 +280,17 @@ npm install --save-dev @types/koa-static
 
   - **File** `index.html`: 默认首页文件
 
+#### 应用程序构建输出目录
+
+- **Folder-Ignore-UNG** `app`: 源码经过编译后的输出目录
+
+  - **Folder-Ignore-UNG** `electron`: electron 运行目录
+  - **Folder-Ignore-UNG** `preload`: 预加载进程运行目录
+  - **Folder-Ignore-UNG** `public`: 渲染进程运行目录
+
 - **Folder-Ignore-UNG** `release`: 应用程序构建的输出目录。
+
+#### 源码目录
 
 - **Folder** `source`: application (src)源码目录
 
@@ -287,11 +300,30 @@ npm install --save-dev @types/koa-static
   - **Folder** `src`: 渲染进程目录
   - **Folder** `types`: 类型定义目录
 
+#### 生成文档与学习目录
+
+- **Folder-Pedding** `gen`: 用于生成文档的目录 (polp 模板也存放在此目录下)
+
+  - **Folder** `docs`: 用于学习记录的文档
+  - **Folder** `template`: 各种学习示例、模板
+
+#### 测试示例与临时文件目录
+
 - **Folder** `temp`: 临时文件目录，希望在 git 提交历史中，不被意外丢失，但没有什么用处。
 - **Folder** `test`: 各种学习示例目录
+
+#### Git 配置文件
+
 - **File** `.gitattributes`: Git 版本控制系统中的一个配置文件，用于指定如何处理文件的属性和行为
 - **File** `.gitignore`: git 忽略配置
-- **File** `package.json`: npm 配置文件
-- **File** `README.md`: 项目介绍
+
+#### 许可协议与文件目录
+
+- **Folder** `licenses`: 用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
 - **File** `LICENSE`: 开源协议 (MIT)
 - **File-None** `LICENSE.rtf`: 软件许可协议条款 (中简版本)
+
+#### 项目配置文件
+
+- **File** `package.json`: npm 配置文件
+- **File** `README.md`: 项目介绍
