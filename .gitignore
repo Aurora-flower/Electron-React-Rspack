@@ -20,7 +20,6 @@ node_modules.asar.unpacked
 
 # 外部文件目录
 builtin
-external
 
 # 隐私目录
 private
@@ -44,6 +43,9 @@ local
 # 其他输出
 dist
 out
+
+# 构建资源目录
+core/build
 
 # ********************************* File *********************************
 # Mac 目录变更缓存文件

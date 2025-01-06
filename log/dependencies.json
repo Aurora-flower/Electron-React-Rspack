@@ -83,6 +83,11 @@
         "description": {},
         "changed": []
       },
+      "electron-builder": {
+        "version": "^25.1.8",
+        "description": {},
+        "changed": []
+      },
       "eslint": {
         "version": "^9.17.0",
         "description": {},
