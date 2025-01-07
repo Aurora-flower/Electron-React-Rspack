@@ -18,7 +18,7 @@
   "keywords": [],
   "author": "HuaYing",
   "license": "MIT",
-  "description": "",
+  "description": "花楹一间，向往自由的发现之旅。",
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",

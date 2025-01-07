@@ -171,6 +171,7 @@ const optimization = {
  */
 const externals = {
   // electron: 'commonjs2 electron'
+  // canvas: 'commonjs2 canvas'
 };
 
 /**

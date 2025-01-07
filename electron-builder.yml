@@ -17,37 +17,37 @@ buildDependenciesFromSource: true
 # 构建资源目录
 directories:
   # 应用程序目录 -- 决定被构建的应用程序目录。
-  # app: app
+  app: app
 
   # 资源路径 --- 用于指定构建过程中使用的资源目录。
   # 该目录中的文件在构建过程中会被用于生成安装包。这些文件可以包括图标、证书、配置文件等
   # [注意：构建资源并未打包到应用程序中]
-  buildResources: core/build
+  # buildResources: core/build
 
   # 输出目录 --- 默认 build
   output: release/${version}
 
 # 包含文件与目录 - 指定在复制文件以创建包时要包含哪些文件
 files:
-  - '!.config/*'
-  - '!.husky/*'
-  - '!.vscode/*'
-  - '!backup/*'
-  - '!cache/*'
-  - '!gen/*'
-  - '!gulp/*'
-  - '!log/*'
-  - '!node_modules/*'
-  - '!public/*'
-  - '!release/*'
-  - '!source/*'
-  - '!temp/*'
-  - '!test/*'
-  - '!.git*'
-  - '!{.hintrc,.prettierignore,.prettierrc.js,electron-builder.yml,gulpfile.js,.gitmodules,plopfile.js,postcss.config.js}'
-  - '!*.config.{js,ts,mjs,cjs}'
-  - '!{README.md,README.zh-CN.md,todo.list,package-lock.json,tsconfig.json}'
-  - '!core/build'
+  # - '!.config/*'
+  # - '!.husky/*'
+  # - '!.vscode/*'
+  # - '!backup/*'
+  # - '!cache/*'
+  # - '!gen/*'
+  # - '!gulp/*'
+  # - '!log/*'
+  # - '!node_modules/*'
+  # - '!public/*'
+  # - '!release/*'
+  # - '!source/*'
+  # - '!temp/*'
+  # - '!test/*'
+  # - '!.git*'
+  # - '!{.hintrc,.prettierignore,.prettierrc.js,electron-builder.yml,gulpfile.js,.gitmodules,plopfile.js,postcss.config.js}'
+  # - '!*.config.{js,ts,mjs,cjs}'
+  # - '!{README.md,README.zh-CN.md,todo.list,package-lock.json,tsconfig.json}'
+  # - '!core/build'
 
 # Asar 选项 --- 默认为 True
 asar: true
@@ -57,8 +57,7 @@ asarUnpack:
   - '**/node_modules/fabric/**'
   - 'core'
 # 在打包和签名之后（在打包成可分发格式之前）要运行的函数（或文件或模块id的路径）。设置与 `beforePack` 相同。
-# afterPack: './core/build/after-pack.js'
-
+afterPack: 'build/after-pack.js'
 # DMG 选项
 # dmg:
 # 是否启用 DMG 签名
