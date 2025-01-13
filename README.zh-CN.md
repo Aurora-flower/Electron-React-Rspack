@@ -44,13 +44,16 @@ npm install @types/react @types/react-dom --save-dev
 > 语法校验
 
 ```shell
-# npm init @eslint/config
+npm init @eslint/config
 
 # 选择后，提示安装 （等价于）
-# npm install --save-dev eslint globals @eslint/js typescript-eslint eslint-plugin-react
+npm install --save-dev eslint globals @eslint/js typescript-eslint eslint-plugin-react
 
 # 进一步需求的安装
-# npm install --save-dev @typescript-eslint/parser
+npm install --save-dev @typescript-eslint/parser
+
+# 配置 prettier
+# npm install --save-dev eslint-config-prettie
 ```
 
 > prettier:

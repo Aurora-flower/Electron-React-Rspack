@@ -29,7 +29,7 @@
         "changed": []
       },
       "@eslint/js": {
-        "version": "^9.17.0",
+        "version": "^9.18.0",
         "description": {},
         "changed": []
       },
@@ -51,7 +51,14 @@
       "@types/react": {
         "version": "^19.0.2",
         "description": {},
-        "changed": []
+        "changed": [
+          {
+            "version": "^19.0.4",
+            "commit": "",
+            "date": "2025/01/12",
+            "message": ""
+          }
+        ]
       },
       "@types/react-dom": {
         "version": "^19.0.2",
@@ -81,7 +88,14 @@
       "electron": {
         "version": "^33.2.1",
         "description": {},
-        "changed": []
+        "changed": [
+          {
+            "version": "^33.3.1",
+            "commit": "",
+            "date": "2025/01/12",
+            "message": ""
+          }
+        ]
       },
       "electron-builder": {
         "version": "^25.1.8",
@@ -89,12 +103,12 @@
         "changed": []
       },
       "eslint": {
-        "version": "^9.17.0",
+        "version": "^9.18.0",
         "description": {},
         "changed": []
       },
       "eslint-plugin-react": {
-        "version": "^7.37.2",
+        "version": "^7.37.4",
         "description": {},
         "changed": []
       },
@@ -135,7 +149,14 @@
           "summary": "一个运行环境，用于执行 js 脚本，负责处理文件、目录、网络、进程等基础功能。",
           "comment": "为没有此环境的应用程序使用者提供"
         },
-        "changed": []
+        "changed": [
+          {
+            "version": "^22.13.0",
+            "commit": "",
+            "date": "2025/01/12",
+            "message": ""
+          }
+        ]
       },
       "prettier": {
         "version": "^3.4.2",
@@ -153,7 +174,7 @@
         "changed": []
       },
       "typescript-eslint": {
-        "version": "^8.18.1",
+        "version": "^8.19.1",
         "description": {},
         "changed": []
       },
