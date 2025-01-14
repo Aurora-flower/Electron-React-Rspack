@@ -77,7 +77,9 @@
       },
       "concurrently": {
         "version": "^9.1.2",
-        "description": {},
+        "description": {
+          "summary": "concurrently 可以并行运行多个命令，也可以通过组合使用 && 和 & 来实现等待。"
+        },
         "changed": []
       },
       "copy-webpack-plugin": {
@@ -186,7 +188,7 @@
       "wait-on": {
         "version": "^8.0.2",
         "description": {
-          "description": "wait-on 是一个 npm 包,可以用来等待文件、端口、HTTP 等资源变得可用。"
+          "summary": "wait-on 是一个 npm 包,可以用来等待文件、端口、HTTP 等资源变得可用。"
         },
         "changed": []
       },

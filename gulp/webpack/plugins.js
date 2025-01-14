@@ -29,7 +29,7 @@ function getHtmlWebpackPlugin({ template, filename }) {
           `script-src 'self';` +
           `style-src-elem 'self';` +
           `font-src 'self';` +
-          `connect-src 'self';` +
+          `connect-src 'self' https://api.iconify.design;` +
           `img-src 'self' data:;`
       }
     }

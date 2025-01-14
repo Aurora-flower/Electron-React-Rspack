@@ -227,6 +227,7 @@ npm install --save-dev @types/koa-static
     └── shell                             用于存放 shell 脚本文件
       ├── bat                             用于存放 bat 脚本文件
       └── sh                              用于存放 sh 脚本文件
+├── docs                                  用于记录某一类型的碎片化文档（未整理版本）
 └─┬ gen                                   用于生成文档、模版的目录 (polp 模板也存放在此目录下)
   ├── docs                                学习文档目录 🟥
   ├── examples                            示例代码目录 🟥

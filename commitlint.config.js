@@ -27,7 +27,8 @@ module.exports = {
         'log' /* 日志类型 */,
         'del' /* 删除 */,
         'assets' /* 资源 */,
-        'editor' /* 编辑器配置 */
+        'editor' /* 编辑器配置 */,
+        'base' /* 项目基础构建流程 */
       ]
     ],
     // subject-case: 定义主题的大小写格式
