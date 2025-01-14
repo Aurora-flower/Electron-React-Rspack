@@ -11,22 +11,24 @@ async function clean(cb) {
   cb();
 }
 
+function findErrors(log) {
+  const regex = /ERROR.*/g;
+  const matches = [];
+  let match;
+
+  while ((match = regex.exec(log)) !== null) {
+    matches.push(match[0]);
+  }
+
+  return matches;
+}
+
 function compile(cd) {
   const webpackConfig = getConfig();
   const compiler = webpack(webpackConfig);
-  compiler.run(function (err, stats) {
-    if (err) {
-      cd();
-      console.log('构建失败', err);
-      return;
-    }
+  compiler.run(function (_err, stats) {
+    console.log('构建信息', findErrors(stats.toString()));
     cd();
-    console.log(
-      '构建成功',
-      // webpackConfig,
-      '\n',
-      stats.toString()
-    );
   });
 }
 

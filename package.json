@@ -27,7 +27,6 @@
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.18.0",
-    "@iconify/react": "^5.2.0",
     "@types/express": "^5.0.0",
     "@types/koa": "^2.15.0",
     "@types/koa-static": "^4.0.4",
@@ -38,6 +37,7 @@
     "babel-loader": "^9.2.1",
     "concurrently": "^9.1.2",
     "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
     "dotenv-webpack": "^8.1.0",
     "electron": "^33.3.1",
     "electron-builder": "^25.1.8",
@@ -50,6 +50,7 @@
     "mini-css-extract-plugin": "^2.9.2",
     "node": "^22.13.0",
     "plop": "^4.0.1",
+    "postcss-loader": "^8.1.1",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "ts-loader": "^9.5.1",
@@ -58,6 +59,9 @@
     "webpack": "^5.97.1"
   },
   "dependencies": {
+    "@iconify/json": "^2.2.294",
+    "@iconify/react": "^5.2.0",
+    "animate.css": "^4.1.1",
     "express": "^4.21.2",
     "fabric": "^6.5.4",
     "koa": "^2.15.3",
@@ -69,6 +73,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/a-room-of-jacaranda/er.git"
+    "url": "https://github.com/Aurora-flower/ER.git"
   }
 }

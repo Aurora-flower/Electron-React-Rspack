@@ -35,6 +35,9 @@ const FolderPath = new Proxy(
     /* 源文件目录 */
     Source: 'source',
 
+    /* 生成文件目录 */
+    Gen: 'gen',
+
     /* 配置文件目录 */
     Config: '.config',
 
@@ -81,6 +84,13 @@ const FolderPath = new Proxy(
           renderer: joinPath(folder, 'src')
         };
       }
+      if ('Gen' == key) {
+        return {
+          base: folder,
+          docs: joinPath(folder, 'docs'),
+          template: joinPath(folder, 'template')
+        };
+      }
       if ('Public' == key) {
         const assets = joinPath(folder, 'assets');
         return {
@@ -114,7 +124,7 @@ const FilePath = new Proxy(
           private: joinPath(FolderPath.Config, '.private.env')
         };
       }
-      return joinPath(FolderPath.Public.base, target[key]);
+      return joinPath(FolderPath.Gen.template, target[key]);
     }
   }
 );
@@ -220,6 +230,7 @@ function get(mode = BuildingEnvironment.Dev) {
       ]);
       options.module.rules = baseLoader.concat(Loader.css);
       options.plugins.push(
+        // TODO: 存在问题，会多次对 index.html 文件进行处理
         getCopyWebpackPlugin([
           {
             from: FolderPath.Public.base,

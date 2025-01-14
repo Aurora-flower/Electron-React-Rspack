@@ -1,271 +1,299 @@
-[
-  {
-    "version": "0.0.1",
-    "devDependencies": {
-      "@babel/preset-env": {
-        "version": "^7.26.0",
-        "description": {},
-        "changed": []
-      },
-      "@babel/preset-react": {
-        "version": "^7.26.3",
-        "description": {},
-        "changed": []
-      },
-      "@commitlint/cli": {
-        "version": "^19.6.1",
-        "description": {},
-        "changed": [
-          {
-            "type": "outdated",
-            "version": "",
-            "message": ""
-          }
-        ]
-      },
-      "@commitlint/config-conventional": {
-        "version": "^19.6.0",
-        "description": {},
-        "changed": []
-      },
-      "@eslint/js": {
-        "version": "^9.18.0",
-        "description": {},
-        "changed": []
-      },
-      "@types/express": {
-        "version": "^5.0.0",
-        "description": {},
-        "changed": []
-      },
-      "@types/koa": {
-        "version": "^2.15.0",
-        "description": {},
-        "changed": []
-      },
-      "@types/koa-static": {
-        "version": "^4.0.4",
-        "description": {},
-        "changed": []
-      },
-      "@types/react": {
-        "version": "^19.0.2",
-        "description": {},
-        "changed": [
-          {
-            "version": "^19.0.4",
-            "commit": "",
-            "date": "2025/01/12",
-            "message": ""
-          }
-        ]
-      },
-      "@types/react-dom": {
-        "version": "^19.0.2",
-        "description": {},
-        "changed": []
-      },
-      "@typescript-eslint/parser": {
-        "version": "^8.18.1",
-        "description": {},
-        "changed": []
-      },
-      "babel-loader": {
-        "version": "^9.2.1",
-        "description": {},
-        "changed": []
-      },
-      "concurrently": {
-        "version": "^9.1.2",
-        "description": {
-          "summary": "concurrently 可以并行运行多个命令，也可以通过组合使用 && 和 & 来实现等待。"
-        },
-        "changed": []
-      },
-      "copy-webpack-plugin": {
-        "version": "^12.0.2",
-        "description": {},
-        "changed": []
-      },
-      "dotenv-webpack": {
-        "version": "^8.1.0",
-        "description": {},
-        "changed": []
-      },
-      "electron": {
-        "version": "^33.2.1",
-        "description": {},
-        "changed": [
-          {
-            "version": "^33.3.1",
-            "commit": "",
-            "date": "2025/01/12",
-            "message": ""
-          }
-        ]
-      },
-      "electron-builder": {
-        "version": "^25.1.8",
-        "description": {},
-        "changed": []
-      },
-      "eslint": {
-        "version": "^9.18.0",
-        "description": {},
-        "changed": []
-      },
-      "eslint-plugin-react": {
-        "version": "^7.37.4",
-        "description": {},
-        "changed": []
-      },
-      "globals": {
-        "version": "^15.14.0",
-        "description": {},
-        "changed": []
-      },
-      "gulp": {
-        "version": "^5.0.0",
-        "description": {
-          "summary": "一个基于 Node.js 的任务自动化构建工具。",
-          "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
-        },
-        "changed": []
-      },
-      "html-webpack-plugin": {
-        "version": "^5.6.3",
-        "description": {},
-        "changed": []
-      },
-      "husky": {
-        "version": "^9.1.7",
-        "description": {},
-        "changed": []
-      },
-      "mini-css-extract-plugin": {
-        "version": "^2.9.2",
-        "description": {
-          "summary": "一个 webpack 插件，用于将 CSS 提取到单独的文件中。",
-          "description": "将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMap 的按需加载。"
-        },
-        "changed": []
-      },
-      "node": {
-        "version": "^23.5.0",
-        "description": {
-          "summary": "一个运行环境，用于执行 js 脚本，负责处理文件、目录、网络、进程等基础功能。",
-          "comment": "为没有此环境的应用程序使用者提供"
-        },
-        "changed": [
-          {
-            "version": "^22.13.0",
-            "commit": "",
-            "date": "2025/01/12",
-            "message": ""
-          }
-        ]
-      },
-      "prettier": {
-        "version": "^3.4.2",
-        "description": {},
-        "changed": []
-      },
-      "rimraf": {
-        "version": "^6.0.1",
-        "description": {},
-        "changed": []
-      },
-      "ts-loader": {
-        "version": "^9.5.1",
-        "description": {},
-        "changed": []
-      },
-      "typescript-eslint": {
-        "version": "^8.19.1",
-        "description": {},
-        "changed": []
-      },
-      "wait-on": {
-        "version": "^8.0.2",
-        "description": {
-          "summary": "wait-on 是一个 npm 包,可以用来等待文件、端口、HTTP 等资源变得可用。"
-        },
-        "changed": []
-      },
-      "webpack": {
-        "version": "^5.97.1",
-        "description": {},
-        "changed": []
-      }
+{
+  "version": "0.0.1",
+  "devDependencies": {
+    "@babel/preset-env": {
+      "version": "^7.26.0",
+      "description": {},
+      "changed": []
     },
-    "dependencies": {
-      "express": {
-        "version": "^4.21.2",
-        "description": {},
-        "changed": []
+    "@babel/preset-react": {
+      "version": "^7.26.3",
+      "description": {},
+      "changed": []
+    },
+    "@commitlint/cli": {
+      "version": "^19.6.1",
+      "description": {},
+      "changed": [
+        {
+          "type": "outdated",
+          "version": "",
+          "message": ""
+        }
+      ]
+    },
+    "@commitlint/config-conventional": {
+      "version": "^19.6.0",
+      "description": {},
+      "changed": []
+    },
+    "@eslint/js": {
+      "version": "^9.18.0",
+      "description": {},
+      "changed": []
+    },
+    "@types/express": {
+      "version": "^5.0.0",
+      "description": {},
+      "changed": []
+    },
+    "@types/koa": {
+      "version": "^2.15.0",
+      "description": {},
+      "changed": []
+    },
+    "@types/koa-static": {
+      "version": "^4.0.4",
+      "description": {},
+      "changed": []
+    },
+    "@types/react": {
+      "version": "^19.0.2",
+      "description": {},
+      "changed": [
+        {
+          "version": "^19.0.4",
+          "commit": "",
+          "date": "2025/01/12",
+          "message": ""
+        }
+      ]
+    },
+    "@types/react-dom": {
+      "version": "^19.0.2",
+      "description": {},
+      "changed": []
+    },
+    "@typescript-eslint/parser": {
+      "version": "^8.18.1",
+      "description": {},
+      "changed": []
+    },
+    "asar": {
+      "version": "^3.2.0",
+      "description": {},
+      "changed": []
+    },
+    "babel-loader": {
+      "version": "^9.2.1",
+      "description": {},
+      "changed": []
+    },
+    "concurrently": {
+      "version": "^9.1.2",
+      "description": {
+        "summary": "concurrently 可以并行运行多个命令，也可以通过组合使用 && 和 & 来实现等待。"
       },
-      "fabric": {
-        "version": "^6.5.3",
-        "description": {
-          "summary": "一个基于 HTML5 Canvas 的开源 JavaScript 库",
-          "comment": "通过使用插件和流(streams)来简化前端开发中的重复性任务, 如编译代码、优化资源、自动刷新浏览器等。"
-        },
-        "changed": [
-          {
-            "version": "^6.5.4",
-            "commit": "cf8b11ec",
-            "date": "2025/01/04",
-            "message": ""
-          }
-        ]
+      "changed": []
+    },
+    "copy-webpack-plugin": {
+      "version": "^12.0.2",
+      "description": {},
+      "changed": []
+    },
+    "css-loader": {
+      "version": "^7.1.2",
+      "description": {},
+      "changed": []
+    },
+    "dotenv-webpack": {
+      "version": "^8.1.0",
+      "description": {},
+      "changed": []
+    },
+    "electron": {
+      "version": "^33.2.1",
+      "description": {},
+      "changed": [
+        {
+          "version": "^33.3.1",
+          "commit": "",
+          "date": "2025/01/12",
+          "message": ""
+        }
+      ]
+    },
+    "electron-builder": {
+      "version": "^25.1.8",
+      "description": {},
+      "changed": []
+    },
+    "eslint": {
+      "version": "^9.18.0",
+      "description": {},
+      "changed": []
+    },
+    "eslint-plugin-react": {
+      "version": "^7.37.4",
+      "description": {},
+      "changed": []
+    },
+    "globals": {
+      "version": "^15.14.0",
+      "description": {},
+      "changed": []
+    },
+    "gulp": {
+      "version": "^5.0.0",
+      "description": {
+        "summary": "一个基于 Node.js 的任务自动化构建工具。",
+        "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
       },
-      "koa": {
-        "version": "^2.15.3",
-        "description": {},
-        "changed": []
+      "changed": []
+    },
+    "html-webpack-plugin": {
+      "version": "^5.6.3",
+      "description": {},
+      "changed": []
+    },
+    "husky": {
+      "version": "^9.1.7",
+      "description": {},
+      "changed": []
+    },
+    "mini-css-extract-plugin": {
+      "version": "^2.9.2",
+      "description": {
+        "summary": "一个 webpack 插件，用于将 CSS 提取到单独的文件中。",
+        "description": "将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMap 的按需加载。"
       },
-      "koa-static": {
-        "version": "^5.0.0",
-        "description": {},
-        "changed": []
+      "changed": []
+    },
+    "node": {
+      "version": "^23.5.0",
+      "description": {
+        "summary": "一个运行环境，用于执行 js 脚本，负责处理文件、目录、网络、进程等基础功能。",
+        "comment": "为没有此环境的应用程序使用者提供"
       },
-      "react": {
-        "version": "^19.0.0",
-        "description": {},
-        "changed": []
+      "changed": [
+        {
+          "version": "^22.13.0",
+          "commit": "",
+          "date": "2025/01/12",
+          "message": ""
+        }
+      ]
+    },
+    "plop": {
+      "version": "^4.0.1",
+      "description": {},
+      "changed": []
+    },
+    "prettier": {
+      "version": "^3.4.2",
+      "description": {},
+      "changed": []
+    },
+    "rimraf": {
+      "version": "^6.0.1",
+      "description": {},
+      "changed": []
+    },
+    "ts-loader": {
+      "version": "^9.5.1",
+      "description": {},
+      "changed": []
+    },
+    "typescript-eslint": {
+      "version": "^8.19.1",
+      "description": {},
+      "changed": []
+    },
+    "wait-on": {
+      "version": "^8.0.2",
+      "description": {
+        "summary": "wait-on 是一个 npm 包,可以用来等待文件、端口、HTTP 等资源变得可用。"
       },
-      "react-dom": {
-        "version": "^19.0.0",
-        "description": {},
-        "changed": []
+      "changed": []
+    },
+    "webpack": {
+      "version": "^5.97.1",
+      "description": {},
+      "changed": []
+    }
+  },
+  "dependencies": {
+    "@iconify/json": {
+      "version": "^2.2.294",
+      "description": {},
+      "changed": []
+    },
+    "@iconify/react": {
+      "version": "^5.2.0",
+      "description": {},
+      "changed": []
+    },
+    "animate.css": {
+      "version": "^4.1.1",
+      "description": {},
+      "changed": []
+    },
+    "express": {
+      "version": "^4.21.2",
+      "description": {},
+      "changed": []
+    },
+    "fabric": {
+      "version": "^6.5.3",
+      "description": {
+        "summary": "一个基于 HTML5 Canvas 的开源 JavaScript 库",
+        "comment": "通过使用插件和流(streams)来简化前端开发中的重复性任务, 如编译代码、优化资源、自动刷新浏览器等。"
       },
-      "react-router-dom": {
-        "version": "^7.1.0",
-        "description": {},
-        "changed": [
-          {
-            "version": "^7.1.1",
-            "commit": "cf8b11ec",
-            "date": "2025/01/04",
-            "message": ""
-          }
-        ]
+      "changed": [
+        {
+          "version": "^6.5.4",
+          "commit": "cf8b11ec",
+          "date": "2025/01/04",
+          "message": ""
+        }
+      ]
+    },
+    "koa": {
+      "version": "^2.15.3",
+      "description": {},
+      "changed": []
+    },
+    "koa-static": {
+      "version": "^5.0.0",
+      "description": {},
+      "changed": []
+    },
+    "react": {
+      "version": "^19.0.0",
+      "description": {},
+      "changed": []
+    },
+    "react-dom": {
+      "version": "^19.0.0",
+      "description": {},
+      "changed": []
+    },
+    "react-router-dom": {
+      "version": "^7.1.0",
+      "description": {},
+      "changed": [
+        {
+          "version": "^7.1.1",
+          "commit": "cf8b11ec",
+          "date": "2025/01/04",
+          "message": ""
+        }
+      ]
+    },
+    "three": {
+      "version": "^0.171.0",
+      "description": {
+        "summary": "一个基于 WebGL 的 JavaScript 库，用于在网页中创建和渲染 3D 图形。",
+        "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
       },
-      "three": {
-        "version": "^0.171.0",
-        "description": {
-          "summary": "一个基于 WebGL 的 JavaScript 库，用于在网页中创建和渲染 3D 图形。",
-          "comment": "通过提供一个更简洁和高效的 API, 使得开发者能够更轻松地创建复杂的 3D 场景、动画和交互效果，而不需要直接操作低级的 WebGL API。"
-        },
-        "changed": [
-          {
-            "version": "^0.172.0",
-            "commit": "cf8b11ec",
-            "date": "2025/01/04",
-            "message": ""
-          }
-        ]
-      }
+      "changed": [
+        {
+          "version": "^0.172.0",
+          "commit": "cf8b11ec",
+          "date": "2025/01/04",
+          "message": ""
+        }
+      ]
     }
   }
-]
+}

@@ -13,7 +13,17 @@ const noUnusedExpressions = [
 ];
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    ignorePatterns: [
+      'source/common/**',
+      'core/**',
+      'node_modules/**',
+      'app/**',
+      'public/**',
+      'test/**'
+    ]
+  },
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node }

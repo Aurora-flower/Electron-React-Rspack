@@ -1,1 +1,1 @@
-export * from '@/common/constant/extensions';
+export * from '@/common/constant/modules/extensions';
