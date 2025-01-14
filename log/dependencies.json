@@ -75,6 +75,11 @@
         "description": {},
         "changed": []
       },
+      "concurrently": {
+        "version": "^9.1.2",
+        "description": {},
+        "changed": []
+      },
       "copy-webpack-plugin": {
         "version": "^12.0.2",
         "description": {},
@@ -176,6 +181,13 @@
       "typescript-eslint": {
         "version": "^8.19.1",
         "description": {},
+        "changed": []
+      },
+      "wait-on": {
+        "version": "^8.0.2",
+        "description": {
+          "description": "wait-on 是一个 npm 包,可以用来等待文件、端口、HTTP 等资源变得可用。"
+        },
         "changed": []
       },
       "webpack": {
