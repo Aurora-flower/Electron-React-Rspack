@@ -134,7 +134,8 @@ const FilePath = new Proxy(
  */
 const Entry = {
   Main: {
-    main: joinPath(FolderPath.Source.electron, 'index.ts')
+    main: joinPath(FolderPath.Source.electron, 'index.ts'),
+    vendor: joinPath(FolderPath.Source.electron, 'vendor.ts')
   },
   Preload: {
     index: joinPath(FolderPath.Source.preload, 'index.ts')
