@@ -9,7 +9,7 @@ const {
   readdirSync,
   readFileSync
 } = require('fs');
-const { join } = require('path');
+const { join } = require('node:path');
 
 function joinPath(...paths) {
   try {
@@ -35,7 +35,7 @@ function existsSync(
         ? stats.isDirectory()
         : !!statSync(localPath);
   } catch (err) {
-    console.error(err);
+    // console.error(err);
     return false;
   }
 }

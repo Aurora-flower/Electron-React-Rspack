@@ -4,9 +4,12 @@ appId: website.huaying.electron-app
 # 应用程序名称
 productName: 花楹一间
 
-#
+# 应用程序版本 --- 默认为 package.json 的 version 字段
 appImage:
   artifactName: ${productName}-${version}-${arch}.${ext}
+
+# 设置应用程序图标
+icon: public/favicon.ico # 或者 .icns 格式，根据平台选择合适的图标格式
 
 # 版权
 copyright: Copyright © 2025 ${productName} ${author}
@@ -57,7 +60,7 @@ asarUnpack:
   - '**/node_modules/fabric/**'
   - 'core'
 # 在打包和签名之后（在打包成可分发格式之前）要运行的函数（或文件或模块id的路径）。设置与 `beforePack` 相同。
-afterPack: 'build/after-pack.js'
+# afterPack: 'build/after-pack.js'
 # DMG 选项
 # dmg:
 # 是否启用 DMG 签名

@@ -1,6 +1,11 @@
 /**
  * @file 执行打包任务
  * @see {@link https://www.electron.build electron-builder 文档}
+ * @description
+ * 1. 清理本地的 app | release 文件夹
+ * 2. 开始 compile
+ * 3. 复制处理 package.json 文件到 app 目录
+ * 4. electron-builder 打包构建 （自调用 build/after-pack.js)
  */
 // 'use strict';
 
