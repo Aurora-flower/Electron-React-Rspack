@@ -1,7 +1,7 @@
 {
   "name": "er",
   "version": "0.0.1",
-  "main": "app/electron/main.js",
+  "main": "electron/main.js",
   "private": "true",
   "scripts": {
     "test": "node . && exit 0",
@@ -9,7 +9,7 @@
     "start": "electron .",
     "compile": "gulp compile",
     "check:out": "npm outdated",
-    "package": "electron-builder",
+    "package": "rimraf release && electron-builder",
     "clean:npm": "npm cache clean --force",
     "preinstall": "echo \"running install\"",
     "dev:server": "ts-node source/electron/server/index.ts",
