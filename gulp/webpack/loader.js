@@ -149,12 +149,27 @@ const text = {
 };
 
 /**
+ * @summary 处理 json 文件的 Loader 配置
+ */
+const json = {
+  test: /\.json$/,
+  type: AssetType.Resource,
+  generator: {
+    filename: 'json/[name].[contenthash][ext]'
+  },
+  exclude
+};
+
+/**
  * @summary webpack Loader
  * 注意📢: 路径是相对于输出目录的路径
  */
 const Loader = {
   /* Css 文件处理 */
   css,
+
+  /* Json 文件处理 */
+  json,
 
   /* Js | Jsx | Ts | Tsx 文件处理 */
   js: {

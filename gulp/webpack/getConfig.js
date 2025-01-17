@@ -1,8 +1,4 @@
 const {
-  AppProcess,
-  BuildingEnvironment
-} = require('./constant');
-const {
   getDotenvPlugin,
   getHtmlWebpackPlugin,
   getCopyWebpackPlugin,
@@ -12,6 +8,9 @@ const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
 const joinPath = require('../utils/joinpath');
 const { WebpakTarget } = require('./webpack-target');
+const { BuildingEnvironment } = require('./constant');
+
+/* ******************************** 目录结构 ******************************** */
 
 /**
  * @summary 获取当前工作目录
@@ -19,130 +18,129 @@ const { WebpakTarget } = require('./webpack-target');
 const CWD = process.cwd();
 
 /**
- * @summary 定义输入、输出目录与文件路径
+ * @summary 目录结构
  */
-const FolderPath = new Proxy(
-  {
-    /* 打包输出位置 */
-    App: 'app',
+const DirectoryStructure = {
+  /* 打包输出总目录 */
+  App: 'app',
 
-    /* 静态文件目录 */
-    Public: 'public',
+  /* 配置文件目录 */
+  Config: '.config',
 
-    /* 类型声明文件目录 */
-    Types: 'types',
+  /* 核心环境与扩展目录  */
+  Core: 'core',
 
-    /* 源文件目录 */
-    Source: 'source',
+  /* 文档与模板、生成文件目录 */
+  Gen: 'gen',
 
-    /* 生成文件目录 */
-    Gen: 'gen',
+  /* 公共文件目录 */
+  Public: 'public',
 
-    /* 配置文件目录 */
-    Config: '.config',
+  /* 源文件目录 */
+  Source: 'source'
+};
 
-    /* 主进程、预加载进程、渲染进程代码存放位置 */
-    Main: 'electron',
-    Preload: 'preload',
-    Renderer: 'public', // renderer | Dist
+function getAppStructure(baseUrl) {
+  return {
+    base: baseUrl,
+    electron: joinPath(baseUrl, 'electron'),
+    renderer: joinPath(baseUrl, 'public'),
+    preload: joinPath(baseUrl, 'preload')
+  };
+}
 
-    /* 模板 html 存放位置 */
-    Static: 'index.html'
-  },
-  {
-    get(target, key) {
-      const flag = key in target;
-      if (!flag) return undefined;
-      if (
-        [
-          AppProcess.Main,
-          AppProcess.Preload,
-          AppProcess.Renderer
-        ].includes(key)
-      ) {
-        return joinPath(CWD, target.App, target[key]);
-      }
+function getSourceStructure(baseUrl) {
+  return {
+    base: baseUrl,
+    common: joinPath(baseUrl, 'common'),
+    electron: joinPath(baseUrl, 'electron'),
+    preload: joinPath(baseUrl, 'preload'),
+    renderer: joinPath(baseUrl, 'src'),
+    static: joinPath(baseUrl, 'static'),
+    types: joinPath(baseUrl, 'types')
+  };
+}
 
-      if (['Static'].includes(key)) {
-        return {
-          page: joinPath(
-            CWD,
-            target.App,
-            target.Renderer,
-            target[key]
-          )
-        };
-      }
+function getGenStructure(baseUrl) {
+  return {
+    base: baseUrl,
+    docs: joinPath(baseUrl, 'docs'),
+    template: joinPath(baseUrl, 'template')
+  };
+}
 
-      const folder = joinPath(CWD, target[key]);
-      if ('Source' == key) {
-        return {
-          base: folder,
-          electron: joinPath(folder, 'electron'),
-          preload: joinPath(folder, 'preload'),
-          server: joinPath(folder, 'server'),
-          renderer: joinPath(folder, 'src')
-        };
-      }
-      if ('Gen' == key) {
-        return {
-          base: folder,
-          docs: joinPath(folder, 'docs'),
-          template: joinPath(folder, 'template')
-        };
-      }
-      if ('Public' == key) {
-        const assets = joinPath(folder, 'assets');
-        return {
-          base: folder,
-          assets,
-          fonts: joinPath(assets, 'fonts'),
-          atlas: joinPath(folder, 'atlas'),
-          images: joinPath(assets, 'images'),
-          styles: joinPath(folder, 'styles')
-        };
-      }
-      return folder;
+const Directory = new Proxy(DirectoryStructure, {
+  get(target, key) {
+    if (!(key in target)) {
+      return undefined;
+    }
+    const baseUrl = joinPath(CWD, target[key]);
+    if (key === 'App') {
+      return getAppStructure(baseUrl);
+    } else if (key === 'Source') {
+      return getSourceStructure(baseUrl);
+    } else if (key === 'Gen') {
+      return getGenStructure(baseUrl);
+    } else {
+      return baseUrl;
     }
   }
-);
+});
 
-const FilePath = new Proxy(
-  {
-    Env: '.env',
-    Page: 'index.html',
-    Favicon: 'favicon.ico'
-  },
-  {
-    get(target, key) {
-      if (!Object.prototype.hasOwnProperty.call(target, key)) {
-        return undefined;
-      }
-      if ('Env' == key) {
-        return {
-          base: joinPath(FolderPath.Config, target[key]),
-          private: joinPath(FolderPath.Config, '.private.env')
-        };
-      }
-      return joinPath(FolderPath.Gen.template, target[key]);
+const FileStructure = {
+  Env: '.env',
+  Page: 'index.html',
+  Package: 'package.json'
+};
+
+function getFileTrend(form, to, name) {
+  return {
+    from: joinPath(form, name),
+    to: to && joinPath(to, name)
+  };
+}
+
+const File = new Proxy(FileStructure, {
+  get(target, key) {
+    if (!(key in target)) {
+      return undefined;
+    }
+    const name = target[key];
+    if (key === 'Env') {
+      return getFileTrend(Directory.Config, '', name);
+    } else if (key === 'Package') {
+      return getFileTrend(CWD, Directory.Gen.template, name);
+    } else if (key === 'Page') {
+      return getFileTrend(
+        Directory.Public,
+        Directory.App.renderer,
+        name
+      );
     }
   }
-);
+});
+
+/* ******************************** Webpack 构建配置 ******************************** */
+
+/* 公共配置 */
+const baseExtensions = ['.js', '.ts', '.json'];
+const baseLoader = [Loader.js, Loader.ts, Loader.json];
+const basePlugins = [getDotenvPlugin(File.Env.from)];
 
 /**
  * @summary 构建入口
  */
 const Entry = {
   Main: {
-    main: joinPath(FolderPath.Source.electron, 'index.ts'),
-    vendor: joinPath(FolderPath.Source.electron, 'vendor.ts')
+    main: joinPath(Directory.Source.electron, 'index.ts'),
+    vendor: joinPath(Directory.Source.electron, 'vendor.ts')
   },
   Preload: {
-    index: joinPath(FolderPath.Source.preload, 'index.ts')
+    index: joinPath(Directory.Source.preload, 'index.ts')
   },
   Renderer: {
-    index: joinPath(FolderPath.Source.renderer, 'index.ts'),
-    vendor: joinPath(FolderPath.Source.renderer, 'vendor.ts')
+    index: joinPath(Directory.Source.renderer, 'index.ts'),
+    vendor: joinPath(Directory.Source.renderer, 'vendor.ts')
   }
 };
 
@@ -150,8 +148,8 @@ const Entry = {
  * @summary Webpack 别名
  */
 const alias = {
-  '@': FolderPath.Source.base,
-  '@type': FolderPath.Types
+  '@': Directory.Source.base,
+  '@public': Directory.Public
 };
 
 /**
@@ -186,72 +184,105 @@ const externals = {
 };
 
 /**
+ * @summary 应用进程结构定义
+ * @description
+ * - `Main`: 主进程
+ * - `Preload`: 预加载进程
+ * - `Renderer`: 渲染进程
+ */
+const AppProcess = {
+  Main: 'electron',
+  Preload: 'preload',
+  Renderer: 'renderer'
+};
+
+/**
+ * @summary 构建状态输出
+ */
+const stats = {
+  errorDetails: true
+};
+
+/**
  * @summary 获取 Webpack 构建配置
  * @param {BuildingEnvironment} mode 构建环境
  */
-function get(mode = BuildingEnvironment.Dev) {
-  const baseExtensions = ['.js', '.ts', '.json'];
-  const baseLoader = [Loader.js, Loader.ts];
-  const basePlugins = [getDotenvPlugin(FilePath.Env.base)];
-  const Config = Object.values(AppProcess).map(name => {
-    const isRenderer = name === AppProcess.Renderer;
-    const options = {
-      mode:
-        mode || process.env?.NODE_ENV || BuildingEnvironment.Dev,
-      target: WebpakTarget[name],
-      stats: {
-        errorDetails: true
-      },
-      entry: Entry[name],
-      output: {
-        path: FolderPath[name], // 输出目录
-        filename: '[name].js', // '[name].[contenthash].js'
-        clean: true
-      },
-      devtool: Devtool.NosourcesSourceMap,
-      resolve: {
-        // mainFields: ['browser', 'module', 'main'],
-        extensions: baseExtensions,
-        alias
-      },
-      externals,
-      module: {
-        rules: baseLoader
-      },
-      optimization,
-      plugins: basePlugins
-    };
+function get(type = BuildingEnvironment.Dev) {
+  const config = Object.entries(AppProcess).map(
+    ([key, name]) => {
+      const isRenderer = name === AppProcess.Renderer;
 
-    if (isRenderer) {
-      /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
-      options.output.publicPath = '/';
-      options.resolve.extensions = baseExtensions.concat([
-        '.jsx',
-        '.tsx'
-      ]);
-      options.module.rules = baseLoader.concat(Loader.css);
-      options.plugins.push(
-        // TODO: 存在问题，会多次对 index.html 文件进行处理
-        getCopyWebpackPlugin([
-          {
-            from: FolderPath.Public.base,
-            toType: 'dir',
-            to: FolderPath.Renderer
-            // force: false
-          }
-        ]),
-        getHtmlWebpackPlugin({
-          template: FilePath.Page,
-          filename: FolderPath.Static.page
-        }),
-        getMiniCssExtractPlugin()
-      );
+      const mode =
+        type || process.env?.NODE_ENV || BuildingEnvironment.Dev;
+
+      const options = {
+        mode,
+        stats,
+        entry: Entry[key],
+        target: WebpakTarget[key],
+        output: {
+          path: Directory.App[name], // 输出目录
+          filename: '[name].js', // '[name].[contenthash].js'
+          clean: true
+        },
+        devtool: Devtool.NosourcesSourceMap,
+        resolve: {
+          // mainFields: ['browser', 'module', 'main'],
+          extensions: baseExtensions,
+          alias
+        },
+        externals,
+        module: {
+          rules: baseLoader
+        },
+        optimization,
+        plugins: basePlugins
+      };
+
+      if (isRenderer) {
+        /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
+        options.output.publicPath = '/';
+        options.resolve.extensions = baseExtensions.concat([
+          '.jsx',
+          '.tsx'
+        ]);
+        options.module.rules = baseLoader.concat(Loader.css);
+        options.plugins.push(
+          // TODO: 存在问题，会多次对 index.html 文件进行处理  - getHtmlWebpackPlugin & getCopyWebpackPlugin
+          getCopyWebpackPlugin([
+            /* public - 不应该直接拷贝，而是经过压缩或编译处理 */
+            // {
+            //   from: FolderPath.Public.base,
+            //   toType: 'dir',
+            //   to: FolderPath.Renderer
+            //   // force: false
+            // },
+
+            /* core */
+            // {
+            //   from: FolderPath.Core,
+            //   toType: 'dir',
+            //   to: joinPath(FolderPath.App, 'core')
+            // },
+            // Tip: 放在打包输出的时候执行
+            {
+              ...File.Package,
+              toType: 'file'
+            }
+          ]),
+          getHtmlWebpackPlugin({
+            template: File.Page.from,
+            filename: File.Page.to
+          }),
+          getMiniCssExtractPlugin()
+        );
+      }
+
+      return options;
     }
+  );
 
-    return options;
-  });
-
-  return Config;
+  return config;
 }
 
 module.exports = get;

@@ -1,3 +1,10 @@
+/**
+ * @file 开发运行任务
+ * @description
+ * 1. 存在问题：
+ * 当我窗口都关闭时，dev 任务仍然是在进行中的；
+ * 如果实现去中止掉任务，则会在重新启动时导致监听结束；
+ */
 const electron = require('electron');
 const { clean, compile } = require('./compile');
 const { spawn } = require('node:child_process');
@@ -7,16 +14,15 @@ let electronProcess = null;
 
 async function start(done) {
   if (electronProcess) {
-    console.log(
-      '终止之前的 Electron 进程',
-      electronProcess?.pid
-    );
     electronProcess.kill();
 
-    // 等待进程完全退出
+    /* 等待进程完全退出 */
     await new Promise(resolve => {
       electronProcess.on('exit', () => {
-        console.log('之前的 Electron 进程已退出');
+        console.log(
+          '终止之前的 Electron 进程',
+          electronProcess?.pid
+        );
         resolve();
       });
     });
@@ -36,6 +42,7 @@ async function start(done) {
   electronProcess.on('error', err => {
     console.error('启动 Electron 进程时出错:', err);
     done(err);
+    // process.exit(1);
   });
 }
 
@@ -44,13 +51,19 @@ task('dev', function () {
   const options = {
     cwd: process.cwd()
   };
+
+  const mainSource = 'source/electron/**/*';
+
+  /* 监听文件变化，并重新编译 */
   watch(
-    ['public/**/*', 'source/**/*', '!source/electron/**/*'],
+    ['public/**/*', 'source/**/*', `!${mainSource}`],
     options,
     series(clean, compile)
   );
+
+  /* 监听主进程相关文件变化，并重新启动 Electron */
   watch(
-    ['source/electron/**/*'],
+    [mainSource, 'source/preload/**/*'],
     { ignoreInitial: false, ...options },
     series(clean, compile, start)
   );

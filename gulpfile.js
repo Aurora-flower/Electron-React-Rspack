@@ -18,11 +18,13 @@
  *    允许在发生更改时监视全局并运行任务。任务与任务系统的其余部分统一处理。
  */
 const Dev = require('./gulp/tasks/dev');
+const Debug = require('./gulp/tasks/debug');
 const Compile = require('./gulp/tasks/compile');
 const Package = require('./gulp/tasks/package');
 
 module.exports = {
   Dev,
+  Debug,
   Compile,
   Package
 };

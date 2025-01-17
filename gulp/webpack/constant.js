@@ -1,17 +1,4 @@
 /**
- * @summary 应用进程结构定义
- * @description
- * - `Main`: 主进程
- * - `Preload`: 预加载进程
- * - `Renderer`: 渲染进程
- */
-const AppProcess = {
-  Main: 'Main',
-  Preload: 'Preload',
-  Renderer: 'Renderer'
-};
-
-/**
  * @summary 构建环境
  * @description
  * - `none`: 不进行构建
@@ -47,4 +34,4 @@ const AssetType = {
   Auto: 'asset' /* 当 size <= 8kb 时，使用 asset/inline，否则使用 asset/resource */
 };
 
-module.exports = { AssetType, AppProcess, BuildingEnvironment };
+module.exports = { AssetType, BuildingEnvironment };

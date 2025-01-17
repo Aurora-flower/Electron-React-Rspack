@@ -15,11 +15,11 @@
  */
 
 /**
- * @summary 请求拦截器
+ * @summary 请求拦截器 interceptors.request
  */
 
 /**
- * @summary 响应拦截器
+ * @summary 响应拦截器 interceptors.response
  */
 
 class Service {}

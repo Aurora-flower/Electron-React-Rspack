@@ -5,6 +5,7 @@
 import { app } from 'electron';
 import { debugLog } from '@/common/log';
 import { createWindow } from '@/electron/helper';
+import { join } from 'path';
 
 // const CWD = process.cwd(); /*  当前工作目录 */
 const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
@@ -15,9 +16,21 @@ const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
 async function onAppReady() {
   try {
     // './app/renderer/public/index.html'
-    createWindow('http://localhost:59080/', null, {
-      isRemote: true
-    });
+    createWindow(
+      'http://localhost:59080/',
+      {
+        width: 1200,
+        height: 800,
+        webPreferences: {
+          preload: join(__dirname, '../preload/index.js'),
+          nodeIntegration: false,
+          contextIsolation: true
+        }
+      },
+      {
+        isRemote: true
+      }
+    );
     debugLog(
       ModuleID,
       'onAppReady',
