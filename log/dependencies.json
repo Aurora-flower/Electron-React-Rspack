@@ -53,7 +53,7 @@
       "changed": [
         {
           "version": "^19.0.4",
-          "commit": "",
+          "commit": "353cec09",
           "date": "2025/01/12",
           "message": ""
         }
@@ -107,8 +107,14 @@
       "changed": [
         {
           "version": "^33.3.1",
-          "commit": "",
+          "commit": "353cec09",
           "date": "2025/01/12",
+          "message": ""
+        },
+        {
+          "version": "^34.0.0",
+          "commit": "",
+          "date": "2025/01/20",
           "message": ""
         }
       ]
@@ -163,12 +169,12 @@
       "version": "^23.5.0",
       "description": {
         "summary": "一个运行环境，用于执行 js 脚本，负责处理文件、目录、网络、进程等基础功能。",
-        "comment": "为没有此环境的应用程序使用者提供"
+        "comment": "为没有此环境的应用程序使用者提供，但是怎么提供呢？"
       },
       "changed": [
         {
           "version": "^22.13.0",
-          "commit": "",
+          "commit": "353cec09",
           "date": "2025/01/12",
           "message": ""
         }
