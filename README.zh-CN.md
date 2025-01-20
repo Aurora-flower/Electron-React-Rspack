@@ -209,17 +209,7 @@
       ├── build                               electron 构建相关
       ├── builtin                             内置插件目录，用于存放内置插件，如：electron 插件等。
       ├── extensions                          应用程序扩展目录，用于存放第三方插件，如：react 插件等。
-      └─┬ lib                                 应用程序核心目录，静态资源与内部文件等（internal）
-        ├── node_modules.asar.unpacked        用于存放 node js script 的依赖项 🟦
-        └─┬ private                           用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。 ⭐️
-          ├── ssl                             用于存放 `https` 协议所需要的证书文件
-          ├── temp                            用于存放临时文件
-          ├── .env.private                    隐私环境配置
-          └── secret.txt                      隐私文本
-        └─┬ resoures                          被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
-          ├── icon                            应用图标
-          ├── fonts                           应用字体
-          └── images                          应用图片
+      ├── lib                                 应用程序核心目录
       ├── packages                            包含多个独立的子模块或包
       ├── polyfill                            用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。 🟦
       └─┬ scripts                             用于存放脚本文件。
@@ -228,6 +218,15 @@
         └── shell                             用于存放 shell 脚本文件
           ├── bat                             用于存放 bat 脚本文件
           └── sh                              用于存放 sh 脚本文件
+      └─┬ private                           用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。 ⭐️
+        ├── ssl                             用于存放 `https` 协议所需要的证书文件
+        ├── temp                            用于存放临时文件
+        ├── .env.private                    隐私环境配置
+        └── secret.txt                      隐私文本
+      └─┬ resoures                          被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
+        ├── icon                            应用图标
+        ├── fonts                           应用字体
+        └── images                          应用图片
     ├── docs                                  用于记录某一类型的碎片化文档（未整理版本）
     └─┬ gen                                   用于生成文档、模版的目录 (polp 模板也存放在此目录下)
       ├── docs                                学习文档目录 🟥
