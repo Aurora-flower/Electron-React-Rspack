@@ -3,7 +3,7 @@
  * 如：防抖、节流等
  */
 
-class PreformanceUtility {
+export class PreformanceUtility {
   // /**
   //  * 防抖
   //  * @param callback 回调函数

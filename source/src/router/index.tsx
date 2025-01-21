@@ -25,7 +25,9 @@ const RouteOptions: RouteObject[] = [
 
 // 创建路由器实例
 const Router = createBrowserRouter(RouteOptions, {
-  // (目前已经升级为 7 版本)解决警告：来自 React Router，意思是 React Router v7 在未来的版本中会将状态更新（state updates）包装在 React.startTransition 中，从而使得状态更新的过程更平滑，避免界面卡顿或阻塞。
+  // (目前已经升级为 7 版本)解决警告：来自 React Router，
+  // 意思是 React Router v7 在未来的版本中会将状态更新（state updates）
+  // 包装在 React.startTransition 中，从而使得状态更新的过程更平滑，避免界面卡顿或阻塞。
   // future: {
   //   v7_skipActionErrorRevalidation: true,
   //   v7_relativeSplatPath: true,

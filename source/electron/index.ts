@@ -35,6 +35,7 @@ async function onAppReady() {
       ModuleID,
       'onAppReady',
       'start',
+      join(__dirname, '../preload/index.js'),
       process.env.IS_DEBUG
     );
   } catch (error) {

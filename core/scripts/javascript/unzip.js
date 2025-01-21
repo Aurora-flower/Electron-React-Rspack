@@ -22,7 +22,8 @@ function debugLog(content = '', flag = 'w') {
 function exits(url) {
   try {
     return !!statSync(url);
-  } catch (e) {
+  } catch (err) {
+    console.log('Error: ', err.message);
     return false;
   }
 }

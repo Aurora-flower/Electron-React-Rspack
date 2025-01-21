@@ -8,7 +8,7 @@
 // function loadResource(url: string, type: string = 'image') {
 //   // 测试
 //   const glob = require.context(
-//     '/Users/HuaYing/Desktop/resources/Local/HuaYing_Test/src/config/styles/constant/common',
+//     'xxx',
 //     true,
 //     /\.ts$/
 //   );

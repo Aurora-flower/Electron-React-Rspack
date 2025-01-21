@@ -2,9 +2,9 @@
  *  @file 全局类型定义
  */
 import './common.d.ts';
-import './modules/main.d.ts';
-import './modules/preload.d.ts';
-import './modules/renderer.d.ts';
+import './main/index.js';
+import './preload/index.js';
+import './renderer/index.js';
 // --- /// <reference path="./common.d.ts" />
 
 declare global {

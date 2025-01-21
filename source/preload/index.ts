@@ -6,7 +6,7 @@
  * - `Node.js` 模块:  	        events、timers、url
  * - `Polyfilled` 的全局模块:	   Buffer、process、clearImmediate、setImmediate
  */
-import { contextBridge, ipcRenderer } from 'electron';
+// import { contextBridge, ipcRenderer } from 'electron';
 
 /**
  * @summary

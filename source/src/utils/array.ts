@@ -109,7 +109,7 @@ export class ArrayUtility {
     arr: unknown[],
     depth: number = 0,
     isCumulative: boolean = false,
-    listener: (data: any) => Boolean = filterListener,
+    listener: (data: unknown) => boolean = filterListener,
     currentDepth: number = 0
   ): unknown[] {
     const result: unknown[] = [];
