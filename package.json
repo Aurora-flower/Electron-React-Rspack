@@ -15,7 +15,8 @@
     "dev:server": "ts-node source/electron/server/index.ts",
     "package:dir": "rimraf release && electron-builder --dir",
     "check:audit": "npm audit --registry=https://registry.npmjs.org/",
-    "eslint": "eslint . --ignore-pattern 'app/*' --ignore-pattern 'gen/*'"
+    "eslint:inspect": "eslint --inspect-config",
+    "lint": "eslint . --ignore-pattern 'app/*' --ignore-pattern 'gen/*' --fix"
   },
   "keywords": [],
   "author": "HuaYing",
@@ -26,6 +27,7 @@
     "@babel/preset-react": "^7.26.3",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/config-inspector": "^1.0.0",
     "@eslint/js": "^9.18.0",
     "@types/express": "^5.0.0",
     "@types/koa": "^2.15.0",

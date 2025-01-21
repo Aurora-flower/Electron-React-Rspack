@@ -52,6 +52,9 @@
 
     # 配置 prettier
     # npm install --save-dev eslint-config-prettie
+
+    # 查看配置
+    npm install --save-dev @eslint/config-inspector@latest
     ```
 
 > prettier:

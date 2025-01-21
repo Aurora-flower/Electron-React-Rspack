@@ -15,28 +15,44 @@ const noUnusedExpressions = [
   }
 ];
 
+const ignores = [
+  '**/source/common',
+  '**/node_modules',
+  '**/public',
+  '**/test',
+  '**/core',
+  '**/app',
+  '**/gen'
+];
+
 export default [
   {
-    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    ignores: [
-      'source/common/**',
-      'core/**',
-      'node_modules/**',
-      'app/**',
-      'public/**',
-      'test/**',
-      'gen/**'
-    ]
+    // ignorePatterns: ignores
+
+    /**
+     * @summary
+     * 如果一个配置对象只有 ignores，没有其他字段，它会全局生效；
+     * 如果一个配置对象既有 ignores，也有rules，它只在该配置对象范围内生效。
+     */
+    ignores
+  },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}']
+  },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    ...pluginReact.configs.flat.recommended,
+    settings: {
+      react: {
+        version: 'detect' // 自动检测 React 版本
+      }
+    }
   },
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node }
-    }
-  },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  {
+    },
     rules: {
       /* ******************** 代码风格 ******************** */
       /* 强制使用分号 */

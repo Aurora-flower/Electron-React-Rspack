@@ -129,6 +129,14 @@
       "description": {},
       "changed": []
     },
+    "@eslint/config-inspector": {
+      "version": "^1.0.0",
+      "description": {
+        "summary": "",
+        "comment": "启动一个网页 ，可以很方便的查看已配置的插件和规则，并对规则进行了分类，每项规则都附有简短的说明，并可以跳转至文档，一目了然。"
+      },
+      "changed": []
+    },
     "eslint": {
       "version": "^9.18.0",
       "description": {},
