@@ -10,7 +10,7 @@ const joinPath = require('../utils/joinpath');
 const { WebpakTarget } = require('./webpack-target');
 const { BuildingEnvironment } = require('./constant');
 
-/* ******************************** 目录结构 ******************************** */
+/* *************** 目录与文件结构 *************** */
 
 /**
  * @summary 获取当前工作目录
@@ -89,6 +89,8 @@ const Directory = new Proxy(DirectoryStructure, {
 
 const FileStructure = {
   Env: '.env',
+  DevEnv: '.env.dev',
+  ProdEnv: '.env.prod',
   Page: 'index.html',
   Package: 'package.json'
 };
@@ -106,7 +108,7 @@ const File = new Proxy(FileStructure, {
       return undefined;
     }
     const name = target[key];
-    if (key === 'Env') {
+    if (key.indexOf('Env') > -1) {
       return getFileTrend(Directory.Config, '', name);
     } else if (key === 'Package') {
       return getFileTrend(CWD, Directory.Gen.template, name);
@@ -120,13 +122,26 @@ const File = new Proxy(FileStructure, {
   }
 });
 
-/* ******************************** Webpack 构建配置 ******************************** */
+/* *************** Webpack 构建配置 *************** */
 
 /* 公共配置 */
 const baseExtensions = ['.js', '.ts', '.json'];
 const baseLoader = [Loader.js, Loader.ts, Loader.json];
-const basePlugins = [getDotenvPlugin(File.Env.from)];
-
+/**
+ * @summary 获取基础插件配置
+ * @param {BuildingEnvironment} mode 构建环境
+ */
+function getBasePlugins(mode) {
+  const envMode = mode || process.env?.NODE_ENV;
+  const envFile =
+    envMode === BuildingEnvironment.Prod
+      ? File.ProdEnv.from
+      : File.DevEnv.from;
+  return [
+    getDotenvPlugin(File.Env.from),
+    getDotenvPlugin(envFile)
+  ];
+}
 /**
  * @summary 构建入口
  */
@@ -207,13 +222,13 @@ const stats = {
  * @summary 获取 Webpack 构建配置
  * @param {BuildingEnvironment} mode 构建环境
  */
-function get(type = BuildingEnvironment.Dev) {
+function get(type) {
+  const mode =
+    type || process.env?.NODE_ENV || BuildingEnvironment.Dev;
+  console.log('构建配置环境:', mode);
   const config = Object.entries(AppProcess).map(
     ([key, name]) => {
       const isRenderer = name === AppProcess.Renderer;
-
-      const mode =
-        type || process.env?.NODE_ENV || BuildingEnvironment.Dev;
 
       const options = {
         mode,
@@ -236,7 +251,7 @@ function get(type = BuildingEnvironment.Dev) {
           rules: baseLoader
         },
         optimization,
-        plugins: basePlugins
+        plugins: getBasePlugins(mode)
       };
 
       if (isRenderer) {
@@ -248,7 +263,8 @@ function get(type = BuildingEnvironment.Dev) {
         ]);
         options.module.rules = baseLoader.concat(Loader.css);
         options.plugins.push(
-          // TODO: 存在问题，会多次对 index.html 文件进行处理  - getHtmlWebpackPlugin & getCopyWebpackPlugin
+          // TODO: 存在问题，会多次对 index.html 文件进行处理
+          // - getHtmlWebpackPlugin & getCopyWebpackPlugin
           getCopyWebpackPlugin([
             /* public - 不应该直接拷贝，而是经过压缩或编译处理 */
             // {

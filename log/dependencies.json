@@ -91,6 +91,11 @@
       "description": {},
       "changed": []
     },
+    "cross-env": {
+      "version": "^7.0.3",
+      "description": {},
+      "changed": []
+    },
     "css-loader": {
       "version": "^7.1.2",
       "description": {},

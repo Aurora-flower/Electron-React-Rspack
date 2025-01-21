@@ -99,6 +99,8 @@
     npm install --save-dev  gulp
 
     npm install --save-dev rimraf
+
+    npm install --save-dev cross-env
     ```
 
 > webpack
