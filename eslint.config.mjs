@@ -1,3 +1,6 @@
+/**
+ * @file ESLint 的扁平配置（flat config）
+ */
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
@@ -15,13 +18,14 @@ const noUnusedExpressions = [
 export default [
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    ignorePatterns: [
+    ignores: [
       'source/common/**',
       'core/**',
       'node_modules/**',
       'app/**',
       'public/**',
-      'test/**'
+      'test/**',
+      'gen/**'
     ]
   },
   {
@@ -57,7 +61,8 @@ export default [
       'max-len': [
         'error',
         {
-          code: 80
+          code: 80,
+          ignoreComments: true // 忽略注释的长度限制
         }
       ],
 
