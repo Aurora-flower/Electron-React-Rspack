@@ -4,26 +4,46 @@
  * @see {@link https://www.koajs.net/ Koa 中文文档}
  * @see {@link https://express.nodejs.cn/ Express Node.js 中文文档}
  * @remarks
- * windows - netstat -ano | findstr :9958
+ * 检测端口：
+ * - `Mac`: lsof -i:59080
+ * - `Windows`: netstat -ano | findstr 59080
  */
+import {
+  checkConnection,
+  getPort
+} from '@/electron/server/helper';
+import { debugLog } from '@/common/log';
 
-import Koa from 'koa';
-import serve from 'koa-static';
-const app = new Koa();
+// import Koa from 'koa';
+// import serve from 'koa-static';
 
-const root = './app/public';
-const opts = {};
+// export function startServer() {
+//   const app = new Koa();
 
-app.use(serve(root, opts));
-app.use((ctx, next) => {
-  const start = Date.now();
-  return next().then(() => {
-    const ms = Date.now() - start;
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-  });
-});
+//   const root = './app/public';
+//   const opts = {};
 
-app.listen(59080);
+//   app.use(serve(root, opts));
+//   app.use((ctx, next) => {
+//     const start = Date.now();
+//     return next().then(() => {
+//       const ms = Date.now() - start;
+//       console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+//     });
+//   });
+
+//   app.listen(59080);
+// }
+
+export async function startServer() {
+  /* 检查是否有端口冲突 */
+  const res = await checkConnection(
+    process.env?.WEB_URL || '',
+    getPort()
+  );
+  debugLog(module.id, 'startServer', true, res);
+}
+
 // import net from 'node:net';
 // import http from 'node:http';
 // import https from 'node:https';
