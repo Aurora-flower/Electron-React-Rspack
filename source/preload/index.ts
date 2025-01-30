@@ -8,6 +8,8 @@
  */
 // import { contextBridge, ipcRenderer } from 'electron';
 
+import { debugLog } from '@/common/log';
+
 /**
  * @summary
  * window 监听 load 事件 | [window、document] 监听 DOMContentLoaded 事件
@@ -38,7 +40,7 @@ function runtimeLoadHandle() {
   // };
 
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('Document-DOMContentLoaded');
+    debugLog(module.id, 'Document-DOMContentLoaded', false);
 
     // 鼠标穿透 - 在 macOS | Windows 平台上转发鼠标事件
     // const el = document.getElementById('clickThroughElement')

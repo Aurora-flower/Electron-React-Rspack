@@ -8,45 +8,35 @@
  * - `Mac`: lsof -i:59080
  * - `Windows`: netstat -ano | findstr 59080
  */
+import { app } from 'electron';
 import {
+  getPort,
   checkConnection,
-  getPort
+  getWebUrl,
+  getHostname
 } from '@/electron/server/helper';
 import { debugLog } from '@/common/log';
+import { AppServer } from '@/electron/server/creator';
+import { join } from 'node:path';
 
-// import Koa from 'koa';
-// import serve from 'koa-static';
+const AppAsar = app.getAppPath();
 
-// export function startServer() {
-//   const app = new Koa();
+export async function startServer(isSafe: boolean = false) {
+  const port = getPort();
+  const webUrl = getWebUrl(isSafe);
 
-//   const root = './app/public';
-//   const opts = {};
-
-//   app.use(serve(root, opts));
-//   app.use((ctx, next) => {
-//     const start = Date.now();
-//     return next().then(() => {
-//       const ms = Date.now() - start;
-//       console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-//     });
-//   });
-
-//   app.listen(59080);
-// }
-
-export async function startServer() {
   /* 检查是否有端口冲突 */
-  const res = await checkConnection(
-    process.env?.WEB_URL || '',
-    getPort()
-  );
-  debugLog(module.id, 'startServer', true, res);
+  const connect = await checkConnection(webUrl, port);
+  if (connect) {
+    // TODO: 端口冲突的处理
+    return;
+  }
+  const server = new AppServer({
+    isSafe: false,
+    hostname: getHostname(),
+    port: getPort(),
+    path: join(AppAsar, 'app/public')
+  });
+  await server.start();
+  debugLog(module.id, 'startServer', true, connect, isSafe);
 }
-
-// import net from 'node:net';
-// import http from 'node:http';
-// import https from 'node:https';
-// import { app } from 'electron';
-// import { readFileSync } from 'node:fs';
-// import { debugLog } from '@/common/log';

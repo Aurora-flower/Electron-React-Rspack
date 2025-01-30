@@ -4,4 +4,4 @@
  */
 import { debugLog } from '@/common/log';
 
-debugLog(module.id, 'Debug');
+debugLog(module.id, 'Debug', false);

@@ -1,11 +1,41 @@
+/**
+ * @file 获取端口和 web 地址
+ */
 import net from 'node:net';
-// import http from 'node:http';
-// import https from 'node:https';
 
-export function getPort() {
-  const DefaultPort = 80;
+export const DefaultHost = '127.0.0.1'; /* 默认地址 */
+export const DefaultPort = 80; /* 默认端口 */
+
+/**
+ * 获取端口
+ * @returns {number}
+ */
+export function getPort(): number {
   const AppServerPort = Number(process.env?.APP_SERVER_PORT); // 定义服务器端口
   return isNaN(AppServerPort) ? DefaultPort : AppServerPort;
+}
+
+/**
+ * 获取 web 地址
+ * @returns {string}
+ */
+export function getHostname(): string {
+  const AppServerHostname = process.env?.APP_SERVER_HOSTNAME; // 定义服务器地址
+  return AppServerHostname || DefaultHost;
+}
+
+/**
+ * 获取 web 地址
+ * @param {boolean} isSafe 是否为 https 安全协议
+ * @returns {string}
+ */
+export function getWebUrl(isSafe: boolean = false): string {
+  return (
+    (isSafe
+      ? process.env?.WEB_SAFE_URL
+      : process.env?.WEB_URL) ||
+    `http://${DefaultHost}/${getPort()}`
+  );
 }
 
 /**
@@ -15,8 +45,7 @@ export function getPort() {
  * @returns 是否被占用
  * @description
  * - 如果连接成功，说明端口被占用;
- * - 如果连接被拒绝，说明端口未被占用;
- * - 如果连接被重置，说明端口被占用;
+ * - 如果连接失败，说明端口未被占用;
  * @remarks
  * 1. `net.createServer()` 方法用于创建一个 TCP 服务器。它接受一个可选的对象参数 `options` 和一个可选的回调函数 `connectionListener。`
  *
@@ -40,7 +69,7 @@ export function getPort() {
  */
 export function checkConnection(
   webUrl: string,
-  port: number = 80
+  port: number = DefaultPort
 ): Promise<boolean> {
   return new Promise(resolve => {
     const socket = net.connect({ port, host: webUrl }, () => {
@@ -57,6 +86,12 @@ export function checkConnection(
       if (expectCodeList.includes(err.code)) {
         resolve(false);
       } else if (err.code === 'ECONNRESET') {
+        // [
+        //   /* 表示地址被占用 */
+        //   'EADDRINUSE',
+        //   /* 表示连接被重置 */
+        //   'ECONNRESET'
+        // ]
         resolve(true);
       }
     });

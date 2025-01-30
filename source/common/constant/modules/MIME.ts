@@ -2,7 +2,8 @@
  * @summary MIME 常见 MIME 类型 (Multipurpose Internet Mail Extensions)
  * @see {@link https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types MIME常见类型}
  */
-const MIME = {
+
+const MIME_TYPES = {
   '.html': {
     mime: 'text/html',
     represent: 'HTML 文档',
@@ -112,16 +113,47 @@ const MIME = {
     mime: 'application/bat',
     represent: '批处理文件',
     description: 'Windows 批处理文件'
-  },
-
-  /**
-   * @function isValid 判断是否为有效的 mime 类型。
-   * @param {string} mime mime类型
-   * @returns {boolean} 是否为有效的平台类型
-   */
-  'isValid': function (mime: string): boolean {
-    return Object.keys(this).includes(mime);
   }
 };
 
-export default MIME;
+type MIMEEntry = {
+  /* MIME 类型 */
+  mime: string;
+  /* 含义 */
+  represent: string;
+  /* 描述 */
+  description: string;
+};
+
+export type MIMEModel = keyof typeof MIME_TYPES;
+
+/**
+ * @class MIME
+ * @description MIME 类的实现
+ */
+export class MIME {
+  private static types: Record<MIMEModel, MIMEEntry> =
+    MIME_TYPES;
+
+  /**
+   * 判断是否为有效的 mime 类型。
+   * @param {string} mime mime类型
+   * @returns {boolean} 是否为有效的平台类型
+   */
+  public static isValid(mime: string): boolean {
+    return Object.values(this.types).some(
+      entry => entry.mime === mime
+    );
+  }
+
+  /**
+   * 根据扩展名获取对应的 mime 类型。
+   * @param {string} extension 扩展名
+   * @returns {string} mime 类型
+   */
+  public static getMIMEByExtension(
+    extension: MIMEModel
+  ): MIMEEntry | undefined {
+    return this.types[extension];
+  }
+}

@@ -1,12 +1,17 @@
+import { debugLog } from '@/common/log';
 import { BrowserWindow } from 'electron';
 
+/**
+ * @summary 创建窗口
+ * @param {string} url - 窗口地址
+ * @param {Electron.BrowserWindowConstructorOptions} options - 窗口配置
+ * @param {MainProcess.WindowParams} params - 窗口参数
+ * @returns {Electron.BrowserWindow} - 窗口实例
+ */
 export function createWindow(
   url: string,
   options: Electron.BrowserWindowConstructorOptions | null = null,
-  params: {
-    isDev?: boolean;
-    isRemote?: boolean;
-  } = {}
+  params: MainProcess.WindowParams = {}
 ): Electron.BrowserWindow | null {
   try {
     if (
@@ -15,7 +20,6 @@ export function createWindow(
       Object.keys(options).length === 0
     ) {
       options = {
-        // TODO: 最小宽、高
         webPreferences: {
           nodeIntegration: true
         }
@@ -24,13 +28,19 @@ export function createWindow(
 
     const win = new BrowserWindow(options);
 
+    /* 加载地址 */
     params?.isRemote ? win.loadURL(url) : win.loadFile(url);
 
-    if (params?.isDev) {
-      win.webContents.openDevTools();
-    }
+    /* 设置调试模式 */
+    params?.debug && win.webContents.openDevTools();
 
-    win.setMinimumSize(765, 600); // 设置最小尺寸
+    /* 设置最小尺寸 */
+    if (params?.minize) {
+      win.setMinimumSize(
+        params.minize.width,
+        params.minize.height
+      );
+    }
 
     return win;
   } catch (error: unknown) {
@@ -38,11 +48,11 @@ export function createWindow(
       error instanceof Error
         ? error.message
         : 'Unknown error occurred!';
+    debugLog(module.id, 'createWindow', true, msg);
     // AppMessageDistributor.showErrorBox(
     //   'Failed to create main window',
     //   msg
     // );
-    console.error(msg + '1');
     return null;
   }
 }

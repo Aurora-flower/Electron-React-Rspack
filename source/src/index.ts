@@ -6,4 +6,4 @@ import '@/src/debug';
 import '@/src/vendor';
 import { debugLog } from '@/common/log';
 
-debugLog(module.id, 'Main Entry', 'hello world');
+debugLog(module.id, 'Main Entry', false, 'hello world');

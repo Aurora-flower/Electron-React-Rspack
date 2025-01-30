@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { debugLog } from '@/common/log';
 import { Environment } from '@/common/constant';
 import { createWindow } from '@/electron/helper';
-
+import { getWebUrl } from '@/electron/server/helper';
 // const CWD = process.cwd(); /*  当前工作目录 */
 const IsProd = process.env?.NODE_ENV === Environment.Prod;
 const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
@@ -32,8 +32,7 @@ const AppAsar =
  */
 export async function onAppReady() {
   try {
-    const webURL =
-      process.env?.WEB_URL || 'http://localhost:59080';
+    const webURL = getWebUrl();
     const windowOptions: Electron.BrowserWindowConstructorOptions =
       {
         width: 800,
@@ -50,7 +49,6 @@ export async function onAppReady() {
       debug: Boolean(process.env?.IS_DEBUG)
     };
     createWindow(webURL, windowOptions, params);
-
     debugLog(ModuleID, 'onAppReady', IsProd);
   } catch (error) {
     const msgTitle = 'Failed to start the application';
