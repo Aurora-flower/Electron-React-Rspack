@@ -1,6 +1,12 @@
 {
   "extends": ["development"],
   "hints": {
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": ["-webkit-text-size-adjust"]
+      }
+    ]
   }
 }

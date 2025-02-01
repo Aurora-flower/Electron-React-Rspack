@@ -1,6 +1,6 @@
 /**
  * @file eslint 配置文件
- * @see https://eslint.org/docs/latest/use/configure/
+ * @see {@link https://eslint.org/docs/latest/use/configure/}
  */
 import globals from 'globals';
 import pluginJs from '@eslint/js';

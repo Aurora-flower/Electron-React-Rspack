@@ -19,7 +19,7 @@ const CWD = process.cwd(); /* 当前工作目录  */
 // // Let's get that intellisense working
 // /**
 //  * @type {import('electron-builder').Configuration}
-//  * @see https://www.electron.build/configuration
+//  * @see {@link https://www.electron.build/configuration}
 //  */
 // // const options = {
 // //   protocols: {

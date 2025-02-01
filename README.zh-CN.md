@@ -114,7 +114,7 @@
     npm install --save-dev webpack
 
     # plugins
-    npm install --save-dev html-webpack-plugin copy-webpack-plugin mini-css-extract-plugin
+    npm install --save-dev html-webpack-plugin copy-webpack-plugin mini-css-extract-plugin css-minimizer-webpack-plugin
 
     # loader
     npm install --save-dev babel-loader ts-loader postcss-loader css-loader

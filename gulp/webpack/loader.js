@@ -11,15 +11,15 @@ const css = {
   test: /\.css$/,
   use: [
     /**
-     * @summary 由于开启了 CSP 策略，所以需要使用 MiniCssExtractPlugin 提取 css
-     * 替换掉 'style-loader'
-     * @see https://github.com/webpack-contrib/mini-css-extract-plugin
+     * @summary
+     * Tip: 由于开启了 CSP 策略，所以需要使用 MiniCssExtractPlugin 提取 css, 替换掉 'style-loader'
+     * @see {@link https://github.com/webpack-contrib/mini-css-extract-plugin}
      */
     MiniCssExtractPlugin.loader,
 
     /*
      * @summary style-loader 处理 css 文件
-     * @see https://github.com/webpack-contrib/style-loader
+     * @see {@link https://github.com/webpack-contrib/style-loader}
      */
     // {
     //   loader: 'style-loader'
@@ -40,32 +40,35 @@ const css = {
          */
         // modules: {
         //   localIdentName: '[name]__[local]__[hash:base64:5]'
-        // }
+        // },
+        sourceMap: true
       }
     },
 
     /*
      * @summary postcss-loader 处理 css 文件
-     * @see https://github.com/postcss/postcss-loader
+     * @see {@link https://github.com/postcss/postcss-loader}
      */
     {
       loader: 'postcss-loader'
       // 注意📢: 可以单独配置文件
       // options: {
-      //   postcssOptions: {
-      //     plugins: [
-      //       /**
-      //        * @summary tailwindcss 插件 - '@tailwindcss/postcss'
-      //        * @see https://tailwindcss.com/docs/installation
-      //        */
-      //       '@tailwindcss/postcss',
-      //       /**
-      //        * @summary autoprefixer 插件
-      //        * @see https://github.com/postcss/autoprefixer
-      //        */
-      //       'autoprefixer'
-      //     ]
-      //   }
+      // sourceMap: true,
+      // postcssOptions: {
+      // plugins: [
+      /**
+       * @summary tailwindcss 插件 - '@tailwindcss/postcss'
+       * @see {@link https://tailwindcss.com/docs/installation}
+       */
+      // '@tailwindcss/postcss'
+      // require('@tailwindcss/postcss'),
+      /**
+       * @summary autoprefixer 插件
+       * @see {@link https://github.com/postcss/autoprefixer}
+       */
+      // require('autoprefixer')
+      // ]
+      // }
       // }
     }
   ]
@@ -78,7 +81,7 @@ const css = {
 const jsParser =
   /*
    * @summary babel-loader 处理 js | jsx 文件
-   * @see https://github.com/babel/babel-loader
+   * @see {@link https://github.com/babel/babel-loader}
    */
   {
     loader: 'babel-loader',
@@ -96,7 +99,7 @@ const jsParser =
 const tsParser =
   /*
    * @summary ts-loader 处理 ts | tsx 文件
-   * @see https://github.com/TypeStrong/ts-loader
+   * @see {@link https://github.com/TypeStrong/ts-loader}
    */
   {
     loader: 'ts-loader',

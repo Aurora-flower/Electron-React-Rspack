@@ -1,6 +1,11 @@
 @import url('./var.css');
 @import url('./font.css');
 @import url('./media.css');
+@import url('./vendor.css');
+
+body {
+  font: 600 14px var(--font-family);
+}
 
 /* *********************** 渲染加载 loading *********************** */
 @keyframes square-spin {

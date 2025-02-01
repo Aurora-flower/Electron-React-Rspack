@@ -2,6 +2,7 @@ const {
   getDotenvPlugin,
   getHtmlWebpackPlugin,
   getCopyWebpackPlugin,
+  getCssMinimizerPlugin,
   getMiniCssExtractPlugin
 } = require('./plugins');
 const { Loader } = require('./loader');
@@ -261,7 +262,10 @@ function get(type) {
           '.jsx',
           '.tsx'
         ]);
-        options.module.rules = baseLoader.concat(Loader.css);
+        options.module.rules = baseLoader.concat([
+          Loader.css,
+          Loader.font
+        ]);
         options.plugins.push(
           // TODO: 存在问题，会多次对 index.html 文件进行处理
           // - getHtmlWebpackPlugin & getCopyWebpackPlugin
@@ -290,7 +294,8 @@ function get(type) {
             template: File.Page.from,
             filename: File.Page.to
           }),
-          getMiniCssExtractPlugin()
+          getMiniCssExtractPlugin(),
+          getCssMinimizerPlugin()
         );
       }
 

@@ -1,0 +1,16 @@
+/* 使用媒体查询或 JavaScript 切换主题 */
+@media (prefers-color-scheme: light) {
+  :root {
+    --primary-color: var(--dark-primary-color);
+    --background-color: var(--dark-background-color);
+    --text-color: var(--dark-text-color);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: var(--dark-primary-color);
+    --background-color: var(--dark-background-color);
+    --text-color: var(--dark-text-color);
+  }
+}

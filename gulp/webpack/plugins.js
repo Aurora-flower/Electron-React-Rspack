@@ -2,6 +2,7 @@
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
@@ -51,6 +52,25 @@ function getMiniCssExtractPlugin() {
 }
 
 /**
+ * 获取 CssMinimizerPlugin 实例
+ * @description 压缩 CSS
+ * @returns {CssMinimizerPlugin}
+ */
+function getCssMinimizerPlugin() {
+  const CssMinimizerPluginOption = {
+    minimizerOptions: {
+      preset: [
+        'default',
+        {
+          discardComments: { removeAll: true }
+        }
+      ]
+    }
+  };
+  return new CssMinimizerPlugin(CssMinimizerPluginOption);
+}
+
+/**
  * 获取 CopyWebpackPlugin 实例
  * @description 用于复制文件
  * @param patterns 模式
@@ -92,5 +112,6 @@ module.exports = {
   getDotenvPlugin,
   getHtmlWebpackPlugin,
   getCopyWebpackPlugin,
+  getCssMinimizerPlugin,
   getMiniCssExtractPlugin
 };

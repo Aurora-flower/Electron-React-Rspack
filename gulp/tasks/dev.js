@@ -20,7 +20,7 @@ async function start(done) {
     await new Promise(resolve => {
       electronProcess.on('exit', () => {
         console.log(
-          '终止之前的 Electron 进程',
+          '终止原 Electron 进程',
           electronProcess?.pid
         );
         resolve();
@@ -56,7 +56,13 @@ task('dev', function () {
 
   /* 监听文件变化，并重新编译 */
   watch(
-    ['public/**/*', 'source/**/*', `!${mainSource}`],
+    [
+      'public/**/*',
+      'source/**/*',
+      `!${mainSource}`,
+      'postcss.config.js',
+      'tailwind.config.js'
+    ],
     options,
     series(clean, compile)
   );

@@ -4,8 +4,8 @@
  */
 import * as React from 'react';
 import { Icon } from '@iconify/react';
-import { createRoot } from 'react-dom/client';
 import { debugLog } from '@/common/log';
+import { createRoot } from 'react-dom/client';
 
 /**
  * @summary 渲染 React 应用
@@ -22,7 +22,7 @@ function AppRender() {
   }
   const name = [
     'animate__animated animate__bounce',
-    'text-3xl font-bold underline'
+    'text-3xl font-bold underline bg-red-200'
   ].join(' ');
 
   const AppView = (

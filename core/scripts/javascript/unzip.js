@@ -23,7 +23,7 @@ function exits(url) {
   try {
     return !!statSync(url);
   } catch (err) {
-    console.log('Error: ', err.message);
+    // console.log('Error: ', err.message);
     return false;
   }
 }

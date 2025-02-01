@@ -1,0 +1,12 @@
+/* 
+@file 字体定义文件 
+@description web 浏览器中  .woff 和 .woff2 格式有更好的跨浏览器兼容性 
+*/
+@font-face {
+  font-family: 'YEZI';
+  src:
+    url('../assets/fonts/YeZi\ Graffiti.woff2') format('woff2'),
+    url('../assets/fonts/YeZi\ Graffiti.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

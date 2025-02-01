@@ -73,11 +73,10 @@ const safeDOM = {
 
 /**
  * @summary 加载动画
- * @see  加载动画示例
- * {@link https://tobiasahlin.com/spinkit}
- * {@link https://connoratherton.com/loaders}
- * {@link https://projects.lukehaas.me/css-loaders}
- * {@link https://matejkustec.github.io/SpinThatShit}
+ * @see {@link https://tobiasahlin.com/spinkit 加载动画示例-spinkit}
+ * @see {@link https://connoratherton.com/loaders 加载动画示例-loaders}
+ * @see {@link https://projects.lukehaas.me/css-loaders 加载动画示例-css-loaders}
+ * @see {@link https://matejkustec.github.io/SpinThatShit 加载动画示例-SpinThatShit}
  */
 function useLoading() {
   const containerId = `loaders-css__square-spin`;
@@ -101,7 +100,7 @@ function useLoading() {
  * @remarks
  * - readyState: complete | interactive | loading 表示当前页面状态
  * - 浏览器加载状态：loading -> interactive -> complete
- * @see https://javascript.info/onload-ondomcontentloaded
+ * @see {@link https://javascript.info/onload-ondomcontentloaded}
  */
 function domReady(
   condition: DocumentReadyState[] = ['complete', 'interactive'] // "complete" | "interactive" | "loading"

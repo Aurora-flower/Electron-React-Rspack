@@ -109,7 +109,8 @@ export class AppServer {
   }
 
   /**
-   * 启动服务
+   * @method start
+   * @description 启动服务
    */
   async start() {
     /**
@@ -123,7 +124,7 @@ export class AppServer {
      * @returns {void}
      * 对于 SPA，返回 index.html 文件
      */
-    this._application.get('*', (req, res, next) => {
+    this._application.get('*', (req, res /* , next */) => {
       const indexFilePath = joinPath(
         this._option.path,
         'index.html'
@@ -133,8 +134,7 @@ export class AppServer {
         'Res',
         true,
         `${req.url}`,
-        indexFilePath,
-        next
+        indexFilePath
       );
       res.sendFile(indexFilePath);
     });
@@ -144,9 +144,23 @@ export class AppServer {
         module.id,
         'Server Listen',
         true,
-        `Static source - ${this._option.path} - port: ${this._option.port}`
+        `Static source - ${this._option.path}: ${this._option.port}`
       );
     }); // 监听端口
     this._server.on('error', handleError);
+  }
+
+  /**
+   * @method stop
+   * @description 停止服务器
+   * */
+  async stop(): Promise<void> {
+    if (!this._server) {
+      throw new Error('Server is not running');
+    }
+
+    this._server.close(() => {
+      debugLog(module.id, 'Server stopped', true);
+    });
   }
 }
