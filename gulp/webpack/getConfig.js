@@ -259,6 +259,7 @@ function get(type) {
         /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
         options.output.publicPath = '/';
         options.resolve.extensions = baseExtensions.concat([
+          '.css',
           '.jsx',
           '.tsx'
         ]);

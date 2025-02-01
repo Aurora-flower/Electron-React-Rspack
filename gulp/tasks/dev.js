@@ -60,7 +60,7 @@ task('dev', function () {
       'public/**/*',
       'source/**/*',
       `!${mainSource}`,
-      'postcss.config.js',
+      'postcss.config.*',
       'tailwind.config.js'
     ],
     options,

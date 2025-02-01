@@ -1,6 +1,6 @@
 /**
- * @file postcss.config.mjs
- * @description postcss配置文件
+ * @file postcss.config.{js|mjs}
+ * @description postcss 配置文件
  * @see {@link https://tailwindcss.com/docs TailwindCSS 文档}
  * @see {@link https://github.com/postcss/postcss postcss Github开源}
  * @see {@link https://github.com/postcss/autoprefixer autoprefixer Github开源}
@@ -8,11 +8,17 @@
  */
 
 module.exports = {
-  plugins: [require('@tailwindcss/postcss')]
+  // plugins: [require('@tailwindcss/postcss')]
+  plugins: {
+    // 'postcss-import': {},
+    tailwindcss: {},
+    autoprefixer: {}
+    // 'postcss-preset-env': {},
+  }
 };
-// module.exports = {
+
+// export default {
 //   plugins: {
-//     'tailwindcss': {},
-//     'autoprefixer': {}
+//     '@tailwindcss/postcss': {},
 //   }
 // };

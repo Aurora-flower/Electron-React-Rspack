@@ -76,7 +76,7 @@
 
     ```shell
     npm install animate.css
-    npm install --save-dev postcss
+    npm install --save-dev postcss postcss-import postcss-preset-env
     npm install --save-dev autoprefixer
     npm install --save-dev tailwindcss @tailwindcss/postcss @tailwindcss/cli
     ```

@@ -4,7 +4,8 @@
 import '@/src/App';
 import '@/src/debug';
 import '@/src/vendor';
-import '@/static/stylesheets/index.css';
+import '@/src/static/stylesheets';
+// import '@/src/static/stylesheets/tailwind';
 import { debugLog } from '@/common/log';
 
 debugLog(module.id, 'Main Entry', false, 'hello world');
