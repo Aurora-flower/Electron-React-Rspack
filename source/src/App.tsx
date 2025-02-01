@@ -5,6 +5,8 @@
 import * as React from 'react';
 import { Icon } from '@iconify/react';
 import { createRoot } from 'react-dom/client';
+import { debugLog } from '@/common/log';
+
 /**
  * @summary 渲染 React 应用
  * @remarks 应用使用了 React.StrictMode，那么在开发环境下，
@@ -18,11 +20,15 @@ function AppRender() {
   if (!rootElement) {
     return;
   }
+  const name = [
+    'animate__animated animate__bounce',
+    'text-3xl font-bold underline'
+  ].join(' ');
 
   const AppView = (
     <React.StrictMode>
       <div className='root-wrapper'>
-        应用程序
+        <div className={name}>应用程序</div>
         <Icon icon='medical-icon:gift-shop'></Icon>
       </div>
     </React.StrictMode>
@@ -30,6 +36,7 @@ function AppRender() {
 
   /** render 渲染，挂载到根元素 */
   createRoot(rootElement).render(AppView);
+  debugLog(module.id, 'render', false, name);
 }
 
 AppRender();

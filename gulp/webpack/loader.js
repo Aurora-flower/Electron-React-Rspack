@@ -32,9 +32,15 @@ const css = {
     {
       loader: 'css-loader',
       options: {
-        modules: {
-          localIdentName: '[name]__[local]__[hash:base64:5]'
-        }
+        /**
+         * @summary 启用 CSS 模块功能
+         * @description 启用 CSS 模块功能后，类名会自动加上哈希值，防止类名冲突。
+         * CSS 模块是一种将 CSS 样式限制在局部作用域的方法，避免全局命名冲突。通过启用 modules，每个 CSS 类名都会被自动转换为唯一的标识符。
+         * Tip: 此处开启会影响到 animate.css 的动画效果
+         */
+        // modules: {
+        //   localIdentName: '[name]__[local]__[hash:base64:5]'
+        // }
       }
     },
 
@@ -48,6 +54,11 @@ const css = {
       // options: {
       //   postcssOptions: {
       //     plugins: [
+      //       /**
+      //        * @summary tailwindcss 插件 - '@tailwindcss/postcss'
+      //        * @see https://tailwindcss.com/docs/installation
+      //        */
+      //       '@tailwindcss/postcss',
       //       /**
       //        * @summary autoprefixer 插件
       //        * @see https://github.com/postcss/autoprefixer
