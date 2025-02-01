@@ -144,7 +144,7 @@ export class AppServer {
         module.id,
         'Server Listen',
         true,
-        `Static source - ${this._option.path}: ${this._option.port}`
+        `Static source - ${this._option.path} - port: ${this._option.port}`
       );
     }); // 监听端口
     this._server.on('error', handleError);

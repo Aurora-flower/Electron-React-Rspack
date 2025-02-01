@@ -27,6 +27,19 @@
       "description": {},
       "changed": []
     },
+    "@tailwindcss/cli": {
+      "version": "^4.0.3",
+      "description": {},
+      "changed": []
+    },
+    "@tailwindcss/postcss": {
+      "version": "^4.0.1",
+      "description": {
+        "summary": "postcss 插件，用于为 CSS 添加浏览器前缀。",
+        "comment": "tailwindcss 的 PostCSS 插件已经移动到一个单独的包 @tailwindcss/postcss"
+      },
+      "changed": []
+    },
     "@eslint/js": {
       "version": "^9.18.0",
       "description": {},
@@ -71,6 +84,11 @@
     },
     "asar": {
       "version": "^3.2.0",
+      "description": {},
+      "changed": []
+    },
+    "autoprefixer": {
+      "version": "^10.4.20",
       "description": {},
       "changed": []
     },
@@ -205,6 +223,11 @@
     },
     "rimraf": {
       "version": "^6.0.1",
+      "description": {},
+      "changed": []
+    },
+    "tailwindcss": {
+      "version": "^4.0.1",
       "description": {},
       "changed": []
     },

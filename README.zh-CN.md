@@ -76,7 +76,9 @@
 
     ```shell
     npm install animate.css
-    npm install --save-dev tailwindcss
+    npm install --save-dev postcss
+    npm install --save-dev autoprefixer
+    npm install --save-dev tailwindcss @tailwindcss/postcss @tailwindcss/cli
     ```
 
 > 2D 渲染库
