@@ -79,10 +79,12 @@ const safeDOM = {
  * @see {@link https://matejkustec.github.io/SpinThatShit 加载动画示例-SpinThatShit}
  */
 function useLoading() {
-  const containerId = `loaders-css__square-spin`;
+  const containerId = `loader`;
   const oDiv = document.createElement('div');
   oDiv.className = 'app-loading-wrap';
-  oDiv.innerHTML = `<div id="${containerId}"><div></div></div>`;
+  oDiv.innerHTML = `<div id="${containerId}">
+    <div class="loader-container"></div>
+  </div>`;
   return {
     appendLoading() {
       const root = document.body.querySelector('#root');
