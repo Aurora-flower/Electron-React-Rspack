@@ -1,17 +1,17 @@
 /**
  * @file 应用准备就绪时的处理
  */
-import { app } from 'electron';
-import { join } from 'node:path';
+import { homedir } from 'node:os';
 import { debugLog } from '@/common/log';
 import { Environment } from '@/common/constant';
 import { createWindow } from '@/electron/helper';
 import { getWebUrl } from '@/electron/server/helper';
+import { loadExtension } from '@/electron/handler/loadExtension';
+import { windowOptions } from '@/electron/handler/windowOptions';
+
 // const CWD = process.cwd(); /*  当前工作目录 */
 const IsProd = process.env?.NODE_ENV === Environment.Prod;
 const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
-const AppAsar =
-  app.getAppPath(); /* 项目路径 - 打包后对应着的是 app.asar */
 
 /**
  * @event `ready`
@@ -32,24 +32,16 @@ const AppAsar =
  */
 export async function onAppReady() {
   try {
+    await loadExtension();
+
     const webURL = getWebUrl();
-    const windowOptions: Electron.BrowserWindowConstructorOptions =
-      {
-        width: 800,
-        height: 600,
-        webPreferences: {
-          preload: join(AppAsar, 'app/preload/index.js'),
-          nodeIntegration: false,
-          contextIsolation: true
-        }
-      };
 
     const params = {
       isRemote: true,
       debug: Boolean(process.env?.IS_DEBUG)
     };
     createWindow(webURL, windowOptions, params);
-    debugLog(ModuleID, 'onAppReady', IsProd);
+    debugLog(ModuleID, 'onAppReady', IsProd, homedir());
   } catch (error) {
     const msgTitle = 'Failed to start the application';
     const msg =

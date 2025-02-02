@@ -32,7 +32,8 @@ export function createWindow(
     params?.isRemote ? win.loadURL(url) : win.loadFile(url);
 
     /* 设置调试模式 */
-    params?.debug && win.webContents.openDevTools();
+    params?.debug &&
+      win.webContents.openDevTools({ mode: 'detach' });
 
     /* 设置最小尺寸 */
     if (params?.minize) {
