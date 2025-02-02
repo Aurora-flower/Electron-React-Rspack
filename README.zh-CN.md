@@ -23,7 +23,7 @@
 > 桌面应用程序
 
     ```shell
-    npm install electron --save-dev
+    npm install --save-dev electron
     ```
 
 > react:
@@ -33,7 +33,7 @@
     ```shell
     npm install react react-dom
 
-    npm install @types/react @types/react-dom --save-dev
+    npm install --save-dev @types/react @types/react-dom
     ```
 
 > eslint:

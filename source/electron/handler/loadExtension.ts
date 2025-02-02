@@ -1,6 +1,6 @@
 // import { join } from 'node:path';
-// import { session } from 'electron';
 import {
+  REDUX_DEVTOOLS,
   installExtension,
   REACT_DEVELOPER_TOOLS
 } from 'electron-devtools-installer';
@@ -13,15 +13,12 @@ export async function loadExtension() {
   // await session.defaultSession.loadExtension(
   //   reactDevToolsPath
   // );
-  await installExtension(REACT_DEVELOPER_TOOLS, {
-    loadExtensionOptions: { allowFileAccess: true }
-  })
-    .then(ext => console.log(`Added Extension: ${ext.name}`))
-    .catch(err => console.log('An error occurred: ', err));
-
-  // session.defaultSession.getAllExtensions().map(e => {
-  //   if (e.name === 'React Developer Tools') {
-  //     session.defaultSession.loadExtension(e.path);
-  //   }
-  // });
+  const extensions = [REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS];
+  for (const extension of extensions) {
+    await installExtension(extension, {
+      loadExtensionOptions: { allowFileAccess: true }
+    })
+      .then(ext => console.log(`Added Extension: ${ext.name}`))
+      .catch(err => console.log('An error occurred: ', err));
+  }
 }
