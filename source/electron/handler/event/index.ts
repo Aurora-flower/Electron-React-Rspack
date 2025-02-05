@@ -3,7 +3,7 @@
  */
 import { app } from 'electron';
 import { debugLog } from '@/common/helper/log';
-import { onAppReady } from '@/electron/handler/onAppReady';
+import onAppReady from '@/electron/handler/onAppReady';
 import onAppReadyAfter from '@/electron/handler/onAppReadyAfter';
 import onAppReadyBefore from '@/electron/handler/onAppReadyBefore';
 

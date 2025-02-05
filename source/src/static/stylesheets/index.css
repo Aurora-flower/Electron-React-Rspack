@@ -10,9 +10,14 @@
 @import url('./vendor.css');
 @import url('./loading.css');
 
-body {
+body #root .root-wrapper {
+  width: 100vw;
+  height: 100vh;
+  font: 600 14px var(--font-family);
+
   /* 禁止用户选择文本 */
   user-select: none;
-  app-region: drag;
-  font: 600 14px var(--font-family);
+
+  /* Electron 应用中用于指定可拖动窗口的区域的自定义属性。 drag | no-drag */
+  /* app-region: no-drag; */
 }

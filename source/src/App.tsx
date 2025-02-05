@@ -5,6 +5,7 @@
 import * as React from 'react';
 import { Icon } from '@iconify/react';
 import { createRoot } from 'react-dom/client';
+import { appMenuAction } from '@/src/helpers';
 import { debugLog } from '@/common/helper/log';
 
 /**
@@ -16,7 +17,7 @@ function App() {
     'text-3xl font-bold underline bg-red-200'
   );
 
-  // 使用 useEffect 来处理副作用（如定时器）
+  /* 使用 useEffect 来处理副作用（如定时器） */
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setBaseStyles(
@@ -25,7 +26,7 @@ function App() {
       );
     }, 4000);
 
-    // 清理定时器
+    /* 清理定时器 */
     return () => clearTimeout(timer);
   }, []);
 
@@ -34,6 +35,18 @@ function App() {
       <div className='root-wrapper'>
         <div className={baseStyles}>应用程序</div>
         <Icon icon='medical-icon:gift-shop'></Icon>
+        <button
+          className='menu-item'
+          data-action='open'
+          onClick={appMenuAction}>
+          打开文件
+        </button>
+        <button
+          className='menu-item'
+          data-action='debug'
+          onClick={appMenuAction}>
+          调试工具
+        </button>
       </div>
     </React.StrictMode>
   );

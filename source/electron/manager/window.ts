@@ -22,10 +22,9 @@ export class WindowManager {
   private constructor(
     mainWindow?: Electron.BrowserWindow | Electron.BaseWindow
   ) {
-    if (!mainWindow) {
-      return;
+    if (mainWindow) {
+      this.mainWindow = mainWindow;
     }
-    this.mainWindow = mainWindow;
   }
 
   public addWindow(
@@ -33,6 +32,7 @@ export class WindowManager {
     name: string,
     isMainWindow: boolean = false
   ): void {
+    /* 重置 mainWindow */
     if (isMainWindow) {
       this.mainWindow = window;
     } else {

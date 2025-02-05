@@ -6,8 +6,8 @@ import Helper from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 import { Environment } from '@/common/constant';
 import { getWebUrl } from '@/electron/server/helper';
+import { windowOptions } from '@/electron/config/options';
 import { loadExtension } from '@/electron/handler/loadExtension';
-import { windowOptions } from '@/electron/handler/windowOptions';
 
 // const CWD = process.cwd(); /*  当前工作目录 */
 const IsProd = process.env?.NODE_ENV === Environment.Prod;
@@ -30,13 +30,15 @@ const ModuleID = module.id; /*  当前模块的 id - 模块路径 */
  * - 替代了 `app.on('ready', ()=>{})` 的用法
  * - 在 `will-finish-launching` 之后，`ready` 事件将触发。
  */
-export async function onAppReady() {
+async function onAppReady() {
   try {
     await loadExtension();
-
     const webURL = getWebUrl();
-
-    const params = {
+    const params: MainProcess.WindowParams = {
+      minize: {
+        width: 800,
+        height: 600
+      },
       isRemote: true,
       debug: Boolean(process.env?.IS_DEBUG)
     };
@@ -52,3 +54,5 @@ export async function onAppReady() {
     debugLog(ModuleID, 'onAppReady', true, msgTitle, msg);
   }
 }
+
+export default onAppReady;
