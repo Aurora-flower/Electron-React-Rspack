@@ -1,5 +1,5 @@
 /**
- * @summary MIME 常见 MIME 类型 (Multipurpose Internet Mail Extensions)
+ * @summary MIME 常见类型 (Multipurpose Internet Mail Extensions)
  * @see {@link https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types MIME常见类型}
  */
 

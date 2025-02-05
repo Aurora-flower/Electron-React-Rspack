@@ -1,5 +1,36 @@
 import { debugLog } from '@/common/log';
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, BaseWindow } from 'electron';
+
+/**
+ * 获取窗口的个数
+ * @returns {number} 返回窗口的个数
+ */
+export function getWindowCount(): number {
+  return BrowserWindow.getAllWindows()?.length;
+}
+
+/**
+ * 获取当前聚焦的窗口
+ * @returns {BrowserWindow | BaseWindow} 返回当前聚焦的窗口实例
+ */
+export function getFocusedWindow():
+  | BrowserWindow
+  | BaseWindow
+  | null {
+  return BrowserWindow.getFocusedWindow();
+}
+
+/**
+ * 获取 webcontent 对应的窗口实例
+ * @param webContent webcontent 对象
+ * @returns {BrowserWindow} 返回 webcontent 对应的窗口实例
+ */
+export function getWebContentsWindow(
+  webContents: Electron.WebContents
+): BrowserWindow | null {
+  // BrowserWindow.getAllWindows().find(win => win.webContents.getURL() === url);
+  return BrowserWindow.fromWebContents(webContents);
+}
 
 /**
  * @summary 创建窗口
