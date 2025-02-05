@@ -54,7 +54,7 @@ export default [
       globals: { ...globals.browser, ...globals.node }
     },
     rules: {
-      /* ******************** 代码风格 ******************** */
+      /* ***** ***** ***** ***** 代码风格 ***** ***** ***** ***** */
       /* 强制使用分号 */
       'semi': ['error', 'always'],
 

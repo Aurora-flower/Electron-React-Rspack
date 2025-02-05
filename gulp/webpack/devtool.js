@@ -8,13 +8,13 @@
  * - 非 eval 类型：不使用 eval 方式生成 source maps。适合生产环境，文件较小但生成速度较慢。
  */
 const Devtool = {
-  /* ******************** eval 类型 ******************** */
+  /* ***** ***** ***** ***** eval 类型 ***** ***** ***** ***** */
   Eval: 'eval',
   EvalSourceMap: 'eval-source-map',
   EvalCheapSourceMap: 'eval-cheap-source-map',
   EvalCheapModuleSourceMap: 'eval-cheap-module-source-map',
 
-  /* ******************** 非 eval 类型 ******************** */
+  /* ***** ***** ***** ***** 非 eval 类型 ***** ***** ***** ***** */
   SourceMap: 'source-map',
   CheapSourceMap: 'cheap-source-map',
   CheapModuleSourceMap: 'cheap-module-source-map',

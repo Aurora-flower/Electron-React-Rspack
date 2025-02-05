@@ -11,7 +11,7 @@ const joinPath = require('../utils/joinpath');
 const { WebpakTarget } = require('./webpack-target');
 const { BuildingEnvironment } = require('./constant');
 
-/* *************** 目录与文件结构 *************** */
+/* ***** ***** ***** ***** 目录与文件结构 ***** ***** ***** ***** */
 
 /**
  * @summary 获取当前工作目录
@@ -123,7 +123,7 @@ const File = new Proxy(FileStructure, {
   }
 });
 
-/* *************** Webpack 构建配置 *************** */
+/* ***** ***** ***** ***** Webpack 构建配置 ***** ***** ***** ***** */
 
 /* 公共配置 */
 const baseExtensions = ['.js', '.ts', '.json'];

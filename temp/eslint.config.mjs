@@ -31,7 +31,7 @@ export default [
   pluginReact.configs.flat.recommended,
   {
     rules: {
-      /* ******************** 代码风格 ******************** */
+      /* ***** ***** ***** ***** 代码风格 ***** ***** ***** ***** */
       /* 强制使用分号 */
       'semi': ['error', 'always'],
 

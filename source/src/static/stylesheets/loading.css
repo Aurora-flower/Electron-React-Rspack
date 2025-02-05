@@ -1,4 +1,4 @@
-/* *********************** App 渲染加载 loading *********************** */
+/* ***** ***** ***** ***** App 渲染加载 loading ***** ***** ***** ***** */
 @keyframes loading-square-spin {
   25% {
     transform: perspective(100px) rotateX(180deg) rotateY(0);
