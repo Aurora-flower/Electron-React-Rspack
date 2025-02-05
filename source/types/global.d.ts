@@ -1,10 +1,11 @@
 /**
  *  @file 全局类型定义
  */
-import './common.d.ts';
-import './main/index.js';
-import './preload/index.js';
-import './renderer/index.js';
+import './main';
+import './shims';
+import './common';
+import './preload';
+import './renderer';
 // --- /// <reference path="./common.d.ts" />
 
 declare global {
@@ -15,6 +16,17 @@ declare global {
   // export namespace PreloadProcess {}
   /* ********************* 渲染进程的类型定义 ********************* */
   // export namespace RendererProcess {}
+  /**
+   * @summary （若是不安装 webpakc-env 的情况下，）解决使用 require.context 报错 Property 'context' does not exist on type 'NodeRequire' 的问题
+   */
+  // interface NodeRequire {
+  //   /** A special feature supported by webpack's compiler that allows you to get all matching modules starting from some base directory.  */
+  //   context: (
+  //     directory: string,
+  //     useSubdirectories: boolean,
+  //     regExp: RegExp
+  //   ) => any;
+  // }
 }
 
 export {};

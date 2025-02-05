@@ -30,6 +30,6 @@
     "experimentalDecorators": true,
     "jsxFactory": "React.createElement",
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./types/*", "../node_modules/@types/*"]
+    "typeRoots": ["./node_modules/@types"]
   }
 }
