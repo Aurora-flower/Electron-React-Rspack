@@ -72,5 +72,3 @@ export default function murmurhash2_32_gc(
 
   return h >>> 0;
 }
-
-console.log(murmurhash2_32_gc('HELLO', 32));

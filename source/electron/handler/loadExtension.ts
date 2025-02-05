@@ -4,6 +4,9 @@ import {
   installExtension,
   REACT_DEVELOPER_TOOLS
 } from 'electron-devtools-installer';
+import { debugLog } from '@/common/log';
+
+const ModuleID = module.id;
 
 export async function loadExtension() {
   // const reactDevToolsPath =
@@ -18,9 +21,16 @@ export async function loadExtension() {
     await installExtension(extension, {
       loadExtensionOptions: { allowFileAccess: true }
     })
-      .then(ext => console.log(`Added Extension: ${ext.name}`))
+      .then(res =>
+        debugLog(ModuleID, `Added Extension`, true, res.name)
+      )
       .catch(err =>
-        console.log('An error occurred: ', err?.message)
+        debugLog(
+          ModuleID,
+          'An error occurred',
+          true,
+          err?.message
+        )
       );
   }
 }

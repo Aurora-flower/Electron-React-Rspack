@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+// import { debugLog } from '@/common/log';
 
 export function joinPath(...paths: any[]) {
   try {
@@ -6,8 +7,8 @@ export function joinPath(...paths: any[]) {
     return process.platform == 'win32'
       ? base.replace(/\\/g, '/')
       : base.replace(/(?=\W+)\s+(?<=\W+)/g, '\\ ');
-  } catch (error) {
-    console.log(!!error);
+  } catch (error: any) {
+    // debugLog(module.id, 'joinPath', false, error?.message);
     return '';
   }
 }
