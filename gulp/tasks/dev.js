@@ -20,7 +20,7 @@ async function start(done) {
     await new Promise(resolve => {
       electronProcess.on('exit', () => {
         console.log(
-          '终止原 Electron 进程',
+          'Stop origin electron progress pid:',
           electronProcess?.pid
         );
         resolve();
@@ -34,13 +34,13 @@ async function start(done) {
 
   console.log('Electron running ...', electronProcess?.pid);
   electronProcess.on('close', code => {
-    console.log(`子进程退出，退出码 ${code}`);
+    console.log(`Subprogress Quit code: ${code}`);
     electronProcess = null;
     done(code);
   });
 
   electronProcess.on('error', err => {
-    console.error('启动 Electron 进程时出错:', err);
+    console.error('启动 Electron 进程时出错:', err?.message);
     done(err);
     // process.exit(1);
   });

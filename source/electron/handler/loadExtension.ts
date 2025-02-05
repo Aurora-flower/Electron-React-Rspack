@@ -19,6 +19,8 @@ export async function loadExtension() {
       loadExtensionOptions: { allowFileAccess: true }
     })
       .then(ext => console.log(`Added Extension: ${ext.name}`))
-      .catch(err => console.log('An error occurred: ', err));
+      .catch(err =>
+        console.log('An error occurred: ', err?.message)
+      );
   }
 }

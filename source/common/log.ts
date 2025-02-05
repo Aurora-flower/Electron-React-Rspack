@@ -21,7 +21,7 @@ export function debugLog(
     // 记录 main 进程的日志
     // const fs = require('node:fs');
     console.log(
-      '记录日志:',
+      'Record log:',
       process.env?.NODE_ENV,
       process.env?.IS_DEBUG
     );

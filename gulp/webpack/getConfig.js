@@ -226,7 +226,7 @@ const stats = {
 function get(type) {
   const mode =
     type || process.env?.NODE_ENV || BuildingEnvironment.Dev;
-  console.log('构建配置环境:', mode);
+  console.log('Compile env:', mode);
   const config = Object.entries(AppProcess).map(
     ([key, name]) => {
       const isRenderer = name === AppProcess.Renderer;

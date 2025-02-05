@@ -149,7 +149,7 @@ const CWD = process.cwd(); /* 当前工作目录  */
 //   });
 
 task('package', function (done) {
-  console.log('开始打包...', CWD);
+  console.log('Packing...', CWD);
 
   done();
 });

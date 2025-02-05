@@ -27,7 +27,7 @@ function compile(cd) {
   const webpackConfig = getConfig();
   const compiler = webpack(webpackConfig);
   compiler.run(function (_err, stats) {
-    console.log('构建信息:', findErrors(stats.toString()));
+    console.log('Compile info:', findErrors(stats.toString()));
     cd();
   });
 }
