@@ -9,15 +9,15 @@
  * - `Windows`: netstat -ano | findstr 59080
  */
 import { app } from 'electron';
+import { join } from 'node:path';
 import {
   getPort,
   checkConnection,
   getWebUrl,
   getHostname
 } from '@/electron/server/helper';
-import { debugLog } from '@/common/log';
+import { debugLog } from '@/common/helper/log';
 import { AppServer } from '@/electron/server/creator';
-import { join } from 'node:path';
 
 const AppAsar = app.getAppPath();
 

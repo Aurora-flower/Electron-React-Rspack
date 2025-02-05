@@ -2,10 +2,10 @@
  * @file 应用事件监听
  */
 import { app } from 'electron';
+import { debugLog } from '@/common/helper/log';
 import { onAppReady } from '@/electron/handler/onAppReady';
 import onAppReadyAfter from '@/electron/handler/onAppReadyAfter';
 import onAppReadyBefore from '@/electron/handler/onAppReadyBefore';
-import { debugLog } from '@/common/log';
 
 /* *********************** 应用事件监听(已启用) *********************** */
 

@@ -4,8 +4,8 @@
  */
 import * as React from 'react';
 import { Icon } from '@iconify/react';
-import { debugLog } from '@/common/log';
 import { createRoot } from 'react-dom/client';
+import { debugLog } from '@/common/helper/log';
 
 /**
  * @summary React 应用主组件

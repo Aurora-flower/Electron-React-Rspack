@@ -3,7 +3,7 @@
  */
 import { homedir } from 'node:os';
 import Helper from '@/electron/helper';
-import { debugLog } from '@/common/log';
+import { debugLog } from '@/common/helper/log';
 import { Environment } from '@/common/constant';
 import { getWebUrl } from '@/electron/server/helper';
 import { loadExtension } from '@/electron/handler/loadExtension';

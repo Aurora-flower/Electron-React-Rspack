@@ -8,7 +8,7 @@
  */
 // import { contextBridge, ipcRenderer } from 'electron';
 
-import { debugLog } from '@/common/log';
+import { debugLog } from '@/common/helper/log';
 
 /**
  * @summary

@@ -1,4 +1,4 @@
-import { debugLog } from '@/common/log';
+import { debugLog } from '@/common/helper/log';
 
 /**
  * 服务器错误处理

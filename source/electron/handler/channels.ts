@@ -5,7 +5,7 @@
  * 由于主进程和渲染进程是两个不同的进程，彼此之间不能直接共享数据，因此需要使用 IPC 来交换信息。
  */
 
-import { debugLog } from '@/common/log';
+import { debugLog } from '@/common/helper/log';
 
 // TODO: 定义好事件的传参与处理逻辑 - 事件分发
 
