@@ -16,6 +16,8 @@
 
     ```shell
     npm install --save-dev node ts-node
+
+    npm install --save-dev @types/node
     ```
 
 > electron:
@@ -123,6 +125,8 @@
 
     npm install --save-dev dotenv-webpack
 
+    # types
+    npm install --save-dev @types/webpack-env
     ```
 
 > koa & express

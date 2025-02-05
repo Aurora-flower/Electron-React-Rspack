@@ -50,6 +50,16 @@
       "description": {},
       "changed": []
     },
+    "@types/node": {
+      "version": "^22.13.1",
+      "description": {},
+      "changed": []
+    },
+    "@types/webpack-env": {
+      "version": "^1.18.8",
+      "description": {},
+      "changed": []
+    },
     "@types/koa": {
       "version": "^2.15.0",
       "description": {},
