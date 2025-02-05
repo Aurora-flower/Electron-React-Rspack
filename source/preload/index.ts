@@ -56,7 +56,7 @@ function runtimeLoadHandle() {
 
 runtimeLoadHandle();
 
-// ********************* loading 加载 *********************
+/* ***** ***** ***** ***** loading 加载 ***** ***** ***** ***** */
 const safeDOM = {
   append(parent: HTMLElement, child: HTMLElement) {
     if (!Array.from(parent.children).find(e => e === child)) {

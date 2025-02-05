@@ -38,6 +38,9 @@ export function getWebContentsWindow(
  * @param {Electron.BrowserWindowConstructorOptions} options - 窗口配置
  * @param {MainProcess.WindowParams} params - 窗口参数
  * @returns {Electron.BrowserWindow} - 窗口实例
+ * @remarks
+ * - 在 app 模块 `emitted ready` 事件之前，不能使用此模块
+ * - BrowserWindow 类暴露了各种方法来修改应用窗口的外观和行为。
  */
 export function createWindow(
   url: string,
@@ -58,6 +61,24 @@ export function createWindow(
     }
 
     const win = new BrowserWindow(options);
+
+    /**
+     * @summary 用于优化窗口加载的视觉体验
+     * @remarks
+     *  - 触发时机:
+     *      当窗口的网页内容首次完成渲染（即 DOM 和样式已加载并准备好显示）时触发。此时窗口虽然已创建，但可能尚未显示。
+     *  - 核心用途:
+     *      避免窗口在加载过程中出现白屏或未渲染内容的闪烁现象。通过延迟窗口显示，直到内容完全准备好后再展示给用户。
+     *  - 对比其他事件:
+     *    - `ready-to-show`: 触发于窗口内容首次完成渲染, 用于优化显示时机，避免白屏；
+     *    - `did-finish-load`: 触发于页面资源（HTML/CSS/JS）加载完成, 用于执行与资源加载完成后的逻辑；
+     *    - `dom-ready`: 触发于DOM 解析完成（可能样式未渲染）, 用于操作 DOM 元素；
+     *  - 优先使用 once 而非 on
+     *      因为 ready-to-show 只需要触发一次（首次渲染完成），使用 win.once() 避免内存泄漏。
+     */
+    // win.once('ready-to-show', () => {
+    //   win.show(); /* 内容准备就绪后再显示窗口 */
+    // });
 
     /* 加载地址 */
     params?.isRemote ? win.loadURL(url) : win.loadFile(url);

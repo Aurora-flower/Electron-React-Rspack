@@ -190,7 +190,7 @@
 > 🟦 待定
 > 🟨 被 Git 忽略
 > 🟩 由代码运行环境生成
-> ♠ 输出目录
+> ⚠️ 输出目录
 
     ```text
     └─┬ .config                               项目配置目录
@@ -203,7 +203,7 @@
       ├── tasks.json                          vs code 任务配置文件 🟥
       ├── snippets.json                       vs code 片段配置文件 🟥
       └── workspace.json                      vs code 工作区配置文件 🟥
-    └─┬ app                                   构建编译输出目录 ♠
+    └─┬ app                                   构建编译输出目录 ⚠️
       ├── electron                            electron 运行目录
       ├── preload                             预加载进程运行目录
       └── public                              渲染进程运行目录
@@ -229,15 +229,15 @@
         └── shell                             用于存放 shell 脚本文件
           ├── bat                             用于存放 bat 脚本文件
           └── sh                              用于存放 sh 脚本文件
-      └─┬ private                           用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。 ⭐️
-        ├── ssl                             用于存放 `https` 协议所需要的证书文件
-        ├── temp                            用于存放临时文件
-        ├── .env.private                    隐私环境配置
-        └── secret.txt                      隐私文本
-      └─┬ resoures                          被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
-        ├── icon                            应用图标
-        ├── fonts                           应用字体
-        └── images                          应用图片
+      └─┬ private                             用于存放无法提供开源的隐私文件的目录，只会提供结构及生成方法。 ⭐️
+        ├── ssl                               用于存放 `https` 协议所需要的证书文件
+        ├── temp                              用于存放临时文件
+        ├── .env.private                      隐私环境配置
+        └── secret.txt                        隐私文本
+      └─┬ resoures                            被打包或引入编译的静态文件 (存放在 `app.asar.unpacked`)
+        ├── icon                              应用图标
+        ├── fonts                             应用字体
+        └── images                            应用图片
     ├── docs                                  用于记录某一类型的碎片化文档（未整理版本）
     └─┬ gen                                   用于生成文档、模版的目录 (polp 模板也存放在此目录下)
       ├── docs                                学习文档目录 🟥

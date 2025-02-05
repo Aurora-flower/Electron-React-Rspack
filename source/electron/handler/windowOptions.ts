@@ -4,10 +4,33 @@ import { join } from 'node:path';
 const AppAsar =
   app.getAppPath(); /* 项目路径 - 打包后对应着的是 app.asar */
 
+/**
+ * @summary 窗口选项
+ * @remarks
+ * - 父子窗口：
+ *   通过使用 parent 选项创建子窗口，子窗口将总是显示在父窗口的顶部
+ * - 模态窗口：
+ *   模态窗口是禁用父窗口的子窗口。 要创建模态窗口，必须同时设置 parent 和 modal 属性
+ */
 export const windowOptions: Electron.BrowserWindowConstructorOptions =
   {
+    /* 窗口的尺寸 */
     width: 800,
     height: 600,
+
+    /* 窗口是否可见 - 搭配 ready-to-show 事件使用，用于优化显示时机，避免白屏 */
+    // show: false,
+
+    /* 最初隐藏时绘制 */
+    // paintWhenInitiallyHidden: true,
+
+    /* 窗口是否无边框 */
+    frame: false,
+
+    /* 窗口是否透明 */
+    // transparent: true,
+
+    /* 窗口首选项 */
     webPreferences: {
       /* 预加载脚本 */
       preload: join(AppAsar, 'app/preload/index.js'),
@@ -32,10 +55,13 @@ export const windowOptions: Electron.BrowserWindowConstructorOptions =
 
       /* 允许运行不安全内容 */
       // allowRunningInsecureContent: false,
+
       /* 控制沙盒模式 */
       // sandbox: true,
+
       /* 启用离屏渲染 */
       // offscreen: true,
+
       /* 启用 webview 标签 - 重要提示： 不建议使用 WebView，因为这个标签会发生剧烈的结构变化，可能会影响应用程序的稳定性。 */
       // webviewTag: false,
     }

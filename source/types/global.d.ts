@@ -10,11 +10,11 @@ import './renderer';
 
 declare global {
   // interface Window {}
-  /* ********************* 主进程的类型定义 ********************* */
+  /* ***** ***** ***** ***** 主进程的类型定义 ***** ***** ***** ***** */
   // export namespace MainProcess {}
-  /* ********************* 预加载进程的类型定义 ********************* */
+  /* ***** ***** ***** ***** 预加载进程的类型定义 ***** ***** ***** ***** */
   // export namespace PreloadProcess {}
-  /* ********************* 渲染进程的类型定义 ********************* */
+  /* ***** ***** ***** ***** 渲染进程的类型定义 ***** ***** ***** ***** */
   // export namespace RendererProcess {}
   /**
    * @summary （若是不安装 webpakc-env 的情况下，）解决使用 require.context 报错 Property 'context' does not exist on type 'NodeRequire' 的问题

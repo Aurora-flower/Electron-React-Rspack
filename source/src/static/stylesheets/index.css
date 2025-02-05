@@ -11,5 +11,8 @@
 @import url('./loading.css');
 
 body {
+  /* 禁止用户选择文本 */
+  user-select: none;
+  app-region: drag;
   font: 600 14px var(--font-family);
 }
