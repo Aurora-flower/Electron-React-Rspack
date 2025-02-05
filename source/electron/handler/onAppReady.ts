@@ -2,9 +2,9 @@
  * @file 应用准备就绪时的处理
  */
 import { homedir } from 'node:os';
+import Helper from '@/electron/helper';
 import { debugLog } from '@/common/log';
 import { Environment } from '@/common/constant';
-import { createWindow } from '@/electron/helper';
 import { getWebUrl } from '@/electron/server/helper';
 import { loadExtension } from '@/electron/handler/loadExtension';
 import { windowOptions } from '@/electron/handler/windowOptions';
@@ -40,7 +40,7 @@ export async function onAppReady() {
       isRemote: true,
       debug: Boolean(process.env?.IS_DEBUG)
     };
-    createWindow(webURL, windowOptions, params);
+    Helper.createWindow(webURL, windowOptions, params);
     debugLog(ModuleID, 'onAppReady', IsProd, homedir());
   } catch (error) {
     const msgTitle = 'Failed to start the application';
