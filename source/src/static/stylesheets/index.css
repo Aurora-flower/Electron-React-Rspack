@@ -10,7 +10,7 @@
 @import url('./vendor.css');
 @import url('./loading.css');
 
-body #root .root-wrapper {
+body {
   width: 100vw;
   height: 100vh;
   font: 600 14px var(--font-family);
@@ -20,4 +20,14 @@ body #root .root-wrapper {
 
   /* Electron 应用中用于指定可拖动窗口的区域的自定义属性。 drag | no-drag */
   app-region: drag;
+
+  /* background-color: transparent; */
+  /* background-color: rgba(0, 0, 0, 0); */
+}
+
+#root,
+.root-wrapper {
+  width: 100%;
+  height: 100%;
+  /* app-region: no-drag; */
 }

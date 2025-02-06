@@ -108,6 +108,9 @@ export default [
 
       /* 无效 转义 */
       'no-useless-escape': 'warn'
+
+      /* 允许使用 rest 参数 */
+      // 'prefer-rest-params'
     }
   }
 ];

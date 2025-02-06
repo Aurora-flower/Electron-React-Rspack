@@ -16,13 +16,15 @@ function ready() {
   onAppReadyBefore();
   app
     .whenReady()
-    .then(onAppReady)
+    .then(() => {
+      onAppReady();
+    })
+    .finally(onAppReadyAfter)
     .catch(reason => {
       debugLog(module.id, 'readyError', true, reason);
-    })
-    .finally(onAppReadyAfter);
+    });
 }
 
-export function AppEventListeners() {
+export function onAppEventListeners() {
   ready();
 }

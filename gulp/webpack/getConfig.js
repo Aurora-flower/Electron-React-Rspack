@@ -91,8 +91,9 @@ const Directory = new Proxy(DirectoryStructure, {
 const FileStructure = {
   Env: '.env',
   DevEnv: '.env.dev',
-  ProdEnv: '.env.prod',
   Page: 'index.html',
+  ProdEnv: '.env.prod',
+  Favicon: 'favicon.ico',
   Package: 'package.json'
 };
 
@@ -113,7 +114,7 @@ const File = new Proxy(FileStructure, {
       return getFileTrend(Directory.Config, '', name);
     } else if (key === 'Package') {
       return getFileTrend(CWD, Directory.Gen.template, name);
-    } else if (key === 'Page') {
+    } else if (['Page', 'Favicon'].includes(key)) {
       return getFileTrend(
         Directory.Public,
         Directory.App.renderer,
@@ -286,8 +287,16 @@ function get(type) {
             //   to: joinPath(FolderPath.App, 'core')
             // },
             // Tip: 放在打包输出的时候执行
+
+            /* package.json */
             {
               ...File.Package,
+              toType: 'file'
+            },
+
+            /* favicon.ico */
+            {
+              ...File.Favicon,
               toType: 'file'
             }
           ]),

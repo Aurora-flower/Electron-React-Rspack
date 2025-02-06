@@ -1,9 +1,8 @@
 /**
  * @file 开发运行任务
  * @description
- * 1. 存在问题：
- * 当我窗口都关闭时，dev 任务仍然是在进行中的；
- * 如果实现去中止掉任务，则会在重新启动时导致监听结束；
+ * - 局限性:
+ *
  */
 const electron = require('electron');
 const { clean, compile } = require('./compile');
@@ -36,8 +35,8 @@ async function start(done) {
   electronProcess.on('close', code => {
     console.log(`Subprogress Quit code: ${code}`);
     electronProcess = null;
-    done(code);
-    process.exit(code);
+    done(code || 0);
+    process.exit(code || 0);
   });
 
   electronProcess.on('error', err => {

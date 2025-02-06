@@ -55,7 +55,8 @@ function App() {
 
 /**
  * @summary 渲染 React 应用
- * @remarks 应用使用了 React.StrictMode，那么在开发环境下，
+ * @remarks
+ * 应用使用了 React.StrictMode，那么在开发环境下，
  * React 会对每一个组件执行两次渲染以帮助开发者发现潜在的问题，比如副作用的清理问题。
  */
 function AppRender() {

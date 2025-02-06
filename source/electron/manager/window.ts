@@ -1,7 +1,7 @@
 /**
  * @file 用于存储窗口实例，方便对窗口的管理
  */
-export class WindowManager {
+class WindowManager {
   public mainWindow:
     | Electron.BrowserWindow
     | Electron.BaseWindow
@@ -50,3 +50,5 @@ export class WindowManager {
     this.windows.delete(name);
   }
 }
+
+export default WindowManager;

@@ -19,6 +19,12 @@ const AppAsar =
  */
 export const windowOptions: Electron.BrowserWindowConstructorOptions =
   {
+    /* 窗口标题 - 默认为应用名称 | html 的 title 标签的内容 | package.json 的 name */
+    // title: '花楹一间',
+
+    /* 应用图标 */
+    icon: join(AppAsar, 'app/public/favicon.ico'),
+
     /* 窗口的尺寸 */
     // width: 800,
     // height: 600,
