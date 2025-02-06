@@ -19,5 +19,5 @@ body #root .root-wrapper {
   user-select: none;
 
   /* Electron 应用中用于指定可拖动窗口的区域的自定义属性。 drag | no-drag */
-  /* app-region: no-drag; */
+  app-region: drag;
 }

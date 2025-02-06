@@ -37,6 +37,7 @@ async function start(done) {
     console.log(`Subprogress Quit code: ${code}`);
     electronProcess = null;
     done(code);
+    process.exit(code);
   });
 
   electronProcess.on('error', err => {
@@ -47,7 +48,7 @@ async function start(done) {
 }
 
 // exports.dev = function () {};
-task('dev', function () {
+task('dev', async function () {
   const options = {
     cwd: process.cwd()
   };
@@ -59,6 +60,7 @@ task('dev', function () {
     [
       'public/**/*',
       'source/**/*',
+      'source/preload/**/*',
       `!${mainSource}`,
       'postcss.config.*',
       'tailwind.config.js'
@@ -69,7 +71,7 @@ task('dev', function () {
 
   /* 监听主进程相关文件变化，并重新启动 Electron */
   watch(
-    [mainSource, 'source/preload/**/*'],
+    [mainSource],
     { ignoreInitial: false, ...options },
     series(clean, compile, start)
   );

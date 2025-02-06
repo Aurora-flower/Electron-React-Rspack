@@ -23,12 +23,15 @@ function findErrors(log) {
   return matches;
 }
 
-function compile(cd) {
-  const webpackConfig = getConfig();
-  const compiler = webpack(webpackConfig);
-  compiler.run(function (_err, stats) {
-    console.log('Compile info:', findErrors(stats.toString()));
-    cd();
+async function compile(cd) {
+  return new Promise(resolve => {
+    const webpackConfig = getConfig();
+    const compiler = webpack(webpackConfig);
+    compiler.run(function (_err, stats) {
+      console.log('Compile info:', findErrors(stats.toString()));
+      cd();
+      resolve();
+    });
   });
 }
 
