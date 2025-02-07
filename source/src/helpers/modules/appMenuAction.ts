@@ -5,10 +5,22 @@ import { debugLog } from '@/common/helper/log';
  * @param ev 点击事件
  */
 export function appMenuAction(
-  ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ev: React.MouseEvent<HTMLElement, MouseEvent>
 ) {
-  const action =
-    ev.currentTarget.dataset
-      .action; /* .getAttribute('data-action') */
-  debugLog(module.id, 'customMenuAction', false, action);
+  /**
+   * @summary 获取自定义菜单的 action 属性的方式
+   * @description
+   * - (ev.target as HTMLElement).dataset.action --- 仅非
+   * - (ev.target as HTMLElement).getAttribute('data-action')
+   */
+  const action = (ev.target as HTMLElement).getAttribute(
+    'data-action'
+  );
+  debugLog(
+    module.id,
+    'customMenuAction',
+    false,
+    action,
+    (ev.target as HTMLElement).dataset.action
+  );
 }

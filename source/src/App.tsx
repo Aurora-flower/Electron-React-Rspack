@@ -35,18 +35,18 @@ function App() {
       <div className='root-wrapper'>
         <div className={baseStyles}>应用程序</div>
         <Icon icon='medical-icon:gift-shop'></Icon>
-        <button
-          className='menu-item'
-          data-action='open'
-          onClick={appMenuAction}>
-          打开文件
-        </button>
-        <button
-          className='menu-item'
-          data-action='debug'
-          onClick={appMenuAction}>
-          调试工具
-        </button>
+        <div onClick={appMenuAction}>
+          <button
+            className='menu-item'
+            data-action='open'>
+            打开文件
+          </button>
+          <button
+            className='menu-item'
+            data-action='debug'>
+            调试工具
+          </button>
+        </div>
       </div>
     </React.StrictMode>
   );
