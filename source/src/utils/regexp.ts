@@ -1,10 +1,8 @@
 /**
  * @file RegExp 相关
  * @descript
- * RegExp 是 JavaScript 的正则表达式对象，用于操作正则表达式。
- * @remarks
  * `RegExp` 是 JavaScript 的内置对象，用于处理正则表达式，它在浏览器环境和 Node.js 中都可用。
- *
+ * @remarks
  * 1. 字符类
  * [abc]: 匹配单个字符，可以是 a、b 或 c 中的一个。
  * [^abc]: 匹配单个字符，除了 a、b 或 c 之外的任意字符。

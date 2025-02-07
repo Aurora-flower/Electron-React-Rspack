@@ -73,7 +73,7 @@ export const windowOptions: Electron.BrowserWindowConstructorOptions =
       /* 启用离屏渲染 */
       // offscreen: true,
 
-      /* 启用 webview 标签 - 重要提示： 不建议使用 WebView，因为这个标签会发生剧烈的结构变化，可能会影响应用程序的稳定性。 */
+      /* 启用 webview 标签 - 注意📢： 不建议使用 WebView，因为这个标签会发生剧烈的结构变化，可能会影响应用程序的稳定性。 */
       // webviewTag: false,
     }
   };

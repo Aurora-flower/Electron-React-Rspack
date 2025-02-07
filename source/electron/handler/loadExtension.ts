@@ -10,7 +10,7 @@ import { debugLog } from '@/common/helper/log';
 const ModuleID = module.id;
 
 export async function loadExtension() {
-  // Tip: windows 下会一直尝试安装，但最终还是安装不成功，很久之后才启动应用；
+  // 注意📢: windows 下会一直尝试安装，但最终还是安装不成功，很久之后才启动应用；
   if (Helper.isWin()) {
     return;
   }

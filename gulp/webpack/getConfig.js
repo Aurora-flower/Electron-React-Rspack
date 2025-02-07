@@ -286,7 +286,7 @@ function get(type) {
             //   toType: 'dir',
             //   to: joinPath(FolderPath.App, 'core')
             // },
-            // Tip: 放在打包输出的时候执行
+            // 注意📢: 放在打包输出的时候执行
 
             /* package.json */
             {

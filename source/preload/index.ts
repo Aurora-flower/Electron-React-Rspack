@@ -34,7 +34,7 @@ import { debugLog } from '@/common/helper/log';
  * ```
  */
 function runtimeLoadHandle() {
-  // Tip: 对于现代 Web 开发，推荐使用 DOMContentLoaded 事件
+  // 注意📢: 对于现代 Web 开发，推荐使用 DOMContentLoaded 事件
   // window.onload = function () {
   //   console.log('Window loaded successfully!');
   // };

@@ -12,7 +12,7 @@ const css = {
   use: [
     /**
      * @summary
-     * Tip: 由于开启了 CSP 策略，所以需要使用 MiniCssExtractPlugin 提取 css, 替换掉 'style-loader'
+     * 注意📢: 由于开启了 CSP 策略，所以需要使用 MiniCssExtractPlugin 提取 css, 替换掉 'style-loader'
      * @see {@link https://github.com/webpack-contrib/mini-css-extract-plugin}
      */
     MiniCssExtractPlugin.loader,
@@ -36,7 +36,7 @@ const css = {
          * @summary 启用 CSS 模块功能
          * @description 启用 CSS 模块功能后，类名会自动加上哈希值，防止类名冲突。
          * CSS 模块是一种将 CSS 样式限制在局部作用域的方法，避免全局命名冲突。通过启用 modules，每个 CSS 类名都会被自动转换为唯一的标识符。
-         * Tip: 此处开启会影响到 animate.css 的动画效果
+         * 注意📢: 此处开启会影响到 animate.css 的动画效果
          */
         // modules: {
         //   localIdentName: '[name]__[local]__[hash:base64:5]'
