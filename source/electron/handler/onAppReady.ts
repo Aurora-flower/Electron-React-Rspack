@@ -40,7 +40,7 @@ async function onAppReady() {
         height: 600
       },
       isRemote: true,
-      debug: Boolean(process.env?.IS_DEBUG)
+      debug: process.env?.IS_DEBUG === 'true'
     };
     Helper.createWindow(webURL, windowOptions, params);
     debugLog(ModuleID, 'onAppReady', IsProd, homedir());

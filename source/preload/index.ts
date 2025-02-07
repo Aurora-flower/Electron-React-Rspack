@@ -40,7 +40,14 @@ function runtimeLoadHandle() {
   // };
 
   document.addEventListener('DOMContentLoaded', () => {
-    debugLog(module.id, 'Document-DOMContentLoaded', false);
+    debugLog(
+      module.id,
+      'Document-DOMContentLoaded',
+      false,
+      process.env.NODE_ENV,
+      process.env.IS_DEBUG,
+      process.env?.IS_RECORD_LOG
+    );
 
     // 鼠标穿透 - 在 macOS | Windows 平台上转发鼠标事件
     // const el = document.getElementById('clickThroughElement')

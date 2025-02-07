@@ -57,10 +57,12 @@ task('dev', async function () {
   /* 监听文件变化，并重新编译 */
   watch(
     [
+      '.config/**/*',
       'public/**/*',
       'source/**/*',
       'source/preload/**/*',
       `!${mainSource}`,
+      `!source/common/helper/log.ts`,
       'postcss.config.*',
       'tailwind.config.js'
     ],
@@ -70,7 +72,7 @@ task('dev', async function () {
 
   /* 监听主进程相关文件变化，并重新启动 Electron */
   watch(
-    [mainSource],
+    [mainSource, 'source/common/helper/log.ts'],
     { ignoreInitial: false, ...options },
     series(clean, compile, start)
   );

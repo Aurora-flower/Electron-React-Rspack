@@ -70,7 +70,7 @@ function AppRender() {
 
   /** render 渲染，挂载到根元素 */
   createRoot(rootElement).render(<App />);
-  debugLog(module.id, 'render', false, name);
+  debugLog(module.id, 'Render', false);
 }
 
 AppRender();

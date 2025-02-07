@@ -1,28 +1,28 @@
 /**
  * @file 执行编译任务
  */
-const { task, series } = require('gulp');
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
+const { task, series } = require('gulp');
 const getConfig = require('../webpack/getConfig');
 
 async function clean(cb) {
   // await rimraf('./app');
-  await rimraf('./app/electron');
-  await rimraf('./app/preload');
-  await rimraf('./app/public');
-  cb();
+  await rimraf([
+    './app/node_modules',
+    './app/electron',
+    './app/preload',
+    './app/public'
+  ]).finally(cb);
 }
 
 function findErrors(log) {
   const regex = /ERROR.*/g;
   const matches = [];
   let match;
-
   while ((match = regex.exec(log)) !== null) {
     matches.push(match[0]);
   }
-
   return matches;
 }
 
