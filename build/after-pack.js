@@ -3,7 +3,7 @@
  * @description 现在是只有对 app/core 目录进行移动
  */
 
-const { moveDir } = require('./file');
+const { moveDir } = require('./utils/file');
 
 exports.default = function () {
   // const folder = joinPath(process.cwd(), 'core');
