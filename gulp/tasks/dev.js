@@ -36,7 +36,7 @@ async function start(done) {
     console.log(`Subprogress Quit code: ${code}`);
     electronProcess = null;
     done(code || 0);
-    process.exit(code || 0);
+    // process.exit(code || 0);
   });
 
   electronProcess.on('error', err => {

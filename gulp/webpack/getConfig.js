@@ -289,10 +289,10 @@ function get(type) {
             // 注意📢: 放在打包输出的时候执行
 
             /* package.json */
-            {
-              ...File.Package,
-              toType: 'file'
-            },
+            // {
+            //   ...File.Package,
+            //   toType: 'file'
+            // },
 
             /* favicon.ico */
             {

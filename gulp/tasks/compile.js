@@ -7,7 +7,10 @@ const { rimraf } = require('rimraf');
 const getConfig = require('../webpack/getConfig');
 
 async function clean(cb) {
-  await rimraf('./app');
+  // await rimraf('./app');
+  await rimraf('./app/electron');
+  await rimraf('./app/preload');
+  await rimraf('./app/public');
   cb();
 }
 

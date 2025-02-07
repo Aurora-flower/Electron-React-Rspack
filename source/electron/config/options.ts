@@ -1,13 +1,9 @@
 /**
  * @file 常用的配置项
  */
+import Helper from '@/electron/helper';
 
-import { app } from 'electron';
-import { join } from 'node:path';
-import { isWin } from '@/electron/helper/modules/platform';
-
-const AppAsar =
-  app.getAppPath(); /* 项目路径 - 打包后对应着的是 app.asar */
+const { isWin, getAppAsarOutput } = Helper;
 
 /**
  * @summary 窗口默认配置项
@@ -23,7 +19,7 @@ export const windowOptions: Electron.BrowserWindowConstructorOptions =
     // title: '花楹一间',
 
     /* 应用图标 */
-    icon: join(AppAsar, 'app/public/favicon.ico'),
+    icon: getAppAsarOutput('public/favicon.ico'),
 
     /* 窗口的尺寸 */
     // width: 800,
@@ -44,7 +40,7 @@ export const windowOptions: Electron.BrowserWindowConstructorOptions =
     /* 窗口首选项 */
     webPreferences: {
       /* 预加载脚本 */
-      preload: join(AppAsar, 'app/preload/index.js'),
+      preload: getAppAsarOutput('preload/index.js'),
 
       /* 启用 Node.js 的集成 */
       nodeIntegration: false,

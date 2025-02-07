@@ -8,19 +8,15 @@
  * - `Mac`: lsof -i:59080
  * - `Windows`: netstat -ano | findstr 59080
  */
-import { app } from 'electron';
-import { join } from 'node:path';
 import {
   getPort,
   checkConnection,
   getWebUrl,
   getHostname
 } from '@/electron/server/helper';
+import Helper from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 import { AppServer } from '@/electron/server/creator';
-
-const AppAsar = app.getAppPath();
-
 export async function startServer(isSafe: boolean = false) {
   const port = getPort();
   const webUrl = getWebUrl(isSafe);
@@ -35,7 +31,7 @@ export async function startServer(isSafe: boolean = false) {
     isSafe: false,
     hostname: getHostname(),
     port: getPort(),
-    path: join(AppAsar, 'app/public')
+    path: Helper.getAppAsarOutput('public')
   });
   await server.start();
   debugLog(module.id, 'startServer', true, connect, isSafe);

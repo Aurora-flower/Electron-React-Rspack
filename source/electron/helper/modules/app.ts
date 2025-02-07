@@ -3,7 +3,7 @@
  * @description app 模块相关事件处理函数。
  */
 import { app } from 'electron';
-
+import { join } from 'node:path';
 /**
  * 获取 app 模块的属性值。
  * @description
@@ -77,4 +77,16 @@ export function routineFeature<T>(
   return () => {
     app.off(eventName as any, Listener);
   };
+}
+
+/**
+ * 获取输出路径
+ * @param path 输出路径
+ * @returns 输出路径
+ */
+export function getAppAsarOutput(path: string) {
+  const AppAsar =
+    app.getAppPath(); /* 项目路径 - 打包后对应着的是 app.asar */
+  const baseOutput = app.isPackaged ? '' : 'app';
+  return join(AppAsar, baseOutput, path);
 }
