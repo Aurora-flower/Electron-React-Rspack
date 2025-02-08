@@ -3,7 +3,9 @@
  * @description app 模块相关事件处理函数。
  */
 import { app } from 'electron';
-import { join } from 'node:path';
+import { sep, join } from 'node:path';
+import { getPlatform } from './platform';
+
 /**
  * 获取 app 模块的属性值。
  * @description
@@ -89,4 +91,60 @@ export function getAppAsarOutput(path: string) {
     app.getAppPath(); /* 项目路径 - 打包后对应着的是 app.asar */
   const baseOutput = app.isPackaged ? '' : 'app';
   return join(AppAsar, baseOutput, path);
+}
+
+/**
+ * 获取应用程序相关路径信息
+ * @returns 应用路径
+ */
+export function getAppPaths(): Record<string, string | boolean> {
+  try {
+    const paths: {
+      [key: string]: string | boolean;
+    } = {
+      /* 是否打包 */
+      packaged: app.isPackaged,
+
+      /* 文件路径分隔符 */
+      sep,
+
+      /* 系统平台 */
+      platform: getPlatform()
+    };
+
+    const about: Array<MainProcess.PathNames> = [
+      'home', // 用户主目录
+      'appData', // 应用程序数据目录
+      'userData', // 用户数据目录
+      'sessionData', // 会话数据目录
+      'temp', // 临时文件目录
+      'exe', // 可执行文件目录
+      'module', // 模块目录
+      'desktop', // 桌面目录
+      'documents', // 文档目录
+      'downloads', // 下载目录
+      'music', // 音乐目录
+      'pictures', // 图片目录
+      'videos', // 视频目录
+      // 'recent', // 最近访问文件目录 - 仅限于 windows
+      'logs' // 日志文件目录
+      // 'crashDumps' // 系统崩溃转储文件目录
+    ];
+
+    for (let index = 0; index < about.length; index++) {
+      const name = about[index];
+      paths[name] = app.getPath(name);
+    }
+
+    // 自定义工作空间位置
+    paths.workspace = join(
+      paths.appData as string,
+      'com.huaying.app'
+    );
+
+    return paths;
+  } catch (error) {
+    console.error('getAppPath Error:', error);
+    return {};
+  }
 }

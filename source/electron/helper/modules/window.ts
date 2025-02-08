@@ -33,7 +33,7 @@ export function getWebContentsWindow(
 }
 
 /**
- * @summary 创建窗口
+ * 创建应用窗口
  * @param {string} url - 窗口地址
  * @param {Electron.BrowserWindowConstructorOptions} options - 窗口配置
  * @param {MainProcess.WindowParams} params - 窗口参数

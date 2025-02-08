@@ -9,6 +9,7 @@
 @import url('./media.css');
 @import url('./vendor.css');
 @import url('./loading.css');
+@import url('./scrollbar.css');
 
 body {
   width: 100vw;
