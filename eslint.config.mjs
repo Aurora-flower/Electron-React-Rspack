@@ -22,7 +22,8 @@ const ignores = [
   '**/test',
   '**/core',
   '**/app',
-  '**/gen'
+  '**/gen',
+  '**/docs/other'
 ];
 
 export default [
