@@ -6,6 +6,8 @@
   "scripts": {
     "test": "node . && exit 0 && echo \"running install\"",
     "start": "electron .",
+    "i:legacy": "npm install --legacy-peer-deps",
+    "i": "npm install --registry=https://registry.npmjs.org/",
     "preinstall": "npm outdated",
     "check:out": "npm outdated",
     "clean:npm": "npm cache clean --force",
