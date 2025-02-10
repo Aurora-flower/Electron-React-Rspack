@@ -7,13 +7,14 @@ const { task, series } = require('gulp');
 const getConfig = require('../webpack/getConfig');
 
 async function clean(cb) {
-  // await rimraf('./app');
-  await rimraf([
-    './app/node_modules',
-    './app/electron',
-    './app/preload',
-    './app/public'
-  ]).finally(cb);
+  rimraf('./app').then(cb);
+
+  // await rimraf([
+  //   './app/node_modules',
+  //   './app/electron',
+  //   './app/preload',
+  //   './app/public'
+  // ]).finally(cb);
 }
 
 function findErrors(log) {
