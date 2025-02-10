@@ -17,10 +17,10 @@
  *    watch() 函数接受一个或多个文件路径，返回一个任务函数，该任务函数将监视这些文件，并调用相应的任务函数。
  *    允许在发生更改时监视全局并运行任务。任务与任务系统的其余部分统一处理。
  */
-const Dev = require('./gulp/tasks/dev');
-const Debug = require('./gulp/tasks/debug');
-const Compile = require('./gulp/tasks/compile');
-const Package = require('./gulp/tasks/package');
+const Dev = require('./tasks/dev');
+const Debug = require('./tasks/debug');
+const Compile = require('./tasks/compile');
+const Package = require('./tasks/package');
 
 module.exports = {
   Dev,
