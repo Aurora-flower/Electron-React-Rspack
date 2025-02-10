@@ -11,6 +11,27 @@ declare namespace MainProcess {
     | 'userAgentFallback'
     | 'runningUnderARM64Translation';
 
+  /**
+   * @summary app.getPath 应用路径支持的类型
+   * @see {@link https://www.electronjs.org/docs/helper/app#appgetpathname | Electron App getPath}
+   */
+  export type PathNames =
+    | 'home'
+    | 'appData'
+    | 'userData'
+    | 'sessionData'
+    | 'temp'
+    | 'exe'
+    | 'module'
+    | 'desktop'
+    | 'documents'
+    | 'downloads'
+    | 'music'
+    | 'pictures'
+    | 'videos'
+    | 'recent'
+    | 'logs';
+
   /* createWindow 方法 - 创建窗口的参数 */
   export interface WindowParams {
     /* 是否开启调试模式 - openTools */
