@@ -4,7 +4,13 @@
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
 const { task, series } = require('gulp');
+const joinPath = require('../utils/joinpath');
 const getConfig = require('../webpack/getConfig');
+const {
+  copyHandler,
+  readHandler,
+  writeHandler
+} = require('../utils/file');
 
 async function clean(cb) {
   rimraf('./app').then(cb);
@@ -39,9 +45,38 @@ async function compile(cd) {
   });
 }
 
-task('compile', series(clean, compile));
+async function compileAfter(cb) {
+  // TODO: 对 package 文件进行拷贝并修改处理
+  const CWD = process.cwd();
+  const source = new Proxy(
+    {
+      src: './package.json',
+      dest: './app/package.json'
+    },
+    {
+      get(target, prop) {
+        if (prop in target) {
+          return joinPath(CWD, target[prop]);
+        }
+        return undefined;
+      }
+    }
+  );
+
+  const res = await copyHandler(source.src, source.dest);
+
+  const json = await readHandler(source.dest);
+  json.main = 'electron/main.js';
+  delete json.scripts;
+  delete json.devDependencies;
+  writeHandler(source.dest, json).then(cb);
+  console.log('compileAfter:', res, json);
+}
+
+task('compile', series(clean, compile, compileAfter));
 
 module.exports = {
   clean,
-  compile
+  compile,
+  compileAfter
 };

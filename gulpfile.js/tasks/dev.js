@@ -5,8 +5,8 @@
  *
  */
 const electron = require('electron');
-const { clean, compile } = require('./compile');
 const { spawn } = require('node:child_process');
+const { clean, compile, compileAfter } = require('./compile');
 const { task, series, watch /* parallel */ } = require('gulp');
 
 let electronProcess = null;
@@ -46,6 +46,8 @@ async function start(done) {
   });
 }
 
+const buildSeries = series(clean, compile, compileAfter);
+
 // exports.dev = function () {};
 task('dev', async function () {
   const options = {
@@ -67,13 +69,13 @@ task('dev', async function () {
       'tailwind.config.js'
     ],
     options,
-    series(clean, compile)
+    buildSeries
   );
 
   /* 监听主进程相关文件变化，并重新启动 Electron */
   watch(
     [mainSource, 'source/common/helper/log.ts'],
     { ignoreInitial: false, ...options },
-    series(clean, compile, start)
+    series(buildSeries, start)
   );
 });
