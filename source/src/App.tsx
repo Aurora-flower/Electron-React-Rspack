@@ -46,6 +46,11 @@ function App() {
             data-action='debug'>
             调试工具
           </button>
+          <a
+            href='http://127.0.0.1:59080/'
+            download='fonts/YeZi Graffiti.8e1b9776ab4abc148550.woff'>
+            下载
+          </a>
         </div>
       </div>
     </React.StrictMode>
