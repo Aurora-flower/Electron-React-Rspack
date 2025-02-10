@@ -1,8 +1,7 @@
 import Helper from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 import { spawn, exec } from 'node:child_process';
-
-const { joinPath, getPlatform } = Helper;
+import { joinPath } from '@/common/helper/joinPath';
 
 export function runProcess(
   _event: Electron.IpcMainInvokeEvent,
@@ -17,7 +16,7 @@ export function runProcess(
     detached: true, // 分离的
     stdio: ['pipe', 'pipe', 'pipe', 'ipc']
   });
-  const platform = getPlatform();
+  const platform = Helper.getPlatform();
   const pid = nodeProcess.pid;
   const command =
     platform == 'win32' ? `tasklist /FI "PID eq"` : `kill -0`;

@@ -1,8 +1,8 @@
 /**
  * @file 用于 logger 配置
  */
-import { TimeUtility } from '@/common/utils/time';
 import Helper from '@/electron/helper';
+import { TimeUtility } from '@/common/utils/time';
 import FileSystemUtils from '@/electron/utils/fileSystemUtils';
 // import { joinPath } from '@/common/helper/joinPath';
 

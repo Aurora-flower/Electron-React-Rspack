@@ -17,6 +17,7 @@ import {
 import Helper from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 import { AppServer } from '@/electron/server/creator';
+
 export async function startServer(isSafe: boolean = false) {
   const port = getPort();
   const webUrl = getWebUrl(isSafe);
