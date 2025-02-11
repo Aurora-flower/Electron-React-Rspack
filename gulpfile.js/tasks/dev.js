@@ -8,6 +8,7 @@ const electron = require('electron');
 const { buildSeries } = require('./compile');
 const { spawn } = require('node:child_process');
 const { task, series, watch /* parallel */ } = require('gulp');
+const { existsSync } = require('../utils/isExists');
 
 let electronProcess = null;
 
@@ -27,6 +28,10 @@ async function start(done) {
     });
   }
 
+  if (!existsSync('./app/electron/main.js', 'File')) {
+    done();
+    return;
+  }
   electronProcess = spawn(electron, ['.'], {
     stdio: 'inherit'
   });
