@@ -6,11 +6,16 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 
-const noUnusedExpressions = [
+const noUnusedConfig = [
   'error',
   {
+    /* 允许使用 JSX */
     enforceForJSX: true,
+
+    /* 允许使用短路运算符 */
     allowShortCircuit: true,
+
+    /* 允许使用三元运算符 */
     allowTernary: true
   }
 ];
@@ -99,10 +104,16 @@ export default [
       /* 允许使用 switch 语句的 fallthrough */
       'no-fallthrough': 'off',
 
-      /* 允许使用没有副作用的表达式  */
-      'no-unused-expressions': noUnusedExpressions,
-      '@typescript-eslint/no-unused-expressions':
-        noUnusedExpressions,
+      /* 允许使用没有副作用的表达式 | 变量 */
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          /* 下划线变量 */
+          argsIgnorePattern: '^_'
+        }
+      ],
+      'no-unused-expressions': noUnusedConfig,
+      '@typescript-eslint/no-unused-expressions': noUnusedConfig,
 
       /* 允许使用 any */
       '@typescript-eslint/no-explicit-any': 'warn',
