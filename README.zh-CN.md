@@ -274,6 +274,7 @@
     ├── test                                  学习测试
     ├── LICENSE                               开源协议 (MIT)
     ├── LICENSE.rtf                           软件许可协议条款 (En)
+    ├── .prettierrc.js                        代码格式化配置文件
     ├── activities                            项目活动目录 🟦
     ├── .gitattributes                        Git 版本控制系统中的一个配置文件，用于指定如何处理文件的属性和行为
     ├── .gitignore                            git 忽略文件
