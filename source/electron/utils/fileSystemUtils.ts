@@ -73,6 +73,31 @@ class FileSystemUtils {
     }
     writeFileSync(localPath, content, options);
   }
+
+  static writeJsonFile(
+    localPath: string,
+    content: unknown = {},
+    options: WriteFileOptions = { flag: 'w' }
+  ) {
+    try {
+      this.writeFile(
+        localPath,
+        JSON.stringify(content, null, 2),
+        options
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  static readJsonFile(_localPath: string) {
+    // try {
+    //   const content = this.readFile(localPath);
+    //   return JSON.parse(content);
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  }
 }
 
 export default FileSystemUtils;
