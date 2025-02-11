@@ -44,10 +44,7 @@ function writeHandler(filepath, data) {
       writeFile(filepath, json, err => {
         resolve(!err);
       });
-      resolve(null);
     }
-    console.log('writeHandler', ext);
-    resolve(null);
   });
 }
 

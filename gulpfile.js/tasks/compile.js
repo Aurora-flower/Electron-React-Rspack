@@ -62,9 +62,7 @@ async function compileAfter(cb) {
       }
     }
   );
-
   const res = await copyHandler(source.src, source.dest);
-
   const json = await readHandler(source.dest);
   json.main = 'electron/main.js';
   delete json.scripts;
@@ -73,10 +71,13 @@ async function compileAfter(cb) {
   console.log('compileAfter:', res, json);
 }
 
-task('compile', series(clean, compile, compileAfter));
+const buildSeries = series(clean, compile, compileAfter);
+
+task('compile', buildSeries);
 
 module.exports = {
   clean,
   compile,
-  compileAfter
+  compileAfter,
+  buildSeries
 };

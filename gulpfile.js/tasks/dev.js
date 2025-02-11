@@ -5,8 +5,8 @@
  *
  */
 const electron = require('electron');
+const { buildSeries } = require('./compile');
 const { spawn } = require('node:child_process');
-const { clean, compile, compileAfter } = require('./compile');
 const { task, series, watch /* parallel */ } = require('gulp');
 
 let electronProcess = null;
@@ -45,8 +45,6 @@ async function start(done) {
     // process.exit(1);
   });
 }
-
-const buildSeries = series(clean, compile, compileAfter);
 
 // exports.dev = function () {};
 task('dev', async function () {
