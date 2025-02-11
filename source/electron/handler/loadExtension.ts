@@ -1,3 +1,4 @@
+import { app } from 'electron';
 // import { join } from 'node:path';
 import {
   REDUX_DEVTOOLS,
@@ -11,7 +12,7 @@ const ModuleID = module.id;
 
 export async function loadExtension() {
   // 注意📢: windows 下会一直尝试安装，但最终还是安装不成功，很久之后才启动应用；
-  if (Helper.isWin()) {
+  if (Helper.isWin() && !app.isPackaged) {
     return;
   }
 
