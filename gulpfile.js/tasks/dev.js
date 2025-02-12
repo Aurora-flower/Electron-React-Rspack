@@ -7,8 +7,8 @@
 const electron = require('electron');
 const { buildSeries } = require('./compile');
 const { spawn } = require('node:child_process');
-const { task, series, watch /* parallel */ } = require('gulp');
 const { existsSync } = require('../utils/isExists');
+const { task, series, watch /* parallel */ } = require('gulp');
 
 let electronProcess = null;
 

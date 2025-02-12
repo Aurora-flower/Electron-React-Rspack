@@ -143,7 +143,7 @@ const baseLoader = [Loader.js, Loader.ts, Loader.json];
  * @param {BuildingEnvironment} mode 构建环境
  */
 function getBasePlugins(mode) {
-  const envMode = mode || process.env?.NODE_ENV;
+  const envMode = mode;
   const envFile =
     envMode === BuildingEnvironment.Prod
       ? File.ProdEnv.from
@@ -234,8 +234,7 @@ const stats = {
  * @param {BuildingEnvironment} mode 构建环境
  */
 function get(type) {
-  const mode =
-    type || process.env?.NODE_ENV || BuildingEnvironment.Dev;
+  const mode = type || BuildingEnvironment.Dev;
   console.log('Compile env:', mode);
   const config = Object.entries(AppProcess).map(
     ([key, name]) => {

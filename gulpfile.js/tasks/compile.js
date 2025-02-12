@@ -1,16 +1,17 @@
 /**
  * @file 执行编译任务
  */
-const webpack = require('webpack');
-const { rimraf } = require('rimraf');
-const { task, series } = require('gulp');
-const joinPath = require('../utils/joinpath');
-const getConfig = require('../webpack/getConfig');
 const {
   copyHandler,
   readHandler,
   writeHandler
 } = require('../utils/file');
+const webpack = require('webpack');
+const { rimraf } = require('rimraf');
+const { task, series } = require('gulp');
+const { getArgv } = require('../utils/argv');
+const joinPath = require('../utils/joinpath');
+const getConfig = require('../webpack/getConfig');
 
 async function clean(cb) {
   rimraf('./app').then(cb);
@@ -35,7 +36,8 @@ function findErrors(log) {
 
 async function compile(cd) {
   return new Promise((resolve, reject) => {
-    const webpackConfig = getConfig();
+    const argInfo = getArgv();
+    const webpackConfig = getConfig(argInfo.mode);
     try {
       const compiler = webpack(webpackConfig);
       compiler.run(function (_err, stats) {
