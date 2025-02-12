@@ -65,8 +65,14 @@ function getSourceStructure(baseUrl) {
 function getGenStructure(baseUrl) {
   return {
     base: baseUrl,
-    docs: joinPath(baseUrl, 'docs'),
     template: joinPath(baseUrl, 'template')
+  };
+}
+
+function getPublicStructure(baseUrl) {
+  return {
+    base: baseUrl,
+    pages: joinPath(baseUrl, 'pages')
   };
 }
 
@@ -82,6 +88,8 @@ const Directory = new Proxy(DirectoryStructure, {
       return getSourceStructure(baseUrl);
     } else if (key === 'Gen') {
       return getGenStructure(baseUrl);
+    } else if (key === 'Public') {
+      return getPublicStructure(baseUrl);
     } else {
       return baseUrl;
     }
@@ -116,7 +124,7 @@ const File = new Proxy(FileStructure, {
       return getFileTrend(CWD, Directory.Gen.template, name);
     } else if (['Page', 'Favicon'].includes(key)) {
       return getFileTrend(
-        Directory.Public,
+        Directory.Public.base,
         Directory.App.renderer,
         name
       );
@@ -129,6 +137,7 @@ const File = new Proxy(FileStructure, {
 /* 公共配置 */
 const baseExtensions = ['.js', '.ts', '.json'];
 const baseLoader = [Loader.js, Loader.ts, Loader.json];
+
 /**
  * @summary 获取基础插件配置
  * @param {BuildingEnvironment} mode 构建环境
@@ -166,7 +175,7 @@ const Entry = {
  */
 const alias = {
   '@': Directory.Source.base,
-  '@public': Directory.Public
+  '@public': Directory.Public.base
 };
 
 /**
@@ -268,36 +277,28 @@ function get(type) {
           Loader.css,
           Loader.font
         ]);
-        options.plugins.push(
+
+        const pluginsExtend = [
           // TODO: 存在问题，会多次对 index.html 文件进行处理
           // - getHtmlWebpackPlugin & getCopyWebpackPlugin
           getCopyWebpackPlugin([
-            /* public - 不应该直接拷贝，而是经过压缩或编译处理 */
+            /* favicon.ico */
             // {
-            //   from: FolderPath.Public.base,
-            //   toType: 'dir',
-            //   to: FolderPath.Renderer
-            //   // force: false
-            // },
-
-            /* core */
-            // {
-            //   from: FolderPath.Core,
-            //   toType: 'dir',
-            //   to: joinPath(FolderPath.App, 'core')
-            // },
-            // 注意📢: 放在打包输出的时候执行
-
-            /* package.json */
-            // {
-            //   ...File.Package,
+            //   ...File.Favicon,
             //   toType: 'file'
             // },
 
-            /* favicon.ico */
+            /* public */
             {
-              ...File.Favicon,
-              toType: 'file'
+              from: Directory.Public.pages,
+              toType: 'dir',
+              to: Directory.App.renderer,
+              filter: filePath => {
+                if (filePath.indexOf('index.html') > -1) {
+                  return false;
+                }
+                return true;
+              }
             }
           ]),
           getHtmlWebpackPlugin({
@@ -306,7 +307,9 @@ function get(type) {
           }),
           getMiniCssExtractPlugin(),
           getCssMinimizerPlugin()
-        );
+        ].filter(Boolean);
+
+        options.plugins.push(...pluginsExtend);
       }
 
       return options;

@@ -34,14 +34,22 @@ function findErrors(log) {
 }
 
 async function compile(cd) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const webpackConfig = getConfig();
-    const compiler = webpack(webpackConfig);
-    compiler.run(function (_err, stats) {
-      console.log('Compile info:', findErrors(stats.toString()));
-      cd();
-      resolve();
-    });
+    try {
+      const compiler = webpack(webpackConfig);
+      compiler.run(function (_err, stats) {
+        console.log(
+          'Compile info:',
+          findErrors(stats.toString())
+        );
+        cd();
+        resolve();
+      });
+    } catch (error) {
+      reject(error?.message);
+      process.exit(101);
+    }
   });
 }
 
@@ -62,13 +70,14 @@ async function compileAfter(cb) {
       }
     }
   );
-  const res = await copyHandler(source.src, source.dest);
+  // const res =
+  await copyHandler(source.src, source.dest);
   const json = await readHandler(source.dest);
   json.main = 'electron/main.js';
   delete json.scripts;
   delete json.devDependencies;
   writeHandler(source.dest, json).then(cb);
-  console.log('compileAfter:', res, json);
+  // console.log('compileAfter:', res, json);
 }
 
 const buildSeries = series(clean, compile, compileAfter);

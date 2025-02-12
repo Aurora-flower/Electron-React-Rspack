@@ -94,7 +94,7 @@ async function extractWithProgress(zipFilePath, destDir) {
 
           zipFile.on('error', err => {
             reject(err);
-            process.exit(103);
+            process.exit(104);
           });
         }
       );

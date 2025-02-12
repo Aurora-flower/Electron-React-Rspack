@@ -32,6 +32,7 @@ async function start(done) {
     done();
     return;
   }
+
   electronProcess = spawn(electron, ['.'], {
     stdio: 'inherit'
   });
@@ -41,13 +42,11 @@ async function start(done) {
     console.log(`Subprogress Quit code: ${code}`);
     electronProcess = null;
     done(code || 0);
-    // process.exit(code || 0);
   });
 
   electronProcess.on('error', err => {
     console.error('启动 Electron 进程时出错:', err?.message);
     done(err);
-    // process.exit(1);
   });
 }
 
@@ -60,6 +59,7 @@ task('dev', async function () {
   const mainSource = 'source/electron/**/*';
 
   /* 监听文件变化，并重新编译 */
+  // const Compile =
   watch(
     [
       '.config/**/*',
@@ -74,11 +74,27 @@ task('dev', async function () {
     options,
     buildSeries
   );
+  // Compile.on('change', function (path) {
+  //   console.log('Compile File ' + path + ' was changed');
+  // });
+
+  // Compile.on('error', function (error) {
+  //   console.log('Compile task Error:', error.message);
+  // });
 
   /* 监听主进程相关文件变化，并重新启动 Electron */
+  // const Refresh =
   watch(
     [mainSource, 'source/common/helper/log.ts'],
     { ignoreInitial: false, ...options },
     series(buildSeries, start)
   );
+
+  // Refresh.on('error', function (error) {
+  //   console.log('Refresh task Error:', error.message);
+  // });
+
+  // Refresh.on('change', function (path) {
+  //   console.log('Refresh File ' + path + ' was changed');
+  // });
 });

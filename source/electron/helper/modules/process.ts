@@ -3,6 +3,8 @@ import { debugLog } from '@/common/helper/log';
 import { spawn, exec } from 'node:child_process';
 import { joinPath } from '@/common/helper/joinPath';
 
+const ModuleID = module.id;
+
 export function runProcess(
   _event: Electron.IpcMainInvokeEvent,
   ...params: any
@@ -23,7 +25,7 @@ export function runProcess(
   exec(`${command} ${pid}`, (error, stdout, stderr) => {
     if (error) {
       debugLog(
-        module.id,
+        ModuleID,
         'RunProcess Error',
         true,
         error?.message,
@@ -31,7 +33,7 @@ export function runProcess(
       );
     } else {
       debugLog(
-        module.id,
+        ModuleID,
         'RunProcess',
         true,
         `进程 ${pid} 正在运行`,
@@ -41,6 +43,6 @@ export function runProcess(
     }
   });
 
-  debugLog(module.id, 'RunProcess', params, nodeProcess.pid);
+  debugLog(ModuleID, 'RunProcess', params, nodeProcess.pid);
   return null;
 }

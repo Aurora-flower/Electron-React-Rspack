@@ -6,8 +6,9 @@ import { debugLog } from '@/common/helper/log';
  */
 export function handleError(err: Error) {
   debugLog(
+    module.id,
     'Error',
-    `Failed to start the server: ${err.message}`,
-    false
+    false,
+    `Failed to start the server: ${err.message}`
   );
 }

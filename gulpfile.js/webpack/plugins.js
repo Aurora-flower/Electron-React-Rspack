@@ -11,31 +11,36 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
  * @returns {HtmlWebpackPlugin}
  */
 function getHtmlWebpackPlugin({ template, filename }) {
-  const inject = 'body'; // boolean | 'body' | 'head'
-  const HtmlWebpackPluginOption = {
-    inject,
-    title: '花楹一间',
-    template,
-    filename,
-    meta: {
-      // shrink-to-fit=no
-      'viewport':
-        'width=device-width, initial-scale=1.0,' +
-        'maximum-scale=1.0, user-scalable=no',
-      /* Content-Security-Policy 策略 */
-      'Content-Security-Policy': {
-        'http-equiv': 'Content-Security-Policy',
-        'content':
-          `default-src 'self';` +
-          `script-src 'self';` +
-          `style-src-elem 'self';` +
-          `font-src 'self';` +
-          `connect-src 'self' https://api.iconify.design;` +
-          `img-src 'self' data:;`
+  try {
+    const inject = 'body'; // boolean | 'body' | 'head'
+    const HtmlWebpackPluginOption = {
+      inject,
+      title: '花楹一间',
+      template,
+      filename,
+      meta: {
+        // shrink-to-fit=no
+        'viewport':
+          'width=device-width, initial-scale=1.0,' +
+          'maximum-scale=1.0, user-scalable=no',
+        /* Content-Security-Policy 策略 */
+        'Content-Security-Policy': {
+          'http-equiv': 'Content-Security-Policy',
+          'content':
+            `default-src 'self';` +
+            `script-src 'self';` +
+            `style-src-elem 'self';` +
+            `font-src 'self';` +
+            `connect-src 'self' https://api.iconify.design;` +
+            `img-src 'self' data:;`
+        }
       }
-    }
-  };
-  return new HtmlWebpackPlugin(HtmlWebpackPluginOption);
+    };
+    return new HtmlWebpackPlugin(HtmlWebpackPluginOption);
+  } catch (error) {
+    console.log('HtmlWebpackPlugin error:', error?.message);
+    return null;
+  }
 }
 
 /**
@@ -44,11 +49,16 @@ function getHtmlWebpackPlugin({ template, filename }) {
  * @returns {MiniCssExtractPlugin}
  */
 function getMiniCssExtractPlugin() {
-  const MiniCssExtractPluginOption = {
-    filename: 'css/[name].[contenthash].css', // 输出的 CSS 文件名
-    chunkFilename: 'css/[id].[contenthash].css' // chunk 的 CSS 文件名
-  };
-  return new MiniCssExtractPlugin(MiniCssExtractPluginOption);
+  try {
+    const MiniCssExtractPluginOption = {
+      filename: 'css/[name].[contenthash].css', // 输出的 CSS 文件名
+      chunkFilename: 'css/[id].[contenthash].css' // chunk 的 CSS 文件名
+    };
+    return new MiniCssExtractPlugin(MiniCssExtractPluginOption);
+  } catch (error) {
+    console.log('MiniCssExtractPlugin error:', error?.message);
+    return null;
+  }
 }
 
 /**
@@ -57,17 +67,22 @@ function getMiniCssExtractPlugin() {
  * @returns {CssMinimizerPlugin}
  */
 function getCssMinimizerPlugin() {
-  const CssMinimizerPluginOption = {
-    minimizerOptions: {
-      preset: [
-        'default',
-        {
-          discardComments: { removeAll: true }
-        }
-      ]
-    }
-  };
-  return new CssMinimizerPlugin(CssMinimizerPluginOption);
+  try {
+    const CssMinimizerPluginOption = {
+      minimizerOptions: {
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true }
+          }
+        ]
+      }
+    };
+    return new CssMinimizerPlugin(CssMinimizerPluginOption);
+  } catch (error) {
+    console.log('CssMinimizerPlugin error:', error?.message);
+    return null;
+  }
 }
 
 /**
@@ -78,13 +93,18 @@ function getCssMinimizerPlugin() {
  * @returns  {CopyWebpackPlugin}
  */
 function getCopyWebpackPlugin(patterns, option) {
-  const CopyPluginOption = {
-    patterns
-  };
-  if (option) {
-    CopyPluginOption.options = option;
+  try {
+    const CopyPluginOption = {
+      patterns
+    };
+    if (option) {
+      CopyPluginOption.options = option;
+    }
+    return new CopyWebpackPlugin(CopyPluginOption);
+  } catch (error) {
+    console.log('CopyWebpackPlugin error:', error?.message);
+    return null;
   }
-  return new CopyWebpackPlugin(CopyPluginOption);
 }
 
 /**
@@ -95,17 +115,22 @@ function getCopyWebpackPlugin(patterns, option) {
  * @returns {DotenvPlugin}
  */
 function getDotenvPlugin(envpath, option = {}) {
-  const DefaultOption = {
-    safe: true,
-    systemvars: true,
-    silent: true
-  };
-  const MergedOption = Object.assign(DefaultOption, option);
-  const DotenvPluginOption = {
-    path: envpath,
-    ...MergedOption
-  };
-  return new Dotenv(DotenvPluginOption);
+  try {
+    const DefaultOption = {
+      safe: true,
+      systemvars: true,
+      silent: true
+    };
+    const MergedOption = Object.assign(DefaultOption, option);
+    const DotenvPluginOption = {
+      path: envpath,
+      ...MergedOption
+    };
+    return new Dotenv(DotenvPluginOption);
+  } catch (error) {
+    console.log('DotenvPlugin error:', error?.message);
+    return null;
+  }
 }
 
 module.exports = {

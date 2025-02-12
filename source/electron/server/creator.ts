@@ -26,6 +26,8 @@ import { joinPath } from '@/common/helper/joinPath';
 //   app.listen(59080);
 // }
 
+const ModuleID = module.id;
+
 interface AppServerOptions {
   isSafe: boolean /* 是否为 https 协议 */;
   hostname: string /* 主机域名 */;
@@ -73,7 +75,7 @@ export class AppServer {
       /* http 协议 */
       this.creatorServer();
     }
-    debugLog(module.id, options.path, true);
+    debugLog(ModuleID, options.path, true);
   }
 
   getWebUrl() {
@@ -130,7 +132,7 @@ export class AppServer {
         'index.html'
       );
       debugLog(
-        module.id,
+        ModuleID,
         'Res',
         true,
         `${req.url}`,
@@ -141,7 +143,7 @@ export class AppServer {
 
     this._server.listen(this._option.port, () => {
       debugLog(
-        module.id,
+        ModuleID,
         'Server Listen',
         true,
         `Static source - ${this._option.path}: ${this._option.port}`
@@ -160,7 +162,7 @@ export class AppServer {
     }
 
     this._server.close(() => {
-      debugLog(module.id, 'Server stopped', true);
+      debugLog(ModuleID, 'Server stopped', true);
     });
   }
 }

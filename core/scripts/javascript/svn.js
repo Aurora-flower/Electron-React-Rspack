@@ -202,7 +202,3 @@
  *    - 应用场景：当使用较新版本的 SVN 客户端时，如果工作副本的格式不兼容，可以使用此命令进行升级。例如，`svn upgrade .` 将当前工作副本升级到最新格式。
  */
 // const ChildProcess = require('child_process');
-
-for (let index = 0; index < 1000000; index++) {
-  console.log(1);
-}
