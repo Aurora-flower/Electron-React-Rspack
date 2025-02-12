@@ -41,7 +41,7 @@ export function debugLog(
   }
 
   console.log(
-    `>>> Origin [ ${scriptModuleId} ] - ${sign}: `,
+    `>>> Source [ ${scriptModuleId} ] - ${sign}: `,
     params
   );
 }

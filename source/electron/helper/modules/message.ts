@@ -1,12 +1,6 @@
 /**
- * @file 消息弹窗
- */
-import { dialog } from 'electron';
-
-/**
- * @class 消息对话框 Distributor
- *
- * @remarks
+ * @file AppMessage 消息弹窗  (Distributor)
+ *  * @remarks
  * The `window` argument allows the dialog to attach itself to a parent window, making it modal.
  *
  * ```ts
@@ -17,17 +11,20 @@ import { dialog } from 'electron';
  * showMessageBoxSync(window: BaseWindow, options: MessageBoxSyncOptions): number;
  * ```
  *
- * 注意📢: window 参数可以不传入，单个参数时对应 options
+ * 注意📢: showMessageBox、showMessageBoxSync 的 window 参数可以不传入，单个参数时对应 options
  */
-export class AppMessage {
-  static async showErrorBox(title: string, content: string) {
-    dialog.showErrorBox(title, content);
-  }
+import { dialog } from 'electron';
 
-  static async showMessageBox(
-    window: Electron.BaseWindow,
-    options: Electron.MessageBoxOptions
-  ): Promise<Electron.MessageBoxReturnValue> {
-    return dialog.showMessageBox(window, options);
-  }
+export async function showErrorBox(
+  title: string,
+  content: string
+) {
+  dialog.showErrorBox(title, content);
+}
+
+export async function showMessageBox(
+  window: Electron.BaseWindow,
+  options: Electron.MessageBoxOptions
+): Promise<Electron.MessageBoxReturnValue> {
+  return dialog.showMessageBox(window, options);
 }
