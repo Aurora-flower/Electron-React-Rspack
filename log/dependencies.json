@@ -13,14 +13,7 @@
     },
     "@commitlint/cli": {
       "version": "^19.6.1",
-      "description": {},
-      "changed": [
-        {
-          "type": "outdated",
-          "version": "",
-          "message": ""
-        }
-      ]
+      "description": {}
     },
     "@commitlint/config-conventional": {
       "version": "^19.6.0",
@@ -38,6 +31,11 @@
         "summary": "postcss 插件，用于为 CSS 添加浏览器前缀。",
         "comment": "tailwindcss 的 PostCSS 插件已经移动到一个单独的包 @tailwindcss/postcss"
       },
+      "changed": []
+    },
+    "esbuild": {
+      "version": "0.25.0",
+      "description": {},
       "changed": []
     },
     "@eslint/js": {
@@ -269,7 +267,13 @@
     "tailwindcss": {
       "version": "^4.0.1",
       "description": {},
-      "changed": []
+      "changed": [
+        {
+          "type": "exact",
+          "version": "3.4.17",
+          "message": ""
+        }
+      ]
     },
     "ts-loader": {
       "version": "^9.5.1",
