@@ -4,6 +4,7 @@
  * @description 支持多平台打包，通过命令行参数指定平台
  */
 const path = require('node:path');
+const { rimraf } = require('rimraf');
 const { task, series } = require('gulp');
 const builder = require('electron-builder');
 const { getArgv } = require('../utils/argv');
@@ -58,7 +59,7 @@ const baseConfig = {
 
 async function package() {
   console.log('Packageing...');
-  // await rimraf([path.join(CWD, 'app'), path.join(CWD, 'dist')]);
+  await rimraf('./release');
 
   // 获取命令行参数
   const argv = getArgv();
