@@ -1,4 +1,4 @@
-const { AssetType } = require('./constant');
+const { AssetType } = require('./webpack-asset');
 // const svgToMiniDataURI = require('mini-svg-data-uri');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 

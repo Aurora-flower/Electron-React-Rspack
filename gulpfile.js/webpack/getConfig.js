@@ -8,8 +8,8 @@ const {
 const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
 const joinPath = require('../utils/joinpath');
+const { BuildingEnvironment } = require('./env');
 const { WebpakTarget } = require('./webpack-target');
-const { BuildingEnvironment } = require('./constant');
 
 /* ***** ***** ***** ***** 目录与文件结构 ***** ***** ***** ***** */
 

@@ -1,17 +1,4 @@
 /**
- * @summary 构建环境
- * @description
- * - `none`: 不进行构建
- * - `development`: 开发环境
- * - `production`: 生产环境
- */
-const BuildingEnvironment = {
-  None: 'none',
-  Dev: 'development',
-  Prod: 'production'
-};
-
-/**
  * @summary Webpack 资源模块的模块类型
  * @description
  * 资源模块(asset module)是一种模块类型，它允许使用资源文件（字体，图标等）而无需配置额外 loader。
@@ -34,4 +21,4 @@ const AssetType = {
   Auto: 'asset' /* 当 size <= 8kb 时，使用 asset/inline，否则使用 asset/resource */
 };
 
-module.exports = { AssetType, BuildingEnvironment };
+module.exports = { AssetType };

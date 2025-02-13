@@ -1,4 +1,4 @@
-const { BuildingEnvironment } = require('../webpack/constant');
+const { BuildingEnvironment } = require('../webpack/env');
 
 function getMode(args) {
   return args?.mode || BuildingEnvironment.Prod;
