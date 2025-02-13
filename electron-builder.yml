@@ -53,7 +53,7 @@ files:
   # - '!{README.md,README.zh-CN.md,todo.list,package-lock.json,tsconfig.json}'
   # - '!core/build'
 
-# Asar 选项 --- 默认为 True
+# 启用 asar 打包 --- 默认为 True
 asar: true
 
 # 指定在创建 asar 存档时要解压缩哪些文件
