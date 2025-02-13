@@ -1,8 +1,5 @@
 /**
  * @file 开发运行任务
- * @description
- * - 局限性:
- *
  */
 const electron = require('electron');
 const { buildSeries } = require('./compile');

@@ -2,7 +2,7 @@
 
 ## 引言
 
-自动化并增强工作流程的工具包
+Gulp是基于Node.js的任务运行器，使用异步操作来处理文件流。自动化并增强工作流程的工具包。
 
 利用 Gulp 和 JavaScript 的灵活性来自动执行缓慢、重复的工作流，并将其组合成高效的构建管道。
 
@@ -13,6 +13,8 @@
 > Node 的模块的解析功能允许将 `gulpfile.js`' 文件替换为同样命名为 `gulpfile.js` 的目录，该目录中包含了一个名为 `index.js` 的文件，该 `index.js` 文件将被当作 `gulpfile.js` 使用。
 >
 > 如果使用了转译器（transpiler），需要给文件夹和目录相应地命名。
+
+在 `Gulp 4.x` 中，任务可以是异步的，支持多种处理方式，包括、Promise、async/await、流等。当任务完成时，必须通知 Gulp，否则任务会挂起，导致后续任务无法执行。
 
 ---
 
@@ -43,10 +45,15 @@
    ```shell
    # 安装 ts-node 模块
    npm install --save-dev ts-node
-
+   
    # 安装 @babel/register 模块
    npm install --save-dev @babel/register
-
+   
    # 安装 esm 模块
    npm install --save-dev esm
    ```
+
+Gulp 任务
+
+每个 gulp 任务都是一个_**异步**_ JavaScript 函数 - 接受错误优先回调或返回流、promise、事件触发器、子进程或可观察对象的函数。
+
