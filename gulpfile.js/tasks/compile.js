@@ -15,7 +15,7 @@ const getConfig = require('../webpack/getConfig');
 
 /**
  * 清理构建目录
- * @description 这里使用的 gulp 传统任务的编写方式 - 回调模式
+ * @description 这里使用的 gulp 传统任务的编写方式 - `回调模式`
  * @param {Function} cb 是 gulp 的回调函数
  * @remarks
  * `cb`是回调函数，全称应该是 callback。
@@ -25,7 +25,7 @@ const getConfig = require('../webpack/getConfig');
 function clean(cb) {
   rimraf('./app')
     .then(() => cb())
-    .catch(error => cb(error));
+    .catch(cb);
 }
 
 /**
@@ -45,7 +45,7 @@ function findErrors(log) {
 
 /**
  * 编译构建项目
- * @description 这里使用的现代 gulp 任务的编写方式 - （返回）Promise 模式
+ * @description 这里使用的现代 gulp 任务的编写方式 - （返回）`Promise 模式`
  * @returns {Promise<*>}
  */
 function compile() {
@@ -69,7 +69,7 @@ function compile() {
 
 /**
  * 编译完成后的回调函数, 做收尾处理
- * @description 这里使用的现代 gulp 任务的编写方式 - Async/Await 模式
+ * @description 这里使用的现代 gulp 任务的编写方式 - `Async/Await 模式`
  * @returns {Promise<void>}
  */
 async function compileAfter() {

@@ -4,7 +4,7 @@
 const { task } = require('gulp');
 const getConfig = require('../webpack/getConfig');
 
-async function debug(cd) {
+function debug(cd) {
   getConfig();
 
   cd();
