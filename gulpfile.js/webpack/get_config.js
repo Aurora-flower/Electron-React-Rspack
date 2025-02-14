@@ -7,9 +7,9 @@ const {
 } = require('./plugins');
 const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
-const joinPath = require('../utils/joinpath');
+const joinPath = require('../utils/join_path');
 const { BuildingEnvironment } = require('./env');
-const { WebpakTarget } = require('./webpack-target');
+const { WebpakTarget } = require('./webpack_target');
 
 /* ***** ***** ***** ***** 目录与文件结构 ***** ***** ***** ***** */
 

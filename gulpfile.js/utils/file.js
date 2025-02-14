@@ -3,6 +3,7 @@ const {
   copyFile,
   constants,
   stat,
+  statSync,
   readFileSync,
   writeFile
 } = require('node:fs');
@@ -10,12 +11,28 @@ const { parse } = require('node:path');
 
 const JsonFormatExtension = ['.json', '.prefab', '.fire'];
 
+function existsSync(
+  localPath,
+  type = 'All' // 'File' | 'Directory' | 'All'
+) {
+  try {
+    const stats = statSync(localPath);
+    return type == 'File'
+      ? stats.isFile()
+      : type == 'Directory'
+        ? stats.isDirectory()
+        : !!statSync(localPath);
+  } catch (_error) {
+    return !_error;
+  }
+}
+
 function parseUint8Array(uint8Array, type = 'utf-8') {
   const decoder = new TextDecoder(type);
   return decoder.decode(uint8Array);
 }
 
-function existsHandler(filepath) {
+function exists(filepath) {
   return new Promise(resolve => {
     stat(filepath, (err /* , stats */) => {
       resolve(!err);
@@ -36,7 +53,7 @@ function copyHandler(src, dest) {
   });
 }
 
-function writeHandler(filepath, data) {
+function writeJsonFile(filepath, data) {
   return new Promise(resolve => {
     const ext = parse(filepath).ext;
     if (JsonFormatExtension.includes(ext)) {
@@ -56,9 +73,9 @@ function renameHandler(oldPath, newPath) {
   });
 }
 
-function readHandler(filepath) {
+function readJsonFileToData(filepath) {
   return new Promise(resolve => {
-    if (existsHandler(filepath)) {
+    if (exists(filepath)) {
       const ext = parse(filepath).ext;
       const buffer = readFileSync(filepath);
       if (JsonFormatExtension.includes(ext) && buffer.length) {
@@ -75,7 +92,7 @@ function readHandler(filepath) {
         }
         return;
       }
-      console.log('readHandler', ext);
+      console.log('readJsonFileToData', ext);
       resolve(null);
     } else {
       resolve(null);
@@ -85,7 +102,8 @@ function readHandler(filepath) {
 
 module.exports = {
   copyHandler,
-  readHandler,
-  writeHandler,
+  existsSync,
+  readJsonFileToData,
+  writeJsonFile,
   renameHandler
 };

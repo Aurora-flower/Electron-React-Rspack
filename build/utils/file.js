@@ -1,11 +1,27 @@
 const {
   writeFile,
   mkdirSync,
+  statSync,
   readdirSync,
   readFileSync
 } = require('fs');
-const joinPath = require('./joinPath');
-const { existsSync } = require('./isExists');
+const joinPath = require('./join_path');
+
+function existsSync(
+  localPath,
+  type = 'All' // 'File' | 'Directory' | 'All'
+) {
+  try {
+    const stats = statSync(localPath);
+    return type == 'File'
+      ? stats.isFile()
+      : type == 'Directory'
+        ? stats.isDirectory()
+        : !!statSync(localPath);
+  } catch (_error) {
+    return !_error;
+  }
+}
 
 /* 移动目录（包含子级目录与文件）到指定目录 */
 function moveDir(sourceDir, targetDir) {

@@ -3,15 +3,15 @@
  */
 const {
   copyHandler,
-  readHandler,
-  writeHandler
+  readJsonFileToData,
+  writeJsonFile
 } = require('../utils/file');
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
 const { task, series } = require('gulp');
 const { getArgv } = require('../utils/argv');
-const joinPath = require('../utils/joinpath');
-const getConfig = require('../webpack/getConfig');
+const joinPath = require('../utils/join_path');
+const getConfig = require('../webpack/get_config');
 
 /**
  * 清理构建目录
@@ -91,11 +91,11 @@ async function compileAfter() {
   );
   // const res =
   await copyHandler(source.src, source.dest);
-  const json = await readHandler(source.dest);
+  const json = await readJsonFileToData(source.dest);
   json.main = 'electron/main.js';
   delete json.scripts;
   delete json.devDependencies;
-  await writeHandler(source.dest, json);
+  await writeJsonFile(source.dest, json);
   // console.log('compileAfter:', res, json);
 }
 
