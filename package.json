@@ -77,7 +77,8 @@
     "ts-node": "^10.9.2",
     "typescript-eslint": "^8.19.1",
     "wait-on": "^8.0.2",
-    "webpack": "^5.97.1"
+    "webpack": "^5.97.1",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "dependencies": {
     "@iconify/json": "^2.2.294",

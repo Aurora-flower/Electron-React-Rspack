@@ -9,12 +9,12 @@ const { task, series, watch /* parallel */ } = require('gulp');
 
 let electronProcess = null;
 
-async function start(done) {
-  if (electronProcess) {
-    electronProcess.kill();
+async function start() {
+  await new Promise((resolve, reject) => {
+    if (electronProcess) {
+      electronProcess.kill();
 
-    /* 等待进程完全退出 */
-    await new Promise(resolve => {
+      /* 等待进程完全退出 */
       electronProcess.on('exit', () => {
         console.log(
           'Stop origin electron progress pid:',
@@ -22,28 +22,28 @@ async function start(done) {
         );
         resolve();
       });
+    }
+
+    if (!existsSync('./app/electron/main.js', 'File')) {
+      reject('./app/electron/main.js 不存在');
+      return;
+    }
+
+    electronProcess = spawn(electron, ['.'], {
+      stdio: 'inherit'
     });
-  }
 
-  if (!existsSync('./app/electron/main.js', 'File')) {
-    done();
-    return;
-  }
+    console.log('Electron running ...', electronProcess?.pid);
+    electronProcess.on('close', code => {
+      console.log(`Subprogress Quit code: ${code}`);
+      electronProcess = null;
+      resolve();
+    });
 
-  electronProcess = spawn(electron, ['.'], {
-    stdio: 'inherit'
-  });
-
-  console.log('Electron running ...', electronProcess?.pid);
-  electronProcess.on('close', code => {
-    console.log(`Subprogress Quit code: ${code}`);
-    electronProcess = null;
-    done(code || 0);
-  });
-
-  electronProcess.on('error', err => {
-    console.error('启动 Electron 进程时出错:', err?.message);
-    done(err);
+    electronProcess.on('error', err => {
+      console.error('启动 Electron 进程时出错:', err?.message);
+      reject(err);
+    });
   });
 }
 

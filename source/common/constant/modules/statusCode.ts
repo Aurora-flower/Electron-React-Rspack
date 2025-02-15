@@ -3,6 +3,9 @@
  * @see {@link https://www.w3ccoo.com/tags/ref_httpmessages.html HTTP 消息参考手册}
  */
 
+/**
+ * @enum StatusCode HTTP 状态码
+ */
 export enum StatusCode {
   // --------- 1xx: 信息  ---------
   /* 

@@ -3,6 +3,7 @@ const {
   getHtmlWebpackPlugin,
   getCopyWebpackPlugin,
   getCssMinimizerPlugin,
+  getBundleAnalyzerPlugin,
   getMiniCssExtractPlugin
 } = require('./plugins');
 const { Loader } = require('./loader');
@@ -150,7 +151,8 @@ function getBasePlugins(mode) {
       : File.DevEnv.from;
   return [
     getDotenvPlugin(File.Env.from),
-    getDotenvPlugin(envFile)
+    getDotenvPlugin(envFile),
+    getBundleAnalyzerPlugin()
   ];
 }
 /**
@@ -183,19 +185,6 @@ const alias = {
  * @see {@link https://www.webpackjs.com/configuration/optimization/}
  */
 const optimization = {
-  // runtimeChunk: 'single',
-  // splitChunks: {
-  //   chunks: 'all',
-  //   maxInitialRequests: Infinity,
-  //   minSize: 0,
-  //   cacheGroups: {
-  //     vendors: {
-  //       test: /[\\/]node_modules[\\/]/,
-  //       name: 'vendors',
-  //       chunks: 'all'
-  //     }
-  //   }
-  // }
   /* 压缩代码 */
   minimize: true
 };
@@ -239,6 +228,8 @@ function get(type) {
   const config = Object.entries(AppProcess).map(
     ([key, name]) => {
       const isRenderer = name === AppProcess.Renderer;
+      const isMain = name === AppProcess.Main;
+      // const isPreload = name === AppProcess.Preload;
 
       const options = {
         mode,
@@ -309,6 +300,23 @@ function get(type) {
         ].filter(Boolean);
 
         options.plugins.push(...pluginsExtend);
+
+        // options.node = {
+        // global: false
+        // __filename: false,
+        // __dirname: false,
+        // };
+      } else {
+        options.optimization = {
+          ...options.optimization,
+          splitChunks: {
+            chunks: 'all'
+          }
+        };
+
+        if (isMain) {
+          options.optimization.runtimeChunk = 'single';
+        }
       }
 
       return options;

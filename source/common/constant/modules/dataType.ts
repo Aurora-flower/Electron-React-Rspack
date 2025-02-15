@@ -1,5 +1,5 @@
 /**
- * @enum 数据类型枚举
+ * @enum DataTypeMode 数据类型枚举
  */
 export enum DataTypeMode {
   STRING = 'String',
