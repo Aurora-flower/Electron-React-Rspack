@@ -10,17 +10,12 @@ export function appMenuAction(
   /**
    * @summary 获取自定义菜单的 action 属性的方式
    * @description
-   * - (ev.target as HTMLElement).dataset.action --- 仅非
+   * 获取自定义属性的方式
+   * - (ev.target as HTMLElement).dataset.action
    * - (ev.target as HTMLElement).getAttribute('data-action')
    */
   const action = (ev.target as HTMLElement).getAttribute(
     'data-action'
   );
-  debugLog(
-    module.id,
-    'customMenuAction',
-    false,
-    action,
-    (ev.target as HTMLElement).dataset.action
-  );
+  debugLog(module.id, 'customMenuAction', false, action);
 }

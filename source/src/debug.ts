@@ -4,4 +4,4 @@
  */
 import { debugLog } from '@/common/helper/log';
 
-debugLog(module.id, 'Debug', false);
+debugLog(module.id, 'Debug', false, window.navigator);
