@@ -301,6 +301,11 @@
       "version": "^5.97.1",
       "description": {},
       "changed": []
+    },
+    "webpack-bundle-analyzer": {
+      "version": "^4.10.2",
+      "description": {},
+      "changed": []
     }
   },
   "dependencies": {
