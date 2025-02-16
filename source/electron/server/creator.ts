@@ -141,6 +141,7 @@ export class AppServer {
       res.sendFile(indexFilePath);
     });
 
+    /* 监听端口 */
     this._server.listen(this._option.port, () => {
       debugLog(
         ModuleID,
@@ -148,7 +149,7 @@ export class AppServer {
         true,
         `Static source - ${this._option.path}: ${this._option.port}`
       );
-    }); // 监听端口
+    });
     this._server.on('error', handleError);
   }
 

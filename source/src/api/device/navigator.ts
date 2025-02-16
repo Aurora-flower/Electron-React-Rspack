@@ -70,7 +70,12 @@ export function getBrowser() {
  */
 export function getClipboardText() {
   try {
-    return window.navigator.clipboard.readText();
+    // 确保文档处于焦点状态
+    if (!document.hasFocus()) {
+      throw new Error('Document is not focused');
+    }
+    const text = window.navigator.clipboard.readText();
+    return text;
   } catch (error: any) {
     debugLog(
       module.id,
@@ -78,6 +83,7 @@ export function getClipboardText() {
       true,
       error?.message
     );
+    return '';
   }
 }
 
@@ -97,4 +103,19 @@ export function getClipboardText() {
  */
 export function getConnectivity() {
   return window.navigator.connection;
+}
+
+/**
+ * 获取 cookie
+ * @description
+ * `navigator.cookieEnabled` 只读属性返回一个布尔值，指示是否启用了 cookie。
+ * @returns cookie 内容
+ */
+export function getCookie() {
+  if (window.navigator.cookieEnabled) {
+    return window.document.cookie;
+  } else {
+    /* 浏览器不支持或阻止设置 cookie。 */
+    return '';
+  }
 }

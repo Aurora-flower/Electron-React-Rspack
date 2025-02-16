@@ -4,7 +4,8 @@
  */
 import {
   getClipboardText,
-  getConnectivity
+  getConnectivity,
+  getCookie
 } from '@/src/api/device';
 import { debugLog } from '@/common/helper/log';
 
@@ -13,5 +14,6 @@ debugLog(
   'Debug',
   false,
   getClipboardText(),
-  getConnectivity()
+  getConnectivity(),
+  getCookie()
 );
