@@ -25,6 +25,7 @@ async function start() {
     }
 
     if (!existsSync('./app/electron/main.js', 'File')) {
+      console.log('entry file not found');
       reject('./app/electron/main.js 不存在');
       return;
     }
@@ -33,7 +34,6 @@ async function start() {
       stdio: 'inherit'
     });
 
-    console.log('Electron running ...', electronProcess?.pid);
     electronProcess.on('close', code => {
       console.log(`Subprogress Quit code: ${code}`);
       electronProcess = null;
@@ -41,9 +41,12 @@ async function start() {
     });
 
     electronProcess.on('error', err => {
-      console.error('启动 Electron 进程时出错:', err?.message);
+      console.error('Electron Error:', err?.message);
       reject(err);
     });
+
+    console.log('Electron running ...', electronProcess?.pid);
+    resolve();
   });
 }
 

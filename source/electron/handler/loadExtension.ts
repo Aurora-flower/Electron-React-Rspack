@@ -1,5 +1,4 @@
 import { app } from 'electron';
-// import { join } from 'node:path';
 import {
   REDUX_DEVTOOLS,
   installExtension,

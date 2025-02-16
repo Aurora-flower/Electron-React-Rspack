@@ -23,6 +23,6 @@ export function setClipboard(
   if (text) {
     clipboard.writeText(text);
   } else {
-    debugLog(module.id, 'setClipboard', true, 'text is empty');
+    debugLog(module.id, 'SetClipboard', true, 'text is empty');
   }
 }

@@ -43,7 +43,7 @@ async function onAppReady() {
       debug: process.env?.IS_DEBUG === 'true'
     };
     Helper.createWindow(webURL, windowOptions, params);
-    debugLog(ModuleID, 'onAppReady', IsProd, homedir());
+    debugLog(ModuleID, 'OnAppReady', IsProd, homedir());
   } catch (error) {
     const msgTitle = 'Failed to start the application';
     const msg =
@@ -51,7 +51,7 @@ async function onAppReady() {
         ? error.message
         : 'Unknown error occurred!';
     // showErrorBox(msgTitle, msg);
-    debugLog(ModuleID, 'onAppReady', true, msgTitle, msg);
+    debugLog(ModuleID, 'OnAppReady', true, msgTitle, msg);
   }
 }
 

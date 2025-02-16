@@ -17,5 +17,5 @@ export function appMenuAction(
   const action = (ev.target as HTMLElement).getAttribute(
     'data-action'
   );
-  debugLog(module.id, 'customMenuAction', false, action);
+  debugLog(module.id, 'CustomMenuAction', false, action);
 }

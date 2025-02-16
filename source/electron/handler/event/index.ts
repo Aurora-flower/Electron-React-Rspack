@@ -21,7 +21,7 @@ function ready() {
     })
     .finally(onAppReadyAfter)
     .catch(reason => {
-      debugLog(module.id, 'readyError', true, reason);
+      debugLog(module.id, 'ReadyError', true, reason);
     });
 }
 
