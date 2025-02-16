@@ -119,3 +119,114 @@ export function getCookie() {
     return '';
   }
 }
+
+/**
+ * 向服务器发送认证结果进行验证
+ * @description
+ * 在使用 WebAuthn 进行认证后，需要将认证结果发送到服务器进行验证。
+ * 服务器会验证用户凭据是否正确，并返回验证结果。
+ * @param credential - 认证结果
+ * @returns 验证结果
+ */
+async function sendToServerForVerification(credential: any) {
+  return !credential;
+}
+
+/**
+ * 使用传统登录方式进行认证
+ * @description
+ * 在使用 WebAuthn 进行认证后，如果浏览器不支持 WebAuthn 或发生错误，
+ * 可以使用传统登录方式进行认证。
+ * @returns 认证结果
+ */
+function fallbackToLegacyAuth() {
+  // const username = document.querySelector<HTMLInputElement>('#username')!.value;
+  // const password = document.querySelector<HTMLInputElement>('#password')!.value;
+
+  // return fetch('/api/legacy-login', {
+  //   method: 'POST',
+  //   body: JSON.stringify({ username, password })
+  // });
+  return Promise.resolve(false);
+}
+
+/**
+ * 实现 基于 WebAuthn 的认证流程（如指纹/安全密钥登录），并在浏览器不支持时回退传统登录方式。
+ * @description
+ * Navigator 接口的只读属性 credentials 返回与当前文档关联的 CredentialsContainer 对象，该对象暴露用于请求凭据的方法。
+ * CredentialsContainer 接口还会在发生感兴趣的事件时通知用户代理，例如成功登录或注销。此接口可用于特性检测。
+ * @remarks
+ * - WebAuthn 认证流程
+ *
+ * | 步骤 | 	说明 |
+ * | ----------- | ----------|
+ * | challenge |  生成	服务器生成随机数用于防重放攻击（需替换为实际服务端生成值）|
+ * | 凭证请求配置 | 	限定允许的凭证类型、传输方式等参数|
+ * | 调用浏览器接口 | 	触发用户验证流程（如弹出指纹识别对话框）|
+ * | 认证结果验证 | 	将客户端生成的签名数据发送到服务器验证|
+ */
+export async function getCredentials() {
+  /* 现代认证流程 （WebAuthn） */
+  if ('credentials' in navigator) {
+    try {
+      const publicKeyCredentialOptions: PublicKeyCredentialRequestOptions =
+        {
+          challenge: new Uint8Array(32), // 需替换为服务器生成的随机 challenge
+          allowCredentials: [
+            {
+              type: 'public-key',
+              id: new Uint8Array(64), // 需替换为已注册的凭证 ID
+              transports: ['internal'] // 限定认证设备类型（如内置指纹识别器）
+            }
+          ],
+          userVerification: 'required', // 需要用户主动验证（如指纹）
+          timeout: 60000 // 60秒超时
+        };
+
+      // 调用浏览器 WebAuthn 接口
+      const credential = (await navigator.credentials.get({
+        publicKey: publicKeyCredentialOptions
+      })) as PublicKeyCredential;
+
+      // 将认证结果发送到服务器验证
+      const verificationResult =
+        await sendToServerForVerification({
+          id: credential.id,
+          rawId: Array.from(new Uint8Array(credential.rawId)),
+          response: {
+            clientDataJSON: Array.from(
+              new Uint8Array(credential.response.clientDataJSON)
+            ),
+            authenticatorData: Array.from(
+              new Uint8Array(
+                (
+                  credential.response as AuthenticatorAssertionResponse
+                ).authenticatorData
+              )
+            ),
+            signature: Array.from(
+              new Uint8Array(
+                (
+                  credential.response as AuthenticatorAssertionResponse
+                ).signature
+              )
+            ),
+            userHandle: Array.from(
+              new Uint8Array(
+                (
+                  credential.response as AuthenticatorAssertionResponse
+                ).userHandle!
+              )
+            )
+          }
+        });
+
+      return verificationResult;
+    } catch (error) {
+      console.error('WebAuthn 认证失败:', error);
+      return fallbackToLegacyAuth(); // 降级到传统认证
+    }
+  } else {
+    /* 传统认证流程 -- 通过账号密码请求认证 */
+  }
+}
