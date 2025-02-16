@@ -18,10 +18,11 @@ function getArgv() {
     }
   });
 
-  console.log('args:', args, getMode({}), argObject);
+  console.log('args:', args, argObject);
   return argObject;
 }
 
 module.exports = {
+  getMode,
   getArgv
 };

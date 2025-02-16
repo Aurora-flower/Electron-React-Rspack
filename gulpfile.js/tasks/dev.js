@@ -2,7 +2,7 @@
  * @file 开发运行任务
  */
 const electron = require('electron');
-const { debounce } = require('lodash');
+const { throttle } = require('lodash');
 const { buildSeries } = require('./compile');
 const { spawn } = require('node:child_process');
 const { existsSync } = require('../utils/file');
@@ -11,11 +11,11 @@ const { task, series, watch /* parallel */ } = require('gulp');
 let electronProcess = null;
 
 async function start() {
-  await new Promise((resolve, reject) => {
-    if (electronProcess) {
-      electronProcess.kill();
+  if (electronProcess) {
+    electronProcess.kill();
 
-      /* 等待进程完全退出 */
+    /* 等待进程完全退出 */
+    await new Promise(resolve => {
       electronProcess.on('exit', () => {
         console.log(
           'Stop origin electron progress pid:',
@@ -23,14 +23,15 @@ async function start() {
         );
         resolve();
       });
-    }
+    });
+  }
 
-    if (!existsSync('./app/electron/main.js', 'File')) {
-      console.log('entry file not found');
-      reject('./app/electron/main.js 不存在');
-      return;
-    }
+  if (!existsSync('./app/electron/main.js', 'File')) {
+    console.log('entry file not found');
+    return;
+  }
 
+  await new Promise((resolve, reject) => {
     electronProcess = spawn(electron, ['.'], {
       stdio: 'inherit'
     });
@@ -45,17 +46,15 @@ async function start() {
       console.error('Electron Error:', err?.message);
       reject(err);
     });
-
     console.log('Electron running ...', electronProcess?.pid);
     resolve();
   });
 }
 
-const debouncedStart = debounce(cd => {
-  start()
-    .then(() => cd())
-    .catch(cd);
-}, 1 * 1000);
+const debouncedDev = throttle(
+  series(buildSeries, start),
+  3 * 1000
+);
 
 // exports.dev = function () {};
 task('dev', async function () {
@@ -63,24 +62,24 @@ task('dev', async function () {
     cwd: process.cwd()
   };
 
-  const mainSource = 'source/electron/**/*';
+  // const mainSource = 'source/electron/**/*';
 
   /* 监听文件变化，并重新编译 */
   // const Compile =
-  watch(
-    [
-      '.config/**/*',
-      'public/**/*',
-      'source/**/*',
-      'source/preload/**/*',
-      `!${mainSource}`,
-      `!source/common/helper/log.ts`,
-      'postcss.config.*',
-      'tailwind.config.js'
-    ],
-    options,
-    buildSeries
-  );
+  // watch(
+  //   [
+  //     '.config/**/*',
+  //     'public/**/*',
+  //     'source/**/*',
+  //     'source/preload/**/*',
+  //     `!${mainSource}`,
+  //     `!source/common/helper/log.ts`,
+  //     'postcss.config.*',
+  //     'tailwind.config.js'
+  //   ],
+  //   options,
+  //   buildSeries
+  // );
   // Compile.on('change', function (path) {
   //   console.log('Compile File ' + path + ' was changed');
   // });
@@ -91,10 +90,16 @@ task('dev', async function () {
 
   /* 监听主进程相关文件变化，并重新启动 Electron */
   // const Refresh =
+  // watch(
+  //   [mainSource, 'source/common/helper/log.ts'],
+  //   { ignoreInitial: false, ...options },
+  //   series(buildSeries, debouncedStart)
+  // );
+
   watch(
-    [mainSource, 'source/common/helper/log.ts'],
+    ['.config/**/*', 'public/**/*', 'source/**/*'],
     { ignoreInitial: false, ...options },
-    series(buildSeries, debouncedStart)
+    debouncedDev
   );
 
   // Refresh.on('error', function (error) {

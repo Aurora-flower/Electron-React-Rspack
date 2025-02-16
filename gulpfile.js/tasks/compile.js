@@ -8,9 +8,8 @@ const {
 } = require('../utils/file');
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
-const { debounce } = require('lodash');
 const { task, series } = require('gulp');
-const { getArgv } = require('../utils/argv');
+const { getArgv, getMode } = require('../utils/argv');
 const joinPath = require('../utils/join_path');
 const getConfig = require('../webpack/get_config');
 
@@ -52,12 +51,14 @@ function findErrors(log) {
 function compile() {
   return new Promise((resolve, reject) => {
     const argInfo = getArgv();
-    const webpackConfig = getConfig(argInfo.mode);
+    const mode = argInfo.mode || getMode(argInfo);
+    const webpackConfig = getConfig(mode);
     try {
       const compiler = webpack(webpackConfig);
       compiler.run(function (_err, stats) {
         console.log(
           'Compile info:',
+          mode,
           findErrors(stats.toString())
         );
         resolve(stats);
@@ -103,10 +104,7 @@ async function compileAfter() {
 /**
  * @summary 编译任务完整流程
  */
-const buildSeries = debounce(
-  series(clean, compile, compileAfter),
-  1 * 1000
-);
+const buildSeries = series(clean, compile, compileAfter);
 
 task('compile', buildSeries);
 

@@ -8,10 +8,5 @@ module.exports = {
   theme: {
     extend: {}
   },
-  // corePlugins: {
-  //   /* 如果不需要默认样式重置可以禁用 preflight */
-  //   preflight: false
-  // },
   plugins: []
-  // safelist: ['app-region']
 };
