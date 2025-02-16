@@ -84,13 +84,16 @@ export function getClipboardText() {
 /**
  * 获取网络连接信息
  * @description
- * 通过 web api - navigator.connection 获取网络连接信息。
+ * - 通过 web api - navigator.connection 获取网络连接信息。
+ * - Navigator 接口的 connection 只读属性返回一个包含有关系统网络连接信息的 NetworkInformation 对象，
+ * 例如用户设备的当前带宽或连接是否按流量计费。
+ * - 这可以用于根据用户的连接状态来选择高清晰度内容或低清晰度内容。
  *
  * @remarks
- * navigator.connection.downlink - 下载速度（单位：Mbps）
- * navigator.connection.rtt - 往返时间（单位：ms）
- * navigator.connection.effectiveType - 网络连接类型（e.g., '4g', '3g', '2g', 'slow-2g'）
- * navigator.connection.saveData - 是否启用了数据保存模式（true/false）
+ * - `navigator.connection.downlink` - 下载速度（单位：Mbps）
+ * - `navigator.connection.rtt` - 往返时间（单位：ms）
+ * - `navigator.connection.effectiveType` - 网络连接类型（e.g., '4g', '3g', '2g', 'slow-2g'）
+ * - `navigator.connection.saveData` - 是否启用了数据保存模式（true/false）
  */
 export function getConnectivity() {
   return window.navigator.connection;

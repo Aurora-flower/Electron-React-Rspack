@@ -8,6 +8,7 @@ const {
 } = require('../utils/file');
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
+const { debounce } = require('lodash');
 const { task, series } = require('gulp');
 const { getArgv } = require('../utils/argv');
 const joinPath = require('../utils/join_path');
@@ -102,7 +103,10 @@ async function compileAfter() {
 /**
  * @summary 编译任务完整流程
  */
-const buildSeries = series(clean, compile, compileAfter);
+const buildSeries = debounce(
+  series(clean, compile, compileAfter),
+  1 * 1000
+);
 
 task('compile', buildSeries);
 

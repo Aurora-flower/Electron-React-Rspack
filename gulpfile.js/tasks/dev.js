@@ -2,6 +2,7 @@
  * @file 开发运行任务
  */
 const electron = require('electron');
+const { debounce } = require('lodash');
 const { buildSeries } = require('./compile');
 const { spawn } = require('node:child_process');
 const { existsSync } = require('../utils/file');
@@ -50,6 +51,12 @@ async function start() {
   });
 }
 
+const debouncedStart = debounce(cd => {
+  start()
+    .then(() => cd())
+    .catch(cd);
+}, 1 * 1000);
+
 // exports.dev = function () {};
 task('dev', async function () {
   const options = {
@@ -87,7 +94,7 @@ task('dev', async function () {
   watch(
     [mainSource, 'source/common/helper/log.ts'],
     { ignoreInitial: false, ...options },
-    series(buildSeries, start)
+    series(buildSeries, debouncedStart)
   );
 
   // Refresh.on('error', function (error) {
