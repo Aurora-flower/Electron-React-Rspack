@@ -10,7 +10,7 @@ const { task, series, watch /* parallel */ } = require('gulp');
 
 let electronProcess = null;
 
-async function start() {
+async function stop() {
   if (electronProcess) {
     electronProcess.kill();
 
@@ -25,6 +25,23 @@ async function start() {
       });
     });
   }
+}
+
+async function start() {
+  // if (electronProcess) {
+  //   electronProcess.kill();
+
+  //   /* 等待进程完全退出 */
+  //   await new Promise(resolve => {
+  //     electronProcess.on('exit', () => {
+  //       console.log(
+  //         'Stop origin electron progress pid:',
+  //         electronProcess?.pid
+  //       );
+  //       resolve();
+  //     });
+  //   });
+  // }
 
   if (!existsSync('./app/electron/main.js', 'File')) {
     console.log('entry file not found');
@@ -52,7 +69,7 @@ async function start() {
 }
 
 const debouncedDev = throttle(
-  series(buildSeries, start),
+  series(stop, buildSeries, start),
   3 * 1000
 );
 

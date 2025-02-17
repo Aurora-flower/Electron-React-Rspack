@@ -27,6 +27,11 @@ declare global {
   //     regExp: RegExp
   //   ) => any;
   // }
+
+  /* ***** ***** ***** ***** Window.Navigator 类型定义扩展 ***** ***** ***** ***** */
+  interface Navigator {
+    readonly deviceMemory?: number;
+  }
 }
 
 export {};
