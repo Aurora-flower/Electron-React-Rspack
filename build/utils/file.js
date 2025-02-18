@@ -4,7 +4,7 @@ const {
   statSync,
   readdirSync,
   readFileSync
-} = require('fs');
+} = require('node:fs');
 const joinPath = require('./join_path');
 
 function existsSync(

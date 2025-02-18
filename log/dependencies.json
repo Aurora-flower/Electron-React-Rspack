@@ -77,18 +77,38 @@
           "commit": "353cec09",
           "date": "2025/01/12",
           "message": ""
+        },
+        {
+          "version": "^19.0.8",
+          "commit": "",
+          "date": "2025/01/20",
+          "message": ""
         }
       ]
     },
     "@types/react-dom": {
       "version": "^19.0.2",
       "description": {},
-      "changed": []
+      "changed": [
+        {
+          "version": "^19.0.3",
+          "commit": "",
+          "date": "2025/01/20",
+          "message": ""
+        }
+      ]
     },
     "@typescript-eslint/parser": {
       "version": "^8.18.1",
       "description": {},
-      "changed": []
+      "changed": [
+        {
+          "version": "^8.24.0",
+          "commit": "",
+          "date": "2025/01/20",
+          "message": ""
+        }
+      ]
     },
     "asar": {
       "version": "^3.2.0",
@@ -288,7 +308,14 @@
     "typescript-eslint": {
       "version": "^8.19.1",
       "description": {},
-      "changed": []
+      "changed": [
+        {
+          "version": "^8.24.0",
+          "commit": "353cec09",
+          "date": "2025/01/12",
+          "message": ""
+        }
+      ]
     },
     "wait-on": {
       "version": "^8.0.2",
@@ -340,6 +367,12 @@
           "version": "^6.5.4",
           "commit": "cf8b11ec",
           "date": "2025/01/04",
+          "message": ""
+        },
+        {
+          "version": "^6.6.0",
+          "commit": "",
+          "date": "2025/02/18",
           "message": ""
         }
       ]

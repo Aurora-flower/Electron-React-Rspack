@@ -187,6 +187,7 @@ const alias = {
 const optimization = {
   /* 压缩代码 */
   minimize: true
+  // minimizer: [new TerserPlugin()],
 };
 
 /**
@@ -246,6 +247,9 @@ function get(type) {
           // mainFields: ['browser', 'module', 'main'],
           extensions: baseExtensions,
           alias
+          // fallback: {
+          //   fs: false // 明确禁用 fs 的 polyfill
+          // }
         },
         externals,
         module: {
