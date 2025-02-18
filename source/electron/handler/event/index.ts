@@ -21,7 +21,14 @@ function ready() {
     })
     .finally(onAppReadyAfter)
     .catch(reason => {
-      debugLog(module.id, 'ReadyError', true, reason);
+      debugLog(
+        {
+          id: module.id,
+          sign: 'Ready Error',
+          isMain: true
+        },
+        reason
+      );
     });
 }
 

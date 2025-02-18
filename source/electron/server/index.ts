@@ -35,5 +35,13 @@ export async function startServer(isSafe: boolean = false) {
     path: Helper.getAppAsarOutput('public')
   });
   await server.start();
-  debugLog(module.id, 'Start Server', true, connect, isSafe);
+  debugLog(
+    {
+      id: module.id,
+      sign: 'OnAppReady',
+      isMain: true
+    },
+    connect,
+    isSafe
+  );
 }

@@ -31,6 +31,9 @@ declare global {
   /* ***** ***** ***** ***** Window.Navigator 类型定义扩展 ***** ***** ***** ***** */
   interface Navigator {
     readonly deviceMemory?: number;
+    readonly presentation?: unknown;
+    readonly usb?: unknown;
+    readonly windowControlsOverlay?: unknown;
   }
 }
 

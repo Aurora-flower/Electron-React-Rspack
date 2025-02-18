@@ -41,9 +41,10 @@ function runtimeLoadHandle() {
 
   document.addEventListener('DOMContentLoaded', () => {
     debugLog(
-      module.id,
-      'Document-DOMContentLoaded',
-      false,
+      {
+        id: module.id,
+        sign: 'Document-DOMContentLoaded'
+      },
       process.env.NODE_ENV,
       process.env.IS_DEBUG,
       process.env?.IS_RECORD_LOG

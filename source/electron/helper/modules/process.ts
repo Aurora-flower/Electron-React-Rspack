@@ -7,14 +7,14 @@ const ModuleID = module.id;
 
 export function runProcess(
   _event: Electron.IpcMainInvokeEvent,
-  ...params: any
+  ...params: string[]
 ): null {
   const script = joinPath(
     process.cwd(),
     'extend/scripts',
     'svn.js'
   );
-  const nodeProcess: any = spawn('node', [script, ...params], {
+  const nodeProcess = spawn('node', [script, ...params], {
     detached: true, // 分离的
     stdio: ['pipe', 'pipe', 'pipe', 'ipc']
   });
@@ -25,17 +25,21 @@ export function runProcess(
   exec(`${command} ${pid}`, (error, stdout, stderr) => {
     if (error) {
       debugLog(
-        ModuleID,
-        'RunProcess Error',
-        true,
+        {
+          id: ModuleID,
+          sign: 'RunProcess Error',
+          isMain: true
+        },
         error?.message,
         `进程 ${pid} 不存在`
       );
     } else {
       debugLog(
-        ModuleID,
-        'RunProcess',
-        true,
+        {
+          id: ModuleID,
+          sign: 'RunProcess',
+          isMain: true
+        },
         `进程 ${pid} 正在运行`,
         stdout,
         stderr
@@ -43,6 +47,14 @@ export function runProcess(
     }
   });
 
-  debugLog(ModuleID, 'RunProcess', params, nodeProcess.pid);
+  debugLog(
+    {
+      id: ModuleID,
+      sign: 'RunProcess',
+      isMain: true
+    },
+    params,
+    nodeProcess.pid
+  );
   return null;
 }

@@ -1,5 +1,4 @@
 import { join } from 'node:path';
-// import { debugLog } from '@/common/log';
 
 /**
  * 拼接路径
@@ -13,7 +12,6 @@ export function joinPath(...paths: any[]) {
       ? base.replace(/\\/g, '/')
       : base.replace(/(?=\W+)\s+(?<=\W+)/g, '\\ ');
   } catch (error: any) {
-    // debugLog(module.id, 'joinPath', false, error?.message);
     return '';
   }
 }

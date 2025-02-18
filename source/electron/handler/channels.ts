@@ -16,9 +16,11 @@ export function channelEventDispatch(
   ...args: unknown[]
 ) {
   debugLog(
-    module.id,
-    'channelEventDispatch',
-    false,
+    {
+      id: module.id,
+      sign: 'ChannelEventDispatch',
+      isMain: true
+    },
     channel,
     ...args,
     Panel

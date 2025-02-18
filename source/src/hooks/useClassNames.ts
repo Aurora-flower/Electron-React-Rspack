@@ -43,9 +43,10 @@ function useClassNames(classNames: Array<unknown>): string {
     return processedClassNames.join(' ');
   } catch (error: unknown) {
     debugLog(
-      module.id,
-      'UseClassNames error',
-      false,
+      {
+        id: module.id,
+        sign: 'UseClassNames error'
+      },
       (error as Error)?.message
     );
     return '';

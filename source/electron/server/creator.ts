@@ -75,7 +75,14 @@ export class AppServer {
       /* http 协议 */
       this.creatorServer();
     }
-    debugLog(ModuleID, options.path, true);
+    debugLog(
+      {
+        id: ModuleID,
+        sign: 'AppServer',
+        isMain: true
+      },
+      options.path
+    );
   }
 
   getWebUrl() {
@@ -132,9 +139,11 @@ export class AppServer {
         'index.html'
       );
       debugLog(
-        ModuleID,
-        'Res',
-        true,
+        {
+          id: ModuleID,
+          sign: 'Application Res',
+          isMain: true
+        },
         `${req.url}`,
         indexFilePath
       );
@@ -144,9 +153,11 @@ export class AppServer {
     /* 监听端口 */
     this._server.listen(this._option.port, () => {
       debugLog(
-        ModuleID,
-        'Server Listen',
-        true,
+        {
+          id: ModuleID,
+          sign: 'Server Listen',
+          isMain: true
+        },
         `Static source - ${this._option.path}: ${this._option.port}`
       );
     });
@@ -163,7 +174,14 @@ export class AppServer {
     }
 
     this._server.close(() => {
-      debugLog(ModuleID, 'Server stopped', true);
+      debugLog(
+        {
+          id: ModuleID,
+          sign: 'Server Stopped',
+          isMain: true
+        },
+        true
+      );
     });
   }
 }

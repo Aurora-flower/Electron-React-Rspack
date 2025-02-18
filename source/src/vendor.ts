@@ -1,9 +1,9 @@
 /**
  * @file vendor 第三方库或编译资源的引入
  */
-
+import '@/src/debug';
 import { debugLog } from '@/common/helper/log';
-import { getConnectivity } from '@/src/api/device';
+import { getConnectivity } from '@/src/api/web/device';
 
 /**
  * @import animate.css 动画库
@@ -13,4 +13,10 @@ import { getConnectivity } from '@/src/api/device';
  */
 // import 'animate.css';
 
-debugLog(module.id, 'Vendor', false, getConnectivity());
+debugLog(
+  {
+    id: module.id,
+    sign: 'Vendor'
+  },
+  getConnectivity()
+);

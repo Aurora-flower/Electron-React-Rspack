@@ -111,7 +111,14 @@ export function createWindow(
       error instanceof Error
         ? error.message
         : 'Unknown error occurred!';
-    debugLog(module.id, 'CreateWindow', true, msg);
+    debugLog(
+      {
+        id: module.id,
+        sign: 'CreateWindow',
+        isMain: true
+      },
+      msg
+    );
     // AppMessageDistributor.showErrorBox(
     //   'Failed to create main window',
     //   msg

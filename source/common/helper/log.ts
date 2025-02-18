@@ -17,13 +17,30 @@ function recordLog(_args: unknown[]) {
   );
 }
 
+interface LogOptions {
+  /**
+   * 模块标识 - scriptModuleId
+   */
+  id: string;
+  /**
+   * 签名(标识符)
+   */
+  sign: string;
+  /**
+   * 是否是主进程
+   */
+  isMain?: boolean;
+  /**
+   * 输出类型
+   */
+  type?: 'log' | 'error' | 'warn' | 'info';
+}
+
 /**
  * @file 用于在调试模式下输出日志。
  */
 export function debugLog(
-  scriptModuleId: string,
-  sign: string /* 标识符 */,
-  isMain: boolean /* 是否是主进程 */,
+  options: LogOptions,
   ...args: unknown[]
 ) {
   if (
@@ -32,7 +49,9 @@ export function debugLog(
   ) {
     return;
   }
-
+  const sign = options.sign || 'DEBUG';
+  const isMain = options.isMain || false;
+  const moduleId = options.id || '?unknown';
   const params = args.length > 0 ? args : null;
 
   if (isMain && process.env?.IS_RECORD_LOG) {
@@ -40,8 +59,5 @@ export function debugLog(
     recordLog(args);
   }
 
-  console.log(
-    `>>> Source [ ${scriptModuleId} ] - ${sign}: `,
-    params
-  );
+  console.log(`>>> Source [ ${moduleId} ] - ${sign}: `, params);
 }

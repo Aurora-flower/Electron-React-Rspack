@@ -1,3 +1,3 @@
 import { debugLog } from '@/common/helper/log';
 
-debugLog(module.id, 'Vendor', true);
+debugLog({ id: module.id, sign: 'Vendor', isMain: true });

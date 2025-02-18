@@ -21,13 +21,22 @@ export async function loadExtension() {
       loadExtensionOptions: { allowFileAccess: true }
     })
       .then(res =>
-        debugLog(ModuleID, `Added Extension`, true, res.name)
+        debugLog(
+          {
+            id: ModuleID,
+            sign: `Added Extension`,
+            isMain: true
+          },
+          res.name
+        )
       )
       .catch(err =>
         debugLog(
-          ModuleID,
-          'An error occurred',
-          true,
+          {
+            id: ModuleID,
+            sign: `An error occurred`,
+            isMain: true
+          },
           err?.message
         )
       );

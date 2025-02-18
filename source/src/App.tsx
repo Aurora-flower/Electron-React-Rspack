@@ -75,7 +75,10 @@ function AppRender() {
 
   /** render 渲染，挂载到根元素 */
   createRoot(rootElement).render(<App />);
-  debugLog(module.id, 'Render', false);
+  debugLog({
+    id: module.id,
+    sign: 'Document-Render'
+  });
 }
 
 AppRender();

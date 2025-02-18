@@ -3,15 +3,17 @@
  */
 const {
   copyHandler,
-  readJsonFileToData,
-  writeJsonFile
+  writeJsonFile,
+  readJsonFileToData
 } = require('../utils/file');
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
 const { task, series } = require('gulp');
-const { getArgv, getMode } = require('../utils/argv');
 const joinPath = require('../utils/join_path');
 const getConfig = require('../webpack/get_config');
+const { getArgv, getMode } = require('../utils/argv');
+
+const argInfo = getArgv();
 
 /**
  * 清理构建目录
@@ -50,7 +52,6 @@ function findErrors(log) {
  */
 function compile() {
   return new Promise((resolve, reject) => {
-    const argInfo = getArgv();
     const mode = argInfo.mode || getMode(argInfo);
     const webpackConfig = getConfig(mode);
     try {

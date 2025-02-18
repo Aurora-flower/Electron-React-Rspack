@@ -9,4 +9,10 @@
 // } from '@/src/api/device';
 import { debugLog } from '@/common/helper/log';
 
-debugLog(module.id, 'Debug', false, window.isSecureContext);
+debugLog(
+  {
+    id: module.id,
+    sign: 'Debug'
+  },
+  window.isSecureContext
+);
