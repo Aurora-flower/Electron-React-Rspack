@@ -2,6 +2,8 @@
   "recommendations": [
     "huizhou.githd",
     "antfu.iconify",
+    "ms-python.python",
+    "lokalise.i18n-ally",
     "mhutchie.git-graph",
     "ritwickdey.liveserver",
     "esbenp.prettier-vscode",
