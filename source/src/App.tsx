@@ -77,7 +77,7 @@ function AppRender() {
   createRoot(rootElement).render(<App />);
   debugLog({
     id: module.id,
-    sign: 'Document-Render'
+    sign: 'Document-Render test'
   });
 }
 

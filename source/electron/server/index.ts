@@ -38,7 +38,7 @@ export async function startServer(isSafe: boolean = false) {
   debugLog(
     {
       id: module.id,
-      sign: 'OnAppReady',
+      sign: 'startServer',
       isMain: true
     },
     connect,

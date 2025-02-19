@@ -70,6 +70,50 @@ function compile() {
   });
 }
 
+function compileWatch() {
+  return new Promise((resolve, reject) => {
+    const mode = argInfo.mode || getMode(argInfo);
+    const webpackConfig = getConfig(mode);
+    try {
+      const compiler = webpack(webpackConfig);
+
+      /* 修改为 watch 模式 */
+      const watching = compiler.watch(
+        {
+          // aggregateTimeout: 300, // 延迟时间(ms)
+          // poll: undefined, // 关闭文件系统轮询
+          ignored: /node_modules/
+        },
+        (err, stats) => {
+          if (err) {
+            console.error('Watch error:', err);
+            return reject(err);
+          }
+
+          console.log(
+            'Recompiled at:',
+            new Date().toLocaleString()
+          );
+          console.log(
+            'Compile info:',
+            mode,
+            findErrors(stats.toString())
+          );
+          resolve(stats); // 注意📢: 这里 resolve 只会在第一次编译时触发
+        }
+      );
+
+      /* 添加关闭钩子（按需）*/
+      process.on('SIGINT', () => {
+        watching.close();
+        process.exit();
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 /**
  * 编译完成后的回调函数, 做收尾处理
  * @description 这里使用的现代 gulp 任务的编写方式 - `Async/Await 模式`
@@ -106,12 +150,19 @@ async function compileAfter() {
  * @summary 编译任务完整流程
  */
 const buildSeries = series(clean, compile, compileAfter);
+const buildSeriesWatch = series(
+  clean,
+  compileWatch,
+  compileAfter
+);
 
 task('compile', buildSeries);
+task('compile:watch', buildSeriesWatch);
 
 module.exports = {
   clean,
   compile,
   compileAfter,
-  buildSeries
+  buildSeries,
+  buildSeriesWatch
 };

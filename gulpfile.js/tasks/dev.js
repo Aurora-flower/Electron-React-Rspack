@@ -2,11 +2,11 @@
  * @file 开发运行任务
  */
 const electron = require('electron');
-const { throttle } = require('lodash');
-const { buildSeries } = require('./compile');
+const { /* debounce, */ throttle } = require('lodash');
+const { buildSeries, buildSeriesWatch } = require('./compile');
 const { spawn } = require('node:child_process');
 const { existsSync } = require('../utils/file');
-const { task, series, watch /* parallel */ } = require('gulp');
+const { task, series, watch /*, parallel*/ } = require('gulp');
 
 let electronProcess = null;
 
@@ -73,38 +73,11 @@ const debouncedDev = throttle(
   3 * 1000
 );
 
-// exports.dev = function () {};
+// 另一种语法：exports.dev = function () {};
 task('dev', async function () {
   const options = {
     cwd: process.cwd()
   };
-
-  // const mainSource = 'source/electron/**/*';
-
-  /* 监听文件变化，并重新编译 */
-  // const Compile =
-  // watch(
-  //   [
-  //     '.config/**/*',
-  //     'public/**/*',
-  //     'source/**/*',
-  //     'source/preload/**/*',
-  //     `!${mainSource}`,
-  //     `!source/common/helper/log.ts`,
-  //     'postcss.config.*',
-  //     'tailwind.config.js'
-  //   ],
-  //   options,
-  //   buildSeries
-  // );
-  // Compile.on('change', function (path) {
-  //   console.log('Compile File ' + path + ' was changed');
-  // });
-
-  // Compile.on('error', function (error) {
-  //   console.log('Compile task Error:', error.message);
-  // });
-
   /* 监听主进程相关文件变化，并重新启动 Electron */
   // const Refresh =
   // watch(
@@ -113,17 +86,52 @@ task('dev', async function () {
   //   series(buildSeries, debouncedStart)
   // );
 
-  watch(
+  const Refresh = watch(
     ['.config/**/*', 'public/**/*', 'source/**/*'],
     { ignoreInitial: false, ...options },
     debouncedDev
   );
 
-  // Refresh.on('error', function (error) {
-  //   console.log('Refresh task Error:', error.message);
-  // });
-
-  // Refresh.on('change', function (path) {
-  //   console.log('Refresh File ' + path + ' was changed');
-  // });
+  Refresh.on('error', function (error) {
+    console.log('Refresh task Error:', error.message);
+    process.exit(1);
+  });
 });
+
+async function devWatch() {
+  const options = {
+    cwd: process.cwd()
+  };
+
+  const mainSource = 'source/electron/**/*';
+  /* 监听文件变化，并重新编译 */
+  //   '.config/**/*',
+  //   'public/**/*',
+  //   'source/**/*',
+  //   'source/preload/**/*',
+  //   `!${mainSource}`,
+  //   `!source/common/helper/log.ts`,
+  //   'postcss.config.*',
+  //   'tailwind.config.js'
+  // ]
+
+  watch(
+    mainSource,
+    {
+      ignoreInitial: false,
+      ...options,
+      // delay: 1000 * 1, // 延迟时间
+      // alwaysStat: false, // 关闭不必要的stat信息
+      // usePolling: false, // 禁用轮询模式
+      // depth: 5, // 限制监控目录深度
+      // atomic: true, // 处理原子保存操作
+      awaitWriteFinish: {
+        stabilityThreshold: 3000, // 文件稳定时间
+        pollInterval: 1000 // 检查间隔
+      }
+    },
+    series(stop, start)
+  );
+}
+
+task('dev:watch', series(buildSeriesWatch, devWatch));

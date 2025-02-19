@@ -160,8 +160,8 @@ function getBasePlugins(mode) {
  */
 const Entry = {
   Main: {
-    main: joinPath(Directory.Source.electron, 'index.ts'),
-    vendor: joinPath(Directory.Source.electron, 'vendor.ts')
+    main: joinPath(Directory.Source.electron, 'index.ts')
+    // vendor: joinPath(Directory.Source.electron, 'vendor.ts')
   },
   Preload: {
     index: joinPath(Directory.Source.preload, 'index.ts')

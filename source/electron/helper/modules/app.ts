@@ -95,7 +95,8 @@ export function getAppAsarOutput(path: string) {
 
 /**
  * 获取应用程序相关路径信息
- * @returns 应用路径
+ * @returns 应用路径信息字典
+ * @default {}
  */
 export function getAppPaths(): Record<string, string | boolean> {
   try {

@@ -15,6 +15,7 @@
     "eslint:inspect": "eslint --inspect-config",
     "package": "rimraf release && electron-builder --platform mac,win",
     "dev": "gulp dev --mode=development",
+    "dev:watch": "gulp dev:watch --mode=development",
     "gulp:package": "gulp package",
     "compile": "gulp compile",
     "dev:server": "ts-node source/electron/server/index.ts",
