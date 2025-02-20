@@ -9,12 +9,13 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import * as React from 'react';
+import Layout from '@/src/layout';
 
 // 客户端路由配置
 const RouteOptions: RouteObject[] = [
   {
     path: '/',
-    element: <div data-date={new Date()}></div>,
+    element: <Layout date={new Date()}></Layout>,
     children: [
       /**
        * @summary 嵌套路由是将 URL 的片段与组件层次结构和数据耦合在一起的总体思路。

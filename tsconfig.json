@@ -2,7 +2,6 @@
   "include": ["source"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./source/*"],
@@ -12,6 +11,7 @@
     "target": "ES6",
     "allowJs": true,
     "newLine": "lf",
+    "jsx": "react-jsx",
     "sourceMap": true,
     "diagnostics": true,
     "declaration": true,
@@ -28,7 +28,6 @@
     "skipDefaultLibCheck": true,
     "allowUnreachableCode": true,
     "experimentalDecorators": true,
-    "jsxFactory": "React.createElement",
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./node_modules/@types"]
   }

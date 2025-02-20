@@ -1,3 +1,4 @@
+/* ***** ***** ***** ***** 主进程的类型定义 ***** ***** ***** ***** */
 declare namespace MainProcess {
   /* Eelectron app Api 的属性 */
   export type AppProperty =
