@@ -70,6 +70,9 @@ function compile() {
   });
 }
 
+/**
+ * @summary 编译构建项目 - HMR
+ */
 function compileWatch() {
   return new Promise((resolve, reject) => {
     const mode = argInfo.mode || getMode(argInfo);

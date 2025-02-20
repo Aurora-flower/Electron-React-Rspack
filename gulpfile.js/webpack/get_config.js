@@ -269,7 +269,8 @@ function get(type) {
         ]);
         options.module.rules = baseLoader.concat([
           Loader.css,
-          Loader.font
+          Loader.font,
+          Loader.image
         ]);
 
         const pluginsExtend = [
