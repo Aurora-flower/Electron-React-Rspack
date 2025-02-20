@@ -1,4 +1,6 @@
 /* 使用媒体查询或 JavaScript 切换主题 */
+
+/* 媒体查询 - 用于检测用户是否设置浅色或深色主题  */
 @media (prefers-color-scheme: light) {
   :root {
     --primary-color: var(--dark-primary-color);
@@ -12,5 +14,12 @@
     --primary-color: var(--dark-primary-color);
     --background-color: var(--dark-background-color);
     --text-color: var(--dark-text-color);
+  }
+}
+
+/* 媒体查询 - 是否减少动画 - 表示当用户的操作系统未开启"减少动画效果"设置时（用户未主动要求降低动态效果），才会应用内部的样式规则。 */
+@media (prefers-reduced-motion: no-preference) {
+  a > .logo {
+    animation: logo-spin infinite 20s linear;
   }
 }
