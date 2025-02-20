@@ -8,8 +8,8 @@ const {
 } = require('../utils/file');
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
+const { join } = require('node:path');
 const { task, series } = require('gulp');
-const joinPath = require('../utils/join_path');
 const getConfig = require('../webpack/get_config');
 const { getArgv, getMode } = require('../utils/argv');
 
@@ -130,7 +130,7 @@ async function compileAfter() {
     {
       get(target, prop) {
         if (prop in target) {
-          return joinPath(CWD, target[prop]);
+          return join(CWD, target[prop]);
         }
         return undefined;
       }

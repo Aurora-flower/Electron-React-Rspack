@@ -4,7 +4,6 @@
 import Helper from '@/electron/helper';
 import { TimeUtility } from '@/common/utils';
 import FileSystemUtils from '@/electron/utils/fileSystemUtils';
-// import { joinPath } from '@/common/helper/joinPath';
 
 interface LoggerOptions {
   /* 日志文件名：默认 - cache/debug/logger.log */

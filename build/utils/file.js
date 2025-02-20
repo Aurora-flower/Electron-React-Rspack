@@ -5,7 +5,7 @@ const {
   readdirSync,
   readFileSync
 } = require('node:fs');
-const joinPath = require('./join_path');
+const { join } = require('node:path');
 
 function existsSync(
   localPath,
@@ -35,8 +35,8 @@ function moveDir(sourceDir, targetDir) {
       mkdirSync(targetDir, { recursive: true });
     }
     readdirSync(sourceDir).forEach(file => {
-      const sourcePath = joinPath(sourceDir, file);
-      const targetPath = joinPath(targetDir, file);
+      const sourcePath = join(sourceDir, file);
+      const targetPath = join(targetDir, file);
       if (existsSync(sourcePath, 'File')) {
         writeFile(targetPath, readFileSync(sourcePath), err => {
           resolve(!err);

@@ -1,7 +1,7 @@
 import Helper from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 import { spawn, exec } from 'node:child_process';
-import { joinPath } from '@/common/helper/joinPath';
+import { joinPath } from '@/electron/utils/path';
 
 const ModuleID = module.id;
 

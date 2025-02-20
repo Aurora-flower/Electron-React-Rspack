@@ -6,9 +6,9 @@ const {
   getBundleAnalyzerPlugin,
   getMiniCssExtractPlugin
 } = require('./plugins');
+const { join } = require('node:path');
 const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
-const joinPath = require('../utils/join_path');
 const { BuildingEnvironment } = require('./env');
 const { WebpakTarget } = require('./webpack_target');
 
@@ -45,35 +45,35 @@ const DirectoryStructure = {
 function getAppStructure(baseUrl) {
   return {
     base: baseUrl,
-    electron: joinPath(baseUrl, 'electron'),
-    renderer: joinPath(baseUrl, 'public'),
-    preload: joinPath(baseUrl, 'preload')
+    electron: join(baseUrl, 'electron'),
+    renderer: join(baseUrl, 'public'),
+    preload: join(baseUrl, 'preload')
   };
 }
 
 function getSourceStructure(baseUrl) {
   return {
     base: baseUrl,
-    common: joinPath(baseUrl, 'common'),
-    electron: joinPath(baseUrl, 'electron'),
-    preload: joinPath(baseUrl, 'preload'),
-    renderer: joinPath(baseUrl, 'src'),
-    static: joinPath(baseUrl, 'static'),
-    types: joinPath(baseUrl, 'types')
+    common: join(baseUrl, 'common'),
+    electron: join(baseUrl, 'electron'),
+    preload: join(baseUrl, 'preload'),
+    renderer: join(baseUrl, 'src'),
+    static: join(baseUrl, 'static'),
+    types: join(baseUrl, 'types')
   };
 }
 
 function getGenStructure(baseUrl) {
   return {
     base: baseUrl,
-    template: joinPath(baseUrl, 'template')
+    template: join(baseUrl, 'template')
   };
 }
 
 function getPublicStructure(baseUrl) {
   return {
     base: baseUrl,
-    pages: joinPath(baseUrl, 'pages')
+    pages: join(baseUrl, 'pages')
   };
 }
 
@@ -82,7 +82,7 @@ const Directory = new Proxy(DirectoryStructure, {
     if (!(key in target)) {
       return undefined;
     }
-    const baseUrl = joinPath(CWD, target[key]);
+    const baseUrl = join(CWD, target[key]);
     if (key === 'App') {
       return getAppStructure(baseUrl);
     } else if (key === 'Source') {
@@ -108,8 +108,8 @@ const FileStructure = {
 
 function getFileTrend(form, to, name) {
   return {
-    from: joinPath(form, name),
-    to: to && joinPath(to, name)
+    from: join(form, name),
+    to: to && join(to, name)
   };
 }
 
@@ -160,15 +160,15 @@ function getBasePlugins(mode) {
  */
 const Entry = {
   Main: {
-    main: joinPath(Directory.Source.electron, 'index.ts')
-    // vendor: joinPath(Directory.Source.electron, 'vendor.ts')
+    main: join(Directory.Source.electron, 'index.ts')
+    // vendor: join(Directory.Source.electron, 'vendor.ts')
   },
   Preload: {
-    index: joinPath(Directory.Source.preload, 'index.ts')
+    index: join(Directory.Source.preload, 'index.ts')
   },
   Renderer: {
-    index: joinPath(Directory.Source.renderer, 'index.ts'),
-    vendor: joinPath(Directory.Source.renderer, 'vendor.ts')
+    index: join(Directory.Source.renderer, 'index.ts'),
+    vendor: join(Directory.Source.renderer, 'vendor.ts')
   }
 };
 

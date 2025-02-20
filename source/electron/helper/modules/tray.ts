@@ -2,9 +2,9 @@
  * @file 系统托盘
  */
 // import { createWindow } from './window';
+import { joinPath } from '@/electron/utils/path';
 // import { debugLog } from '@/common/helper/log';
 import { nativeImage, Tray, Menu } from 'electron';
-import { joinPath } from '@/common/helper/joinPath';
 
 /**
  * @summary 设置系统托盘

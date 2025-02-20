@@ -2,8 +2,8 @@ import http from 'node:http';
 import express from 'express';
 import https from 'node:https';
 import { debugLog } from '@/common/helper/log';
+import { joinPath } from '@/electron/utils/path';
 import { handleError } from '@/common/helper/error';
-import { joinPath } from '@/common/helper/joinPath';
 
 // import Koa from 'koa';
 // import serve from 'koa-static';

@@ -6,8 +6,8 @@
 const { moveDir } = require('./utils/file');
 
 exports.default = function () {
-  // const folder = joinPath(process.cwd(), 'core');
-  // const destFolder = joinPath(process.cwd(), 'app/core');
+  // const folder = join(process.cwd(), 'core');
+  // const destFolder = join(process.cwd(), 'app/core');
   moveDir('gen', 'app/gen');
   moveDir('core', 'app/core');
 };
