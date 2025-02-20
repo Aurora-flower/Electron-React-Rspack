@@ -1,6 +1,6 @@
 {
   "name": "er",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "app/electron/main.js",
   "private": "true",
   "scripts": {
