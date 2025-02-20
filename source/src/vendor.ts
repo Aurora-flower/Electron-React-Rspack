@@ -3,7 +3,6 @@
  */
 import '@/src/debug';
 import { debugLog } from '@/common/helper/log';
-import { getConnectivity } from '@/common/api/web/device';
 
 /**
  * @import animate.css 动画库
@@ -13,10 +12,7 @@ import { getConnectivity } from '@/common/api/web/device';
  */
 // import 'animate.css';
 
-debugLog(
-  {
-    id: module.id,
-    sign: 'Vendor'
-  },
-  getConnectivity()
-);
+debugLog({
+  id: module.id,
+  sign: 'Vendor'
+});

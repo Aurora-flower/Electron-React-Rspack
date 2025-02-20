@@ -1,7 +1,6 @@
 /**
- * @file 存放与设备相关的 web api
+ * @file 媒体查询相关
  */
-export * from '@/common/api/web/device/navigator';
 
 /**
  * @summary 监听媒体查询
