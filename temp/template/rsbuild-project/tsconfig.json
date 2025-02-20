@@ -6,6 +6,7 @@
     "noEmit": true,
     "skipLibCheck": true,
     "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
 
     /* modules */
     "module": "ESNext",
