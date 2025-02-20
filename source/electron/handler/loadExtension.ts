@@ -4,14 +4,13 @@ import {
   installExtension,
   REACT_DEVELOPER_TOOLS
 } from 'electron-devtools-installer';
-// import Helper from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 
 const ModuleID = module.id;
 
 export async function loadExtension() {
   // 注意📢: windows 下会一直尝试安装，但最终还是安装不成功，很久之后才启动应用；
-  if (/* Helper.isWin() && */ !app.isPackaged) {
+  if (/* isWin() && */ !app.isPackaged) {
     return;
   }
 

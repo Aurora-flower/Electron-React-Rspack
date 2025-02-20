@@ -1,60 +1,33 @@
-import Helper from '@/electron/helper';
-import { debugLog } from '@/common/helper/log';
-import { spawn, exec } from 'node:child_process';
-import { joinPath } from '@/electron/utils/path';
+/**
+ * @file Electron 应用中的系统信息收集与性能监测
+ * @see {@link https://lzw.me/a/electron-app-sysinfo-stats.html 文档实例}
+ * @description
+ * - Node.js 中的 process 模块提供的信息
+ * - Electron 中的 process 模块扩展的信息
+ * - electron 提供的信息统计方法
+ */
 
-const ModuleID = module.id;
+/* ***** ***** ***** ***** 获取平台信息 ***** ***** ***** ***** */
 
-export function runProcess(
-  _event: Electron.IpcMainInvokeEvent,
-  ...params: string[]
-): null {
-  const script = joinPath(
-    process.cwd(),
-    'extend/scripts',
-    'svn.js'
-  );
-  const nodeProcess = spawn('node', [script, ...params], {
-    detached: true, // 分离的
-    stdio: ['pipe', 'pipe', 'pipe', 'ipc']
-  });
-  const platform = Helper.getPlatform();
-  const pid = nodeProcess.pid;
-  const command =
-    platform == 'win32' ? `tasklist /FI "PID eq"` : `kill -0`;
-  exec(`${command} ${pid}`, (error, stdout, stderr) => {
-    if (error) {
-      debugLog(
-        {
-          id: ModuleID,
-          sign: 'RunProcess Error',
-          isMain: true
-        },
-        error?.message,
-        `进程 ${pid} 不存在`
-      );
-    } else {
-      debugLog(
-        {
-          id: ModuleID,
-          sign: 'RunProcess',
-          isMain: true
-        },
-        `进程 ${pid} 正在运行`,
-        stdout,
-        stderr
-      );
-    }
-  });
+/**
+ * 获取平台信息
+ * @param {string} platform 平台名称
+ * @returns {boolean | string}
+ */
+export function getPlatform(
+  platform?: string
+): boolean | string {
+  if (platform) {
+    return process.platform === platform;
+  } else {
+    return process.platform;
+  }
+}
 
-  debugLog(
-    {
-      id: ModuleID,
-      sign: 'RunProcess',
-      isMain: true
-    },
-    params,
-    nodeProcess.pid
-  );
-  return null;
+/**
+ * 是否为 Windows 平台
+ * @returns {boolean}
+ */
+export function isWin(): boolean {
+  return getPlatform('win32') as boolean;
 }

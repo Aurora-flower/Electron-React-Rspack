@@ -1,9 +1,7 @@
 /**
  * @file 常用的配置项
  */
-import Helper from '@/electron/helper';
-
-const { isWin, getAppAsarOutput } = Helper;
+import { isWin, getAppAsarOutput } from '@/electron/helper';
 
 /**
  * @summary 窗口默认配置项

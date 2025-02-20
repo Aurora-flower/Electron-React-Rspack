@@ -1,7 +1,7 @@
 /**
  * @file 用于 logger 配置
  */
-import Helper from '@/electron/helper';
+import { getAppAsarOutput } from '@/electron/helper';
 import { TimeUtility } from '@/common/utils';
 import FileSystemUtils from '@/electron/utils/fileSystemUtils';
 
@@ -22,7 +22,7 @@ class Logger {
   };
 
   private constructor(options: LoggerOptions) {
-    this._filepath = Helper.getAppAsarOutput(options.filename);
+    this._filepath = getAppAsarOutput(options.filename);
     this._format = options.format;
     FileSystemUtils.writeFile(this._filepath);
   }

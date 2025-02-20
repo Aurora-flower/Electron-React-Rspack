@@ -2,7 +2,7 @@
  * @file 应用准备就绪时的处理
  */
 import { homedir } from 'node:os';
-import Helper from '@/electron/helper';
+import { createWindow } from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 import { Environment } from '@/common/constant';
 import { getWebUrl } from '@/electron/server/helper';
@@ -42,7 +42,7 @@ async function onAppReady() {
       isRemote: true,
       debug: process.env?.IS_DEBUG === 'true'
     };
-    Helper.createWindow(webURL, windowOptions, params);
+    createWindow(webURL, windowOptions, params);
     debugLog(
       {
         id: ModuleID,

@@ -14,7 +14,7 @@ import {
   getWebUrl,
   getHostname
 } from '@/electron/server/helper';
-import Helper from '@/electron/helper';
+import { getAppAsarOutput } from '@/electron/helper';
 import { debugLog } from '@/common/helper/log';
 import { AppServer } from '@/electron/server/creator';
 
@@ -32,7 +32,7 @@ export async function startServer(isSafe: boolean = false) {
     isSafe: false,
     hostname: getHostname(),
     port: getPort(),
-    path: Helper.getAppAsarOutput('public')
+    path: getAppAsarOutput('public')
   });
   await server.start();
   debugLog(
