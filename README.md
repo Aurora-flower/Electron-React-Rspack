@@ -33,3 +33,7 @@
 | assets       | Add resources                                                            | `asset(icns): Add some Icns icons`                      |
 | base         | Basic project build process                                              | `base(git): Configure/update git ignore file`           |
 | editor       | Editor configuration and modifications                                   | `editor(vscode): Configure vscode`                      |
+
+---
+
+**Email: yanl_802@163.com**
