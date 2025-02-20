@@ -2,7 +2,7 @@
  * @file 数组工具类
  */
 
-import { CommonUtility } from '@/common/utils/common';
+import { CommonUtility } from '@/common/utils';
 
 const { DataTypeMode, getDataType } = CommonUtility;
 
