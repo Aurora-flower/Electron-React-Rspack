@@ -458,15 +458,18 @@ export function getMediaSession(): MediaSession {
 /**
  * 获取网络状态
  * @description
+ * 在渲染进程中，在线/离线事件 的探测，是通过标准 HTML5 API 中 `navigator.onLine` 属性来实现的。
  * - Navigator 接口的只读属性 onLine 返回一个布尔值，表示当前网络是否可用。
  * - 当浏览器连接网络状态发生变化时，该属性会发送更新。
  * 更新发生在用户点击链接或脚本请求远程页面时。
  * 例如，当用户在失去互联网连接后立即点击链接时，该属性会返回 false。
  * - 可以通过监听 online 和 offline 事件来观察网络状态的变化。
  *
+ *
  * @returns {boolean} 网络状态
  *
  * 注意📢:
+ * - 由于许多情况都会返回 true，应该小心对待误报的情况。
  * - 不同浏览器对该属性的实现方式有所不同。
  * - 在 Chrome 和 Safari 中，如果浏览器无法连接到本地局域网（LAN）或路由器，则该浏览器处于离线状态
  * 而所有其他情况下，该属性都会返回 true。

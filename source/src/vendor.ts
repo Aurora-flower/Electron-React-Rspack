@@ -3,7 +3,7 @@
  */
 import '@/src/debug';
 import { debugLog } from '@/common/helper/log';
-import { getConnectivity } from '@/src/api/web/device';
+import { getConnectivity } from '@/common/api/web/device';
 
 /**
  * @import animate.css 动画库

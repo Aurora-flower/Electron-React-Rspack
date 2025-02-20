@@ -1,9 +1,10 @@
 /**
  * @file 用于生成类名
  */
+import { CommonUtility } from '@/common/utils';
 import { debugLog } from '@/common/helper/log';
 import { DataTypeMode } from '@/common/constant';
-import { CommonUtility } from '@/common/utils/common';
+
 const { getDataType } = CommonUtility;
 
 /**

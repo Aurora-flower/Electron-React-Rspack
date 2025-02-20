@@ -3,7 +3,7 @@
  */
 import '@/src/App';
 import '@/src/static/stylesheets';
-import { getOS } from '@/src/api/web/device';
+import { getOS } from '@/common/api/web/device';
 // import '@/src/static/stylesheets/tailwind';
 import { debugLog } from '@/common/helper/log';
 

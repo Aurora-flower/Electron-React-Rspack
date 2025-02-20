@@ -1,3 +1,7 @@
+/**
+ * @file 日志输出
+ */
+
 // import Logger from 'electron-log';
 import { Environment } from '@/common/constant';
 

@@ -3,7 +3,7 @@
  * @see Window.sessionStorage&Window.localStorage
  * {@link https://developer.mozilla.org/zh-CN/docs/Web/API/Window}
  */
-import { CommonUtility } from '@/common/utils/common';
+import { CommonUtility } from '@/common/utils';
 
 function useStorage(
   type: Common.StorageType = 'sessionStorage'
