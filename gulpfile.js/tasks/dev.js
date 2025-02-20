@@ -87,7 +87,12 @@ task('dev', async function () {
   // );
 
   const Refresh = watch(
-    ['.config/**/*', 'public/**/*', 'source/**/*'],
+    [
+      '.config/**/*',
+      'public/**/*',
+      'source/**/*',
+      '!source/types'
+    ],
     { ignoreInitial: false, ...options },
     debouncedDev
   );
@@ -116,7 +121,7 @@ async function devWatch() {
   // ]
 
   watch(
-    mainSource,
+    [mainSource, '!source/types'],
     {
       ignoreInitial: false,
       ...options,

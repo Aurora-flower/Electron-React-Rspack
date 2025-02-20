@@ -5,6 +5,10 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
+import { fixupConfigRules } from '@eslint/compat';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactJsx from 'eslint-plugin-react/configs/jsx-runtime.js';
+import react from 'eslint-plugin-react/configs/recommended.js';
 
 const noUnusedConfig = [
   'error',
@@ -28,7 +32,8 @@ const ignores = [
   '**/core',
   '**/app',
   '**/gen',
-  '**/docs/other'
+  '**/docs/other',
+  'temp/'
 ];
 
 export default [
@@ -48,18 +53,28 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ...pluginReact.configs.flat.recommended,
-    settings: {
-      react: {
-        version: 'detect' // 自动检测 React 版本
-      }
-    }
+    ...pluginReact.configs.flat.recommended
   },
+  ...fixupConfigRules([
+    // ...pluginReact.configs.flat.recommended,
+    {
+      ...react,
+      settings: {
+        react: { version: 'detect' } // 自动检测 React 版本
+      }
+    },
+    reactJsx
+  ]),
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node }
     },
+    plugins: {
+      'react-hooks': reactHooks
+    },
     rules: {
+      ...reactHooks.configs.recommended.rules,
+
       /* ***** ***** ***** ***** 代码风格 ***** ***** ***** ***** */
       /* 强制使用分号 */
       'semi': ['error', 'always'],
