@@ -2,7 +2,7 @@
  * @file 应用事件监听
  */
 import { app } from 'electron';
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 import onAppReady from '@/electron/handler/onAppReady';
 import onAppReadyAfter from '@/electron/handler/onAppReadyAfter';
 import onAppReadyBefore from '@/electron/handler/onAppReadyBefore';
@@ -24,8 +24,7 @@ function ready() {
       debugLog(
         {
           id: module.id,
-          sign: 'Ready Error',
-          isMain: true
+          sign: 'Ready Error'
         },
         reason
       );

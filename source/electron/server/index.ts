@@ -15,7 +15,7 @@ import {
   getHostname
 } from '@/electron/server/helper';
 import { getAppAsarOutput } from '@/electron/helper';
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 import { AppServer } from '@/electron/server/creator';
 
 export async function startServer(isSafe: boolean = false) {
@@ -38,8 +38,7 @@ export async function startServer(isSafe: boolean = false) {
   debugLog(
     {
       id: module.id,
-      sign: 'startServer',
-      isMain: true
+      sign: 'startServer'
     },
     connect,
     isSafe

@@ -3,7 +3,7 @@
  */
 // import { createWindow } from './window';
 import { joinPath } from '@/electron/utils/path';
-// import { debugLog } from '@/common/helper/log';
+// import debugLog from '@/electron/tools/log';
 import { nativeImage, Tray, Menu } from 'electron';
 
 /**

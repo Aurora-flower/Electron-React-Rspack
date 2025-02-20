@@ -1,3 +1,3 @@
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 
-debugLog({ id: module.id, sign: 'Vendor', isMain: true });
+debugLog({ id: module.id, sign: 'Vendor' });

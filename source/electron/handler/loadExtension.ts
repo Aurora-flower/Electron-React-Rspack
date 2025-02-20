@@ -4,7 +4,7 @@ import {
   installExtension,
   REACT_DEVELOPER_TOOLS
 } from 'electron-devtools-installer';
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 
 const ModuleID = module.id;
 
@@ -23,8 +23,7 @@ export async function loadExtension() {
         debugLog(
           {
             id: ModuleID,
-            sign: `Added Extension`,
-            isMain: true
+            sign: `Added Extension`
           },
           res.name
         )
@@ -33,8 +32,7 @@ export async function loadExtension() {
         debugLog(
           {
             id: ModuleID,
-            sign: `An error occurred`,
-            isMain: true
+            sign: `An error occurred`
           },
           err?.message
         )

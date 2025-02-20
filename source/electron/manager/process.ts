@@ -1,7 +1,7 @@
 /**
  * @file 用于对应用启动的进程进行管理
  */
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 import { getPlatform } from '@/electron/helper';
 import { spawn, exec } from 'node:child_process';
 import { joinPath } from '@/electron/utils/path';
@@ -30,8 +30,7 @@ export function runProcess(
       debugLog(
         {
           id: ModuleID,
-          sign: 'RunProcess Error',
-          isMain: true
+          sign: 'RunProcess Error'
         },
         error?.message,
         `进程 ${pid} 不存在`
@@ -40,8 +39,7 @@ export function runProcess(
       debugLog(
         {
           id: ModuleID,
-          sign: 'RunProcess',
-          isMain: true
+          sign: 'RunProcess'
         },
         `进程 ${pid} 正在运行`,
         stdout,
@@ -53,8 +51,7 @@ export function runProcess(
   debugLog(
     {
       id: ModuleID,
-      sign: 'RunProcess',
-      isMain: true
+      sign: 'RunProcess'
     },
     params,
     nodeProcess.pid

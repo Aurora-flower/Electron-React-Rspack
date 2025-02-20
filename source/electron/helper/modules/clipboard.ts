@@ -2,7 +2,7 @@
  * @file clipboard 剪切板操作
  */
 import { clipboard } from 'electron';
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 
 /**
  * 获取剪贴板中的文本内容
@@ -26,8 +26,7 @@ export function setClipboard(
     debugLog(
       {
         id: module.id,
-        sign: 'SetClipboard',
-        isMain: true
+        sign: 'SetClipboard'
       },
       'text is empty'
     );

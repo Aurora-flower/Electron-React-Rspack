@@ -1,5 +1,5 @@
-import { debugLog } from '@/common/helper/log';
 import { join } from 'node:path';
+import debugLog from '@/electron/tools/log';
 
 /**
  * 用于拼接路径，处理为可被 shell 执行的路径
@@ -16,8 +16,7 @@ export function joinPath(...paths: string[]): string {
     debugLog(
       {
         id: module.id,
-        sign: 'joinPath',
-        isMain: true
+        sign: 'joinPath'
       },
       error?.message
     );

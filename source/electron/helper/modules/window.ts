@@ -1,4 +1,4 @@
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 import { BrowserWindow, BaseWindow } from 'electron';
 
 /**
@@ -114,8 +114,7 @@ export function createWindow(
     debugLog(
       {
         id: module.id,
-        sign: 'CreateWindow',
-        isMain: true
+        sign: 'CreateWindow'
       },
       msg
     );

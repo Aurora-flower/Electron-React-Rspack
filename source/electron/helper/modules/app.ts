@@ -63,15 +63,16 @@ export async function getAppProperty(
 ): Promise<unknown> {
   return app[prop];
 }
+
 /**
- * 常规类型事件处理函数，提供添加和移除事件监听器的功能。
+ * 常规 app.on 类型事件处理函数，提供添加和移除事件监听器的功能。
  * @param eventName 事件名称
  * @param Listener 事件监听
  * @returns 返回一个函数，调用该函数将移除事件监听器。
  */
 export function routineFeature<T>(
   eventName: T,
-  Listener: (...args: any) => unknown
+  Listener: (...args: unknown[]) => unknown
 ) {
   app.on(eventName as any, Listener);
 

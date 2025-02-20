@@ -1,7 +1,7 @@
 import http from 'node:http';
 import express from 'express';
 import https from 'node:https';
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 import { joinPath } from '@/electron/utils/path';
 import { handleError } from '@/common/helper/error';
 
@@ -78,8 +78,7 @@ export class AppServer {
     debugLog(
       {
         id: ModuleID,
-        sign: 'AppServer',
-        isMain: true
+        sign: 'AppServer'
       },
       options.path
     );
@@ -141,8 +140,7 @@ export class AppServer {
       debugLog(
         {
           id: ModuleID,
-          sign: 'Application Res',
-          isMain: true
+          sign: 'Application Res'
         },
         `${req.url}`,
         indexFilePath
@@ -155,8 +153,7 @@ export class AppServer {
       debugLog(
         {
           id: ModuleID,
-          sign: 'Server Listen',
-          isMain: true
+          sign: 'Server Listen'
         },
         `Static source - ${this._option.path}: ${this._option.port}`
       );
@@ -177,8 +174,7 @@ export class AppServer {
       debugLog(
         {
           id: ModuleID,
-          sign: 'Server Stopped',
-          isMain: true
+          sign: 'Server Stopped'
         },
         true
       );

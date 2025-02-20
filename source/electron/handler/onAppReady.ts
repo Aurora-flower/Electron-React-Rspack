@@ -2,9 +2,9 @@
  * @file 应用准备就绪时的处理
  */
 import { homedir } from 'node:os';
-import { createWindow } from '@/electron/helper';
-import { debugLog } from '@/common/helper/log';
+import debugLog from '@/electron/tools/log';
 import { Environment } from '@/common/constant';
+import { createWindow } from '@/electron/helper';
 import { getWebUrl } from '@/electron/server/helper';
 import { windowOptions } from '@/electron/config/options';
 import { loadExtension } from '@/electron/handler/loadExtension';
@@ -46,8 +46,7 @@ async function onAppReady() {
     debugLog(
       {
         id: ModuleID,
-        sign: 'OnAppReady',
-        isMain: true
+        sign: 'OnAppReady'
       },
       IsProd,
       homedir()
@@ -62,8 +61,7 @@ async function onAppReady() {
     debugLog(
       {
         id: ModuleID,
-        sign: 'OnAppReady Error',
-        isMain: true
+        sign: 'OnAppReady Error'
       },
       msgTitle,
       msg
