@@ -299,18 +299,17 @@ function get(type) {
           getHtmlWebpackPlugin({
             template: File.Page.from,
             filename: File.Page.to
+
+            /* 对于多个页面的配置，需要指定多个 entry 入口文件，并配置 chunk */
+            // chunks: [
+            //   'index'
+            // ]
           }),
           getMiniCssExtractPlugin(),
           getCssMinimizerPlugin()
         ].filter(Boolean);
 
         options.plugins.push(...pluginsExtend);
-
-        // options.node = {
-        // global: false
-        // __filename: false,
-        // __dirname: false,
-        // };
       } else {
         options.optimization = {
           ...options.optimization,
