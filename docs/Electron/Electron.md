@@ -23,7 +23,7 @@
 export ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/"
 ```
 
-> 如果希望每次启动终端时自动设置此变量，可以将上述命令添加到你的 .bash_profile 或 .zshrc 文件(末尾)中。
+> 如果希望每次启动终端时自动设置此变量，可以将上述命令添加到 .bash_profile 或 .zshrc 文件(末尾)中。
 >
 > - 使用 nano，按 `Ctrl + O` 保存文件，然后按 `Ctrl + X` 退出。
 > - 使用 vim，按 `Esc` 键，然后输入 `:wq` 并按回车键保存并退出。
