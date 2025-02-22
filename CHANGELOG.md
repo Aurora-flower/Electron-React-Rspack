@@ -1,6 +1,7 @@
 # CHANGE LOG
 
-    standard-version --release-as xxx
+    工具: `standard-version`
+    命令生成: `standard-version --release-as xxx`
 
 ## [0.0.1] - 2025-02-19
 
