@@ -1,6 +1,8 @@
 /**
  * @file Navigator - Web API 相关
- * @description Navigator 接口代表了用户代理的状态和身份，它允许脚本对其进行查询并注册自身以便执行某些活动。
+ * @description
+ * - `Navigator` 接口代表了用户代理的状态和身份，它允许脚本对其进行查询并注册自身以便执行某些活动。
+ * - 只读属性 `Window.navigator` 会返回一个 `Navigator` 对象的引用，可以用于请求运行当前代码的应用程序的相关信息。
  *
  * 注意📢:
  * - window 下的属性都是可以省略缩写的，如 window.navigator 可以简写为 navigator

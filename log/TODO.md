@@ -15,3 +15,11 @@
 3. 应用的更新与发布 release
 
 4. 更多的学习
+
+- [pattern](https://www.patterns.dev/)
+
+5. 资料转移
+
+- [语雀](https://www.yuque.com/yanbin-rwuuc)
+
+6. DeepSeek 的接入与学习
