@@ -11,7 +11,10 @@ backup
 cache
 
 # 运行环境目录
-core/bin
+# core/bin
+
+# 核心目录
+core
 
 # 运行环境缓存目录
 .cache
