@@ -27,8 +27,10 @@
   "license": "MIT",
   "description": "花楹一间，向往自由的发现之旅。",
   "devDependencies": {
+    "@babel/core": "^7.26.9",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
     "@biomejs/biome": "^1.9.4",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
