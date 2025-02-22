@@ -9,8 +9,8 @@ const {
 const { join } = require('node:path');
 const { Loader } = require('./loader');
 const { Devtool } = require('./devtool');
-const { BuildingEnvironment } = require('./env');
 const { WebpakTarget } = require('./webpack_target');
+const { BuildingEnvironment } = require('../common/env');
 
 /* ***** ***** ***** ***** 目录与文件结构 ***** ***** ***** ***** */
 
@@ -58,8 +58,8 @@ function getSourceStructure(baseUrl) {
     electron: join(baseUrl, 'electron'),
     preload: join(baseUrl, 'preload'),
     renderer: join(baseUrl, 'src'),
-    static: join(baseUrl, 'static'),
-    types: join(baseUrl, 'types')
+    static: join(baseUrl, 'static')
+    // types: join(baseUrl, 'types')
   };
 }
 

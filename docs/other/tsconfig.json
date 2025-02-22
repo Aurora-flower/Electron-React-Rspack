@@ -64,7 +64,7 @@ tsconfig.json
     */
     // "outFile": "",
 
-    /* 指定 ECMAScript 目标版本 */
+    /* 指定 ECMAScript 目标版本 - 指示 TypeScript 编译器生成符合指定标准的代码。 */
     "target": "ESNext",
 
     /* 是否允许编译 javascript 文件 */
@@ -197,7 +197,7 @@ tsconfig.json
     */
     // "maxNodeModuleJsDepth": 0,
 
-    /* 指定生成目标模块系统代码 target === "ES6" ? "ES6" : "commonjs" */
+    /* 指定生成（输出）目标模块系统代码 target === "ES6" ? "ES6" : "commonjs" */
     "module": "ESNext",
 
     /* 指定模块解析策略 - 决定如何处理模块 module === "AMD" or "System" or "ES6" ? "Classic" : "Node" */

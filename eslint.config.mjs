@@ -4,11 +4,10 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import { fixupConfigRules } from '@eslint/compat';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactJsx from 'eslint-plugin-react/configs/jsx-runtime.js';
-import react from 'eslint-plugin-react/configs/recommended.js';
+import parser from '@typescript-eslint/parser';
+// import pluginReact from 'eslint-plugin-react';
+
+const ignores = ['app/', 'dist/', 'node_modules/', 'temp/'];
 
 const noUnusedConfig = [
   'error',
@@ -24,22 +23,10 @@ const noUnusedConfig = [
   }
 ];
 
-const ignores = [
-  '**/source/common',
-  '**/node_modules',
-  '**/public',
-  '**/test',
-  '**/core',
-  '**/app',
-  '**/gen',
-  '**/docs/other',
-  'temp/'
-];
-
 export default [
+  /* ***** ***** ***** ***** 忽略 ***** ***** ***** ***** */
+  //   ignorePatterns: ignores
   {
-    // ignorePatterns: ignores
-
     /**
      * @summary
      * 如果一个配置对象只有 ignores，没有其他字段，它会全局生效；
@@ -47,35 +34,54 @@ export default [
      */
     ignores
   },
-  {
-    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}']
-  },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  {
-    ...pluginReact.configs.flat.recommended
-  },
-  ...fixupConfigRules([
-    // ...pluginReact.configs.flat.recommended,
-    {
-      ...react,
-      settings: {
-        react: { version: 'detect' } // 自动检测 React 版本
-      }
-    },
-    reactJsx
-  ]),
+
+  /* ***** ***** ***** ***** 公共配置 ***** ***** ***** ***** */
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node }
-    },
-    plugins: {
-      'react-hooks': reactHooks
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
+      globals: /* globals.browser,*/ {
+        ...globals.browser,
+        ...globals.node
+      },
+      parserOptions: {
+        ecmaVersion: 'latest'
+      }
+    }
+  },
 
-      /* ***** ***** ***** ***** 代码风格 ***** ***** ***** ***** */
+  /* ***** ***** ***** ***** JS\TS 专属配置 ***** ***** ***** ***** */
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
+    ...pluginJs.configs.recommended
+  },
+
+  /* ***** ***** ***** ***** React 配置  ***** ***** ***** ***** */
+
+  {
+    files: ['**/*.{jsx,tsx}'],
+    // ...pluginReact.configs.flat.recommended,
+    settings: {
+      react: { version: 'detect' } // 自动检测 React 版本
+    },
+    // plugins: ['react'],
+    languageOptions: {
+      parser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true
+        }
+      }
+    }
+  },
+
+  /* ***** ***** ***** ***** 代码规则 ***** ***** ***** ***** */
+  {
+    rules: {
+      /* 允许使用未定义的变量 -- 暂时写法，对全局类型处理 */
+      'no-undef': 'off',
+
       /* 强制使用分号 */
       'semi': ['error', 'always'],
 
@@ -117,27 +123,84 @@ export default [
       '@typescript-eslint/no-require-imports': 'off',
 
       /* 允许使用 switch 语句的 fallthrough */
-      'no-fallthrough': 'off',
-
-      /* 允许使用没有副作用的表达式 | 变量 */
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          /* 下划线变量 */
-          argsIgnorePattern: '^_'
-        }
-      ],
-      'no-unused-expressions': noUnusedConfig,
-      '@typescript-eslint/no-unused-expressions': noUnusedConfig,
+      'no-fallthrough': 'warn',
 
       /* 允许使用 any */
       '@typescript-eslint/no-explicit-any': 'warn',
 
-      /* 无效 转义 */
-      'no-useless-escape': 'warn'
+      /**
+       * @summary 允许使用未使用的变量
+       * @see {@link https://eslint.org/docs/latest/rules/no-unused-vars}
+       * @see {@link https://typescript-eslint.io/rules/no-unused-vars/}
+       */
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          /**
+           * @summary
+           * - `all` - 检查所有变量的使用情况
+           * - `local` - 只检查局部变量的使用情况
+           */
+          vars: 'all',
 
-      /* 允许使用 rest 参数 */
-      // 'prefer-rest-params'
+          /**
+           * @summary
+           * 忽略名称与 regexp 模式匹配的变量
+           */
+          varsIgnorePattern: '^_',
+
+          /**
+           * @summary
+           * - `after-used` - 不会检查在上次使用的参数之前出现的未使用的位置参数，但会检查所有命名参数和上次使用的参数之后的所有位置参数。
+           * - `all` - 必须使用所有命名参数。
+           * - `none` - 不要检查参数。
+           */
+          args: 'after-used',
+
+          /**
+           * @summary
+           * 忽略名称与 regexp 模式匹配的参数
+           */
+          argsIgnorePattern: '^_',
+
+          /**
+           * @summary
+           * 对于 `try {} catch (error) {}` 块中的错误对象
+           * - `all` - 必须使用所有命名参数。这是默认设置。
+           * - `none` - 不检查错误对象。
+           */
+          caughtErrors: 'none',
+
+          /**
+           * @summary
+           * 忽略名称与 regexp 模式匹配的错误对象
+           */
+          caughtErrorsIgnorePattern: '^_',
+
+          /**
+           * @summary
+           * 忽略名称与 regexp 模式匹配的数组解构模式的元素
+           */
+          destructuredArrayIgnorePattern: '^_',
+
+          /**
+           * @summary
+           * 使用 Rest 属性可以从对象中“省略”属性，但默认情况下，同级属性被标记为“未使用”。
+           */
+          ignoreRestSiblings: false,
+
+          /* 将报告与任何有效 ignore 匹配的变量 pattern 选项 */
+          reportUsedIgnorePattern: false
+        }
+      ],
+
+      /* 允许使用没有副作用的表达式  */
+      'no-unused-expressions': noUnusedConfig,
+      '@typescript-eslint/no-unused-expressions': noUnusedConfig
+
+      /* 允许无效转义 */
+      // 'no-useless-escape': 'off'
     }
   }
 ];

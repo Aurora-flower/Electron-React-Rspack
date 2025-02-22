@@ -1,5 +1,5 @@
 {
-  "include": ["source"],
+  "include": ["source/**/*", "types/**/*.d.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
@@ -29,6 +29,6 @@
     "allowUnreachableCode": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types", "./types"]
   }
 }

@@ -18,13 +18,7 @@
  *    允许在发生更改时监视全局并运行任务。任务与任务系统的其余部分统一处理。
  */
 const Dev = require('./tasks/dev');
-const Debug = require('./tasks/debug');
-const Compile = require('./tasks/compile');
-const Package = require('./tasks/package');
 
 module.exports = {
-  Dev,
-  Debug,
-  Compile,
-  Package
+  Dev
 };
