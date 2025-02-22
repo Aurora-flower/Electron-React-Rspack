@@ -1,8 +1,4 @@
-const { BuildingEnvironment } = require('../webpack/env');
-
-function getMode(args) {
-  return args?.mode || BuildingEnvironment.Prod;
-}
+const { BuildingEnvironment } = require('../common/env');
 
 function getArgv() {
   const args = process.argv.splice(3);
@@ -19,10 +15,12 @@ function getArgv() {
   });
 
   console.log('args:', args, argObject);
-  return argObject;
+  return {
+    mode: args?.mode || BuildingEnvironment.Prod,
+    argObject
+  };
 }
 
 module.exports = {
-  getMode,
   getArgv
 };

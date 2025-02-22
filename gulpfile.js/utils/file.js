@@ -22,8 +22,8 @@ function existsSync(
       : type == 'Directory'
         ? stats.isDirectory()
         : !!statSync(localPath);
-  } catch (_error) {
-    return !_error;
+  } catch (error) {
+    return false;
   }
 }
 

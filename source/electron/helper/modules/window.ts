@@ -106,7 +106,7 @@ export function createWindow(
     }
 
     return win;
-  } catch (error: unknown) {
+  } catch (error) {
     const msg =
       error instanceof Error
         ? error.message

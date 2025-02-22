@@ -8,7 +8,7 @@ const { rimraf } = require('rimraf');
 const { task, series } = require('gulp');
 const builder = require('electron-builder');
 const { getArgv } = require('../utils/argv');
-const { buildSeries } = require('./compile');
+const { buildSeries } = require('../../webpack/compile');
 
 const CWD = process.cwd();
 

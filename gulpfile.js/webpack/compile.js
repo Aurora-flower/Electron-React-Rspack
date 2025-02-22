@@ -11,7 +11,7 @@ const { rimraf } = require('rimraf');
 const { join } = require('node:path');
 const { task, series } = require('gulp');
 const getConfig = require('../webpack/get_config');
-const { getArgv, getMode } = require('../utils/argv');
+const { getArgv } = require('../utils/argv');
 
 const argInfo = getArgv();
 
@@ -52,7 +52,7 @@ function findErrors(log) {
  */
 function compile() {
   return new Promise((resolve, reject) => {
-    const mode = argInfo.mode || getMode(argInfo);
+    const mode = argInfo.mode;
     const webpackConfig = getConfig(mode);
     try {
       const compiler = webpack(webpackConfig);
@@ -75,7 +75,7 @@ function compile() {
  */
 function compileWatch() {
   return new Promise((resolve, reject) => {
-    const mode = argInfo.mode || getMode(argInfo);
+    const mode = argInfo.mode;
     const webpackConfig = getConfig(mode);
     try {
       const compiler = webpack(webpackConfig);

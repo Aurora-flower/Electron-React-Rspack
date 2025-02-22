@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import debugLog from '@/electron/tools/log';
+// import debugLog from '@/electron/tools/log';
 
 /**
  * 用于拼接路径，处理为可被 shell 执行的路径
@@ -12,14 +12,14 @@ export function joinPath(...paths: string[]): string {
     return process.platform == 'win32'
       ? base.replace(/\\/g, '/')
       : base.replace(/(?=\W+)\s+(?<=\W+)/g, '\\ ');
-  } catch (error: any) {
-    debugLog(
-      {
-        id: module.id,
-        sign: 'joinPath'
-      },
-      error?.message
-    );
+  } catch (error) {
+    // debugLog(
+    //   {
+    //     id: module.id,
+    //     sign: 'joinPath'
+    //   },
+    //   error?.message
+    // );
     return '';
   }
 }
