@@ -61,7 +61,7 @@ asarUnpack:
   - '**/node_modules/fabric/**'
   - 'core'
 # 在打包和签名之后（在打包成可分发格式之前）要运行的函数（或文件或模块id的路径）。设置与 `beforePack` 相同。
-# afterPack: 'build/after-pack.js'
+# afterPack: 'build/script/after-pack.js'
 # DMG 选项
 # dmg:
 # 是否启用 DMG 签名
