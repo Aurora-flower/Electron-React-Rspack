@@ -8,16 +8,18 @@ function Layout(prop: { date: Date }) {
       <div data-date={new Date()}>
         {prop.date.toLocaleString()}
       </div>
-      <a
-        href='https://reactjs.org'
-        target='_blank'
-        rel='noopener noreferrer'>
-        <img
-          src={reactLogo}
-          className='logo react'
-          alt='React logo'
-        />
-      </a>
+      <div className='size-10'>
+        <a
+          href='https://reactjs.org'
+          target='_blank'
+          rel='noopener noreferrer'>
+          <img
+            src={reactLogo}
+            className='logo react'
+            alt='React logo'
+          />
+        </a>
+      </div>
       <Outlet />
     </>
   );
