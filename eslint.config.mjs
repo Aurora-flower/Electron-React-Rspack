@@ -7,7 +7,14 @@ import tseslint from 'typescript-eslint';
 import parser from '@typescript-eslint/parser';
 // import pluginReact from 'eslint-plugin-react';
 
-const ignores = ['app/', 'dist/', 'node_modules/', 'temp/'];
+const ignores = [
+  'app/',
+  'dist/',
+  'node_modules/',
+  'temp/',
+  'backup/',
+  'core/bin'
+];
 
 const noUnusedConfig = [
   'error',
@@ -40,7 +47,21 @@ export default [
     languageOptions: {
       globals: /* globals.browser,*/ {
         ...globals.browser,
-        ...globals.node
+        ...globals.node,
+        ...globals.worker,
+
+        // 注意📢: eslint 无法识别全局类型问题的解决
+        Electron: 'readonly',
+        React: 'readonly',
+        PublicKeyCredentialRequestOptions: 'readonly',
+        DocumentReadyState: 'readonly',
+        __WebpackModuleApi: 'readonly',
+        GlobalRequest: 'readonly',
+        GlobalResponse: 'readonly',
+        NodeJS: 'readonly',
+
+        MainProcess: 'readonly',
+        Common: 'readonly'
       },
       parserOptions: {
         ecmaVersion: 'latest'
@@ -80,7 +101,7 @@ export default [
   {
     rules: {
       /* 允许使用未定义的变量 -- 暂时写法，对全局类型处理 */
-      'no-undef': 'off',
+      // 'no-undef': 'off',
 
       /* 强制使用分号 */
       'semi': ['error', 'always'],

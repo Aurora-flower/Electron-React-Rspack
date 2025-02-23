@@ -52,6 +52,7 @@ class Dog extends Animal {
 
   // 公共方法: 返回描述信息
   public describe(): string {
+    // eslint-disable-next-line max-len
     return `${this.species} is ${this.age} years old and it says "${this.makeSound()}"`;
   }
 }
@@ -70,6 +71,7 @@ class Cat extends Animal {
 
   // 公共方法: 返回描述信息
   public describe(): string {
+    // eslint-disable-next-line max-len
     return `${this.species} is ${this.age} years old and it says "${this.makeSound()}"`;
   }
 }

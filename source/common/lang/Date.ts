@@ -76,3 +76,5 @@ const Week = {
   /* Sun */
   7: 'Sunday'
 };
+
+export { Month, Week };

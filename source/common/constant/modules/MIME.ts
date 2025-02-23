@@ -85,6 +85,7 @@ const MIME_TYPES = {
     description: 'Microsoft Word 文件'
   },
   '.docx': {
+    // eslint-disable-next-line max-len
     mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     represent: 'Word 文件',
     description: 'Microsoft Word (OpenXML) 文件'
