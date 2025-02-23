@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Web Components Demo</title>
+</head>
+
+<body>
+	<!-- 自定义元素模板 -->
+	<template id="my-element-template">
+		<style>
+            .my-element {
+                color: red;
+                font-size: 20px;
+            }
+		</style>
+		<div class="my-element">
+			Hello, <slot></slot>!
+		</div>
+	</template>
+
+	<!-- 使用自定义元素 -->
+	<my-element>World</my-element>
+
+	<script>
+        // 注册自定义元素
+        class MyElement extends HTMLElement {
+            constructor() {
+                super();
+
+                // 创建影子DOM
+                const shadowRoot = this.attachShadow({ mode: 'open' });
+
+                // 导入模板内容
+                const template = document.getElementById('my-element-template');
+                const content = template.content.cloneNode(true); // 克隆了模板的内容
+                shadowRoot.appendChild(content);
+            }
+        }
+        customElements.define('my-element', MyElement);
+	</script>
+</body>
+
+</html>
