@@ -44,6 +44,7 @@
     "@rspack/plugin-react-refresh": "^1.0.1",
     "@tailwindcss/cli": "^4.0.6",
     "@tailwindcss/postcss": "^4.0.6",
+    "@types/archiver": "^6.0.3",
     "@types/express": "^5.0.0",
     "@types/koa": "^2.15.0",
     "@types/koa-static": "^4.0.4",
@@ -95,7 +96,10 @@
   "dependencies": {
     "@iconify/json": "^2.2.307",
     "@iconify/react": "^5.2.0",
+    "7zip-min": "^2.0.0",
+    "adm-zip": "^0.5.16",
     "animate.css": "^4.1.1",
+    "archiver": "^7.0.1",
     "electron-log": "^5.3.0",
     "electron-store": "^10.0.1",
     "electron-updater": "^6.3.9",
@@ -108,7 +112,8 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "three": "^0.173.0",
-    "yauzl": "^3.2.0"
+    "yauzl": "^3.2.0",
+    "yazl": "^3.3.1"
   },
   "repository": {
     "type": "git",
