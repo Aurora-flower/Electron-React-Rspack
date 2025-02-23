@@ -16,10 +16,12 @@
 
 4. 更多的学习
 
-- [pattern](https://www.patterns.dev/)
+   - [pattern](https://www.patterns.dev/)
 
 5. 资料转移
 
-- [语雀](https://www.yuque.com/yanbin-rwuuc)
+   - [语雀](https://www.yuque.com/yanbin-rwuuc)
 
 6. DeepSeek 的接入与学习
+
+7. 完成 gulp + electron-builder 打包任务
