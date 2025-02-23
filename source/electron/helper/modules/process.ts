@@ -15,7 +15,7 @@
  * @returns {boolean | string}
  */
 export function getPlatform(
-  platform?: string
+  platform?: NodeJS.Platform
 ): boolean | string {
   if (platform) {
     return process.platform === platform;
