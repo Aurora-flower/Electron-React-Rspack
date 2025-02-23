@@ -90,7 +90,10 @@ export class PreformanceUtility {
    * @param delay 延迟时间
    * @returns
    */
-  static debounce(callback: Function, wait: number) {
+  static debounce(
+    callback: (...params: unknown[]) => unknown,
+    wait: number
+  ) {
     let timeout: NodeJS.Timeout | null = null;
     return (...args: unknown[]) => {
       timeout && clearTimeout(timeout);

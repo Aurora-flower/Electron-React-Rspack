@@ -75,4 +75,6 @@
  * 例如，a*? 匹配尽可能少的 'a'。
  */
 
-export class RegExpUtility {}
+export class RegExpUtility {
+  // replace(pattern: RegExp | string, replacement: RegExp |string)
+}
