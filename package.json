@@ -19,7 +19,7 @@
     "compile": "gulp compile",
     "package:dir": "rimraf release && electron-builder --dir",
     "check:audit": "npm audit --registry=https://registry.npmjs.org/",
-    "lint": "eslint . --ignore-pattern 'app/*' --ignore-pattern 'gen/*' --ignore-pattern 'temp/*' --fix",
+    "lint": "eslint . --ignore-pattern 'gen/*'",
     "tailwind": "npx @tailwindcss/cli -i source/src/static/stylesheets/tailwind.css -o source/src/static/stylesheets/tailwind_output.css"
   },
   "keywords": [],
