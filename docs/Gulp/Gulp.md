@@ -45,15 +45,10 @@ Gulp是基于Node.js的任务运行器，使用异步操作来处理文件流。
    ```shell
    # 安装 ts-node 模块
    npm install --save-dev ts-node
-   
+
    # 安装 @babel/register 模块
    npm install --save-dev @babel/register
-   
+
    # 安装 esm 模块
    npm install --save-dev esm
    ```
-
-Gulp 任务
-
-每个 gulp 任务都是一个_**异步**_ JavaScript 函数 - 接受错误优先回调或返回流、promise、事件触发器、子进程或可观察对象的函数。
-

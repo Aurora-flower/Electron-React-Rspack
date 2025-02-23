@@ -47,6 +47,7 @@ local
 # 其他输出
 dist
 out
+output
 
 # 构建资源目录
 # core/build

@@ -32,7 +32,7 @@ var greet = function () {
 ## JSX 转换
 
 > Babel 可以用于将 React 代码转换为浏览器可理解的 JavaScript 代码。
-> React 使用的是一种扩展的 JavaScript 语法，叫做 JSX（JavaScript XML），这是一种允许你在 JavaScript 中直接编写类似 HTML 的代码格式。
+> React 使用的是一种扩展的 JavaScript 语法，叫做 JSX（JavaScript XML），这是一种允许在 JavaScript 中直接编写类似 HTML 的代码格式。
 > 浏览器并不能直接理解 JSX，因此需要使用 Babel 来将它转译成普通的 JavaScript。
 
 对于 React 项目，Babel 可以将 JSX 语法（React 特有的 HTML 类似语法）转换为普通的 JavaScript。
@@ -54,7 +54,7 @@ const element = React.createElement('h1', null, 'Hello, world!');
 
 ## Polyfill
 
-Babel 可以通过 polyfill 来支持一些新的 JavaScript 特性（如 Promise、Map 等）。这意味着如果你使用了某些 JavaScript 新特性，而这些特性在某些浏览器中不被支持，Babel 可以自动引入 polyfill 代码，使这些特性能够在旧浏览器中运行。
+Babel 可以通过 polyfill 来支持一些新的 JavaScript 特性（如 Promise、Map 等）。这意味着如果使用了某些 JavaScript 新特性，而这些特性在某些浏览器中不被支持，Babel 可以自动引入 polyfill 代码，使这些特性能够在旧浏览器中运行。
 
 ---
 

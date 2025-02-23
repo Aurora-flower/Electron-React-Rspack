@@ -1,0 +1,14 @@
+{
+  "add": {
+    "devDependencies": {},
+    "dependencies": {}
+  },
+  "update": {
+    "devDependencies": {},
+    "dependencies": {}
+  },
+  "remove": {
+    "devDependencies": {},
+    "dependencies": {}
+  }
+}
