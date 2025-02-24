@@ -104,10 +104,10 @@ interface UnzipOptions extends OptionsModel {
 export class Security {
   /* ***** ***** ***** ***** 配置：指定算法、密钥 ***** ***** ***** ***** */
   /* 向量 - 识别加密片段 */
-  private _iv: Buffer<ArrayBufferLike> = Buffer.alloc(16);
+  private _iv: Buffer = Buffer.alloc(16);
 
   /* 密钥 - 解密文件的密钥 */
-  private _key: Buffer<ArrayBufferLike> = Buffer.alloc(32);
+  private _key: Buffer = Buffer.alloc(32);
 
   /* 使用 AES-256 加密算法 */
   private _algorithm: string = 'aes-256-cbc';
