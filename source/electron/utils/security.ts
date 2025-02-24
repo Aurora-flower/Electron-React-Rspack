@@ -24,6 +24,7 @@ import { exec } from 'child_process';
 function isWin(): boolean {
   return process.platform === 'win32';
 }
+
 function murmurhash2_32_gc(str: string, seed: number): number {
   let l = str.length,
     h = seed ^ l,
@@ -105,7 +106,7 @@ export class Security {
   /* 向量 - 识别加密片段 */
   private _iv: Buffer<ArrayBufferLike> = Buffer.alloc(16);
 
-  /* 密钥 - 解密文件的片段 */
+  /* 密钥 - 解密文件的密钥 */
   private _key: Buffer<ArrayBufferLike> = Buffer.alloc(32);
 
   /* 使用 AES-256 加密算法 */

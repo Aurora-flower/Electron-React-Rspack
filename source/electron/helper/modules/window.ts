@@ -1,3 +1,9 @@
+/**
+ * @file 窗口相关的工具函数
+ * @description
+ * - macOS 特性: 没有窗口打开时，点击 dock 图标时，会创建一个窗口
+ * - windows | linux 特性: 没有窗口打开时退出应用
+ */
 import debugLog from '@/electron/tools/log';
 import { BrowserWindow, BaseWindow } from 'electron';
 
@@ -104,6 +110,12 @@ export function createWindow(
         params.minize.height
       );
     }
+
+    /* 启用远程模块功能 - 以允许渲染进程中使用主进程的模块 */
+    // if (!params?.shabox) {
+    //   const main = require('@electron/remote/main');
+    //   main.enabled(main);
+    // }
 
     return win;
   } catch (error) {
