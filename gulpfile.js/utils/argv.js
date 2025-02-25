@@ -17,7 +17,7 @@ function getArgv() {
   console.log('args:', args, argObject);
   return {
     mode: args?.mode || BuildingEnvironment.Prod,
-    argObject
+    ...argObject
   };
 }
 
