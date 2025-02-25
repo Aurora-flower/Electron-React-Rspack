@@ -4,15 +4,16 @@
  * 结合 rspack 与 gulp 构建
  */
 const { task } = require('gulp');
-// const { RspackCLI } = require('@rspack/cli');
-const { getArgv } = require('../utils/argv');
-const { series } = require('gulp');
+const { compile } = require('../rs');
+// const { getArgv } = require('../utils/argv');
+// const { series } = require('gulp');
 
 /* ***** ***** ***** ***** 开发任务 ***** ***** ***** ***** */
 
-async function dev() {
-  const args = getArgv();
-  console.log('dev task running...', args);
+async function dev(done) {
+  const res = await compile();
+  console.log('dev task done...', res);
+  done();
 }
 
 task('dev', dev);

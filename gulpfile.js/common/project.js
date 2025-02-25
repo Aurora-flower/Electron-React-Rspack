@@ -68,7 +68,7 @@ function getPublicStructure(baseUrl) {
   };
 }
 
-const Directory = new Proxy(DirectoryStructure, {
+const _Directory_ = new Proxy(DirectoryStructure, {
   get(target, key) {
     if (!(key in target)) {
       return undefined;
@@ -106,27 +106,36 @@ function getFileTrend(form, to, name) {
   };
 }
 
-const File = new Proxy(FileStructure, {
+const _File_ = new Proxy(FileStructure, {
   get(target, key) {
     if (!(key in target)) {
       return undefined;
     }
     const name = target[key];
     if (key.indexOf('Env') > -1) {
-      return getFileTrend(Directory.Config, '', name);
+      return getFileTrend(_Directory_.Config, '', name);
     } else if (key === 'Package') {
-      return getFileTrend(CWD, Directory.Gen.template, name);
+      return getFileTrend(CWD, _Directory_.Gen.template, name);
     } else if (['Page', 'Favicon'].includes(key)) {
       return getFileTrend(
-        Directory.Public.base,
-        Directory.App.renderer,
+        _Directory_.Public.base,
+        _Directory_.App.renderer,
         name
       );
     }
   }
 });
 
+// function getProjectStructure() {
+//   console.log(Object.apply({}, _File_));
+//   const structure = {
+//     _File_: Object.apply({}, _File_),
+//     _Directory_: Object.apply({}, _Directory_)
+//   };
+//   return structure;
+// }
+
 module.exports = {
-  Directory,
-  File
+  _Directory_,
+  _File_
 };
