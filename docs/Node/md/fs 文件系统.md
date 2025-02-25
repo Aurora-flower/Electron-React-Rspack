@@ -1,8 +1,8 @@
-# 文件系统
+# fs 文件系统
 
 ## 引言
 
-在计算机中，文件系统（File System）是计算机存储数据的 fundamental structure，它定义了计算机如何组织存储数据和如何管理存储数据的方式。
+在计算机中，文件系统（File System）是计算机存储数据的 `fundamental structure`（基本结构），它定义了计算机如何组织存储数据和如何管理存储数据的方式。
 
 ---
 
