@@ -24,17 +24,19 @@ function compile() {
     );
 
     // ==================== 运行 rspack ====================
-    rspack([], (err, stats) => {
+    const multiCompiler = rspack([]);
+    multiCompiler.run((err, stats) => {
       // process.stdout.write('Stdout:', stats.toString() + '\n');
       if (
         err ||
         stats.hasErrors() /* err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
       ) {
+        console.log('compile stat...', err, stats);
         resolve(false);
       }
-      console.log('compile done...');
-      resolve(true);
     });
+    console.log('compile done...', multiCompiler);
+    resolve(true);
   });
 }
 
