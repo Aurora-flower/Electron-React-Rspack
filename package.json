@@ -4,7 +4,6 @@
   "main": "app/electron/main.js",
   "private": "true",
   "scripts": {
-    "test": "node . && exit",
     "start": "electron .",
     "i:legacy": "npm install --legacy-peer-deps",
     "i": "npm install --registry=https://registry.npmjs.org/",
@@ -13,14 +12,15 @@
     "clean:npm": "npm cache clean --force",
     "mac:chown": "sudo chown -R $USER ~/.npm",
     "eslint:inspect": "eslint --inspect-config",
-    "package": "rimraf release && electron-builder --platform mac,win",
+    "package": "rimraf release && electron-builder",
     "dev": "gulp dev --mode=development",
     "gulp:package": "gulp package",
     "compile": "gulp compile",
     "package:dir": "rimraf release && electron-builder --dir",
     "check:audit": "npm audit --registry=https://registry.npmjs.org/",
     "lint": "eslint . --ignore-pattern 'gen/*'",
-    "tailwind": "npx @tailwindcss/cli -i source/src/static/stylesheets/tailwind.css -o source/src/static/stylesheets/tailwind_output.css"
+    "tailwind": "npx @tailwindcss/cli -i source/src/static/stylesheets/tailwind.css -o source/src/static/stylesheets/tailwind_output.css",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "HuaYing",
