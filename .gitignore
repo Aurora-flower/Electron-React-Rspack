@@ -5,7 +5,7 @@
 backup
 
 # 提交规范配置目录
-.husky
+# .husky
 
 # 主进程运行缓存目录
 cache
