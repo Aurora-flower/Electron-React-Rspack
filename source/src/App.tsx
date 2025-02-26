@@ -11,14 +11,13 @@ import { debugLog } from '@/common/helper/log';
  * @summary React 应用主组件
  */
 function App() {
-  const AppView = (
+  return (
     <React.StrictMode>
       <div className='root-wrapper'>
         <AppRouter></AppRouter>
       </div>
     </React.StrictMode>
   );
-  return AppView;
 }
 
 /**
