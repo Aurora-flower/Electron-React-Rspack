@@ -58,7 +58,7 @@ const Entry = new Proxy(Object.create(null), {
     }
     const entry = {
       index: {
-        /* 入口模块的路径, import 属性可以设置多个路径 */
+        /* 入口模块的路径, import 属性可以设置多个路径。多个模块会按照数组定义的顺序依次执行。 */
         import: generateFilePath(key, EntryFilename.Main),
 
         /* runtime 属性用于设置运行时 chunk 的名称 */
@@ -77,71 +77,115 @@ const Entry = new Proxy(Object.create(null), {
 
 /* ***** ***** ***** ***** 配置组合 ***** ***** ***** ***** */
 /* 公共配置 */
-const baseExtensions = [
-  /* ... 等价于 Rspack 内置的默认扩展名配置 */
-  '...'
-  // '.js',
-  // '.ts',
-  // '.json'
-];
+// const baseExtensions = [
+/* ... 等价于 Rspack 内置的默认扩展名配置 */
+// '...'
+// ];
 
-function getPlugins(_type, _isDev) {
-  // const isRenderer = type === AppProcessMode.renderer;
+/**
+ * @summary 解析器选项
+ * @description
+ * - asset: asset 模块的解析器选项
+ * - javascript: javascript 模块的解析器选项
+ * - css: CSS 模块的解析器选项
+ * - css/auto: css/auto 模块的解析器选项
+ * - css/module: css/module 模块的解析器选项
+ */
+const parser = {
+  // asset 模块的解析器选项
+  'asset': {
+    dataUrlCondition: {
+      // 小于等于 8KB 的模块将被 Base64 编码
+      maxSize: 1024 * 8
+    }
+  },
+  // javascript 模块的解析器选项
+  'javascript': {
+    /**
+     * @summary 指定动态导入的全局模式
+     * @see {@link }
+     */
+    dynamicImportMode: 'lazy',
 
-  const plugins = [
-    /* 启用 React Refresh */
-    // isRenderer && getHtmlPlugin(),
-    /* 启用 CSS 模块化 */
-    // new rspack.CssMinimizerRspackPlugin({
-    //   minimizerOptions: { targets }
-    // })
-    // isDev ? new RefreshPlugin() : null
-  ];
+    /**
+     * @summary 指定动态导入的全局 prefetch
+     * @see {@link https://rspack.dev/zh/api/runtime-api/module-methods#webpackprefetch}
+     */
+    dynamicImportPrefetch: false,
 
-  return plugins.filter(Boolean);
-}
+    /**
+     * @summary 指定动态导入的全局 preload
+     * @see {@link https://rspack.dev/zh/api/runtime-api/module-methods#webpackpreload}
+     */
+    dynamicImportPreload: false,
+
+    /**
+     * @summary 指定 URL 全局模式
+     * @description
+     * 启用 new URL() 语法解析。
+     * 当使用 'relative' 时，webpack 将为 new URL() 语法生成相对的 URL，即结果 URL 中不包含根 URL
+     */
+    url: true,
+    importMeta: true
+  },
+  // CSS 模块的解析器选项
+  'css': {
+    namedExports: true
+  },
+  // css/auto 模块的解析器选项
+  'css/auto': {
+    namedExports: true
+  },
+  // css/module 模块的解析器选项
+  'css/module': {
+    namedExports: true
+  }
+};
+
+// function getPlugins(_type, _isDev) {
+// const isRenderer = type === AppProcessMode.renderer;
+
+// const plugins = [
+/* 启用 React Refresh */
+// isRenderer && getHtmlPlugin(),
+/* 启用 CSS 模块化 */
+// new rspack.CssMinimizerRspackPlugin({
+//   minimizerOptions: { targets }
+// })
+// isDev ? new RefreshPlugin() : null
+// ];
+
+// return plugins.filter(Boolean);
+// }
 
 /**
  * @summary 单个配置
  */
 function signleConfig(mode, type) {
   /* 是否开发环境 */
-  const isDev = mode === BuildingEnvironment.Dev;
+  // const isDev = mode === BuildingEnvironment.Dev;
 
   /* 是否渲染进程 */
   const isRenderer = type === AppProcessMode.renderer;
 
   /* 基础 Loader */
-  const baseLoader = [
-    {
-      with: { type: 'url' },
-      type: 'asset/resource'
-    },
-    {
-      test: /\.ts$/,
-      exclude: [/node_modules/],
-      loader: 'builtin:swc-loader',
-      options: {
-        jsc: {
-          experimental: {
-            keepImportAttributes: true
-          },
-          parser: {
-            syntax: 'typescript'
-          }
-        }
-      },
-      type: 'javascript/auto'
-    }
-
-    /* Loader.js, Loader.ts, Loader.json*/
-    // Loader.react(isDev)
-  ];
+  // const baseLoader = [
+  /* Loader.js, Loader.ts, Loader.json*/
+  // ];
 
   const options = {
+    /* 设置构建模式，以启用对应模式下的默认优化策略。 */
     mode,
+
+    /* 构建入口，默认值：'./src/index.js' */
     entry: Entry[type],
+
+    /* 构建上下文，设置构建时所依赖的基础路径，默认值：process.cwd() */
+    context: process.cwd(),
+
     target: BuildTarget[type],
+
+    /* 指定 bundles、assets 输出的位置  */
     output: {
       /* 输出目录 */
       path: Structure.directory.App[type],
@@ -152,60 +196,94 @@ function signleConfig(mode, type) {
           ? '[name].[contenthash].js'
           : '[name].js',
 
-      /* 清除原输出 */
+      /* 非初始块文件的名称 - 默认情况下，使用 [id].js 或从 output.filename 推断出的值（[name] 被替换为 [id] 或在前面加上 [id].）。 */
+      // chunkFilename: '[id].js',
+
+      /* 清除原输出 - 在生成产物前，删除输出目录下的所有文件。 */
       clean: true
+      // {
+      // keep: 'xxx/xxx' // 决定保留的文件
+      //}
     },
-    resolve: {
-      /* 模块解析规则 */
-      extensions: baseExtensions,
-      /* 别名 */
-      alias: {
-        '@': Structure.directory.Source.base,
-        '@typing': Structure.directory.Typing,
-        '@public': Structure.directory.Public.base
-      }
-    },
-    stats: {
-      /* 显示错误细节 */
-      errorDetails: true,
-      /* 开启模块跟踪 */
-      modules: true,
-      moduleTrace: true
-    },
-    externals: {
-      /* 忽略外部依赖 */
-      // electron: 'commonjs2 electron'
-      // canvas: 'commonjs2 canvas'
-    },
-    plugins: getPlugins(type, isDev),
+
+    /* 用于决定如何处理一个项目中不同类型的模块。*/
     module: {
-      rules: baseLoader
-    },
-    optimization: {
-      // minimizer: [
-      //   new rspack.SwcJsMinimizerRspackPlugin(),
-      //   new rspack.LightningCssMinimizerRspackPlugin({
-      //     minimizerOptions: { targets }
-      //   })
-      // ]
+      /* 应用于模块的默认规则。 */
+      defaultRules: [
+        '...' // 使用 "..." 来引用 Rspack 默认规则
+      ],
+
+      /* 配置所有解析器选项 */
+      parser,
+
+      /* Rule 定义了一个模块的匹配条件以及处理这些模块的行为。 */
+      rules: [
+        {
+          with: { type: 'url' },
+          type: 'asset/resource'
+        },
+        {
+          test: /\.ts$/,
+          exclude: [/node_modules/],
+          loader: 'builtin:swc-loader',
+          options: {
+            jsc: {
+              experimental: {
+                keepImportAttributes: true
+              },
+              parser: {
+                syntax: 'typescript'
+              }
+            }
+          },
+          type: 'javascript/auto'
+        },
+        {
+          test: /\.jsx$/,
+          use: {
+            loader: 'builtin:swc-loader',
+            options: {
+              jsc: {
+                parser: {
+                  syntax: 'ecmascript',
+                  jsx: true
+                }
+              }
+            }
+          },
+          type: 'javascript/auto'
+        },
+        {
+          test: /\.tsx$/,
+          use: {
+            loader: 'builtin:swc-loader',
+            options: {
+              jsc: {
+                parser: {
+                  syntax: 'typescript',
+                  tsx: true
+                }
+              }
+            }
+          },
+          type: 'javascript/auto'
+        }
+      ]
+
+      /* 用于标识匹配的模块的 layer。可以将一组模块聚合到一个 layer 中，该 layer 随后可以在 split chunks, stats 或 entry options 中使用。 */
+      // experiments: { layers: true }
     }
-    // experiments: {
-    //   css: true
-    // }
   };
 
   if (isRenderer) {
     /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
-    options.output.publicPath = '/';
-
-    /* 默认扩展名补充  */
-    options.resolve.extensions = baseExtensions.concat(
-      ...['.css', '.jsx', '.tsx']
-    );
+    // options.output.publicPath = '/';
   }
 
   return options;
 }
+
+/* ***** ***** ***** ***** 获取方法 ***** ***** ***** ***** */
 
 /**
  * @summary 获取 rspack 构建配置
@@ -231,7 +309,7 @@ function getConfig() {
       const config = signleConfig(mode, type);
       flatConfig.push(config);
       console.log('SignleConfig...', type, config);
-      break;
+      // break;
     }
   }
   return flatConfig;
