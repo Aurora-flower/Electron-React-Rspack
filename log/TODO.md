@@ -27,3 +27,5 @@
 7. 完成 gulp + electron-builder 打包任务
 
 8. 学习 AI,接受 AI,拥抱 AI
+
+9. electron 安装界面美化
