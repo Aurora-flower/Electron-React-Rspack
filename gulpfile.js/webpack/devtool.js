@@ -23,4 +23,4 @@ const Devtool = {
   NosourcesSourceMap: 'nosources-source-map'
 };
 
-module.exports = { Devtool };
+module.exports = Devtool;

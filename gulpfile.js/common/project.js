@@ -30,7 +30,10 @@ const DirectoryStructure = {
   Public: 'public',
 
   /* 源文件目录 */
-  Source: 'source'
+  Source: 'source',
+
+  /* 类型文件目录 */
+  Typing: 'types'
 };
 
 function getAppStructure(baseUrl) {

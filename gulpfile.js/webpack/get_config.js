@@ -6,9 +6,9 @@ const {
   getBundleAnalyzerPlugin,
   getMiniCssExtractPlugin
 } = require('./plugins');
+const Devtool = require('./devtool');
 const { join } = require('node:path');
 const { Loader } = require('./loader');
-const { Devtool } = require('./devtool');
 const { WebpakTarget } = require('./webpack_target');
 const { BuildingEnvironment } = require('../common/env');
 

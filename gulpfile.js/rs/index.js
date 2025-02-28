@@ -6,25 +6,15 @@
  * - Rspack（读音为 /'ɑrespæk/,）是一个基于 Rust 编写的高性能 JavaScript 打包工具，
  * 它提供对 webpack 生态良好的兼容性，能够无缝替换 webpack，并提供闪电般的构建速度。
  */
+const getConfig = require('./config');
 const { rspack } = require('@rspack/core');
-const { getArgv } = require('../utils/argv');
-const { _Directory_, _File_ } = require('../common/project');
 
 function compile() {
   return new Promise(resolve => {
-    // ==================== 获取参数 ====================
-    const args = getArgv();
-
-    // const structure = getProjectStructure();
-    console.log(
-      'compile running...',
-      args,
-      Object.assign({}, _Directory_),
-      Object.assign({}, _File_)
-    );
+    const config = getConfig();
 
     // ==================== 运行 rspack ====================
-    const multiCompiler = rspack([]);
+    const multiCompiler = rspack(config);
     multiCompiler.run((err, stats) => {
       // process.stdout.write('Stdout:', stats.toString() + '\n');
       if (
@@ -35,7 +25,7 @@ function compile() {
         resolve(false);
       }
     });
-    console.log('compile done...', multiCompiler);
+    console.log('compile done...', process.env.NODE_ENV);
     resolve(true);
   });
 }
