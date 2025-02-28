@@ -23,4 +23,4 @@ const AssetModuleType = {
   Auto: 'asset'
 };
 
-module.exports = { AssetModuleType };
+module.exports = AssetModuleType;

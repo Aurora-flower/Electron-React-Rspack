@@ -21,6 +21,4 @@ function getArgv() {
   };
 }
 
-module.exports = {
-  getArgv
-};
+module.exports = getArgv;

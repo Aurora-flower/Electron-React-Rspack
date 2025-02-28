@@ -9,9 +9,9 @@ const {
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
 const { join } = require('node:path');
+const getArgv = require('../utils/argv');
 const { task, series } = require('gulp');
 const getConfig = require('../webpack/get_config');
-const { getArgv } = require('../utils/argv');
 
 const argInfo = getArgv();
 

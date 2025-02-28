@@ -1,7 +1,7 @@
 {
   "name": "er",
   "version": "0.0.2",
-  "main": "app/electron/main.js",
+  "main": "app/electron/index.js",
   "private": "true",
   "scripts": {
     "start": "electron .",
@@ -13,7 +13,7 @@
     "mac:chown": "sudo chown -R $USER ~/.npm",
     "eslint:inspect": "eslint --inspect-config",
     "package": "rimraf release && electron-builder",
-    "dev": "gulp dev --mode=development",
+    "dev": "cross-env NODE_ENV=development gulp dev --mode=development",
     "gulp:package": "gulp package",
     "compile": "gulp compile",
     "package:dir": "rimraf release && electron-builder --dir",
