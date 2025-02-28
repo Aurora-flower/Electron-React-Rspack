@@ -7,6 +7,8 @@
 import debugLog from '@/electron/tools/log';
 import { BrowserWindow, BaseWindow } from 'electron';
 
+/* ***** ***** ***** ***** BrowserWindow API ***** ***** ***** ***** */
+
 /**
  * 获取窗口的个数
  * @returns {number} 返回窗口的个数
@@ -38,12 +40,101 @@ export function getWebContentsWindow(
   return BrowserWindow.fromWebContents(webContents);
 }
 
+/* ***** ***** ***** ***** Window 实例 API ***** ***** ***** ***** */
+
+/**
+ * 判断窗口是否最大化
+ * @param win 窗口实例
+ * @returns {boolean} 返回窗口是否最大化
+ */
+export function isMaximized(win: BrowserWindow): boolean {
+  return win.isMaximized();
+}
+
+/**
+ * 判断窗口是否最小化
+ * @param win 窗口实例
+ * @returns {boolean} 返回窗口是否最小化
+ */
+export function isMinimized(win: BrowserWindow): boolean {
+  return win.isMinimized();
+}
+
+/**
+ * 窗口操作
+ * @param win 窗口实例
+ * @param operate 操作类型
+ * @remarks
+ * - `maximize`: 最大化窗口
+ * - `minimize`: 最小化窗口
+ * - `unmaximize`: 取消最大化窗口
+ * - `restore`: 还原窗口
+ * - `close`: 关闭窗口
+ * - `reload`: 重新加载窗口
+ * - `focus`: 聚焦窗口
+ */
+export function winOperation(
+  win: BrowserWindow,
+  operate:
+    | 'maximize'
+    | 'minimize'
+    | 'unmaximize'
+    | 'restore'
+    | 'close'
+    | 'reload'
+    | 'focus'
+) {
+  win[operate]();
+}
+
+/* ***** ***** ***** ***** 应用进度条相关 ***** ***** ***** ***** */
+/**
+ * 设置进度条
+ * @param progress 进度值，取值范围：0-1
+ * @param window 窗口实例
+ * @remarks
+ * 在 Windows 上，每个窗口都可以有自己的进度条，而在 macOS 和 Linux（unity桌面）上，同一个应用程序只能有一个进度条。
+ *
+ * 注意📢:
+ * 将参数设置为负值 (例如， -1) 将删除progress bar。
+ * 设定值大于 1 在 Windows 中将表示一个不确定的进度条 ，或在其他操作系统中显示为 100%。
+ */
+export function setProgress(
+  event: Electron.IpcMainEvent,
+  progress: number,
+  window?: BrowserWindow
+) {
+  const webContents = event.sender; // 发送该命令的 webContents 实例
+  const win =
+    window ||
+    getFocusedWindow() ||
+    (getWebContentsWindow(webContents) as BrowserWindow);
+  win.setProgressBar(progress);
+}
+
+/* ***** ***** ***** ***** 窗口操作 ***** ***** ***** ***** */
+
+/**
+ * 启用远程模块功能
+ * @remarks
+ * 以允许渲染进程中使用主进程的模块
+ * @param {BrowserWindow} _win - 窗口实例
+ *
+ * 注意📢:
+ * 此示例项目并未安装 `@electron/remote` 模块，因此无法使用 `@electron/remote` 模块。
+ */
+export function enableRemote(_win: BrowserWindow) {
+  // const remote = require('@electron/remote/main');
+  // remote.enable(win.webContents);
+  // remote.initialize();
+}
+
 /**
  * 创建应用窗口
  * @param {string} url - 窗口地址
- * @param {Electron.BrowserWindowConstructorOptions} options - 窗口配置
+ * @param {BrowserWindowConstructorOptions} options - 窗口配置
  * @param {MainProcess.WindowParams} params - 窗口参数
- * @returns {Electron.BrowserWindow} - 窗口实例
+ * @returns {BrowserWindow} - 窗口实例
  * @remarks
  * - 在 app 模块 `emitted ready` 事件之前，不能使用此模块
  * - BrowserWindow 类暴露了各种方法来修改应用窗口的外观和行为。
@@ -52,7 +143,7 @@ export function createWindow(
   url: string,
   options: Electron.BrowserWindowConstructorOptions | null = null,
   params: MainProcess.WindowParams = {}
-): Electron.BrowserWindow | null {
+): BrowserWindow | null {
   try {
     if (
       !options ||
@@ -136,31 +227,4 @@ export function createWindow(
     // );
     return null;
   }
-}
-
-/* ***** ***** ***** ***** 应用进度条相关 ***** ***** ***** ***** */
-/**
- * 设置进度条
- * @param progress 进度值，取值范围：0-1
- * @param window 窗口实例
- * @remarks
- * 在 Windows 上，每个窗口都可以有自己的进度条，而在 macOS 和 Linux（unity桌面）上，同一个应用程序只能有一个进度条。
- *
- * 注意📢:
- * 将参数设置为负值 (例如， -1) 将删除progress bar。
- * 设定值大于 1 在 Windows 中将表示一个不确定的进度条 ，或在其他操作系统中显示为 100%。
- */
-export function setProgress(
-  event: Electron.IpcMainEvent,
-  progress: number,
-  window?: Electron.BrowserWindow
-) {
-  const webContents = event.sender; // 发送该命令的 webContents 实例
-  const win =
-    window ||
-    getFocusedWindow() ||
-    (getWebContentsWindow(
-      webContents
-    ) as Electron.BrowserWindow);
-  win.setProgressBar(progress);
 }
