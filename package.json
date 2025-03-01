@@ -1,9 +1,10 @@
 {
   "name": "er",
   "version": "0.0.2",
-  "main": "app/electron/index.js",
+  "main": "app/electron/main.js",
   "private": "true",
   "scripts": {
+    "test": " gulp test --mode=development",
     "start": "electron .",
     "i:legacy": "npm install --legacy-peer-deps",
     "i": "npm install --registry=https://registry.npmjs.org/",
@@ -13,7 +14,7 @@
     "mac:chown": "sudo chown -R $USER ~/.npm",
     "eslint:inspect": "eslint --inspect-config",
     "package": "rimraf release && electron-builder",
-    "dev": "cross-env NODE_ENV=development gulp dev --mode=development",
+    "dev": "cross-env NODE_ENV=development gulp dev",
     "gulp:package": "gulp package",
     "compile": "gulp compile",
     "package:dir": "rimraf release && electron-builder --dir",

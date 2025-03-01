@@ -58,12 +58,12 @@ const Entry = new Proxy(Object.create(null), {
     }
     const filename = generateFilePath(key, EntryFilename.Main);
     const entry = {
-      index: {
+      [key == AppProcessMode.electron ? 'main' : 'index']: {
         /* 入口模块的路径, import 属性可以设置多个路径。多个模块会按照数组定义的顺序依次执行。 */
         import: filename,
 
         /* runtime 属性用于设置运行时 chunk 的名称 */
-        runtime: key + '_chunk'
+        runtime: 'index' // key + '_chunk'
       }
     };
     return key === 'renderer'
@@ -187,7 +187,17 @@ function signleConfig(mode, type) {
         )
       }),
     isDev && isRenderer && new RefreshPlugin(),
-    !isDev && new rspack.SwcJsMinimizerRspackPlugin()
+    !isDev && new rspack.SwcJsMinimizerRspackPlugin(),
+
+    isRenderer &&
+      new rspack.DefinePlugin({
+        global: 'window',
+        process: JSON.stringify({
+          env: {
+            NODE_ENV: isDev ? 'development' : 'production'
+          }
+        })
+      })
   ].filter(Boolean);
 
   // 补充 loader 配置

@@ -155,7 +155,7 @@ export class AppServer {
           id: ModuleID,
           sign: 'Server Listen'
         },
-        `${this._option.path}: ${this._option.port}`
+        `${this._option.path}:${this._option.port}`
       );
     });
     this._server.on('error', handleError);

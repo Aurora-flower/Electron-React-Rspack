@@ -1,5 +1,6 @@
 /**
  * @file gulp 自动任务脚本配置
+ * @description 尝试多种构建工具、打包程序的 JavaScript API 配合 gulp 进行构建与打包
  * @see {@link https://gulp.nodejs.cn/docs/en/api/concepts Gulp API 文档}
  *
  * @remarks
@@ -17,9 +18,10 @@
  *    watch() 函数接受一个或多个文件路径，返回一个任务函数，该任务函数将监视这些文件，并调用相应的任务函数。
  *    允许在发生更改时监视全局并运行任务。任务与任务系统的其余部分统一处理。
  */
-// const Dev = require('./tasks/dev');
+const Test = require('./tasks/dev');
 const Dev = require('./tasks/temp/dev');
 
 module.exports = {
+  Test,
   Dev
 };

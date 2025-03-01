@@ -16,4 +16,4 @@ async function dev(done) {
   done();
 }
 
-task('dev', dev);
+task('test', dev);
