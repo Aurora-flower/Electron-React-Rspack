@@ -3,11 +3,11 @@
  */
 const electron = require('electron');
 const { spawn } = require('node:child_process');
-const { existsSync } = require('../utils/file');
-const { /* debounce, */ throttle } = require('lodash');
+const { existsSync } = require('../../utils/file');
+// const { /* debounce, */ throttle  } = require('lodash');
 const { task, series, watch /*, parallel*/ } = require('gulp');
 const {
-  buildSeries,
+  /* buildSeries, */
   buildSeriesWatch
 } = require('../../webpack/compile');
 
@@ -71,40 +71,40 @@ async function start() {
   });
 }
 
-const debouncedDev = throttle(
-  series(stop, buildSeries, start),
-  3 * 1000
-);
+// const debouncedDev = throttle(
+//   series(stop, buildSeries, start),
+//   3 * 1000
+// );
 
 // 另一种语法：exports.dev = function () {};
-task('dev', async function () {
-  const options = {
-    cwd: process.cwd()
-  };
-  /* 监听主进程相关文件变化，并重新启动 Electron */
-  // const Refresh =
-  // watch(
-  //   [mainSource, 'source/common/helper/log.ts'],
-  //   { ignoreInitial: false, ...options },
-  //   series(buildSeries, debouncedStart)
-  // );
+// task('dev', async function () {
+//   const options = {
+//     cwd: process.cwd()
+//   };
+//   /* 监听主进程相关文件变化，并重新启动 Electron */
+//   // const Refresh =
+//   // watch(
+//   //   [mainSource, 'source/common/helper/log.ts'],
+//   //   { ignoreInitial: false, ...options },
+//   //   series(buildSeries, debouncedStart)
+//   // );
 
-  const Refresh = watch(
-    [
-      '.config/**/*',
-      'public/**/*',
-      'source/**/*',
-      '!source/types'
-    ],
-    { ignoreInitial: false, ...options },
-    debouncedDev
-  );
+//   const Refresh = watch(
+//     [
+//       '.config/**/*',
+//       'public/**/*',
+//       'source/**/*',
+//       '!source/types'
+//     ],
+//     { ignoreInitial: false, ...options },
+//     debouncedDev
+//   );
 
-  Refresh.on('error', function (error) {
-    console.log('Refresh task Error:', error.message);
-    process.exit(1);
-  });
-});
+//   Refresh.on('error', function (error) {
+//     console.log('Refresh task Error:', error.message);
+//     process.exit(1);
+//   });
+// });
 
 async function devWatch() {
   const options = {
@@ -142,4 +142,5 @@ async function devWatch() {
   );
 }
 
-task('dev:watch', series(buildSeriesWatch, devWatch));
+// task('dev:watch', series(buildSeriesWatch, devWatch));
+task('dev', series(buildSeriesWatch, devWatch));

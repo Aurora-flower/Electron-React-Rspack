@@ -17,7 +17,8 @@
  *    watch() 函数接受一个或多个文件路径，返回一个任务函数，该任务函数将监视这些文件，并调用相应的任务函数。
  *    允许在发生更改时监视全局并运行任务。任务与任务系统的其余部分统一处理。
  */
-const Dev = require('./tasks/dev');
+// const Dev = require('./tasks/dev');
+const Dev = require('./tasks/temp/dev');
 
 module.exports = {
   Dev

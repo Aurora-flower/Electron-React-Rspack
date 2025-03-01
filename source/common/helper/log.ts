@@ -27,6 +27,7 @@ export function debugLog(
   options: LogOptions,
   ...args: unknown[]
 ) {
+  // TODO: 要兼容渲染模式（Web)
   if (
     process.env?.NODE_ENV === Environment.Prod &&
     process.env?.IS_DEBUG === 'false'

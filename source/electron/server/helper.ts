@@ -34,7 +34,7 @@ export function getWebUrl(isSafe: boolean = false): string {
     (isSafe
       ? process.env?.WEB_SAFE_URL
       : process.env?.WEB_URL) ||
-    `http://${DefaultHost}/${getPort()}`
+    `http://${getHostname()}:${getPort()}`
   );
 }
 
