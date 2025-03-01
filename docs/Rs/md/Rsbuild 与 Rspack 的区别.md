@@ -4,6 +4,17 @@
 
 `rsbuild` 和 `rspack` 都是 JavaScript 或前端构建工具，但它们有一些关键的区别。
 
+- Rsbuild 和 Rspack 的关系:
+
+Rspack 是 Rsbuild 底层的打包工具。
+Rsbuild 的目标是为 Rspack 用户提供开箱即用的构建能力，使开发者能够在零配置的情况下启动一个 web 项目。
+
+- Rspack 和 Rsbuild 的主要区别在于：
+
+  - Rspack 项目需要从零开始配置；Rsbuild 默认提供了最佳实践的配置，并支持扩展 Rspack 配置。
+  - Rspack 项目需要接入社区中的 loaders 和 plugins 来支持各种场景；Rsbuild 提供官方插件，默认支持常见的前端框架和构建能力。
+  - Rspack CLI 的能力对标 webpack CLI，功能比较精简；而 Rsbuild 提供更强大的 CLI 和更完善的 dev server。
+
 ---
 
 ### rsbuild
