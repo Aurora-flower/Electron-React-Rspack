@@ -4,7 +4,7 @@
 import net from 'node:net';
 
 export const DefaultHost = '127.0.0.1'; /* 默认地址 */
-export const DefaultPort = 80; /* 默认端口 */
+export const DefaultPort = 59080; /* 默认端口 */
 
 /**
  * 获取端口
