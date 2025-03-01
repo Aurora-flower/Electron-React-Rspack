@@ -239,12 +239,15 @@ function get(type) {
         target: WebpakTarget[key],
         output: {
           path: Directory.App[name], // 输出目录
-          filename: '[name].js', // '[name].[contenthash].js'
+          filename: '[name].js',
+          chunkFilename: '[id].[contenthash].js',
+          assetModuleFilename: 'assets/[hash][ext][query]',
           clean: true
         },
         devtool: Devtool.NosourcesSourceMap,
         resolve: {
           // mainFields: ['browser', 'module', 'main'],
+          // mainFiles: ['index', 'main'],
           extensions: baseExtensions,
           alias
           // fallback: {

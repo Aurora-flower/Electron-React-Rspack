@@ -49,6 +49,7 @@ async function onAppReady() {
         sign: 'OnAppReady'
       },
       IsProd,
+      webURL,
       homedir()
     );
   } catch (error) {

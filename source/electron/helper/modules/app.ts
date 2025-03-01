@@ -91,6 +91,11 @@ export function getAppAsarOutput(path: string) {
   const AppAsar =
     app.getAppPath(); /* 项目路径 - 打包后对应着的是 app.asar */
   const baseOutput = app.isPackaged ? '' : 'app';
+
+  console.log(
+    '******************',
+    join(AppAsar, baseOutput, path)
+  );
   return join(AppAsar, baseOutput, path);
 }
 

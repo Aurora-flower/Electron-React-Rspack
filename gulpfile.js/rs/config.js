@@ -8,11 +8,11 @@ const {
 // const Loader = require('./loader');
 const { join } = require('node:path');
 const getArgv = require('../utils/argv');
-// const { rspack } = require('@rspack/core');
+const { rspack } = require('@rspack/core');
 // const { defineConfig } = require('@rsbuild/core');
 const BuildTarget = require('../common/build_target');
 const { _Directory_, _File_ } = require('../common/project');
-// const RefreshPlugin = require('@rspack/plugin-react-refresh');
+const RefreshPlugin = require('@rspack/plugin-react-refresh');
 // const { getHtmlPlugin } = require('./plugins');
 
 /* ***** ***** ***** ***** 项目入口与输出配置 ***** ***** ***** ***** */
@@ -56,13 +56,14 @@ const Entry = new Proxy(Object.create(null), {
     if (!prop) {
       return undefined;
     }
+    const filename = generateFilePath(key, EntryFilename.Main);
     const entry = {
       index: {
         /* 入口模块的路径, import 属性可以设置多个路径。多个模块会按照数组定义的顺序依次执行。 */
-        import: generateFilePath(key, EntryFilename.Main),
+        import: filename,
 
         /* runtime 属性用于设置运行时 chunk 的名称 */
-        runtime: key
+        runtime: key + '_chunk'
       }
     };
     return key === 'renderer'
@@ -163,7 +164,10 @@ const parser = {
  */
 function signleConfig(mode, type) {
   /* 是否开发环境 */
-  // const isDev = mode === BuildingEnvironment.Dev;
+  const isDev = mode === BuildingEnvironment.Dev;
+
+  /* 是否主进程 */
+  const isMain = type === AppProcessMode.electron;
 
   /* 是否渲染进程 */
   const isRenderer = type === AppProcessMode.renderer;
@@ -172,6 +176,111 @@ function signleConfig(mode, type) {
   // const baseLoader = [
   /* Loader.js, Loader.ts, Loader.json*/
   // ];
+
+  // 插件系统
+  const plugins = [
+    isRenderer &&
+      new rspack.HtmlRspackPlugin({
+        template: join(
+          Structure.directory.Public.base,
+          'index.html'
+        )
+      }),
+    isDev && isRenderer && new RefreshPlugin(),
+    !isDev && new rspack.SwcJsMinimizerRspackPlugin()
+  ].filter(Boolean);
+
+  // 补充 loader 配置
+  const rules = [
+    // TODO: 拆分为 通用（主进程、渲染进程） | node_modules 专用
+    {
+      test: /\.(js|jsx|ts|tsx)$/,
+      exclude: [/node_modules/],
+      use: [
+        {
+          loader: 'builtin:swc-loader',
+          options: {
+            jsc: {
+              parser: {
+                syntax: 'typescript',
+                tsx: true
+              },
+              transform: {
+                react: {
+                  runtime: 'automatic',
+                  development: isDev,
+                  refresh: isDev
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      test: /\.js$/,
+      include: [/node_modules/],
+      use: [
+        {
+          loader: 'builtin:swc-loader',
+          options: {
+            jsc: {
+              parser: {
+                syntax: 'ecmascript',
+                jsx: false // 明确禁用 JSX 转换
+              },
+              transform: null // 禁用所有转换
+            }
+          }
+        }
+      ]
+    },
+    {
+      test: /\.css$/,
+      use: ['postcss-loader'],
+      // 仅渲染进程需要 CSS 模块化
+      ...(isRenderer && {
+        oneOf: [
+          {
+            test: /\.module\.css$/,
+            use: [
+              {
+                loader: 'css-loader',
+                options: { modules: true }
+              }
+            ]
+          },
+          {
+            use: ['css-loader']
+          }
+        ]
+      })
+    },
+    {
+      test: /\.(png|jpe?g|gif|svg)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'images/[hash][ext][query]'
+      }
+    }
+  ];
+
+  // 优化配置
+  const optimization = {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          priority: -10
+        }
+      }
+    }
+    // minimize: true
+    // minimizer: [new rspack.SwcJsMinimizerRspackPlugin()]
+  };
 
   const options = {
     /* 设置构建模式，以启用对应模式下的默认优化策略。 */
@@ -183,6 +292,7 @@ function signleConfig(mode, type) {
     /* 构建上下文，设置构建时所依赖的基础路径，默认值：process.cwd() */
     context: process.cwd(),
 
+    /* 构建目标，指定构建目标环境 */
     target: BuildTarget[type],
 
     /* 指定 bundles、assets 输出的位置  */
@@ -191,10 +301,10 @@ function signleConfig(mode, type) {
       path: Structure.directory.App[type],
 
       /* 输出文件名(格式) - 默认为 main.js */
-      filename:
-        type == AppProcessMode.Renderer
-          ? '[name].[contenthash].js'
-          : '[name].js',
+      // filename:
+      //   type == AppProcessMode.Renderer
+      //     ? '[name].[contenthash].js'
+      //     : '[name].js',
 
       /* 非初始块文件的名称 - 默认情况下，使用 [id].js 或从 output.filename 推断出的值（[name] 被替换为 [id] 或在前面加上 [id].）。 */
       // chunkFilename: '[id].js',
@@ -204,6 +314,32 @@ function signleConfig(mode, type) {
       // {
       // keep: 'xxx/xxx' // 决定保留的文件
       //}
+    },
+
+    devtool: isDev ? 'cheap-source-map' : 'source-map',
+
+    plugins,
+
+    optimization,
+
+    resolve: {
+      /* 模块解析选项 */
+      extensions: [
+        '.js',
+        '.jsx',
+        '.ts',
+        '.tsx',
+        '.json',
+        '.css'
+      ],
+
+      /* 别名 */
+      alias: {
+        '@': Structure.directory.Source.base
+      },
+      mainFiles: ['index', 'main'],
+      enforceExtension: false,
+      symlinks: false
     },
 
     /* 用于决定如何处理一个项目中不同类型的模块。*/
@@ -217,58 +353,7 @@ function signleConfig(mode, type) {
       parser,
 
       /* Rule 定义了一个模块的匹配条件以及处理这些模块的行为。 */
-      rules: [
-        {
-          with: { type: 'url' },
-          type: 'asset/resource'
-        },
-        {
-          test: /\.ts$/,
-          exclude: [/node_modules/],
-          loader: 'builtin:swc-loader',
-          options: {
-            jsc: {
-              experimental: {
-                keepImportAttributes: true
-              },
-              parser: {
-                syntax: 'typescript'
-              }
-            }
-          },
-          type: 'javascript/auto'
-        },
-        {
-          test: /\.jsx$/,
-          use: {
-            loader: 'builtin:swc-loader',
-            options: {
-              jsc: {
-                parser: {
-                  syntax: 'ecmascript',
-                  jsx: true
-                }
-              }
-            }
-          },
-          type: 'javascript/auto'
-        },
-        {
-          test: /\.tsx$/,
-          use: {
-            loader: 'builtin:swc-loader',
-            options: {
-              jsc: {
-                parser: {
-                  syntax: 'typescript',
-                  tsx: true
-                }
-              }
-            }
-          },
-          type: 'javascript/auto'
-        }
-      ]
+      rules
 
       /* 用于标识匹配的模块的 layer。可以将一组模块聚合到一个 layer 中，该 layer 随后可以在 split chunks, stats 或 entry options 中使用。 */
       // experiments: { layers: true }
@@ -278,6 +363,23 @@ function signleConfig(mode, type) {
   if (isRenderer) {
     /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
     // options.output.publicPath = '/';
+  } else if (isMain) {
+    // 在主进程配置中禁用代码分割(禁用破坏性优化)
+    // optimization: {
+    //   splitChunks: false,
+    //   minimize: false,
+    //   concatenateModules: false
+    // }
+    // options.externals = [
+    //   { express: 'require("express")' },
+    //   { electron: 'require("electron")' },
+    //   /^node:/
+    // ];
+
+    options.optimization = {
+      ...optimization,
+      runtimeChunk: 'single'
+    };
   }
 
   return options;
@@ -299,7 +401,12 @@ function getConfig() {
   /* 获取构建环境 */
   const mode = args.mode || BuildingEnvironment.Dev;
 
-  console.log('getConfig...', args, mode);
+  console.log(
+    'getConfig...',
+    args,
+    mode,
+    Structure.directory.Source.base
+  );
   const flatConfig = [];
   for (const key in AppProcessMode) {
     if (
@@ -308,7 +415,9 @@ function getConfig() {
       const type = AppProcessMode[key];
       const config = signleConfig(mode, type);
       flatConfig.push(config);
-      console.log('SignleConfig...', type, config);
+      console.log('config...', {
+        [type]: Entry[type]
+      });
       // break;
     }
   }
