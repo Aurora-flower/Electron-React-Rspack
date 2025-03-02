@@ -95,6 +95,7 @@
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "dependencies": {
+    "@douyinfe/semi-ui": "^2.75.0",
     "@iconify/json": "^2.2.307",
     "@iconify/react": "^5.2.0",
     "7zip-min": "^2.0.0",
