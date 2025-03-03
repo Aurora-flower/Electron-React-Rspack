@@ -9,11 +9,8 @@ const {
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
 const { join } = require('node:path');
-const getArgv = require('../utils/argv');
 const { task, series } = require('gulp');
 const getConfig = require('../webpack/get_config');
-
-const argInfo = getArgv();
 
 /**
  * 清理构建目录
@@ -52,7 +49,7 @@ function findErrors(log) {
  */
 function compile() {
   return new Promise((resolve, reject) => {
-    const mode = argInfo.mode;
+    const mode = process.env.NODE_ENV;
     const webpackConfig = getConfig(mode);
     try {
       const compiler = webpack(webpackConfig);
@@ -75,7 +72,7 @@ function compile() {
  */
 function compileWatch() {
   return new Promise((resolve, reject) => {
-    const mode = argInfo.mode;
+    const mode = process.env.NODE_ENV;
     const webpackConfig = getConfig(mode);
     try {
       const compiler = webpack(webpackConfig);
