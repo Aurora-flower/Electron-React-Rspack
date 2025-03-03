@@ -1,2 +1,4 @@
 #!/usr/bin/env sh
+npm run check:audit
+# npm run check:out
 npm run lint
