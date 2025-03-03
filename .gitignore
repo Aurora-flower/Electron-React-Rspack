@@ -26,7 +26,7 @@ node_modules.asar.unpacked
 builtin
 
 # 隐私目录
-# private
+private
 
 # 项目依赖目录
 node_modules
