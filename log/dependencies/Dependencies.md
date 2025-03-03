@@ -135,6 +135,7 @@ npm install -D css-loader
 npm install -D babel-loader
 npm install -D postcss-loader
 npm install -D ts-loader
+npm install -D style-loader
 
 npm install -D dotenv-webpack
 

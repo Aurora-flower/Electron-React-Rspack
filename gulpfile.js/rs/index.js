@@ -9,6 +9,10 @@
 const getConfig = require('./config');
 const { rspack } = require('@rspack/core');
 
+/**
+ * 编译
+ * @returns {Promise<boolean>}
+ */
 function compile() {
   return new Promise(resolve => {
     const config = getConfig();
@@ -21,12 +25,15 @@ function compile() {
         err ||
         stats.hasErrors() /* err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
       ) {
-        console.log('compile stat...', err, stats);
+        if (err) console.error(err);
+        if (stats.hasErrors()) {
+          console.log(stats.toString({ colors: true }));
+        }
+
         resolve(false);
       }
+      resolve(true);
     });
-    console.log('compile done...', process.env.NODE_ENV);
-    resolve(true);
   });
 }
 

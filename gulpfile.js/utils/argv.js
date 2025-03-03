@@ -1,6 +1,7 @@
 const { BuildingEnvironment } = require('../common/env');
 
 function getArgv() {
+  if (process.env.NODE_ENV) return;
   const args = process.argv.splice(3);
   const argObject = {};
 
@@ -14,7 +15,7 @@ function getArgv() {
     }
   });
 
-  console.log('args:', args, argObject);
+  console.log('args:', args);
   return {
     mode: args?.mode || BuildingEnvironment.Prod,
     ...argObject
