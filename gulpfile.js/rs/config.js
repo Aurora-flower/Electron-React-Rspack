@@ -1,16 +1,12 @@
 /**
  * @file 获取构建配置
  */
-const {
-  BuildingEnvironment
-  // targets
-} = require('../common/env');
-// const Loader = require('./loader');
+const Loader = require('./loader');
 const { join } = require('node:path');
-const getArgv = require('../utils/argv');
 const { rspack } = require('@rspack/core');
 // const { defineConfig } = require('@rsbuild/core');
 const BuildTarget = require('../common/build_target');
+const { BuildingEnvironment } = require('../common/env');
 const { _Directory_, _File_ } = require('../common/project');
 const RefreshPlugin = require('@rspack/plugin-react-refresh');
 // const { getHtmlPlugin } = require('./plugins');
@@ -38,6 +34,9 @@ const AppProcessMode = {
   renderer: 'renderer'
 };
 
+/**
+ * @summary 入口文件名
+ */
 const EntryFilename = {
   Main: 'index.ts',
   Vendor: 'vendor.ts'
@@ -63,7 +62,7 @@ const Entry = new Proxy(Object.create(null), {
         import: filename,
 
         /* runtime 属性用于设置运行时 chunk 的名称 */
-        runtime: 'index' // key + '_chunk'
+        runtime: `${key}_runtime`
       }
     };
     return key === 'renderer'
@@ -82,82 +81,6 @@ const Entry = new Proxy(Object.create(null), {
 /* ... 等价于 Rspack 内置的默认扩展名配置 */
 // '...'
 // ];
-
-/**
- * @summary 解析器选项
- * @description
- * - asset: asset 模块的解析器选项
- * - javascript: javascript 模块的解析器选项
- * - css: CSS 模块的解析器选项
- * - css/auto: css/auto 模块的解析器选项
- * - css/module: css/module 模块的解析器选项
- */
-const parser = {
-  // asset 模块的解析器选项
-  'asset': {
-    dataUrlCondition: {
-      // 小于等于 8KB 的模块将被 Base64 编码
-      maxSize: 1024 * 8
-    }
-  },
-  // javascript 模块的解析器选项
-  'javascript': {
-    /**
-     * @summary 指定动态导入的全局模式
-     * @see {@link }
-     */
-    dynamicImportMode: 'lazy',
-
-    /**
-     * @summary 指定动态导入的全局 prefetch
-     * @see {@link https://rspack.dev/zh/api/runtime-api/module-methods#webpackprefetch}
-     */
-    dynamicImportPrefetch: false,
-
-    /**
-     * @summary 指定动态导入的全局 preload
-     * @see {@link https://rspack.dev/zh/api/runtime-api/module-methods#webpackpreload}
-     */
-    dynamicImportPreload: false,
-
-    /**
-     * @summary 指定 URL 全局模式
-     * @description
-     * 启用 new URL() 语法解析。
-     * 当使用 'relative' 时，webpack 将为 new URL() 语法生成相对的 URL，即结果 URL 中不包含根 URL
-     */
-    url: true,
-    importMeta: true
-  },
-  // CSS 模块的解析器选项
-  'css': {
-    namedExports: true
-  },
-  // css/auto 模块的解析器选项
-  'css/auto': {
-    namedExports: true
-  },
-  // css/module 模块的解析器选项
-  'css/module': {
-    namedExports: true
-  }
-};
-
-// function getPlugins(_type, _isDev) {
-// const isRenderer = type === AppProcessMode.renderer;
-
-// const plugins = [
-/* 启用 React Refresh */
-// isRenderer && getHtmlPlugin(),
-/* 启用 CSS 模块化 */
-// new rspack.CssMinimizerRspackPlugin({
-//   minimizerOptions: { targets }
-// })
-// isDev ? new RefreshPlugin() : null
-// ];
-
-// return plugins.filter(Boolean);
-// }
 
 /**
  * @summary 单个配置
@@ -184,11 +107,28 @@ function signleConfig(mode, type) {
         template: join(
           Structure.directory.Public.base,
           'index.html'
-        )
+        ),
+        inject: 'body',
+        meta: {
+          // shrink-to-fit=no
+          'viewport':
+            'width=device-width, initial-scale=1.0,' +
+            'maximum-scale=1.0, user-scalable=no',
+          /* Content-Security-Policy 策略 */
+          'Content-Security-Policy': {
+            'http-equiv': 'Content-Security-Policy',
+            'content':
+              `default-src 'self';` +
+              `script-src 'self';` +
+              `style-src-elem 'self';` +
+              `font-src 'self';` +
+              `connect-src 'self' https://api.iconify.design;` +
+              `img-src 'self' data:;`
+          }
+        }
       }),
     isDev && isRenderer && new RefreshPlugin(),
     !isDev && new rspack.SwcJsMinimizerRspackPlugin(),
-
     isRenderer &&
       new rspack.DefinePlugin({
         global: 'window',
@@ -200,94 +140,27 @@ function signleConfig(mode, type) {
       })
   ].filter(Boolean);
 
-  // 补充 loader 配置
+  /* loader 配置 */
   const rules = [
-    // TODO: 拆分为 通用（主进程、渲染进程） | node_modules 专用
-    {
-      test: /\.(js|jsx|ts|tsx)$/,
-      exclude: [/node_modules/],
-      use: [
-        {
-          loader: 'builtin:swc-loader',
-          options: {
-            jsc: {
-              parser: {
-                syntax: 'typescript',
-                tsx: true
-              },
-              transform: {
-                react: {
-                  runtime: 'automatic',
-                  development: isDev,
-                  refresh: isDev
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    {
-      test: /\.js$/,
-      include: [/node_modules/],
-      use: [
-        {
-          loader: 'builtin:swc-loader',
-          options: {
-            jsc: {
-              parser: {
-                syntax: 'ecmascript',
-                jsx: false // 明确禁用 JSX 转换
-              },
-              transform: null // 禁用所有转换
-            }
-          }
-        }
-      ]
-    },
-    {
-      test: /\.css$/,
-      use: ['postcss-loader'],
-      // 仅渲染进程需要 CSS 模块化
-      ...(isRenderer && {
-        oneOf: [
-          {
-            test: /\.module\.css$/,
-            use: [
-              {
-                loader: 'css-loader',
-                options: { modules: true }
-              }
-            ]
-          },
-          {
-            use: ['css-loader']
-          }
-        ]
-      })
-    },
-    {
-      test: /\.(png|jpe?g|gif|svg)$/,
-      type: 'asset/resource',
-      generator: {
-        filename: 'images/[hash][ext][query]'
-      }
-    }
-  ];
+    Loader.js(),
+    Loader.ts(),
+    isRenderer && Loader.react(isDev),
+    Loader.svg()
+  ].filter(Boolean);
 
   // 优化配置
   const optimization = {
-    splitChunks: {
-      chunks: 'all',
-      minSize: 20000,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          priority: -10
-        }
-      }
-    }
+    // splitChunks: {
+    // chunks: 'all'
+    // minSize: 20 * 1000,
+    // cacheGroups: {
+    //   vendors: {
+    //     test: /[\\/]node_modules[\\/]/,
+    //     name: 'vendors',
+    //     priority: -10
+    //   }
+    // }
+    // }
     // minimize: true
     // minimizer: [new rspack.SwcJsMinimizerRspackPlugin()]
   };
@@ -296,11 +169,18 @@ function signleConfig(mode, type) {
     /* 设置构建模式，以启用对应模式下的默认优化策略。 */
     mode,
 
+    /* 设置构建时的详细程度，默认值：'normal' */
+    stats: {
+      // all: true,
+      preset: 'minimal'
+      // errorDetails: true
+    },
+
     /* 构建入口，默认值：'./src/index.js' */
     entry: Entry[type],
 
     /* 构建上下文，设置构建时所依赖的基础路径，默认值：process.cwd() */
-    context: process.cwd(),
+    // context: process.cwd(),
 
     /* 构建目标，指定构建目标环境 */
     target: BuildTarget[type],
@@ -311,10 +191,7 @@ function signleConfig(mode, type) {
       path: Structure.directory.App[type],
 
       /* 输出文件名(格式) - 默认为 main.js */
-      // filename:
-      //   type == AppProcessMode.Renderer
-      //     ? '[name].[contenthash].js'
-      //     : '[name].js',
+      filename: '[name].js', // '[name].[contenthash].js'
 
       /* 非初始块文件的名称 - 默认情况下，使用 [id].js 或从 output.filename 推断出的值（[name] 被替换为 [id] 或在前面加上 [id].）。 */
       // chunkFilename: '[id].js',
@@ -326,12 +203,13 @@ function signleConfig(mode, type) {
       //}
     },
 
+    /* 开发工具，指定构建时使用的 source map 类型。 */
     devtool: isDev ? 'cheap-source-map' : 'source-map',
 
+    /* 构建插件 */
     plugins,
 
-    optimization,
-
+    /* 解析选项 */
     resolve: {
       /* 模块解析选项 */
       extensions: [
@@ -347,49 +225,38 @@ function signleConfig(mode, type) {
       alias: {
         '@': Structure.directory.Source.base
       },
+
+      /* 主入口文件名 */
       mainFiles: ['index', 'main'],
+
+      /* 强制扩展名 */
       enforceExtension: false,
+
+      /* 符号链接 */
       symlinks: false
     },
 
+    /* 优化选项 */
+    optimization,
+
     /* 用于决定如何处理一个项目中不同类型的模块。*/
     module: {
-      /* 应用于模块的默认规则。 */
-      defaultRules: [
-        '...' // 使用 "..." 来引用 Rspack 默认规则
-      ],
-
-      /* 配置所有解析器选项 */
-      parser,
-
       /* Rule 定义了一个模块的匹配条件以及处理这些模块的行为。 */
       rules
-
-      /* 用于标识匹配的模块的 layer。可以将一组模块聚合到一个 layer 中，该 layer 随后可以在 split chunks, stats 或 entry options 中使用。 */
-      // experiments: { layers: true }
     }
   };
 
   if (isRenderer) {
-    /* 注意📢：对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
-    // options.output.publicPath = '/';
-  } else if (isMain) {
-    // 在主进程配置中禁用代码分割(禁用破坏性优化)
-    // optimization: {
-    //   splitChunks: false,
-    //   minimize: false,
-    //   concatenateModules: false
-    // }
-    // options.externals = [
-    //   { express: 'require("express")' },
-    //   { electron: 'require("electron")' },
-    //   /^node:/
-    // ];
-
-    options.optimization = {
-      ...optimization,
-      runtimeChunk: 'single'
-    };
+    options.module.rules = options.module.rules.concat([
+      Loader.css(isRenderer)
+    ]);
+  }
+  if (isMain) {
+    // options.optimization = {
+    //   splitChunks: {
+    //     chunks: 'all'
+    //   }
+    // };
   }
 
   return options;
@@ -401,22 +268,10 @@ function signleConfig(mode, type) {
  * @summary 获取 rspack 构建配置
  */
 function getConfig() {
-  // ==================== 获取参数 ====================
-  /* 获取命令行参数 */
-  const args = getArgv();
-
   /* 是否开发环境 - args.mode | process.env.NODE_ENV */
   // const isDev = process.env.NODE_ENV === BuildingEnvironment.Dev;
-
-  /* 获取构建环境 */
-  const mode = args.mode || BuildingEnvironment.Dev;
-
-  console.log(
-    'getConfig...',
-    args,
-    mode,
-    Structure.directory.Source.base
-  );
+  const mode = process.env.NODE_ENV;
+  console.log('getConfig...', mode);
   const flatConfig = [];
   for (const key in AppProcessMode) {
     if (
@@ -425,9 +280,6 @@ function getConfig() {
       const type = AppProcessMode[key];
       const config = signleConfig(mode, type);
       flatConfig.push(config);
-      console.log('config...', {
-        [type]: Entry[type]
-      });
       // break;
     }
   }

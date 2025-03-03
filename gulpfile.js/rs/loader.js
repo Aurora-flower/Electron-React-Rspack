@@ -7,12 +7,42 @@
 
 const { targets } = require('../common/env');
 
+/* ***** ***** ***** ***** 通用配置 ***** ***** ***** ***** */
+
+/* ***** ***** ***** ***** 针对特殊模块：如 node_modules 下的依赖处理 ***** ***** ***** ***** */
+
+/* ***** ***** ***** ***** 获取 Loader ***** ***** ***** ***** */
+
 /**
  * @summary SVG 图片资源
  */
 const svg = () => ({
   test: /\.svg$/,
   type: 'asset'
+});
+
+const js = () => ({
+  test: /\.js$/,
+  use: [
+    {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env']
+      }
+    }
+  ]
+});
+
+const ts = () => ({
+  test: /\.ts$/,
+  use: [
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true
+      }
+    }
+  ]
 });
 
 /**
@@ -61,7 +91,33 @@ const react = isDev => ({
   type: 'javascript/auto'
 });
 
+const css = () => ({
+  test: /\.css$/,
+  use: [
+    'style-loader',
+    'css-loader',
+    {
+      loader: 'postcss-loader',
+      options: {
+        postcssOptions: {
+          plugins: [
+            require('tailwindcss'),
+            require('autoprefixer')
+          ]
+        }
+      }
+    }
+  ]
+});
+
 const Loader = {
+  /* 脚本文件 */
+  js,
+  ts,
+
+  /* css 样式文件 */
+  css,
+
   /* 图片资源 */
   svg,
 
