@@ -1,12 +1,15 @@
 /**
  * @file 获取构建配置
  */
+const {
+  targets,
+  BuildingEnvironment
+} = require('../common/env');
 const Loader = require('./loader');
 const { join } = require('node:path');
 const { rspack } = require('@rspack/core');
 // const { defineConfig } = require('@rsbuild/core');
 const BuildTarget = require('../common/build_target');
-const { BuildingEnvironment } = require('../common/env');
 const { _Directory_, _File_ } = require('../common/project');
 const RefreshPlugin = require('@rspack/plugin-react-refresh');
 // const { getHtmlPlugin } = require('./plugins');
@@ -250,6 +253,18 @@ function signleConfig(mode, type) {
     options.module.rules = options.module.rules.concat([
       Loader.css(isRenderer)
     ]);
+
+    options.optimization = {
+      minimizer: [
+        new rspack.SwcJsMinimizerRspackPlugin(),
+        new rspack.LightningCssMinimizerRspackPlugin({
+          minimizerOptions: { targets }
+        })
+      ]
+    };
+    options.experiments = {
+      css: true
+    };
   }
   if (isMain) {
     // options.optimization = {

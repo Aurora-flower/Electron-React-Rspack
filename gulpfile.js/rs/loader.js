@@ -70,18 +70,18 @@ const react = isDev => ({
 
               /* 开启通用的 react 转换支持 */
               refresh: isDev
-            },
+            }
 
             // 新增类型剥离配置
-            hidden: {
-              jest: false // 禁用jest模式
-            }
+            // hidden: {
+            //   jest: false // 禁用jest模式
+            // }
           }
         },
-        parser: {
-          syntax: 'ecmascript',
-          jsx: true
-        },
+        // parser: {
+        //   syntax: 'ecmascript',
+        //   jsx: true
+        // },
         env: { targets }
       }
     }
