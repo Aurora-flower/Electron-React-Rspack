@@ -14,7 +14,7 @@ cache
 # core/bin
 
 # 核心目录
-core
+# core
 
 # 运行环境缓存目录
 .cache
