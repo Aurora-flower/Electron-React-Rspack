@@ -5,7 +5,9 @@ import reactLogo from '@/src/static/assets/svgs/react.svg';
 function Layout(prop: { date: Date }) {
   return (
     <>
-      <div data-date={new Date()}>
+      <div
+        data-date={new Date()}
+        className='text-red-500'>
         {prop.date.toLocaleString()}
       </div>
       <div className='size-10'>
