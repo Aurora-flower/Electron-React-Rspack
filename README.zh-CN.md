@@ -19,6 +19,8 @@ PS:
 
 **中文** | [英文](./README.md)
 
+---
+
 ## 风格规范
 
 ### 提交规范
@@ -47,3 +49,16 @@ PS:
 | assets   | 添加资源                           | `asset(icns): 添加一些 Icns 图标资源`       |
 | base     | 项目基础构建流程                   | `base(git): 配置\更新 git 忽略文件`         |
 | editor   | 编辑器配置与修改                   | `editor(vscode): 配置 vscode`               |
+
+### 相关文档
+
+<!-- 构建相关 -->
+
+- [gulp 文档 - 中文](https://gulp.nodejs.cn/)
+- [webpack 文档 - 中文](https://www.webpackjs.com/)
+- [rspack 文档 - 中文](https://rspack.dev/zh/)
+
+<!--- 主技术栈 --->
+
+- [electron 文档 - 中文](https://www.electronjs.org/zh/)
+- [react 文档 - 中文](https://react.docschina.org/)
