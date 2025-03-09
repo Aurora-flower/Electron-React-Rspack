@@ -1,6 +1,6 @@
 # 开发过程中问题记录
 
-1.  类型初始化不当造成的错误
+1. 类型初始化不当造成的错误
 
     **场景**:
 
@@ -18,7 +18,7 @@
 
         确保传入的参数类型与组件的预期类型一致。
 
-2.  同步循环与闭包陷阱
+2. 同步循环与闭包陷阱
 
     原写法:
 
@@ -65,7 +65,7 @@
         }
         ```
 
-3.  eval 函数报错
+3. eval 函数报错
 
     **原因**:
     在开启 CSP 时， webpack 打包构建的资源内部使用 `eval()` 函数，导致 CSP 策略无法正常工作。
@@ -73,7 +73,7 @@
     **解决方式**:
     指定 `devtool` 属性 为 `source-map`，控制 Source Map 的生成方式，从而避免 `eval()` 函数的使用。
 
-4.  使用 react-router-dom 后，本地刷新匹配 404 问题
+4. 使用 react-router-dom 后，本地刷新匹配 404 问题
 
     **原因**:
     在单页应用中，前端负责处理页面间的导航和内容的更新，而服务器只提供初始的 HTML 页面。
@@ -83,7 +83,7 @@
     **解决方式**:
     让服务器在接收到未知路径的 GET 请求时，总是返回 SPA 的入口 HTML 文件，从而让前端路由接管并显示正确的页面内容。
 
-5.  一旦引入 `@douyinfe/semi-ui` 组件库的使用，在打包时会报错
+5. 一旦引入 `@douyinfe/semi-ui` 组件库的使用，在打包时会报错
 
         ```text
         Field 'browser' doesn't contain a valid alias configuration
@@ -97,7 +97,7 @@
 
     配置 webpack 的 `rules` 以及 `extensions` 配置项，关于 js、css 的处理。
 
-6.  无法使用 webpack 的 `require.context` 函数 ✅
+6. 无法使用 webpack 的 `require.context` 函数 ✅
 
     错误提示：类型“NodeRequire”上不存在属性“context”
 
