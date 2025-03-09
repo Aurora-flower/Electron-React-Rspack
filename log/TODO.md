@@ -113,37 +113,37 @@
 
 9. 样式参考
 
-- 卡片 3D 效果 -- [免费4K高清壁纸网站](https://haowallpaper.com/)
-- 卡片内容显示 -- [古驰官网](https://www.gucci.cn/)
-- 滚动卡片区 -- [React 官网](https://zh-hans.react.dev/)
+   - 卡片 3D 效果 -- [免费4K高清壁纸网站](https://haowallpaper.com/)
+   - 卡片内容显示 -- [古驰官网](https://www.gucci.cn/)
+   - 滚动卡片区 -- [React 官网](https://zh-hans.react.dev/)
 
 10. 设计模式
 
-[pattern](https://www.patterns.dev/)
+    - js
+    - vue
+    - react
 
-- js
-- vue
-- react
+      相关链接：[pattern](https://www.patterns.dev/)
 
-10. 了解区分 web 与 node API
+11. 了解区分 web 与 node API
 
-- Buffer 对象
-- File 对象
-- FileReader 对象
-- Stream 对象
-- FormData 对象
+    - Buffer 对象  ✅
+    - File 对象  ✅
+    - FileReader 对象  ✅
+    - Stream 对象
+    - FormData 对象  ✅
 
-10. 任务进度球 - 可拖拽，贴边隐藏
+12. 任务进度球 - 可拖拽，贴边隐藏
 
-11. 爬虫爬取考研网信息
+13. 爬虫爬取考研网信息
 
-12. SVN 管理
+14. SVN 管理
 
-13. 股票类型（币安）、音乐类型（网易云）、笔记类型（语雀）
+15. 股票类型（币安）、音乐类型（网易云）、笔记类型（语雀）
 
-14. 音视频控件 （流的解析）
+16. 音视频控件 （流的解析）
 
-15. 虚拟图形处理
+17. 虚拟图形处理
 
 ---
 

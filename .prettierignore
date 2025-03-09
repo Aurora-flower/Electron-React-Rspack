@@ -53,4 +53,8 @@ out
 package-lock.json
 
 
+# markdown 文件
+*.md
+
+
 # ***** ***** ***** ***** Other ***** ***** ***** *****
