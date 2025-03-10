@@ -3,7 +3,23 @@
  * @see {@link https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types MIME常见类型}
  */
 
-const MIME_TYPES = {
+type MIMEEntry = {
+  /* MIME 类型 */
+  mime: string;
+  /* 含义 */
+  represent: string;
+  /* 描述 */
+  description: string;
+};
+
+export type MIMEModel = keyof typeof MIME_TYPES;
+
+export const MIME_TYPES = {
+  '.txt': {
+    mime: 'text/plain',
+    represent: '文本文件',
+    description: '文本文件'
+  },
   '.html': {
     mime: 'text/html',
     represent: 'HTML 文档',
@@ -116,17 +132,6 @@ const MIME_TYPES = {
     description: 'Windows 批处理文件'
   }
 };
-
-type MIMEEntry = {
-  /* MIME 类型 */
-  mime: string;
-  /* 含义 */
-  represent: string;
-  /* 描述 */
-  description: string;
-};
-
-export type MIMEModel = keyof typeof MIME_TYPES;
 
 /**
  * @class MIME

@@ -5,7 +5,7 @@
  * 命名空间是组织 TypeScript 代码的一种过时的方式。
  * - 不允许某些三斜杠指令，以支持 ES6 样式的导入声明。
  */
-
+// --- /// <reference lib="dom" />
 // --- /// <reference path="./common.d.ts" />
 
 // declare interface CustomType { /* 自动全局生效 */ }
@@ -25,7 +25,15 @@ declare global {
   // }
 
   /* ***** ***** ***** ***** Window 类型定义扩展 ***** ***** ***** ***** */
-  // interface Window {}
+  interface Window {
+    showSaveFilePicker: (options?: {
+      suggestedName?: string;
+      types?: Array<{
+        description?: string;
+        accept: Record<string, string[]>;
+      }>;
+    }) => Promise<FileSystemFileHandle>;
+  }
 
   /* ***** ***** ***** ***** Window.Navigator 类型定义扩展 ***** ***** ***** ***** */
   interface Navigator {
