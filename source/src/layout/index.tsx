@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import reactLogo from '@/src/static/assets/svgs/react.svg';
 // import React, { useEffect, useRef, useState } from 'react';
 
-import '@/src/layout/style/index.css';
+import '@/src/layout/style';
 
 function Layout(prop: { date: Date }) {
   return (
@@ -13,7 +13,7 @@ function Layout(prop: { date: Date }) {
           className='date text-red-500'>
           {prop.date.toLocaleString()}
         </div>
-        <div className='size-10'>
+        <div className='trapezoid size-20'>
           <a
             href='https://reactjs.org'
             target='_blank'
