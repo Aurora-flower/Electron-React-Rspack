@@ -1,0 +1,6 @@
+.layout .date {
+  text-shadow:
+    1px -1px #fff,
+    -1px 1px #999,
+    -10px 10px 5px #80808080;
+}
