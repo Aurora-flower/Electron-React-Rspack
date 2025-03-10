@@ -1,3 +1,7 @@
+/**
+ * @file 对象工具类
+ */
+
 export class ObjectUtility {
   /**
    * 将一个对象转为数组
