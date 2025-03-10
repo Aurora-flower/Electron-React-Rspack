@@ -171,7 +171,7 @@ function getBundleAnalyzerPlugin() {
 
       /**
        * @summary 模块大小默认显示在报告中
-       * @description 可选值：`stat` | `parsed` | `gzip`
+       * @description 可选值: `stat` | `parsed` | `gzip`
        */
       // defaultSizes: 'parsed',
 
@@ -192,7 +192,7 @@ function getBundleAnalyzerPlugin() {
 
       /**
        * @summary 日志级别
-       * @description 可选值：`info` | `warn` | `error` | `silent`
+       * @description 可选值: `info` | `warn` | `error` | `silent`
        */
       // logLevel: 'info'
     };

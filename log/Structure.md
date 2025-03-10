@@ -37,8 +37,8 @@
         ├── Python                            Python 运行环境
         └── Svn                               SVN 运行环境
       ├── build                               electron 构建相关
-      ├── builtin                             内置插件目录，用于存放内置插件，如：electron 插件等。
-      ├── extensions                          应用程序扩展目录，用于存放第三方插件，如：react 插件等。
+      ├── builtin                             内置插件目录，用于存放内置插件，如: electron 插件等。
+      ├── extensions                          应用程序扩展目录，用于存放第三方插件，如: react 插件等。
       ├── lib                                 应用程序核心目录
       ├── packages                            包含多个独立的子模块或包
       ├── polyfill                            用于提供缺失功能或 API 的技术，使得旧版本的浏览器或环境能够支持现代 JavaScript 特性或浏览器功能。 🟦
@@ -66,7 +66,7 @@
       ├── tasks                               gulp 任务目录
       ├── utils                               gulp 辅助工具目录
       └── webpack                             webpack 构建工具配置目录
-    ├── licenses                              用于存放软件许可协议条款 (多语言版本，如： `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
+    ├── licenses                              用于存放软件许可协议条款 (多语言版本，如:  `LICENSE-chs.rtf` 中简、 `LICENSE-cht.rtf` 中繁、 `LICENSE-jpn.rtf` 日本 等)
     └─┬ log                                   日志文件目录
       ├── CHANGELOG                           项目更新日志
       └── dependencies.json                   依赖包版本信息与变动记录

@@ -3,10 +3,10 @@
  */
 import { getAppAsarOutput } from '@/electron/helper';
 import { TimeUtility } from '@/common/utils';
-import FileSystemUtils from '@/electron/utils/fileSystemUtils';
+import FileSystemUtils from '@/electron/utils/fileSystem';
 
 interface LoggerOptions {
-  /* 日志文件名：默认 - cache/debug/logger.log */
+  /* 日志文件名: 默认 - cache/debug/logger.log */
   filename: string;
   /* 日期时间格式*/
   format: string;
