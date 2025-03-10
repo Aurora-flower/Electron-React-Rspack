@@ -1,6 +1,6 @@
 export class StringUtility {
   /**
-   * 垫片字符串
+   * @summary 垫片字符串
    */
   static padString(
     content: string,
@@ -8,21 +8,17 @@ export class StringUtility {
     type: 'start' | 'end',
     pad: string
   ) {
-    // return (
-    //   str: string,
-    //   padStr: string,
-    //   padLen: number
-    // ) => {
-    //   if (type === 'start') {
-    //     return padStr.repeat(padLen) + str
-    //   } else {
-    //     return str + padStr.repeat(padLen)
-    //   }
-    // }
     if (type === 'start') {
       return content.padStart(digit, pad);
     } else {
       return content.padEnd(digit, pad);
     }
+  }
+
+  /**
+   * @summary 重复字符串
+   */
+  static repeatString(content: string, times: number) {
+    return content.repeat(times);
   }
 }
