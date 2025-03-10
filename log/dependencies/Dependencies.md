@@ -23,6 +23,8 @@ npm install -D electron
 
 npm install -D electron-builder
 
+# npm install -D electron-icon-builder
+
 npm install -D electron-devtools-installer
 
 npm install -S electron-updater

@@ -4,8 +4,8 @@
  * 定义了 Webpack 在不同构建模式下使用的 devtool 类型，用于生成 source maps。
  * Source maps 可以帮助调试编译后的代码，提供原始源代码的映射信息。
  * @remarks
- * - eval 类型：使用 eval 函数生成 source maps。适合开发环境，速度较快但文件较大
- * - 非 eval 类型：不使用 eval 方式生成 source maps。适合生产环境，文件较小但生成速度较慢。
+ * - eval 类型: 使用 eval 函数生成 source maps。适合开发环境，速度较快但文件较大
+ * - 非 eval 类型: 不使用 eval 方式生成 source maps。适合生产环境，文件较小但生成速度较慢。
  */
 const Devtool = {
   /* ***** ***** ***** ***** eval 类型 ***** ***** ***** ***** */

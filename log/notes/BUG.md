@@ -99,7 +99,7 @@
 
 6. 无法使用 webpack 的 `require.context` 函数 ✅
 
-    错误提示：类型“NodeRequire”上不存在属性“context”
+    错误提示: 类型“NodeRequire”上不存在属性“context”
 
     **原因**:
     TypeScript 默认不识别 require.context 这个方法

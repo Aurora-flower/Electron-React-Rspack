@@ -8,11 +8,11 @@ const {
 const Loader = require('./loader');
 const { join } = require('node:path');
 const { rspack } = require('@rspack/core');
+// const { getHtmlPlugin } = require('./plugins');
 // const { defineConfig } = require('@rsbuild/core');
 const BuildTarget = require('../common/build_target');
 const { _Directory_, _File_ } = require('../common/project');
 const RefreshPlugin = require('@rspack/plugin-react-refresh');
-// const { getHtmlPlugin } = require('./plugins');
 
 /* ***** ***** ***** ***** 项目入口与输出配置 ***** ***** ***** ***** */
 
@@ -172,17 +172,17 @@ function signleConfig(mode, type) {
     /* 设置构建模式，以启用对应模式下的默认优化策略。 */
     mode,
 
-    /* 设置构建时的详细程度，默认值：'normal' */
+    /* 设置构建时的详细程度，默认值: 'normal' */
     stats: {
       // all: true,
       preset: 'minimal'
       // errorDetails: true
     },
 
-    /* 构建入口，默认值：'./src/index.js' */
+    /* 构建入口，默认值: './src/index.js' */
     entry: Entry[type],
 
-    /* 构建上下文，设置构建时所依赖的基础路径，默认值：process.cwd() */
+    /* 构建上下文，设置构建时所依赖的基础路径，默认值: process.cwd() */
     // context: process.cwd(),
 
     /* 构建目标，指定构建目标环境 */

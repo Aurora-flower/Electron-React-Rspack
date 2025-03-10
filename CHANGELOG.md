@@ -8,11 +8,11 @@
 ### Added
 
 - 初始化 Electron + React 项目脚手架
-- 集成核心技术栈：
+- 集成核心技术栈:
   - Electron@27.1.3
   - React@18.2.0
   - TailwindCSS@3.4.0
-- 配置工程化工具链：
+- 配置工程化工具链:
 
   - Gulp + Webpack 构建流水线
   - ESLint（Airbnb 规范）
