@@ -76,7 +76,7 @@ async function start() {
 //   3 * 1000
 // );
 
-// 另一种语法：exports.dev = function () {};
+// 另一种语法: exports.dev = function () {};
 // task('dev', async function () {
 //   const options = {
 //     cwd: process.cwd()
