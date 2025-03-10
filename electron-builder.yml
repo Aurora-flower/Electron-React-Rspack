@@ -10,7 +10,7 @@ appImage:
 
 # 设置应用程序图标
 # icon: public/favicon.ico # 或者 .icns 格式，根据平台选择合适的图标格式 - least 512x512
-icon: build/assets/icon.icns
+icon: build/assets/images/icon.icns
 
 # 版权
 copyright: Copyright © 2025 ${productName} ${author}
@@ -25,7 +25,7 @@ directories:
 
   # 资源路径 --- 用于指定构建过程中使用的资源目录。
   # 该目录中的文件在构建过程中会被用于生成安装包。这些文件可以包括图标、证书、配置文件等
-  # [注意📢：构建资源并未打包到应用程序中]
+  # [注意📢: 构建资源并未打包到应用程序中]
   # buildResources: core/build
 
   # 输出目录 --- 默认 build
