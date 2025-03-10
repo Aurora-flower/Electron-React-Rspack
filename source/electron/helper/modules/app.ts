@@ -5,6 +5,7 @@
 import { app } from 'electron';
 import { sep, join } from 'node:path';
 import { getPlatform } from './process';
+import { debugLog } from '@/common/helper/log';
 
 /**
  * 获取 app 模块的属性值。
@@ -145,8 +146,14 @@ export function getAppPaths(): Record<string, string | boolean> {
     );
 
     return paths;
-  } catch (error) {
-    console.error('getAppPath Error:', error);
+  } catch (error: any) {
+    debugLog(
+      {
+        id: module.id,
+        sign: 'getAppPath Error'
+      },
+      error?.message
+    );
     return {};
   }
 }
