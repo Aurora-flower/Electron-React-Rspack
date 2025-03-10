@@ -7,30 +7,40 @@ const {
 } = require('node:fs');
 const { join } = require('node:path');
 
-function existsSync(
-  localPath,
-  type = 'All' // 'File' | 'Directory' | 'All'
-) {
+/**
+ * 判断文件是否存在
+ * @param {*} localPath 文件或目录的路径
+ * @param {*} type 校验类型，可选值：File | Directory | undefined
+ * @returns {boolean} 是否存在且符合类型
+ */
+function existsSync(localPath, type) {
   try {
     const stats = statSync(localPath);
     return type == 'File'
       ? stats.isFile()
       : type == 'Directory'
         ? stats.isDirectory()
-        : !!statSync(localPath);
+        : !!stats;
   } catch (error) {
     return false;
   }
 }
 
-/* 移动目录（包含子级目录与文件）到指定目录 */
+/**
+ * 移动目录（包含子级目录与文件）到指定目录
+ * @param {*} sourceDir
+ * @param {*} targetDir 目标目录
+ * @returns {Promise<boolean>} 是否成功
+ */
 function moveDir(sourceDir, targetDir) {
   return new Promise(resolve => {
+    /* 判断源目录是否存在 */
     if (!existsSync(sourceDir, 'Directory')) {
-      console.error('目标源不存在');
+      console.error('The target source does not exist');
       resolve(false);
       return;
     }
+    /* 判断目标目录是否存在 - 不存在则创建 */
     if (!existsSync(targetDir, 'Directory')) {
       mkdirSync(targetDir, { recursive: true });
     }
