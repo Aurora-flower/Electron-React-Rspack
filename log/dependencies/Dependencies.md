@@ -138,6 +138,8 @@ npm install -D babel-loader
 npm install -D postcss-loader
 npm install -D ts-loader
 npm install -D style-loader
+npm install -D file-loader
+npm install -D node-loader
 
 npm install -D dotenv-webpack
 
