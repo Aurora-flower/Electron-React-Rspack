@@ -167,6 +167,8 @@ npm install -D react-refresh
 > typescript
 
 ```shell
+npm install -D esm
+
 npm install -D node
 
 npm install -D ts-node

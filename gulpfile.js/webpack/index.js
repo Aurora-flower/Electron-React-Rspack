@@ -1,7 +1,7 @@
 /**
  * @file webpack 入口
  */
-const GetViteConfig = require('./get_config');
+const GetWebpackConfig = require('./get_config');
 
 /**
  * 运行 webpack 编译
@@ -9,7 +9,7 @@ const GetViteConfig = require('./get_config');
  */
 function compile() {
   return new Promise(resolve => {
-    console.log('ViteConfig:', GetViteConfig());
+    console.log('WebpackConfig:', GetWebpackConfig());
     resolve(true);
   });
 }

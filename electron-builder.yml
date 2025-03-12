@@ -10,7 +10,7 @@ appImage:
 
 # 设置应用程序图标
 # icon: public/favicon.ico # 或者 .icns 格式，根据平台选择合适的图标格式 - least 512x512
-icon: build/assets/images/icon.icns
+icon: build/assets/app-icon/mac/icon.icns
 
 # 版权
 copyright: Copyright © 2025 ${productName} ${author}

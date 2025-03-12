@@ -1,128 +1,143 @@
-/**
- * @file loader 配置
- * @description
- * Loader 用于模块源代码的转换。它们被编写为函数，接收源代码作为参数，并返回转换后的代码。
- */
-// const AssetModuleType = require('../common/asset_module');
+const NODE_MODULES = /node_modules/;
 
-const { targets } = require('../common/env');
+const JS_PARSER_OPTIONS = {
+  loader: 'babel-loader',
+  options: {
+    /* 预设 */
+    presets: [
+      '@babel/preset-env',
+      '@babel/preset-react' /* 用于处理 react 文件 */,
+      '@babel/preset-typescript'
+    ]
+  }
+  // cacheDirectory: true,
+  // cacheCompression: false,
+  // compact: false
+};
 
-/* ***** ***** ***** ***** 通用配置 ***** ***** ***** ***** */
-
-/* ***** ***** ***** ***** 针对特殊模块: 如 node_modules 下的依赖处理 ***** ***** ***** ***** */
+const TS_PARSER_OPTIONS = {
+  loader: 'ts-loader',
+  options: {
+    /**
+     * @summary 仅编译，不进行类型检查;
+     * @description
+     * 当 `transpileOnly: true` 时，需配合 `fork-ts-checker-webpack-plugin` 或其他插件进行类型检查
+     */
+    transpileOnly: true,
+    /* 启用 happypack 优化 - 多进程 */
+    happyPackMode: true
+  }
+};
 
 /* ***** ***** ***** ***** 获取 Loader ***** ***** ***** ***** */
 
 /**
- * @summary SVG 图片资源
+ * @summary 图片文件处理
+ * @param {boolean} isExclude 是否排除 node_modules
+ * @param {RegExp} exclude 排除的规则
+ * @returns {Object}
  */
-const svg = () => ({
-  test: /\.svg$/,
-  type: 'asset'
-});
-
-const js = () => ({
-  test: /\.js$/,
-  use: [
-    {
-      loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-env']
-      }
-    }
-  ]
-});
-
-const ts = () => ({
-  test: /\.ts$/,
-  use: [
-    {
-      loader: 'ts-loader',
-      options: {
-        transpileOnly: true
-      }
-    }
-  ]
-});
-
-/**
- * @summary React 配置
- * @param {boolean} isDev 是否开发环境
- */
-const react = isDev => ({
-  test: /\.(jsx?|tsx?)$/,
-  use: [
-    {
-      /* 使用 SWC 转译器支持 JSX/TSX */
-      loader: 'builtin:swc-loader',
-      // exclude: [/node_modules/],
-      options: {
-        jsc: {
-          parser: {
-            syntax: 'typescript',
-            tsx: true,
-            decorators: true // 新增装饰器支持
-          },
-          transform: {
-            react: {
-              runtime: 'automatic',
-              development: isDev,
-
-              /* 开启通用的 react 转换支持 */
-              refresh: isDev
-            }
-
-            // 新增类型剥离配置
-            // hidden: {
-            //   jest: false // 禁用jest模式
-            // }
-          }
-        },
-        // parser: {
-        //   syntax: 'ecmascript',
-        //   jsx: true
-        // },
-        env: { targets }
-      }
-    }
-  ],
-
-  /* 默认为 JavaScript 模块，需要设置为 auto */
-  type: 'javascript/auto'
-});
-
-const css = () => ({
-  test: /\.css$/,
-  use: [
-    'style-loader',
-    'css-loader',
-    {
-      loader: 'postcss-loader',
-      options: {
-        postcssOptions: {
-          plugins: [
-            require('tailwindcss'),
-            require('autoprefixer')
-          ]
+function getImageLoader(
+  isExclude = false,
+  exclude = NODE_MODULES
+) {
+  const options = {
+    test: /\.(png|jpe?g|gif|svg)$/,
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: '[name].[contenthash].[ext]',
+          outputPath: 'images'
         }
       }
-    }
-  ]
-});
+    ],
+    exclude: isExclude ? exclude : undefined
+  };
+  return options;
+}
 
-const Loader = {
-  /* 脚本文件 */
-  js,
-  ts,
+/**
+ * @summary css 文件处理
+ * @param {boolean} isExclude 是否排除 node_modules
+ * @param {RegExp} exclude 排除的规则
+ * @returns {Object}
+ */
+function getCssLoader(
+  isExclude = false,
+  exclude = NODE_MODULES
+) {
+  const options = {
+    test: /\.css$/,
+    use: [
+      {
+        loader: 'style-loader'
+      },
+      {
+        loader: 'css-loader',
+        options: {
+          /* 启用 happypack 优化 - 多进程 */
+          happyPackMode: true
+        }
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          postcssOptions: {
+            plugins: [
+              require('tailwindcss'),
+              require('autoprefixer')
+            ]
+          }
+        }
+      }
+    ],
+    exclude: isExclude ? exclude : undefined
+  };
+  return options;
+}
 
-  /* css 样式文件 */
-  css,
+/**
+ * @summary js 文件处理
+ * @param {boolean} isExclude 是否排除 node_modules
+ * @param {RegExp} exclude 排除的规则
+ * @returns {Object}
+ */
+function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
+  const options = {
+    test: /\.jsx?$/,
+    use: [JS_PARSER_OPTIONS],
+    exclude: isExclude ? exclude : undefined
+  };
+  return options;
+}
 
-  /* 图片资源 */
-  svg,
+/**
+ * @summary ts 文件处理
+ * @param {boolean} isExclude 是否排除 node_modules
+ * @param {RegExp} exclude 排除的规则
+ * @returns {Object}
+ */
+function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
+  const options = {
+    test: /\.tsx?$/,
+    use: [JS_PARSER_OPTIONS, TS_PARSER_OPTIONS],
+    exclude: isExclude ? exclude : undefined
+  };
+  return options;
+}
 
-  /* 语言和框架 */
-  react
+/* ***** ***** ***** ***** 导出 Loader ***** ***** ***** ***** */
+
+const LOADER = {
+  Js: getJsLoader(),
+  JsExclude: getJsLoader(true),
+  Ts: getTsLoader(),
+  TsExclude: getTsLoader(true),
+  Css: getCssLoader(),
+  CssExclude: getCssLoader(true),
+  Image: getImageLoader(),
+  ImageExclude: getImageLoader(true)
 };
 
-module.exports = Loader;
+module.exports = LOADER;
