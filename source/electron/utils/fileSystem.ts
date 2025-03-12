@@ -1,7 +1,7 @@
 /**
  * @file 本地系统文件处理模块
+ * 注意📢: 运行子进程的关键关注点是能不能及时的终止释放进程
  */
-
 import { parse } from 'node:path';
 import {
   statSync,

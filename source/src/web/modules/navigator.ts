@@ -105,8 +105,8 @@ export function getClipboardText() {
  *
  * @remarks
  * - 属性:
- *    - `navigator.connection.downlink` - 下载速度（单位：Mbps）
- *    - `navigator.connection.rtt` - 往返时间（单位：ms）
+ *    - `navigator.connection.downlink` - 下载速度（单位: Mbps）
+ *    - `navigator.connection.rtt` - 往返时间（单位: ms）
  *    - `navigator.connection.effectiveType` - 网络连接类型（e.g., '4g', '3g', '2g', 'slow-2g'）
  *    - `navigator.connection.saveData` - 是否启用了数据保存模式（true/false）
  */
@@ -290,7 +290,7 @@ export function getGeolocation() {
  * Navigator 接口的只读属性 hardwareConcurrency 返回一个数字，表示当前设备的并发数。
  * 这表示当前设备可以同时运行线程的最大线程数(逻辑处理器数量)。
  *
- * 使用场景：根据可以运行最大线程数，创建了一个可用于稍后处理请求的 Worker 池。
+ * 使用场景: 根据可以运行最大线程数，创建了一个可用于稍后处理请求的 Worker 池。
  *
  * @returns {number} 一个介于 1 和用户代理可能使用的逻辑处理器数量之间的数字。
  * @remarks
@@ -319,7 +319,7 @@ export function getHardwareConcurrencyNumber(): number {
  * - 用户浏览器发出的每个 HTTP 请求中的 Accept-Language HTTP 标头使用与 navigator.languages 属性相同的值，
  * 但额外包含 qvalues（权重值）字段（例如 en-US;q=0.8）。
  *
- * 使用场景：根据用户首选语言的区域设置格式化内容，提供适合用户阅读的页面内容。
+ * 使用场景: 根据用户首选语言的区域设置格式化内容，提供适合用户阅读的页面内容。
  *
  * @returns {string} 一个表示语言版本的字符串，定义于 RFC 5646: 语言识别标签（也称为 BCP 47）中。
  * 有效的语言代码示例包括“en”、“en-US”、“fr”、“fr-FR”、“es-ES”等。
@@ -351,7 +351,7 @@ export function getLanguage<T extends LanguageQueryType>(
  * Navigator 接口的只读属性 locks 返回一个 LockManager 对象，该对象用于管理锁定，提供了请求新的 Lock 对象和查询现有的 Lock 对象的方法。。
  * 锁定是一个机制，用于阻止其他进程或线程访问共享资源，直到锁定被释放。
  *
- * 使用场景：
+ * 使用场景:
  * - 锁定管理器用于管理资源访问，例如文件、数据库等。
  * - 它可以防止多个进程或线程同时访问相同的资源，从而避免数据冲突和错误。
  *
@@ -368,7 +368,7 @@ export function getLockManager(): LockManager {
  * Navigator 接口的只读属性 maxTouchPoints 返回一个数字，表示用户设备的最大触控点数。
  * 这表示当前设备支持的最大同时按下的触控点数。
  *
- * 使用场景：
+ * 使用场景:
  * - 根据最大触控点数，可以创建一个适合用户设备的触控点数。
  * - 例如，如果用户设备的最大触控点数是 2，则可以创建两个触控点数，以便在用户设备上进行双
  */
@@ -382,7 +382,7 @@ export function getMaxTouchPoints(): number {
  * - Navigator 接口的只读属性 mediaCapabilities 返回一个 MediaCapabilities 对象，该对象用于检查媒体源是否支持特定的编码格式和配置。
  * - 该对象可以暴露有关给定格式的解码和编码能力以及由媒体能力 API 定义的输出能力的信息。
  *
- * 使用场景：
+ * 使用场景:
  * - 根据媒体约束，可以创建一个适合用户设备的媒体源。
  * - 例如，如果媒体约束不支持特定的编码格式和配置，则可以创建一个适合用户设备的媒体源。
  *
@@ -414,11 +414,11 @@ export function getMediaConstraints(): MediaCapabilities {
  * @description
  * Navigator 接口的只读属性 mediaDevices 返回一个 MediaDevices 对象，该对象可提供对相机和麦克风等媒体输入设备以及屏幕共享的连接访问，如麦克风、摄像头等。
  *
- * 使用场景：
+ * 使用场景:
  * - 根据媒体设备，可以创建一个适合用户设备的媒体源。
  * - 例如，如果媒体设备不支持特定的编码格式和配置，则可以创建一个适合用户设备的媒体源。
  *
- * @returns {MediaDevices} MediaDevices 单例对象，用于访问媒体设备。 通常，只需直接使用此对象的成员，如：navigator.mediaDevices.getUserMedia()
+ * @returns {MediaDevices} MediaDevices 单例对象，用于访问媒体设备。 通常，只需直接使用此对象的成员，如: navigator.mediaDevices.getUserMedia()
  *
  */
 export function getMediaDevices(): MediaDevices {
@@ -439,7 +439,7 @@ export function getMediaDevices(): MediaDevices {
  * 当前文档可以使用 MediaSession 对象来共享有关正在播放的媒体及其当前播放状态的信息。
  * 此信息可以包括典型元数据，例如正在播放的歌曲的标题、艺术家和专辑名称，以及可能包含专辑封面、艺术家照片等内容的一张或多张图片。
  *
- * 使用场景：
+ * 使用场景:
  * - 根据媒体会话，可以创建一个适合用户设备的媒体源。
  * - 例如，如果媒体会话不支持特定的编码格式和配置，则可以创建一个适合用户设备的媒体源。
  *
@@ -681,7 +681,7 @@ export function getWindowControlsOverlay() {
  * - `canShare()`:
  *    - Navigator 接口的 `canShare()` 方法在对 `navigator.share()` 的等效调用能够成功时返回 `true`。
  *    - 如果数据无法通过验证，该方法将返回 false。
- *    数据可能无效的原因包括：
+ *    数据可能无效的原因包括:
  *       - data 参数已被省略或仅包含具有未知值的属性。请注意，用户代理无法识别的任何属性都会被忽略
  *       - URL 格式错误
  *       - 指定了要分享的文件但用户代理实现不支持文件共享
@@ -692,7 +692,7 @@ export function getWindowControlsOverlay() {
  *      用户代理未知的属性将被忽略；
  *      共享数据仅根据用户代理理解的属性进行评估。
  *      所有属性都是可选的，但必须至少指定一个已知的数据属性，否则该方法将返回 false。
- *      可能的值为：
+ *      可能的值为:
  *       - url - (可选)表示要共享的 URL 的字符串。
  *       - text - (可选)表示要共享的文本的字符串。
  *       - title - (可选)表示要共享的标题的字符串。

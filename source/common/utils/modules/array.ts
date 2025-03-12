@@ -15,6 +15,31 @@ function filterListener(data: unknown) {
   return data !== null && data !== undefined;
 }
 
+/**
+ * @summary 模拟 Array.from (不完整)
+ * @description
+ * 通过 `Array.prototype.forEach.call()` 将数组的 forEach 方法应用到非数组对象上。
+ * 注意📢: 也适用 Array 原型上的其他方法。
+ */
+export function from() {
+  const list = Array.prototype.forEach.bind(
+    Object.entries({
+      a: '1',
+      b: '2',
+      c: '3'
+    })
+    // (v, k) => {
+    //   console.log(v, k);
+    // }
+  );
+
+  list((v, k) => {
+    console.log(v, k);
+  });
+
+  // console.log(list);
+}
+
 export class ArrayUtility {
   /**
    * 求数组中从指定索引开始到末尾的元素之和
@@ -56,10 +81,10 @@ export class ArrayUtility {
    * @param length 生成数组的长度
    * @param mapFn 生成数组的回调
    * @remarks
-   * 回调函数最多接受三个参数：
-   * - currentValue：当前元素的值。
-   * - index：当前元素的索引。
-   * - array：当前被调用 map 方法的数组。
+   * 回调函数最多接受三个参数:
+   * - currentValue: 当前元素的值。
+   * - index: 当前元素的索引。
+   * - array: 当前被调用 map 方法的数组。
    */
   static arrayFromLength(
     length: number,

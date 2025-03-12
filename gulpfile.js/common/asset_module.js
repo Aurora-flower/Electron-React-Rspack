@@ -1,11 +1,11 @@
 /**
- * @summary 资源模块的模块类型
+ * @summary 资源模块的模块类型 (Asset Module Type)
  * @remarks
  * - 使用 'asset/inline' 替换 `url-loader`
  * - 使用 'asset/resource' 替换 `file-loader`
  * - 使用 'asset/source' 替换 `raw-loader`
  */
-const AssetModuleType = {
+const ASSET_MODULE_TYPE = {
   /* 将资源转换为单独的文件，并且导出产物地址 */
   Resource: 'asset/resource',
 
@@ -23,4 +23,4 @@ const AssetModuleType = {
   Auto: 'asset'
 };
 
-module.exports = AssetModuleType;
+module.exports = ASSET_MODULE_TYPE;

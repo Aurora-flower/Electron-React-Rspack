@@ -1,24 +1,20 @@
 /**
- * @file rspack
+ * @file rspack 入口
  * @see {@link https://rspack.dev/zh/guide/start/introduction RSPACK 官方文档}
- * @description
- * - Rspack是字节跳动开发的基于 Rust 的打包工具，设计上兼容 Webpack 的配置结构和插件生态。
- * - Rspack（读音为 /'ɑrespæk/,）是一个基于 Rust 编写的高性能 JavaScript 打包工具，
- * 它提供对 webpack 生态良好的兼容性，能够无缝替换 webpack，并提供闪电般的构建速度。
  */
-const getConfig = require('./config');
 const { rspack } = require('@rspack/core');
+const GetRsConfig = require('./get_config');
+const ENVIRONMENT = require('../common/env');
 
 /**
- * 编译
+ * 运行 rspack 编译
  * @returns {Promise<boolean>}
  */
 function compile() {
   return new Promise(resolve => {
-    const config = getConfig();
-
-    // ==================== 运行 rspack ====================
-    const multiCompiler = rspack(config);
+    const mode = process.env.NODE_ENV || ENVIRONMENT.Dev;
+    const RsConfig = GetRsConfig(mode);
+    const multiCompiler = rspack(RsConfig);
     multiCompiler.run((err, stats) => {
       // process.stdout.write('Stdout:', stats.toString() + '\n');
       if (
@@ -29,7 +25,6 @@ function compile() {
         if (stats.hasErrors()) {
           console.log(stats.toString({ colors: true }));
         }
-
         resolve(false);
       }
       resolve(true);
@@ -37,6 +32,4 @@ function compile() {
   });
 }
 
-module.exports = {
-  compile
-};
+module.exports = compile;
