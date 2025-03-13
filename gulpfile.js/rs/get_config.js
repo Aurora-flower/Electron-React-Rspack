@@ -2,6 +2,7 @@
  * @file 获取项目配置
  */
 const LOADER = require('./loader');
+const DEVTOOL = require('./devtool');
 // const ENV = require('../common/env');
 const PLUGINS = require('./plugins');
 const { join } = require('node:path');
@@ -118,6 +119,9 @@ function getSignleConfig(mode, type) {
       // new NodePolyfillPlugin()
       // 独立进程做类型检查
       // new ForkTsCheckerWebpackPlugin()
+
+      /* 添加 CSS 提取插件 */
+      PLUGINS.CssExtract()
     ]
   };
 
@@ -142,15 +146,19 @@ function getSignleConfig(mode, type) {
 
       /* 清除原输出 - 在生成产物前，删除输出目录下的所有文件。 */
       clean: true
-    }
+    },
+    devtool: DEVTOOL.NosourcesSourceMap
   });
 
   if (isRenderer) {
+    /* 注意📢: 对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
+    options.output.publicPath = '/';
+
     /* 增加 HTML 相关插件 */
-    options.plugins.push(
+    options.plugins = options.plugins.concat([
       /* 添加 HTML 插件 */
-      PLUGINS.HtmlRspackPlugin(FILE.Page.from)
-    );
+      PLUGINS.Html(FILE.Page.from)
+    ]);
   }
 
   return options;

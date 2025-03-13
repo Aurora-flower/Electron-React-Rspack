@@ -26,8 +26,13 @@ function getHtmlRspackPlugin(template) {
   return HtmlRspackPlugin;
 }
 
+function getMiniCssExtractPlugin() {
+  return new rspack.CssExtractRspackPlugin({});
+}
+
 const PLUGINS = {
-  HtmlRspackPlugin: getHtmlRspackPlugin
+  Html: getHtmlRspackPlugin,
+  CssExtract: getMiniCssExtractPlugin
   // HtmlWebpackPlugin: require('html-webpack-plugin'),
   // CopyWebpackPlugin: require('copy-webpack-plugin'),
   // MiniCssExtractPlugin: require('mini-css-extract-plugin'),

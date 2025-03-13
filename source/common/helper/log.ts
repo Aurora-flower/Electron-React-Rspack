@@ -3,7 +3,7 @@
  */
 
 // import Logger from 'electron-log';
-import { Environment } from '@/common/constant';
+// import { Environment } from '@/common/constant';
 
 interface LogOptions {
   /**
@@ -28,12 +28,12 @@ export function debugLog(
   ...args: unknown[]
 ) {
   // TODO: 要兼容渲染模式（Web)
-  if (
-    process.env?.NODE_ENV === Environment.Prod &&
-    process.env?.IS_DEBUG === 'false'
-  ) {
-    return;
-  }
+  // if (
+  //   process.env?.NODE_ENV === Environment.Prod &&
+  //   process.env?.IS_DEBUG === 'false'
+  // ) {
+  //   return;
+  // }
   const sign = options.sign || 'DEBUG';
   const moduleId = options.id || '?unknown';
   const params = args.length > 0 ? args : null;
