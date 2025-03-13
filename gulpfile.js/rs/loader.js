@@ -1,3 +1,5 @@
+const { rspack } = require('@rspack/core');
+
 const NODE_MODULES = /node_modules/;
 
 const JS_PARSER_OPTIONS = {
@@ -70,6 +72,8 @@ function getCssLoader(
   const options = {
     test: /\.css$/,
     use: [
+      /* 替代 style-loader - rspack 不兼容 MiniCssExtractPlugin */
+      rspack.CssExtractRspackPlugin.loader,
       {
         loader: 'style-loader'
       },

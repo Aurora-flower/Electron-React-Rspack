@@ -230,6 +230,13 @@ npm install -D @biomejs/biome
 
 ```
 
+### 实用工具库
+
+```shell
+npm install -S lodash
+npm install -S fs-extra
+```
+
 ### 其他
 
 > devlopment tool
