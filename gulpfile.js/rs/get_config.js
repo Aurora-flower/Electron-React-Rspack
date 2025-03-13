@@ -1,15 +1,18 @@
 /**
  * @file 获取项目配置
  */
+const LOADER = require('./loader');
+// const ENV = require('../common/env');
+const PLUGINS = require('./plugins');
 const { join } = require('node:path');
 const {
   APP_PROCESS_MODE,
   getFileStructure,
   getDirectoryStructure
 } = require('../common/project_structure');
-const LOADER = require('./loader');
+const BUILD_TARGET = require('./build_target');
 
-const _FILE = getFileStructure();
+const FILE = getFileStructure();
 const DIRECTORY = getDirectoryStructure();
 
 /* ***** ***** ***** ***** 项目入口与输出配置 ***** ***** ***** ***** */
@@ -56,7 +59,25 @@ const _Entry_ = new Proxy(Object.create(null), {
 /* ***** ***** ***** ***** 渲染进程相关 ***** ***** ***** ***** */
 
 /* ***** ***** ***** ***** 配置组合 ***** ***** ***** ***** */
-function getRsConfig(mode) {
+
+/**
+ *
+ * @param {*} type
+ * @param {*} isDev
+ * @param {*} options
+ * @returns
+ */
+function getSignleConfig(mode, type) {
+  /* 是否开发环境 */
+  // const isDev = mode === ENV.Dev;
+
+  /* 是否主进程 */
+  const isMain = type === APP_PROCESS_MODE.electron;
+
+  /* 是否渲染进程 */
+  const isRenderer = type === APP_PROCESS_MODE.renderer;
+
+  /* 基础配置 */
   const baseOptions = {
     mode,
     module: {
@@ -64,7 +85,7 @@ function getRsConfig(mode) {
         LOADER.Js,
         LOADER.TsExclude,
         LOADER.Css,
-        LOADER.ImageExclude
+        LOADER.Image
       ]
     },
     resolve: {
@@ -84,26 +105,70 @@ function getRsConfig(mode) {
 
       /* 扩展名解析选项 */
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css']
-    }
-  };
-  console.log('BaseConfig', baseOptions);
-  const processMode = Object.keys(APP_PROCESS_MODE);
-  return processMode.map(key => {
-    const options = Object.create(null);
-    const type = APP_PROCESS_MODE[key];
-    Object.assign(options, baseOptions, {
-      entry: _Entry_[key],
-      output: {
-        /* 输出目录 */
-        path: DIRECTORY.App[type]
 
-        /* 输出文件名 - 默认为 main.js  */
-        // filename: _FILE.Output.Main
+      /* fallback 配置：将 Node.js 核心模块指向浏览器兼容的实现 */
+      // fallback: {
+      //   path: require.resolve('path-browserify'), // 处理 path 模块
+      //   fs: false, // 禁用文件系统模块
+      //   crypto: require.resolve('crypto-browserify') // 其他需要处理的模块
+      // }
+    },
+    plugins: [
+      // 添加 Node polyfill 插件（所有配置共享）
+      // new NodePolyfillPlugin()
+      // 独立进程做类型检查
+      // new ForkTsCheckerWebpackPlugin()
+    ]
+  };
+
+  const emptyObject = Object.create(null);
+  const options = Object.assign(emptyObject, baseOptions, {
+    target: BUILD_TARGET[type],
+    entry: {
+      [type]: {
+        /* 入口模块的路径, import 属性可以设置多个路径。多个模块会按照数组定义的顺序依次执行。 */
+        import: _Entry_[type]
+
+        /* runtime 属性用于设置运行时 chunk 的名称 */
+        // runtime: `${key}_runtime`
       }
-    });
-    console.log('ConfigItem:', key, type, DIRECTORY.App[type]);
-    return options;
+    },
+    output: {
+      /* 输出目录 */
+      path: DIRECTORY.App[type],
+
+      /* 输出文件名 - 默认为 main.js  */
+      filename: `${isMain ? 'main' : 'index'}.js`,
+
+      /* 清除原输出 - 在生成产物前，删除输出目录下的所有文件。 */
+      clean: true
+    }
   });
+
+  if (isRenderer) {
+    /* 增加 HTML 相关插件 */
+    options.plugins.push(
+      /* 添加 HTML 插件 */
+      PLUGINS.HtmlRspackPlugin(FILE.Page.from)
+    );
+  }
+
+  return options;
+}
+
+function getRsConfig(mode) {
+  const flatConfig = [];
+  for (const key in APP_PROCESS_MODE) {
+    if (
+      Object.prototype.hasOwnProperty.call(APP_PROCESS_MODE, key)
+    ) {
+      const type = APP_PROCESS_MODE[key];
+      const config = getSignleConfig(mode, type);
+      flatConfig.push(config);
+    }
+  }
+
+  return flatConfig;
 }
 
 module.exports = getRsConfig;

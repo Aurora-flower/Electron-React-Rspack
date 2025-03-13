@@ -14,6 +14,7 @@ function compile() {
   return new Promise(resolve => {
     const mode = process.env.NODE_ENV || ENVIRONMENT.Dev;
     const RsConfig = GetRsConfig(mode);
+    console.log('RSPACK 配置', RsConfig);
     const multiCompiler = rspack(RsConfig);
     multiCompiler.run((err, stats) => {
       // process.stdout.write('Stdout:', stats.toString() + '\n');

@@ -18,9 +18,9 @@ const CWD = process.cwd();
  * - `renderer`: 渲染进程
  */
 const APP_PROCESS_MODE = {
-  Electron: 'electron',
-  Preload: 'preload',
-  Renderer: 'renderer'
+  electron: 'electron',
+  preload: 'preload',
+  renderer: 'renderer'
 };
 
 /* ***** ***** ***** ***** 目录结构 ***** ***** ***** ***** */
