@@ -46,6 +46,7 @@
    - **初版本**: webpack 构建后，使用 electron-builder 进行应用程序打包。
      原计划使用 gulp 完成 `compile` -> `package` 的流程。目前未完成。
    - **升级版本**:
+   注意📢: 关注打包体积。
 
 4. electron - 应用安装程序界面美化
 
