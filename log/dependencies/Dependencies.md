@@ -60,6 +60,8 @@ npm install -S three
 
 npm install -S fabric
 
+npm install -S pixi.js
+
 
 # ***** ***** ***** ***** iconfont ***** ***** ***** *****
 npm install -D @iconify/json
