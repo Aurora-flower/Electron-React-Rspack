@@ -1,9 +1,11 @@
 /**
- * @summary 资源模块的模块类型 (Asset Module Type)
- * @remarks
- * - 使用 'asset/inline' 替换 `url-loader`
- * - 使用 'asset/resource' 替换 `file-loader`
- * - 使用 'asset/source' 替换 `raw-loader`
+ * @file webpack 与 rspack 的资源模块
+ */
+
+/**
+ * @constant ASSET_MODULE_TYPE 资源模块的模块类型 (Asset Module Type)
+ * @description
+ * Asset 模块是一种特殊的模块类型，用来处理静态资源，例如图片、字体、视频等。
  */
 const ASSET_MODULE_TYPE = {
   /* 将资源转换为单独的文件，并且导出产物地址 */

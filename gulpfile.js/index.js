@@ -5,7 +5,7 @@
  */
 
 // 测试代码
-const RsCompiler = require('./rs');
+const RsCompiler = require('./rs/pack');
 const WebpackCompiler = require('./webpack');
 
 exports.rs = RsCompiler;

@@ -2,21 +2,28 @@
  * @file 获取项目配置
  */
 const LOADER = require('./loader');
-const DEVTOOL = require('./devtool');
 // const ENV = require('../common/env');
 const PLUGINS = require('./plugins');
 const { join } = require('node:path');
 const {
-  APP_PROCESS_MODE,
   getFileStructure,
   getDirectoryStructure
-} = require('../common/project_structure');
-const BUILD_TARGET = require('./build_target');
+} = require('../../common/project_structure');
+const DEVTOOL = require('../../common/devtool');
+const { APP_PROCESS_MODE } = require('../../common/const');
+const BUILD_TARGET = require('../../common/build_target');
 
 const FILE = getFileStructure();
 const DIRECTORY = getDirectoryStructure();
 
 /* ***** ***** ***** ***** 项目入口与输出配置 ***** ***** ***** ***** */
+/**
+ * @constant ENTRY_FILENAME 入口文件名
+ */
+const ENTRY_FILENAME = {
+  Main: 'index.ts',
+  Vendor: 'vendor.ts'
+};
 
 /**
  * @summary 生成文件路径
@@ -25,33 +32,8 @@ const DIRECTORY = getDirectoryStructure();
  * @returns {string} - 文件路径
  */
 function generateFilePath(type, filename) {
-  return join(DIRECTORY.Source[type], filename);
+  return join(DIRECTORY.Source[type] || '', filename);
 }
-
-/**
- * @summary 入口文件名
- */
-const EntryFilename = {
-  Main: 'index.ts',
-  Vendor: 'vendor.ts'
-};
-
-/**
- * @summary 构建入口
- */
-const _Entry_ = new Proxy(Object.create(null), {
-  get(target, key) {
-    const prop = APP_PROCESS_MODE[key];
-    if (prop) {
-      const filepath = generateFilePath(
-        prop,
-        EntryFilename.Main
-      );
-      return filepath;
-    }
-    return undefined;
-  }
-});
 
 /* ***** ***** ***** ***** 主进程相关 ***** ***** ***** ***** */
 
@@ -68,15 +50,15 @@ const _Entry_ = new Proxy(Object.create(null), {
  * @param {*} options
  * @returns
  */
-function getSignleConfig(mode, type) {
+function getSignleConfig(mode, key, type) {
   /* 是否开发环境 */
   // const isDev = mode === ENV.Dev;
 
   /* 是否主进程 */
-  const isMain = type === APP_PROCESS_MODE.electron;
+  const isMain = type === APP_PROCESS_MODE.Electron;
 
   /* 是否渲染进程 */
-  const isRenderer = type === APP_PROCESS_MODE.renderer;
+  const isRenderer = type === APP_PROCESS_MODE.Renderer;
 
   /* 基础配置 */
   const baseOptions = {
@@ -127,11 +109,11 @@ function getSignleConfig(mode, type) {
 
   const emptyObject = Object.create(null);
   const options = Object.assign(emptyObject, baseOptions, {
-    target: BUILD_TARGET[type],
+    target: BUILD_TARGET[key],
     entry: {
       [type]: {
         /* 入口模块的路径, import 属性可以设置多个路径。多个模块会按照数组定义的顺序依次执行。 */
-        import: _Entry_[type]
+        import: generateFilePath(type, ENTRY_FILENAME.Main)
 
         /* runtime 属性用于设置运行时 chunk 的名称 */
         // runtime: `${key}_runtime`
@@ -171,7 +153,7 @@ function getRsConfig(mode) {
       Object.prototype.hasOwnProperty.call(APP_PROCESS_MODE, key)
     ) {
       const type = APP_PROCESS_MODE[key];
-      const config = getSignleConfig(mode, type);
+      const config = getSignleConfig(mode, key, type);
       flatConfig.push(config);
     }
   }
