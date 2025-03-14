@@ -7,7 +7,7 @@ const GetRsConfig = require('./get_config');
 const ENVIRONMENT = require('../../common/env');
 
 /**
- * 运行 rspack 编译
+ * @summary 运行 rspack 编译
  * @returns {Promise<boolean>}
  */
 function compile() {
