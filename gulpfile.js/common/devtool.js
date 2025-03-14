@@ -1,7 +1,11 @@
 /**
- * @summary Webpack devtool 配置
+ * @file webpack 与 rspack 的 devtool 配置
+ */
+
+/**
+ * @constant DEVTOOL devtool 配置
  * @description
- * 定义了 Webpack 在不同构建模式下使用的 devtool 类型，用于生成 source maps。
+ * 定义了在不同构建模式下使用的 devtool 类型，用于生成 source maps。
  * Source maps 可以帮助调试编译后的代码，提供原始源代码的映射信息。
  * @remarks
  * - eval 类型: 使用 eval 函数生成 source maps。适合开发环境，速度较快但文件较大
