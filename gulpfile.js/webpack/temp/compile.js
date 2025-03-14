@@ -5,7 +5,7 @@ const {
   copyHandler,
   writeJsonFile,
   readJsonFileToData
-} = require('../../utils/file');
+} = require('./file');
 const webpack = require('webpack');
 const { rimraf } = require('rimraf');
 const { join } = require('node:path');
