@@ -1,7 +1,19 @@
+/**
+ * @file Loader 处理配置
+ */
 const { rspack } = require('@rspack/core');
 
+/* ***** ***** ***** ***** 忽略规则 ***** ***** ***** ***** */
+/**
+ * @constant {RegExp} NODE_MODULES node_modules 规则
+ */
 const NODE_MODULES = /node_modules/;
 
+/* ***** ***** ***** ***** Parser ***** ***** ***** ***** */
+
+/**
+ * @summary js parser
+ */
 const JS_PARSER_OPTIONS = {
   loader: 'babel-loader',
   options: {
@@ -17,6 +29,9 @@ const JS_PARSER_OPTIONS = {
   // compact: false
 };
 
+/**
+ * @summary ts parser
+ */
 const TS_PARSER_OPTIONS = {
   loader: 'ts-loader',
   options: {
@@ -35,9 +50,9 @@ const TS_PARSER_OPTIONS = {
 
 /**
  * @summary 图片文件处理
- * @param {boolean} isExclude 是否排除 node_modules
+ * @param {boolean} isExclude 是否排除
  * @param {RegExp} exclude 排除的规则
- * @returns {Object}
+ * @returns {Object} 返回图片资源的 loader 配置选项
  */
 function getImageLoader(
   isExclude = false,
@@ -61,9 +76,9 @@ function getImageLoader(
 
 /**
  * @summary css 文件处理
- * @param {boolean} isExclude 是否排除 node_modules
+ * @param {boolean} isExclude 是否排除
  * @param {RegExp} exclude 排除的规则
- * @returns {Object}
+ * @returns {Object}  返回 css 文件的 loader 配置选项
  */
 function getCssLoader(
   isExclude = false,
@@ -105,9 +120,9 @@ function getCssLoader(
 
 /**
  * @summary js 文件处理
- * @param {boolean} isExclude 是否排除 node_modules
+ * @param {boolean} isExclude 是否排除
  * @param {RegExp} exclude 排除的规则
- * @returns {Object}
+ * @returns {Object} 返回 js 文件的 loader 配置选项
  */
 function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
@@ -120,9 +135,9 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
 
 /**
  * @summary ts 文件处理
- * @param {boolean} isExclude 是否排除 node_modules
+ * @param {boolean} isExclude 是否排除
  * @param {RegExp} exclude 排除的规则
- * @returns {Object}
+ * @returns {Object} 返回 ts 文件的 loader 配置选项
  */
 function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {

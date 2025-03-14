@@ -1,5 +1,13 @@
+/**
+ * @file 插件
+ */
 const { rspack } = require('@rspack/core');
 
+/**
+ * @summary 获取 HtmlRspackPlugin 实例
+ * @param {*} template 模板文件路径
+ * @returns {rspack.HtmlRspackPlugin} HtmlRspackPlugin 实例
+ */
 function getHtmlRspackPlugin(template) {
   const HtmlRspackPlugin = new rspack.HtmlRspackPlugin({
     template,
@@ -26,6 +34,11 @@ function getHtmlRspackPlugin(template) {
   return HtmlRspackPlugin;
 }
 
+/**
+ * @summary 获取 CssExtractRspackPlugin 实例
+ * @param {*} template 模板文件路径
+ * @returns {rspack.CssExtractRspackPlugin} CssExtractRspackPlugin 实例
+ */
 function getMiniCssExtractPlugin() {
   return new rspack.CssExtractRspackPlugin({});
 }
@@ -33,12 +46,6 @@ function getMiniCssExtractPlugin() {
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
   CssExtract: getMiniCssExtractPlugin
-  // HtmlWebpackPlugin: require('html-webpack-plugin'),
-  // CopyWebpackPlugin: require('copy-webpack-plugin'),
-  // MiniCssExtractPlugin: require('mini-css-extract-plugin'),
-  // CssMinimizerPlugin: require('css-minimizer-webpack-plugin'),
-  // TerserPlugin: require('terser-webpack-plugin'),
-  // ImageMinimizerPlugin:require('image-minimizer-webpack-plugin'),
 };
 
 module.exports = PLUGINS;

@@ -1,5 +1,5 @@
 /**
- * @file 获取项目配置
+ * @file 获取项目构建配置
  */
 const LOADER = require('./loader');
 // const ENV = require('../common/env');
@@ -42,13 +42,12 @@ function generateFilePath(type, filename) {
 /* ***** ***** ***** ***** 渲染进程相关 ***** ***** ***** ***** */
 
 /* ***** ***** ***** ***** 配置组合 ***** ***** ***** ***** */
-
 /**
- *
- * @param {*} type
- * @param {*} isDev
- * @param {*} options
- * @returns
+ * @summary 获取单构建配置
+ * @param {string} mode 构建环境
+ * @param {string} key 构建环境
+ * @param {string} type 进程类型
+ * @returns {*} 单构建配置
  */
 function getSignleConfig(mode, key, type) {
   /* 是否开发环境 */
@@ -146,6 +145,11 @@ function getSignleConfig(mode, key, type) {
   return options;
 }
 
+/**
+ * @summary 获取 Rspack 构建配置
+ * @param {string} mode 构建环境
+ * @returns {*} Rspack 扁平化构建配置
+ */
 function getRsConfig(mode) {
   const flatConfig = [];
   for (const key in APP_PROCESS_MODE) {
@@ -157,7 +161,6 @@ function getRsConfig(mode) {
       flatConfig.push(config);
     }
   }
-
   return flatConfig;
 }
 
