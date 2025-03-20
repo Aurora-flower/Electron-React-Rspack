@@ -205,6 +205,7 @@ npm install -D @babel/preset-typescript
 # ***** ***** ***** ***** 提交验证: husky + commitlint ***** ***** ***** *****
 npm install -D husky
 
+# 或 npm install --save-dev @commitlint/{config-conventional,cli}
 npm install -D @commitlint/cli
 
 npm install -D @commitlint/config-conventional
