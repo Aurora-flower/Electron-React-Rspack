@@ -20,10 +20,13 @@ try {
     console.log('Checking dependency updates...', outdated);
     if (!pkgs.length) return;
     const tips = pkgs.map(pkg => `${pkg}@latest`).join(' ');
+    const start_char = '\n'.padStart(50, '*');
+    const end_char = '\n'.padEnd(50, '*');
     console.log(
-      '*********************************************\n' +
-        'Update all dependencies to the latest version:\n' +
-        `npm install ${tips}`
+      start_char,
+      'Update all dependencies to the latest version:\n' +
+        `npm install ${tips}`,
+      end_char
     );
   });
 } catch (error) {
