@@ -16,7 +16,7 @@ const DEVTOOL = {
   Eval: 'eval',
   EvalSourceMap: 'eval-source-map',
   EvalCheapSourceMap: 'eval-cheap-source-map',
-  EvalCheapModuleSourceMap: 'eval-cheap-module-source-map',
+  EvalCheapModuleSourceMap: 'eval-cheap-module-source-map', // 最快的 source map 类型
 
   /* ***** ***** ***** ***** 非 eval 类型 ***** ***** ***** ***** */
   SourceMap: 'source-map',
