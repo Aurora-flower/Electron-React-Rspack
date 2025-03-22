@@ -2,16 +2,17 @@
  * @file 获取项目构建配置
  */
 const LOADER = require('./loader');
-// const ENV = require('../common/env');
 const PLUGINS = require('./plugins');
 const { join } = require('node:path');
+const ENV = require('../../common/env');
+// const { rspack } = require('@rspack/core');
 const {
   getFileStructure,
   getDirectoryStructure
 } = require('../../common/project_structure');
 const DEVTOOL = require('../../common/devtool');
-const { APP_PROCESS_MODE } = require('../../common/const');
 const BUILD_TARGET = require('../../common/build_target');
+const { APP_PROCESS_MODE } = require('../../common/const');
 
 const FILE = getFileStructure();
 const DIRECTORY = getDirectoryStructure();
@@ -51,7 +52,8 @@ function generateFilePath(type, filename) {
  */
 function getSignleConfig(mode, key, type) {
   /* 是否开发环境 */
-  // const isDev = mode === ENV.Dev;
+  const isDev = mode === ENV.Dev;
+  console.log('ISDEV', isDev);
 
   /* 是否主进程 */
   const isMain = type === APP_PROCESS_MODE.Electron;
@@ -128,7 +130,7 @@ function getSignleConfig(mode, key, type) {
       /* 清除原输出 - 在生成产物前，删除输出目录下的所有文件。 */
       clean: true
     },
-    devtool: DEVTOOL.NosourcesSourceMap
+    devtool: DEVTOOL.CheapModuleSourceMap
   });
 
   if (isRenderer) {
