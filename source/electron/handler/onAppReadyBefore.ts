@@ -15,6 +15,7 @@ async function onAppReadyBefore() {
   //   app.quit();
   // }
 
+  // TODO: 不用本地服务，使用 file 协议也可以
   startServer();
   // try {
   // } catch (error) {

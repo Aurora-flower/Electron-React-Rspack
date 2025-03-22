@@ -42,6 +42,8 @@ async function onAppReady() {
       isRemote: true,
       debug: process.env?.IS_DEBUG === 'true'
     };
+    // TODO: 直接加载 index.html 也可以 （默认使用 file 协议）
+    // join(__dirname, '../public/index.html')
     createWindow(webURL, windowOptions, params);
     debugLog(
       {

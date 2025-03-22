@@ -132,7 +132,10 @@ function getSignleConfig(mode, key, type) {
   });
 
   if (isRenderer) {
-    /* 注意📢: 对主进程、预加载进程可能有影响；当启用路由时，需要设置 publicPath */
+    /**
+     * 注意📢: 对主进程、预加载进程可能有影响; 当启用路由时，需要设置 publicPath;
+     * TODO: 当主进程使用 loadFile 加载文件时，关闭此处
+     */
     options.output.publicPath = '/';
 
     /* 增加 HTML 相关插件 */

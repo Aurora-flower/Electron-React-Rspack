@@ -4,7 +4,7 @@
   "main": "app/electron/main.js",
   "private": "true",
   "scripts": {
-    "test": "cross-env NODE_ENV=development gulp rs --name=rs",
+    "test": "cross-env NODE_ENV=development gulp dev --name=rs",
     "start": "electron .",
     "i:legacy": "npm install --legacy-peer-deps",
     "up": "npm update --major",
