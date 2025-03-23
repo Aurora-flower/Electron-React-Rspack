@@ -96,21 +96,18 @@ function getCssLoader(
         loader: 'css-loader',
         options: {
           /* 声明需要经过的 loader 数量 */
-          importLoaders: 1,
+          // importLoaders: 1,
           /* 启用 happypack 优化 - 多进程 */
-          happyPackMode: true
+          // happyPackMode: true
         }
       },
       {
-        loader: 'postcss-loader',
-        options: {
-          postcssOptions: {
-            plugins: [
-              require('tailwindcss'),
-              require('autoprefixer')
-            ]
-          }
-        }
+        loader: 'postcss-loader'
+        // options: {
+        //   postcssOptions: {
+        //     config: './postcss.config.js'
+        //   }
+        // }
       }
     ],
     exclude: isExclude ? exclude : undefined

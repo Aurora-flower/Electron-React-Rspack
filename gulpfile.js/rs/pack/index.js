@@ -36,23 +36,23 @@ function compile() {
             err ||
             stats.hasErrors() /* err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
           ) {
-            if (err) console.error(err);
+            if (err)
+              console.error(
+                'Rspack watch Error ---',
+                err?.message
+              );
             if (stats.hasErrors()) {
               console.log(stats.toString({ colors: true }));
             }
-            resolve(false);
           }
-          resolve(true);
         }
       );
-
-      /* 添加关闭钩子（按需）*/
-      process.on('SIGINT', () => {
-        watcher.close();
-        process.exit();
+      watcher.close(() => {
+        console.log('Rspack closed...');
+        resolve(true);
       });
     } catch (err) {
-      console.error(err);
+      console.error('Rspack Compile Error:', err?.message);
       reject(err);
     }
   });
