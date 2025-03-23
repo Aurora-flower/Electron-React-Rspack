@@ -85,6 +85,8 @@ npm install -S yauzl
 
 npm install -S yazl
 
+# npm install -D npm-run-all2
+
 ```
 
 > css 实用程序
