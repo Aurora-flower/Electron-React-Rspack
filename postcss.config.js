@@ -8,12 +8,12 @@
  */
 
 module.exports = {
-  // plugins: [require('@tailwindcss/postcss')]
   plugins: {
+    // tailwindcss: {},
     // 'postcss-import': {},
-    // 'postcss-preset-env': {},
-    tailwindcss: {},
-    autoprefixer: {}
+    'postcss-preset-env': {},
+    '@tailwindcss/postcss': {},
+    'autoprefixer': {}
   }
 };
 

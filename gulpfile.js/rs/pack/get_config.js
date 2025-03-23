@@ -66,7 +66,7 @@ function getSignleConfig(mode, key, type) {
     mode,
     module: {
       rules: [
-        LOADER.Js,
+        LOADER.JsExclude,
         LOADER.TsExclude,
         LOADER.Css,
         LOADER.Image

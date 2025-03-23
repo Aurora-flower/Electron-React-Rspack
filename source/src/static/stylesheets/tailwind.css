@@ -1,11 +1,9 @@
-/* @import 'tailwindcss'; */
-
-/* 
-4.0 版本的引入
-@tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
+/* 引入 tailwindcss */
+/*
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+*/
+
+/* 4.0 版本的引入*/
+@import 'tailwindcss';
