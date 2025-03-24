@@ -23,11 +23,3 @@ export function getPlatform(
     return process.platform;
   }
 }
-
-/**
- * 是否为 Windows 平台
- * @returns {boolean}
- */
-export function isWin(): boolean {
-  return getPlatform('win32') as boolean;
-}

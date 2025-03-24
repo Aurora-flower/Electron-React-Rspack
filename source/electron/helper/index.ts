@@ -17,3 +17,4 @@
 export * from '@/electron/helper/modules/app';
 export * from '@/electron/helper/modules/window';
 export * from '@/electron/helper/modules/process';
+export * from '@/electron/helper/modules/platform';

@@ -95,16 +95,21 @@ export function getAppAsarOutput(path: string) {
   return join(AppAsar, baseOutput, path);
 }
 
+interface AppInfoModel {
+  packaged: boolean;
+  sep: string;
+  platform: string;
+  paths: Record<string, string>;
+  workspace: string;
+}
+
 /**
- * 获取应用程序相关路径信息
- * @returns 应用路径信息字典
- * @default {}
+ * 获取应用程序相关信息
+ * @returns 应用信息字典
  */
-export function getAppPaths(): Record<string, string | boolean> {
+export function getAppInfo(): AppInfoModel | null {
   try {
-    const paths: {
-      [key: string]: string | boolean;
-    } = {
+    const info: AppInfoModel = {
       /* 是否打包 */
       packaged: app.isPackaged,
 
@@ -112,7 +117,13 @@ export function getAppPaths(): Record<string, string | boolean> {
       sep,
 
       /* 系统平台 */
-      platform: getPlatform()
+      platform: getPlatform() as string,
+
+      /* 应用程序路径 */
+      paths: {},
+
+      /* 工作空间路径 */
+      workspace: ''
     };
 
     const about: Array<MainProcess.PathNames> = [
@@ -136,16 +147,16 @@ export function getAppPaths(): Record<string, string | boolean> {
 
     for (let index = 0; index < about.length; index++) {
       const name = about[index];
-      paths[name] = app.getPath(name);
+      info.paths[name] = app.getPath(name);
     }
 
     // 自定义工作空间位置
-    paths.workspace = join(
-      paths.appData as string,
+    info.workspace = join(
+      info.paths.appData as string,
       'com.huaying.app'
     );
 
-    return paths;
+    return info;
   } catch (error: any) {
     debugLog(
       {
@@ -154,7 +165,7 @@ export function getAppPaths(): Record<string, string | boolean> {
       },
       error?.message
     );
-    return {};
+    return null;
   }
 }
 
