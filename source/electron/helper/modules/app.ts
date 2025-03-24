@@ -185,16 +185,19 @@ export function getAppInfo(): AppInfoModel | null {
  * - 当网页上没有发生任何情况时，不会生成帧
  * - 屏幕窗口始终创建为 `无边框窗口`..
  *
+ *
+ * @see {@link https://www.bytenote.net/article/193102900845608960}
+ *
  * 渲染模式:
- * - GPU加速
- * GPU 加速渲染意味着使用GPU用于合成。
+ * - GPU 加速
+ * GPU 加速渲染意味着使用 GPU用于合成。
  * 这也就意味着帧必须从 GPU 拷贝过来，从而需求更多的资源，因此这会比软件输出设备更慢。 这
  * 种模式的优点是支持 WebGL 和 3D CSS 动画.
  *
  * - 软件输出设备
  * 此模式使用软件输出设备在 CPU 中渲染，因此帧 生成的速度要快得多。 因此，此模式优先于 GPU 加速模式。
  *
- * - 若要启用此模式，必须通过调用 `app.disableHardwareAcceleration（）` API禁用 GPU 加速。
+ * - 若要启用此模式，必须通过调用 `app.disableHardwareAcceleration（）` API 禁用 GPU 加速。
  */
 export function disableGPUAcceleration() {
   app.disableHardwareAcceleration(); // 表示不使用硬件加速
