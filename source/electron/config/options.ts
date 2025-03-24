@@ -49,6 +49,9 @@ export const windowOptions: Electron.BrowserWindowConstructorOptions =
       /* 控制上下文隔离 */
       contextIsolation: true
 
+      /* 启用自动播放策略 */
+      // autoplayPolicy: 'no-user-gesture-required'
+
       /* 启用 DevTools */
       // devTools: false
 

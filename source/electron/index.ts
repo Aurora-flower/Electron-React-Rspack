@@ -10,7 +10,10 @@
 import { app } from 'electron';
 import { onAppEventListeners } from '@/electron/handler/event';
 
-/* 忽略证书相关错误 -- 自签名的 CA 不会被浏览认可 */
-app.commandLine.appendSwitch('ignore-certificate-errors');
+/* Immediately Excute */
+(function () {
+  /* 忽略证书相关错误 -- 自签名的 CA 不会被浏览认可 */
+  app.commandLine.appendSwitch('ignore-certificate-errors');
+})();
 
 onAppEventListeners();
