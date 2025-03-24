@@ -5,7 +5,9 @@ const { exec } = require('child_process');
  * 忽略的依赖包 - 版本差异过大，更改后会造成项目崩坏
  * @type {string[]}
  */
-const fixedDeps = ['tailwindcss'];
+const fixedDeps = [
+  // 'tailwindcss'
+];
 
 try {
   const subprocess = exec('npm outdated --json', {
