@@ -1,3 +1,5 @@
+import { DATA_TYPE_MODE } from '@/common/constant';
+
 /**
  * @class 公共工具类
  */
@@ -5,16 +7,7 @@ export class CommonUtility {
   /**
    * @static 数据类型
    */
-  static DataTypeMode = {
-    String: 'String',
-    Number: 'Number',
-    Boolean: 'Boolean',
-    Object: 'Object',
-    Array: 'Array',
-    Function: 'Function',
-    Null: 'Null',
-    undefined: 'Undefined'
-  };
+  static DataTypeMode = DATA_TYPE_MODE;
 
   /**
    * @static getDataType 判断数据类型
