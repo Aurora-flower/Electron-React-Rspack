@@ -3,7 +3,7 @@
  */
 import { CommonUtility } from '@/common/utils';
 import { debugLog } from '@/common/helper/log';
-import { DataTypeMode } from '@/common/constant';
+import { DATA_TYPE_MODE } from '@/common/constant';
 
 const { getDataType } = CommonUtility;
 
@@ -24,16 +24,16 @@ function useClassNames(classNames: Array<unknown>): string {
     const processedClassNames = classnames.reduce(
       (pre: string[], current) => {
         const dataType = getDataType(current);
-        if (dataType == DataTypeMode.STRING) {
+        if (dataType == DATA_TYPE_MODE.String) {
           pre.push(current as string);
-        } else if (dataType == DataTypeMode.OBJECT) {
+        } else if (dataType == DATA_TYPE_MODE.Object) {
           const val = current as Record<string, boolean>;
           Object.keys(val).forEach((item: string) => {
             if (val[item]) {
               pre.push(item);
             }
           });
-        } else if (dataType == DataTypeMode.ARRAY) {
+        } else if (dataType == DATA_TYPE_MODE.Array) {
           pre.push(...(current as any).filter(Boolean));
         }
         return pre;
