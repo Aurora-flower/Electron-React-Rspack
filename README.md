@@ -4,6 +4,10 @@
 
 [Chinese](./README.zh-CN.md) | **English**
 
+PS: Please refer to the `dev` branch for the latest modifications.
+
+---
+
 ## Style Guidelines
 
 ### Commit Conventions
