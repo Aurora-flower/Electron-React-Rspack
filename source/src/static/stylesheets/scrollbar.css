@@ -3,7 +3,6 @@
   -ms-overflow-style: none !important; /* IE 和 Edge */
   scrollbar-width: none !important; /* Firefox */
 
-  /* 隐藏滚动条 */
   ::-webkit-scrollbar {
     width: 0 !important; /* 隐藏滚动条宽度 */
     height: 0 !important; /* 隐藏滚动条高度 */
