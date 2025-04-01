@@ -1,3 +1,5 @@
 /**
- * @file 构建应用任务
+ * @file
  */
+
+module.exports = {};

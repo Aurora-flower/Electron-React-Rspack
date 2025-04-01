@@ -6,13 +6,12 @@
 const Dev = require('./tasks/dev');
 const Cleaner = require('./tasks/clean');
 const Compiler = require('./tasks/compile');
+const Packetizer = require('./tasks/package');
 
 exports.dev = Dev;
 exports.clean = Cleaner;
 exports.compile = Compiler;
-
-// exports.rs = RsCompiler;
-// exports.webpack = WebpackCompiler;
+exports.package = Packetizer;
 
 // 注意📢: 如果使用了 `task()` API 注册任务，直接导出即可
 // module.exports = {

@@ -2,10 +2,10 @@
 const { exec } = require('child_process');
 
 /**
- * 忽略的依赖包 - 版本差异过大，更改后会造成项目崩坏
+ * @constant FIXED_DEPS 忽略的依赖包 - 版本差异过大，更改后会造成项目崩坏
  * @type {string[]}
  */
-const fixedDeps = [
+const _FIXED_DEPS = [
   // 'tailwindcss'
 ];
 
@@ -14,22 +14,17 @@ try {
     encoding: 'utf-8'
   });
 
-  subprocess.stdout.on('data', data => {
-    const outdated = JSON.parse(data);
-    const pkgs = Object.keys(outdated).filter(
-      pkg => !fixedDeps.includes(pkg)
-    );
-    console.log('Checking dependency updates...', outdated);
-    if (!pkgs.length) return;
-    const tips = pkgs.map(pkg => `${pkg}@latest`).join(' ');
-    const start_char = '\n'.padStart(50, '*');
-    const end_char = '\n'.padEnd(50, '*');
-    console.log(
-      start_char,
-      'Update all dependencies to the latest version:\n' +
-        `npm install ${tips}`,
-      end_char
-    );
+  subprocess.stdout.on('data', _data => {
+    // const outdated = JSON.parse(data);
+    // console.log(outdated);
+  });
+
+  subprocess.stderr.on('data', _data => {
+    // console.error('Script execution error:', data);
+  });
+
+  subprocess.on('close', code => {
+    console.log(`Script execution completed with code ${code}`);
   });
 } catch (error) {
   console.error(
