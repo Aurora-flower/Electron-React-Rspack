@@ -1,0 +1,19 @@
+# 指示 Git 自动检测文件的换行符并确保所有文本文件使用 LF（Unix 风格的换行符）
+* text=auto eol=lf
+
+# 二进制文件类型
+*.exe binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.otf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
+# 可选：其他文本文件
+# *.md text
+
