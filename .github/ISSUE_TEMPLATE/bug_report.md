@@ -1,40 +1,44 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+name: Bug 报告 (Bug Report)
+about: 创建报告以帮助项目的改进
+title: ""
+labels: ""
+assignees: ""
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## 描述错误 (Describe the bug)
 
-**To Reproduce**
-Steps to reproduce the behavior:
+对 bug 的清晰简洁的描述。
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+---
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## 问题复现 (To Reproduce)
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+重现行为的步骤
 
-**Desktop (please complete the following information):**
+---
+
+## 预期行为 (Expected behavior)
+
+对期望发生的事情的清晰简洁的描述。
+
+---
+
+## 屏幕截图(Screenshots)
+
+请添加屏幕截图以帮助解释您的问题。
+
+---
+
+## 运行环境 (Desktop or Mobile)
 
 - OS: [e.g. iOS]
 - Browser [e.g. chrome, safari]
 - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
-
 - Device: [e.g. iPhone6]
-- OS: [e.g. iOS8.1]
-- Browser [e.g. stock browser, safari]
-- Version [e.g. 22]
 
-**Additional context**
-Add any other context about the problem here.
+---
+
+## 附加上下文 (Additional context)
+
+在此处添加有关该问题的任何其他上下文。
