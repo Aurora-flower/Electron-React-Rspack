@@ -1,0 +1,26 @@
+{
+  "name": "electron-react-rspack",
+  "version": "0.0.1",
+  "description": "花楹一间，向往自由的发现之旅。",
+  "main": "app/electron/main.js",
+  "private": "true",
+  "scripts": {
+    "prepare": "echo 'prepare'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aurora-flower/Electron-React-Rspack.git"
+  },
+  "keywords": [
+    "electron",
+    "react",
+    "rspack",
+    "gulp"
+  ],
+  "author": "Aurora-flower",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Aurora-flower/Electron-React-Rspack/issues"
+  },
+  "homepage": "https://github.com/Aurora-flower/Electron-React-Rspack#readme"
+}
