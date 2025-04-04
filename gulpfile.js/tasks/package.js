@@ -1,5 +1,0 @@
-/**
- * @file
- */
-
-module.exports = {};
