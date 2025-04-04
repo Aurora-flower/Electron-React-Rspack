@@ -18,7 +18,7 @@
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json, env.d.ts, .eslint*, eslint*, .prettier*, prettier*, tailwind.config.js, postcss.config.js, commitlint.config.js",
     ".gitignore": ".git*",
-    "README.md": "README.zh-CN.md, LICENSE, CHANGELOG.md, CODE_OF_CONDUCT.md",
+    "README.md": "README.*.md, LICENSE, CHANGELOG.md, CODE_OF_CONDUCT.md",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .editorconfig, .npmrc, .hintrc, electron-builder.yml"
   }
 }
