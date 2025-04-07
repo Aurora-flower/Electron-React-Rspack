@@ -8,10 +8,6 @@
     "prepare": "echo 'prepare'",
     "preinstall": "echo 'preinstall'"
   },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Aurora-flower/Electron-React-Rspack.git"
@@ -22,6 +18,10 @@
     "rspack",
     "gulp"
   ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "author": "Aurora-flower",
   "license": "MIT",
   "bugs": {
