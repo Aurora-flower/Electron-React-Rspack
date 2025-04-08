@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/Aurora-flower/Electron-React-Rspack/issues"
   },
-  "homepage": "https://github.com/Aurora-flower/Electron-React-Rspack#readme"
+  "homepage": "https://github.com/Aurora-flower/Electron-React-Rspack#readme",
+  "devDependencies": {
+    "electron": "^35.1.4"
+  }
 }
