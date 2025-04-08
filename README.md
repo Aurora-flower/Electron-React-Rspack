@@ -33,4 +33,17 @@
 
 ## 相关文档
 
+- [Node.js](https://nodejs.cn/api/)
+- [Electron](https://www.electronjs.org/zh/docs/latest/)
+- [React](https://zh-hans.react.dev/learn)
+
+---
+
+## 其他相关
+
 - [Chromium](https://www.chromium.org/chromium-projects/)
+- [JavaScript](https://www.w3ccoo.com/js/js_intro.html)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [MDN](https://developer.mozilla.org/zh-CN/)
+- [NPM](https://npm.nodejs.cn/)
+- [React Reference](https://react.dev/reference/react)
