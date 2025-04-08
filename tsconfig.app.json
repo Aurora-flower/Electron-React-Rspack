@@ -4,6 +4,7 @@
   "exclude": [],
   "compilerOptions": {
     "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM"],
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "types": [],
