@@ -3,11 +3,12 @@
   "include": ["source/electron/**/*"],
   "compilerOptions": {
     "composite": true,
+    "baseUrl": ".",
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "moduleResolution": "Bundler",
     "types": ["node", "electron"],
     "paths": {
-      "@main/*": ["./source/electron/*"]
+      "@main/*": ["source/electron/*"]
     }
   }
 }

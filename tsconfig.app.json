@@ -1,15 +1,16 @@
 {
   "extends": [],
   "exclude": [],
-  "include": ["source/src/**/*"],
+  "include": ["source/web/**/*"],
   "compilerOptions": {
+    "baseUrl": ".",
     "jsx": "react-jsx",
     "lib": ["ESNext", "DOM"],
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "types": ["./types/global.d.ts"],
     "paths": {
-      "@/*": ["./source/src/*"]
+      "@/*": ["source/web/*"]
     }
   }
 }
