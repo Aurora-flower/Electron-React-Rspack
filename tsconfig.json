@@ -1,0 +1,19 @@
+{
+  "include": ["env.d.ts", "types/**/*.d.ts"],
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": []
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
+}
