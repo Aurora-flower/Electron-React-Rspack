@@ -1,5 +1,7 @@
 # Electron-React-Rspack
 
+[![GitHub license](https://img.shields.io/github/license/Aurora-flower/Electron-React-Rspack?style=for-the-badge)](https://github.com/Aurora-flower/Electron-React-Rspack/blob/main/LICENSE)
+
 ## 前言
 
 该项目旨在学习如何结合 **Electron** 和 **React** 构建桌面应用，并使用 **Rspack** 作为构建工具。它是一个基础的示范项目，适用于希望了解如何在桌面应用中使用现代 Web 技术的开发者。
@@ -47,3 +49,4 @@
 - [MDN](https://developer.mozilla.org/zh-CN/)
 - [NPM](https://npm.nodejs.cn/)
 - [React Reference](https://react.dev/reference/react)
+- [Shields](https://shields.io/)
