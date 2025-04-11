@@ -31,4 +31,4 @@ output
 .DS_Store
 
 # 项目依赖详情文件
-package-lock.json
+# package-lock.json
