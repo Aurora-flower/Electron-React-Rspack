@@ -1,0 +1,35 @@
+{
+  "include": [],
+  "exclude": ["**/*.spec.ts"],
+  "compilerOptions": {
+    "composite": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+    "preserveConstEnums": false,
+    "sourceMap": true,
+
+    /* Output */
+    // "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "./dist",
+
+    /* Bundler mode */
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": false,
+    // "moduleDetection": "legacy",
+
+    /* Linting */
+    "strict": true, // sctrict mode
+    // "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  }
+}

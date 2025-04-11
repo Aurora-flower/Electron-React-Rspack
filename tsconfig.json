@@ -1,19 +1,7 @@
 {
-  "include": ["env.d.ts", "types/global.d.ts"],
-  "compilerOptions": {
-    "strict": true,
-    "module": "ESNext",
-    "useDefineForClassFields": true,
-    "forceConsistentCasingInFileNames": true
-    // "types": ["./types/global.d.ts"]
-  },
   "files": [],
   "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    }
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }
