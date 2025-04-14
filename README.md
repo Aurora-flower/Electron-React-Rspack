@@ -48,5 +48,7 @@
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [MDN](https://developer.mozilla.org/zh-CN/)
 - [NPM](https://npm.nodejs.cn/)
+- [NPM-package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
 - [React Reference](https://react.dev/reference/react)
 - [Shields](https://shields.io/)
+- [MDN-CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
