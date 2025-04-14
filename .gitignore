@@ -5,6 +5,9 @@ temp
 template
 backup
 
+# 测试目录
+test/
+
 # 运行缓存目录
 .cache
 
