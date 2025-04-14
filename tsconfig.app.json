@@ -4,7 +4,8 @@
     "types/global.d.ts",
     "env.d.ts",
     "source/web/**/*",
-    "source/web/**/*.tsx"
+    "source/web/**/*.tsx",
+    "types/web/**/*.d.ts"
   ],
   "exclude": ["source/web/**/__tests__/*"],
   "compilerOptions": {
