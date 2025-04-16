@@ -1,6 +1,6 @@
-import onAppReadyBefore from "@main/helpers/event/onAppReadyBefore";
-import onAppReady from "@main/helpers/event/onAppReady";
-import onAppReadyAfter from "@main/helpers/event/onAppReadyAfter";
+import onAppReadyBefore from "@main/handlers/event/onAppReadyBefore";
+import onAppReady from "@main/handlers/event/onAppReady";
+import onAppReadyAfter from "@main/handlers/event/onAppReadyAfter";
 import commandLines from "@main/helpers/function/commandLines";
 
 function advanceExecution() {
