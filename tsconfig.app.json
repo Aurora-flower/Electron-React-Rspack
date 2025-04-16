@@ -12,8 +12,7 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "types": [],
     "paths": {
-      "@/*": ["source/web/*"],
-      "@assets/*": ["assets/*"]
+      "@/*": ["source/web/*"]
     },
 
     /* JSX */
