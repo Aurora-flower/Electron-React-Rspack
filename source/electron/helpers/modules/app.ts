@@ -37,8 +37,8 @@ export function getAppInfo() {
         videos: "", // 视频目录
         logs: "", // 日志文件目录
         recent: "", // 最近访问文件目录 - 仅限于 windows
-        crashDumps: "", // 系统崩溃转储文件目录
-      },
+        crashDumps: "" // 系统崩溃转储文件目录
+      }
     };
 
     const about = Object.keys(info.paths) as AppPathTypes[];
@@ -46,7 +46,7 @@ export function getAppInfo() {
       const name = about[index];
       info.paths[name] = app.getPath(name);
     }
-    info.workspace = join(info.paths.appData as string, "com.app.ui-editor");
+    info.workspace = join(info.paths.appData as string, "com.huaying.app");
     return info;
   } catch (error) {
     return null;

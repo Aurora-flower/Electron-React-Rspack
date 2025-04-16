@@ -1,4 +1,3 @@
-import { join } from "node:path";
 import { BrowserWindow, Menu } from "electron";
 import { isWin } from "@main/helpers/function/platform";
 import { getIsPackage } from "@main/helpers/modules/app";
@@ -11,8 +10,8 @@ class WindowManager {
   public mainWindow: BrowserWindow | null = null;
   private static instance: WindowManager;
   private windowOptions = {
-    title: process.env?.TITLE ?? "Electron-React-Rspack",
-    frame: !this.isWindows,
+    title: process.env?.TITLE ?? "Electron-React-Rspack"
+    // frame: !this.isWindows,
     // webPreferences: {
     //   preload: resolvePath("../preload/index.js"),
     // },
@@ -88,7 +87,7 @@ class WindowManager {
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
         mode: "detach",
-        activate: true,
+        activate: true
       });
     }
     return this.mainWindow;
