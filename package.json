@@ -8,8 +8,7 @@
   "scripts": {
     "prepare": "echo 'prepare'",
     "preinstall": "echo 'preinstall'",
-    "start": "electron .",
-    "toolkit": "electron ./node_modules/electron-toolkit"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -28,7 +27,9 @@
   },
   "homepage": "https://github.com/Aurora-flower/Electron-React-Rspack#readme",
   "devDependencies": {
-    "electron": "35.0.0"
+    "electron": "35.0.0",
+    "gulp": "5.0.0",
+    "ts-node": "10.9.2"
   },
   "engines": {
     "node": ">=18.0.0",
