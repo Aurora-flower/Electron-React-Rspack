@@ -1,6 +1,10 @@
 {
   "extends": "./tsconfig.base.json", // "@electron-toolkit/tsconfig/tsconfig.node.json", // "@tsconfig/node22/tsconfig.json"
-  "include": ["source/electron/**/*", "types/electron/**/*.d.ts"],
+  "include": [
+    "source/electron/**/*",
+    "types/electron/**/*.d.ts",
+    "*.config.js"
+  ],
   "compilerOptions": {
     "composite": true,
     "incremental": true,

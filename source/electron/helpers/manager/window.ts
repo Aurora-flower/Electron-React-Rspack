@@ -10,7 +10,7 @@ class WindowManager {
   public mainWindow: BrowserWindow | null = null;
   private static instance: WindowManager;
   private windowOptions = {
-    title: process.env?.TITLE ?? "Electron-React-Rspack"
+    title: process.env?.TITLE ?? "Electron-React-Rspack",
     // frame: !this.isWindows,
     // webPreferences: {
     //   preload: resolvePath("../preload/index.js"),
@@ -67,6 +67,9 @@ class WindowManager {
   }
 
   private createMainWindow() {
+    if (!process.env.DEV_SERVER_URL) {
+      process.env.DEV_SERVER_URL = "https://www.w3ccoo.com/";
+    }
     if (this.mainWindow && !this.mainWindow.isDestroyed()) {
       return this.mainWindow;
     }
@@ -87,7 +90,7 @@ class WindowManager {
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
         mode: "detach",
-        activate: true
+        activate: true,
       });
     }
     return this.mainWindow;
