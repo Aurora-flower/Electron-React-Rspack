@@ -10,7 +10,7 @@ class WindowManager {
   public mainWindow: BrowserWindow | null = null;
   private static instance: WindowManager;
   private windowOptions = {
-    title: process.env?.TITLE ?? "Electron-React-Rspack",
+    title: process.env?.TITLE ?? "Electron-React-Rspack"
     // frame: !this.isWindows,
     // webPreferences: {
     //   preload: resolvePath("../preload/index.js"),
@@ -67,21 +67,26 @@ class WindowManager {
   }
 
   private createMainWindow() {
-    if (!process.env.DEV_SERVER_URL) {
-      process.env.DEV_SERVER_URL = "https://www.w3ccoo.com/";
-    }
+    // if (!process.env.DEV_SERVER_URL) {
+    //   process.env.DEV_SERVER_URL = "https://www.w3ccoo.com/";
+    // }
     if (this.mainWindow && !this.mainWindow.isDestroyed()) {
       return this.mainWindow;
     }
     this.mainWindow = new BrowserWindow(this.windowOptions);
     if (this.isPackage) {
-      if (!this.isWindows) {
+      if (this.isWindows) {
         Menu.setApplicationMenu(null); // win.removeMenu(); | win.setMenu(null);
       }
-      this.mainWindow.loadFile(resolvePath("../public/index.html"));
     } else {
-      this.mainWindow.loadURL(process.env.DEV_SERVER_URL!);
     }
+
+    if (process.env.DEV_SERVER_URL) {
+      this.mainWindow.loadURL(process.env.DEV_SERVER_URL!);
+    } else {
+      this.mainWindow.loadFile("../public/index.html");
+    }
+
     // this.mainWindow.maximize();
     // this.mainWindow.webContents.on("devtools-opened", () => {
     //   this.mainWindow?.focus();
@@ -90,7 +95,7 @@ class WindowManager {
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
         mode: "detach",
-        activate: true,
+        activate: true
       });
     }
     return this.mainWindow;
