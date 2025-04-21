@@ -39,6 +39,7 @@
 - [Electron](https://www.electronjs.org/zh/docs/latest/)
 - [React](https://zh-hans.react.dev/learn)
 - [Gulp](https://gulp.nodejs.cn/)
+- [Rspack](https://rspack.dev/zh/)
 
 ---
 
@@ -53,3 +54,4 @@
 - [React Reference](https://react.dev/reference/react)
 - [Shields](https://shields.io/)
 - [MDN-CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+- [BabelJS](https://www.babeljs.cn/docs/)
