@@ -8,6 +8,7 @@ const NODE_MODULES = /node_modules/;
 
 /* ***** ***** ***** ***** Parser ***** ***** ***** ***** */
 const JS_PARSER_OPTIONS = {
+  // @babel/core
   loader: "babel-loader",
   options: {
     presets: [
