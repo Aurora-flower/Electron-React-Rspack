@@ -43,6 +43,13 @@
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2"
   },
+  "dependencies": {
+    "express": "5.1.0",
+    "pixi.js": "8.9.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "three": "0.125.2"
+  },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
