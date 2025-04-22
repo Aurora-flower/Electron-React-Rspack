@@ -10,7 +10,8 @@
     "preinstall": "echo 'preinstall'",
     "start": "electron .",
     "build": "gulp",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "package:prepare": "ts-node ./scripts/build/package-prepare.ts"
   },
   "repository": {
     "type": "git",
