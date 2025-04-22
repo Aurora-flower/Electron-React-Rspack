@@ -1,13 +1,13 @@
-import { rspack } from "@rspack/core";
+import { rspack, type WatchOptions } from "@rspack/core";
 import getRsConfig from "./config";
 
 function rspackCompiler() {
   return new Promise((resolve, reject) => {
     const RsConfig = getRsConfig();
     try {
+      const options: WatchOptions = {};
       const multiCompiler = rspack(RsConfig);
-      const watcher = multiCompiler.watch({}, (err, stats) => {
-        // process.stdout.write('Stdout:', stats.toString() + '\n');
+      const watcher = multiCompiler.watch(options, (err, stats) => {
         /* err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
         if (err) {
           console.error("Rspack watch Error ---", err?.message);
@@ -16,8 +16,8 @@ function rspackCompiler() {
           console.log(stats.toString({ colors: true }));
         }
       });
-      watcher.close(() => {
-        console.log("Rspack closed...");
+      watcher.close((error) => {
+        console.log("Rspack closed...", error);
         resolve(true);
       });
     } catch (err) {

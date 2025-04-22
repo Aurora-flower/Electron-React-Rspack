@@ -13,7 +13,7 @@ async function Run() {
 
 async function WatchSource() {
   const options: WatchOptions = {
-    cwd: process.cwd(),
+    // cwd: process.cwd(),
     ignoreInitial: false,
     // delay: 1000 * 1,
     // alwaysStat: false, // 关闭不必要的 stat 信息

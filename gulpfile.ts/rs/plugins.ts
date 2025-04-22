@@ -28,7 +28,6 @@ function getHtmlRspackPlugin(template: string) {
       }
     }
   });
-
   return HtmlRspackPlugin;
 }
 
