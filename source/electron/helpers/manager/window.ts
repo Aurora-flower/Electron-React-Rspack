@@ -84,7 +84,7 @@ class WindowManager {
     if (process.env.DEV_SERVER_URL) {
       this.mainWindow.loadURL(process.env.DEV_SERVER_URL!);
     } else {
-      this.mainWindow.loadFile("../public/index.html");
+      this.mainWindow.loadFile(resolvePath("../public/index.html"));
     }
 
     // this.mainWindow.maximize();
