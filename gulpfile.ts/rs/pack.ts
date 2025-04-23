@@ -8,7 +8,7 @@ function rspackCompiler() {
       const options: WatchOptions = {};
       const multiCompiler = rspack(RsConfig);
       const watcher = multiCompiler.watch(options, (err, stats) => {
-        /* err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
+        /* Tip: err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
         if (err) {
           console.error("Rspack watch Error ---", err?.message);
         }
