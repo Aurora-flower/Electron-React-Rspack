@@ -1,6 +1,6 @@
 import { app } from "electron";
 import { sep, join } from "node:path";
-import { getPlatform, isWin } from "@main/helpers/function/platform";
+import { getPlatform, isWin, PLATFORM } from "@main/helpers/node/process/platform";
 
 export function getIsPackage() {
   return app.isPackaged;

@@ -1,8 +1,8 @@
 import { BrowserWindow, Menu } from "electron";
-import { isWin } from "@main/helpers/function/platform";
+import { isWin } from "@main/helpers/node/process/platform";
 import { getIsPackage } from "@main/helpers/modules/app";
-import { isDev } from "@main/helpers/function/env";
-import { resolvePath } from "@main/helpers/function/path";
+import { isDev } from "@main/helpers/node/process/env";
+import { resolvePath } from "@main/helpers/node/path";
 
 const MAIN_WINDOW_NAME = "_MAIN_";
 
@@ -103,16 +103,21 @@ class WindowManager {
 
   private setupWindowHooks() {
     if (!this.mainWindow) return;
-    this.mainWindow.on("close", (e) => {
+    const win = this.mainWindow;
+    win.on("close", (e) => {
       if (!this.isClosing) {
         e.preventDefault();
         this.safeCloseWindow();
       }
     });
 
-    this.mainWindow.on("closed", () => {
+    win.on("closed", () => {
       this.mainWindow = null;
       this.isClosing = false;
+    });
+
+    win.webContents.on("did-finish-load", () => {
+      // win.webContents.send("trigger-message", "Hello from main process");
     });
   }
 
