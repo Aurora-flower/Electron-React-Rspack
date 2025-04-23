@@ -31,6 +31,11 @@
 
 - 渲染进程代码中标记了 `📌` 的部分与主进程相关，方便在后期迁移为纯 Web 页面时修改。
 
+### 补丁策略
+
+- 使用 `electron-builder` 与 `electron-updater` 实现增量更新。
+- 使用 `patch-package`，用于持久化修改 `node_modules` 中的第三方库(依赖包)的问题。
+
 ---
 
 ## 相关文档
