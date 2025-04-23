@@ -52,3 +52,11 @@ export function getAppInfo() {
     return null;
   }
 }
+
+export function setupAppHooks() {
+  app.on("window-all-closed", () => {
+    if (getPlatform() !== PLATFORM.darwin) {
+      app.quit();
+    }
+  });
+}
