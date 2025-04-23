@@ -23,7 +23,7 @@ class ListenerCollect {
 
   public static removeSpecificListener(
     event: string,
-    callback: EventListener,
+    callback: EventListener
   ): void {
     const index = ListenerCollect.listeners[event]?.indexOf(callback);
     if (index !== -1) {
@@ -41,9 +41,9 @@ class ListenerCollect {
 
 export function enableWindowResizeListener(
   callback: EventListener,
-  immediately = false,
+  immediately = false
 ) {
-  const eventName = 'resize';
+  const eventName = "resize";
   ListenerCollect.addListener(eventName, callback);
   if (immediately) {
     window.dispatchEvent(new Event(eventName));
@@ -51,7 +51,22 @@ export function enableWindowResizeListener(
 }
 
 export function destoryWindowResizeListener(callback: EventListener) {
-  ListenerCollect.removeSpecificListener('resize', callback);
+  ListenerCollect.removeSpecificListener("resize", callback);
+}
+
+export function enableWindowMessagesListener(
+  callback: EventListener,
+  immediately = false
+) {
+  const eventName = "message";
+  ListenerCollect.addListener(eventName, callback);
+  if (immediately) {
+    window.dispatchEvent(new MessageEvent(eventName, { data: null }));
+  }
+}
+
+export function disableWindowMessagesListener(callback: EventListener) {
+  ListenerCollect.removeSpecificListener("message", callback);
 }
 
 export function clearAllListeners() {
