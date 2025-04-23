@@ -12,11 +12,11 @@
 
 ---
 
-**中文** | [英文](./README.EN.md)
+**Email: `yanl_802@163.com`**
 
 ---
 
-**Email: `yanl_802@163.com`**
+**Chinese** | [English](./README.EN.md)
 
 ---
 
