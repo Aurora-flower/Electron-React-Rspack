@@ -4,10 +4,11 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 interface PackageJson {
   name: string;
   main: string;
-  author?: string;
+  license: string;
+  author: string;
   version: string;
-  description?: string;
-  dependencies?: Record<string, string>;
+  description: string;
+  dependencies: Record<string, string>;
 }
 
 type DistPackage = Partial<PackageJson> & {
@@ -21,7 +22,7 @@ const outputPath = join(outDir, "package.json");
 async function preparePackage() {
   try {
     const raw = await readFile(packagePath, "utf-8");
-    const { name, main, author, version, description, dependencies } =
+    const { name, main, author, version, license, description, dependencies } =
       JSON.parse(raw) as PackageJson;
 
     const distPackage: DistPackage = {
@@ -29,6 +30,7 @@ async function preparePackage() {
       main: relative(outDir, main),
       author,
       version,
+      license,
       description,
       dependencies,
     };
