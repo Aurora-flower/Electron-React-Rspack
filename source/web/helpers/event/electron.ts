@@ -9,5 +9,5 @@ export async function sender(channel: string, ...args: any[]) {
   if (!window.IPC) {
     return null;
   }
-  return window.IPC.sender(channel, ...args);
+  return window.IPC.emitter(channel, ...args);
 }
