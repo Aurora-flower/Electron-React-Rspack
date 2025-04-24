@@ -9,7 +9,8 @@
     "prepare": "echo 'prepare'",
     "preinstall": "patch-package",
     "start": "electron .",
-    "build": "gulp",
+    "compile": "gulp",
+    "build": "run-p \"package:prepare\" \"compile\"",
     "dev": "gulp dev",
     "package:prepare": "ts-node ./scripts/build/package-prepare.ts"
   },
@@ -45,7 +46,8 @@
     "patch-package": "8.0.0",
     "postcss-loader": "8.1.1",
     "ts-loader": "9.5.2",
-    "ts-node": "10.9.2"
+    "ts-node": "10.9.2",
+    "npm-run-all2": "7.0.2"
   },
   "dependencies": {
     "express": "5.1.0",
