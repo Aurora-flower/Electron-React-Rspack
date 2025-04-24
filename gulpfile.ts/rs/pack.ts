@@ -1,5 +1,6 @@
 import { rspack, type WatchOptions } from "@rspack/core";
 import getRsConfig from "./config";
+import { isDev } from "../common/env";
 
 function rspackCompiler() {
   return new Promise((resolve, reject) => {
@@ -7,22 +8,32 @@ function rspackCompiler() {
     try {
       const options: WatchOptions = {};
       const multiCompiler = rspack(RsConfig);
-      const watcher = multiCompiler.watch(options, (err, stats) => {
+      multiCompiler.watch(options, (err, stats) => {
         /* Tip: err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
         if (err) {
-          console.error("Rspack watch Error ---", err?.message);
+          console.error("[Rspack Watch Error]", err?.stack || err?.message);
+          reject(err);
+          return;
         }
         if (stats && stats.hasErrors()) {
-          console.log(stats.toString({ colors: true }));
+          // stats.toString({ colors: true })
+          const json = stats.toJson({
+            colors: true,
+            all: false,
+            errors: true,
+            warnings: true,
+            logging: "error",
+          });
+          console.error("[Rspack Build Error]", json.errors);
+          reject(json.errors);
+          return;
         }
-      });
-      watcher.close((error) => {
-        console.log("Rspack closed...", error);
         resolve(true);
+        console.log("[Rspack Compiling...]", isDev());
       });
     } catch (err) {
       console.error(
-        "Rspack Compile Error:",
+        "[Rspack Compile Error]",
         err instanceof Error ? err.message : String(err)
       );
       reject(err);

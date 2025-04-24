@@ -10,7 +10,7 @@ export const PLATFORM = Object.freeze({
   sunos: "sunos",
   cygwin: "cygwin",
   netbsd: "netbsd"
-} as const satisfies { [K in NodeJS.Platform]: K });
+} as const satisfies { [K in NodeJS.Platform] K });
 
 export function getPlatform(platform?: NodeJS.Platform): boolean | string {
   if (platform) {

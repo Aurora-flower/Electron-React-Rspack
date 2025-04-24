@@ -19,12 +19,12 @@ class ElectronProcess {
       const electron = require("electron");
       try {
         this.electronProcess = spawn(electron, ["."], {
-          stdio: "inherit"
+          stdio: "inherit",
         });
 
         this.electronProcess
           .on("spawn", () => {
-            console.log("Electron running ...", this.electronProcess?.pid);
+            console.log("[Electron Running...]", this.electronProcess?.pid);
             resolve(true);
           })
           .on("close", (code: number) => {
@@ -32,12 +32,12 @@ class ElectronProcess {
             this.electronProcess = null;
           })
           .on("error", (err: unknown) => {
-            console.error("Electron Error:", errorMessage(err));
+            console.error("[Electron Error]", errorMessage(err));
             reject(err);
           });
 
         process.on("uncaughtException", (err: unknown) => {
-          console.error("Uncaught Exception:", errorMessage(err));
+          console.error("[Uncaught Exception]", errorMessage(err));
           reject(err);
         });
       } catch (error) {
@@ -52,7 +52,7 @@ class ElectronProcess {
       if (!proc) return resolve(false);
       proc
         .once("exit", () => {
-          console.log(`Stopped process: ${proc.pid}`);
+          console.log(`Stopped Process: ${proc.pid}`);
           this.electronProcess = null;
           resolve(true);
         })

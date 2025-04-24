@@ -1,1 +1,1 @@
-import { Application, Graphics } from "pixi.js";
+document.body.innerHTML = `<div id="app">HELLO WORLD!</div>`;
