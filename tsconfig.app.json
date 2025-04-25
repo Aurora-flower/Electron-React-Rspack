@@ -2,10 +2,11 @@
   "extends": "./tsconfig.base.json",
   "include": [
     "types/global.d.ts",
+    "types/web/*.d.ts",
     "env.d.ts",
-    "source/web/**/*",
-    "source/web/**/*.tsx",
-    "types/web/**/*.d.ts"
+    "components.d.ts",
+    "source/web/**/*.ts",
+    "source/web/**/*.tsx"
   ],
   "exclude": ["source/web/**/__tests__/*"],
   "compilerOptions": {
