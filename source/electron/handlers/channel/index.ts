@@ -1,11 +1,11 @@
 import { ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 
-export const channelDisposer = createChannelHandler(true);
+export const channelSenderDisposer = createChannelHandler();
 
 export const channelInvokeDisposer = createChannelHandler(true);
 
 const HANDLER: ChannelConfig = {
-  handler: channelDisposer,
+  handler: channelSenderDisposer,
   name: "emitter",
   type: "event"
 };
@@ -36,13 +36,13 @@ const IPC_HANDLERS = new Map<string, (...args: unknown[]) => unknown>(
   Object.entries(LISTENERS) as Array<[string, (...args: unknown[]) => unknown]>
 );
 
-function findListener(channel: string) {
+function findListener(channel: ChannelName) {
   return IPC_HANDLERS.get(channel);
 }
 
 const prepareParams = (
   _event: IpcMainEvent | IpcMainInvokeEvent,
-  _channel: string,
+  _channel: ChannelName,
   args: unknown[]
 ) => {
   const params = [...args];
@@ -51,7 +51,7 @@ const prepareParams = (
   return params;
 };
 
-// function middlewar(event: IpcMainEvent | IpcMainInvokeEvent, channel: string,
+// function middlewar(event: IpcMainEvent | IpcMainInvokeEvent, channel: ChannelName,
 //   ...args: unknown[]) {
 //     const sender = event.sender;
 //     console.log(
@@ -69,15 +69,16 @@ function createChannelHandler(
 ) {
   return function (
     event: IpcMainEvent | IpcMainInvokeEvent,
-    channel: string,
+    channel: ChannelName,
     ...args: unknown[]
   ) {
     const listener = findListener(channel);
-    if (listener) {
-      const params = prepareParams(event, channel, args);
-      if (isInvoke) {
-        return listener(...params);
-      }
+    if (!listener) return;
+    const params = prepareParams(event, channel, args);
+    if (isInvoke) {
+      return listener(...params);
+    } else {
+      listener(...params);
     }
   };
 }

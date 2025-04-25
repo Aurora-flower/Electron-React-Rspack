@@ -22,6 +22,10 @@ declare global {
     core: string;
     workspace: string;
   }
+
+  type InvokeChannelName = string;
+  type SenderChannelName = string;
+  type ChannelName = SenderChannelName | InvokeChannelName;
 }
 
 export {};

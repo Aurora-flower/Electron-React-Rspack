@@ -1,10 +1,8 @@
 type ChannelType = "event" | "invoke";
-type ChannelName = string;
-type InvokeChannelName = string;
 
 type OnHandler = (
   event: IpcMainEvent,
-  channel: ChannelName,
+  channel: SenderChannelName,
   ...args: unknown[]
 ) => void;
 
