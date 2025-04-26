@@ -1,5 +1,5 @@
 import { ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
-import { transmit } from "@main/handlers/channel/sms";
+import { transmit } from "@main/handlers/channel/message/sms";
 
 export const channelSenderDisposer = createChannelHandler();
 
