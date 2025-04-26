@@ -10,11 +10,11 @@ class WindowManager {
   public mainWindow: BrowserWindow | null = null;
   private static instance: WindowManager;
   private windowOptions = {
-    title: process.env?.TITLE ?? "Electron-React-Rspack"
+    title: process.env?.TITLE ?? "Electron-React-Rspack",
     // frame: !this.isWindows,
-    // webPreferences: {
-    //   preload: resolvePath("../preload/index.js"),
-    // },
+    webPreferences: {
+      preload: resolvePath("../preload/index.js"),
+    },
   };
   private windows: Map<string, BrowserWindow> = new Map();
   private isClosing = false;
@@ -95,7 +95,7 @@ class WindowManager {
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
         mode: "detach",
-        activate: true
+        activate: true,
       });
     }
     return this.mainWindow;
