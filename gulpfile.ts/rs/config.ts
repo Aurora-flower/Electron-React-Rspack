@@ -29,7 +29,7 @@ function singleConfig(key: string, type: string) {
     devtool: DEVTOOL.CheapSourceMap,
     resolve: {
       mainFiles: ["index", "main"],
-      extensions: [".ts"],
+      extensions: [".ts", ".js"],
     },
     module: {
       rules: [LOADER.JsExclude, LOADER.TsExclude, LOADER.Css, LOADER.Image],
