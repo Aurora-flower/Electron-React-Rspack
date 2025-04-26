@@ -12,7 +12,8 @@
     "compile": "gulp",
     "build": "run-p \"package:prepare\" \"compile\"",
     "dev": "gulp dev",
-    "package:prepare": "ts-node ./scripts/build/package-prepare.ts"
+    "package:prepare": "ts-node ./scripts/build/package-prepare.ts",
+    "package": "npm run build && electron-builder --publish always"
   },
   "repository": {
     "type": "git",

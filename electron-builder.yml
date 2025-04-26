@@ -1,0 +1,45 @@
+appId: website.huaying.app
+
+productName: 花楹一间
+
+appImage:
+  artifactName: ${productName}-${version}-${arch}.${ext}
+
+# icon: build/assets/app-icon/mac/icon.icns
+
+copyright: Copyright © 2025 ${productName} ${author}
+
+buildDependenciesFromSource: true
+
+directories:
+  app: app
+  output: release/${version}
+
+# files:
+
+asar: true
+
+asarUnpack:
+  - "core"
+
+mac:
+  target:
+    - dmg
+    - zip
+
+win:
+  target:
+    - nsis
+    - zip
+    - msi
+    - squirrel
+    - portable
+
+publish:
+  provider: generic
+  url: http://192.168.3.27:3000/release/
+  channel: latest
+# publish:
+#   provider: github
+#   owner: Aurora-flower
+#   repo: Electron-React-Rspack
