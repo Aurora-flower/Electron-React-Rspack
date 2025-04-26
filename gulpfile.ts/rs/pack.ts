@@ -16,16 +16,16 @@ function rspackCompiler() {
           return;
         }
         if (stats && stats.hasErrors()) {
-          // stats.toString({ colors: true })
-          const json = stats.toJson({
-            colors: true,
-            all: false,
-            errors: true,
-            warnings: true,
-            logging: "error",
-          });
-          console.error("[Rspack Build Error]", json.errors);
-          reject(json.errors);
+          const json = stats.toString({ colors: true });
+          // const json = stats.toJson({
+          //   colors: true,
+          //   all: false,
+          //   errors: true,
+          //   warnings: true,
+          //   logging: "error",
+          // }); // json.errors
+          console.error("[Rspack Build Error]", json);
+          reject(json);
           return;
         }
         resolve(true);
