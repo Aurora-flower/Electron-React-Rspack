@@ -50,6 +50,11 @@
 - [Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
 - [Three.js](https://threejs.org/manual/#zh/fundamentals)
 - [Express](https://www.expressjs.com.cn/)
+- [Electron Logger](https://github.com/megahertz/electron-log)
+- [Electron Builder](https://www.electron.build/)
+
+<!-- - [Log4](https://github.com/log4js-node/log4js-node) -->
+<!-- - [Electron-Store](https://github.com/sindresorhus/electron-store) -->
 
 ---
 
@@ -64,7 +69,7 @@
 - [Shields](https://shields.io/)
 - [BabelJS](https://www.babeljs.cn/docs/)
 - [MDN](https://developer.mozilla.org/zh-CN/)
-- [MDN-CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
-- [MDN-WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
-- [MDN-WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
-- [MDN-WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
+- [MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+- [MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
+- [MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
+- [MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
