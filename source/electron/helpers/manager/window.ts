@@ -3,6 +3,7 @@ import { isWin } from "@main/helpers/node/process/platform";
 import { getIsPackage } from "@main/helpers/modules/app";
 import { isDev } from "@main/helpers/node/process/env";
 import { resolvePath } from "@main/helpers/node/path";
+import { checkForUpdates } from "@main/toolkit/updater";
 
 const MAIN_WINDOW_NAME = "_MAIN_";
 
@@ -98,6 +99,7 @@ class WindowManager {
         activate: true,
       });
     }
+    checkForUpdates(this.mainWindow);
     return this.mainWindow;
   }
 
