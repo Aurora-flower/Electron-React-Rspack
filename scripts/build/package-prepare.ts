@@ -19,24 +19,30 @@ const outDir = join(process.cwd(), "app");
 const packagePath = join(process.cwd(), "package.json");
 const outputPath = join(outDir, "package.json");
 
+async function clonePackageJSON() {
+  const raw = await readFile(packagePath, "utf-8");
+  const { name, main, author, version, license, description, dependencies } =
+    JSON.parse(raw) as PackageJson;
+  const distPackage: DistPackage = {
+    name,
+    main: relative(outDir, main),
+    author,
+    version,
+    license,
+    description,
+    dependencies,
+  };
+  await mkdir(outDir, { recursive: true });
+  await writeFile(outputPath, JSON.stringify(distPackage, null, 2));
+  console.log("clonePackageJSON:", distPackage);
+}
+
+async function copiedCoreFolder() {}
+
 async function preparePackage() {
   try {
-    const raw = await readFile(packagePath, "utf-8");
-    const { name, main, author, version, license, description, dependencies } =
-      JSON.parse(raw) as PackageJson;
-
-    const distPackage: DistPackage = {
-      name,
-      main: relative(outDir, main),
-      author,
-      version,
-      license,
-      description,
-      dependencies,
-    };
-    await mkdir(outDir, { recursive: true });
-    await writeFile(outputPath, JSON.stringify(distPackage, null, 2));
-    console.log("Package prepared:", distPackage);
+    await clonePackageJSON();
+    console.log("Package prepared:");
   } catch (error) {
     console.error("Preparation failed:", error);
     process.exit(1);
