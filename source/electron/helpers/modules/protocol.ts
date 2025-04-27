@@ -1,9 +1,6 @@
-import { errorMessage } from "@main/utils/error";
-import { app, net, protocol } from "electron";
-import { normalize } from "node:path";
-import { pathToFileURL } from "node:url";
-
-const DEFAULT_SCHEMA = "local"; // 本地文件访问
+import { net, protocol } from "electron";
+import { DEFAULT_SCHEMA } from "@main/common/const";
+import { normalizeDirveLetter } from "@main/helpers/function/driveLetter";
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,
@@ -18,6 +15,8 @@ export function privilegedSchemes(
         standard: true,
         secure: true,
         supportFetchAPI: true
+        // corsEnabled: true,
+        // stream: true
       }
     };
     const mergeOption = Object.assign(defaultOption, options);
@@ -34,28 +33,18 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA) {
   async function protocolHander(
     request: GlobalRequest
   ): Promise<GlobalResponse> {
-    if (!request.url.startsWith(`${scheme}://`)) {
-      return Promise.reject(new Error("Invalid request URL."));
-    }
     try {
-      // const filePath = request.url.replace(`${scheme}:/`, "");
-      // const fileURL = pathToFileURL(decodeURI(filePath)).toString();
-      //   try {
-      //     // return await net.fetch(fileURL);
-      //     return await net.fetch("file:///F:/SERVER/release/ER/sample.png");
-      //   } catch (error) {
-      //     return Promise.reject(errorMessage(error));
-      //   }
-      return await net.fetch(request.url);
+      const fileURL = normalizeDirveLetter(request.url);
+      console.log("request", request.url, fileURL);
+      return await net.fetch(
+        // fileURL
+        "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
+      );
     } catch (error) {
+      console.log("request", error);
       return Promise.reject(error);
     }
   }
 
   protocol.handle(scheme, protocolHander);
-
-  // protocol.handle(scheme, (request) => {
-  //   const filePath = request.url.slice(`{scheme}://`.length);
-  //   return net.fetch(pathToFileURL(join(__dirname, filePath)).toString());
-  // });
 }

@@ -33,20 +33,10 @@ enableWindowMessagesListener((event) => {
     resizeTo: element
   } as Partial<ApplicationOptions>);
   element.appendChild(app.canvas);
-  // const url = "local:///Users/HuaYing/Downloads/图片/bg.png"; // electron 自定义协议
-  const url = "local://F:/SERVER/release/ER/sample.png";
-
-  // Assets.load(url).then((texture) => {
-  //   const sprite = new Sprite({ texture });
-  //   sprite.anchor.set(0.5);
-  //   app.stage.addChild(sprite);
-  // });
-  // fetch(url)
-  //   .then((res) => {
-  //     console.log("res", res);
-  //   })
-  //   .catch((err) => {
-  //     console.log("err", err instanceof Error ? err.message : err);
-  //   });
+  const url = `local://${"F:\\SERVER\\release\\ER\\sample.png"}`; //
+  Assets.load(url).then((texture) => {
+    const sprite = new Sprite({ texture });
+    app.stage.addChild(sprite);
+  });
   console.log("Root", element, app, url);
 })();
