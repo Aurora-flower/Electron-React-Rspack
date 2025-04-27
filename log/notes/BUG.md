@@ -26,6 +26,7 @@
         function previewSignleAction() {
         animateStore.getFrameList.forEach((item, index) => {
             currentFrameIndex.value = index;
+            // Node 环境 - NodeJS.Timeout   | Web 环境 - number
             let timer = setTimeout(
             () => {
                 animateLayer.animate?.clear();
