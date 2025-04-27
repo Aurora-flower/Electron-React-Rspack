@@ -1,17 +1,17 @@
-import { series, watch, type WatchOptions } from "gulp";
-import compile from "./compile";
-import ElectronProcess from "../utils/electron";
+import { type WatchOptions, series, watch } from "gulp"
+import ElectronProcess from "../utils/electron"
+import compile from "./compile"
 
-const instance = ElectronProcess.getInstance();
+const instance = ElectronProcess.getInstance()
 
 // const onceCompile = () => compile(false);
-const watchCompile = () => compile(false);
+const watchCompile = () => compile(false)
 
 async function Run() {
   // series(instance.stop(), instance.start())
-  await instance.stop();
-  await instance.start();
-  console.log("[electron reload]");
+  await instance.stop()
+  await instance.start()
+  console.log("[electron reload]")
 }
 
 async function WatchSource() {
@@ -27,8 +27,8 @@ async function WatchSource() {
       stabilityThreshold: 1000, // 文件稳定时间
       pollInterval: 1000 * 0.5 // 检查间隔
     }
-  };
-  watch(["source/electron/**/*"], options, Run);
+  }
+  watch(["source/electron/**/*"], options, Run)
 }
 
-export default series(watchCompile, WatchSource);
+export default series(watchCompile, WatchSource)

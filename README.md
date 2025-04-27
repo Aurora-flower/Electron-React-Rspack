@@ -41,6 +41,8 @@
 
 ## 相关文档
 
+### 相关技术栈
+
 - [Node.js](https://nodejs.cn/api/)
 - [Electron](https://www.electronjs.org/zh/docs/latest/)
 - [React](https://zh-hans.react.dev/learn)
@@ -58,10 +60,10 @@
 
 ---
 
-## 其他相关
+### 其他相关
 
 - [Chromium](https://www.chromium.org/chromium-projects/)
-- [JavaScript](https://www.w3ccoo.com/js/js_intro.html)
+- [W3school JavaScript](https://www.w3ccoo.com/js/js_intro.html)
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [NPM](https://npm.nodejs.cn/)
 - [NPM package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
@@ -73,3 +75,4 @@
 - [MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
 - [MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
 - [MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
+- [Biome](https://biomejs.dev/zh-cn/)

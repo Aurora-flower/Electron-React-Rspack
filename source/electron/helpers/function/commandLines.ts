@@ -1,7 +1,7 @@
-import { app } from "electron";
+import { app } from "electron"
 
 function commandLines() {
-  app.commandLine.appendSwitch('ignore-certificate-errors');
+  app.commandLine.appendSwitch("ignore-certificate-errors")
 }
 
-export default commandLines;
+export default commandLines

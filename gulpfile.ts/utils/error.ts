@@ -1,3 +1,3 @@
 export function errorMessage(error: unknown) {
-  return error instanceof Error ? error.message : error;
+  return error instanceof Error ? error.message : error
 }

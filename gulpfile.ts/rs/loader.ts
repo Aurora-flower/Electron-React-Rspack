@@ -1,10 +1,10 @@
 /**
  * @file Loader 处理配置
  */
-import { rspack } from "@rspack/core";
+import { rspack } from "@rspack/core"
 
 /* ***** ***** ***** ***** Rules ***** ***** ***** ***** */
-const NODE_MODULES = /node_modules/;
+const NODE_MODULES = /node_modules/
 
 /* ***** ***** ***** ***** Parser ***** ***** ***** ***** */
 const JS_PARSER_OPTIONS = {
@@ -17,7 +17,7 @@ const JS_PARSER_OPTIONS = {
       "@babel/preset-typescript"
     ]
   }
-};
+}
 
 const TS_PARSER_OPTIONS = {
   loader: "ts-loader",
@@ -25,7 +25,7 @@ const TS_PARSER_OPTIONS = {
     transpileOnly: true,
     happyPackMode: true
   }
-};
+}
 
 /* ***** ***** ***** ***** Loader ***** ***** ***** ***** */
 function getImageLoader(isExclude = false, exclude = NODE_MODULES) {
@@ -41,8 +41,8 @@ function getImageLoader(isExclude = false, exclude = NODE_MODULES) {
       }
     ],
     exclude: isExclude ? exclude : undefined
-  };
-  return options;
+  }
+  return options
 }
 
 function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
@@ -69,8 +69,8 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
       }
     ],
     exclude: isExclude ? exclude : undefined
-  };
-  return options;
+  }
+  return options
 }
 
 function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
@@ -78,8 +78,8 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
     test: /\.jsx?$/,
     use: [JS_PARSER_OPTIONS],
     exclude: isExclude ? exclude : undefined
-  };
-  return options;
+  }
+  return options
 }
 
 function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
@@ -87,8 +87,8 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
     test: /\.tsx?$/,
     use: [JS_PARSER_OPTIONS, TS_PARSER_OPTIONS],
     exclude: isExclude ? exclude : undefined
-  };
-  return options;
+  }
+  return options
 }
 
 const LOADER = {
@@ -100,6 +100,6 @@ const LOADER = {
   CssExclude: getCssLoader(true),
   Image: getImageLoader(),
   ImageExclude: getImageLoader(true)
-};
+}
 
-export default LOADER;
+export default LOADER

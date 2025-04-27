@@ -1,20 +1,20 @@
-import { app } from "electron";
-import WindowManager from "@main/helpers/manager/window";
-import { setupAppHooks } from "@main/helpers/modules/app";
-import { registerProtocolHandle } from "@main/helpers/modules/protocol";
-import Logger from "electron-log";
-import onAppReadyAfter from "@main/handlers/event/onAppReadyAfter";
+import onAppReadyAfter from "@main/handlers/event/onAppReadyAfter"
+import WindowManager from "@main/helpers/manager/window"
+import { setupAppHooks } from "@main/helpers/modules/app"
+import { registerProtocolHandle } from "@main/helpers/modules/protocol"
+import { app } from "electron"
+import Logger from "electron-log"
 
 async function onAppReady() {
   app
     .whenReady()
     .then(() => {
-      registerProtocolHandle();
-      WindowManager.getInstance();
+      registerProtocolHandle()
+      WindowManager.getInstance()
     })
-    .then(onAppReadyAfter);
-  setupAppHooks();
-  Logger.log("onAppReady");
+    .then(onAppReadyAfter)
+  setupAppHooks()
+  Logger.log("onAppReady")
 }
 
-export default onAppReady;
+export default onAppReady

@@ -1,24 +1,24 @@
-import { app } from "electron";
-import { sep, join } from "node:path";
+import { join, sep } from "node:path"
 import {
+  PLATFORM,
   getPlatform,
-  isWin,
-  PLATFORM
-} from "@main/helpers/node/process/platform";
+  isWin
+} from "@main/helpers/node/process/platform"
+import { app } from "electron"
 
 const FOLDER_NAMES = {
   Core: "core"
-};
+}
 
-const FILE_NAMES = {};
+const FILE_NAMES = {}
 
 export function getIsPackage() {
-  return app.isPackaged;
+  return app.isPackaged
 }
 
 export function getAppInfo() {
   try {
-    const appFolder = app.getAppPath();
+    const appFolder = app.getAppPath()
     const info: AppInfo = {
       name: app.getName(),
       appFolder,
@@ -48,24 +48,24 @@ export function getAppInfo() {
       },
       core: "",
       workspace: ""
-    };
-
-    const about = Object.keys(info.paths) as AppPathTypes[];
-    for (let index = 0; index < about.length; index++) {
-      const name = about[index];
-      info.paths[name] = app.getPath(name);
     }
-    info.core = join(info.appUnpackFolder, FOLDER_NAMES.Core);
-    return info;
+
+    const about = Object.keys(info.paths) as AppPathTypes[]
+    for (let index = 0; index < about.length; index++) {
+      const name = about[index]
+      info.paths[name] = app.getPath(name)
+    }
+    info.core = join(info.appUnpackFolder, FOLDER_NAMES.Core)
+    return info
   } catch (error) {
-    return null;
+    return null
   }
 }
 
 export function setupAppHooks() {
   app.on("window-all-closed", () => {
     if (getPlatform() !== PLATFORM.darwin) {
-      app.quit();
+      app.quit()
     }
-  });
+  })
 }
