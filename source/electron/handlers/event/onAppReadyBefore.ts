@@ -1,8 +1,9 @@
+import Logger from "electron-log";
 import { privilegedSchemes } from "@main/helpers/modules/protocol";
-import { protocol } from "electron";
 
 async function onAppReadyBefore() {
   privilegedSchemes();
+  Logger.log("onAppReadyBefore");
 }
 
 export default onAppReadyBefore;
