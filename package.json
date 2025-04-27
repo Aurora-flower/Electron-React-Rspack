@@ -10,7 +10,7 @@
     "preinstall": "patch-package",
     "start": "electron .",
     "compile": "gulp",
-    "clean:cache": "rimraf app release",
+    "clean:cache": "rimraf app release/win-unpacked",
     "build": "npm run clean:cache && run-p \"package:prepare\" \"compile\"",
     "dev": "gulp dev",
     "package:prepare": "ts-node ./scripts/build/package-prepare.ts",
