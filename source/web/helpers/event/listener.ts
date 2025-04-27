@@ -1,21 +1,36 @@
 class ListenerCollect {
-  private static listeners: Record<string, EventListener[]> = {};
+  private static listeners: Record<
+    string,
+    Array<{
+      callback: EventListener;
+      options?: AddEventListenerOptions | boolean;
+    }>
+  > = {};
 
-  public static addListener(event: string, callback: EventListener): void {
+  public static addListener(
+    event: string,
+    callback: EventListener,
+    options?: AddEventListenerOptions | boolean
+  ): void {
     if (!ListenerCollect.listeners[event]) {
       ListenerCollect.listeners[event] = [];
     }
 
-    if (!ListenerCollect.listeners[event].includes(callback)) {
-      ListenerCollect.listeners[event].push(callback);
-      window.addEventListener(event, callback);
+    const hasExisting = ListenerCollect.listeners[event].some(
+      (entry) => entry.callback === callback && entry.options === options
+    );
+
+    if (!hasExisting) {
+      ListenerCollect.listeners[event].push({ callback, options });
+      window.addEventListener(event, callback, options);
     }
   }
 
   public static removeListener(event: string): void {
-    if (ListenerCollect.listeners[event]) {
-      ListenerCollect.listeners[event].forEach((callback) => {
-        window.removeEventListener(event, callback);
+    const listeners = ListenerCollect.listeners[event];
+    if (listeners) {
+      listeners.forEach(({ callback, options }) => {
+        window.removeEventListener(event, callback, options);
       });
       ListenerCollect.listeners[event] = [];
     }
@@ -23,12 +38,18 @@ class ListenerCollect {
 
   public static removeSpecificListener(
     event: string,
-    callback: EventListener
+    callback: EventListener,
+    options?: AddEventListenerOptions | boolean
   ): void {
-    const index = ListenerCollect.listeners[event]?.indexOf(callback);
-    if (index !== -1) {
-      ListenerCollect.listeners[event].splice(index, 1);
-      window.removeEventListener(event, callback);
+    const listeners = ListenerCollect.listeners[event];
+    if (listeners) {
+      const index = listeners.findIndex(
+        (entry) => entry.callback === callback && entry.options === options
+      );
+      if (index !== -1) {
+        const [removed] = listeners.splice(index, 1);
+        window.removeEventListener(event, removed.callback, removed.options);
+      }
     }
   }
 
@@ -41,32 +62,40 @@ class ListenerCollect {
 
 export function enableWindowResizeListener(
   callback: EventListener,
-  immediately = false
+  immediately = false,
+  options?: AddEventListenerOptions | boolean
 ) {
   const eventName = "resize";
-  ListenerCollect.addListener(eventName, callback);
+  ListenerCollect.addListener(eventName, callback, options);
   if (immediately) {
     window.dispatchEvent(new Event(eventName));
   }
 }
 
-export function destoryWindowResizeListener(callback: EventListener) {
-  ListenerCollect.removeSpecificListener("resize", callback);
+export function destoryWindowResizeListener(
+  callback: EventListener,
+  options?: AddEventListenerOptions | boolean
+) {
+  ListenerCollect.removeSpecificListener("resize", callback, options);
 }
 
 export function enableWindowMessagesListener(
   callback: EventListener,
-  immediately = false
+  immediately = false,
+  options?: AddEventListenerOptions | boolean
 ) {
   const eventName = "message";
-  ListenerCollect.addListener(eventName, callback);
+  ListenerCollect.addListener(eventName, callback, options);
   if (immediately) {
     window.dispatchEvent(new MessageEvent(eventName, { data: null }));
   }
 }
 
-export function disableWindowMessagesListener(callback: EventListener) {
-  ListenerCollect.removeSpecificListener("message", callback);
+export function disableWindowMessagesListener(
+  callback: EventListener,
+  options?: AddEventListenerOptions | boolean
+) {
+  ListenerCollect.removeSpecificListener("message", callback, options);
 }
 
 export function clearAllListeners() {
