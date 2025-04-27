@@ -13,7 +13,7 @@ buildDependenciesFromSource: true
 
 directories:
   app: app
-  output: release/${version}
+  output: release
 
 # files:
 
@@ -22,18 +22,18 @@ asar: true
 asarUnpack:
   - "core"
 
-mac:
-  target:
-    - dmg
-    - zip
+# mac:
+#   target:
+#     - dmg
+#     - zip
 
-win:
-  target:
-    - nsis
-    - zip
-    - msi
-    - squirrel
-    - portable
+# win:
+#   target:
+#     - nsis
+#     - zip
+#     - msi
+#     - squirrel
+#     - portable
 
 publish:
   provider: generic
