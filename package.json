@@ -10,7 +10,8 @@
     "preinstall": "patch-package",
     "start": "electron .",
     "compile": "gulp",
-    "build": "run-p \"package:prepare\" \"compile\"",
+    "clean:cache": "rimraf app release",
+    "build": "npm run clean:cache && run-p \"package:prepare\" \"compile\"",
     "dev": "gulp dev",
     "package:prepare": "ts-node ./scripts/build/package-prepare.ts",
     "package": "npm run build && electron-builder --publish always"
@@ -48,6 +49,7 @@
     "npm-run-all2": "7.0.2",
     "patch-package": "8.0.0",
     "postcss-loader": "8.1.1",
+    "rimraf": "6.0.1",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2"
   },
@@ -55,11 +57,11 @@
     "electron-builder": "26.0.12",
     "electron-log": "5.3.4",
     "electron-updater": "6.6.2",
-    "three": "0.176.0",
     "express": "5.1.0",
     "pixi.js": "8.9.1",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "three": "0.176.0"
   },
   "engines": {
     "node": ">=18.0.0",
