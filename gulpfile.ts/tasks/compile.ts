@@ -1,7 +1,7 @@
 import rspackCompiler from "../rs/pack";
 
 async function compile() {
-  await rspackCompiler();
+  await rspackCompiler(true);
 }
 
 export default compile;

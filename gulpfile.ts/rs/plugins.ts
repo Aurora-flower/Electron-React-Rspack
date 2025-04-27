@@ -20,13 +20,14 @@ function getHtmlRspackPlugin(template: string) {
         "http-equiv": "Content-Security-Policy",
         content:
           `default-src 'self';` +
-          `script-src 'self';` +
+          `script-src 'self' blob:;` +
           `style-src-elem 'self';` +
           `font-src 'self';` +
-          `connect-src 'self' https://api.iconify.design;` +
-          `img-src 'self' data:;`
-      }
-    }
+          `worker-src 'self' blob:;` +
+          `connect-src 'self' https://api.iconify.design/ data:;` +
+          `img-src 'self' data:;`,
+      },
+    },
   });
   return HtmlRspackPlugin;
 }
@@ -37,7 +38,7 @@ function getMiniCssExtractPlugin() {
 
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
-  CssExtract: getMiniCssExtractPlugin
+  CssExtract: getMiniCssExtractPlugin,
 };
 
 export default PLUGINS;

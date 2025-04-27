@@ -27,9 +27,10 @@
 - **初学者**：适合刚接触 Electron 或 React 的开发者作为学习和实践的入门项目。项目中我尽量添加清晰规范的注释，并封装一些常用函数和日常开发中常见的方法，帮助提高理解和使用效率。
 - **中高级开发者**：本项目也适合作为基础模板，开发者可以基于此项目进行功能拓展和架构优化。
 
-### 重要标记 📌
+### 历史版本与最新分支 📌
 
-- 渲染进程代码中标记了 `📌` 的部分与主进程相关，方便在后期迁移为纯 Web 页面时修改。
+- 请通过 `tags` 查看历史版本
+- `main` 分支为最新版本，`dev` 分支为上个大迭代的版本， `future` 分支为下个大迭代的版本， `next` 分支为下个小迭代的版本。
 
 ### 补丁策略
 
@@ -49,6 +50,11 @@
 - [Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
 - [Three.js](https://threejs.org/manual/#zh/fundamentals)
 - [Express](https://www.expressjs.com.cn/)
+- [Electron Logger](https://github.com/megahertz/electron-log)
+- [Electron Builder](https://www.electron.build/)
+
+<!-- - [Log4](https://github.com/log4js-node/log4js-node) -->
+<!-- - [Electron-Store](https://github.com/sindresorhus/electron-store) -->
 
 ---
 
@@ -63,7 +69,7 @@
 - [Shields](https://shields.io/)
 - [BabelJS](https://www.babeljs.cn/docs/)
 - [MDN](https://developer.mozilla.org/zh-CN/)
-- [MDN-CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
-- [MDN-WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
-- [MDN-WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
-- [MDN-WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
+- [MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+- [MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
+- [MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
+- [MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)

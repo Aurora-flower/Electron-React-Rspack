@@ -3,6 +3,7 @@ import { isWin } from "@main/helpers/node/process/platform";
 import { getIsPackage } from "@main/helpers/modules/app";
 import { isDev } from "@main/helpers/node/process/env";
 import { resolvePath } from "@main/helpers/node/path";
+import { checkForUpdates } from "@main/toolkit/updater";
 
 const MAIN_WINDOW_NAME = "_MAIN_";
 
@@ -10,11 +11,11 @@ class WindowManager {
   public mainWindow: BrowserWindow | null = null;
   private static instance: WindowManager;
   private windowOptions = {
-    title: process.env?.TITLE ?? "Electron-React-Rspack"
+    title: process.env?.TITLE ?? "Electron-React-Rspack",
     // frame: !this.isWindows,
-    // webPreferences: {
-    //   preload: resolvePath("../preload/index.js"),
-    // },
+    webPreferences: {
+      preload: resolvePath("../preload/index.js"),
+    },
   };
   private windows: Map<string, BrowserWindow> = new Map();
   private isClosing = false;
@@ -95,9 +96,10 @@ class WindowManager {
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
         mode: "detach",
-        activate: true
+        activate: true,
       });
     }
+    checkForUpdates(this.mainWindow);
     return this.mainWindow;
   }
 

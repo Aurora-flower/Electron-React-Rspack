@@ -87,7 +87,9 @@ export function enableWindowMessagesListener(
   const eventName = "message";
   ListenerCollect.addListener(eventName, callback, options);
   if (immediately) {
-    window.dispatchEvent(new MessageEvent(eventName, { data: null }));
+    window.dispatchEvent(
+      new MessageEvent(eventName, { data: null } as MessageEventInit)
+    );
   }
 }
 

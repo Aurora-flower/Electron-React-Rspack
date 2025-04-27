@@ -25,7 +25,7 @@ export const safeDOM = {
     if (Array.from(parent.children).find((e) => e === child)) {
       return parent.removeChild(child);
     }
-  }
+  },
 };
 
 export function useLoading(
@@ -48,7 +48,7 @@ export function useLoading(
     },
     removeLoading() {
       safeDOM.remove(document.body, oDiv);
-    }
+    },
   };
 }
 
@@ -64,4 +64,16 @@ export function domLoadAfter() {
       }, 2000);
     });
   });
+}
+
+function getDomElement(parameter: string, way: "selector" | "id" = "selector") {
+  if (way === "selector") {
+    return document.querySelector(parameter) as HTMLElement;
+  } else if (way === "id") {
+    return document.getElementById(parameter) as HTMLElement;
+  }
+}
+
+export function getRootElement(root: string | HTMLElement) {
+  return typeof root === "string" ? (getDomElement(root) as HTMLElement) : root;
 }
