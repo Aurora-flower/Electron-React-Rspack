@@ -4,6 +4,9 @@ import ElectronProcess from "../utils/electron";
 
 const instance = ElectronProcess.getInstance();
 
+// const onceCompile = () => compile(false);
+const watchCompile = () => compile(false);
+
 async function Run() {
   // series(instance.stop(), instance.start())
   await instance.stop();
@@ -22,10 +25,10 @@ async function WatchSource() {
     // atomic: true, // 处理原子保存操作
     awaitWriteFinish: {
       stabilityThreshold: 1000, // 文件稳定时间
-      pollInterval: 1000 * 0.5, // 检查间隔
-    },
+      pollInterval: 1000 * 0.5 // 检查间隔
+    }
   };
   watch(["source/electron/**/*"], options, Run);
 }
 
-export default series(compile, WatchSource);
+export default series(watchCompile, WatchSource);
