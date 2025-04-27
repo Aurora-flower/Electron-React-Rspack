@@ -1,23 +1,17 @@
 
 # ***** ***** ***** ***** Folder ***** ***** ***** *****
-# 临时目录
-temp
-template
-backup
+/temp
+/template
+/backup
 
-# 测试目录
 test/
 
-# 运行缓存目录
 .cache
 
-# 隐私目录
 private
 
-# 项目依赖目录
 node_modules
 
-# 应用程序构建输出目录
 /app
 /release
 
@@ -25,13 +19,9 @@ dist
 out
 output
 
-# 编辑器配置目录
 .idea
 # .vscode
 
 # ***** ***** ***** ***** File ***** ***** ***** *****
-# Mac 目录变更缓存文件
 .DS_Store
 
-# 项目依赖详情文件
-# package-lock.json
