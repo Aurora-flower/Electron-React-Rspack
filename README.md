@@ -76,3 +76,4 @@
 - [MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
 - [MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
 - [Biome](https://biomejs.dev/zh-cn/)
+- [Contributor Covenant](https://www.contributor-covenant.org/)
