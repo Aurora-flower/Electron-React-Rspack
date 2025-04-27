@@ -1,6 +1,6 @@
 {
   "name": "electron-react-rspack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "productName": "HuaYing",
   "description": "花楹一间，向往自由的发现之旅。",
   "main": "app/electron",

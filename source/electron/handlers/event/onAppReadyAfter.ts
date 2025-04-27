@@ -2,6 +2,7 @@ import { registerIPCChannel } from "@main/handlers/channel";
 import { checkForUpdates } from "@main/toolkit/updater";
 import WindowManager from "@main/helpers/manager/window";
 import Logger from "electron-log";
+import { writeFileSync } from "node:fs";
 
 async function onAppReadyAfter() {
   registerIPCChannel();

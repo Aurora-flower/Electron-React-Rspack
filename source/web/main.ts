@@ -8,7 +8,7 @@ const root = "#root";
 
 sender("sms:transmit", {
   channel: "sms:transmit",
-  msg: "Hello World!",
+  msg: "Hello World!"
 });
 
 enableWindowMessagesListener((event) => {
@@ -30,17 +30,23 @@ enableWindowMessagesListener((event) => {
   const element = getRootElement(root);
   await app.init({
     antialias: true,
-    resizeTo: element,
+    resizeTo: element
   } as Partial<ApplicationOptions>);
   element.appendChild(app.canvas);
-  const url = "local:///Users/HuaYing/Downloads/图片/bg.png"; // electron 自定义协议
-  Assets.load(url).then((texture) => {
-    const sprite = new Sprite({ texture });
-    sprite.anchor.set(0.5);
-    app.stage.addChild(sprite);
-  });
-  // fetch(url).then((res) => {
-  //   console.log("res", res);
+  // const url = "local:///Users/HuaYing/Downloads/图片/bg.png"; // electron 自定义协议
+  const url = "local://F:/SERVER/release/ER/sample.png";
+
+  // Assets.load(url).then((texture) => {
+  //   const sprite = new Sprite({ texture });
+  //   sprite.anchor.set(0.5);
+  //   app.stage.addChild(sprite);
   // });
+  // fetch(url)
+  //   .then((res) => {
+  //     console.log("res", res);
+  //   })
+  //   .catch((err) => {
+  //     console.log("err", err instanceof Error ? err.message : err);
+  //   });
   console.log("Root", element, app, url);
 })();

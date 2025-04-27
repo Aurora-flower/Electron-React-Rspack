@@ -8,13 +8,13 @@ export const channelInvokeDisposer = createChannelHandler(true);
 const HANDLER: ChannelConfig = {
   handler: channelSenderDisposer,
   name: "emitter",
-  type: "event",
+  type: "event"
 };
 
 const INVOKE: ChannelConfig = {
   handler: channelInvokeDisposer,
   name: "dispatch",
-  type: "invoke",
+  type: "invoke"
 };
 
 const CHANNELS: ChannelConfig[] = [HANDLER, INVOKE];
@@ -31,7 +31,7 @@ export function registerIPCChannel() {
 
 const LISTENERS = {
   /* ***** ***** ***** ***** Application ***** ***** ***** ***** */
-  "sms:transmit": transmit,
+  "sms:transmit": transmit
 };
 
 const IPC_HANDLERS = new Map<string, (...args: unknown[]) => unknown>(
@@ -56,13 +56,8 @@ const prepareParams = (
 // function middlewar(event: IpcMainEvent | IpcMainInvokeEvent, channel: ChannelName,
 //   ...args: unknown[]) {
 //     const sender = event.sender;
-//     console.log(
-//     `[middlewar IPC]`,
 //     sender.getProcessId(),
 //     sender.getURL(),
-//     channel,
-//     args
-//   );
 // }
 
 function createChannelHandler(

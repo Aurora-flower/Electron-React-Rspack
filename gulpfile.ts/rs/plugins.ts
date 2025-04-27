@@ -25,9 +25,9 @@ function getHtmlRspackPlugin(template: string) {
           `font-src 'self';` +
           `worker-src 'self' blob:;` +
           `connect-src 'self' https://api.iconify.design/ data:;` +
-          `img-src 'self' data:;`,
-      },
-    },
+          `img-src 'self' data:;`
+      }
+    }
   });
   return HtmlRspackPlugin;
 }
@@ -38,7 +38,7 @@ function getMiniCssExtractPlugin() {
 
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
-  CssExtract: getMiniCssExtractPlugin,
+  CssExtract: getMiniCssExtractPlugin
 };
 
 export default PLUGINS;
