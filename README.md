@@ -71,37 +71,38 @@ git commit -m "feat(file): 文件处理模块"
 
 ### 相关技术栈
 
-- [Node.js](https://nodejs.cn/api/)
-- [Electron](https://www.electronjs.org/zh/docs/latest/)
-- [React](https://zh-hans.react.dev/learn)
-- [React Router](https://reactrouter.com/start/data/custom)
-- [Gulp](https://gulp.nodejs.cn/)
-- [Rspack](https://rspack.dev/zh/)
-- [Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
-- [Three.js](https://threejs.org/manual/#zh/fundamentals)
-- [Express](https://www.expressjs.com.cn/)
-- [Electron Logger](https://github.com/megahertz/electron-log)
-- [Electron Builder](https://www.electron.build/)
+- [🖼️ Node.js](https://nodejs.cn/api/)
+- [📚 Electron](https://www.electronjs.org/zh/docs/latest/)
+- [🎮 React](https://zh-hans.react.dev/learn)
+- [🍓 React Router](https://reactrouter.com/start/data/custom)
+- [🌱 Gulp](https://gulp.nodejs.cn/)
+- [🧪 Rspack](https://rspack.dev/zh/)
+- [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
+- [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
+- [🌴 Express](https://www.expressjs.com.cn/)
+- [🧸 Electron Logger](https://github.com/megahertz/electron-log)
+- [🛍️ Electron Builder](https://www.electron.build/)
 
-<!-- - [Log4](https://github.com/log4js-node/log4js-node) -->
-<!-- - [Electron-Store](https://github.com/sindresorhus/electron-store) -->
+<!-- [🎁 Log4](https://github.com/log4js-node/log4js-node) -->
+<!-- [🏁 Electron-Store](https://github.com/sindresorhus/electron-store) -->
 
 ---
 
 ### 其他相关
 
-- [Chromium](https://www.chromium.org/chromium-projects/)
-- [W3school JavaScript](https://www.w3ccoo.com/js/js_intro.html)
-- [TypeScript](https://www.typescriptlang.org/docs/)
-- [NPM](https://npm.nodejs.cn/)
-- [NPM package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
-- [React Reference](https://react.dev/reference/react)
-- [Shields](https://shields.io/)
-- [BabelJS](https://www.babeljs.cn/docs/)
-- [MDN](https://developer.mozilla.org/zh-CN/)
-- [MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
-- [MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
-- [MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
-- [MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
-- [Biome](https://biomejs.dev/zh-cn/)
-- [Contributor Covenant](https://www.contributor-covenant.org/)
+- [🔒 Chromium](https://www.chromium.org/chromium-projects/)
+- [🌙 W3school JavaScript](https://www.w3ccoo.com/js/js_intro.html)
+- [🏠 TypeScript](https://www.typescriptlang.org/docs/)
+- [✈️ NPM](https://npm.nodejs.cn/)
+- [🚗 NPM package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
+- [🌍 React Reference](https://react.dev/reference/react)
+- [🌻 Shields](https://shields.io/)
+- [🦋 BabelJS](https://www.babeljs.cn/docs/)
+- [🐱 MDN](https://developer.mozilla.org/zh-CN/)
+- [🐶 MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+- [🍎 MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
+- [🍕 MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
+- [🛶 MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
+- [🧳 Biome](https://biomejs.dev/zh-cn/)
+- [🌈 Contributor Covenant](https://www.contributor-covenant.org/)
+- [📦 Eslint](https://eslint.org/)
