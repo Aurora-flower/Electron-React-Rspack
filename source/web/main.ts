@@ -1,15 +1,15 @@
-import { sender } from "@/helpers/event/electron";
-import { enableWindowMessagesListener } from "@/helpers/event/listener";
-import { getRootElement } from "@/helpers/function/dom";
+import { sender } from "@/helpers/event/electron"
+import { enableWindowMessagesListener } from "@/helpers/event/listener"
+import { getRootElement } from "@/helpers/function/dom"
 import {
   Application,
-  ApplicationOptions,
+  type ApplicationOptions,
   Assets,
   Container,
   Sprite,
   Text
-} from "pixi.js";
-import "pixi.js/unsafe-eval";
+} from "pixi.js"
+import "pixi.js/unsafe-eval"
 
 const root = "#root"
 
@@ -37,12 +37,12 @@ enableWindowMessagesListener(event => {
   await app.init({
     antialias: true,
     resizeTo: element
-  } as Partial<ApplicationOptions>);
-  element.appendChild(app.canvas);
-  const url = `local://${"F:\\SERVER\\release\\ER\\sample.png"}`; //
-  Assets.load(url).then((texture) => {
-    const container = new Container();
-    const sprite = new Sprite({ texture });
+  } as Partial<ApplicationOptions>)
+  element.appendChild(app.canvas)
+  const url = `local://${"F:\\SERVER\\release\\ER\\sample.png"}` //
+  Assets.load(url).then(texture => {
+    const container = new Container()
+    const sprite = new Sprite({ texture })
     const text = new Text({
       text: "Hello World!",
       style: {
@@ -50,10 +50,10 @@ enableWindowMessagesListener(event => {
         fill: 0xffffff,
         fontFamily: "Arial"
       }
-    });
-    container.addChild(text);
-    container.addChild(sprite);
-    const container2 = new Container();
+    })
+    container.addChild(text)
+    container.addChild(sprite)
+    const container2 = new Container()
     const text2 = new Text({
       text: "Hello Text!",
       style: {
@@ -61,10 +61,10 @@ enableWindowMessagesListener(event => {
         fill: 0xffffff,
         fontFamily: "Arial"
       }
-    });
-    container2.addChild(text2);
-    container.addChild(container2);
-    app.stage.addChild(container);
-  });
-  console.log("Root", element, app, url);
-})();
+    })
+    container2.addChild(text2)
+    container.addChild(container2)
+    app.stage.addChild(container)
+  })
+  console.log("Root", element, app, url)
+})()

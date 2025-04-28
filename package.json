@@ -13,7 +13,7 @@
     "clean:cache": "rimraf app release/win-unpacked",
     "build": "npm run clean:cache && run-p \"package:prepare\" \"compile\"",
     "dev": "gulp dev",
-    "lint": "biome check",
+    "lint": "biome check --write",
     "package:prepare": "ts-node ./scripts/build/package-prepare.ts",
     "package": "npm run build && electron-builder --publish always"
   },

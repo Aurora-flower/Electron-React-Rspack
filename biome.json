@@ -7,7 +7,14 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["app/**/*", ".vscode/**/*", "node_modules/**/*"]
+    "ignore": [
+      "app/**/*",
+      ".vscode/**/*",
+      "**/node_modules/**/*",
+      "release/**/*",
+      "**/dist/**/*",
+      "test/**/*"
+    ]
   },
   "formatter": {
     "enabled": true,
