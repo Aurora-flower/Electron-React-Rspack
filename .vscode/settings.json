@@ -4,6 +4,8 @@
   "editor.tabSize": 2,
   "editor.indentSize": "tabSize",
   "editor.formatOnPaste": false,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "auto",
 
   "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
