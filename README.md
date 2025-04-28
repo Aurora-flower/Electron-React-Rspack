@@ -114,3 +114,6 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 - [🧳 Biome](https://biomejs.dev/zh-cn/)
 - [🌈 Contributor Covenant](https://www.contributor-covenant.org/)
 - [📦 Eslint](https://eslint.org/)
+- [JS Blog](https://davidwalsh.name)
+- [NPM Mirror](https://npmmirror.com/)
+- [ES6 Blog](https://es6.ruanyifeng.com/)
