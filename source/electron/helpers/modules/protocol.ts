@@ -35,7 +35,6 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA) {
   ): Promise<GlobalResponse> {
     try {
       const fileURL = normalizeDirveLetter(request.url);
-      console.log("request", request.url, fileURL);
       return await net.fetch(
         // fileURL
         "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
