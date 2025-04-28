@@ -9,7 +9,6 @@
     "ignoreUnknown": false,
     "ignore": [
       "app/**/*",
-      ".vscode/**/*",
       "**/node_modules/**/*",
       "release/**/*",
       "**/dist/**/*",
