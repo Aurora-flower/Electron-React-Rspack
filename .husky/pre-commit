@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+npm audit
+npm outdated
+npm run lint

@@ -1,3 +1,3 @@
 class WorkspaceManager {}
 
-export default WorkspaceManager;
+export default WorkspaceManager

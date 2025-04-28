@@ -1,22 +1,22 @@
-import { type DevTool, type Target } from "@rspack/core";
+import type { DevTool, Target } from "@rspack/core"
 
 export const ENTRY_FILENAME = {
   Main: "main.ts",
   Index: "index.ts",
   Vendor: "vendor.ts"
-};
+}
 
 export const APP_PROCESS_MODE = {
   Electron: "main",
   Preload: "preload",
   Renderer: "renderer"
-};
+}
 
 export const BUILD_TARGET: Record<string, Target> = {
   Electron: "electron-main",
   Preload: "electron-preload",
   Renderer: "electron-renderer"
-};
+}
 
 export const DEVTOOL: Record<string, DevTool> = {
   /* ***** ***** ***** ***** eval ***** ***** ***** ***** */
@@ -32,4 +32,4 @@ export const DEVTOOL: Record<string, DevTool> = {
   InlineSourceMap: "inline-source-map",
   HiddenSourceMap: "hidden-source-map",
   NosourcesSourceMap: "nosources-source-map"
-};
+}

@@ -1,4 +1,4 @@
-import { rspack } from "@rspack/core";
+import { rspack } from "@rspack/core"
 
 function getHtmlRspackPlugin(template: string) {
   /**
@@ -28,17 +28,17 @@ function getHtmlRspackPlugin(template: string) {
           `img-src 'self' data: blob:;`
       }
     }
-  });
-  return HtmlRspackPlugin;
+  })
+  return HtmlRspackPlugin
 }
 
 function getMiniCssExtractPlugin() {
-  return new rspack.CssExtractRspackPlugin({});
+  return new rspack.CssExtractRspackPlugin({})
 }
 
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
   CssExtract: getMiniCssExtractPlugin
-};
+}
 
-export default PLUGINS;
+export default PLUGINS

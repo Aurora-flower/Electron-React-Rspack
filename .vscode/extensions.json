@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "biomejs.biome",
     "huizhou.githd",
     "antfu.iconify",
     "tomoki1207.pdf",
@@ -12,12 +13,9 @@
     "dbaeumer.vscode-eslint",
     "EditorConfig.EditorConfig",
     "formulahendry.code-runner",
-    "yzhang.markdown-all-in-one",
     "Alibaba-Cloud.tongyi-lingma",
     "rvest.vs-code-prettier-eslint",
-    "DavidAnson.vscode-markdownlint",
     "atommaterial.a-file-icon-vscode",
     "emmanuelbeziat.vscode-great-icons",
-    "shd101wyy.markdown-preview-enhanced"
   ]
 }

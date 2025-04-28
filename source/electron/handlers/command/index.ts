@@ -1,5 +1,5 @@
-import Logger from "electron-log";
+import Logger from "electron-log"
 
 export function command(instruct: string) {
-  Logger.log(instruct);
+  Logger.log(instruct)
 }

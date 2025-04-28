@@ -30,4 +30,4 @@ type AppPathTypes =
   /* 最近访问文件目录- 仅限于 windows */
   | "recent"
   /* 系统崩溃转储文件目录 */
-  | "crashDumps";
+  | "crashDumps"

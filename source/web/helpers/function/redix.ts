@@ -1,13 +1,13 @@
 export function decimalToBinary(oct: string) {
-  let binary = "";
-  let decimal = parseInt(oct, 10);
+  let binary = ""
+  let decimal = Number.parseInt(oct, 10)
   while (decimal > 0) {
-    binary = (decimal % 2) + binary;
-    decimal = Math.floor(decimal / 2);
+    binary = (decimal % 2) + binary
+    decimal = Math.floor(decimal / 2)
   }
-  return binary;
+  return binary
 }
 
 export function binaryToDecimal(binary: string) {
-  return parseInt(binary, 2);
+  return Number.parseInt(binary, 2)
 }

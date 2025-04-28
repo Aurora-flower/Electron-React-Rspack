@@ -10,16 +10,12 @@ export const PLATFORM = Object.freeze({
   sunos: "sunos",
   cygwin: "cygwin",
   netbsd: "netbsd"
-} as const satisfies { [K in NodeJS.Platform] K });
+} as const satisfies { [K in NodeJS.Platform]: K })
 
 export function getPlatform(platform?: NodeJS.Platform): boolean | string {
-  if (platform) {
-    return process.platform === platform;
-  } else {
-    return process.platform;
-  }
+  return platform ? process.platform === platform : process.platform
 }
 
 export function isWin() {
-  return getPlatform(PLATFORM.win32) as boolean;
+  return getPlatform(PLATFORM.win32) as boolean
 }

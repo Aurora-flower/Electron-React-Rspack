@@ -1,1 +1,1 @@
-export const DEFAULT_SCHEMA = "local"; // 本地文件访问
+export const DEFAULT_SCHEMA = "local" // 本地文件访问

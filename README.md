@@ -39,7 +39,37 @@
 
 ---
 
+## 快速开始
+
+1. 安装依赖
+
+```shell
+npm install
+```
+
+2. 运行项目
+
+```shell
+npm run dev
+```
+
+3. 提交修改
+
+```shell
+# 提交格式 - [类型](模块名称|功能命名): 修改描述
+git commit -m "feat(file): 文件处理模块"
+```
+
+**注意**:
+每次执行 `commit` 时会触发 `pre-commit` 钩子，钩子中执行预定义的脚本命名，并检查 `commit` 信息是否符合规范。当存在错误，则会阻止提交。
+
+**可以使用 `-n/--no-verify` 选项来跳过钩子。对于没有此标志的命令，请使用 `HUSKY=0` 暂时禁用钩子。**
+
+---
+
 ## 相关文档
+
+### 相关技术栈
 
 - [Node.js](https://nodejs.cn/api/)
 - [Electron](https://www.electronjs.org/zh/docs/latest/)
@@ -58,10 +88,10 @@
 
 ---
 
-## 其他相关
+### 其他相关
 
 - [Chromium](https://www.chromium.org/chromium-projects/)
-- [JavaScript](https://www.w3ccoo.com/js/js_intro.html)
+- [W3school JavaScript](https://www.w3ccoo.com/js/js_intro.html)
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [NPM](https://npm.nodejs.cn/)
 - [NPM package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
@@ -73,3 +103,5 @@
 - [MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
 - [MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
 - [MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
+- [Biome](https://biomejs.dev/zh-cn/)
+- [Contributor Covenant](https://www.contributor-covenant.org/)
