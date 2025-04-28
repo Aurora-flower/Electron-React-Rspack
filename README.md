@@ -61,9 +61,17 @@ git commit -m "feat(file): 文件处理模块"
 ```
 
 **注意**:
+
 每次执行 `commit` 时会触发 `pre-commit` 钩子，钩子中执行预定义的脚本命名，并检查 `commit` 信息是否符合规范。当存在错误，则会阻止提交。
 
 **可以使用 `-n/--no-verify` 选项来跳过钩子。对于没有此标志的命令，请使用 `HUSKY=0` 暂时禁用钩子。**
+
+**提示**:
+
+如果出现以下错误，请将 node 版本更改为 22.14.0 版本。（比如: nvm 工具）
+```text
+Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts'
+```
 
 ---
 
