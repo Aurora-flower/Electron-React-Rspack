@@ -37,7 +37,7 @@ async function clonePackageJSON() {
   console.log("clonePackageJSON:", distPackage)
 }
 
-async function copiedCoreFolder() {}
+// async function copiedCoreFolder() {}
 
 async function preparePackage() {
   try {

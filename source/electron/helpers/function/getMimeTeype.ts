@@ -1,5 +1,4 @@
-import { promises, readFile, readFileSync } from "node:fs"
-import { extname, join, normalize } from "node:path"
+import { extname } from "node:path"
 
 export function getMimeType(filePath: string) {
   const ext = extname(filePath).toLowerCase()

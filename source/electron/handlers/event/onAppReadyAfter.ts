@@ -1,4 +1,3 @@
-import { writeFileSync } from "node:fs"
 import { registerIPCChannel } from "@main/handlers/channel"
 import WindowManager from "@main/helpers/manager/window"
 import { checkForUpdates } from "@main/toolkit/updater"

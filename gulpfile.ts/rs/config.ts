@@ -63,8 +63,8 @@ function singleConfig(key: string, type: string) {
     }
   }
 
-  if (isPeload) {
-  }
+  // if (isPeload) {
+  // }
 
   if (isRenderer) {
     // options.output!.publicPath = "/";
@@ -88,4 +88,3 @@ function getRsConfig() {
 }
 
 export default getRsConfig
-0

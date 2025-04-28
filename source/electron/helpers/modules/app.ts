@@ -5,12 +5,13 @@ import {
   isWin
 } from "@main/helpers/node/process/platform"
 import { app } from "electron"
+import Logger from "electron-log"
 
 const FOLDER_NAMES = {
   Core: "core"
 }
 
-const FILE_NAMES = {}
+// const FILE_NAMES = {}
 
 export function getIsPackage() {
   return app.isPackaged
@@ -58,6 +59,7 @@ export function getAppInfo() {
     info.core = join(info.appUnpackFolder, FOLDER_NAMES.Core)
     return info
   } catch (error) {
+    Logger.error(error)
     return null
   }
 }

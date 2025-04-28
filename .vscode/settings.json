@@ -1,13 +1,11 @@
 {
-  // 基础配置
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.eol": "\n",
   "editor.tabSize": 2,
   "editor.indentSize": "tabSize",
   "editor.formatOnPaste": false,
 
-  // Biome 核心配置
-  "editor.defaultFormatter": "biomejs.biome", // "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
@@ -16,22 +14,18 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
 
-  // Prettier 相关
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
   },
 
-  // ESLint 相关
   "eslint.validate": ["javascript", "typescript"],
 
-  // 关联文件
   "files.associations": {
     "*.css": "tailwindcss"
   },
 
-  // 文件树相关
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json, env.d.ts, .eslint*, eslint*, biome.json, .prettier*, prettier*, tailwind.config.js, postcss.config.js, commitlint.config.js",
@@ -40,7 +34,6 @@
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .editorconfig, .npmrc, .hintrc, electron-builder.yml"
   },
 
-  // JSON 相关
   "json.schemas": [
     {
       "fileMatch": ["tsconfig.node.json"],

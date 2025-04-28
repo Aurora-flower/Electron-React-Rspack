@@ -3,6 +3,7 @@ import { resolvePath } from "@main/helpers/node/path"
 import { isDev } from "@main/helpers/node/process/env"
 import { isWin } from "@main/helpers/node/process/platform"
 import { BrowserWindow } from "electron"
+import Logger from "electron-log"
 
 const MAIN_WINDOW_NAME = "_MAIN_"
 
@@ -78,7 +79,6 @@ class WindowManager {
       // if (this.isWindows) {
       // Menu.setApplicationMenu(null); // win.removeMenu(); | win.setMenu(null);
       // }
-    } else {
     }
 
     if (typeof process.env.DEV_SERVER_URL === "string") {
@@ -127,7 +127,9 @@ class WindowManager {
       this.isClosing = true
       await this.beforeWindowClose()
       this.mainWindow.destroy()
-    } catch (error) {}
+    } catch (error) {
+      Logger.error(error)
+    }
   }
 
   private async beforeWindowClose() {}

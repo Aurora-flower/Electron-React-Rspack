@@ -32,10 +32,12 @@ assignees: ""
 
 ## 运行环境 (Desktop or Mobile)
 
-- OS: [e.g. iOS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
-- Device: [e.g. iPhone6]
+示例(e.g.):
+
+- OS: `iOS`
+- Browser: `chrome`, `safari`
+- Version: `v0.0.0`
+- Device: `iPhone6`
 
 ---
 

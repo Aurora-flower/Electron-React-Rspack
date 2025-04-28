@@ -58,6 +58,6 @@ export function checkForUpdates(window?: BrowserWindow | undefined) {
   })
 
   autoUpdaterInstance.on("error", error => {
-    // Logger.error("error", error);
+    Logger.error("error", error)
   })
 }
