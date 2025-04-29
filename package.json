@@ -24,12 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/Aurora-flower/Electron-React-Rspack.git"
   },
-  "keywords": [
-    "electron",
-    "react",
-    "rspack",
-    "gulp"
-  ],
+  "keywords": ["electron", "react", "rspack", "gulp"],
   "author": "Aurora-flower",
   "license": "MIT",
   "bugs": {

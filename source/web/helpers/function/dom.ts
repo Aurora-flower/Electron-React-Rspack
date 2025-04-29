@@ -66,7 +66,10 @@ export function domLoadAfter() {
   })
 }
 
-function getDomElement(parameter: string, way: "selector" | "id" = "selector") {
+export function getDomElement(
+  parameter: string,
+  way: "selector" | "id" = "selector"
+) {
   if (way === "selector") {
     return document.querySelector(parameter) as HTMLElement
   } else if (way === "id") {
