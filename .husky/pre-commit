@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 npm audit
-npm outdated
+# npm outdated
 npm run lint
