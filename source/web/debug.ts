@@ -10,6 +10,8 @@ import {
   Text
 } from "pixi.js"
 
+import { enableWorker } from "@/handlers/worker/registry"
+
 async function debug(root = "#pixi-container") {
   messageListener()
   sender("sms:transmit", {
@@ -54,6 +56,14 @@ async function debug(root = "#pixi-container") {
     app.stage.addChild(container)
   })
   console.log("Root", element, app, url)
+
+  const workerPath = new URL(
+    "../../core/scripts/javascript/worker.js",
+    location.href
+  )?.pathname
+  enableWorker(workerPath, {
+    type: "module"
+  })
 }
 
 export default debug
