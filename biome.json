@@ -30,7 +30,8 @@
       "recommended": true,
       "style": {
         "noUselessElse": "off",
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useSelfClosingElements": "warn"
       },
       "suspicious": {
         "noExplicitAny": "info",
