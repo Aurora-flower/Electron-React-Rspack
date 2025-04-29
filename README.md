@@ -10,6 +10,8 @@
 
 在不断学习的过程中，细节可能会有所调整。未来，我会不断补充和融入在日常工作中接触到的技术栈，并尽量保持代码的可复用性。
 
+**`Sponsor` 按钮是无用的，只是为了显示在 GitHub 仓库上，请忽略。**
+
 ---
 
 **Email: `yanl_802@163.com`**
@@ -117,3 +119,4 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 - [JS Blog](https://davidwalsh.name)
 - [NPM Mirror](https://npmmirror.com/)
 - [ES6 Blog](https://es6.ruanyifeng.com/)
+- [GitHub](https://docs.github.com/zh/get-started)
