@@ -24,7 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/Aurora-flower/Electron-React-Rspack.git"
   },
-  "keywords": ["electron", "react", "rspack", "gulp"],
+  "keywords": ["electron", "react", "rspack", "gulp", "pixi", "three"],
   "author": "Aurora-flower",
   "license": "MIT",
   "bugs": {
@@ -47,6 +47,7 @@
     "@tsconfig/node22": "22.0.1",
     "@types/gulp": "4.0.17",
     "@types/node": "22.15.3",
+    "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "@typescript-eslint/parser": "8.31.0",
     "babel-loader": "10.0.0",
