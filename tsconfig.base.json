@@ -16,21 +16,18 @@
     "useDefineForClassFields": true,
 
     /* Output */
-    // "rootDir": ".",
     "baseUrl": ".",
     "outDir": "./dist",
 
     /* Bundler mode */
-    "moduleResolution": "Bundler", // node | Bundler
+    "moduleResolution": "Bundler",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": false,
     "moduleDetection": "force",
-    // "moduleDetection": "legacy",
 
     /* Linting */
-    "strict": true, // sctrict mode
-    // "noImplicitAny": true,
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,

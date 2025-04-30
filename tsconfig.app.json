@@ -15,12 +15,6 @@
     "paths": {
       "@/*": ["source/web/*"]
     },
-
-    /* JSX */
-    "jsx": "react-jsx" // preserve
-    // "jsxImportSource": "react" |  "@emotion/react" | "solid-js,
-    // "esModuleInterop": true,
-    // "allowSyntheticDefaultImports": true,
-    // "resolveJsonModule": true
+    "jsx": "preserve"
   }
 }
