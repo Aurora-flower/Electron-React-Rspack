@@ -1,4 +1,5 @@
 /// <reference types="./electron/app.d.ts" />
+/// <reference types="./shims.d.ts" />
 
 declare global {
   /* ***** ***** ***** ***** Window 类型定义扩展 ***** ***** ***** ***** */

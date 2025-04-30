@@ -5,6 +5,7 @@
     "types/electron/*.d.ts",
     "source/electron/**/*.ts"
   ],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "lib": ["ES2022"],
     "forceConsistentCasingInFileNames": true,
