@@ -72,7 +72,13 @@ function singleConfig(key: string, type: string) {
       "@": DIRECTORY.Source.renderer
     }
     options.resolve!.extensions = options.resolve!.extensions?.concat([".tsx"])
-    options.plugins = options.plugins!.concat([PLUGINS.Html(FILE.Page.from)])
+    options.plugins = options.plugins!.concat(
+      [
+        PLUGINS.Html(FILE.Page.from),
+        isDev() && PLUGINS.ReactRefresh(),
+        isDev() && PLUGINS.HotModuleReplacement()
+      ].filter(Boolean)
+    )
   }
 
   return options

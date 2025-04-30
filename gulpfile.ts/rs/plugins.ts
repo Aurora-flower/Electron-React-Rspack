@@ -1,4 +1,5 @@
 import { rspack } from "@rspack/core"
+const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
 
 function getHtmlRspackPlugin(template: string) {
   /**
@@ -36,9 +37,19 @@ function getMiniCssExtractPlugin() {
   return new rspack.CssExtractRspackPlugin({})
 }
 
+function getReactRefreshPlugin() {
+  return new ReactRefreshPlugin()
+}
+
+function getHotModuleReplacementPlugin() {
+  return new rspack.HotModuleReplacementPlugin()
+}
+
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
-  CssExtract: getMiniCssExtractPlugin
+  CssExtract: getMiniCssExtractPlugin,
+  ReactRefresh: getReactRefreshPlugin,
+  HotModuleReplacement: getHotModuleReplacementPlugin
 }
 
 export default PLUGINS

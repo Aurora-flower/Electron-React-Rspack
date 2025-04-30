@@ -2,35 +2,36 @@
  * @file Loader 处理配置
  */
 import { rspack } from "@rspack/core"
+import { ENVIRONMENT } from "../common/env"
 
 /* ***** ***** ***** ***** Rules ***** ***** ***** ***** */
 const NODE_MODULES = /node_modules/
 
 /* ***** ***** ***** ***** Parser ***** ***** ***** ***** */
-const JS_PARSER_OPTIONS = {
-  // @babel/core
-  loader: "babel-loader",
-  options: {
-    presets: [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
-    ]
-  }
-}
+// const JS_PARSER_OPTIONS = {
+//   // @babel/core
+//   loader: "babel-loader",
+//   options: {
+//     presets: [
+//       "@babel/preset-env",
+//       "@babel/preset-react",
+//       "@babel/preset-typescript"
+//     ]
+//   }
+// }
 
-const TS_PARSER_OPTIONS = {
-  loader: "ts-loader",
-  options: {
-    transpileOnly: true,
-    happyPackMode: true
-  }
-}
+// const TS_PARSER_OPTIONS = {
+//   loader: "ts-loader",
+//   options: {
+//     transpileOnly: true,
+//     happyPackMode: true
+//   }
+// }
 
 /* ***** ***** ***** ***** Loader ***** ***** ***** ***** */
 function getImageLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
-    test: /\.(png|jpe?g|gif|svg)$/,
+    test: /\.(png|jpe?g|gif)$/,
     use: [
       {
         loader: "file-loader",
@@ -40,6 +41,16 @@ function getImageLoader(isExclude = false, exclude = NODE_MODULES) {
         }
       }
     ],
+    exclude: isExclude ? exclude : undefined
+  }
+  return options
+}
+
+function getSvgLoader(isExclude = false, exclude = NODE_MODULES) {
+  const options = {
+    test: /\.svg$/i,
+    issuer: /\.[jt]sx?$/,
+    use: ["@svgr/webpack"],
     exclude: isExclude ? exclude : undefined
   }
   return options
@@ -73,10 +84,32 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
   return options
 }
 
+const isDev = process.env.NODE_ENV === ENVIRONMENT.Dev
+
 function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
     test: /\.jsx?$/,
-    use: [JS_PARSER_OPTIONS],
+    // use: [JS_PARSER_OPTIONS],
+    use: [
+      {
+        loader: "builtin:swc-loader",
+        options: {
+          jsc: {
+            parser: {
+              syntax: "ecmascript",
+              jsx: true
+            },
+            transform: {
+              react: {
+                development: isDev,
+                refresh: isDev
+              }
+            }
+          }
+        }
+      }
+    ],
+    type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
   return options
@@ -85,7 +118,29 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
 function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
     test: /\.tsx?$/,
-    use: [JS_PARSER_OPTIONS, TS_PARSER_OPTIONS],
+    // use: [JS_PARSER_OPTIONS, TS_PARSER_OPTIONS],
+    use: [
+      {
+        loader: "builtin:swc-loader",
+        options: {
+          jsc: {
+            parser: {
+              syntax: "typescript",
+              tsx: true
+            },
+            transform: {
+              react: {
+                runtime: "automatic"
+              },
+              optimizer: {
+                simplify: true
+              }
+            }
+          }
+        }
+      }
+    ],
+    type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
   return options
@@ -99,7 +154,9 @@ const LOADER = {
   Css: getCssLoader(),
   CssExclude: getCssLoader(true),
   Image: getImageLoader(),
-  ImageExclude: getImageLoader(true)
+  ImageExclude: getImageLoader(true),
+  Svg: getSvgLoader(),
+  SvgExclude: getSvgLoader(true)
 }
 
 export default LOADER
