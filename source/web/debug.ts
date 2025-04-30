@@ -15,8 +15,8 @@ import { enableWorker } from "@/handlers/worker/registry"
 async function debug(root = "#pixi-container") {
   messageListener()
   sender("sms:transmit", {
-    channel: "sms:transmit",
-    msg: "Hello World!"
+    type: "sms:transmit",
+    data: "Hello World!"
   })
   const app = new Application()
   const element = getDomElement(root)

@@ -5,7 +5,7 @@ export function messageListener() {
     const ev = event as MessageEvent
     event.stopImmediatePropagation() // 阻止传递
     const origin = ev.origin || location.href
-    console.log("[onMsg]", ev, origin, ev.data, ev.source)
+    console.log("[onMsg]", origin, ev.data, ev.source)
   })
 
   enableWindowMessagesListener(event => {
