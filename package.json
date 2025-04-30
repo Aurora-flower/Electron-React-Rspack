@@ -24,7 +24,14 @@
     "type": "git",
     "url": "git+https://github.com/Aurora-flower/Electron-React-Rspack.git"
   },
-  "keywords": ["electron", "react", "rspack", "gulp", "pixi", "three"],
+  "keywords": [
+    "electron",
+    "react",
+    "rspack",
+    "gulp",
+    "pixi",
+    "three"
+  ],
   "author": "Aurora-flower",
   "license": "MIT",
   "bugs": {
@@ -48,7 +55,9 @@
     "@rspack/plugin-react-refresh": "1.4.1",
     "@swc/core": "1.11.24",
     "@swc/helpers": "0.5.17",
+    "@tailwindcss/postcss": "4.1.4",
     "@tsconfig/node22": "22.0.1",
+    "@types/css-modules": "1.0.5",
     "@types/gulp": "4.0.17",
     "@types/node": "22.15.3",
     "@types/react": "19.1.2",
@@ -70,6 +79,7 @@
     "postcss-loader": "8.1.1",
     "react-refresh": "0.17.0",
     "rimraf": "6.0.1",
+    "tailwindcss": "4.1.4",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
     "typescript-eslint": "8.31.1"
@@ -78,8 +88,8 @@
     "electron-log": "5.3.4",
     "electron-updater": "6.6.2",
     "express": "5.1.0",
-    "react": "19.1.0",
     "pixi.js": "8.9.2",
+    "react": "19.1.0",
     "react-dom": "19.1.0",
     "three": "0.176.0"
   },
