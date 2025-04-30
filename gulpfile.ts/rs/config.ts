@@ -71,7 +71,10 @@ function singleConfig(key: string, type: string) {
     options.resolve!.alias = {
       "@": DIRECTORY.Source.renderer
     }
-    options.resolve!.extensions = options.resolve!.extensions?.concat([".tsx"])
+    options.resolve!.extensions = options.resolve!.extensions?.concat([
+      ".tsx",
+      ".css"
+    ])
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),

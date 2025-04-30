@@ -79,6 +79,7 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
         // }
       }
     ],
+    // type: "css",
     exclude: isExclude ? exclude : undefined
   }
   return options
