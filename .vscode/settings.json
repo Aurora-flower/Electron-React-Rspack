@@ -30,7 +30,7 @@
 
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "tsconfig.json": "tsconfig.*.json, env.d.ts, .eslint*, eslint*, biome.json, .prettier*, prettier*, tailwind.config.js, postcss.config.js, commitlint.config.js",
+    "tsconfig.json": "tsconfig.*.json, env.d.ts, .eslint*, eslint*, biome.json, .prettier*, prettier*, *.config.js",
     ".gitignore": ".git*",
     "README.md": "README.*.md, LICENSE, CHANGELOG.md, CODE_OF_CONDUCT.md",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .editorconfig, .npmrc, .hintrc, electron-builder.yml"
