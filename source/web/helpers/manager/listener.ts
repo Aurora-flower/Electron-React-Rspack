@@ -93,7 +93,7 @@ export function enableWindowMessagesListener(
   }
 }
 
-export function disableWindowMessagesListener(
+export function destoryWindowMessagesListener(
   callback: EventListener,
   options?: AddEventListenerOptions | boolean
 ) {
