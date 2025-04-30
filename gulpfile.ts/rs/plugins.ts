@@ -45,8 +45,16 @@ function getHotModuleReplacementPlugin() {
   return new rspack.HotModuleReplacementPlugin()
 }
 
+function getDefinePlugin() {
+  return new rspack.DefinePlugin({
+    global: `(typeof globalThis !== "undefined" ? globalThis : window)` // '(typeof globalThis !== "undefined" ? globalThis : window)' | "window"
+    // "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+  })
+}
+
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
+  Define: getDefinePlugin,
   CssExtract: getMiniCssExtractPlugin,
   ReactRefresh: getReactRefreshPlugin,
   HotModuleReplacement: getHotModuleReplacementPlugin

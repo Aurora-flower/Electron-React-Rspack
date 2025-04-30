@@ -78,6 +78,7 @@ function singleConfig(key: string, type: string) {
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),
+        // PLUGINS.Define(),
         isDev() && PLUGINS.ReactRefresh(),
         isDev() && PLUGINS.HotModuleReplacement()
       ].filter(Boolean)

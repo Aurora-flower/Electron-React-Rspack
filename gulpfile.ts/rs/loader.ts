@@ -8,25 +8,41 @@ import { ENVIRONMENT } from "../common/env"
 const NODE_MODULES = /node_modules/
 
 /* ***** ***** ***** ***** Parser ***** ***** ***** ***** */
-// const JS_PARSER_OPTIONS = {
-//   // @babel/core
-//   loader: "babel-loader",
-//   options: {
-//     presets: [
-//       "@babel/preset-env",
-//       "@babel/preset-react",
-//       "@babel/preset-typescript"
-//     ]
-//   }
-// }
+const JS_PARSER_OPTIONS = {
+  // @babel/core
+  loader: "babel-loader",
+  options: {
+    presets: [
+      "@babel/preset-env",
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+      // ***** *****
+      // [
+      //   "@babel/preset-env",
+      //   {
+      //     cacheIdentifier: "env",
+      //     targets: "> 0.25%, not ie 11, not op_mini all",
+      //     useBuiltIns: "usage",
+      //     corejs: 3
+      //   }
+      // ],
+      // [
+      //   "@babel/preset-react",
+      //   { runtime: "automatic", cacheIdentifier: "react" }
+      // ],
+      // ["@babel/preset-typescript", { cacheIdentifier: "ts" }]
+    ]
+  }
+}
 
-// const TS_PARSER_OPTIONS = {
-//   loader: "ts-loader",
-//   options: {
-//     transpileOnly: true,
-//     happyPackMode: true
-//   }
-// }
+const TS_PARSER_OPTIONS = {
+  loader: "ts-loader",
+  options: {
+    transpileOnly: true,
+    happyPackMode: true,
+    experimentalFileCaching: true
+  }
+}
 
 /* ***** ***** ***** ***** Loader ***** ***** ***** ***** */
 function getImageLoader(isExclude = false, exclude = NODE_MODULES) {
@@ -90,7 +106,6 @@ const isDev = process.env.NODE_ENV === ENVIRONMENT.Dev
 function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
     test: /\.jsx?$/,
-    // use: [JS_PARSER_OPTIONS],
     use: [
       {
         loader: "builtin:swc-loader",
@@ -108,9 +123,10 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
             }
           }
         }
-      }
+      },
+      JS_PARSER_OPTIONS
     ],
-    type: "javascript/auto",
+    // type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
   return options
@@ -119,7 +135,6 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
 function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
     test: /\.tsx?$/,
-    // use: [JS_PARSER_OPTIONS, TS_PARSER_OPTIONS],
     use: [
       {
         loader: "builtin:swc-loader",
@@ -134,14 +149,16 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
                 runtime: "automatic"
               },
               optimizer: {
-                simplify: true
+                // simplify: true
               }
             }
           }
         }
-      }
+      },
+      JS_PARSER_OPTIONS,
+      TS_PARSER_OPTIONS
     ],
-    type: "javascript/auto",
+    // type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
   return options
