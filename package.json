@@ -24,7 +24,14 @@
     "type": "git",
     "url": "git+https://github.com/Aurora-flower/Electron-React-Rspack.git"
   },
-  "keywords": ["electron", "react", "rspack", "gulp", "pixi", "three"],
+  "keywords": [
+    "electron",
+    "react",
+    "rspack",
+    "gulp",
+    "pixi",
+    "three"
+  ],
   "author": "Aurora-flower",
   "license": "MIT",
   "bugs": {
@@ -33,7 +40,6 @@
   "homepage": "https://github.com/Aurora-flower/Electron-React-Rspack#readme",
   "devDependencies": {
     "@babel/core": "7.26.10",
-    "@babel/plugin-syntax-jsx": "7.25.9",
     "@babel/preset-env": "7.26.9",
     "@babel/preset-react": "7.26.3",
     "@babel/preset-typescript": "7.27.0",
@@ -57,7 +63,6 @@
     "@types/react-dom": "19.1.2",
     "@typescript-eslint/parser": "8.31.1",
     "babel-loader": "10.0.0",
-    "babel-plugin-react-compiler": "19.1.0-rc.1",
     "css-loader": "7.1.2",
     "electron": "36.0.0",
     "electron-builder": "26.0.12",

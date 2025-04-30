@@ -16,21 +16,6 @@ const JS_PARSER_OPTIONS = {
       "@babel/preset-env",
       "@babel/preset-react",
       "@babel/preset-typescript"
-      // ***** *****
-      // [
-      //   "@babel/preset-env",
-      //   {
-      //     cacheIdentifier: "env",
-      //     targets: "> 0.25%, not ie 11, not op_mini all",
-      //     useBuiltIns: "usage",
-      //     corejs: 3
-      //   }
-      // ],
-      // [
-      //   "@babel/preset-react",
-      //   { runtime: "automatic", cacheIdentifier: "react" }
-      // ],
-      // ["@babel/preset-typescript", { cacheIdentifier: "ts" }]
     ]
   }
 }
@@ -39,8 +24,7 @@ const TS_PARSER_OPTIONS = {
   loader: "ts-loader",
   options: {
     transpileOnly: true,
-    happyPackMode: true,
-    experimentalFileCaching: true
+    happyPackMode: true
   }
 }
 
@@ -149,7 +133,7 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
                 runtime: "automatic"
               },
               optimizer: {
-                // simplify: true
+                simplify: true
               }
             }
           }
