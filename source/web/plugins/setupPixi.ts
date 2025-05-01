@@ -1,1 +1,1 @@
-import "pixi.js/unsafe-eval"
+export default async function setupPixi() {}

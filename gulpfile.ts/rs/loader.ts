@@ -70,6 +70,7 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
       {
         loader: "css-loader",
         options: {
+          // modules: false,
           happyPackMode: true
         }
       },

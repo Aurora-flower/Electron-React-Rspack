@@ -1,13 +1,8 @@
 import { rspack } from "@rspack/core"
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
 
 function getHtmlRspackPlugin(template: string) {
-  /**
-   * @summary
-   * - `style-src`：控制所有 CSS 来源（包括内联样式和外部样式）
-   * - `style-src-attr`：仅控制 HTML 元素内联样式（如 <div style="...">）
-   * - `style-src-elem`：更细粒度地聚焦外部样式表和 <style> 标签内容
-   */
   const HtmlRspackPlugin = new rspack.HtmlRspackPlugin({
     template,
     inject: "body",
@@ -20,9 +15,9 @@ function getHtmlRspackPlugin(template: string) {
       "Content-Security-Policy": {
         "http-equiv": "Content-Security-Policy",
         content:
-          `default-src 'self';` +
+          // `default-src 'self';` +
           `script-src 'self' blob:;` +
-          `style-src-elem 'self';` +
+          `style-src-attr 'self';` + // style-src style-src-attr style-src-elem
           `font-src 'self';` +
           `worker-src 'self' blob:;` +
           `connect-src 'self' https://api.iconify.design/ data:;` +

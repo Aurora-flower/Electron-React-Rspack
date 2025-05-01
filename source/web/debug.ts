@@ -11,11 +11,18 @@ import {
 
 import { enableWorker } from "@/handlers/worker/registry"
 
-async function debug(root = "#pixi-container") {
-  sender("sms:transmit", {
-    type: "sms:transmit",
-    data: "Hello World!"
+export function debugWorker() {
+  const workerPath = new URL(
+    "../../core/scripts/javascript/worker.js",
+    location.href
+  )?.pathname
+  enableWorker(workerPath, {
+    type: "module"
   })
+}
+
+export async function debugPixiRender() {
+  const root = "#pixi-container"
   const app = new Application()
   const element = getDomElement(root)
   if (!element) {
@@ -53,13 +60,19 @@ async function debug(root = "#pixi-container") {
     container.addChild(container2)
     app.stage.addChild(container)
   })
-  const workerPath = new URL(
-    "../../core/scripts/javascript/worker.js",
-    location.href
-  )?.pathname
-  enableWorker(workerPath, {
-    type: "module"
+}
+
+export function debugIPC() {
+  sender("sms:transmit", {
+    type: "sms:transmit",
+    data: "Hello World!"
   })
+}
+
+async function debug() {
+  // await debugPixiRender()
+  debugIPC()
+  debugWorker()
 }
 
 export default debug
