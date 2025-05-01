@@ -33,6 +33,9 @@
         "noNonNullAssertion": "off",
         "useSelfClosingElements": "warn"
       },
+      "correctness": {
+        "noUnusedImports": "error"
+      },
       "suspicious": {
         "noExplicitAny": "info",
         "noSuspiciousSemicolonInJsx": "error"
