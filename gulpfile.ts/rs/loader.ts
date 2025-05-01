@@ -16,7 +16,10 @@ const JS_PARSER_OPTIONS = {
       "@babel/preset-env",
       "@babel/preset-react",
       "@babel/preset-typescript"
-    ]
+    ],
+    cacheDirectory: true,
+    cacheCompression: false,
+    compact: false
   }
 }
 

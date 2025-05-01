@@ -19,9 +19,9 @@ export default defineConfig([
       "core/",
       "test/",
       "release/",
-      "*.config.*",
-      "*config.*",
-      "*config.*.*",
+      // "*.config.*",
+      // "*config.*",
+      // "*config.*.*",
       "package-lock.json"
     ]
   },
@@ -105,6 +105,13 @@ export default defineConfig([
           enforceForJSX: true,
           // allowShortCircuit: true,
           allowTernary: true
+        }
+      ],
+      "max-len": [
+        "error",
+        {
+          code: 80,
+          ignoreComments: true
         }
       ],
       // 与当前 eslint-plugin-react 版本不兼容配置
