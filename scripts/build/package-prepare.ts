@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises"
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises"
 import { join, relative } from "node:path"
 
 interface PackageJson {
@@ -15,8 +15,11 @@ type DistPackage = Partial<PackageJson> & {
   main: string
 }
 
-const outDir = join(process.cwd(), "app")
-const packagePath = join(process.cwd(), "package.json")
+const cwd = process.cwd()
+const npmName = ".npmrc"
+const npmrc = join(cwd, npmName)
+const outDir = join(cwd, "app")
+const packagePath = join(cwd, "package.json")
 const outputPath = join(outDir, "package.json")
 
 async function clonePackageJSON() {
@@ -42,6 +45,7 @@ async function clonePackageJSON() {
 async function preparePackage() {
   try {
     await clonePackageJSON()
+    copyFile(npmrc, join(outDir, npmName))
     console.log("Package prepared:")
   } catch (error) {
     console.error("Preparation failed:", error)

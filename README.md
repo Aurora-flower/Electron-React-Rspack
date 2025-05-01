@@ -51,6 +51,9 @@ npm install
 # 安装新依赖
 npm install --no-save-dev [package-name] # prod
 npm install [package-name] # dev
+
+# 查看依赖可用版本
+npm show [package-name] versions
 ```
 
 2. 运行项目
