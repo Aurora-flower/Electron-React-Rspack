@@ -1,4 +1,5 @@
-import "pixi.js/unsafe-eval"
+import "@/plugins/setupPixi"
+import "@/plugins/setupPrimeUI"
 import "./assets/stylesheets/main.css"
 import "@/App"
 import debug from "@/debug"
