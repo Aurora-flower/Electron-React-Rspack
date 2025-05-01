@@ -1,5 +1,4 @@
 import { sender } from "@/helpers/event/electron"
-import { messageListener } from "@/helpers/event/listener"
 import { getDomElement } from "@/helpers/function/dom"
 import {
   Application,
@@ -13,7 +12,6 @@ import {
 import { enableWorker } from "@/handlers/worker/registry"
 
 async function debug(root = "#pixi-container") {
-  messageListener()
   sender("sms:transmit", {
     type: "sms:transmit",
     data: "Hello World!"
