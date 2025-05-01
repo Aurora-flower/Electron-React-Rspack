@@ -68,6 +68,7 @@
     "npm-run-all2": "7.0.2",
     "patch-package": "8.0.0",
     "postcss-loader": "8.1.1",
+    "primeflex": "4.0.0",
     "primeicons": "7.0.0",
     "primereact": "10.9.5",
     "react-refresh": "0.17.0",
