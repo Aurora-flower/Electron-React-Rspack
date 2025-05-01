@@ -88,9 +88,6 @@ class WindowManager {
     }
 
     // this.mainWindow.maximize();
-    // this.mainWindow.webContents.on("devtools-opened", () => {
-    //   this.mainWindow?.focus();
-    // });
     this.setupWindowHooks()
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
@@ -117,7 +114,18 @@ class WindowManager {
     })
 
     win.webContents.on("did-finish-load", () => {
-      // win.webContents.send("trigger-message", "Hello from main process");
+      win.webContents.send("trigger-message", {
+        type: "ready",
+        data: "did-finish-load"
+      })
+    })
+
+    win.webContents.on("devtools-opened", () => {
+      this.mainWindow?.focus()
+      win.webContents.send("trigger-message", {
+        type: "devtools",
+        data: "devtools-opened"
+      })
     })
   }
 

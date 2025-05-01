@@ -1,5 +1,7 @@
+import { webLog } from "@/helpers/log"
+
 function timeStamp() {
-  console.log("[time stamp]", Date.now())
+  webLog("time", "time stamp", Date.now())
 }
 
 export function delay(duration: number, callback: () => void = timeStamp) {

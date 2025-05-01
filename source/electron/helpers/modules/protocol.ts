@@ -40,7 +40,6 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA) {
         "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
       )
     } catch (error) {
-      console.log("request", error)
       return Promise.reject(error)
     }
   }

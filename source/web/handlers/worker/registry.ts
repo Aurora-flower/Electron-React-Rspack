@@ -1,3 +1,6 @@
+import { webLog } from "@/helpers/log"
+import CommonUtility from "@/utils/utility"
+
 export function enableWorker(
   scriptURL: string | URL,
   message: unknown,
@@ -6,10 +9,10 @@ export function enableWorker(
   const worker = new Worker(scriptURL, options)
   worker.postMessage(message)
   worker.onmessage = event => {
-    console.log("Main thread received message:", event.data)
+    webLog("enableWorker", "Main thread received message", event.data)
     worker.terminate() // Stop Worker
   }
   worker.onerror = error => {
-    console.error("Worker error:", error.message)
+    webLog("enableWorker", "error", CommonUtility.errorMessage(error))
   }
 }

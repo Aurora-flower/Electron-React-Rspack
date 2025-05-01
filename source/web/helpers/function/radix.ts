@@ -29,7 +29,6 @@ export function binaryToOct(binary: string) {
   if (!binary) return "0" // 0o0
   return Number.parseInt(binary, 2).toString(8)
 }
-console.log(octToBinary("17"), binaryToOct("1111"))
 
 /* ***** ***** 二进制 - 十六进制 - 四位计算法 ***** ***** */
 export function hexToBinary(hex: string) {

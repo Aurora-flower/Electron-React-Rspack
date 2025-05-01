@@ -53,8 +53,6 @@ async function debug(root = "#pixi-container") {
     container.addChild(container2)
     app.stage.addChild(container)
   })
-  console.log("Root", element, app, url)
-
   const workerPath = new URL(
     "../../core/scripts/javascript/worker.js",
     location.href

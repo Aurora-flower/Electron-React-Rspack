@@ -23,7 +23,6 @@ function App() {
 function AppRender() {
   const root = "#root"
   const rootElement = getRootElement(root)
-  console.log("rootElement", rootElement)
   if (!rootElement) {
     return
   }

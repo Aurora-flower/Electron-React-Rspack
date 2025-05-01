@@ -27,6 +27,10 @@ declare global {
   type InvokeChannelName = string
   type SenderChannelName = string
   type ChannelName = SenderChannelName | InvokeChannelName
+
+  type ObjectType<T> = {
+    [key: string]: T
+  }
 }
 
 export {}
