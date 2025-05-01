@@ -12,7 +12,9 @@ function App() {
     <React.StrictMode>
       <div className="root-wrapper">
         <div id="pixi-container" />
-        {/* <div className="text-green-200">HELLO WORLD</div> */}
+        <div className="animate__animated text-green-200 animate__bounce">
+          HELLO WORLD
+        </div>
       </div>
     </React.StrictMode>
   )

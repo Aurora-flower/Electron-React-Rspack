@@ -47,6 +47,10 @@
 
 ```shell
 npm install
+
+# 安装新依赖
+npm install --no-save-dev [package-name] # prod
+npm install [package-name] # dev
 ```
 
 2. 运行项目
@@ -92,6 +96,7 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 - [🌴 Express](https://www.expressjs.com.cn/)
 - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
 - [🛍️ Electron Builder](https://www.electron.build/)
+- [Animate.css](https://animate.style/)
 
 <!-- [🎁 Log4](https://github.com/log4js-node/log4js-node) -->
 <!-- [🏁 Electron-Store](https://github.com/sindresorhus/electron-store) -->
