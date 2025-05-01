@@ -25,3 +25,4 @@ output
 # ***** ***** ***** ***** File ***** ***** ***** *****
 .DS_Store
 
+components.d.ts
