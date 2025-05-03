@@ -105,8 +105,12 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
             },
             transform: {
               react: {
+                runtime: "automatic",
                 development: isDev,
                 refresh: isDev
+              },
+              optimizer: {
+                simplify: true
               }
             }
           }
@@ -134,7 +138,9 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
             },
             transform: {
               react: {
-                runtime: "automatic"
+                runtime: "automatic",
+                development: isDev,
+                refresh: isDev
               },
               optimizer: {
                 simplify: true
