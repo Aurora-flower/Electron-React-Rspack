@@ -1,4 +1,6 @@
 import { join, sep } from "node:path"
+import WindowManager from "@main/helpers/manager/window"
+import { isAllWindowClosed } from "@main/helpers/modules/window"
 import {
   PLATFORM,
   getPlatform,
@@ -68,6 +70,12 @@ export function setupAppHooks() {
   app.on("window-all-closed", () => {
     if (getPlatform() !== PLATFORM.darwin) {
       app.quit()
+    }
+  })
+
+  app.on("activate", () => {
+    if (isAllWindowClosed()) {
+      WindowManager.getInstance()?.createMainWindow()
     }
   })
 }

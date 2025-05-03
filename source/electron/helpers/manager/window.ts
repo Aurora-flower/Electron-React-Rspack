@@ -67,7 +67,7 @@ class WindowManager {
     return {}
   }
 
-  private createMainWindow() {
+  public createMainWindow() {
     // if (!process.env.DEV_SERVER_URL) {
     //   process.env.DEV_SERVER_URL = "https://www.w3ccoo.com/";
     // }
