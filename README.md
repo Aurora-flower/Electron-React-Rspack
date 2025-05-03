@@ -91,7 +91,7 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 - [🖼️ Node.js](https://nodejs.cn/api/)
 - [📚 Electron](https://www.electronjs.org/zh/docs/latest/)
 - [🎮 React](https://zh-hans.react.dev/learn)
-- [🍓 React Router](https://reactrouter.com/start/data/custom)
+- [🍓 React Router](https://reactrouter.remix.org.cn/start/data/routing)
 - [🌱 Gulp](https://gulp.nodejs.cn/)
 - [🧪 Rspack](https://rspack.dev/zh/)
 - [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
@@ -100,6 +100,7 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
 - [🛍️ Electron Builder](https://www.electron.build/)
 - [Animate.css](https://animate.style/)
+- [Prime React UI](https://primereact.org/)
 
 <!-- [🎁 Log4](https://github.com/log4js-node/log4js-node) -->
 <!-- [🏁 Electron-Store](https://github.com/sindresorhus/electron-store) -->
