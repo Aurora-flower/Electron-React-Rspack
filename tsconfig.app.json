@@ -13,10 +13,10 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["css-modules", "react", "react-dom"],
+    "types": ["css-modules", "react", "react-dom", "react-router"],
     "paths": {
       "@/*": ["source/web/*"]
     },
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   }
 }
