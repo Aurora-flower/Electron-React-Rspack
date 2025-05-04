@@ -62,3 +62,22 @@ export function decimalToHex(decimal: string) {
   if (!decimal) return "0"
   return Number.parseInt(decimal, 10).toString(16)
 }
+
+/* ***** ***** 十进制 - 任意进制 ***** ***** */
+export function baseConverter(decNumber: number, radix: 2 | 8 | 16) {
+  let num = decNumber
+  const states = []
+  let rem = 0
+  let baseString = ""
+  const digits = "0123456789ABCDEF"
+
+  while (num > 0) {
+    rem = Math.floor(num % radix)
+    states.push(rem)
+    num = Math.floor(num / radix)
+  }
+  while (states.length !== 0) {
+    baseString += digits[states.pop() as number] //{7}
+  }
+  return baseString
+}
