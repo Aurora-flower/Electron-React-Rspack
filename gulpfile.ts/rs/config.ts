@@ -61,13 +61,15 @@ function singleConfig(key: string, type: string) {
     options.resolve!.alias = {
       "@main": DIRECTORY.Source.main
     }
+    options.plugins = options.plugins!.concat([PLUGINS.Env()])
   }
 
-  // if (isPeload) {
-  // }
+  if (isPeload) {
+    options.plugins = options.plugins!.concat([PLUGINS.Env()])
+  }
 
   if (isRenderer) {
-    // options.output!.publicPath = "/";
+    // options.output!.publicPath = "/"
     options.resolve!.alias = {
       "@": DIRECTORY.Source.renderer
     }
@@ -78,7 +80,6 @@ function singleConfig(key: string, type: string) {
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),
-        // PLUGINS.Define(),
         isDev() && PLUGINS.ReactRefresh(),
         isDev() && PLUGINS.HotModuleReplacement()
       ].filter(Boolean)

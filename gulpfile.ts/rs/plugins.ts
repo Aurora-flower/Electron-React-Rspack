@@ -1,4 +1,6 @@
 import { rspack } from "@rspack/core"
+import { configDotenv } from "dotenv"
+import { getFileStructure } from "../common/structure"
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
 
@@ -42,14 +44,25 @@ function getHotModuleReplacementPlugin() {
 
 function getDefinePlugin() {
   return new rspack.DefinePlugin({
-    global: `(typeof globalThis !== "undefined" ? globalThis : window)` // '(typeof globalThis !== "undefined" ? globalThis : window)' | "window"
+    // global: `(typeof globalThis !== "undefined" ? globalThis : window)` // '(typeof globalThis !== "undefined" ? globalThis : window)' | "window"
     // "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+  })
+}
+
+function getEnvPlugin() {
+  const FILE = getFileStructure()
+  configDotenv({ path: FILE.Env.from })
+  return new rspack.EnvironmentPlugin({
+    // TITLE: process.env.TITLE ?? "",
+    // DEV_SERVER_URL: process.env.DEV_SERVER_URL ?? ""
+    ...process.env
   })
 }
 
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
   Define: getDefinePlugin,
+  Env: getEnvPlugin,
   CssExtract: getMiniCssExtractPlugin,
   ReactRefresh: getReactRefreshPlugin,
   HotModuleReplacement: getHotModuleReplacementPlugin
