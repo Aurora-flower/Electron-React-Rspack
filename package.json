@@ -51,6 +51,7 @@
     "@tailwindcss/postcss": "4.1.5",
     "@tsconfig/node22": "22.0.1",
     "@types/css-modules": "1.0.5",
+    "@types/express": "5.0.1",
     "@types/gulp": "4.0.17",
     "@types/node": "22.15.3",
     "@types/react": "19.1.2",
@@ -82,6 +83,7 @@
   },
   "dependencies": {
     "animate.css": "4.1.1",
+    "dotenv": "16.5.0",
     "electron-log": "5.4.0",
     "electron-updater": "6.6.2",
     "express": "5.1.0",
