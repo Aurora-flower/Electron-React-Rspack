@@ -1,11 +1,12 @@
 import * as http from "node:http"
 import * as https from "node:https"
+import { join } from "node:path"
 // import certificate from "@main/private/certificate.pem"
 // import privateKey from "@main/private/private-key.pem"
 import { errorMessage } from "@main/utils/error"
 import Logger from "electron-log"
-import express = require("express")
-import { join } from "node:path"
+import type { Application } from "express"
+const express = require("express")
 
 interface AppServerOptions {
   path: string
@@ -19,7 +20,7 @@ interface AppServerOptions {
 export class AppServer {
   private _options: AppServerOptions | undefined
   private _instance!: AppServer
-  private _application!: express.Application
+  private _application!: Application
   private _server!: http.Server | https.Server
 
   constructor(options?: AppServerOptions) {
