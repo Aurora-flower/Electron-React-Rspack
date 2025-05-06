@@ -7,9 +7,11 @@ import Logger from "electron-log"
 function advanceExecution() {
   commandLines()
 }
-;(function init() {
+
+function initialization() {
   advanceExecution()
-  onAppReadyBefore().then(onAppReady).catch(console.error)
   createAppServer()
-  Logger.info(process.env.DEV_SERVER_URL, process.env.TITLE)
-})()
+  onAppReadyBefore().then(onAppReady).catch(console.error)
+  Logger.log("DEV_SERVER_URL", process.env.DEV_SERVER_URL)
+}
+initialization()

@@ -1,8 +1,9 @@
+import { WINDOW_OPTIONS } from "@main/common/config/window"
 import { getIsPackage } from "@main/helpers/modules/app"
 import { resolvePath } from "@main/helpers/node/path"
 import { isDev } from "@main/helpers/node/process/env"
 import { isWin } from "@main/helpers/node/process/platform"
-import { BrowserWindow } from "electron"
+import { BrowserWindow, MessageChannelMain } from "electron"
 import Logger from "electron-log"
 
 const MAIN_WINDOW_NAME = "_MAIN_"
@@ -10,13 +11,7 @@ const MAIN_WINDOW_NAME = "_MAIN_"
 class WindowManager {
   public mainWindow: BrowserWindow | null = null
   private static instance: WindowManager
-  private windowOptions = {
-    title: process.env?.TITLE ?? "Electron-React-Rspack",
-    // frame: !this.isWindows,
-    webPreferences: {
-      preload: resolvePath("../preload/index.js")
-    }
-  }
+  private windowOptions = WINDOW_OPTIONS
   private windows: Map<string, BrowserWindow> = new Map()
   private isClosing = false
 
@@ -68,9 +63,6 @@ class WindowManager {
   }
 
   public createMainWindow() {
-    // if (!process.env.DEV_SERVER_URL) {
-    //   process.env.DEV_SERVER_URL = "https://www.w3ccoo.com/";
-    // }
     if (this.mainWindow && !this.mainWindow.isDestroyed()) {
       return this.mainWindow
     }
@@ -80,14 +72,11 @@ class WindowManager {
       // Menu.setApplicationMenu(null); // win.removeMenu(); | win.setMenu(null);
       // }
     }
-
     if (typeof process.env.DEV_SERVER_URL === "string") {
       this.mainWindow.loadURL(process.env.DEV_SERVER_URL)
     } else {
       this.mainWindow.loadFile(resolvePath("../public/index.html"))
     }
-
-    // this.mainWindow.maximize();
     this.setupWindowHooks()
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
@@ -101,6 +90,10 @@ class WindowManager {
   private setupWindowHooks() {
     if (!this.mainWindow) return
     const win = this.mainWindow
+
+    // win.maximize();
+    win.setMinimumSize(800, 600)
+
     win.on("close", e => {
       if (!this.isClosing) {
         e.preventDefault()
@@ -127,6 +120,14 @@ class WindowManager {
         data: "devtools-opened"
       })
     })
+
+    const { port1, port2 } = new MessageChannelMain()
+    port2.postMessage({ test: 21 })
+    port2.on("message", event => {
+      console.log("from renderer main world:", event.data)
+    })
+    port2.start()
+    win.webContents.postMessage("message-port", null, [port1])
   }
 
   private async safeCloseWindow() {
