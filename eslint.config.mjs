@@ -112,7 +112,8 @@ export default defineConfig([
         {
           code: 80,
           ignoreComments: true,
-          ignoreUrls: true
+          ignoreUrls: true,
+          ignoreStrings: true
         }
       ],
       // 与当前 eslint-plugin-react 版本不兼容配置
