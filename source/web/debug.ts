@@ -72,7 +72,7 @@ export function debugIPC() {
 async function debug() {
   // await debugPixiRender()
   debugIPC()
-  debugWorker()
+  // debugWorker()
 }
 
 export default debug

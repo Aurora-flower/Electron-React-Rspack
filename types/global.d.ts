@@ -7,6 +7,7 @@ declare global {
     IPC: {
       emitter: (channel: string, ...args: unknown[]) => Promise<unknown>
       dispatch: (channel: string, ...args: unknown[]) => Promise<unknown>
+      // post: () => void
     }
   }
 

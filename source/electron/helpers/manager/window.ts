@@ -3,7 +3,7 @@ import { getIsPackage } from "@main/helpers/modules/app"
 import { resolvePath } from "@main/helpers/node/path"
 import { isDev } from "@main/helpers/node/process/env"
 import { isWin } from "@main/helpers/node/process/platform"
-import { BrowserWindow, MessageChannelMain } from "electron"
+import { BrowserWindow } from "electron"
 import Logger from "electron-log"
 
 const MAIN_WINDOW_NAME = "_MAIN_"
@@ -72,7 +72,7 @@ class WindowManager {
       // Menu.setApplicationMenu(null); // win.removeMenu(); | win.setMenu(null);
       // }
     }
-    if (typeof process.env.DEV_SERVER_URL === "string") {
+    if (process.env.DEV_SERVER_URL) {
       this.mainWindow.loadURL(process.env.DEV_SERVER_URL)
     } else {
       this.mainWindow.loadFile(resolvePath("../public/index.html"))
@@ -120,14 +120,6 @@ class WindowManager {
         data: "devtools-opened"
       })
     })
-
-    const { port1, port2 } = new MessageChannelMain()
-    port2.postMessage({ test: 21 })
-    port2.on("message", event => {
-      console.log("from renderer main world:", event.data)
-    })
-    port2.start()
-    win.webContents.postMessage("message-port", null, [port1])
   }
 
   private async safeCloseWindow() {

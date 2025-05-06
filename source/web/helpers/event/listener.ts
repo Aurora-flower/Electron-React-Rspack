@@ -5,7 +5,7 @@ export function messageListener() {
   enableWindowMessagesListener(event => {
     const ev = event as MessageEvent
     const origin = ev.origin || location.href
-    webLog("messageListener", "onMsg", origin, ev.data, ev.source)
+    webLog("messageListener", "onMsg", origin, ev.data, ev.ports, ev.source)
   })
 
   // enableWindowMessagesListener(event => {
