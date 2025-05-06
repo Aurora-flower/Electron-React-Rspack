@@ -7,13 +7,15 @@
   ],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "lib": ["ES2022"],
+    "lib": ["ES2015"],
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "baseUrl": ".",
-    "module": "ESNext",
+    "target": "ES2015",
+    "module": "CommonJS",
+    "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["node", "electron", "express"],
     "moduleResolution": "node",
     "paths": {

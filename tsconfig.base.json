@@ -13,20 +13,18 @@
     "preserveConstEnums": false,
     "sourceMap": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": true,
 
-    /* Output */
     "baseUrl": ".",
     "outDir": "./dist",
 
-    /* Bundler mode */
     "moduleResolution": "Bundler",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": false,
     "moduleDetection": "force",
 
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
