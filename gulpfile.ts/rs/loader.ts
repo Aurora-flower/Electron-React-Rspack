@@ -158,6 +158,15 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
   return options
 }
 
+function getTextLoader(isExclude = false, exclude = NODE_MODULES) {
+  const options = {
+    test: /\.(pem|txt)$/,
+    type: "asset/source",
+    exclude: isExclude ? exclude : undefined
+  }
+  return options
+}
+
 const LOADER = {
   Js: getJsLoader(),
   JsExclude: getJsLoader(true),
@@ -168,7 +177,9 @@ const LOADER = {
   Image: getImageLoader(),
   ImageExclude: getImageLoader(true),
   Svg: getSvgLoader(),
-  SvgExclude: getSvgLoader(true)
+  SvgExclude: getSvgLoader(true),
+  Text: getTextLoader(),
+  TextExclude: getTextLoader(true)
 }
 
 export default LOADER

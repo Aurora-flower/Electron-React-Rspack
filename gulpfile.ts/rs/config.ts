@@ -32,7 +32,13 @@ function singleConfig(key: string, type: string) {
       extensions: [".ts", ".js"]
     },
     module: {
-      rules: [LOADER.JsExclude, LOADER.TsExclude, LOADER.Css, LOADER.Image]
+      rules: [
+        LOADER.JsExclude,
+        LOADER.TsExclude,
+        LOADER.Css,
+        LOADER.Image,
+        LOADER.TextExclude
+      ]
     },
     plugins: [PLUGINS.CssExtract()]
   }

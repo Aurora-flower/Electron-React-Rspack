@@ -52,11 +52,11 @@ declare module "*.ttf" {
 }
 
 // other
-declare module "*.pdf" {
-  const src: string
-  export default src
-}
 declare module "*.txt" {
   const src: string
   export default src
+}
+declare module "*.pem" {
+  const value: string
+  export default value
 }
