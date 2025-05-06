@@ -116,6 +116,7 @@ export default defineConfig([
           ignoreStrings: true
         }
       ],
+      "@typescript-eslint/no-explicit-any": "info",
       // 与当前 eslint-plugin-react 版本不兼容配置
       "react/display-name": "off",
       "react/jsx-key": "off",
