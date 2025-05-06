@@ -1,9 +1,6 @@
 import * as http from "node:http"
 import * as https from "node:https"
 import { join } from "node:path"
-// import certificate from "@main/private/certificate.pem"
-// import privateKey from "@main/private/private-key.pem"
-import { errorMessage } from "@main/utils/error"
 import Logger from "electron-log"
 import type { Application } from "express"
 const express = require("express")
@@ -13,8 +10,14 @@ interface AppServerOptions {
   port: number
   hostname: string
   isSafe?: boolean
-  privateKey?: string
-  certificate?: string
+
+  [key: string]: any
+}
+
+export function applicationHooks(app: Application) {
+  app.get("/", (req, res) => {
+    res.send("Hello World")
+  })
 }
 
 export class AppServer {
@@ -31,31 +34,21 @@ export class AppServer {
       this._application.use(middleware)
       this._application.get("/", (req, res) => {
         res.sendFile(join(options.path, "index.html"))
-        // res.send("Hello World")
       })
-      Logger.log("PATH", join(options.path, "index.html"))
     }
   }
 
   private createHttpServer() {
-    if (!this._application || !this._options) return
     this._server = http.createServer(this._application)
-    this._server.listen(this._options.port, () => {
+    this._server.listen(this._options!.port, () => {
       Logger.log(`HTTP server listening on port ${this._options?.port}`)
     })
-    this._server.on("error", err => {
-      Logger.log("Server error", errorMessage(err))
-    })
-    Logger.log("createHttpServer", this._options.path)
   }
 
   private createHttpsServer() {
-    if (!this._application || !this._options) {
-      return
-    }
     const credentials = {
-      key: this._options.privateKey,
-      cert: this._options.certificate
+      key: this._options!.PRIVATE_KEY,
+      cert: this._options!.CERTIFICATE
     }
     this._server = https.createServer(credentials, () => {
       Logger.log(`HTTPS server listening on port ${this._options?.port}`)
@@ -64,9 +57,8 @@ export class AppServer {
 
   start() {
     if (!this._application) return
-    if (this._options?.privateKey && this._options?.certificate) {
-      // this.createHttpsServer()
-      this.createHttpServer()
+    if (this._options?.PRIVATE_KEY && this._options?.CERTIFICATE) {
+      this.createHttpsServer()
     } else {
       this.createHttpServer()
     }
@@ -96,12 +88,13 @@ export class AppServer {
 export function createAppServer() {
   const options = {
     path: "F:\\Project\\Electron-React-Rspack\\app\\public",
-    port: 59098,
-    hostname: "127.0.0.1",
-    isSafe: true
-    // privateKey,
-    // certificate
+    port: Number(process.env.DEV_SERVER_PORT ?? ""),
+    hostname: process.env.DEV_SERVER_HOSTNAME ?? "127.0.0.1",
+    isSafe: process.env.DEV_SAFE_MODE === "true"
+    // PRIVATE_KEY: readFileSync("private/key.pem"),
+    // CERTIFICATE: readFileSync("private/cert.pem")
   }
+  process.env.DEV_SERVER_URL = `${options.isSafe ? "https" : "http"}://${options.hostname}:${options.port}`
   const appServer = new AppServer(options)
   appServer.start()
 }
