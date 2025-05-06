@@ -45,7 +45,7 @@ function rspackCompiler(isClosing = false) {
     } catch (err) {
       console.error(
         "[Rspack Compile Error]",
-        err instanceof Error ? err.message : String(err)
+        err instanceof Error ? err.message : err
       )
       reject(err)
     }

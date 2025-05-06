@@ -1,6 +1,6 @@
 class CommonUtility {
   static errorMessage(e: unknown) {
-    return e instanceof Error ? e.message : String(e)
+    return e instanceof Error ? e.message : e
   }
 }
 

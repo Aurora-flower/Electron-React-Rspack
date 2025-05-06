@@ -22,11 +22,12 @@ function singleConfig(key: string, type: string) {
   const isMain = type === APP_PROCESS_MODE.Electron
   const isPeload = type === APP_PROCESS_MODE.Preload
   const isRenderer = type === APP_PROCESS_MODE.Renderer
+  const isDevelopment = isDev()
 
   const baseOptions: RspackOptions = {
-    mode: isDev() ? "development" : "production",
+    mode: isDevelopment ? "development" : "production",
     stats: "verbose",
-    devtool: DEVTOOL.CheapSourceMap,
+    devtool: DEVTOOL.SourceMap,
     resolve: {
       mainFiles: ["index", "main"],
       extensions: [".ts", ".js"]
@@ -86,8 +87,8 @@ function singleConfig(key: string, type: string) {
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),
-        isDev() && PLUGINS.ReactRefresh(),
-        isDev() && PLUGINS.HotModuleReplacement()
+        isDevelopment && PLUGINS.ReactRefresh(),
+        isDevelopment && PLUGINS.HotModuleReplacement()
       ].filter(Boolean)
     )
   }
