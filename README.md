@@ -45,29 +45,29 @@
 
 1. 安装依赖
 
-```shell
-npm install
+    ```shell
+    npm install
 
-# 安装新依赖
-npm install --no-save-dev [package-name] # prod
-npm install [package-name] # dev
+    # 安装新依赖
+    npm install --no-save-dev [package-name] # prod
+    npm install [package-name] # dev
 
-# 查看依赖可用版本
-npm show [package-name] versions
-```
+    # 查看依赖可用版本
+    npm show [package-name] versions
+    ```
 
 2. 运行项目
 
-```shell
-npm run dev
-```
+    ```shell
+    npm run dev
+    ```
 
 3. 提交修改
 
-```shell
-# 提交格式 - [类型](模块名称|功能命名): 修改描述
-git commit -m "feat(file): 文件处理模块"
-```
+    ```shell
+    # 提交格式 - [类型](模块名称|功能命名): 修改描述
+    git commit -m "feat(file): 文件处理模块"
+    ```
 
 **注意**:
 
@@ -77,7 +77,8 @@ git commit -m "feat(file): 文件处理模块"
 
 **提示**:
 
-如果出现以下错误，请将 node 版本更改为 22.14.0 版本。（比如: nvm 工具）
+如果出现以下错误，请将 node 版本更改为 22.14.0 版本。（比如: **[nvm](https://nvm.p6p.net/)** 工具）
+
 ```text
 Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts'
 ```
@@ -99,8 +100,8 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 - [🌴 Express](https://www.expressjs.com.cn/)
 - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
 - [🛍️ Electron Builder](https://www.electron.build/)
-- [Animate.css](https://animate.style/)
-- [Prime React UI](https://primereact.org/)
+- [🎉 Animate.css](https://animate.style/)
+- [🟢 Prime React UI](https://primereact.org/)
 
 <!-- [🎁 Log4](https://github.com/log4js-node/log4js-node) -->
 <!-- [🏁 Electron-Store](https://github.com/sindresorhus/electron-store) -->
@@ -125,7 +126,9 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 - [🧳 Biome](https://biomejs.dev/zh-cn/)
 - [🌈 Contributor Covenant](https://www.contributor-covenant.org/)
 - [📦 Eslint](https://eslint.org/)
-- [JS Blog](https://davidwalsh.name)
-- [NPM Mirror](https://npmmirror.com/)
-- [ES6 Blog](https://es6.ruanyifeng.com/)
-- [GitHub](https://docs.github.com/zh/get-started)
+- [⭐JS Blog](https://davidwalsh.name)
+- [💡 NPM Mirror](https://npmmirror.com/)
+- [🔥 ES6 Blog](https://es6.ruanyifeng.com/)
+- [💬 GitHub](https://docs.github.com/zh/get-started)
+- [🌟 OpenSSL for Windows](https://slproweb.com/products/Win32OpenSSL.html)
+- [💎 NVM](https://nvm.p6p.net/)
