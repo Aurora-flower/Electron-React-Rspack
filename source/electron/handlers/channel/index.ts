@@ -1,29 +1,40 @@
-import { transmit } from "@main/handlers/channel/message/sms"
+import { messagePort, transmit } from "@main/handlers/channel/message/sms"
 import { type IpcMainEvent, type IpcMainInvokeEvent, ipcMain } from "electron"
 
 export const channelSenderDisposer = createChannelHandler()
 
 export const channelInvokeDisposer = createChannelHandler(true)
 
+const CHANNLE_TYPE: Record<"Event" | "Invoke", ChannelType> = {
+  Event: "event",
+  Invoke: "invoke"
+}
+
 const HANDLER: ChannelConfig = {
   handler: channelSenderDisposer,
   name: "emitter",
-  type: "event"
+  type: CHANNLE_TYPE.Event
 }
 
 const INVOKE: ChannelConfig = {
   handler: channelInvokeDisposer,
   name: "dispatch",
-  type: "invoke"
+  type: CHANNLE_TYPE.Invoke
 }
 
-const CHANNELS: ChannelConfig[] = [HANDLER, INVOKE]
+const PORT: ChannelConfig = {
+  handler: messagePort,
+  name: "port",
+  type: CHANNLE_TYPE.Event
+}
+
+const CHANNELS: ChannelConfig[] = [HANDLER, INVOKE, PORT]
 
 export function registerIPCChannel() {
   for (const { name, handler, type } of CHANNELS) {
-    if (type === INVOKE.type) {
+    if (type === CHANNLE_TYPE.Invoke) {
       ipcMain.handle(name, handler as InvokeHandler)
-    } else if (type === HANDLER.type) {
+    } else if (type === CHANNLE_TYPE.Event) {
       ipcMain.on(name, handler as OnHandler)
     }
   }
