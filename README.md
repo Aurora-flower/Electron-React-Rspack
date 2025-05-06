@@ -83,6 +83,14 @@
 Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts'
 ```
 
+## 自签名证书
+
+使用 OpenSSL 一键生成私钥和证书（无密码保护）
+
+```shell
+openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 365 -subj "/CN=localhost"
+```
+
 ---
 
 ## 相关文档
