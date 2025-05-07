@@ -16,10 +16,10 @@ const JS_PARSER_OPTIONS = {
       "@babel/preset-env",
       "@babel/preset-react",
       "@babel/preset-typescript"
-    ],
-    cacheDirectory: true,
-    cacheCompression: false,
-    compact: false
+    ]
+    // cacheDirectory: true,
+    // cacheCompression: false,
+    // compact: false
   }
 }
 
@@ -152,7 +152,6 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
       JS_PARSER_OPTIONS,
       TS_PARSER_OPTIONS
     ],
-    // type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
   return options
