@@ -136,4 +136,12 @@ class WindowManager {
   private async beforeWindowClose() {}
 }
 
+export function createWorkerWindow() {
+  const worker = new BrowserWindow({
+    show: false,
+    webPreferences: { nodeIntegration: true }
+  })
+  worker.loadURL(resolvePath("../public/pages/worker/index.html"))
+}
+
 export default WindowManager

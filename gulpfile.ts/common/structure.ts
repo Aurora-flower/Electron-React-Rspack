@@ -31,7 +31,8 @@ function getSourceStructure(baseUrl: string) {
 
 function getPublicStructure(baseUrl: string) {
   return {
-    baseUrl
+    baseUrl,
+    resource: join(baseUrl, "resource")
   }
 }
 

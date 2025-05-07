@@ -87,6 +87,12 @@ function singleConfig(key: string, type: string) {
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),
+        PLUGINS.Copy([
+          {
+            from: DIRECTORY.Static.resource,
+            to: DIRECTORY.Output.renderer
+          }
+        ]),
         isDevelopment && PLUGINS.ReactRefresh(),
         isDevelopment && PLUGINS.HotModuleReplacement()
       ].filter(Boolean)

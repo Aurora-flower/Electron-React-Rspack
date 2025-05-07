@@ -1,3 +1,4 @@
+import type { RawCopyPattern } from "@rspack/binding"
 import { rspack } from "@rspack/core"
 import { configDotenv } from "dotenv"
 import { getFileStructure } from "../common/structure"
@@ -59,10 +60,24 @@ function getEnvPlugin() {
   })
 }
 
+type Pattern = (
+  | string
+  | ({
+      from: string
+    } & Partial<RawCopyPattern>)
+)[]
+
+function copyPlugin(patterns: Pattern) {
+  return new rspack.CopyRspackPlugin({
+    patterns
+  })
+}
+
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
   Define: getDefinePlugin,
   Env: getEnvPlugin,
+  Copy: copyPlugin,
   CssExtract: getMiniCssExtractPlugin,
   ReactRefresh: getReactRefreshPlugin,
   HotModuleReplacement: getHotModuleReplacementPlugin
