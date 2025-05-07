@@ -1,5 +1,5 @@
-import { getRootElement } from "@/helpers/function/dom"
 import AppRouter from "@/routers"
+import { getRootElement } from "@/utils/mod/dom"
 import { type APIOptions, PrimeReactProvider } from "primereact/api"
 import * as React from "react"
 import { createRoot } from "react-dom/client"

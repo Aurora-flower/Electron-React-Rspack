@@ -1,11 +1,7 @@
 import { join, sep } from "node:path"
 import WindowManager from "@main/helpers/manager/window"
 import { isAllWindowClosed } from "@main/helpers/modules/window"
-import {
-  PLATFORM,
-  getPlatform,
-  isWin
-} from "@main/helpers/node/process/platform"
+import { PLATFORM, getPlatform, isWin } from "@main/utils/node/process/platform"
 import { app } from "electron"
 import Logger from "electron-log"
 

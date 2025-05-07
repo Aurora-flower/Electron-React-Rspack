@@ -1,4 +1,4 @@
-import { webLog } from "@/helpers/log"
+import { webLog } from "@/utils/log"
 
 function timeStamp() {
   webLog("time", "time stamp", Date.now())

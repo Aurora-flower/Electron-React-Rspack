@@ -1,5 +1,5 @@
 import { sender } from "@/helpers/event/electron"
-import { getDomElement } from "@/helpers/function/dom"
+import { getDomElement } from "@/utils/mod/dom"
 import {
   Application,
   type ApplicationOptions,

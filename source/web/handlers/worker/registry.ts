@@ -1,4 +1,4 @@
-import { webLog } from "@/helpers/log"
+import { webLog } from "@/utils/log"
 import CommonUtility from "@/utils/utility"
 
 export function enableWorker(

@@ -1,5 +1,5 @@
-import { webLog } from "@/helpers/log"
-import { enableWindowMessagesListener } from "@/helpers/manager/listener"
+import { webLog } from "@/utils/log"
+import { enableWindowMessagesListener } from "@/utils/manager/listener"
 
 export function messageListener() {
   enableWindowMessagesListener(event => {

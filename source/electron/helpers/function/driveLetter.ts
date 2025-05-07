@@ -1,7 +1,7 @@
 import { pathToFileURL } from "node:url"
 import { DEFAULT_SCHEMA } from "@main/common/const"
 // import { normalize } from "node:path";
-import { isWin } from "@main/helpers/node/process/platform"
+import { isWin } from "@main/utils/node/process/platform"
 
 export function driveLetterReplace(url: string) {
   const driveLetterRegex = /^[a-zA-Z]:/

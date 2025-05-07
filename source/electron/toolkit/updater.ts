@@ -1,5 +1,5 @@
 import { getIsPackage } from "@main/helpers/modules/app"
-import { isWin } from "@main/helpers/node/process/platform"
+import { isWin } from "@main/utils/node/process/platform"
 import { type BrowserWindow, Notification } from "electron"
 import Logger from "electron-log"
 import { type AppUpdater, autoUpdater } from "electron-updater"

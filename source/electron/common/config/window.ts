@@ -1,4 +1,4 @@
-import { resolvePath } from "@main/helpers/node/path"
+import { resolvePath } from "@main/utils/node/path"
 
 export const WINDOW_OPTIONS = {
   title: process.env?.TITLE ?? "Electron-React-Rspack",

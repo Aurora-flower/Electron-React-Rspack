@@ -1,5 +1,5 @@
-import { DATA_TYPE_MODE, isType } from "@/helpers/function/dataType"
-import { webLog } from "@/helpers/log"
+import { webLog } from "@/utils/log"
+import { DATA_TYPE_MODE, isType } from "@/utils/mod/dataType"
 import CommonUtility from "@/utils/utility"
 
 function useClassNames(classNames: Array<unknown>): string {

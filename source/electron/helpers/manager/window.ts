@@ -1,8 +1,8 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
 import { getIsPackage } from "@main/helpers/modules/app"
-import { resolvePath } from "@main/helpers/node/path"
-import { isDev } from "@main/helpers/node/process/env"
-import { isWin } from "@main/helpers/node/process/platform"
+import { resolvePath } from "@main/utils/node/path"
+import { isDev } from "@main/utils/node/process/env"
+import { isWin } from "@main/utils/node/process/platform"
 import { BrowserWindow } from "electron"
 import Logger from "electron-log"
 
