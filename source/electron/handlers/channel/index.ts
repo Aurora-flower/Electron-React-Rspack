@@ -1,4 +1,4 @@
-import { messagePort, transmit } from "@main/handlers/channel/message/sms"
+import { transmit } from "@main/handlers/channel/message/sms"
 import { type IpcMainEvent, type IpcMainInvokeEvent, ipcMain } from "electron"
 
 export const channelSenderDisposer = createChannelHandler()
@@ -22,13 +22,7 @@ const INVOKE: ChannelConfig = {
   type: CHANNLE_TYPE.Invoke
 }
 
-const PORT: ChannelConfig = {
-  handler: messagePort,
-  name: "port",
-  type: CHANNLE_TYPE.Event
-}
-
-const CHANNELS: ChannelConfig[] = [HANDLER, INVOKE, PORT]
+const CHANNELS: ChannelConfig[] = [HANDLER, INVOKE]
 
 export function registerIPCChannel() {
   for (const { name, handler, type } of CHANNELS) {
