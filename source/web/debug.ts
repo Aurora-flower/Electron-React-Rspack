@@ -65,8 +65,11 @@ export async function debugPixiRender() {
 export function debugIPC() {
   sender("sms:transmit", {
     type: "sms:transmit",
-    data: "Hello World!"
-  })
+    data: {
+      channel: "sms:transmit",
+      msg: "Hello World!"
+    }
+  } as Message)
 }
 
 async function debug() {

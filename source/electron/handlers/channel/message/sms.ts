@@ -1,11 +1,5 @@
 import WindowManager from "@main/helpers/manager/window"
 
-interface Message {
-  type: string
-  data: string
-  isJson: boolean
-}
-
 export async function transmit(msg: Message) {
   const window = WindowManager.getInstance().mainWindow
   if (!window) return

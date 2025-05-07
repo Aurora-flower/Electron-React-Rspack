@@ -29,6 +29,12 @@ declare global {
   type SenderChannelName = string
   type ChannelName = SenderChannelName | InvokeChannelName
 
+  interface Message {
+    type: string
+    data: unknown
+    isJson?: boolean
+  }
+
   type ObjectType<T> = {
     [key: string]: T
   }
