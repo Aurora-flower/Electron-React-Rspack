@@ -11,7 +11,7 @@ declare global {
     }
   }
 
-  interface AppInfo {
+  interface AppInfoModel {
     name: string
     appFolder: string
     appUnpackFolder: string

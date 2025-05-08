@@ -1,9 +1,8 @@
-import { join, sep } from "node:path"
+import { join } from "node:path"
 import WindowManager from "@main/helpers/manager/window"
 import { isAllWindowClosed } from "@main/helpers/modules/window"
 import { PLATFORM, getPlatform, isWin } from "@main/utils/node/process/platform"
 import { app } from "electron"
-import Logger from "electron-log"
 
 const FOLDER_NAMES = {
   Core: "core"
@@ -11,55 +10,60 @@ const FOLDER_NAMES = {
 
 // const FILE_NAMES = {}
 
-export function getIsPackage() {
-  return app.isPackaged
-}
+export class AppInfo implements AppInfoModel {
+  name: string = app.getName()
+  appFolder: string = app.getAppPath()
+  appUnpackFolder = ""
+  sep = ""
+  win32: boolean = isWin()
+  version = ""
+  platform = ""
+  packaged = getIsPackage()
+  paths: Record<AppPathTypes, string> = {
+    home: "",
+    appData: "",
+    userData: "",
+    sessionData: "",
+    temp: "",
+    exe: "",
+    module: "",
+    desktop: "",
+    documents: "",
+    downloads: "",
+    music: "",
+    pictures: "",
+    videos: "",
+    logs: "",
+    recent: "",
+    crashDumps: ""
+  }
+  core = ""
+  workspace = ""
+  private _instance: AppInfo | null = null
 
-export function getAppInfo() {
-  try {
-    const appFolder = app.getAppPath()
-    const info: AppInfo = {
-      name: app.getName(),
-      appFolder,
-      appUnpackFolder: appFolder.replace("app.asar", "app.asar.unpacked"),
-      sep,
-      win32: isWin(),
-      version: app.getVersion(),
-      packaged: app.isPackaged,
-      platform: getPlatform() as string,
-      paths: {
-        home: "",
-        appData: "",
-        userData: "",
-        sessionData: "",
-        temp: "",
-        exe: "",
-        module: "",
-        desktop: "",
-        documents: "",
-        downloads: "",
-        music: "",
-        pictures: "",
-        videos: "",
-        logs: "",
-        recent: "",
-        crashDumps: ""
-      },
-      core: "",
-      workspace: ""
-    }
-
-    const about = Object.keys(info.paths) as AppPathTypes[]
+  constructor() {
+    this.appUnpackFolder = this.appFolder.replace(
+      "app.asar",
+      "app.asar.unpacked"
+    )
+    const about = Object.keys(this.paths) as AppPathTypes[]
     for (let index = 0; index < about.length; index++) {
       const name = about[index]
-      info.paths[name] = app.getPath(name)
+      this.paths[name] = app.getPath(name)
     }
-    info.core = join(info.appUnpackFolder, FOLDER_NAMES.Core)
-    return info
-  } catch (error) {
-    Logger.error(error)
-    return null
+    this.core = join(this.appUnpackFolder, FOLDER_NAMES.Core)
   }
+
+  getInstance() {
+    if (!this._instance) {
+      this._instance = new AppInfo()
+    }
+    return this._instance
+  }
+}
+
+export function getIsPackage() {
+  return app.isPackaged
 }
 
 export function setupAppHooks() {
