@@ -83,6 +83,18 @@
 Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts'
 ```
 
+## 安装问题
+
+1. electron 的安装
+
+由于网络错误，请尝试添加以下环境变量：
+
+```text
+# 废弃 (deprecated) - 可通过配置环境变量的方式来设置
+electron_mirror=https://npmmirror.com/mirrors/electron/
+electron_builder_binaries_mirror=https://npmmirror.com/mirrors/electron-builder-binaries/
+```
+
 ## 自签名证书
 
 使用 OpenSSL 一键生成私钥和证书（无密码保护）

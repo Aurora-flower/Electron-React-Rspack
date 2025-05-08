@@ -37,6 +37,12 @@ export default defineConfig([
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
+    plugins: { react: pluginReact },
+    settings: {
+      react: { version: "detect" }
+    }
+  },
+  {
     files: ["**/*.json"],
     plugins: { json },
     language: "json/json",
@@ -116,7 +122,7 @@ export default defineConfig([
           ignoreStrings: true
         }
       ],
-      "@typescript-eslint/no-explicit-any": "info",
+      "@typescript-eslint/no-explicit-any": "warn",
       // 与当前 eslint-plugin-react 版本不兼容配置
       "react/display-name": "off",
       "react/jsx-key": "off",
