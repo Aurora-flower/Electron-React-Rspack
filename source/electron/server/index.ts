@@ -88,7 +88,7 @@ export class AppServer {
 
 export function createAppServer() {
   const options = {
-    path: join(AppInfo.getInstance().appFolder, "public"),
+    path: join(AppInfo.getInstance().appFolder, "app", "public"),
     port: Number(process.env.DEV_SERVER_PORT ?? ""),
     hostname: process.env.DEV_SERVER_HOSTNAME ?? "127.0.0.1",
     isSafe: process.env.DEV_SAFE_MODE === "true"
