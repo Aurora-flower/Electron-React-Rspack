@@ -1,5 +1,5 @@
 export async function dispatch(
-  channel: InvokeChannelName,
+  channel: ReplyChannelName,
   ...args: unknown[]
 ): Promise<unknown> {
   if (!window.IPC) {
@@ -8,7 +8,7 @@ export async function dispatch(
   return window.IPC.dispatch(channel, ...args)
 }
 
-export async function sender(channel: SenderChannelName, ...args: unknown[]) {
+export async function sender(channel: ReceiverChannelName, ...args: unknown[]) {
   if (!window.IPC) {
     return null
   }

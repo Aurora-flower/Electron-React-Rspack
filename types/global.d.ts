@@ -11,6 +11,8 @@ declare global {
     }
   }
 
+  /* ***** ***** ***** ***** 全局类型定义 ***** ***** ***** ***** */
+
   interface AppInfoModel {
     /* 应用信息 */
     name: string
@@ -40,9 +42,9 @@ declare global {
     workspace: string
   }
 
-  type InvokeChannelName = string
-  type SenderChannelName = string
-  type ChannelName = SenderChannelName | InvokeChannelName
+  type ReplyChannelName = string
+  type ReceiverChannelName = string
+  type ChannelName = ReceiverChannelName | ReplyChannelName
 
   interface Message {
     type: string

@@ -2,13 +2,13 @@ type ChannelType = "event" | "invoke"
 
 type OnHandler = (
   event: IpcMainEvent,
-  channel: SenderChannelName,
+  channel: ReceiverChannelName,
   ...args: unknown[]
 ) => void
 
 type InvokeHandler = (
   event: IpcMainInvokeEvent,
-  channel: InvokeChannelName,
+  channel: ReplyChannelName,
   ...args: unknown[]
 ) => unknown
 

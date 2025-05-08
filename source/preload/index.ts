@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld("IPC", {
 ipcRenderer.on(
   "trigger-message",
   (event: Electron.IpcRendererEvent, message: MessageEventInit) => {
-    const replay: MessageEventInit<MessageEventInit<any> | undefined> = {
+    const replay: MessageEventInit<MessageEventInit<unknown> | undefined> = {
       data: message
     }
     window.dispatchEvent(new MessageEvent("message", replay))
