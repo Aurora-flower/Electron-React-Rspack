@@ -1,6 +1,7 @@
 import * as http from "node:http"
 import * as https from "node:https"
 import { join } from "node:path"
+import { AppInfo } from "@main/helpers/modules/app"
 import Logger from "electron-log"
 import type { Application } from "express"
 const express = require("express")
@@ -87,7 +88,7 @@ export class AppServer {
 
 export function createAppServer() {
   const options = {
-    path: "F:\\Project\\Electron-React-Rspack\\app\\public",
+    path: join(AppInfo.getInstance().appFolder, "public"),
     port: Number(process.env.DEV_SERVER_PORT ?? ""),
     hostname: process.env.DEV_SERVER_HOSTNAME ?? "127.0.0.1",
     isSafe: process.env.DEV_SAFE_MODE === "true"

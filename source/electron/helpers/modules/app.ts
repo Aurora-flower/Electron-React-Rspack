@@ -52,9 +52,12 @@ export class AppInfo implements AppInfoModel {
       FILE_NAMES.Asar,
       FILE_NAMES.Unpack
     )
-    const about = Object.keys(this.paths) as AppPathTypes[]
-    for (let index = 0; index < about.length; index++) {
-      const name = about[index]
+    const aboutPath = Object.keys(this.paths) as AppPathTypes[]
+    for (let index = 0; index < aboutPath.length; index++) {
+      const name = aboutPath[index]
+      if (name === "recent" && !this.win32) {
+        continue
+      }
       this.paths[name] = app.getPath(name)
     }
     this.core = join(this.appUnpackFolder, FOLDER_NAMES.Core)
