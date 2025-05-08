@@ -1,4 +1,5 @@
 import { transmit } from "@main/handlers/channel/message/sms"
+import { getAppInfo } from "@main/helpers/modules/app"
 import { type IpcMainEvent, type IpcMainInvokeEvent, ipcMain } from "electron"
 
 export const channelSenderDisposer = createChannelHandler()
@@ -10,6 +11,7 @@ const CHANNLE_TYPE: Record<"Event" | "Invoke", ChannelType> = {
   Invoke: "invoke"
 }
 
+// receiver
 const HANDLER: ChannelConfig = {
   handler: channelSenderDisposer,
   name: "emitter",
@@ -36,6 +38,7 @@ export function registerIPCChannel() {
 
 const LISTENERS = {
   /* ***** ***** ***** ***** Application ***** ***** ***** ***** */
+  "app:info": getAppInfo,
   "sms:transmit": transmit
 }
 

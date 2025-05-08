@@ -1,4 +1,4 @@
-import { join } from "node:path"
+import { join, parse, sep } from "node:path"
 import WindowManager from "@main/helpers/manager/window"
 import { isAllWindowClosed } from "@main/helpers/modules/window"
 import { PLATFORM, getPlatform, isWin } from "@main/utils/node/process/platform"
@@ -8,13 +8,18 @@ const FOLDER_NAMES = {
   Core: "core"
 }
 
-// const FILE_NAMES = {}
+const FILE_NAMES = {
+  Asar: "app.asar",
+  Unpack: "app.asar.unpacked"
+}
 
 export class AppInfo implements AppInfoModel {
   name: string = app.getName()
   appFolder: string = app.getAppPath()
   appUnpackFolder = ""
-  sep = ""
+  sep = sep
+  cwd = process.cwd()
+  driveLetter = ""
   win32: boolean = isWin()
   version = ""
   platform = ""
@@ -39,12 +44,13 @@ export class AppInfo implements AppInfoModel {
   }
   core = ""
   workspace = ""
-  private _instance: AppInfo | null = null
+  private static _instance: AppInfo | null = null
 
   constructor() {
+    this.driveLetter = parse(this.cwd).root
     this.appUnpackFolder = this.appFolder.replace(
-      "app.asar",
-      "app.asar.unpacked"
+      FILE_NAMES.Asar,
+      FILE_NAMES.Unpack
     )
     const about = Object.keys(this.paths) as AppPathTypes[]
     for (let index = 0; index < about.length; index++) {
@@ -52,14 +58,20 @@ export class AppInfo implements AppInfoModel {
       this.paths[name] = app.getPath(name)
     }
     this.core = join(this.appUnpackFolder, FOLDER_NAMES.Core)
+
+    // workspace
   }
 
-  getInstance() {
-    if (!this._instance) {
-      this._instance = new AppInfo()
+  static getInstance() {
+    if (!AppInfo._instance) {
+      AppInfo._instance = new AppInfo()
     }
-    return this._instance
+    return AppInfo._instance
   }
+}
+
+export function getAppInfo() {
+  return AppInfo.getInstance()
 }
 
 export function getIsPackage() {

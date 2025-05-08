@@ -16,6 +16,6 @@ type ChannelHandler = OnHandler | InvokeHandler
 
 interface ChannelConfig {
   handler: ChannelHandler
-  name: string
+  name: "emitter" | "dispatch"
   type?: ChannelType
 }
