@@ -1,14 +1,14 @@
 import { DEFAULT_SCHEMA } from "@main/common/const"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
-import { net, protocol } from "electron"
+import { net, type CustomScheme, protocol } from "electron"
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,
-  options?: Array<Electron.CustomScheme>
+  options?: Array<CustomScheme>
 ) {
-  let _option: Array<Electron.CustomScheme> = options || []
+  let _option: Array<CustomScheme> = options || []
   if (scheme) {
-    const defaultOption: Electron.CustomScheme = {
+    const defaultOption: CustomScheme = {
       scheme,
       privileges: {
         bypassCSP: true,

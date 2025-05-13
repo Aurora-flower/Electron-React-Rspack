@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from "electron"
+import { type IpcRendererEvent, contextBridge, ipcRenderer } from "electron"
 
 // const windowLoaded = new Promise(resolve => {
 //   window.onload = resolve
@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld("IPC", {
 
 ipcRenderer.on(
   "trigger-message",
-  (event: Electron.IpcRendererEvent, message: MessageEventInit) => {
+  (event: IpcRendererEvent, message: MessageEventInit) => {
     const replay: MessageEventInit<MessageEventInit<unknown> | undefined> = {
       data: message
     }
