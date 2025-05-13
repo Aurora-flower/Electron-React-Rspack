@@ -1,14 +1,13 @@
+import { PRIME_REACT_OPTIONS } from "@/plugins/setupPrimeUI"
 import AppRouter from "@/routers"
 import { getRootElement } from "@/utils/mod/dom"
-import { type APIOptions, PrimeReactProvider } from "primereact/api"
+import { PrimeReactProvider } from "primereact/api"
 import * as React from "react"
 import { createRoot } from "react-dom/client"
 
+// import type { ReactNode } from "react"
 // React.CSSProperties
 // React.ReactNode | React.ReactElement
-const PRIME_REACT_OPTIONS: Partial<APIOptions> = {
-  ripple: true
-}
 
 function App() {
   return (
