@@ -1,3 +1,4 @@
+import Layout from "@/views/layout"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import {
@@ -10,7 +11,7 @@ import {
 const RouteOptions: RouteObject[] = [
   {
     path: "/",
-    element: <div>Hello World</div>,
+    element: <Layout date={new Date()} />,
     children: []
   }
 ]

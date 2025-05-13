@@ -9,6 +9,10 @@ export const DATA_TYPE_MODE = {
   Undefined: "Undefined"
 }
 
+export function isEffectiveElement(data: unknown) {
+  return data !== null && data !== undefined
+}
+
 export function getDefaultData(type: keyof typeof DATA_TYPE_MODE) {
   if (type === DATA_TYPE_MODE.String) {
     return ""
@@ -30,6 +34,15 @@ export function getDefaultData(type: keyof typeof DATA_TYPE_MODE) {
   }
 }
 
+/**
+ * @summary
+ * 优点：
+ * 不会受到原型链污染的影响
+ *
+ * 缺点：
+ * - 性能开销：Object.prototype.toString.call(value) 会涉及函数调用和字符串比较；
+ * - 兼容性：在不同的浏览器之间，Object.prototype.toString.call 的结果可能略有差异，
+ */
 export function getDataType(data: unknown): string {
   return Object.prototype.toString.call(data).slice(8, -1)
 }
