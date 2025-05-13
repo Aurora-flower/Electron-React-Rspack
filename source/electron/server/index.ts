@@ -4,7 +4,7 @@ import { join } from "node:path"
 import { AppInfo } from "@main/helpers/modules/app"
 import Logger from "electron-log"
 import type { Application } from "express"
-const express = require("express") // TODO: 暂时只能使用 require 引入，未解决
+const express = require("express") // TODO(低优先级): 解决express模块引入问题，替换为import语法
 // import express from "express"
 
 interface AppServerOptions {

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "ES6",
     "incremental": true,
     "resolveJsonModule": true,
     "composite": true,
@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "outDir": "./dist",
 
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node16",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": false,

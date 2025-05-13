@@ -39,7 +39,7 @@ export function checkForUpdates(window?: BrowserWindow | undefined) {
   })
 
   autoUpdaterInstance.on("update-not-available", () => {
-    // TODO: 增量更新检测
+    // TODO(高优先级): 实现增量更新检测功能，减少下载体积
   })
 
   autoUpdaterInstance.on("download-progress", progress => {
