@@ -30,7 +30,9 @@ function singleConfig(key: string, type: string) {
     devtool: DEVTOOL.SourceMap,
     resolve: {
       mainFiles: ["index", "main"],
-      extensions: [".ts", ".js"]
+      extensions: [".ts", ".js", ".json"],
+      enforceExtension: false,
+      symlinks: false
     },
     module: {
       rules: [

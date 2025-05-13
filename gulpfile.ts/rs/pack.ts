@@ -29,7 +29,11 @@ function rspackCompiler(isClosing = false) {
           return
         }
         resolve(true)
-        console.log("[Rspack Compiling...]", isDev())
+        console.log(
+          "[Rspack Compiling...]",
+          new Date().toLocaleTimeString(),
+          isDev()
+        )
       })
       if (isClosing) {
         multiCompiler.close(err => {
