@@ -13,9 +13,12 @@
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "baseUrl": ".",
-    "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
     "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["node", "electron", "express"],
+    "experimentalDecorators": true,
+    "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
       "@main/*": ["source/electron/*"]
