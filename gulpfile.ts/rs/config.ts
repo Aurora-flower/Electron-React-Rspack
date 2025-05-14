@@ -71,6 +71,7 @@ function singleConfig(key: string, type: string) {
       "@main": DIRECTORY.Source.main
     }
     options.plugins = options.plugins!.concat([PLUGINS.Env(isDevelopment)])
+    // options.externals = []
   }
 
   if (isPeload) {
@@ -86,7 +87,7 @@ function singleConfig(key: string, type: string) {
       ".tsx",
       ".css"
     ])
-
+    options.externals = ["primereact"]
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),
