@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "outDir": "./dist",
 
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": false,
