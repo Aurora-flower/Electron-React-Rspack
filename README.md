@@ -116,6 +116,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - [🌱 Gulp](https://gulp.nodejs.cn/)
 - [🧪 Rspack](https://rspack.dev/zh/)
 - [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
+- [🍀 Pixi API](https://pixijs.download/release/docs/scene.Graphics.html)
 - [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
 - [🌴 Express](https://www.expressjs.com.cn/)
 - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
