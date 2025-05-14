@@ -47,7 +47,6 @@ export class AppServer {
     })
   }
 
-  // TODO(低优先级): 添加 HTTPS 支持
   private createHttpsServer() {
     const credentials = {
       key: this._options!.PRIVATE_KEY,

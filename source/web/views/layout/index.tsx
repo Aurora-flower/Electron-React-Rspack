@@ -7,7 +7,7 @@ function Layout(props: { date: Date }) {
   webLog("Layout", "props", props)
   return (
     <div>
-      <div>{props.date.toDateString()}</div>
+      <div>{props.date.toLocaleDateString()}</div>
       <Outlet />
     </div>
   )

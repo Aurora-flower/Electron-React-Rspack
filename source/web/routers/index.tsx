@@ -12,7 +12,12 @@ const RouteOptions: RouteObject[] = [
   {
     path: "/",
     element: <Layout date={new Date()} />,
-    children: []
+    children: [
+      {
+        index: true,
+        element: <div>Hello World</div>
+      }
+    ]
   }
 ]
 const opts: DOMRouterOpts = {}

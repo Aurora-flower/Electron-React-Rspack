@@ -50,6 +50,8 @@ declare global {
     core: string
     /* 工作空间路径 */
     workspace: string
+    /* 是否为开发环境 */
+    isDev: boolean
   }
 
   type ObjectType<T> = {
