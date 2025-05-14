@@ -1,5 +1,6 @@
 # Electron-React-Rspack
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Aurora-flower/Electron-React-Rspack)
 [![GitHub license](https://img.shields.io/github/license/Aurora-flower/Electron-React-Rspack?style=for-the-badge)](https://github.com/Aurora-flower/Electron-React-Rspack/blob/main/LICENSE)
 
 ## 前言
@@ -15,6 +16,8 @@
 ---
 
 **Email: `yanl_802@163.com`**
+
+**WIKI: [Electron-React-Rspack](https://deepwiki.com/Aurora-flower/Electron-React-Rspack)**
 
 ---
 
@@ -147,7 +150,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - [🛶 MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
 - [🧳 Biome](https://biomejs.dev/zh-cn/)
 - [🌈 Contributor Covenant](https://www.contributor-covenant.org/)
-- [📦 Eslint](https://eslint.org/)
+- [📦 Eslint](https://zh-hans.eslint.org/)
 - [⭐JS Blog](https://davidwalsh.name)
 - [💡 NPM Mirror](https://npmmirror.com/)
 - [🔥 ES6 Blog](https://es6.ruanyifeng.com/)
@@ -158,3 +161,4 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - [🧠 Pixi.js API](https://api.pixijs.io/index.html)
 - [📷 Three Editor](https://threehub.cn/editor/)
 - [🎶 Web3D Three](http://www.webgl3d.cn/)
+- [🔄 Husky](https://husky.nodejs.cn/get-started.html)
