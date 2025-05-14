@@ -51,5 +51,20 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  user-select: none;
+}
+
+@supports (user-select: none) {
+  .body {
+    /* 标准 */
+    user-select: none;
+
+    /* Webkit前缀（Safari, Chrome, Opera）*/
+    /* -webkit-user-select: none; */
+
+    /* Firefox */
+    /* -moz-user-select: none; */
+
+    /* Microsoft Edge */
+    /* -ms-user-select: none; */
+  }
 }
