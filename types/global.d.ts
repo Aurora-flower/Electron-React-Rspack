@@ -1,18 +1,28 @@
 /// <reference types="./electron/app.d.ts" />
 /// <reference types="./shims.d.ts" />
+/// <reference types="./channel.d.ts" />
 
 declare global {
   /* ***** ***** ***** ***** Window 类型定义扩展 ***** ***** ***** ***** */
   interface Window {
     IPC: {
-      emitter: (channel: string, ...args: unknown[]) => Promise<unknown>
-      dispatch: (channel: string, ...args: unknown[]) => Promise<unknown>
-      // post: () => void
+      emitter: (
+        channel: ReceiverChannelName,
+        ...args: unknown[]
+      ) => Promise<unknown>
+      dispatch: (
+        channel: TriggerChannelName,
+        ...args: unknown[]
+      ) => Promise<unknown>
+      sender: (channel: MessagenerChannelName, ...args: unknown[]) => void
     }
   }
 
   /* ***** ***** ***** ***** 全局类型定义 ***** ***** ***** ***** */
 
+  /**
+   * @summary 应用信息
+   */
   interface AppInfoModel {
     /* 应用信息 */
     name: string
@@ -40,16 +50,6 @@ declare global {
     core: string
     /* 工作空间路径 */
     workspace: string
-  }
-
-  type ReplyChannelName = string
-  type ReceiverChannelName = string
-  type ChannelName = ReceiverChannelName | ReplyChannelName
-
-  interface Message {
-    type: string
-    data: unknown
-    isJson?: boolean
   }
 
   type ObjectType<T> = {

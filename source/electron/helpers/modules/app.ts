@@ -88,6 +88,9 @@ export function setupAppHooks() {
     }
   })
 
+  /**
+   * @platform darwin
+   */
   app.on("activate", () => {
     if (isAllWindowClosed()) {
       WindowManager.getInstance()?.createMainWindow()
