@@ -2,8 +2,7 @@ import type { RawCopyPattern } from "@rspack/binding"
 import { rspack } from "@rspack/core"
 import { configDotenv } from "dotenv"
 import { getFileStructure } from "../common/structure"
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
+// const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
 
 function getHtmlRspackPlugin(template: string) {
   const HtmlRspackPlugin = new rspack.HtmlRspackPlugin({
@@ -35,26 +34,30 @@ function getMiniCssExtractPlugin() {
   return new rspack.CssExtractRspackPlugin({})
 }
 
-function getReactRefreshPlugin() {
-  return new ReactRefreshPlugin()
-}
+// function getReactRefreshPlugin() {
+//   return new ReactRefreshPlugin()
+// }
 
-function getHotModuleReplacementPlugin() {
-  return new rspack.HotModuleReplacementPlugin()
-}
+// function getHotModuleReplacementPlugin() {
+//   return new rspack.HotModuleReplacementPlugin()
+// }
 
-function getDefinePlugin() {
+function getDefinePlugin(options = {}) {
   return new rspack.DefinePlugin({
+    ...options
     // global: `(typeof globalThis !== "undefined" ? globalThis : window)` // '(typeof globalThis !== "undefined" ? globalThis : window)' | "window"
-    // "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
   })
 }
 
-function getEnvPlugin() {
+function getEnvPlugin(isDev = false) {
   const FILE = getFileStructure()
   configDotenv({ path: FILE.Env.from })
+  if (isDev) {
+    configDotenv({ path: `${FILE.Env.from}.dev` })
+  } else {
+    configDotenv({ path: `${FILE.Env.from}.prod` })
+  }
   return new rspack.EnvironmentPlugin({
-    // TITLE: process.env.TITLE ?? "",
     // DEV_SERVER_URL: process.env.DEV_SERVER_URL ?? ""
     ...process.env
   })
@@ -73,14 +76,19 @@ function copyPlugin(patterns: Pattern) {
   })
 }
 
+function getProvidePlugin() {
+  return new rspack.ProvidePlugin({})
+}
+
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
   Define: getDefinePlugin,
   Env: getEnvPlugin,
   Copy: copyPlugin,
-  CssExtract: getMiniCssExtractPlugin,
-  ReactRefresh: getReactRefreshPlugin,
-  HotModuleReplacement: getHotModuleReplacementPlugin
+  Provide: getProvidePlugin,
+  CssExtract: getMiniCssExtractPlugin
+  // ReactRefresh: getReactRefreshPlugin,
+  // HotModuleReplacement: getHotModuleReplacementPlugin
 }
 
 export default PLUGINS

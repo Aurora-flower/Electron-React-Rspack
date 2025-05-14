@@ -2,7 +2,7 @@
  * @file Loader 处理配置
  */
 import { rspack } from "@rspack/core"
-import { ENVIRONMENT } from "../common/env"
+// import { ENVIRONMENT } from "../common/env"
 
 /* ***** ***** ***** ***** Rules ***** ***** ***** ***** */
 const NODE_MODULES = /node_modules/
@@ -89,36 +89,13 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
   return options
 }
 
-const isDev = process.env.NODE_ENV === ENVIRONMENT.Dev
+// const isDev = process.env.NODE_ENV === ENVIRONMENT.Dev
 
 function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
     test: /\.jsx?$/,
-    use: [
-      {
-        loader: "builtin:swc-loader",
-        options: {
-          jsc: {
-            parser: {
-              syntax: "ecmascript",
-              jsx: true
-            },
-            transform: {
-              react: {
-                runtime: "automatic",
-                development: isDev,
-                refresh: isDev
-              },
-              optimizer: {
-                simplify: true
-              }
-            }
-          }
-        }
-      },
-      JS_PARSER_OPTIONS
-    ],
-    // type: "javascript/auto",
+    // use: [JS_PARSER_OPTIONS],
+    type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
   return options
@@ -128,27 +105,31 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
   const options = {
     test: /\.tsx?$/,
     use: [
-      {
-        loader: "builtin:swc-loader",
-        options: {
-          jsc: {
-            parser: {
-              syntax: "typescript",
-              tsx: true
-            },
-            transform: {
-              react: {
-                runtime: "automatic",
-                development: isDev,
-                refresh: isDev
-              },
-              optimizer: {
-                simplify: true
-              }
-            }
-          }
-        }
-      },
+      // {
+      //   loader: "builtin:swc-loader",
+      //   options: {
+      //     jsc: {
+      //      // parser: {
+      //      //   syntax: "ecmascript",
+      //      //   jsx: true
+      //      // },
+      //       parser: {
+      //         syntax: "typescript",
+      //         tsx: true
+      //       },
+      //       transform: {
+      //         react: {
+      //           runtime: "automatic",
+      //           development: isDev,
+      //           refresh: isDev
+      //         },
+      //         optimizer: {
+      //           simplify: true
+      //         }
+      //       }
+      //     }
+      //   }
+      // },
       JS_PARSER_OPTIONS,
       TS_PARSER_OPTIONS
     ],

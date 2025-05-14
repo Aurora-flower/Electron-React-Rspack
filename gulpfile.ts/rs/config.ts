@@ -1,5 +1,5 @@
 import { join } from "node:path"
-import type { RspackOptions } from "@rspack/core"
+import type { Mode, RspackOptions } from "@rspack/core"
 import { isDev } from "../common/env"
 import { getDirectoryStructure, getFileStructure } from "../common/structure"
 import LOADER from "./loader"
@@ -25,7 +25,7 @@ function singleConfig(key: string, type: string) {
   const isDevelopment = isDev()
 
   const baseOptions: RspackOptions = {
-    mode: isDevelopment ? "development" : "production",
+    mode: (process.env.NODE_ENV as Mode) || "production",
     stats: "verbose",
     devtool: DEVTOOL.SourceMap,
     resolve: {
@@ -70,11 +70,11 @@ function singleConfig(key: string, type: string) {
     options.resolve!.alias = {
       "@main": DIRECTORY.Source.main
     }
-    options.plugins = options.plugins!.concat([PLUGINS.Env()])
+    options.plugins = options.plugins!.concat([PLUGINS.Env(isDevelopment)])
   }
 
   if (isPeload) {
-    options.plugins = options.plugins!.concat([PLUGINS.Env()])
+    options.plugins = options.plugins!.concat([PLUGINS.Env(isDevelopment)])
   }
 
   if (isRenderer) {
@@ -86,6 +86,7 @@ function singleConfig(key: string, type: string) {
       ".tsx",
       ".css"
     ])
+
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),
@@ -94,9 +95,7 @@ function singleConfig(key: string, type: string) {
             from: DIRECTORY.Static.resource,
             to: DIRECTORY.Output.renderer
           }
-        ]),
-        isDevelopment && PLUGINS.ReactRefresh(),
-        isDevelopment && PLUGINS.HotModuleReplacement()
+        ])
       ].filter(Boolean)
     )
   }
