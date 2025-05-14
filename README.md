@@ -156,3 +156,5 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - [💎 NVM](https://nvm.p6p.net/)
 - [⚡ PIXI Text Editor](https://text-style.pixijs.io)
 - [🧠 Pixi.js API](https://api.pixijs.io/index.html)
+- [📷 Three Editor](https://threehub.cn/editor/)
+- [🎶 Web3D Three](http://www.webgl3d.cn/)
