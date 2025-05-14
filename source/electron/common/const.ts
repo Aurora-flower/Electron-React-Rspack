@@ -5,9 +5,14 @@ export const FILE_EXTENSIONS_CATEGORY = {
   Image: [".jpg", ".png"],
 
   // Media
-  Video: [".mp4", ".mov"],
+  Media: [
+    /* ***** ***** Video ***** ***** */
+    ".mp4",
+    ".mov",
 
-  Audio: [".mp3"],
+    /* ***** ***** Audio ***** ***** */
+    ".mp3"
+  ],
 
   Script: [".js", ".jsx", ".ts", ".tsx"],
 
