@@ -3,7 +3,7 @@ import { getIsPackage } from "@main/helpers/modules/app"
 import { resolvePath } from "@main/utils/node/path"
 import { isDev } from "@main/utils/node/process/env"
 import { isWin } from "@main/utils/node/process/platform"
-import { BrowserWindow } from "electron"
+import { BrowserWindow, Menu } from "electron"
 import Logger from "electron-log"
 
 const MAIN_WINDOW_NAME = "_MAIN_"
@@ -68,9 +68,7 @@ class WindowManager {
     }
     this.mainWindow = new BrowserWindow(this.windowOptions)
     if (this.isPackage) {
-      // if (this.isWindows) {
-      // Menu.setApplicationMenu(null); // win.removeMenu(); | win.setMenu(null);
-      // }
+      Menu.setApplicationMenu(null) // win.removeMenu(); | win.setMenu(null);
     }
     if (process.env.DEV_SERVER_URL) {
       this.mainWindow.loadURL(process.env.DEV_SERVER_URL)
@@ -78,12 +76,7 @@ class WindowManager {
       this.mainWindow.loadFile(resolvePath("../public/index.html"))
     }
     this.setupWindowHooks()
-    if (isDev()) {
-      this.mainWindow.webContents.openDevTools({
-        mode: "detach",
-        activate: true
-      })
-    }
+
     return this.mainWindow
   }
 
@@ -92,6 +85,14 @@ class WindowManager {
     const win = this.mainWindow
 
     // win.maximize();
+
+    if (isDev()) {
+      this.mainWindow.webContents.openDevTools({
+        mode: "detach",
+        activate: true
+      })
+    }
+
     win.setMinimumSize(800, 600)
 
     win.on("close", e => {

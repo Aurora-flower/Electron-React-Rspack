@@ -1,6 +1,7 @@
 import { join, parse, sep } from "node:path"
 import WindowManager from "@main/helpers/manager/window"
 import { isAllWindowClosed } from "@main/helpers/modules/window"
+import { isDev } from "@main/utils/node/process/env"
 import { PLATFORM, getPlatform, isWin } from "@main/utils/node/process/platform"
 import { app } from "electron"
 
@@ -18,6 +19,7 @@ export class AppInfo implements AppInfoModel {
   appFolder: string = app.getAppPath()
   appUnpackFolder = ""
   sep = sep
+  isDev = isDev()
   cwd = process.cwd()
   driveLetter = ""
   win32: boolean = isWin()
