@@ -6,7 +6,38 @@ function rspackCompiler(isClosing = false): Promise<boolean> {
   return new Promise((resolve, reject) => {
     const RsConfig = getRsConfig()
     try {
-      const options: WatchOptions = {}
+      const options: WatchOptions = {
+        ignored: [
+          /* ***** ***** Folder ***** ***** */
+          "**/node_modules/**",
+          "**/gulpfile.ts/**",
+          "**/.idea/**",
+          "**/.github/**",
+          "**/.husky/**",
+          "**/.vscode/**",
+          "**/.git/**",
+          "**/.husky/**",
+          "**/test/**",
+          "/app/**",
+          "/core/**",
+          "/.cache/**",
+
+          /* ***** ***** File ***** ***** */
+          "**/.hintrc",
+          "**/.npmrc",
+          "**/LICENSE*",
+          "**/*.md",
+          "**/*.git*",
+          "**/*.yml",
+          "**/*.config.js",
+          "**/*.config.mjs",
+          "**/tsconfig.*.json",
+          "**/tsconfig.json",
+          "**/package.json",
+          "**/package-lock.json"
+        ],
+        poll: 1000 * 3
+      }
       const multiCompiler = rspack(RsConfig)
       multiCompiler.watch(options, (err, stats) => {
         /* Tip: err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
