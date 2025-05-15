@@ -1,4 +1,6 @@
 class ListenerCollect {
+  public static readonly Events = ["resize", "message"] as const
+
   private static listeners: Record<
     string,
     Array<{
@@ -60,15 +62,24 @@ class ListenerCollect {
   }
 }
 
+export function dispatchWindowResize(): void {
+  window.dispatchEvent(new Event(ListenerCollect.Events[0]))
+}
+
+export function dispatchWindowMessages(data: unknown = null): void {
+  window.dispatchEvent(
+    new MessageEvent(ListenerCollect.Events[1], { data } as MessageEventInit)
+  )
+}
+
 export function enableWindowResizeListener(
   callback: EventListener,
   immediately = false,
   options?: AddEventListenerOptions | boolean
 ): void {
-  const eventName = "resize"
-  ListenerCollect.addListener(eventName, callback, options)
+  ListenerCollect.addListener(ListenerCollect.Events[0], callback, options)
   if (immediately) {
-    window.dispatchEvent(new Event(eventName))
+    dispatchWindowResize()
   }
 }
 
@@ -76,7 +87,11 @@ export function destoryWindowResizeListener(
   callback: EventListener,
   options?: AddEventListenerOptions | boolean
 ): void {
-  ListenerCollect.removeSpecificListener("resize", callback, options)
+  ListenerCollect.removeSpecificListener(
+    ListenerCollect.Events[0],
+    callback,
+    options
+  )
 }
 
 export function enableWindowMessagesListener(
@@ -84,12 +99,9 @@ export function enableWindowMessagesListener(
   immediately = false,
   options?: AddEventListenerOptions | boolean
 ): void {
-  const eventName = "message"
-  ListenerCollect.addListener(eventName, callback, options)
+  ListenerCollect.addListener(ListenerCollect.Events[1], callback, options)
   if (immediately) {
-    window.dispatchEvent(
-      new MessageEvent(eventName, { data: null } as MessageEventInit)
-    )
+    dispatchWindowMessages()
   }
 }
 
@@ -97,7 +109,11 @@ export function destoryWindowMessagesListener(
   callback: EventListener,
   options?: AddEventListenerOptions | boolean
 ): void {
-  ListenerCollect.removeSpecificListener("message", callback, options)
+  ListenerCollect.removeSpecificListener(
+    ListenerCollect.Events[1],
+    callback,
+    options
+  )
 }
 
 export function clearAllListeners(): void {

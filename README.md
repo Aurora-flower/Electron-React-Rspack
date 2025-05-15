@@ -127,6 +127,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - [🛍️ Electron Builder](https://www.electron.build/)
 - [🎉 Animate.css](https://animate.style/)
 - [🟢 Prime React UI](https://primereact.cn/installation/)
+- [🛏️ Tailwindcss](https://tailwindcss.com/)
 
 <!-- [🎁 Log4](https://github.com/log4js-node/log4js-node) -->
 <!-- [🏁 Electron-Store](https://github.com/sindresorhus/electron-store) -->

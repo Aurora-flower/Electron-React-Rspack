@@ -1,7 +1,7 @@
 /* semantic color variables for this project */
 :root {
   --color-white: #ffffff;
-  --color-black: #000000;
+  --color-black: #464444;
   --color-indigo: #2c3e50;
 }
 
@@ -51,6 +51,13 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-background);
 }
 
 @supports (user-select: none) {
