@@ -5,7 +5,7 @@ import { registerProtocolHandle } from "@main/helpers/modules/protocol"
 import { app } from "electron"
 import Logger from "electron-log"
 
-async function onAppReady() {
+async function onAppReady(): Promise<void> {
   app
     .whenReady()
     .then(() => {

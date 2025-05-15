@@ -4,6 +4,7 @@ import { join } from "node:path"
 import { AppInfo } from "@main/helpers/modules/app"
 import Logger from "electron-log"
 import type { Application } from "express"
+
 const express = require("express") // TODO(低优先级): 解决express模块引入问题，替换为import语法
 // import express from "express"
 
@@ -12,11 +13,11 @@ interface AppServerOptions {
   port: number
   hostname: string
   isSafe?: boolean
-
-  [key: string]: any
+  PRIVATE_KEY?: string
+  CERTIFICATE?: string
 }
 
-export function applicationHooks(app: Application) {
+export function applicationHooks(app: Application): void {
   app.get("/", (req, res) => {
     res.send("Hello World")
   })
@@ -40,14 +41,14 @@ export class AppServer {
     }
   }
 
-  private createHttpServer() {
+  private createHttpServer(): void {
     this._server = http.createServer(this._application)
     this._server.listen(this._options!.port, () => {
       Logger.log(`HTTP server listening on port ${this._options?.port}`)
     })
   }
 
-  private createHttpsServer() {
+  private createHttpsServer(): void {
     const credentials = {
       key: this._options!.PRIVATE_KEY,
       cert: this._options!.CERTIFICATE
@@ -57,7 +58,7 @@ export class AppServer {
     })
   }
 
-  start() {
+  start(): void {
     if (!this._application) return
     if (this._options?.PRIVATE_KEY && this._options?.CERTIFICATE) {
       this.createHttpsServer()
@@ -66,12 +67,14 @@ export class AppServer {
     }
   }
 
-  stop() {
+  stop(): void {
     if (!this._server) return
-    this._server.close(() => {})
+    this._server.close((): void => {
+      // Logger.log(`Server Stopped`)
+    })
   }
 
-  get option() {
+  get option(): AppServerOptions | undefined {
     return this._options
   }
 
@@ -79,7 +82,7 @@ export class AppServer {
     this._options = options
   }
 
-  getInstance() {
+  getInstance(): AppServer {
     if (!this._instance) {
       this._instance = new AppServer()
     }
@@ -87,7 +90,7 @@ export class AppServer {
   }
 }
 
-export function createAppServer() {
+export function createAppServer(): void {
   const options = {
     path: join(AppInfo.getInstance().appFolder, "app", "public"),
     port: Number(process.env.DEV_SERVER_PORT ?? ""),

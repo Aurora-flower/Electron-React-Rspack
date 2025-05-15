@@ -131,7 +131,7 @@ export function isValidMime(mime: string): boolean {
   return Object.values(MIME_TYPES).some(entry => entry.mime === mime)
 }
 
-export function getMimeType(filePath: string) {
+export function getMimeType(filePath: string): string {
   const extension = extname(filePath).toLowerCase()
   const mimeType = MIME_TYPES[extension]
   return mimeType ? mimeType.mime : "application/octet-stream"

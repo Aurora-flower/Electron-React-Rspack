@@ -8,14 +8,14 @@ export function getAutoUpdater(): AppUpdater {
   Logger.transports.file.level = "verbose"
   Logger.transports.file.format =
     "[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] {scope} {text}"
-  Logger.transports.file.resolvePathFn = () => "./update.log"
+  Logger.transports.file.resolvePathFn = (): string => "./update.log"
   autoUpdater.disableWebInstaller = false
   autoUpdater.autoDownload = false
   autoUpdater.logger = Logger
   return autoUpdater
 }
 
-export function checkForUpdates(window?: BrowserWindow | undefined) {
+export function checkForUpdates(window?: BrowserWindow | undefined): void {
   if (!window || !getIsPackage() || !isWin()) {
     return
   }

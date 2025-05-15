@@ -6,7 +6,11 @@ export interface LogOptions {
   level?: "log" | "error" | "warn" | "info"
 }
 
-export function logger(moduleId: string, sign: string, ...args: unknown[]) {
+export function logger(
+  moduleId: string,
+  sign: string,
+  ...args: unknown[]
+): void {
   // console.log(`>>> Source [ ${moduleId} ] - $_${sign}_$`, ...args);
   Logger.log(`>>> Source [ ${moduleId} ] - $_${sign}_$`, ...args)
 }

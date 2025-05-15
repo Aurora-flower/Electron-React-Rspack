@@ -14,11 +14,11 @@ import PLUGINS from "./plugins"
 const FILE = getFileStructure()
 const DIRECTORY = getDirectoryStructure()
 
-function sourcePath(type: string, filename: string) {
+function sourcePath(type: string, filename: string): string {
   return join(DIRECTORY.Source[type] || "", filename)
 }
 
-function singleConfig(key: string, type: string) {
+function singleConfig(key: string, type: string): Record<string, unknown> {
   const isMain = type === APP_PROCESS_MODE.Electron
   const isPeload = type === APP_PROCESS_MODE.Preload
   const isRenderer = type === APP_PROCESS_MODE.Renderer
@@ -104,7 +104,7 @@ function singleConfig(key: string, type: string) {
   return options
 }
 
-function getRsConfig() {
+function getRsConfig(): RspackOptions[] {
   const flatConfig: Array<RspackOptions> = []
   for (const key in APP_PROCESS_MODE) {
     const type = APP_PROCESS_MODE[key as keyof typeof APP_PROCESS_MODE]

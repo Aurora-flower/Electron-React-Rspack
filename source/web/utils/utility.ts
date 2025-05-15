@@ -1,5 +1,5 @@
 class CommonUtility {
-  static errorMessage(e: unknown) {
+  static errorMessage(e: unknown): string | unknown {
     return e instanceof Error ? e.message : e
   }
 }

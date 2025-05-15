@@ -22,7 +22,7 @@ const outDir = join(cwd, "app")
 const packagePath = join(cwd, "package.json")
 const outputPath = join(outDir, "package.json")
 
-async function clonePackageJSON() {
+async function clonePackageJSON(): Promise<DistPackage> {
   const raw = await readFile(packagePath, "utf-8")
   const { name, main, author, version, license, description, dependencies } =
     JSON.parse(raw) as PackageJson
@@ -38,11 +38,12 @@ async function clonePackageJSON() {
   await mkdir(outDir, { recursive: true })
   await writeFile(outputPath, JSON.stringify(distPackage, null, 2))
   console.log("clonePackageJSON:", distPackage)
+  return distPackage
 }
 
 // async function copiedCoreFolder() {}
 
-async function preparePackage() {
+async function preparePackage(): Promise<void> {
   try {
     await clonePackageJSON()
     copyFile(npmrc, join(outDir, npmName))

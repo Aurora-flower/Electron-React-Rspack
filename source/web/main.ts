@@ -5,8 +5,9 @@ import debug from "@/debug"
 import { messageListener } from "@/helpers/event/listener"
 
 /* ***** ***** plugin hooks ***** ***** */
-import setupPixi from "@/plugins/setupPixi"
+import setupPixiJS from "@/plugins/setupPixiJS"
 import setupPrimeUI from "@/plugins/setupPrimeUI"
+import setupThreeJS from "@/plugins/setupThreeJS"
 
 /* ***** ***** primereact css ***** ***** */
 import "primereact/resources/themes/viva-light/theme.css"
@@ -24,10 +25,12 @@ new THREE.MeshBasicMaterial({
 
 messageListener()
 
-async function AppInit() {
+async function AppInit(): Promise<void> {
   await setupPrimeUI()
-  setupPixi()
+  setupPixiJS()
+  setupThreeJS()
 }
+
 AppInit().then(() => {
   setTimeout(() => debug(), 1000)
 })

@@ -1,39 +1,42 @@
 class Stack {
-  private instance: Stack | null = null
+  private static instance: Stack | null = null
   private stack: Array<unknown> = []
 
-  getInstance() {
-    if (!this.instance) {
-      this.instance = new Stack()
+  static getInstance(): Stack {
+    if (!Stack.instance) {
+      Stack.instance = new Stack()
     }
-    return this.instance
+    return Stack.instance
   }
 
-  push(item: unknown) {
+  push(item: unknown): void {
     this.stack.push(item)
   }
 
-  pop() {
+  pop(): unknown | undefined {
+    if (this.isEmpty()) {
+      return undefined
+    }
     return this.stack.pop()
   }
 
-  peek() {
+  peek(): unknown | undefined {
     return this.stack[this.stack.length - 1]
   }
 
-  size() {
+  size(): number {
     return this.stack.length
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.stack.length === 0
   }
 
-  clear() {
+  clear(): void {
     this.stack = []
   }
 
-  toString() {
+  toString(): string {
     return this.stack.toString()
   }
 }

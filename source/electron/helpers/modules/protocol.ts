@@ -5,7 +5,7 @@ import { net, type CustomScheme, protocol } from "electron"
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,
   options?: Array<CustomScheme>
-) {
+): void {
   let _option: Array<CustomScheme> = options || []
   if (scheme) {
     const defaultOption: CustomScheme = {
@@ -25,9 +25,9 @@ export function privilegedSchemes(
   protocol.registerSchemesAsPrivileged(_option)
 }
 
-export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA) {
+export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
   if (typeof scheme !== "string" || scheme.trim() === "") {
-    return new Error("scheme must be a string and not empty.")
+    throw new Error("scheme must be a string and not empty.")
   }
 
   async function protocolHander(

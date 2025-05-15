@@ -3,13 +3,14 @@ import AppRouter from "@/routers"
 import { getRootElement } from "@/utils/mod/dom"
 import { PrimeReactProvider } from "primereact/api"
 import * as React from "react"
+import type { JSX } from "react"
 import { createRoot } from "react-dom/client"
 
 // import type { ReactNode } from "react"
 // React.CSSProperties
 // React.ReactNode | React.ReactElement
 
-function App() {
+function App(): JSX.Element {
   return (
     <PrimeReactProvider value={PRIME_REACT_OPTIONS}>
       <React.StrictMode>
@@ -19,7 +20,7 @@ function App() {
   )
 }
 
-function AppRender() {
+function AppRender(): void {
   const root = "#root"
   const rootElement = getRootElement(root)
   if (!rootElement) {

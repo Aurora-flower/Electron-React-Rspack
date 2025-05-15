@@ -1,4 +1,4 @@
 @import "./scrollbar.css";
 @import "./base.css";
-@import "animate.css";
-@import "tailwindcss";
+@import "./mod/animate.css";
+@import "./mod/tailwindcss.css";

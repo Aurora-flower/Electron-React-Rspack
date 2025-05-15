@@ -5,16 +5,16 @@ import compile from "./compile"
 const instance = ElectronProcess.getInstance()
 
 // const onceCompile = () => compile(false);
-const watchCompile = () => compile(false)
+const watchCompile = (): Promise<void> => compile(false)
 
-async function Run() {
+async function Run(): Promise<void> {
   // series(instance.stop(), instance.start())
   await instance.stop()
   await instance.start()
   console.log("[electron reload]")
 }
 
-async function WatchSource() {
+async function WatchSource(): Promise<void> {
   const options: WatchOptions = {
     // cwd: process.cwd(),
     ignoreInitial: false,

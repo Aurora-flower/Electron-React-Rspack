@@ -5,7 +5,7 @@ class ElectronProcess {
   private static instance: ElectronProcess | undefined
   private electronProcess: ChildProcess | null = null
 
-  private constructor() {} // Enforce singleton
+  // private constructor() {} // Enforce singleton
 
   static getInstance(): ElectronProcess {
     if (!ElectronProcess.instance) {

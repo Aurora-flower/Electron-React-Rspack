@@ -8,6 +8,10 @@ import Logger from "electron-log"
 
 const MAIN_WINDOW_NAME = "_MAIN_"
 
+interface WindowState {
+  isLoaded: boolean
+}
+
 class WindowManager {
   public mainWindow: BrowserWindow | null = null
   private static instance: WindowManager
@@ -55,14 +59,16 @@ class WindowManager {
     this.windows.clear()
   }
 
-  public getWindowState() {
+  public getWindowState(): WindowState | null {
     if (!this.mainWindow || this.mainWindow.isDestroyed()) {
       return null
     }
-    return {}
+    return {
+      isLoaded: true
+    }
   }
 
-  public createMainWindow() {
+  public createMainWindow(): BrowserWindow {
     if (this.mainWindow && !this.mainWindow.isDestroyed()) {
       return this.mainWindow
     }
@@ -76,11 +82,10 @@ class WindowManager {
       this.mainWindow.loadFile(resolvePath("../public/index.html"))
     }
     this.setupWindowHooks()
-
     return this.mainWindow
   }
 
-  private setupWindowHooks() {
+  private setupWindowHooks(): void {
     if (!this.mainWindow) return
     const win = this.mainWindow
 
@@ -109,21 +114,21 @@ class WindowManager {
 
     win.webContents.on("did-finish-load", () => {
       win.webContents.send("trigger-message", {
-        type: "ready",
-        data: "did-finish-load"
-      })
+        source: "ready",
+        payload: "did-finish-load"
+      } as Message)
     })
 
     win.webContents.on("devtools-opened", () => {
       this.mainWindow?.focus()
       win.webContents.send("trigger-message", {
-        type: "devtools",
-        data: "devtools-opened"
-      })
+        source: "devtools",
+        payload: "devtools-opened"
+      } as Message)
     })
   }
 
-  private async safeCloseWindow() {
+  private async safeCloseWindow(): Promise<void> {
     if (!this.mainWindow || this.mainWindow.isDestroyed()) return
     try {
       this.isClosing = true
@@ -134,10 +139,12 @@ class WindowManager {
     }
   }
 
-  private async beforeWindowClose() {}
+  private async beforeWindowClose(): Promise<void> {
+    // TODO(低优先级): 窗口关闭前的处理
+  }
 }
 
-export function createWorkerWindow() {
+export function createWorkerWindow(): void {
   const worker = new BrowserWindow({
     show: false,
     webPreferences: { nodeIntegration: true }

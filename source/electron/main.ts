@@ -3,13 +3,14 @@ import onAppReadyBefore from "@main/handlers/event/onAppReadyBefore"
 import commandLines from "@main/helpers/function/commandLines"
 import Logger from "electron-log"
 
-function advanceExecution() {
+function advanceExecution(): void {
   commandLines()
 }
 
-function initialization() {
+function initialization(): void {
   advanceExecution()
   onAppReadyBefore().then(onAppReady).catch(console.error)
   Logger.log("DEV_SERVER_URL", process.env.DEV_SERVER_URL)
 }
+
 initialization()

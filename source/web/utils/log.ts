@@ -11,7 +11,11 @@ export const LOG_COLOR = {
   cyan: "color: cyan;"
 }
 
-export function webLog(moduleId: string, sign: string, ...args: unknown[]) {
+export function webLog(
+  moduleId: string,
+  sign: string,
+  ...args: unknown[]
+): void {
   console.log(
     `%c>>> Web Log Source %c[ ${moduleId} ] - %c$_${sign}_$`,
     LOG_COLOR.cyan,
@@ -21,7 +25,11 @@ export function webLog(moduleId: string, sign: string, ...args: unknown[]) {
   )
 }
 
-export function webErrorLog(moduleId: string, sign: string, error: unknown) {
+export function webErrorLog(
+  moduleId: string,
+  sign: string,
+  error: unknown
+): void {
   console.error(
     `>>> Web Error Source %c[ ${moduleId} ] - %c$_${sign}_$`,
     LOG_COLOR.blue,

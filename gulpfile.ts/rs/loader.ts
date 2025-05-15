@@ -1,7 +1,7 @@
 /**
  * @file Loader 处理配置
  */
-import { rspack } from "@rspack/core"
+import { type RuleSetRule, rspack } from "@rspack/core"
 // import { ENVIRONMENT } from "../common/env"
 
 /* ***** ***** ***** ***** Rules ***** ***** ***** ***** */
@@ -32,7 +32,10 @@ const TS_PARSER_OPTIONS = {
 }
 
 /* ***** ***** ***** ***** Loader ***** ***** ***** ***** */
-function getImageLoader(isExclude = false, exclude = NODE_MODULES) {
+function getImageLoader(
+  isExclude = false,
+  exclude = NODE_MODULES
+): RuleSetRule {
   const options = {
     test: /\.(png|jpe?g|gif)$/,
     use: [
@@ -49,7 +52,7 @@ function getImageLoader(isExclude = false, exclude = NODE_MODULES) {
   return options
 }
 
-function getSvgLoader(isExclude = false, exclude = NODE_MODULES) {
+function getSvgLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
     test: /\.svg$/i,
     issuer: /\.[jt]sx?$/,
@@ -59,7 +62,7 @@ function getSvgLoader(isExclude = false, exclude = NODE_MODULES) {
   return options
 }
 
-function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
+function getCssLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
     test: /\.css$/,
     use: [
@@ -91,7 +94,7 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES) {
 
 // const isDev = process.env.NODE_ENV === ENVIRONMENT.Dev
 
-function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
+function getJsLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
     test: /\.jsx?$/,
     // use: [JS_PARSER_OPTIONS],
@@ -101,7 +104,7 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES) {
   return options
 }
 
-function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
+function getTsLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
     test: /\.tsx?$/,
     use: [
@@ -138,7 +141,7 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES) {
   return options
 }
 
-function getTextLoader(isExclude = false, exclude = NODE_MODULES) {
+function getTextLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
     test: /\.(pem|txt)$/,
     type: "asset/source",

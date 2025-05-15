@@ -17,7 +17,7 @@
     "lint:debug": "eslint --debug",
     "lint:fix": "eslint --fix",
     "lint:info": "eslint --quiet",
-    "lint": "biome check --write",
+    "biome:lint": "biome check --write",
     "package:prepare": "cross-env NODE_ENV=production ts-node ./scripts/build/package-prepare.ts",
     "package": "npm run build && electron-builder --publish always"
   },

@@ -5,14 +5,14 @@ export function enableWorker(
   scriptURL: string | URL,
   message: unknown,
   options?: WorkerOptions
-) {
+): void {
   const worker = new Worker(scriptURL, options)
   worker.postMessage(message)
-  worker.onmessage = event => {
+  worker.onmessage = (event): void => {
     webLog("enableWorker", "Main thread received message", event.data)
     worker.terminate() // Stop Worker
   }
-  worker.onerror = error => {
+  worker.onerror = (error): void => {
     webLog("enableWorker", "error", CommonUtility.errorMessage(error))
   }
 }

@@ -3,6 +3,11 @@ import { join } from "node:path"
 // process.chdir('/Users')
 const CWD = process.cwd()
 
+interface ReturnInfo {
+  baseUrl: string
+  [key: string]: string
+}
+
 /* ***** ***** ***** ***** Folder(Directory) Structure ***** ***** ***** ***** */
 const DIRECTORY_STRUCTURE = {
   Output: "app",
@@ -11,7 +16,11 @@ const DIRECTORY_STRUCTURE = {
   Config: ".config"
 }
 
-function getAppStructure(baseUrl: string) {
+function getAppStructure(baseUrl: string): ReturnInfo & {
+  main: string
+  preload: string
+  renderer: string
+} {
   return {
     baseUrl,
     main: join(baseUrl, "electron"),
@@ -20,7 +29,11 @@ function getAppStructure(baseUrl: string) {
   }
 }
 
-function getSourceStructure(baseUrl: string) {
+function getSourceStructure(baseUrl: string): ReturnInfo & {
+  main: string
+  preload: string
+  renderer: string
+} {
   return {
     baseUrl,
     main: join(baseUrl, "electron"),
@@ -29,21 +42,37 @@ function getSourceStructure(baseUrl: string) {
   }
 }
 
-function getPublicStructure(baseUrl: string) {
+function getPublicStructure(baseUrl: string): ReturnInfo & {
+  resource: string
+} {
   return {
     baseUrl,
     resource: join(baseUrl, "resource")
   }
 }
 
-function getConfigStructure(baseUrl: string) {
+function getConfigStructure(baseUrl: string): ReturnInfo {
   return {
     baseUrl
   }
 }
 
+type GetFolderInfo =
+  | ReturnType<typeof getAppStructure>
+  | ReturnType<typeof getSourceStructure>
+  | ReturnType<typeof getPublicStructure>
+  | ReturnType<typeof getConfigStructure>
+  | string
+
+type DirectoryStructure = typeof DIRECTORY_STRUCTURE & {
+  Output: ReturnType<typeof getAppStructure>
+  Source: ReturnType<typeof getSourceStructure>
+  Static: ReturnType<typeof getPublicStructure>
+  Config: ReturnType<typeof getConfigStructure>
+}
+
 const _Directory_ = new Proxy(DIRECTORY_STRUCTURE, {
-  get(target, key) {
+  get(target, key): GetFolderInfo {
     if (!(key in target)) {
       return undefined
     }
@@ -60,12 +89,7 @@ const _Directory_ = new Proxy(DIRECTORY_STRUCTURE, {
       return baseUrl
     }
   }
-}) as typeof DIRECTORY_STRUCTURE & {
-  Output: ReturnType<typeof getAppStructure>
-  Source: ReturnType<typeof getSourceStructure>
-  Static: ReturnType<typeof getPublicStructure>
-  Config: ReturnType<typeof getConfigStructure>
-}
+}) as DirectoryStructure
 
 /* ***** ***** ***** ***** File Structure ***** ***** ***** ***** */
 const FILE_STRUCTURE = {
@@ -76,15 +100,26 @@ const FILE_STRUCTURE = {
   Favicon: "favicon.ico"
 }
 
-function getFileTrend(form: string, name: string, to = "") {
+interface FileInfo {
+  from: string
+  to?: string
+}
+
+function getFileTrend(form: string, name: string, to = undefined): FileInfo {
   return {
     from: join(form, name),
     to: to && join(to, name)
   }
 }
 
+type GetFileInfo = ReturnType<typeof getFileTrend>
+
+type FileStructure = {
+  [key in keyof typeof FILE_STRUCTURE]: GetFileInfo
+}
+
 const _File_ = new Proxy(FILE_STRUCTURE, {
-  get(target, key) {
+  get(target, key): GetFileInfo {
     if (!(key in target)) {
       return undefined
     }
@@ -99,15 +134,15 @@ const _File_ = new Proxy(FILE_STRUCTURE, {
       )
     }
   }
-})
+}) as unknown as FileStructure
 
 /* ***** ***** ***** ***** Export ***** ***** ***** ***** */
-export function getDirectoryStructure() {
+export function getDirectoryStructure(): DirectoryStructure {
   const emptyObject = Object.create(null)
   return Object.assign(emptyObject, _Directory_)
 }
 
-export function getFileStructure() {
+export function getFileStructure(): FileStructure {
   const emptyObject = Object.create(null)
   return Object.assign(emptyObject, _File_)
 }

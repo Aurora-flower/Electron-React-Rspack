@@ -8,14 +8,14 @@ const EFFECT = {
 
 type EffectType = (typeof EFFECT)[keyof typeof EFFECT]
 
-export function getTheme() {
+export function getTheme(): EffectType {
   return nativeTheme.shouldUseDarkColors ? EFFECT.Dark : EFFECT.Light
 }
 
-export function setTheme(theme: EffectType) {
+export function setTheme(theme: EffectType): void {
   nativeTheme.themeSource = theme
 }
 
-export function toggleTheme() {
+export function toggleTheme(): void {
   setTheme(getTheme() === EFFECT.Dark ? EFFECT.Light : EFFECT.Dark)
 }

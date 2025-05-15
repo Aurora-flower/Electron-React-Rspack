@@ -1,34 +1,41 @@
 class Queue {
+  private static instance: Queue | null = null
   private queue: Array<unknown> = []
 
-  getInstance() {
-    if (!this.queue.length) {
-      return null
+  static getInstance(): Queue | null {
+    if (!Queue.instance) {
+      Queue.instance = new Queue()
+    }
+    return Queue.instance
+  }
+
+  enqueue(elements: unknown): void {
+    this.queue.push(elements)
+  }
+
+  dequeue(): unknown | undefined {
+    if (this.isEmpty()) {
+      return undefined
     }
     return this.queue.shift()
   }
 
-  enqueue(elements: unknown) {
-    this.queue.push(elements)
-  }
-
-  dequeue() {
-    return this.queue.shift()
-  }
-
-  peek() {
+  peek(): unknown | undefined {
+    if (this.isEmpty()) {
+      return undefined
+    }
     return this.queue[0]
   }
 
-  size() {
+  size(): number {
     return this.queue.length
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return !this.queue.length
   }
 
-  clear() {
+  clear(): void {
     this.queue = []
   }
 }

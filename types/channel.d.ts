@@ -22,8 +22,12 @@ type ChannelName =
 /**
  * @summary Ipc 监听函数
  */
-type ChannelListener = (...args: any[]) => Promise<unknown> | unknown
-type ChannelVoidListener = (...args: any[]) => Promise<void> | void
+type ChannelListener<T extends unknown[] = unknown[]> = (
+  ...args: T
+) => Promise<unknown> | unknown
+type ChannelVoidListener<T extends unknown[] = unknown[]> = (
+  ...args: T
+) => Promise<void> | void
 
 /**
  * @summary Ipc Channel 处理函数
@@ -52,7 +56,7 @@ type ChannelConfigMap = {
  * @summary SMS 消息类型定义
  */
 interface Message {
-  type: string
-  data: unknown
+  source: string
+  payload: unknown
   isJson?: boolean
 }

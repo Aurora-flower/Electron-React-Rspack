@@ -11,7 +11,7 @@ import {
 
 import { enableWorker } from "@/handlers/worker/registry"
 
-export function debugWorker() {
+export function debugWorker(): void {
   const workerPath = new URL(
     "../../core/scripts/javascript/worker.js",
     location.href
@@ -21,7 +21,7 @@ export function debugWorker() {
   })
 }
 
-export async function debugPixiRender() {
+export async function debugPixiRender(): Promise<void> {
   const root = "#pixi-container"
   const app = new Application()
   const element = getDomElement(root)
@@ -62,17 +62,16 @@ export async function debugPixiRender() {
   })
 }
 
-export function debugIPC() {
+export function debugIPC(): void {
   sender("sms:transmit", {
-    type: "sms:transmit",
-    data: {
-      channel: "sms:transmit",
+    source: "IPC",
+    payload: {
       msg: "Hello World!"
     }
   } as Message)
 }
 
-async function debug() {
+async function debug(): Promise<void> {
   // await debugPixiRender()
   debugIPC()
   // debugWorker()

@@ -64,7 +64,7 @@ export function enableWindowResizeListener(
   callback: EventListener,
   immediately = false,
   options?: AddEventListenerOptions | boolean
-) {
+): void {
   const eventName = "resize"
   ListenerCollect.addListener(eventName, callback, options)
   if (immediately) {
@@ -75,7 +75,7 @@ export function enableWindowResizeListener(
 export function destoryWindowResizeListener(
   callback: EventListener,
   options?: AddEventListenerOptions | boolean
-) {
+): void {
   ListenerCollect.removeSpecificListener("resize", callback, options)
 }
 
@@ -83,7 +83,7 @@ export function enableWindowMessagesListener(
   callback: EventListener,
   immediately = false,
   options?: AddEventListenerOptions | boolean
-) {
+): void {
   const eventName = "message"
   ListenerCollect.addListener(eventName, callback, options)
   if (immediately) {
@@ -96,10 +96,10 @@ export function enableWindowMessagesListener(
 export function destoryWindowMessagesListener(
   callback: EventListener,
   options?: AddEventListenerOptions | boolean
-) {
+): void {
   ListenerCollect.removeSpecificListener("message", callback, options)
 }
 
-export function clearAllListeners() {
+export function clearAllListeners(): void {
   ListenerCollect.clearAllListeners()
 }

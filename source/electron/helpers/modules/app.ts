@@ -67,7 +67,7 @@ export class AppInfo implements AppInfoModel {
     // workspace
   }
 
-  static getInstance() {
+  static getInstance(): AppInfo {
     if (!AppInfo._instance) {
       AppInfo._instance = new AppInfo()
     }
@@ -75,15 +75,15 @@ export class AppInfo implements AppInfoModel {
   }
 }
 
-export function getAppInfo() {
+export function getAppInfo(): AppInfo {
   return AppInfo.getInstance()
 }
 
-export function getIsPackage() {
+export function getIsPackage(): boolean {
   return app.isPackaged
 }
 
-export function setupAppHooks() {
+export function setupAppHooks(): void {
   app.on("window-all-closed", () => {
     if (getPlatform() !== PLATFORM.darwin) {
       app.quit()

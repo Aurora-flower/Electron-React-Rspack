@@ -11,7 +11,7 @@ export async function dispatch(
 export async function emitter(
   channel: ReceiverChannelName,
   ...args: unknown[]
-) {
+): Promise<unknown> {
   if (!window.IPC) {
     return null
   }
@@ -21,7 +21,7 @@ export async function emitter(
 export async function sender(
   channel: MessagenerChannelName,
   ...args: unknown[]
-) {
+): Promise<unknown> {
   if (!window.IPC) {
     return null
   }

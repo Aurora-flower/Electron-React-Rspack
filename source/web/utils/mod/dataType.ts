@@ -9,11 +9,11 @@ export const DATA_TYPE_MODE = {
   Undefined: "Undefined"
 }
 
-export function isEffectiveElement(data: unknown) {
+export function isEffectiveElement(data: unknown): boolean {
   return data !== null && data !== undefined
 }
 
-export function getDefaultData(type: keyof typeof DATA_TYPE_MODE) {
+export function getDefaultData(type: keyof typeof DATA_TYPE_MODE): unknown {
   if (type === DATA_TYPE_MODE.String) {
     return ""
   } else if (type === DATA_TYPE_MODE.Number) {
@@ -25,7 +25,7 @@ export function getDefaultData(type: keyof typeof DATA_TYPE_MODE) {
   } else if (type === DATA_TYPE_MODE.Array) {
     return []
   } else if (type === DATA_TYPE_MODE.Function) {
-    return () => {}
+    return () => null
   } else if (type === DATA_TYPE_MODE.Null) {
     return null
   } else {
@@ -47,6 +47,6 @@ export function getDataType(data: unknown): string {
   return Object.prototype.toString.call(data).slice(8, -1)
 }
 
-export function isType(data: unknown, type: string) {
+export function isType(data: unknown, type: string): boolean {
   return Object.prototype.toString.call(data).slice(8, -1) === type
 }

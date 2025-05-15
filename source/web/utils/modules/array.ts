@@ -4,7 +4,7 @@ import {
   isEffectiveElement
 } from "@/utils/mod/dataType"
 
-export function from() {
+export function from(): void {
   const list = Array.prototype.forEach.bind(
     Object.entries({
       a: "1",
@@ -48,7 +48,7 @@ export class ArrayUtility {
     length: number,
     mapFn?: (value?: unknown, index?: number, array?: unknown[]) => unknown
   ): unknown[] {
-    const defaultMapFn = (_: unknown, i: number) => i
+    const defaultMapFn = (_: unknown, i: number): number => i
     return Array.from({ length }, mapFn || defaultMapFn)
   }
 

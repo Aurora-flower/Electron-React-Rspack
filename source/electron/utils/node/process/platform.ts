@@ -16,6 +16,6 @@ export function getPlatform(platform?: NodeJS.Platform): boolean | string {
   return platform ? process.platform === platform : process.platform
 }
 
-export function isWin() {
+export function isWin(): boolean {
   return getPlatform(PLATFORM.win32) as boolean
 }

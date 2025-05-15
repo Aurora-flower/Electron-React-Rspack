@@ -4,7 +4,9 @@ import { configDotenv } from "dotenv"
 import { getFileStructure } from "../common/structure"
 // const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
 
-function getHtmlRspackPlugin(template: string) {
+function getHtmlRspackPlugin(
+  template: string
+): InstanceType<typeof rspack.HtmlRspackPlugin> {
   const HtmlRspackPlugin = new rspack.HtmlRspackPlugin({
     template,
     inject: "body",
@@ -30,7 +32,9 @@ function getHtmlRspackPlugin(template: string) {
   return HtmlRspackPlugin
 }
 
-function getMiniCssExtractPlugin() {
+function getMiniCssExtractPlugin(): InstanceType<
+  typeof rspack.CssExtractRspackPlugin
+> {
   return new rspack.CssExtractRspackPlugin({})
 }
 
@@ -42,14 +46,18 @@ function getMiniCssExtractPlugin() {
 //   return new rspack.HotModuleReplacementPlugin()
 // }
 
-function getDefinePlugin(options = {}) {
+function getDefinePlugin(
+  options = {}
+): InstanceType<typeof rspack.DefinePlugin> {
   return new rspack.DefinePlugin({
     ...options
     // global: `(typeof globalThis !== "undefined" ? globalThis : window)` // '(typeof globalThis !== "undefined" ? globalThis : window)' | "window"
   })
 }
 
-function getEnvPlugin(isDev = false) {
+function getEnvPlugin(
+  isDev = false
+): InstanceType<typeof rspack.EnvironmentPlugin> {
   const FILE = getFileStructure()
   configDotenv({ path: FILE.Env.from })
   if (isDev) {
@@ -70,13 +78,15 @@ type Pattern = (
     } & Partial<RawCopyPattern>)
 )[]
 
-function copyPlugin(patterns: Pattern) {
+function copyPlugin(
+  patterns: Pattern
+): InstanceType<typeof rspack.CopyRspackPlugin> {
   return new rspack.CopyRspackPlugin({
     patterns
   })
 }
 
-function getProvidePlugin() {
+function getProvidePlugin(): InstanceType<typeof rspack.ProvidePlugin> {
   return new rspack.ProvidePlugin({})
 }
 

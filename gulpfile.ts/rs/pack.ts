@@ -2,7 +2,7 @@ import { type WatchOptions, rspack } from "@rspack/core"
 import { isDev } from "../common/env"
 import getRsConfig from "./config"
 
-function rspackCompiler(isClosing = false) {
+function rspackCompiler(isClosing = false): Promise<boolean> {
   return new Promise((resolve, reject) => {
     const RsConfig = getRsConfig()
     try {

@@ -1,6 +1,6 @@
 import { app } from "electron"
 
-function commandLines() {
+function commandLines(): void {
   app.commandLine.appendSwitch("ignore-certificate-errors")
 }
 

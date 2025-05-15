@@ -4,4 +4,8 @@ export const PRIME_REACT_OPTIONS: Partial<APIOptions> = {
   ripple: true
 }
 
-export default async function setupPrimeUI() {}
+async function setupPrimeUI(): Promise<void> {
+  // TODO: 初始化 PrimeReact
+}
+
+export default setupPrimeUI

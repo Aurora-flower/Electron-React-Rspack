@@ -1,15 +1,14 @@
 import { webLog } from "@/utils/log"
-import { Button } from "primereact/button"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
+import type { JSX } from "react"
 import { Outlet } from "react-router"
 
-function Layout(props: { date: Date }) {
-  webLog("Layout", "props", props)
+function Layout(props: { date: Date }): JSX.Element {
+  webLog("Layout", "props", props.date)
   return (
     <div>
       <div>{props.date.toLocaleDateString()}</div>
-      <Button label="Submit" />
       <Outlet />
     </div>
   )

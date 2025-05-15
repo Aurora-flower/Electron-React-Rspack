@@ -3,7 +3,7 @@ import { DEFAULT_SCHEMA } from "@main/common/const"
 // import { normalize } from "node:path";
 import { isWin } from "@main/utils/node/process/platform"
 
-export function driveLetterReplace(url: string) {
+export function driveLetterReplace(url: string): string {
   const driveLetterRegex = /^[a-zA-Z]:/
   if (driveLetterRegex.test(url)) {
     return url.replace(driveLetterRegex, match => `/${match}`)
@@ -14,7 +14,7 @@ export function driveLetterReplace(url: string) {
 export function normalizeDirveLetter(
   url: string,
   scheme: string = DEFAULT_SCHEMA
-) {
+): string {
   if (isWin()) {
     // url.startsWith(`${scheme}://`)
     const postname = url.replace(`${scheme}://`, "") // url.split("://")[1];
