@@ -86,6 +86,8 @@
 Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts'
 ```
 
+---
+
 ## 安装问题
 
 1. electron 的安装
@@ -97,6 +99,8 @@ Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts
 electron_mirror=https://npmmirror.com/mirrors/electron/
 electron_builder_binaries_mirror=https://npmmirror.com/mirrors/electron-builder-binaries/
 ```
+
+---
 
 ## 自签名证书
 
@@ -115,160 +119,150 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 #### 1. 核心框架
 
 - **跨平台框架**
+  - [📚 Electron](https://www.electronjs.org/zh/docs/latest/)
+  - [📱 Electron-Updater](https://builder.electron.js.cn/auto-update.html)
+  - [🏁 Electron-Store](https://github.com/sindresorhus/electron-store)
 
-  - Electron 相关:
+- **前端框架**
+  - [🎮 React](https://zh-hans.react.dev/learn)
+  - [🍓 React Router](https://reactrouter.remix.org.cn/start/data/routing)
+  - [🌍 React Reference](https://react.dev/reference/react)
 
-    - [📚 Electron](https://www.electronjs.org/zh/docs/latest/)
-    - [📱 Electron-Updater](https://builder.electron.js.cn/auto-update.html)
-    - [🏁 Electron-Store](https://github.com/sindresorhus/electron-store)
-    - [🛍️ Electron Builder](https://www.electron.build/)
-    - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
+- **服务端框架**
+  - [🖼️ Node.js](https://nodejs.cn/api/)
+  - [🌴 Express](https://www.expressjs.com.cn/)
 
-- **前端**
-
-  - React 相关:
-
-    - [🎮 React](https://zh-hans.react.dev/learn)
-    - [🍓 React Router](https://reactrouter.remix.org.cn/start/data/routing)
-    - [🌍 React Reference](https://react.dev/reference/react)
-
-- **后端**
-
-  - 本地服务:
-
-    - [🖼️ Node.js](https://nodejs.cn/api/)
-    - [🌴 Express](https://www.expressjs.com.cn/)
-
-#### 2. 图形渲染
+#### 2. 图形渲染层
 
 - **2D渲染引擎**
-
-  - PixiJS 相关:
-    - [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
-    - [🎯 Pixi.js Example](https://pixi.nodejs.cn/examples)
-    - [🍀 Pixi.js API](https://pixijs.download/release/docs/scene.Graphics.html)
-    - [⚡ PIXI Text Editor](https://text-style.pixijs.io)
-    - [🧠 Pixi.js Library API](https://api.pixijs.io/index.html)
+  - [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
+  - [🎯 Pixi.js示例](https://pixi.nodejs.cn/examples)
+  - [🍀 Pixi.js图形API](https://pixijs.download/release/docs/scene.Graphics.html)
+  - [⚡ PIXI文本样式编辑器](https://text-style.pixijs.io)
+  - [🧠 Pixi.js库API](https://api.pixijs.io/index.html)
 
 - **3D渲染引擎**
-
   - [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
-  - [📷 Three Editor](https://threehub.cn/editor/)
+  - [📷 Three.js编辑器](https://threehub.cn/editor/)
 
-#### 3. 构建体系
+#### 3. 构建工具链
 
-- **打包工具**
-
-  - [🌱 Gulp](https://gulp.nodejs.cn/)
+- **应用打包**
+  - [🛍️ Electron Builder](https://www.electron.build/)
   - [🧪 Rspack](https://rspack.dev/zh/)
 
-- **编译工具**
+- **任务自动化**
+  - [🌱 Gulp](https://gulp.nodejs.cn/)
 
+- **代码编译**
   - [🦋 BabelJS](https://www.babeljs.cn/docs/)
 
-#### 4. UI 体系
+#### 4. UI组件体系
 
 - **组件库**
-
-  - [🟢 Prime React UI](https://primereact.cn/installation/)
+  - [🟢 PrimeReact UI](https://primereact.cn/installation/)
 
 - **样式方案**
-
   - [🛏️ Tailwindcss](https://tailwindcss.com/)
   - [🎉 Animate.css](https://animate.style/)
 
 ---
 
-### 功能维度
+### 开发支持体系
 
-#### 1. 开发工具
+#### 1. 质量保障
 
-- **调试工具**
-
-  - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
-
-- **代码质量**
-
+- **代码规范**
   - [🧳 Biome](https://biomejs.dev/zh-cn/)
-  - [📦 Eslint](https://zh-hans.eslint.org/)
+  - [📦 ESLint](https://zh-hans.eslint.org/)
+
+- **Git工作流**
   - [🔄 Husky](https://husky.nodejs.cn/get-started.html)
 
-- **包管理**
+#### 2. 调试监控
 
-  - [✈️ NPM](https://npm.nodejs.cn/)
-  - [🚗 NPM package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
-  - [💡 NPM Mirror](https://npmmirror.com/)
-  - [💎 NVM](https://nvm.p6p.net/)
+- **日志系统**
+  - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
+  - [🎁 Log4js](https://github.com/log4js-node/log4js-node)
 
-#### 2. 部署发布
+#### 3. 依赖管理
 
-- **打包工具**
+- **包管理器**
+  - [✈️ npm](https://npm.nodejs.cn/)
+  - [🚗 package.json规范](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
 
-  - [🛍️ Electron Builder](https://www.electron.build/)
-
-#### 3. 文档资源
-
-- **学习网站**
-
-  - [🖋️ W3School](https://w3schools.org.cn/)
-
-- **技术文档**
-
-  - [🐱 MDN](https://developer.mozilla.org/zh-CN/)
-  - [🏠 TypeScript](https://www.typescriptlang.org/docs/)
-
-- **规范标准**
-
-  - [🌈 Contributor Covenant](https://www.contributor-covenant.org/)
-  - [🐶 MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
-
-- **安全证书**
-
-  - [🌟 OpenSSL for Windows](https://slproweb.com/products/Win32OpenSSL.html)
-
-#### 4. 其他
-
-- **參考资源**
-
-  - [🎁 Log4](https://github.com/log4js-node/log4js-node)
-  - [⚡ PIXI Text Editor](https://text-style.pixijs.io)
+- **环境管理**
+  - [💎 nvm](https://nvm.p6p.net/)
+  - [💡 npm镜像](https://npmmirror.com/)
 
 ---
 
 ### 专项技术领域
 
-#### 1. Web图形技术
+#### 1. 图形技术栈
 
-- **底层API**
-
-  - [🍎 MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
-  - [🍕 MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
-  - [🛶 MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
-
-#### 2. 前端进阶
-
-- **JavaScript核心**
-
-  - [🔥 ES6 Blog](https://es6.ruanyifeng.com/)
-  - [🌙 W3school JavaScript](https://www.w3ccoo.com/js/js_intro.html)
+- **底层图形API**
+  - [🍎 WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
+  - [🍕 WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
+  - [🛶 WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
 
 - **性能优化**
+  - [🔒 Chromium渲染引擎](https://www.chromium.org/chromium-projects/)
 
-  - [🔒 Chromium](https://www.chromium.org/chromium-projects/)
+#### 2. 前端工程化
 
-#### 3. 工具资源
+- **现代JS特性**
+  - [🔥 ES6核心指南](https://es6.ruanyifeng.com/)
+  - [🌙 JavaScript基础](https://www.w3ccoo.com/js/js_intro.html)
 
-- **辅助工具**
+- **数据转换**
+  - [🕹️ 数据格式工具](https://transform.tools/)
 
-  - [🕹️ Data Transform Tools](https://transform.tools/)
+#### 3. 安全体系
 
-- **AI工具**
+- **内容安全**
+  - [🐶 CSP策略](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 
-  - [🤖 AI Chat](https://chat18.aichatos98.com/#/chat)
+- **证书管理**
+  - [🌟 OpenSSL](https://slproweb.com/products/Win32OpenSSL.html)
 
 ---
 
-### 社区资源
+### 学习资源网络
+
+#### 1. 文档中心
+
+- **技术文档**
+  - [🐱 MDN Web Docs](https://developer.mozilla.org/zh-CN/)
+  - [🏠 TypeScript文档](https://www.typescriptlang.org/docs/)
+
+- **规范标准**
+  - [🌈 贡献者公约](https://www.contributor-covenant.org/)
+
+#### 2. 社区生态
+
+- **开发社区**
+  - [🏆 GitHub](https://docs.github.com/zh/get-started)
+  - [☕️ 掘金社区](https://juejin.cn/)
+
+- **技术博客**
+  - [⭐ David Walsh博客](https://davidwalsh.name)
+
+#### 3. 可视化资源
+
+- **3D资源站**
+  - [🎶 Web3D中文网](http://www.webgl3d.cn/)
+
+- **徽章服务**
+  - [🌻 Shields.io](https://shields.io/)
+
+---
+
+### 扩展工具集
+
+#### AI辅助开发
+
+- [🤖 AI对话工具](https://chat18.aichatos98.com/#/chat)
 
 - **开发社区**
 
