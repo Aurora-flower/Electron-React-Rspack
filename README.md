@@ -108,59 +108,183 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 ---
 
-## 相关文档
+## 相关链接
 
-### 相关技术栈
+### 技术栈分层
 
-- [🖼️ Node.js](https://nodejs.cn/api/)
-- [📚 Electron](https://www.electronjs.org/zh/docs/latest/)
-- [🎮 React](https://zh-hans.react.dev/learn)
-- [🍓 React Router](https://reactrouter.remix.org.cn/start/data/routing)
-- [🌱 Gulp](https://gulp.nodejs.cn/)
-- [🧪 Rspack](https://rspack.dev/zh/)
-- [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
-- [🎯 Pixi.js Example](https://pixi.nodejs.cn/examples)
-- [🍀 Pixi.js API](https://pixijs.download/release/docs/scene.Graphics.html)
-- [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
-- [🌴 Express](https://www.expressjs.com.cn/)
-- [🧸 Electron Logger](https://github.com/megahertz/electron-log)
-- [🛍️ Electron Builder](https://www.electron.build/)
-- [🎉 Animate.css](https://animate.style/)
-- [🟢 Prime React UI](https://primereact.cn/installation/)
-- [🛏️ Tailwindcss](https://tailwindcss.com/)
+#### 1. 核心框架
 
-<!-- [🎁 Log4](https://github.com/log4js-node/log4js-node) -->
-<!-- [🏁 Electron-Store](https://github.com/sindresorhus/electron-store) -->
+- **跨平台框架**
+
+  - Electron 相关:
+
+    - [📚 Electron](https://www.electronjs.org/zh/docs/latest/)
+    - [📱 Electron-Updater](https://builder.electron.js.cn/auto-update.html)
+    - [🏁 Electron-Store](https://github.com/sindresorhus/electron-store)
+    - [🛍️ Electron Builder](https://www.electron.build/)
+    - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
+
+- **前端**
+
+  - React 相关:
+
+    - [🎮 React](https://zh-hans.react.dev/learn)
+    - [🍓 React Router](https://reactrouter.remix.org.cn/start/data/routing)
+    - [🌍 React Reference](https://react.dev/reference/react)
+
+- **后端**
+
+  - 本地服务:
+
+    - [🖼️ Node.js](https://nodejs.cn/api/)
+    - [🌴 Express](https://www.expressjs.com.cn/)
+
+#### 2. 图形渲染
+
+- **2D渲染引擎**
+
+  - PixiJS 相关:
+    - [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
+    - [🎯 Pixi.js Example](https://pixi.nodejs.cn/examples)
+    - [🍀 Pixi.js API](https://pixijs.download/release/docs/scene.Graphics.html)
+    - [⚡ PIXI Text Editor](https://text-style.pixijs.io)
+    - [🧠 Pixi.js Library API](https://api.pixijs.io/index.html)
+
+- **3D渲染引擎**
+
+  - [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
+  - [📷 Three Editor](https://threehub.cn/editor/)
+
+#### 3. 构建体系
+
+- **打包工具**
+
+  - [🌱 Gulp](https://gulp.nodejs.cn/)
+  - [🧪 Rspack](https://rspack.dev/zh/)
+
+- **编译工具**
+
+  - [🦋 BabelJS](https://www.babeljs.cn/docs/)
+
+#### 4. UI 体系
+
+- **组件库**
+
+  - [🟢 Prime React UI](https://primereact.cn/installation/)
+
+- **样式方案**
+
+  - [🛏️ Tailwindcss](https://tailwindcss.com/)
+  - [🎉 Animate.css](https://animate.style/)
 
 ---
 
-### 其他相关
+### 功能维度
 
-- [🔒 Chromium](https://www.chromium.org/chromium-projects/)
-- [🌙 W3school JavaScript](https://www.w3ccoo.com/js/js_intro.html)
-- [🏠 TypeScript](https://www.typescriptlang.org/docs/)
-- [✈️ NPM](https://npm.nodejs.cn/)
-- [🚗 NPM package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
-- [🌍 React Reference](https://react.dev/reference/react)
-- [🌻 Shields](https://shields.io/)
-- [🦋 BabelJS](https://www.babeljs.cn/docs/)
-- [🐱 MDN](https://developer.mozilla.org/zh-CN/)
-- [🐶 MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
-- [🍎 MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
-- [🍕 MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
-- [🛶 MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
-- [🧳 Biome](https://biomejs.dev/zh-cn/)
-- [🌈 Contributor Covenant](https://www.contributor-covenant.org/)
-- [📦 Eslint](https://zh-hans.eslint.org/)
-- [⭐JS Blog](https://davidwalsh.name)
-- [💡 NPM Mirror](https://npmmirror.com/)
-- [🔥 ES6 Blog](https://es6.ruanyifeng.com/)
-- [💬 GitHub](https://docs.github.com/zh/get-started)
-- [🌟 OpenSSL for Windows](https://slproweb.com/products/Win32OpenSSL.html)
-- [💎 NVM](https://nvm.p6p.net/)
-- [⚡ PIXI Text Editor](https://text-style.pixijs.io)
-- [🧠 Pixi.js API](https://api.pixijs.io/index.html)
-- [📷 Three Editor](https://threehub.cn/editor/)
-- [🎶 Web3D Three](http://www.webgl3d.cn/)
-- [🔄 Husky](https://husky.nodejs.cn/get-started.html)
-- [🕹️ Data Transform Tools](https://transform.tools/)
+#### 1. 开发工具
+
+- **调试工具**
+
+  - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
+
+- **代码质量**
+
+  - [🧳 Biome](https://biomejs.dev/zh-cn/)
+  - [📦 Eslint](https://zh-hans.eslint.org/)
+  - [🔄 Husky](https://husky.nodejs.cn/get-started.html)
+
+- **包管理**
+
+  - [✈️ NPM](https://npm.nodejs.cn/)
+  - [🚗 NPM package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
+  - [💡 NPM Mirror](https://npmmirror.com/)
+  - [💎 NVM](https://nvm.p6p.net/)
+
+#### 2. 部署发布
+
+- **打包工具**
+
+  - [🛍️ Electron Builder](https://www.electron.build/)
+
+#### 3. 文档资源
+
+- **学习网站**
+
+  - [🖋️ W3School](https://w3schools.org.cn/)
+
+- **技术文档**
+
+  - [🐱 MDN](https://developer.mozilla.org/zh-CN/)
+  - [🏠 TypeScript](https://www.typescriptlang.org/docs/)
+
+- **规范标准**
+
+  - [🌈 Contributor Covenant](https://www.contributor-covenant.org/)
+  - [🐶 MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+
+- **安全证书**
+
+  - [🌟 OpenSSL for Windows](https://slproweb.com/products/Win32OpenSSL.html)
+
+#### 4. 其他
+
+- **參考资源**
+
+  - [🎁 Log4](https://github.com/log4js-node/log4js-node)
+  - [⚡ PIXI Text Editor](https://text-style.pixijs.io)
+
+---
+
+### 专项技术领域
+
+#### 1. Web图形技术
+
+- **底层API**
+
+  - [🍎 MDN WebGL](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API)
+  - [🍕 MDN WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API)
+  - [🛶 MDN WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
+
+#### 2. 前端进阶
+
+- **JavaScript核心**
+
+  - [🔥 ES6 Blog](https://es6.ruanyifeng.com/)
+  - [🌙 W3school JavaScript](https://www.w3ccoo.com/js/js_intro.html)
+
+- **性能优化**
+
+  - [🔒 Chromium](https://www.chromium.org/chromium-projects/)
+
+#### 3. 工具资源
+
+- **辅助工具**
+
+  - [🕹️ Data Transform Tools](https://transform.tools/)
+
+- **AI工具**
+
+  - [🤖 AI Chat](https://chat18.aichatos98.com/#/chat)
+
+---
+
+### 社区资源
+
+- **开发社区**
+
+  - [🏆 GitHub](https://github.com/)
+  - [👨‍💻 Stack Overflow](https://stackoverflow.com/)
+  - [☕️ 掘金](https://juejin.cn/)
+
+- **技术博客**
+
+  - [⭐JS Blog](https://davidwalsh.name)
+
+- **可视化资源**
+
+  - [🎶 Web3D Three](http://www.webgl3d.cn/)
+  - [🌻 Shields](https://shields.io/)
+
+- **其他**
+
+  - [💬 GitHub](https://docs.github.com/zh/get-started)
