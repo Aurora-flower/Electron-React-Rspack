@@ -10,7 +10,7 @@ function DashboardCard(props: {
   children: JSX.Element
 }): JSX.Element {
   return (
-    <div className="card w-[calc(25%-2rem)] m-1 !bg-gray-100">
+    <div className="card w-[calc(25%-2rem)] m-[1rem] !bg-[var(--color-mint-500)]">
       <div className="card-header">{props.title}</div>
       <div className="card-body">
         {
