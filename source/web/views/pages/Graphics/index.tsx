@@ -1,13 +1,30 @@
 import PixiManager from "@/helpers/render/gremlin/manager"
-// biome-ignore lint/correctness/noUnusedImports: <explanation>
+import { webLog } from "@/utils/log"
+import type { Application } from "pixi.js"
 import * as React from "react"
 import type { JSX } from "react"
 
 function Graphics(): JSX.Element {
-  PixiManager.getApp()
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const [getApp, setApp] = React.useState<Application>()
+
+  React.useEffect(() => {
+    if (!getApp) {
+      PixiManager.init(containerRef.current!).then((app: Application) => {
+        setApp(app)
+        PixiManager.initCanvas(app)
+        webLog("Graphics", "DrowIo", getApp)
+      })
+    }
+
+    return (): void => {
+      PixiManager.destroy()
+    }
+  }, [getApp])
+
   return (
     <div className="grphics page-base">
-      <div id="graphics" />
+      <div ref={containerRef} id="graphics" />
     </div>
   )
 }

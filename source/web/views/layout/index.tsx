@@ -8,9 +8,9 @@ function Layout(props: { date: Date }): JSX.Element {
   webLog("Layout", "props", props.date)
   return (
     <div className="layout-view">
-      <div className="layout-date absolute top-1 left-1">
+      {/* <div className="layout-date absolute top-1 left-1">
         {props.date.toLocaleDateString()}
-      </div>
+      </div> */}
       <Outlet />
     </div>
   )

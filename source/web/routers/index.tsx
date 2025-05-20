@@ -1,6 +1,7 @@
-import HOC from "@/components/Hoc"
-import Dashboard from "@/views/components/Dashboard"
+// import HOC from "@/components/Hoc"
+// import Dashboard from "@/views/components/Dashboard"
 import Layout from "@/views/layout"
+import Graphics from "@/views/pages/Graphics"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"
@@ -11,7 +12,7 @@ import {
   createBrowserRouter
 } from "react-router"
 
-const EnhancedDashboard = HOC(Dashboard)
+// const EnhancedDashboard = HOC(Dashboard)
 
 const RouteOptions: RouteObject[] = [
   {
@@ -20,7 +21,8 @@ const RouteOptions: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <EnhancedDashboard />
+        // element: <EnhancedDashboard />
+        element: <Graphics />
       }
     ]
   }

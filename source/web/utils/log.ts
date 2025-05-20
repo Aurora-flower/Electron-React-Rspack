@@ -19,8 +19,8 @@ export function webLog(
   console.log(
     `%c>>> Web Log Source %c[ ${moduleId} ] - %c$_${sign}_$`,
     LOG_COLOR.cyan,
+    LOG_COLOR.purple,
     LOG_COLOR.pink,
-    LOG_COLOR.green,
     ...args
   )
 }
