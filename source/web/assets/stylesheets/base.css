@@ -53,7 +53,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.page {
+.page-base {
   width: 100vw;
   height: 100vh;
   overflow: hidden;

@@ -7,8 +7,10 @@ import { Outlet } from "react-router"
 function Layout(props: { date: Date }): JSX.Element {
   webLog("Layout", "props", props.date)
   return (
-    <div className="page">
-      <div>{props.date.toLocaleDateString()}</div>
+    <div className="layout-view">
+      <div className="layout-date absolute top-1 left-1">
+        {props.date.toLocaleDateString()}
+      </div>
       <Outlet />
     </div>
   )

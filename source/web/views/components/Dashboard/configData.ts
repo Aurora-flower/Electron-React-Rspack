@@ -1,9 +1,13 @@
 export const DASHBOARD_MAP: Array<{
   name?: string
   label: string
+  desc?: string
+  icon?: string
+  url?: string
 }> = [
   {
-    label: "2D|3D 渲染"
+    label: "2D|3D 渲染",
+    desc: "基于 Pixi.js、Three.js 的 2D|3D 渲染示例集合"
   },
   {
     label: "数据可视化"

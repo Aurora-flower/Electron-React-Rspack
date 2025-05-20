@@ -10,14 +10,12 @@ function DashboardCard(props: {
   children: JSX.Element
 }): JSX.Element {
   return (
-    <div className="card w-[calc(25%-2rem)] m-[1rem] !bg-[var(--color-mint-500)]">
+    <div className="card w-[calc(25%-2rem)] m-[1rem] rounded-md p-1 !bg-[var(--color-mint-500)]">
       <div className="card-header">{props.title}</div>
       <div className="card-body">
-        {
-          <div key={Math.random() + Math.random()} className="item m-2">
-            {props.children}
-          </div>
-        }
+        <div key={Math.random() + Math.random()} className="item m-2">
+          {props.children}
+        </div>
       </div>
     </div>
   )
@@ -25,10 +23,10 @@ function DashboardCard(props: {
 
 function Dashboard(): JSX.Element {
   return (
-    <div className="dashboard flex flex-wrap">
+    <div className="dashboard page-base flex flex-wrap">
       {DASHBOARD_MAP.map(item => (
         <DashboardCard title={item.label} key={item.label}>
-          <div>DashboardCard</div>
+          <div>{item.desc}</div>
         </DashboardCard>
       ))}
     </div>
