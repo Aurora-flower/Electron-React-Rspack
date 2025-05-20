@@ -1,8 +1,10 @@
 import type { RawCopyPattern } from "@rspack/binding"
 import { rspack } from "@rspack/core"
 import { configDotenv } from "dotenv"
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
 import { getFileStructure } from "../common/structure"
-// const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
+
+const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
 
 function getHtmlRspackPlugin(
   template: string
@@ -38,13 +40,15 @@ function getMiniCssExtractPlugin(): InstanceType<
   return new rspack.CssExtractRspackPlugin({})
 }
 
-// function getReactRefreshPlugin() {
-//   return new ReactRefreshPlugin()
-// }
+function getReactRefreshPlugin(): InstanceType<typeof ReactRefreshPlugin> {
+  return new ReactRefreshPlugin()
+}
 
-// function getHotModuleReplacementPlugin() {
-//   return new rspack.HotModuleReplacementPlugin()
-// }
+function getHotModuleReplacementPlugin(): InstanceType<
+  typeof rspack.HotModuleReplacementPlugin
+> {
+  return new rspack.HotModuleReplacementPlugin()
+}
 
 function getDefinePlugin(
   options = {}
@@ -90,15 +94,32 @@ function getProvidePlugin(): InstanceType<typeof rspack.ProvidePlugin> {
   return new rspack.ProvidePlugin({})
 }
 
+function getBundleAnalyzerPlugin(): InstanceType<typeof BundleAnalyzerPlugin> {
+  try {
+    const BundleAnalyzerPluginOption = {
+      analyzerMode: "static",
+      reportFilename: "report.html",
+      openAnalyzer: false,
+      generateStatsFile: true,
+      statsFilename: "stats.json"
+    }
+    return new BundleAnalyzerPlugin(BundleAnalyzerPluginOption)
+  } catch (error) {
+    console.log("BundleAnalyzerPlugin error:", error?.message)
+    return null
+  }
+}
+
 const PLUGINS = {
   Html: getHtmlRspackPlugin,
   Define: getDefinePlugin,
   Env: getEnvPlugin,
   Copy: copyPlugin,
   Provide: getProvidePlugin,
-  CssExtract: getMiniCssExtractPlugin
-  // ReactRefresh: getReactRefreshPlugin,
-  // HotModuleReplacement: getHotModuleReplacementPlugin
+  CssExtract: getMiniCssExtractPlugin,
+  BundleAnalyzer: getBundleAnalyzerPlugin,
+  ReactRefresh: getReactRefreshPlugin,
+  HMR: getHotModuleReplacementPlugin
 }
 
 export default PLUGINS

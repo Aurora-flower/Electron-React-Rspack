@@ -96,7 +96,9 @@ function singleConfig(key: string, type: string): Record<string, unknown> {
             from: DIRECTORY.Static.resource,
             to: DIRECTORY.Output.renderer
           }
-        ])
+        ]),
+        // PLUGINS.BundleAnalyzer(),
+        isDevelopment && PLUGINS.ReactRefresh()
       ].filter(Boolean)
     )
   }
