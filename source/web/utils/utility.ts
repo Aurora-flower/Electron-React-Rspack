@@ -2,6 +2,33 @@ class CommonUtility {
   static errorMessage(e: unknown): string | unknown {
     return e instanceof Error ? e.message : e
   }
+
+  static throttle<T extends (...args: unknown[]) => unknown>(
+    fn: T,
+    delay: number
+  ): T {
+    let lastCall = 0
+    return function (this: unknown, ...args: unknown[]) {
+      const now = Date.now()
+      if (now - lastCall >= delay) {
+        lastCall = now
+        return fn.apply(this, args)
+      }
+    } as T
+  }
+
+  static debounce<T extends (...args: unknown[]) => unknown>(
+    fn: T,
+    delay: number
+  ): T {
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+    return function (this: unknown, ...args: unknown[]) {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+      timeoutId = setTimeout(() => fn.apply(this, args), delay)
+    } as T
+  }
 }
 
 export default CommonUtility
