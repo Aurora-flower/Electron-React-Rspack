@@ -1,3 +1,4 @@
+import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
@@ -41,19 +42,31 @@ class PixiManager {
       y: 0,
       color: 0xffffff
     })
-    const container = createContainer(layerContainer)
-    createGraphics(container, undefined, { x: 80, y: 80, color: 0xffc0cb })
+    const grid = new Grid(basiskarteContainer, {
+      width: app.renderer.width,
+      height: app.renderer.height
+    })
+    grid.draw()
+    createGraphics(layerContainer, undefined, { x: 80, y: 80, color: 0xffc0cb })
 
     loadTexture(`local://${"F:\\SERVER\\release\\ER\\sample.png"}`).then(
       (texture: Texture) => {
-        createSprite(
-          {
-            texture
-          },
-          layerContainer
-        )
+        const container = createContainer(layerContainer)
+        createSprite(container, {
+          texture,
+          width: 100,
+          height: 100
+        })
         basiskarte.attach(basiskarteContainer)
         layer.attach(layerContainer)
+
+        setInterval(() => {
+          container.position.set(
+            container.position.x + 1,
+            container.position.y + 1
+          )
+          webLog("PixiManager", "update", container.position)
+        }, 1000)
       }
     )
 

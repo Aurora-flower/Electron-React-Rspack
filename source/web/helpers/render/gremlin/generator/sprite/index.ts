@@ -1,9 +1,9 @@
 import { type Container, Sprite, type SpriteOptions } from "pixi.js"
 
 export function createSprite(
+  parent: Container | undefined = undefined,
   options: SpriteOptions = {},
-  _config = {},
-  parent?: Container
+  _config = {}
 ): Sprite {
   const sprite = new Sprite(options)
   if (parent) {
