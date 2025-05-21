@@ -13,7 +13,7 @@ function GraphicsPage(): JSX.Element {
       PixiManager.init(containerRef.current!).then((app: Application) => {
         setApp(app)
         PixiManager.initCanvas(app)
-        webLog("Graphics", "DrowIo", getApp)
+        webLog("GraphicsPage", "DrowIo", getApp)
       })
     }
 

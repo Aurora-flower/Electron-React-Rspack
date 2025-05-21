@@ -1,6 +1,6 @@
 // import HOC from "@/components/Hoc"
 // import Dashboard from "@/views/components/Dashboard"
-import Layout from "@/views/layout"
+import LayoutView from "@/views/layout"
 import GraphicsPage from "@/views/pages/Graphics"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
@@ -17,7 +17,7 @@ import {
 const RouteOptions: RouteObject[] = [
   {
     path: "/",
-    element: <Layout date={new Date()} />,
+    element: <LayoutView date={new Date()} />,
     children: [
       {
         index: true,

@@ -45,5 +45,8 @@
       "fileMatch": ["package.json"],
       "url": "https://json.schemastore.org/package.json"
     }
-  ]
+  ],
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
 }
