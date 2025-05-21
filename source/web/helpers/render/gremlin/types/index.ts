@@ -10,4 +10,11 @@ export interface SizeModel {
   height: number
 }
 
+export interface MovePoint {
+  from: PointModel
+  to: PointModel
+}
+
+export type LinePoint = MovePoint
+
 export type ContainerParent = Container | undefined

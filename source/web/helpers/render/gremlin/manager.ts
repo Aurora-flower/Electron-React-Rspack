@@ -1,4 +1,5 @@
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
+import Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
@@ -34,20 +35,26 @@ class PixiManager {
     // 图层
     const basiskarte = new RenderLayer()
     const layer = new RenderLayer()
-    app.stage.addChild(basiskarte, layer)
+    const rulerView = new RenderLayer()
+    app.stage.addChild(basiskarte, layer, rulerView)
     const basiskarteContainer = createContainer(app.stage)
     const layerContainer = createContainer(app.stage)
+    const rulerContainer = createContainer(app.stage)
     const rect = createGraphics(basiskarteContainer, undefined, {
       x: 0,
       y: 0,
       color: 0xffffff
     })
-    const grid = new Grid(basiskarteContainer, {
+    const viewSize = {
       width: app.renderer.width,
       height: app.renderer.height
-    })
+    }
+    const grid = new Grid(basiskarteContainer, viewSize)
     grid.draw()
+    const ruler = new Ruler(rulerContainer, viewSize)
+    ruler.draw()
     createGraphics(layerContainer, undefined, { x: 80, y: 80, color: 0xffc0cb })
+    basiskarte.attach(basiskarteContainer, layerContainer, rulerContainer)
 
     loadTexture(`local://${"F:\\SERVER\\release\\ER\\sample.png"}`).then(
       (texture: Texture) => {
@@ -57,13 +64,15 @@ class PixiManager {
           width: 100,
           height: 100
         })
-        basiskarte.attach(basiskarteContainer)
-        layer.attach(layerContainer)
 
-        setInterval(() => {
+        // setInterval | setTimeout
+        setTimeout(() => {
+          // rect.clear()
+          // app.renderer.render(app.stage)
+          // app.renderer.clear()
           container.position.set(
-            container.position.x + 1,
-            container.position.y + 1
+            container.position.x + 100,
+            container.position.y + 100
           )
           webLog("PixiManager", "update", container.position)
         }, 1000)
@@ -74,19 +83,9 @@ class PixiManager {
       "PixiManager",
       "initCanvas",
       rect instanceof Graphics,
-      rect.constructor.name,
       rect instanceof Container,
       basiskarte instanceof Container
     )
-
-    setTimeout(() => {
-      rect.clear()
-      // rect.position.set(200, 200)
-      // rect.setSize(50, 50)
-      // rect.fill(0x004a77)
-      // basiskarteContainer.position.set(100, 100)
-      // app.renderer.render(app.stage)
-    }, 1000)
   }
 
   static destroy(): void {
