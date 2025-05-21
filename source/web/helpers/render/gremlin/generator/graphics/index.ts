@@ -7,6 +7,7 @@ import {
 } from "pixi.js"
 
 export function createGraphics(
+  parent: Container | undefined = undefined,
   options: GraphicsOptions = {},
   config: {
     width?: number
@@ -14,8 +15,7 @@ export function createGraphics(
     x?: number
     y?: number
     color?: FillInput
-  } = {},
-  parent?: Container
+  } = {}
 ): Graphics {
   const graphic = new Graphics(options)
   graphic

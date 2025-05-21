@@ -1,9 +1,9 @@
 import { Container, type ContainerOptions } from "pixi.js"
 
 export function createContainer(
-  options: ContainerOptions,
-  _config = {},
-  parent?: Container
+  parent: Container | undefined = undefined,
+  options: ContainerOptions = {},
+  _config = {}
 ): Container {
   const container = new Container(options)
   if (parent) {

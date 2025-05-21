@@ -36,13 +36,13 @@ class PixiManager {
     app.stage.addChild(basiskarte, layer)
     const basiskarteContainer = createContainer(app.stage)
     const layerContainer = createContainer(app.stage)
-    const rect = createGraphics(
-      {},
-      { x: 0, y: 0, color: 0xffffff },
-      basiskarteContainer
-    )
+    const rect = createGraphics(basiskarteContainer, undefined, {
+      x: 0,
+      y: 0,
+      color: 0xffffff
+    })
     const container = createContainer(layerContainer)
-    createGraphics({}, { x: 80, y: 80, color: 0xffc0cb }, container)
+    createGraphics(container, undefined, { x: 80, y: 80, color: 0xffc0cb })
 
     loadTexture(`local://${"F:\\SERVER\\release\\ER\\sample.png"}`).then(
       (texture: Texture) => {
