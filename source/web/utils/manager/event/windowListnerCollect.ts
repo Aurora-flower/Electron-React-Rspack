@@ -1,3 +1,5 @@
+import { webWarn } from "@/utils/log"
+
 class ListenerCollect {
   public static readonly Events = ["resize", "message"] as const
 
@@ -43,15 +45,17 @@ class ListenerCollect {
     callback: EventListener,
     options?: AddEventListenerOptions | boolean
   ): void {
-    const listeners = ListenerCollect.listeners[event]
-    if (listeners) {
-      const index = listeners.findIndex(
+    const collect = ListenerCollect.listeners[event]
+    if (collect) {
+      const index = collect.findIndex(
         entry => entry.callback === callback && entry.options === options
       )
       if (index !== -1) {
-        const [removed] = listeners.splice(index, 1)
+        const [removed] = collect.splice(index, 1)
         window.removeEventListener(event, removed.callback, removed.options)
       }
+    } else {
+      webWarn("ListenerCollect", `No listener found for event: ${event}`)
     }
   }
 

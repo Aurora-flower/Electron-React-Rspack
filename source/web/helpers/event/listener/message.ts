@@ -1,5 +1,5 @@
 import { webLog } from "@/utils/log"
-import { enableWindowMessagesListener } from "@/utils/manager/listener"
+import { enableWindowMessagesListener } from "@/utils/manager/event/windowListnerCollect"
 
 const MESSAGE_IGNORE_SIGN = [
   /* react devtools installer */
