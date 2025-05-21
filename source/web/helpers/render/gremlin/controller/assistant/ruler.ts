@@ -35,6 +35,10 @@ class Ruler {
     color: this._markColor,
     alpha: 0.3
   }
+  // private _canvasScale: PointModel = {
+  //   x: 1,
+  //   y: 1
+  // }
   private _topRuler: Graphics = new Graphics()
   private _leftRuler: Graphics = new Graphics()
   private _rulerContainer: Container = new Container()
@@ -47,6 +51,9 @@ class Ruler {
     if (storeStyle) {
       this._strokeInput = storeStyle
     }
+    // if (canvasScale) {
+    //   this._canvasScale = canvasScale
+    // }
   }
 
   draw(): void {

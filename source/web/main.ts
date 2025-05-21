@@ -2,7 +2,7 @@ import "pixi.js/unsafe-eval"
 import "./assets/stylesheets/main.css"
 import "@/App"
 import debug from "@/debug"
-import { messageListener } from "@/helpers/event/listener"
+import { messageListener } from "@/helpers/event/listener/message"
 
 /* ***** ***** ***** ***** plugin hooks ***** ***** ***** ***** */
 import setupPixiJS from "@/plugins/setupPixiJS"
