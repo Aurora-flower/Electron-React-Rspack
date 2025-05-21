@@ -8,7 +8,7 @@ function rspackCompiler(isClosing = false): Promise<boolean> {
     try {
       const options: WatchOptions = {
         ignored: [
-          /* ***** ***** Folder ***** ***** */
+          /* ***** ***** ***** ***** Folder ***** ***** ***** ***** */
           "**/node_modules/**",
           "**/gulpfile.ts/**",
           "**/.idea/**",
@@ -22,7 +22,7 @@ function rspackCompiler(isClosing = false): Promise<boolean> {
           "/core/**",
           "/.cache/**",
 
-          /* ***** ***** File ***** ***** */
+          /* ***** ***** ***** ***** File ***** ***** ***** ***** */
           "**/.hintrc",
           "**/.npmrc",
           "**/LICENSE*",

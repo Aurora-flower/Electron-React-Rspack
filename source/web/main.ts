@@ -4,19 +4,19 @@ import "@/App"
 import debug from "@/debug"
 import { messageListener } from "@/helpers/event/listener"
 
-/* ***** ***** plugin hooks ***** ***** */
+/* ***** ***** ***** ***** plugin hooks ***** ***** ***** ***** */
 import setupPixiJS from "@/plugins/setupPixiJS"
 import setupPrimeUI from "@/plugins/setupPrimeUI"
 import setupThreeJS from "@/plugins/setupThreeJS"
 
-/* ***** ***** primereact css ***** ***** */
+/* ***** ***** ***** ***** primereact css ***** ***** ***** ***** */
 import "primereact/resources/themes/viva-light/theme.css"
 import "primereact/resources/themes/viva-dark/theme.css"
 import "primereact/resources/primereact.min.css"
 import "primeicons/primeicons.css"
 import "primeflex/primeflex.css"
 
-/* ***** ***** primereact css ***** ***** */
+/* ***** ***** ***** ***** primereact css ***** ***** ***** ***** */
 import * as THREE from "three"
 
 new THREE.MeshBasicMaterial({

@@ -1,4 +1,4 @@
-/* ***** ***** 二进制 - 十进制 ***** ***** */
+/* ***** ***** ***** ***** 二进制 - 十进制 ***** ***** ***** ***** */
 export function decimalToBinary(decimal: string): string {
   if (!decimal) return "0" // 0b0
   // let num = Number(decimal)
@@ -19,7 +19,7 @@ export function binaryTodecimal(binary: string): number {
   return Number.parseInt(binary, 2)
 }
 
-/* ***** ***** 二进制 - 八进制 - 三位计算法 ***** ***** */
+/* ***** ***** ***** ***** 二进制 - 八进制 - 三位计算法 ***** ***** ***** ***** */
 export function octToBinary(oct: string): string {
   if (!oct) return "0" // 0b0
   return Number.parseInt(oct, 8).toString(2)
@@ -30,7 +30,7 @@ export function binaryToOct(binary: string): string {
   return Number.parseInt(binary, 2).toString(8)
 }
 
-/* ***** ***** 二进制 - 十六进制 - 四位计算法 ***** ***** */
+/* ***** ***** ***** ***** 二进制 - 十六进制 - 四位计算法 ***** ***** ***** ***** */
 export function hexToBinary(hex: string): string {
   if (!hex) return "0" // 0b0
   return Number.parseInt(hex, 16).toString(2)
@@ -41,7 +41,7 @@ export function binaryToHex(binary: string): string {
   return Number.parseInt(binary, 2).toString(16)
 }
 
-/* ***** ***** 八进制 - 十六进制 - 四位计算法 ***** ***** */
+/* ***** ***** ***** ***** 八进制 - 十六进制 - 四位计算法 ***** ***** ***** ***** */
 export function octTodecimal(oct: string): number {
   if (!oct) return 0
   return Number.parseInt(oct, 8)
@@ -52,7 +52,7 @@ export function decimalToOct(decimal: string): string {
   return Number.parseInt(decimal, 10).toString(8)
 }
 
-/* ***** ***** 十进制 - 十六进制 - 四位计算法 ***** ***** */
+/* ***** ***** ***** ***** 十进制 - 十六进制 - 四位计算法 ***** ***** ***** ***** */
 export function hexTodecimal(hex: string): number {
   if (!hex) return 0
   return Number.parseInt(hex, 16)
@@ -63,7 +63,7 @@ export function decimalToHex(decimal: string): string {
   return Number.parseInt(decimal, 10).toString(16)
 }
 
-/* ***** ***** 十进制 - 任意进制 ***** ***** */
+/* ***** ***** ***** ***** 十进制 - 任意进制 ***** ***** ***** ***** */
 export function baseConverter(decNumber: number, radix: 2 | 8 | 16): string {
   let num = decNumber
   const states = []
