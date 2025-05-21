@@ -1,10 +1,11 @@
-import { Container } from "pixi.js"
+import { Container, type ContainerOptions } from "pixi.js"
 
-export function createContainer(parent?: Container): Container {
-  const container = new Container({
-    eventMode: "static",
-    interactive: true
-  })
+export function createContainer(
+  options: ContainerOptions,
+  _config = {},
+  parent?: Container
+): Container {
+  const container = new Container(options)
   if (parent) {
     parent.addChild(container)
   }

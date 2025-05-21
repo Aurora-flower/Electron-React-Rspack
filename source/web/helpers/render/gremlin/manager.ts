@@ -1,8 +1,11 @@
+import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
+import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
+import { getDomElement } from "@/utils/dom"
 import { webLog } from "@/utils/log"
-import { getDomElement } from "@/utils/mod/dom"
-import { Application, RenderLayer } from "pixi.js"
+import Graphics from "@/views/pages/Graphics"
+import { Application, Container, RenderLayer, type Texture } from "pixi.js"
 
 class PixiManager {
   private static app: Application
@@ -22,7 +25,7 @@ class PixiManager {
       resizeTo: domElement
     })
     domElement.appendChild(app.canvas)
-    webLog("pixi", "init", root)
+    webLog("PixiManager", "init", root)
     return app
   }
 
@@ -34,25 +37,47 @@ class PixiManager {
     const basiskarteContainer = createContainer(app.stage)
     const layerContainer = createContainer(app.stage)
     const rect = createGraphics(
+      {},
       { x: 0, y: 0, color: 0xffffff },
       basiskarteContainer
     )
-    createGraphics({ x: 80, y: 80, color: 0xffc0cb }, layerContainer)
-    basiskarte.attach(basiskarteContainer)
-    layer.attach(layerContainer)
+    const container = createContainer(layerContainer)
+    createGraphics({}, { x: 80, y: 80, color: 0xffc0cb }, container)
+
+    loadTexture(`local://${"F:\\SERVER\\release\\ER\\sample.png"}`).then(
+      (texture: Texture) => {
+        createSprite(
+          {
+            texture
+          },
+          layerContainer
+        )
+        basiskarte.attach(basiskarteContainer)
+        layer.attach(layerContainer)
+      }
+    )
+
+    webLog(
+      "PixiManager",
+      "initCanvas",
+      rect instanceof Graphics,
+      rect.constructor.name,
+      rect instanceof Container,
+      basiskarte instanceof Container
+    )
 
     setTimeout(() => {
       rect.clear()
-      rect.position.set(200, 200)
-      rect.setSize(50, 50)
-      rect.fill(0x004a77)
-      basiskarteContainer.position.set(100, 100)
-      app.renderer.render(app.stage)
+      // rect.position.set(200, 200)
+      // rect.setSize(50, 50)
+      // rect.fill(0x004a77)
+      // basiskarteContainer.position.set(100, 100)
+      // app.renderer.render(app.stage)
     }, 1000)
   }
 
   static destroy(): void {
-    webLog("pixi", "destroy")
+    webLog("PixiManager", "destroy")
   }
 
   static getApp(): Application {

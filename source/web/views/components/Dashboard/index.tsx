@@ -1,4 +1,4 @@
-import { DASHBOARD_MAP } from "@/views/components/Dashboard/configData"
+import { DASHBOARD_MAP } from "@/views/components/Dashboard/map/view"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"
@@ -21,7 +21,7 @@ function DashboardCard(props: {
   )
 }
 
-function Dashboard(): JSX.Element {
+function DashboardView(): JSX.Element {
   return (
     <div className="dashboard page-base flex flex-wrap">
       {DASHBOARD_MAP.map(item => (
@@ -33,4 +33,4 @@ function Dashboard(): JSX.Element {
   )
 }
 
-export default Dashboard
+export default DashboardView

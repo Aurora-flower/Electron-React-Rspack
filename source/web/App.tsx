@@ -1,6 +1,6 @@
 import { PRIME_REACT_OPTIONS } from "@/plugins/setupPrimeUI"
 import AppRouter from "@/routers"
-import { getRootElement } from "@/utils/mod/dom"
+import { getRootElement } from "@/utils/dom"
 import { PrimeReactProvider } from "primereact/api"
 import * as React from "react"
 import type { JSX } from "react"

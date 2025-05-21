@@ -1,19 +1,19 @@
 import { webLog } from "@/utils/log"
 import { enableWindowMessagesListener } from "@/utils/manager/listener"
 
+const MESSAGE_IGNORE_SIGN = [
+  /* react devtools installer */
+  "react-devtools-content-script",
+  "react-devtools-bridge",
+  "react-devtools-hook",
+  "react-devtools-backend-manager"
+]
+
 export function messageListener(/* this: void */): void {
   enableWindowMessagesListener(event => {
     const ev = event as MessageEvent
     const origin = ev.origin || location.href
-    if (
-      [
-        "react-devtools-content-script",
-        "react-devtools-bridge",
-        "ev.data.source",
-        "react-devtools-hook",
-        "react-devtools-backend-manager"
-      ].includes(ev.data.source)
-    ) {
+    if (MESSAGE_IGNORE_SIGN.includes(ev.data.source)) {
       return
     }
     webLog("messageListener", "onMsg", origin, ev.data, ev.ports, ev.source)

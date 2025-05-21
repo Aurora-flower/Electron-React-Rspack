@@ -1,7 +1,7 @@
 // import HOC from "@/components/Hoc"
 // import Dashboard from "@/views/components/Dashboard"
 import Layout from "@/views/layout"
-import Graphics from "@/views/pages/Graphics"
+import GraphicsPage from "@/views/pages/Graphics"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"
@@ -22,7 +22,7 @@ const RouteOptions: RouteObject[] = [
       {
         index: true,
         // element: <EnhancedDashboard />
-        element: <Graphics />
+        element: <GraphicsPage />
       }
     ]
   }

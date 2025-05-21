@@ -2,7 +2,7 @@ import {
   DATA_TYPE_MODE,
   getDataType,
   isEffectiveElement
-} from "@/utils/mod/dataType"
+} from "@/utils/functions/dataType"
 
 export function from(): void {
   const list = Array.prototype.forEach.bind(

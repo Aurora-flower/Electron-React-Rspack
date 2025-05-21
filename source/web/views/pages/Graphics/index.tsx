@@ -4,7 +4,7 @@ import type { Application } from "pixi.js"
 import * as React from "react"
 import type { JSX } from "react"
 
-function Graphics(): JSX.Element {
+function GraphicsPage(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [getApp, setApp] = React.useState<Application>()
 
@@ -29,4 +29,4 @@ function Graphics(): JSX.Element {
   )
 }
 
-export default Graphics
+export default GraphicsPage

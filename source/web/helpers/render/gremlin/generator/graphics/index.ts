@@ -1,28 +1,31 @@
-import { getRandomColor } from "@/utils/mod/color"
-import { type Container, type FillInput, Graphics } from "pixi.js"
+import { getRandomColor } from "@/utils/functions/color"
+import {
+  type Container,
+  type FillInput,
+  Graphics,
+  type GraphicsOptions
+} from "pixi.js"
 
 export function createGraphics(
-  options: {
+  options: GraphicsOptions = {},
+  config: {
     width?: number
     height?: number
     x?: number
     y?: number
     color?: FillInput
-  },
+  } = {},
   parent?: Container
 ): Graphics {
-  const graphic = new Graphics({
-    eventMode: "static",
-    interactive: true
-  })
+  const graphic = new Graphics(options)
   graphic
     .rect(
-      options.x ?? 0,
-      options.y ?? 0,
-      options.width ?? 100,
-      options.height ?? 100
+      config.x ?? 0,
+      config.y ?? 0,
+      config.width ?? 100,
+      config.height ?? 100
     )
-    .fill(options.color ?? getRandomColor())
+    .fill(config.color ?? getRandomColor())
   if (parent) {
     parent.addChild(graphic)
   }
