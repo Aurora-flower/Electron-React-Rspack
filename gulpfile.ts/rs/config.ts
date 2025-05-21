@@ -43,7 +43,7 @@ function singleConfig(key: string, type: string): Record<string, unknown> {
         LOADER.TextExclude
       ]
     },
-    plugins: [PLUGINS.CssExtract()]
+    plugins: [PLUGINS.CssExtract(), PLUGINS.Define()]
   }
 
   const emptyObject = Object.create(null)

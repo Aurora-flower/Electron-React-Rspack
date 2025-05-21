@@ -22,14 +22,16 @@ function getHtmlRspackPlugin(
         "http-equiv": "Content-Security-Policy",
         content:
           // `default-src 'self';` +
-          `script-src 'self' blob:;` +
-          `style-src-attr 'self';` + // style-src style-src-attr style-src-elem
-          `font-src 'self';` +
+          `script-src 'self' blob: https://pixijs.com/ ;` + // 'nonce-{{nonce}}'
+          `style-src-attr 'self' 'unsafe-inline';` + // style-src style-src-attr style-src-elem
+          `font-src 'self' data: https://pixijs.com/;` +
           `worker-src 'self' blob:;` +
-          `connect-src 'self' https://api.iconify.design/ data:;` +
+          `connect-src 'self' data: https://api.iconify.design/ https://pixijs.com/;` +
           `img-src 'self' data: blob:;`
       }
-    }
+    },
+    scriptLoading: "module",
+    templateParameters: {}
   })
   return HtmlRspackPlugin
 }

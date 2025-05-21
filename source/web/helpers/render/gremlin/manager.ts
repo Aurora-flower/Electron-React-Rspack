@@ -9,7 +9,9 @@ import { getDomElement } from "@/utils/dom"
 import { webLog } from "@/utils/log"
 import {
   Application,
+  Assets,
   type FederatedPointerEvent,
+  HTMLText,
   RenderLayer,
   type Texture
 } from "pixi.js"
@@ -112,6 +114,34 @@ class PixiManager {
           bottomHeight: 80
         })
 
+        Assets.addBundle("fonts", [
+          {
+            alias: "Lineal",
+            src: "https://pixijs.com/assets/webfont-loader/Lineal.otf"
+          },
+          {
+            alias: "Dotrice Regular",
+            src: "https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff"
+          }
+        ])
+
+        Assets.loadBundle("fonts").then(() => {
+          const text2 = new HTMLText({
+            text: "Lineal.otf",
+            style: { fontFamily: "Lineal", fontSize: 50, fill: 0xffffff }
+          })
+          const text3 = new HTMLText({
+            text: "Dotrice Regular.woff",
+            style: {
+              fontFamily: "Dotrice Regular",
+              fontSize: 50,
+              fill: 0xffffff
+            }
+          })
+          text2.y = 150
+          text3.y = 300
+          container.addChild(text2, text3)
+        })
         // const dragData = {
         //   offset: {
         //     x: 0,
