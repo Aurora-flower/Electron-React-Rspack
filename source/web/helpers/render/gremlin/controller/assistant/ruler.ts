@@ -4,7 +4,6 @@ import type {
   PointModel,
   SizeModel
 } from "@/helpers/render/gremlin/types"
-import { webLog } from "@/utils/log"
 import { Container, Graphics, type StrokeInput, Text, TextStyle } from "pixi.js"
 
 type DrawLineHander = (
@@ -100,7 +99,6 @@ class Ruler {
         from: { x, y: 0 },
         to: { x, y: scaleLength }
       }
-      webLog("Ruler", "logic", linePoint)
       if (drawScaleLine) {
         drawScaleLine(linePoint, "top", alpha)
       }

@@ -8,7 +8,9 @@ import { Application, RenderLayer } from "pixi.js"
 class PixiManager {
   private static app: Application
 
-  static async init(root: HTMLDivElement | string): Promise<Application> {
+  static async init(
+    root: HTMLDivElement | HTMLElement | string
+  ): Promise<Application> {
     let domElement = root as HTMLElement
     if (typeof root === "string") {
       const element = getDomElement(root, "id")

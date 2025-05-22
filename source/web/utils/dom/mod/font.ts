@@ -20,6 +20,11 @@ export function loadFont(
   })
 }
 
-export function setFontFamily(element: HTMLElement, font: string): void {
-  element.style.fontFamily = font
+export function setFontFamily(
+  element: HTMLElement | HTMLDivElement | null,
+  font: string
+): void {
+  if (element) {
+    element.style.fontFamily = font
+  }
 }
