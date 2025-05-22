@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Dotrice Regular";
+  src: url("https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Crosterian";
+  src: url("https://pixijs.com/assets/webfont-loader/Crosterian.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lineal";
+  src: url("https://pixijs.com/assets/webfont-loader/Lineal.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
