@@ -136,14 +136,15 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **2D渲染引擎**
   - [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
-  - [🎯 Pixi.js示例](https://pixi.nodejs.cn/examples)
-  - [🍀 Pixi.js图形API](https://pixijs.download/release/docs/scene.Graphics.html)
-  - [⚡ PIXI文本样式编辑器](https://text-style.pixijs.io)
-  - [🧠 Pixi.js库API](https://api.pixijs.io/index.html)
+  - [🎯 Pixi.js 示例](https://pixi.nodejs.cn/examples)
+  - [🍀 Pixi.js 图形 API](https://pixijs.download/release/docs/scene.Graphics.html)
+  - [⚡ PIXI 文本样式编辑器](https://text-style.pixijs.io)
+  - [🧠 Pixi.js 库 API](https://api.pixijs.io/index.html)
+  - [📦 Pixi.js UI](https://pixijs.io/ui/)
 
 - **3D渲染引擎**
   - [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
-  - [📷 Three.js编辑器](https://threehub.cn/editor/)
+  - [📷 Three.js 编辑器](https://threehub.cn/editor/)
 
 #### 3. 构建工具链
 
@@ -189,11 +190,11 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **包管理器**
   - [✈️ npm](https://npm.nodejs.cn/)
-  - [🚗 package.json规范](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
+  - [🚗 package.json 规范](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
 
 - **环境管理**
   - [💎 nvm](https://nvm.p6p.net/)
-  - [💡 npm镜像](https://npmmirror.com/)
+  - [💡 npm 镜像](https://npmmirror.com/)
 
 ---
 
@@ -207,7 +208,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🛶 WebAssembly](https://developer.mozilla.org/zh-CN/docs/WebAssembly)
 
 - **性能优化**
-  - [🔒 Chromium渲染引擎](https://www.chromium.org/chromium-projects/)
+  - [🔒 Chromium 渲染引擎](https://www.chromium.org/chromium-projects/)
 
 #### 2. 前端工程化
 
@@ -260,25 +261,31 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 ### 扩展工具集
 
-#### AI辅助开发
+#### 智能工具
 
-- [🤖 AI对话工具](https://chat18.aichatos98.com/#/chat)
+- **AI辅助开发**
+  - [🤖 AI 对话工具](https://chat18.aichatos98.com/#/chat)
 
-- **开发社区**
-
-  - [🏆 GitHub](https://github.com/)
-  - [👨‍💻 Stack Overflow](https://stackoverflow.com/)
-  - [☕️ 掘金](https://juejin.cn/)
+### 技术资源集
 
 - **技术博客**
-
   - [⭐JS Blog](https://davidwalsh.name)
 
 - **可视化资源**
-
   - [🎶 Web3D Three](http://www.webgl3d.cn/)
   - [🌻 Shields](https://shields.io/)
 
 - **其他**
-
   - [💬 GitHub](https://docs.github.com/zh/get-started)
+
+### 社区资源集
+
+- **开发社区**
+  - [🏆 GitHub](https://github.com/)
+  - [👨‍💻 Stack Overflow](https://stackoverflow.com/)
+  - [☕️ 掘金](https://juejin.cn/)
+
+#### 工具集
+
+- **工具**
+  - [🛠️ Codesandbox](https://codesandbox.io/)
