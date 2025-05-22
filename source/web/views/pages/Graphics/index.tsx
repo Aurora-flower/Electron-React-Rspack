@@ -6,6 +6,9 @@ import * as React from "react"
 import type { JSX } from "react"
 
 function GraphicsPage(): JSX.Element {
+  const [getTip] = React.useState<string>(
+    "使用鼠标右键平移视窗焦点，使用滚轮缩放视图"
+  )
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [getApp, setApp] = React.useState<Application>()
 
@@ -19,12 +22,13 @@ function GraphicsPage(): JSX.Element {
       })
     }
     return (): void => {
-      PixiManager.destroy()
+      PixiManager.stageClear()
     }
   }, [getApp])
 
   return (
     <div className="grphics page-base">
+      <div className="absolute top-6 left-6 opacity-80">{getTip}</div>
       <div ref={containerRef} id="graphics" />
     </div>
   )

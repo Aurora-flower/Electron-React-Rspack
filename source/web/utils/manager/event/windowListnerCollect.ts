@@ -70,7 +70,7 @@ export function dispatchWindowResize(): void {
   window.dispatchEvent(new Event(ListenerCollect.Events[0]))
 }
 
-export function dispatchWindowMessages(data: unknown = null): void {
+export function dispatchWindowMessages(data: unknown = []): void {
   window.dispatchEvent(
     new MessageEvent(ListenerCollect.Events[1], { data } as MessageEventInit)
   )

@@ -15,7 +15,10 @@ function LayoutView(props: { date: Date }): JSX.Element {
   return (
     <div className="layout-view">
       <div ref={dateRef} className="layout-date absolute top-1 left-1">
-        {`Time: ${props.date.toLocaleDateString()}`}
+        <span>Time:</span>
+        <span className="select-text">
+          {`  ${props.date.toLocaleDateString()}`}
+        </span>
       </div>
       <Outlet />
     </div>

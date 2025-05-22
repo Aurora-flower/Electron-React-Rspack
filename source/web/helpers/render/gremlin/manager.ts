@@ -6,20 +6,18 @@ import { webLog } from "@/utils/log"
 import { Application, RenderLayer } from "pixi.js"
 
 class PixiManager {
-  private static app: Application
+  private static _app: Application
 
-  static async init(
-    root: HTMLDivElement | HTMLElement | string
-  ): Promise<Application> {
-    let domElement = root as HTMLElement
+  static async init(root: HTMLDivElement | string): Promise<Application> {
+    let domElement = root as HTMLDivElement
     if (typeof root === "string") {
-      const element = getDomElement(root, "id")
+      const element = getDomElement(root, "id") as HTMLDivElement
       if (element) {
         domElement = element
       }
     }
     const app = new Application()
-    PixiManager.app = app
+    PixiManager._app = app
     await app.init({
       antialias: true,
       resizeTo: domElement
@@ -35,8 +33,12 @@ class PixiManager {
     const layer = new RenderLayer()
     const rulerView = new RenderLayer()
     app.stage.addChild(basiskarte, layer, rulerView)
-    const basiskarteContainer = createContainer(app.stage)
-    const layerContainer = createContainer(app.stage)
+    const basiskarteContainer = createContainer(app.stage, {
+      label: "basiskarte"
+    })
+    const layerContainer = createContainer(app.stage, {
+      label: "layer"
+    })
     const rulerContainer = createContainer(app.stage)
     const viewSize = {
       width: app.renderer.width,
@@ -55,12 +57,15 @@ class PixiManager {
     )
   }
 
-  static destroy(): void {
-    webLog("PixiManager", "destroy")
+  static stageClear(): void {
+    if (PixiManager._app?.stage) {
+      // PixiManager._app.stage.destroy()
+      webLog("PixiManager", "destroy")
+    }
   }
 
   static getApp(): Application {
-    return PixiManager.app
+    return PixiManager._app
   }
 }
 

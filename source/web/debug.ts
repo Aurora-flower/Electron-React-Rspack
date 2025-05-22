@@ -1,11 +1,17 @@
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
+import { byLabelFindElement } from "@/helpers/render/gremlin/functions/find"
 import PixiManager from "@/helpers/render/gremlin/manager"
 import { webLog } from "@/utils/log"
 
 export function debugPixiRender(): void {
   const app = PixiManager.getApp()
-  webLog("debug", "debugPixiRender", app)
+  webLog(
+    "debug",
+    "debugPixiRender",
+    app,
+    byLabelFindElement("layer", app.stage)
+  )
   // TEST
   // loadTexture(`local://${"F:\\SERVER\\release\\ER\\sample.png"}`).then(
   //   (texture: Texture) => {
