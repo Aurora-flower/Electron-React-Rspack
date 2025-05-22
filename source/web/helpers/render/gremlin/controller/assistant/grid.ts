@@ -15,8 +15,8 @@ class Grid {
     height: 0
   }
   private _girdInterval: PointModel = {
-    x: 10,
-    y: 10
+    x: 50,
+    y: 50
   }
   private _strokeInput: StrokeInput = {
     width: 1,

@@ -1,7 +1,6 @@
 import "pixi.js/unsafe-eval"
 import "./assets/stylesheets/main.css"
 import "@/App"
-import debug from "@/debug"
 import { messageListener } from "@/helpers/event/listener/message"
 
 /* ***** ***** ***** ***** plugin hooks ***** ***** ***** ***** */
@@ -25,12 +24,8 @@ new THREE.MeshBasicMaterial({
 
 messageListener()
 
-async function AppInit(): Promise<void> {
+void (async function AppInit(): Promise<void> {
   await setupPrimeUI()
   setupPixiJS()
   setupThreeJS()
-}
-
-AppInit().then(() => {
-  setTimeout(() => debug(), 1000)
-})
+})()

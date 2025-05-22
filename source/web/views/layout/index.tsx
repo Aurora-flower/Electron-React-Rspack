@@ -8,8 +8,11 @@ function LayoutView(props: { date: Date }): JSX.Element {
   webLog("LayoutView", "props", props.date)
   return (
     <div className="layout-view">
-      {/* <div className="layout-date absolute top-1 left-1">
-        {props.date.toLocaleDateString()}
+      {/* <div
+        className="layout-date absolute top-1 left-1"
+        style={{ fontFamily: "ChaChicle" }}
+      >
+        {`Time: ${props.date.toLocaleDateString()}`}
       </div> */}
       <Outlet />
     </div>

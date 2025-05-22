@@ -1,3 +1,4 @@
+import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin/manager"
 import { webLog } from "@/utils/log"
 import type { Application } from "pixi.js"
@@ -13,6 +14,7 @@ function GraphicsPage(): JSX.Element {
       PixiManager.init(containerRef.current!).then((app: Application) => {
         setApp(app)
         PixiManager.initCanvas(app)
+        debugPixiRender()
         webLog("GraphicsPage", "DrowIo", getApp)
       })
     }

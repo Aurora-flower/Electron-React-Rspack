@@ -26,11 +26,7 @@ export function webLog(
   )
 }
 
-export function webErrorLog(
-  moduleId: string,
-  sign: string,
-  error: unknown
-): void {
+export function webError(moduleId: string, sign: string, error: unknown): void {
   console.error(
     `>>> Web Error Source %c[ ${moduleId} ] - %c$_${sign}_$`,
     LOG_COLOR.blue,
