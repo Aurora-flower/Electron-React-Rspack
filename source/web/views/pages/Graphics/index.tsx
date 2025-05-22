@@ -18,7 +18,6 @@ function GraphicsPage(): JSX.Element {
         webLog("GraphicsPage", "DrowIo", getApp)
       })
     }
-
     return (): void => {
       PixiManager.destroy()
     }
