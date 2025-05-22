@@ -101,11 +101,14 @@
   "dependencies": {
     "@pixi/ui": "2.2.4",
     "animate.css": "4.1.1",
+    "archiver": "7.0.1",
+    "asar": "3.2.0",
     "electron-log": "5.4.0",
     "electron-updater": "6.6.2",
     "express": "5.1.0",
     "fabric": "6.6.5",
     "fs-extra": "11.3.0",
+    "i18next": "25.2.0",
     "lodash": "4.17.21",
     "pixi.js": "8.9.2",
     "primeflex": "4.0.0",
@@ -113,13 +116,12 @@
     "primereact": "10.9.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-i18next": "15.5.1",
     "react-router": "7.6.0",
     "react-router-dom": "7.6.0",
-    "three": "0.176.0",
     "rimraf": "6.0.1",
-    "yauzl": "3.2.0",
-    "archiver": "7.0.1",
-    "asar": "3.2.0"
+    "three": "0.176.0",
+    "yauzl": "3.2.0"
   },
   "engines": {
     "node": ">=18.0.0",

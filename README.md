@@ -126,11 +126,15 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **前端框架**
   - [🎮 React](https://zh-hans.react.dev/learn)
   - [🍓 React Router](https://reactrouter.remix.org.cn/start/data/routing)
-  - [🌍 React Reference](https://react.dev/reference/react)
+  - [📝 React Reference](https://react.dev/reference/react)
 
 - **服务端框架**
   - [🖼️ Node.js](https://nodejs.cn/api/)
   - [🌴 Express](https://www.expressjs.com.cn/)
+
+- **国际化**
+  - [🌎 i18next](https://www.i18next.com/)
+  - [🍔 react-i18next](https://react.i18next.com/)
 
 #### 2. 图形渲染层
 
