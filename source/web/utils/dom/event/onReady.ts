@@ -1,4 +1,4 @@
-import { useLoading } from "@/utils/dom/mod/load"
+import { useLoading } from "@/utils/dom/mod/loading"
 
 export function domReady(
   condition: DocumentReadyState[] = ["complete", "interactive"] // "complete" | "interactive" | "loading"
