@@ -1,4 +1,5 @@
-import { type WatchOptions, series, watch } from "gulp"
+import { series, watch } from "gulp"
+import type { WatchOptions } from "gulp"
 import ElectronProcess from "../utils/electron"
 import compile from "./compile"
 

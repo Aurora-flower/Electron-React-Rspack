@@ -1,4 +1,5 @@
-import { type WatchOptions, rspack } from "@rspack/core"
+import { rspack } from "@rspack/core"
+import type { WatchOptions } from "@rspack/core"
 import { isDev } from "../common/env"
 import getRsConfig from "./config"
 

@@ -1,6 +1,7 @@
 import { transmit } from "@main/handlers/channel/message/sms"
 import { getAppInfo } from "@main/helpers/modules/app"
-import { type IpcMainEvent, type IpcMainInvokeEvent, ipcMain } from "electron"
+import type { IpcMainEvent, IpcMainInvokeEvent } from "electron"
+import { ipcMain } from "electron"
 
 const TRIGGER_LISTENERS: Record<TriggerChannelName, ChannelListener> = {
   /* ***** ***** ***** ***** Application ***** ***** ***** ***** */

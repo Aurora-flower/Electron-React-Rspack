@@ -1,4 +1,5 @@
-import { type Container, Sprite, type SpriteOptions, Texture } from "pixi.js"
+import type { Container, SpriteOptions } from "pixi.js"
+import { Sprite, Texture } from "pixi.js"
 
 export function createSprite(
   parent: Container | undefined = undefined,

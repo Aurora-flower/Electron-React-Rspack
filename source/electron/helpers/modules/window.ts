@@ -1,4 +1,5 @@
-import { BrowserWindow, type WebContents } from "electron"
+import { BrowserWindow } from "electron"
+import type { WebContents } from "electron"
 
 export function isAllWindowClosed(): boolean {
   return getWindowCount() === 0

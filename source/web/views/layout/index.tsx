@@ -1,13 +1,13 @@
 import { setFontFamily } from "@/utils/dom/mod/font"
 import { webLog } from "@/utils/log"
-import * as React from "react"
+import { useEffect, useRef } from "react"
 import type { JSX } from "react"
 import { Outlet } from "react-router"
 
 function LayoutView(props: { date: Date }): JSX.Element {
-  const dateRef = React.useRef<HTMLDivElement>(null)
+  const dateRef = useRef<HTMLDivElement>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setFontFamily(dateRef.current, "Crosterian")
   }, [])
 

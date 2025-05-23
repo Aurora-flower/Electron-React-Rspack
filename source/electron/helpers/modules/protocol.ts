@@ -1,6 +1,7 @@
 import { DEFAULT_SCHEMA } from "@main/common/const"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
-import { net, type CustomScheme, protocol } from "electron"
+import { net, protocol } from "electron"
+import type { CustomScheme } from "electron"
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,

@@ -4,7 +4,8 @@ import type {
   PointModel,
   SizeModel
 } from "@/helpers/render/gremlin/types"
-import { Container, Graphics, type StrokeInput, Text, TextStyle } from "pixi.js"
+import { Container, Graphics, Text, TextStyle } from "pixi.js"
+import type { StrokeInput } from "pixi.js"
 
 type DrawLineHander = (
   linePoint: LinePoint,

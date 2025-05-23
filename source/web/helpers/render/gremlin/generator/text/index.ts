@@ -1,4 +1,5 @@
-import { type Container, Text, type TextOptions } from "pixi.js"
+import type { Container, TextOptions } from "pixi.js"
+import { Text } from "pixi.js"
 
 export function createText(
   parent: Container | undefined = undefined,

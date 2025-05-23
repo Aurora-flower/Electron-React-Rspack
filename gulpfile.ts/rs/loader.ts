@@ -1,7 +1,8 @@
 /**
  * @file Loader 处理配置
  */
-import { type RuleSetRule, rspack } from "@rspack/core"
+import type { RuleSetRule } from "@rspack/core"
+import { rspack } from "@rspack/core"
 // import { ENVIRONMENT } from "../common/env"
 
 /* ***** ***** ***** ***** Rules ***** ***** ***** ***** */

@@ -2,17 +2,17 @@ import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin/manager"
 import { webLog } from "@/utils/log"
 import type { Application } from "pixi.js"
-import * as React from "react"
+import { useEffect, useRef, useState } from "react"
 import type { JSX } from "react"
 
 function GraphicsPage(): JSX.Element {
-  const [getTip] = React.useState<string>(
+  const [getTip] = useState<string>(
     "使用鼠标右键平移视窗焦点，使用滚轮缩放视图"
   )
-  const containerRef = React.useRef<HTMLDivElement>(null)
-  const [getApp, setApp] = React.useState<Application>()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [getApp, setApp] = useState<Application>()
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!getApp) {
       PixiManager.init(containerRef.current!).then((app: Application) => {
         setApp(app)

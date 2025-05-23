@@ -1,8 +1,10 @@
 import { getIsPackage } from "@main/helpers/modules/app"
 import { isWin } from "@main/utils/node/process/platform"
-import { type BrowserWindow, Notification } from "electron"
+import { Notification } from "electron"
+import type { BrowserWindow } from "electron"
 import Logger from "electron-log"
-import { type AppUpdater, autoUpdater } from "electron-updater"
+import { autoUpdater } from "electron-updater"
+import type { AppUpdater } from "electron-updater"
 
 export function getAutoUpdater(): AppUpdater {
   Logger.transports.file.level = "verbose"
