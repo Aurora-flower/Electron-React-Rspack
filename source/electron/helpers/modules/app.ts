@@ -14,6 +14,7 @@ const FILE_NAMES = {
   Unpack: "app.asar.unpacked"
 }
 
+// app-information
 export class AppInfo implements AppInfoModel {
   name: string = app.getName()
   appFolder: string = app.getAppPath()

@@ -18,9 +18,9 @@ function rspackCompiler(isClosing = false): Promise<boolean> {
           "**/.git/**",
           "**/.husky/**",
           "**/test/**",
-          "/app/**",
-          "/core/**",
-          "/.cache/**",
+          "**/app/**",
+          "**/core/**",
+          "**/.cache/**",
 
           /* ***** ***** ***** ***** File ***** ***** ***** ***** */
           "**/.hintrc",
