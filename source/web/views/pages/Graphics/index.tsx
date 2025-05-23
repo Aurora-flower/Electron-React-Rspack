@@ -2,6 +2,8 @@ import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin/manager"
 import { webLog } from "@/utils/log"
 import type { Application } from "pixi.js"
+// biome-ignore lint/correctness/noUnusedImports: <explanation>
+import * as React from "react"
 import { useEffect, useRef, useState } from "react"
 import type { JSX } from "react"
 

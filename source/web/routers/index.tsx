@@ -5,12 +5,8 @@ import GraphicsPage from "@/views/pages/Graphics"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"
-import {
-  type DOMRouterOpts,
-  type RouteObject,
-  RouterProvider,
-  createBrowserRouter
-} from "react-router"
+import { RouterProvider, createBrowserRouter } from "react-router"
+import type { DOMRouterOpts, RouteObject } from "react-router"
 
 // const EnhancedDashboard = HOC(Dashboard)
 

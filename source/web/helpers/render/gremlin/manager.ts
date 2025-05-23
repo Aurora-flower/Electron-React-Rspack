@@ -6,6 +6,10 @@ import { webLog } from "@/utils/log"
 import { Application, RenderLayer } from "pixi.js"
 
 class PixiManager {
+  static elementFlag = {
+    karte: "basiskarte",
+    layer: "layer"
+  }
   private static _app: Application
 
   static async init(root: HTMLDivElement | string): Promise<Application> {
@@ -34,10 +38,10 @@ class PixiManager {
     const rulerView = new RenderLayer()
     app.stage.addChild(basiskarte, layer, rulerView)
     const basiskarteContainer = createContainer(app.stage, {
-      label: "basiskarte"
+      label: PixiManager.elementFlag.karte
     })
     const layerContainer = createContainer(app.stage, {
-      label: "layer"
+      label: PixiManager.elementFlag.layer
     })
     const rulerContainer = createContainer(app.stage)
     const viewSize = {
