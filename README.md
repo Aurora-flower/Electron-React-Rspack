@@ -72,7 +72,7 @@
     git commit -m "feat(file): 文件处理模块"
     ```
 
-**注意**:
+**注意** 📢:
 
 每次执行 `commit` 时会触发 `pre-commit` 钩子，钩子中执行预定义的脚本命名，并检查 `commit` 信息是否符合规范。当存在错误，则会阻止提交。
 
@@ -144,7 +144,8 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🍀 Pixi.js 图形 API](https://pixijs.download/release/docs/scene.Graphics.html)
   - [⚡ PIXI 文本样式编辑器](https://text-style.pixijs.io)
   - [🧠 Pixi.js 库 API](https://api.pixijs.io/index.html)
-  - [📦 Pixi.js UI](https://pixijs.io/ui/)
+  - [🏹 Pixi.js UI](https://pixijs.io/ui/)
+  - [🛡 Fabric.js](https://fabricjs.cc/)
 
 - **3D渲染引擎**
   - [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
@@ -171,6 +172,25 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🛏️ Tailwindcss](https://tailwindcss.com/)
   - [🎉 Animate.css](https://animate.style/)
 
+### 辅助集
+
+- **electron 扩展功能**
+  - [🔑 electron-shortcut-normalizer](https://npm.io/package/electron-shortcut-normalizer)
+
+- **开发辅助**
+  - [🟪 wait-on](https://npm.io/package/wait-on)
+  - [🟩 patch-package](https://npm.io/package/patch-package)
+  - [🟥 cross-env](https://npm.io/package/cross-env)
+  - [🟨 npm-run-all2](https://npm.io/package/npm-run-all2)
+
+- **运行辅助**
+  - [🔧 archiver](https://npm.io/package/archiver)
+  - [🛑 asar](https://npm.io/package/asar)
+  - [🖋️ fs-extra](https://npm.io/package/fs-extra)
+  - [🔔 lodash](https://www.lodashjs.com/)
+  - [❌ rimraf](https://npm.io/package/rimraf)
+  - [🚫 yauzl](https://npm.io/package/yauzl)
+
 ---
 
 ### 开发支持体系
@@ -194,6 +214,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **包管理器**
   - [✈️ npm](https://npm.nodejs.cn/)
+  - [⭐️ npm 镜像](https://npm.io/)
   - [🚗 package.json 规范](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
 
 - **环境管理**
@@ -251,7 +272,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [☕️ 掘金社区](https://juejin.cn/)
 
 - **技术博客**
-  - [⭐ David Walsh博客](https://davidwalsh.name)
+  - [💥 David Walsh博客](https://davidwalsh.name)
 
 #### 3. 可视化资源
 
@@ -273,7 +294,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 ### 技术资源集
 
 - **技术博客**
-  - [⭐JS Blog](https://davidwalsh.name)
+  - [🦄 JS Blog](https://davidwalsh.name)
 
 - **可视化资源**
   - [🎶 Web3D Three](http://www.webgl3d.cn/)
