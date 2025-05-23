@@ -1,19 +1,20 @@
+import { debugPixiSprite } from "@/debug/pixiRender/sprite"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
+import { join } from "@/utils/interface/url"
 import { webLog } from "@/utils/log"
 
 // https://pixijs.com/assets/eggHead.png
 // https://imgur.com/T2vjvYl.png
 export function debugPixiRender(): void {
+  debugPixiSprite()
+
   /* 1. 坐标起始点的切换 */
   /* 3. 透明区的裁切 */
 }
 
 export function debugWorker(): void {
-  const workerPath = new URL(
-    "../../core/scripts/javascript/worker.js",
-    location.href
-  )?.pathname
+  const workerPath = join("../../core/scripts/javascript/worker.js")
   enableWorker(workerPath, {
     type: "module"
   })

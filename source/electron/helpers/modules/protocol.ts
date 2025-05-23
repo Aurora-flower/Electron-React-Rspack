@@ -2,6 +2,7 @@ import { DEFAULT_SCHEMA } from "@main/common/const"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
 import { net, protocol } from "electron"
 import type { CustomScheme } from "electron"
+import Logger from "electron-log"
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,
@@ -36,9 +37,10 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
   ): Promise<GlobalResponse> {
     try {
       const _fileURL = normalizeDirveLetter(request.url)
+      Logger.info(`[protocol] request url: ${request.url}`, _fileURL)
       return await net.fetch(
-        // fileURL
-        "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
+        _fileURL
+        // "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
       )
     } catch (error) {
       return Promise.reject(error)

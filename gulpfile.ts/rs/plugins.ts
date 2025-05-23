@@ -27,7 +27,7 @@ function getHtmlRspackPlugin(
           `font-src 'self' data: https://pixijs.com/;` +
           `worker-src 'self' blob:;` +
           `connect-src 'self' data: https://api.iconify.design/ https://pixijs.com/;` +
-          `img-src 'self' data: blob:;`
+          `img-src 'self' data: blob: https://pixijs.com/;`
       }
     },
     scriptLoading: "module",

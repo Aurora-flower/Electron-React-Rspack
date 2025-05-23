@@ -36,8 +36,8 @@ function rspackCompiler(isClosing = false): Promise<boolean> {
           "**/tsconfig.json",
           "**/package.json",
           "**/package-lock.json"
-        ],
-        poll: 1000 * 3
+        ]
+        // poll: 1000 * 3
       }
       const multiCompiler = rspack(RsConfig)
       multiCompiler.watch(options, (err, stats) => {

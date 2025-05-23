@@ -16,12 +16,14 @@ export function normalizeDirveLetter(
   scheme: string = DEFAULT_SCHEMA
 ): string {
   if (isWin()) {
-    // url.startsWith(`${scheme}://`)
-    const postname = url.replace(`${scheme}://`, "") // url.split("://")[1];
+    const postname = url.replace(`${scheme}://`, "")
     const letters = postname.split("/")
-    letters[0] = `${letters[0].toUpperCase()}:/`
-    const absolutePath = letters.join("/") // normalize(absolutePath)
-    return pathToFileURL(decodeURI(absolutePath)).toString()
+    const driveLetter = letters[0]
+    if (driveLetter.indexOf("$") > -1) {
+      letters[0] = driveLetter.replace("$", ":")
+    }
+    const fileURL = letters.join("/")
+    return pathToFileURL(decodeURI(fileURL)).toString()
   }
   return url
 }

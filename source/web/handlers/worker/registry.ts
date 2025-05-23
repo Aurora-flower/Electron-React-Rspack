@@ -1,4 +1,4 @@
-import { webLog } from "@/utils/log"
+import { webError, webLog } from "@/utils/log"
 import CommonUtility from "@/utils/utility"
 
 export function enableWorker(
@@ -12,7 +12,7 @@ export function enableWorker(
     webLog("enableWorker", "Main thread received message", event.data)
     worker.terminate() // Stop Worker
   }
-  worker.onerror = (error): void => {
-    webLog("enableWorker", "error", CommonUtility.errorMessage(error))
+  worker.onerror = (error: ErrorEvent): void => {
+    webError("enableWorker", "error", CommonUtility.errorMessage(error))
   }
 }

@@ -5,6 +5,16 @@ import { getDomElement } from "@/utils/dom"
 import { webLog } from "@/utils/log"
 import { Application, RenderLayer } from "pixi.js"
 
+function setupStageHook(app: Application): void {
+  webLog(
+    "PixiManager",
+    "setupStageHook",
+    `Type: ${app.stage.constructor.name}`,
+    app.stage.constructor.name === "Container",
+    app.stage.isInteractive()
+  )
+}
+
 class PixiManager {
   static elementFlag = {
     karte: "basiskarte",
@@ -53,12 +63,7 @@ class PixiManager {
     const ruler = new Ruler(rulerContainer, viewSize)
     ruler.draw()
     basiskarte.attach(basiskarteContainer, layerContainer, rulerContainer)
-    webLog(
-      "PixiManager",
-      "initCanvas",
-      app.stage.constructor.name,
-      app.stage.isInteractive()
-    )
+    setupStageHook(app)
   }
 
   static stageClear(): void {
