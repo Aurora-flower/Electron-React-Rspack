@@ -131,10 +131,9 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **服务端框架**
   - [🖼️ Node.js](https://nodejs.cn/api/)
   - [🌴 Express](https://www.expressjs.com.cn/)
-
-- **国际化**
-  - [🌎 i18next](https://www.i18next.com/)
-  - [🍔 react-i18next](https://react.i18next.com/)
+  <!-- - [📦 Redis](https://redis.io/docs/getting-started/) -->
+  <!-- - [🔰 Redis](https://www.redis.net.cn/) -->
+  - [👻 Sqlite](https://sqlite.readdevdocs.com/)
 
 #### 2. 图形渲染层
 
@@ -150,6 +149,19 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **3D渲染引擎**
   - [🍉 Three.js](https://threejs.org/manual/#zh/fundamentals)
   - [📷 Three.js 编辑器](https://threehub.cn/editor/)
+
+#### 3. 辅助工具
+
+- **日志系统**
+  - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
+  <!-- - [🎁 Log4js](https://github.com/log4js-node/log4js-node) -->
+
+- **存储与缓存**
+  - [📦 Electron Store](https://cn.redux.js.org/)
+
+- **国际化**
+  - [🌎 i18next](https://www.i18next.com/)
+  - [🍔 react-i18next](https://react.i18next.com/)
 
 #### 3. 构建工具链
 
@@ -205,10 +217,6 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🔄 Husky](https://husky.nodejs.cn/get-started.html)
 
 #### 2. 调试监控
-
-- **日志系统**
-  - [🧸 Electron Logger](https://github.com/megahertz/electron-log)
-  - [🎁 Log4js](https://github.com/log4js-node/log4js-node)
 
 #### 3. 依赖管理
 
@@ -314,3 +322,4 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **工具**
   - [🛠️ Codesandbox](https://codesandbox.io/)
+  - [➰ Unicode 彩色符号](https://www.tsfhdq.cn/mfzj/3491.html)

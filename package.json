@@ -100,6 +100,7 @@
   },
   "dependencies": {
     "@pixi/ui": "2.2.4",
+    "@reduxjs/toolkit": "2.8.2",
     "animate.css": "4.1.1",
     "archiver": "7.0.1",
     "asar": "3.2.0",
@@ -117,8 +118,10 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-i18next": "15.5.1",
+    "react-redux": "9.2.0",
     "react-router": "7.6.0",
     "react-router-dom": "7.6.0",
+    "redux": "5.0.1",
     "rimraf": "6.0.1",
     "three": "0.176.0",
     "yauzl": "3.2.0"
