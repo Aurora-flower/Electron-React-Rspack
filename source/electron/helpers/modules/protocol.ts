@@ -1,6 +1,7 @@
-import { DEFAULT_SCHEMA } from "@main/common/const"
+import { resolve } from "node:path"
+import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/const"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
-import { net, protocol } from "electron"
+import { net, app, protocol } from "electron"
 import type { CustomScheme } from "electron"
 import Logger from "electron-log"
 
@@ -52,4 +53,16 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
   }
 
   protocol.handle(scheme, protocolHander)
+}
+
+export function setAsDefaultProtocolClient(): void {
+  if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+      app.setAsDefaultProtocolClient(CLIENT_SCHEMA, process.execPath, [
+        resolve(process.argv[1])
+      ])
+    }
+  } else {
+    app.setAsDefaultProtocolClient(CLIENT_SCHEMA)
+  }
 }

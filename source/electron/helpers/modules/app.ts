@@ -1,5 +1,6 @@
 import { join, parse, sep } from "node:path"
 import WindowManager from "@main/helpers/manager/window"
+import { clientNotify } from "@main/helpers/modules/notification"
 import { isAllWindowClosed } from "@main/helpers/modules/window"
 import { isDev } from "@main/utils/node/process/env"
 import { PLATFORM, getPlatform, isWin } from "@main/utils/node/process/platform"
@@ -98,5 +99,12 @@ export function setupAppHooks(): void {
     if (isAllWindowClosed()) {
       WindowManager.getInstance()?.createMainWindow()
     }
+  })
+
+  /**
+   * @platform darwin
+   */
+  app.on("open-url", (event, url) => {
+    clientNotify("Welcome!", `Reference: ${url}`)
   })
 }
