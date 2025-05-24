@@ -70,7 +70,19 @@ export default defineConfig([
     files: ["**/*.css"],
     plugins: { css },
     language: "css/css",
-    extends: ["css/recommended"]
+    extends: ["css/recommended"],
+    rules: {
+      "css/no-invalid-at-rules": "off"
+      // [
+      //   "error",
+      //   {
+      //     /**
+      //      * @theme is a custom at-rule that is used in TailwindCSS.
+      //      */
+      //     ignoreAtRules: ["theme"]
+      //   }
+      // ]
+    }
   },
   {
     files: ["**/*.ts", "**/*.tsx"],
