@@ -14,9 +14,8 @@ function getHtmlRspackPlugin(
     inject: "body",
     meta: {
       // shrink-to-fit=no
-      viewport:
-        "width=device-width, initial-scale=1.0," +
-        "maximum-scale=1.0, user-scalable=no",
+      // viewport:
+      //   "width=device-width, initial-scale=1.0,",
       /* Content-Security-Policy 策略 */
       "Content-Security-Policy": {
         "http-equiv": "Content-Security-Policy",

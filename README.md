@@ -112,7 +112,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 ---
 
-## 相关链接
+## 相关链接 🔗
 
 ### 技术栈分层
 
@@ -183,6 +183,8 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **样式方案**
   - [🛏️ Tailwindcss](https://tailwindcss.com/)
   - [🎉 Animate.css](https://animate.style/)
+  - [🎨 Motion](https://motion.dev/docs/react-quick-start)
+  - [👾 Framer motion](https://motion.framer.wiki/introduction)
 
 ### 辅助集
 
