@@ -1,4 +1,4 @@
-import { readFile } from "@main/utils/node/file"
+import { readFile } from "@main/node/file"
 
 export async function getImageDataURL(path: string): Promise<string> {
   const data = await readFile(path)
