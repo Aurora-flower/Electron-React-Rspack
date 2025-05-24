@@ -26,22 +26,24 @@ export function debugPixiSprite(): void {
       height: 300
       // tint: 0x036fc2
     })
-    // const spriteMeta = {
-    //   naturalWidth: texture.width,
-    //   naturalHeight: texture.height,
-    //   width: sprite.width,
-    //   height: sprite.height
-    // }
+    const spriteMeta = {
+      naturalWidth: texture.width,
+      naturalHeight: texture.height,
+      width: sprite.width,
+      height: sprite.height
+    }
     // sprite.texture = await Assets.load(`local://${"F:\\SERVER\\release\\ER\\sample.png"}`)
     // texture.update();
     const mask = new Graphics()
     const imageData = new Image()
     imageData.crossOrigin = "Anonymous" // This ensures CORS headers are requested
+    imageData.width = 300
+    imageData.height = 300
     imageData.src = "https://pixijs.com/assets/eggHead.png"
     imageData.onload = (): void => {
       const imageDataCanvas = document.createElement("canvas")
-      imageDataCanvas.width = 300
-      imageDataCanvas.height = 300
+      imageDataCanvas.width = spriteMeta.naturalWidth
+      imageDataCanvas.height = spriteMeta.naturalHeight
       const width = imageDataCanvas.width
       const height = imageDataCanvas.height
       const context = imageDataCanvas.getContext(
@@ -58,8 +60,8 @@ export function debugPixiSprite(): void {
             webLog(
               "debug",
               "mask",
-              width,
-              height,
+              spriteMeta.width,
+              spriteMeta.height,
               imageDataCanvas.width,
               imageDataCanvas.height,
               x,
@@ -69,7 +71,7 @@ export function debugPixiSprite(): void {
           }
         }
       }
-      sprite.mask = mask
+      // sprite.mask = mask
       layerContainer.addChild(mask)
     }
 

@@ -1,5 +1,5 @@
 import "pixi.js/unsafe-eval"
-import "./assets/stylesheets/main.css"
+import "./static/stylesheets/main.css"
 import "@/App"
 import { messageListener } from "@/helpers/event/listener/message"
 
