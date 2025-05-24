@@ -1,6 +1,6 @@
 import type { Container } from "pixi.js"
 
-export function byLabelFindElement(
+export function getElementByLabel(
   label: string,
   root: Container
 ): Container | null {

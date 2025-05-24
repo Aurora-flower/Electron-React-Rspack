@@ -1,4 +1,4 @@
-import { byLabelFindElement } from "@/helpers/render/gremlin/functions/find"
+import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import PixiManager from "@/helpers/render/gremlin/manager"
 
 export function debugPixiGraphic(): void {
@@ -6,6 +6,6 @@ export function debugPixiGraphic(): void {
   const app = PixiManager.getApp()
 
   /* 渲染区图层（容器）的获取 */
-  const layerContainer = byLabelFindElement("layer", app.stage)
+  const layerContainer = getElementByLabel("layer", app.stage)
   if (!layerContainer) return
 }

@@ -10,6 +10,13 @@ export interface SizeModel {
   height: number
 }
 
+export interface BoundsModel extends SizeModel {
+  left: number
+  right: number
+  top: number
+  bottom: number
+}
+
 export interface MovePoint {
   from: PointModel
   to: PointModel
