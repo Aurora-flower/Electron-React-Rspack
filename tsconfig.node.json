@@ -1,5 +1,4 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
   "include": [
     "types/global.d.ts",
     "types/electron/*.d.ts",
@@ -7,7 +6,7 @@
   ],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "lib": ["ES2015"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "composite": true,
@@ -16,7 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["node", "electron", "express"],
+    "types": ["node", "express"],
     "experimentalDecorators": true,
     "module": "ESNext",
     "moduleResolution": "node",
