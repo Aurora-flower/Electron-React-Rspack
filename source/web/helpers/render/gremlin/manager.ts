@@ -5,6 +5,10 @@ import { getDomElement } from "@/utils/dom"
 import { webLog } from "@/utils/log"
 import { Application, RenderLayer } from "pixi.js"
 
+import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
+
+overwritePixi()
+
 function setupStageHook(app: Application): void {
   webLog(
     "PixiManager",

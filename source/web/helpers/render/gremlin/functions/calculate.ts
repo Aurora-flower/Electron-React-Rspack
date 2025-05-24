@@ -35,7 +35,7 @@ import type { BoundsModel } from "@/helpers/render/gremlin/interface"
 //   }
 // }
 
-export function findContentBounds(imageData: ImageData): BoundsModel | null {
+export function calculateImageBounds(imageData: ImageData): BoundsModel | null {
   const pixels = new Uint32Array(imageData.data.buffer)
   const width = imageData.width
   const height = imageData.height

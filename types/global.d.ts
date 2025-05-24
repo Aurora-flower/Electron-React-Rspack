@@ -59,4 +59,14 @@ declare global {
   }
 }
 
+/* ***** ***** ***** ***** 类型扩展覆盖 ***** ***** ***** ***** */
+declare module "pixi.js" {
+  interface Texture {
+    /**
+     * 自动裁剪纹理透明区域
+     * @returns 返回裁剪后的新纹理
+     */
+    autoCrop(): Promise<Texture>
+  }
+}
 export {}

@@ -1,4 +1,3 @@
-import { findContentBounds } from "@/helpers/render/gremlin/functions/calculate"
 import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
@@ -6,7 +5,7 @@ import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite
 import PixiManager from "@/helpers/render/gremlin/manager"
 import { join } from "@/utils/inputs/url"
 import { webLog } from "@/utils/log"
-import { Graphics, type Texture } from "pixi.js"
+import type { Texture } from "pixi.js"
 
 // const sprite = createSprite(layerContainer, {
 //   texture,
@@ -47,7 +46,7 @@ import { Graphics, type Texture } from "pixi.js"
 export function debugPixiSprite(): void {
   const localURL = `local://${join("core/resources/images/sample.png")}`
   // const remoteURL = `remote://${join("core/resources/images/sample.png")}`
-  // const textureURL = "https://pixijs.com/assets/eggHead.png"
+  const textureURL = "https://pixijs.com/assets/eggHead.png"
 
   /* 获取渲染应用对象 */
   const app = PixiManager.getApp()
@@ -61,62 +60,33 @@ export function debugPixiSprite(): void {
     /* 2. 图片的加载与显示 - local 本地资源协议测试 */
     // loadTexture(textureURL)
     .then((texture: Texture) => {
-      const width = texture.width
-      const height = texture.height
-      let imageData: ImageData
-      const canvas = document.createElement("canvas")
-      const context = canvas.getContext("2d") as CanvasRenderingContext2D
-      const image = new Image()
-      image.crossOrigin = "Anonymous"
-      image.src = texture.label || ""
-      image.onload = (): void => {
-        // 在画布上使用图片的实际尺寸（以 CSS 像素为单位）
-        canvas.width = width //image.naturalWidth
-        canvas.height = height //image.naturalHeight
-        context.drawImage(image, 0, 0)
-        imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-        const bounds = findContentBounds(imageData)
-        if (!bounds) return
-        context.clearRect(0, 0, width, height)
-        context.drawImage(
-          image,
-          bounds?.left ?? 0,
-          bounds?.top ?? 0,
-          bounds.width,
-          bounds.height,
-          0,
-          0,
-          width,
-          height
-        )
-        const dataURL = canvas.toDataURL("image/png")
-        loadTexture(dataURL).then(texture => {
-          createSprite(layerContainer, {
-            texture,
-            position: {
-              x: 100,
-              y: 100
-            },
-            width: bounds.width,
-            height: bounds.height
-          })
-          const boundGraphics = new Graphics({
-            alpha: 0.5,
-            position: {
-              x: 100,
-              y: 100
-            }
-          })
-          boundGraphics.rect(0, 0, bounds.width, bounds.height).fill(0xffffff)
-          boundGraphics
-            .rect(-(bounds?.left ?? 0), -(bounds?.top ?? 0), width, height)
-            .fill(0xe54073)
-          layerContainer.addChild(boundGraphics)
+      /* 3. 图片的裁剪透明 */
+      texture.autoCrop().then((cropTexture: Texture) => {
+        createSprite(layerContainer, {
+          texture: cropTexture
         })
-        webLog("debug", "debugPixiRender", texture, bounds)
-      }
+        webLog("autoCrop", "cropTexture", cropTexture.width, cropTexture.height)
+      })
 
-      /* 创建九宫格模式精灵对象 */
+      /* 5. 图片的切换 */
+      const sprite = createSprite(layerContainer, {
+        texture,
+        position: {
+          x: 100,
+          y: 0
+        },
+        scale: {
+          x: 0.5,
+          y: 0.5
+        }
+      })
+      loadTexture(textureURL).then((texture1: Texture) => {
+        setTimeout(() => {
+          sprite.texture = texture1
+        }, 1000 * 3)
+      })
+
+      /* 4. 创建九宫格模式精灵对象 */
       const nineSprite = createNineSliceSprite(layerContainer, {
         texture,
         width: 300,
@@ -127,8 +97,5 @@ export function debugPixiSprite(): void {
         bottomHeight: 80
       })
       nineSprite.position.set(300, 300)
-
-      // sprite.texture = await Assets.load(`local://xxxx}`)
-      // texture.update();
     })
 }
