@@ -3,7 +3,7 @@ import type {
   LinePoint,
   PointModel,
   SizeModel
-} from "@/helpers/render/gremlin/types"
+} from "@/helpers/render/gremlin/interface"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 

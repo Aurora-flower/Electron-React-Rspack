@@ -3,7 +3,7 @@ import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite/nineSliceSprite"
 import PixiManager from "@/helpers/render/gremlin/manager"
-import { join } from "@/utils/interface/url"
+import { join } from "@/utils/inputs/url"
 import { webLog } from "@/utils/log"
 import { Graphics, type Texture } from "pixi.js"
 
