@@ -13,12 +13,12 @@ export function privilegedSchemes(
     const defaultOption: CustomScheme = {
       scheme,
       privileges: {
-        bypassCSP: true,
         standard: true,
         secure: true,
-        supportFetchAPI: true
-        // corsEnabled: true,
-        // stream: true
+        supportFetchAPI: true,
+        corsEnabled: true,
+        stream: true,
+        bypassCSP: true
       }
     }
     const mergeOption = Object.assign(defaultOption, options)
@@ -37,7 +37,11 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
   ): Promise<GlobalResponse> {
     try {
       const _fileURL = normalizeDirveLetter(request.url)
-      Logger.info(`[protocol] request url: ${request.url}`, _fileURL)
+      Logger.log("[Protocol Request]", {
+        url: request.url,
+        headers: Object.fromEntries(request.headers.entries()),
+        _fileURL
+      })
       return await net.fetch(
         _fileURL
         // "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"

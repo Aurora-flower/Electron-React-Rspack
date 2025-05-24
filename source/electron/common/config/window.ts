@@ -6,6 +6,8 @@ export const WINDOW_OPTIONS = {
   title: process.env?.TITLE ?? "Electron-React-Rspack",
   frame: !isWin(),
   webPreferences: {
+    webSecurity: true,
+    sandbox: true,
     preload: resolvePath("../preload/index.js")
   }
 }

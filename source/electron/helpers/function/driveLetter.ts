@@ -1,7 +1,5 @@
 import { pathToFileURL } from "node:url"
 import { DEFAULT_SCHEMA } from "@main/common/const"
-// import { normalize } from "node:path";
-import { isWin } from "@main/utils/node/process/platform"
 
 export function driveLetterReplace(url: string): string {
   const driveLetterRegex = /^[a-zA-Z]:/
@@ -15,15 +13,16 @@ export function normalizeDirveLetter(
   url: string,
   scheme: string = DEFAULT_SCHEMA
 ): string {
-  if (isWin()) {
-    const postname = url.replace(`${scheme}://`, "")
-    const letters = postname.split("/")
-    const driveLetter = letters[0]
-    if (driveLetter.indexOf("$") > -1) {
-      letters[0] = driveLetter.replace("$", ":")
-    }
-    const fileURL = letters.join("/")
-    return pathToFileURL(decodeURI(fileURL)).toString()
+  const postname = url.replace(`${scheme}://`, "")
+  const letters = postname.split("/")
+  const driveLetter = letters[0]
+  if (driveLetter.indexOf("$") > -1) {
+    letters[0] = driveLetter.replace("$", ":")
   }
-  return url
+  const fileURL = letters.join("/")
+  const decoded = decodeURI(fileURL)
+  const normalizedPath = decoded
+    // .replace(/([a-zA-Z])\$/, "$1:") // 处理根路径 C$ → C:
+    .replace(/^\/([a-z]:)/i, "$1")
+  return pathToFileURL(normalizedPath).toString()
 }
