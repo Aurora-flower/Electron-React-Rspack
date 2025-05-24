@@ -22,8 +22,10 @@ export function debugPixiSprite(): void {
     /* 创建普通精灵对象 */
     const sprite = createSprite(layerContainer, {
       texture,
-      width: 300,
-      height: 300
+      position: {
+        x: 100,
+        y: 100
+      }
       // tint: 0x036fc2
     })
     const spriteMeta = {
@@ -34,48 +36,71 @@ export function debugPixiSprite(): void {
     }
     // sprite.texture = await Assets.load(`local://${"F:\\SERVER\\release\\ER\\sample.png"}`)
     // texture.update();
-    const mask = new Graphics()
-    const imageData = new Image()
-    imageData.crossOrigin = "Anonymous" // This ensures CORS headers are requested
-    imageData.width = 300
-    imageData.height = 300
-    imageData.src = "https://pixijs.com/assets/eggHead.png"
-    imageData.onload = (): void => {
-      const imageDataCanvas = document.createElement("canvas")
-      imageDataCanvas.width = spriteMeta.naturalWidth
-      imageDataCanvas.height = spriteMeta.naturalHeight
-      const width = imageDataCanvas.width
-      const height = imageDataCanvas.height
-      const context = imageDataCanvas.getContext(
-        "2d"
-      ) as CanvasRenderingContext2D
-      context.drawImage(imageData, 0, 0)
-      const pixelData = context.getImageData(0, 0, width, height)
+    let imageData: ImageData
+    const canvas = document.createElement("canvas")
+    const context = canvas.getContext("2d") as CanvasRenderingContext2D
+    const image = new Image()
+    image.crossOrigin = "Anonymous"
+    image.src = texture.label || ""
+    image.onload = (): void => {
+      // 在画布上使用图片的实际尺寸（以 CSS 像素为单位）
+      canvas.width = image.naturalWidth
+      canvas.height = image.naturalHeight
+      context.drawImage(image, 0, 0)
+      // const dataURL = canvas.toDataURL("image/png")
+      imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+      const mask = new Graphics({
+        position: {
+          x: 100,
+          y: 100
+        }
+      })
+      const pixelData = imageData.data
+      // for (let index = 0; index < pixelData.length; index++) {
+      //   const pixel = pixelData[index]
+      //   if (pixel > 0) {
+      //     mask.rect()
+      //   }
+      // }
+      // for (let y = 0; y < canvas.height; y++) {
+      //   for (let x = 0; x < canvas.width; x++) {
+      //     const index = (y * canvas.width + x) * 4
+      //     const alpha = pixelData[index + 3]
+      //     if (alpha > 0) {
+      //       mask.rect(x, y, 1, 1).fill(0xffffff)
+      //     }
+      //   }
+      // }
+
+      // const stride = canvas.width * 4 // 每行占用的数组长度，RGBA四通道存储为一组
+      // for (let y = 0; y < canvas.height; y++) {
+      //   const rowStart = y * stride // 预计算行偏移量
+      //   for (let x = 0; x < canvas.width; x++) {
+      //     const index = rowStart + x * 4 // 计算当前像素位置
+      //     const alpha = pixelData[index + 3] // 获取alpha通道
+      //     if (alpha > 0) {
+      //       mask.rect(x, y, 1, 1).fill(0xffffff)
+      //     }
+      //   }
+      // }
+      const u32Buffer = new Uint32Array(pixelData.buffer) // 创建32位视图
+      const width = canvas.width
+      const height = canvas.height
       for (let y = 0; y < height; y++) {
+        const rowStart = y * width // 行起始索引
         for (let x = 0; x < width; x++) {
-          const index = (y * width + x) * 4
-          const alpha = pixelData.data[index + 3] // 获取透明度值
+          const rgba = u32Buffer[rowStart + x] // 一次性读取32位RGBA值
+          const alpha = (rgba >>> 24) & 0xff // 提取alpha通道
           if (alpha > 0) {
-            mask.rect(x, y, 1, 1).fill(0xffffff) // 只绘制非透明的像素
-            webLog(
-              "debug",
-              "mask",
-              spriteMeta.width,
-              spriteMeta.height,
-              imageDataCanvas.width,
-              imageDataCanvas.height,
-              x,
-              y,
-              alpha
-            )
+            mask.rect(x, y, 1, 1).fill(0xffffff)
           }
         }
       }
-      // sprite.mask = mask
+      sprite.mask = mask
       layerContainer.addChild(mask)
+      // context.drawImage(image, 0, 0, image.width, image.height)
+      webLog("debug", "debugPixiRender", spriteMeta, pixelData, texture)
     }
-
-    // webLog("debug", "debugPixiRender", spriteMeta, pixelData)
 
     /* 创建九宫格模式精灵对象 */
     const nineSprite = createNineSliceSprite(layerContainer, {
