@@ -7,6 +7,80 @@ import { join } from "@/utils/interface/url"
 import { webLog } from "@/utils/log"
 import { Graphics, type Texture } from "pixi.js"
 
+// Texture.prototype.autoCrop = async function(): Promise<Texture> {
+//     const image = await this.baseTexture.resource.source
+//     const bounds = await calculateImageBounds(image)
+//     return new Texture(this.baseTexture, new Rectangle(
+//         bounds.left,
+//         bounds.top,
+//         bounds.width,
+//         bounds.height
+//     ))
+// }
+
+interface Bounds {
+  left: number
+  right: number
+  top: number
+  bottom: number
+  width: number
+  height: number
+}
+
+function findContentBounds(imageData: ImageData): Bounds | null {
+  const pixels = new Uint32Array(imageData.data.buffer)
+  const width = imageData.width
+  const height = imageData.height
+
+  // 初始化边界值
+  let left = width
+  let right = 0
+  let top = height
+  let bottom = 0
+
+  // 优化遍历：按行处理，同时检查左右边界
+  for (let y = 0; y < height; y++) {
+    let rowHasPixel = false
+    const rowStart = y * width
+
+    // 从左向右找左边界
+    for (let x = 0; x < width; x++) {
+      if ((pixels[rowStart + x] & 0xff000000) !== 0) {
+        if (x < left) left = x
+        rowHasPixel = true
+        break
+      }
+    }
+
+    // 从右向左找右边界
+    for (let x = width - 1; x >= 0; x--) {
+      if ((pixels[rowStart + x] & 0xff000000) !== 0) {
+        if (x > right) right = x
+        rowHasPixel = true
+        break
+      }
+    }
+
+    // 更新垂直边界
+    if (rowHasPixel) {
+      if (y < top) top = y
+      bottom = y // 持续更新直到最后有像素的行
+    }
+  }
+
+  // 处理全透明情况
+  if (left > right || top > bottom) return null
+
+  return {
+    left,
+    right,
+    top,
+    bottom,
+    width: right - left + 1,
+    height: bottom - top + 1
+  }
+}
+
 export function debugPixiSprite(): void {
   const localURL = `local://${join("core/resources/images/sample.png")}`
   // const remoteURL = `remote://${join("core/resources/images/sample.png")}`
@@ -25,20 +99,20 @@ export function debugPixiSprite(): void {
     // loadTexture(textureURL)
     .then((texture: Texture) => {
       /* 创建普通精灵对象 */
-      const sprite = createSprite(layerContainer, {
-        texture,
-        position: {
-          x: 100,
-          y: 100
-        }
-        // tint: 0x036fc2
-      })
-      const spriteMeta = {
-        naturalWidth: texture.width,
-        naturalHeight: texture.height,
-        width: sprite.width,
-        height: sprite.height
-      }
+      // const sprite = createSprite(layerContainer, {
+      //   texture,
+      //   position: {
+      //     x: 100,
+      //     y: 100
+      //   }
+      //   // tint: 0x036fc2
+      // })
+      // const spriteMeta = {
+      //   naturalWidth: texture.width,
+      //   naturalHeight: texture.height,
+      //   width: sprite.width,
+      //   height: sprite.height
+      // }
       // sprite.texture = await Assets.load(`local://xxxx}`)
       // texture.update();
       let imageData: ImageData
@@ -52,7 +126,6 @@ export function debugPixiSprite(): void {
         canvas.width = image.naturalWidth
         canvas.height = image.naturalHeight
         context.drawImage(image, 0, 0)
-        // const dataURL = canvas.toDataURL("image/png")
         imageData = context.getImageData(0, 0, canvas.width, canvas.height)
         const mask = new Graphics({
           position: {
@@ -102,26 +175,54 @@ export function debugPixiSprite(): void {
           }
         }
         // sprite.mask = mask
-        const rect = new Graphics({
-          position: {
-            x: 100,
-            y: 100
-          }
+        // layerContainer.addChild(mask)
+        context.clearRect(0, 0, width, height)
+        const bound = findContentBounds(imageData)
+        context.drawImage(
+          image,
+          bound?.left ?? 0,
+          bound?.top ?? 0,
+          mask.width,
+          mask.height,
+          0,
+          0,
+          width,
+          height
+        )
+        const dataURL = canvas.toDataURL("image/png")
+        loadTexture(dataURL).then(texture => {
+          createSprite(layerContainer, {
+            texture,
+            position: {
+              x: 100,
+              y: 100
+            },
+            width: mask.width,
+            height: mask.height
+          })
+          const boundGraphics = new Graphics({
+            alpha: 0.5,
+            position: {
+              x: 100,
+              y: 100
+            }
+          })
+          boundGraphics.rect(0, 0, mask.width, mask.height).fill(0xffffff)
+          boundGraphics
+            .rect(-(bound?.left ?? 0), -(bound?.top ?? 0), width, height)
+            .fill(0xe54073)
+          layerContainer.addChild(boundGraphics)
         })
-        rect.rect(0, 0, mask.width, mask.height).fill(0xa63958)
-        layerContainer.addChild(mask)
-        layerContainer.addChild(rect)
-        // context.drawImage(image, 0, 0, image.width, image.height)
         webLog(
           "debug",
           "debugPixiRender",
-          spriteMeta,
+          // spriteMeta,
           pixelData,
           texture,
           mask.width,
           mask.height,
           mask.position,
-          rect.position
+          bound
         )
       }
 
