@@ -1,8 +1,4 @@
 /**
- * @file Ipc 通信类型定义
- */
-
-/**
  * @summary Ipc 通信名称与类型标记
  */
 type IpcName = "emitter" | "dispatch" | "sender"
@@ -49,6 +45,7 @@ interface ChannelConfig<T extends ChannelType> {
 }
 
 type ChannelConfigMap = {
+  [key: string]: ChannelConfig<ChannelType>
   [K in ChannelType]: ChannelConfig<K>
 }
 
@@ -56,6 +53,7 @@ type ChannelConfigMap = {
  * @summary SMS 消息类型定义
  */
 interface Message {
+  type?: string
   source: string
   payload: unknown
   isJson?: boolean

@@ -2,7 +2,6 @@ import onAppReady from "@main/handlers/event/onAppReady"
 import onAppReadyBefore from "@main/handlers/event/onAppReadyBefore"
 import commandLines from "@main/helpers/function/commandLines"
 import { setAsDefaultProtocolClient } from "@main/helpers/modules/protocol"
-import Logger from "electron-log"
 
 function advanceExecution(): void {
   setAsDefaultProtocolClient()
@@ -12,7 +11,6 @@ function advanceExecution(): void {
 function initialization(): void {
   advanceExecution()
   onAppReadyBefore().then(onAppReady).catch(console.error)
-  Logger.log("DEV_SERVER_URL", process.env.DEV_SERVER_URL)
 }
 
 initialization()

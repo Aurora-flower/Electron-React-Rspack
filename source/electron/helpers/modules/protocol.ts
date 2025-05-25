@@ -1,9 +1,9 @@
 import { resolve } from "node:path"
-import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/const"
+import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/macros"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
+import { sendLog } from "@main/toolkit/logger"
 import { net, app, protocol } from "electron"
 import type { CustomScheme } from "electron"
-import Logger from "electron-log"
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,
@@ -38,11 +38,17 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
   ): Promise<GlobalResponse> {
     try {
       const _fileURL = normalizeDirveLetter(request.url)
-      Logger.log("[Protocol Request]", {
-        url: request.url,
-        headers: Object.fromEntries(request.headers.entries()),
-        _fileURL
-      })
+      sendLog(
+        {
+          level: "info",
+          sign: "Protocol Request"
+        },
+        {
+          url: request.url,
+          headers: Object.fromEntries(request.headers.entries()),
+          _fileURL
+        }
+      )
       return await net.fetch(
         _fileURL
         // "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"

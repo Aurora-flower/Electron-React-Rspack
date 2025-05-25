@@ -1,5 +1,11 @@
-import Logger from "electron-log"
+import { sendLog } from "@main/toolkit/logger"
 
 export function command(instruct: string): void {
-  Logger.log(instruct)
+  sendLog(
+    {
+      level: "info",
+      sign: "command"
+    },
+    instruct
+  )
 }

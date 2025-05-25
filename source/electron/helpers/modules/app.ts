@@ -2,8 +2,8 @@ import { join, parse, sep } from "node:path"
 import WindowManager from "@main/helpers/manager/window"
 import { clientNotify } from "@main/helpers/modules/notification"
 import { isAllWindowClosed } from "@main/helpers/modules/window"
-import { isDev } from "@main/utils/node/process/env"
-import { PLATFORM, getPlatform, isWin } from "@main/utils/node/process/platform"
+import { isDev } from "@main/node/process/env"
+import { PLATFORM, getPlatform, isWin } from "@main/node/process/platform"
 import { app } from "electron"
 
 const FOLDER_NAMES = {
@@ -75,6 +75,13 @@ export class AppInfo implements AppInfoModel {
     }
     return AppInfo._instance
   }
+}
+
+export function getAppStaticPath(url?: string): string {
+  const isPackaged = AppInfo.getInstance()?.packaged ?? app.isPackaged
+  const AppAsar = AppInfo.getInstance()?.appFolder ?? app.getAppPath()
+  const baseOutput = isPackaged ? "" : "app"
+  return join(AppAsar, baseOutput, "public", url ?? "")
 }
 
 export function getAppInfo(): AppInfo {

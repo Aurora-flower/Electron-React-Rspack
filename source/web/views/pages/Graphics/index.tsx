@@ -2,31 +2,27 @@ import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin/manager"
 import { webLog } from "@/utils/log"
 import type { Application } from "pixi.js"
-// biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
-import { useEffect, useRef, useState } from "react"
 import type { JSX } from "react"
 
 function GraphicsPage(): JSX.Element {
-  const [getTip] = useState<string>(
+  const [getTip] = React.useState<string>(
     "使用鼠标右键平移视窗焦点，使用滚轮缩放视图"
   )
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [getApp, setApp] = useState<Application>()
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const [getApp, setApp] = React.useState<Application>()
 
-  useEffect(() => {
-    if (!getApp) {
-      PixiManager.init(containerRef.current!).then((app: Application) => {
-        setApp(app)
-        PixiManager.initCanvas(app)
-        debugPixiRender()
-        webLog("GraphicsPage", "DrowIo", getApp)
-      })
-    }
+  React.useEffect(() => {
+    PixiManager.init(containerRef.current!).then((app: Application) => {
+      setApp(app)
+      PixiManager.initCanvas(app)
+      debugPixiRender()
+    })
     return (): void => {
       PixiManager.stageClear()
     }
-  }, [getApp])
+  }, [])
+  webLog("GraphicsPage", "DrowIo", getApp)
 
   return (
     <div className="grphics page-base">

@@ -1,20 +1,20 @@
 import onAppReadyAfter from "@main/handlers/event/onAppReadyAfter"
-import WindowManager from "@main/helpers/manager/window"
+import LoggerManager from "@main/helpers/manager/logger"
 import { setupAppHooks } from "@main/helpers/modules/app"
 import { registerProtocolHandle } from "@main/helpers/modules/protocol"
+import { createAppServer } from "@main/server"
 import { app } from "electron"
-import Logger from "electron-log"
 
 async function onAppReady(): Promise<void> {
+  await createAppServer()
   app
     .whenReady()
     .then(() => {
+      LoggerManager.isReady = true
       registerProtocolHandle()
-      WindowManager.getInstance()
     })
     .then(onAppReadyAfter)
   setupAppHooks()
-  Logger.log("onAppReady")
 }
 
 export default onAppReady

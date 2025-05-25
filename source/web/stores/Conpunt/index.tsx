@@ -1,10 +1,8 @@
 import { webLog } from "@/utils/log"
-// biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
-import { createContext, useContext, useState } from "react"
 import type { Dispatch, JSX, SetStateAction } from "react"
 
-const StoreContext = createContext<{
+const StoreContext = React.createContext<{
   count: number
   setCount: Dispatch<SetStateAction<number>>
 }>({
@@ -17,7 +15,7 @@ const StoreContext = createContext<{
 export const StoreProvider = (props: {
   children: JSX.Element
 }): JSX.Element => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = React.useState(0)
 
   return (
     <StoreContext.Provider value={{ count, setCount }}>
@@ -26,4 +24,4 @@ export const StoreProvider = (props: {
   )
 }
 
-export const useStore = (): unknown => useContext(StoreContext)
+export const useStore = (): unknown => React.useContext(StoreContext)

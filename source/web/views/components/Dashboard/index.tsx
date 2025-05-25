@@ -3,8 +3,6 @@ import { DASHBOARD_MAP } from "@/views/components/Dashboard/map/view"
 import * as React from "react"
 import type { JSX } from "react"
 
-// const { useState, useEffect } = React
-
 function DashboardCard(props: {
   title: string
   children: JSX.Element

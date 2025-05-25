@@ -1,8 +1,9 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
+import { IPC_CHANNEL_NAME } from "@main/common/macros"
 import { getIsPackage } from "@main/helpers/modules/app"
-import { resolvePath } from "@main/utils/node/path"
-import { isDev } from "@main/utils/node/process/env"
-import { isWin } from "@main/utils/node/process/platform"
+import { resolvePath } from "@main/node/path/resolvePath"
+import { isDev } from "@main/node/process/env"
+import { isWin } from "@main/node/process/platform"
 import { BrowserWindow, Menu } from "electron"
 import Logger from "electron-log"
 
@@ -34,12 +35,14 @@ class WindowManager {
     return WindowManager.instance
   }
 
-  private constructor(mainWindow?: BrowserWindow) {
+  constructor(mainWindow?: BrowserWindow) {
     if (mainWindow) {
       this.mainWindow = mainWindow
     } else {
       const window = this.createMainWindow()
-      window && this.addWindow(window, MAIN_WINDOW_NAME)
+      if (window) {
+        this.addWindow(window, MAIN_WINDOW_NAME)
+      }
     }
   }
 
@@ -113,7 +116,7 @@ class WindowManager {
     })
 
     win.webContents.on("did-finish-load", () => {
-      win.webContents.send("trigger-message", {
+      win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
         source: "ready",
         payload: "did-finish-load"
       } as Message)
@@ -121,7 +124,7 @@ class WindowManager {
 
     win.webContents.on("devtools-opened", () => {
       this.mainWindow?.focus()
-      win.webContents.send("trigger-message", {
+      win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
         source: "devtools",
         payload: "devtools-opened"
       } as Message)

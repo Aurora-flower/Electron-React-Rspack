@@ -83,7 +83,7 @@
 如果出现以下错误，请将 node 版本更改为 22.14.0 版本。（比如: **[nvm](https://nvm.p6p.net/)** 工具）
 
 ```text
-Error: Cannot find module '/Users/HuaYing/Desktop/resources/Local/ER/gulpfile.ts'
+Error: Cannot find module 'xxx/gulpfile.ts'
 ```
 
 ---

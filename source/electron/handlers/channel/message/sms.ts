@@ -1,3 +1,4 @@
+import { IPC_CHANNEL_NAME } from "@main/common/macros"
 import WindowManager from "@main/helpers/manager/window"
 
 export async function transmit(msg: Message): Promise<void> {
@@ -7,7 +8,8 @@ export async function transmit(msg: Message): Promise<void> {
     msg.payload && typeof msg.payload === "string" && msg.isJson
       ? JSON.parse(msg.payload)
       : msg.payload
-  window.webContents.send("trigger-message", {
+  window.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
+    type: "transmit",
     source: msg.source,
     payload: message
   })

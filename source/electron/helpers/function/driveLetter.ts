@@ -1,5 +1,5 @@
 import { pathToFileURL } from "node:url"
-import { DEFAULT_SCHEMA } from "@main/common/const"
+import { DEFAULT_SCHEMA } from "@main/common/macros"
 
 export function driveLetterReplace(url: string): string {
   const driveLetterRegex = /^[a-zA-Z]:/

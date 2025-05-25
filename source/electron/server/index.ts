@@ -1,12 +1,11 @@
 import * as http from "node:http"
 import * as https from "node:https"
 import { join } from "node:path"
-import { AppInfo } from "@main/helpers/modules/app"
-import Logger from "electron-log"
+import { getAppStaticPath } from "@main/helpers/modules/app"
+import { checkConnection } from "@main/node/net/connection"
+import { sendLog } from "@main/toolkit/logger"
 import type { Application } from "express"
-
-const express = require("express") // TODO(低优先级): 解决express模块引入问题，替换为import语法
-// import express from "express"
+import * as express from "express"
 
 interface AppServerOptions {
   path: string
@@ -44,7 +43,13 @@ export class AppServer {
   private createHttpServer(): void {
     this._server = http.createServer(this._application)
     this._server.listen(this._options!.port, () => {
-      Logger.log(`HTTP server listening on port ${this._options?.port}`)
+      sendLog(
+        {
+          level: "info",
+          sign: "createHttpServer"
+        },
+        `App Server: http://${this._options?.hostname}:${this._options?.port}`
+      )
     })
   }
 
@@ -54,7 +59,13 @@ export class AppServer {
       cert: this._options!.CERTIFICATE
     }
     this._server = https.createServer(credentials, () => {
-      Logger.log(`HTTPS server listening on port ${this._options?.port}`)
+      sendLog(
+        {
+          level: "info",
+          sign: "createHttpsServer"
+        },
+        `App Server: https://${this._options?.hostname}:${this._options?.port}`
+      )
     })
   }
 
@@ -70,7 +81,13 @@ export class AppServer {
   stop(): void {
     if (!this._server) return
     this._server.close((): void => {
-      // Logger.log(`Server Stopped`)
+      sendLog(
+        {
+          level: "info",
+          sign: "stopServer"
+        },
+        "Server Stopped"
+      )
     })
   }
 
@@ -90,16 +107,27 @@ export class AppServer {
   }
 }
 
-export function createAppServer(): void {
+export async function createAppServer(): Promise<void> {
+  const staticPath = getAppStaticPath()
   const options = {
-    path: join(AppInfo.getInstance().appFolder, "app", "public"),
-    port: Number(process.env.DEV_SERVER_PORT ?? ""),
+    path: staticPath,
+    port: Number(process.env.DEV_SERVER_PORT ?? "3000"),
     hostname: process.env.DEV_SERVER_HOSTNAME ?? "127.0.0.1",
     isSafe: process.env.DEV_SAFE_MODE === "true"
     // PRIVATE_KEY: readFileSync("private/key.pem"),
     // CERTIFICATE: readFileSync("private/cert.pem")
   }
+  const isConnected = await checkConnection(options.hostname, options.port)
+  options.port = isConnected ? options.port + 1 : options.port
   process.env.DEV_SERVER_URL = `${options.isSafe ? "https" : "http"}://${options.hostname}:${options.port}`
+  sendLog(
+    {
+      level: "info",
+      sign: "createAppServer"
+    },
+    `App Server: ${process.env.DEV_SERVER_URL}`,
+    options
+  )
   const appServer = new AppServer(options)
   appServer.start()
 }

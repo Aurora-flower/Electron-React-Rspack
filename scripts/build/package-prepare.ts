@@ -9,6 +9,7 @@ interface PackageJson {
   version: string
   description: string
   dependencies: Record<string, string>
+  devDependencies?: Record<string, string>
 }
 
 type DistPackage = Partial<PackageJson> & {
@@ -24,8 +25,16 @@ const outputPath = join(outDir, "package.json")
 
 async function clonePackageJSON(): Promise<DistPackage> {
   const raw = await readFile(packagePath, "utf-8")
-  const { name, main, author, version, license, description, dependencies } =
-    JSON.parse(raw) as PackageJson
+  const {
+    name,
+    main,
+    author,
+    version,
+    license,
+    description,
+    dependencies
+    // devDependencies
+  } = JSON.parse(raw) as PackageJson
   const distPackage: DistPackage = {
     name,
     main: relative(outDir, main),
@@ -34,6 +43,7 @@ async function clonePackageJSON(): Promise<DistPackage> {
     license,
     description,
     dependencies
+    // devDependencies
   }
   await mkdir(outDir, { recursive: true })
   await writeFile(outputPath, JSON.stringify(distPackage, null, 2))

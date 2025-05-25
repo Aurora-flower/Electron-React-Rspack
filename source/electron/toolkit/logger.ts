@@ -1,16 +1,49 @@
-import Logger from "electron-log"
+// Logger.log('message');
+// Logger.trace('Trace message');
+// Logger.debug('Debug message');
+// Logger.info('Info message');
+// Logger.warn('Warning message');
+// Logger.error('Error message');
 
-export interface LogOptions {
-  id: string
-  sign: string
-  level?: "log" | "error" | "warn" | "info"
+import LoggerManager from "@main/helpers/manager/logger"
+import WindowManager from "@main/helpers/manager/window"
+
+type LogLevel = "log" | "trace" | "debug" | "info" | "warn" | "error"
+
+interface LogOptions {
+  id?: string
+  sign?: string
+  type?: string
+  level?: LogLevel
+  date?: string
+  time?: string
+  window?: string
+  payload?: unknown[]
 }
 
-export function logger(
-  moduleId: string,
-  sign: string,
-  ...args: unknown[]
-): void {
-  // console.log(`>>> Source [ ${moduleId} ] - $_${sign}_$`, ...args);
-  Logger.log(`>>> Source [ ${moduleId} ] - $_${sign}_$`, ...args)
+export function sendLog(options: LogOptions, ...args: unknown[]): void {
+  const date = new Date()
+  const info: LogOptions = {
+    id: "ELECTRON_LOGGER",
+    sign: "log",
+    level: "log",
+    type: "log",
+    // date: date.toLocaleDateString(),
+    time: date.toLocaleTimeString(), // "zh-Hant-TW"
+    window: "",
+    ...options,
+    payload: args
+  }
+  if (LoggerManager.isReady) {
+    const winM = WindowManager.getInstance()
+    const win = info.window ? winM.getWindow(info.window) : winM.mainWindow
+    if (win) {
+      // TODO: 根据 window 对象向渲染进程发送 log 消息
+      win.webContents.send("message-transmit", info)
+    }
+  }
+  const loggerInstance = LoggerManager.getInstance()
+  if (loggerInstance) {
+    loggerInstance.logger.log(info)
+  }
 }

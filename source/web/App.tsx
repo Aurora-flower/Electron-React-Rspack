@@ -11,6 +11,15 @@ import { createRoot } from "react-dom/client"
 // React.ReactNode | React.ReactElement
 
 function App(): JSX.Element {
+  const [, setAppInfo] = React.useState<AppInfoModel | null>(null)
+
+  React.useEffect(() => {
+    setAppInfo(null)
+    return (): void => {
+      setAppInfo(null)
+    }
+  }, [])
+
   return (
     <PrimeReactProvider value={PRIME_REACT_OPTIONS}>
       <React.StrictMode>

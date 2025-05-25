@@ -1,5 +1,7 @@
-import { ipcMain } from "electron"
+import type { IpcMainEvent } from "electron"
 
-ipcMain.on("synchronous-message", event => {
-  event.returnValue = "pong"
-})
+async function synchronousMessage(event: IpcMainEvent): Promise<void> {
+  event.returnValue = "sync-pong"
+}
+
+export default synchronousMessage

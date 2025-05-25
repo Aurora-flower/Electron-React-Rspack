@@ -1,5 +1,5 @@
-import { resolvePath } from "@main/utils/node/path"
-import { isWin } from "@main/utils/node/process/platform"
+import { resolvePath } from "@main/node/path/resolvePath"
+import { isWin } from "@main/node/process/platform"
 
 export const WINDOW_OPTIONS = {
   icon: resolvePath("../../public/favicon.ico"),

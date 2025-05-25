@@ -1,5 +1,4 @@
-// import net from "node:net"
-const net = require("node:net")
+import * as net from "node:net"
 
 const EXPECT_CODE = [
   /* 表示找不到主机 */
