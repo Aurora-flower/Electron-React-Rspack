@@ -29,7 +29,7 @@ export function normalizeDirveLetter(
     if (!isWin() && !normalizedPath.startsWith("/")) {
       normalizedPath = `/${normalizedPath}`
     }
-    return pathToFileURL(normalizedPath).toString() // pathToFileURL(normalizedPath).toString()
+    return pathToFileURL(normalizedPath).toString()
   } catch (error) {
     throw new Error(error)
   }
