@@ -15,16 +15,19 @@ function GraphicsPage(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [, setApp] = React.useState<Application>()
 
-  const throttleCallback =
+  const callback =
     //  CommonUtility.throttle(
     (): void => {
       // TODO: 添加一个函数，用于在窗口大小改变时重新渲染画布
       PixiManager.stageClear()
       PixiManager.initCanvas()
+
+      /* 测试渲染 */
+      debugPixiRender()
     }
   // )
 
-  const redraw = React.useCallback(throttleCallback, [])
+  const redraw = React.useCallback(callback, [])
 
   enableWindowResizeListener(redraw)
 
