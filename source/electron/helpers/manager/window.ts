@@ -1,13 +1,11 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
-import { IPC_CHANNEL_NAME } from "@main/common/macros"
+import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
 import { getIsPackage } from "@main/helpers/modules/app"
 import { resolvePath } from "@main/node/path/resolvePath"
 import { isDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
 import { BrowserWindow, Menu } from "electron"
 import Logger from "electron-log"
-
-const MAIN_WINDOW_NAME = "_MAIN_"
 
 interface WindowState {
   isLoaded: boolean

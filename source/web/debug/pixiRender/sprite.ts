@@ -60,6 +60,7 @@ export function debugPixiSprite(): void {
     /* 2. 图片的加载与显示 - local 本地资源协议测试 */
     // loadTexture(textureURL)
     .then((texture: Texture) => {
+      if (!texture) return
       /* 3. 图片的裁剪透明 */
       texture.autoCrop().then((cropTexture: Texture) => {
         createSprite(layerContainer, {

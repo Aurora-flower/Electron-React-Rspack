@@ -118,7 +118,7 @@ export async function createAppServer(): Promise<void> {
     // CERTIFICATE: readFileSync("private/cert.pem")
   }
   const isConnected = await checkConnection(options.hostname, options.port)
-  options.port = isConnected ? options.port + 1 : options.port
+  options.port = isConnected ? options.port + 1 : options.port // TODO: 端口冲突处理
   process.env.DEV_SERVER_URL = `${options.isSafe ? "https" : "http"}://${options.hostname}:${options.port}`
   sendLog(
     {

@@ -4,7 +4,9 @@ import type {
   MessageBoxOptions,
   MessageBoxReturnValue,
   OpenDialogOptions,
-  SaveDialogOptions
+  OpenDialogReturnValue,
+  SaveDialogOptions,
+  SaveDialogReturnValue
 } from "electron"
 
 export class AppDialog {
@@ -21,13 +23,17 @@ export class AppDialog {
     return AppDialog.lastUserChoice
   }
 
-  static async openDialog(options: OpenDialogOptions): Promise<string[]> {
+  static async openDialog(
+    options: OpenDialogOptions
+  ): Promise<OpenDialogReturnValue> {
     return dialog.showOpenDialog({
       ...options
     })
   }
 
-  static async saveDialog(options: SaveDialogOptions): Promise<string> {
+  static async saveDialog(
+    options: SaveDialogOptions
+  ): Promise<SaveDialogReturnValue> {
     return dialog.showSaveDialog({
       ...options
     })

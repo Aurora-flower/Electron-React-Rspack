@@ -9,7 +9,7 @@ interface MimeModel {
   description: string
 }
 
-export const MIME_TYPES: Record<string, MimeModel> = {
+export const MIME_TYPES = {
   ".txt": {
     mime: "text/plain",
     represent: "文本文件",
@@ -128,7 +128,9 @@ export const MIME_TYPES: Record<string, MimeModel> = {
 }
 
 export function isValidMime(mime: string): boolean {
-  return Object.values(MIME_TYPES).some(entry => entry.mime === mime)
+  return Object.values(
+    MIME_TYPES as Record<keyof typeof MIME_TYPES, MimeModel>
+  ).some(entry => entry.mime === mime)
 }
 
 export function getMimeType(filePath: string): string {

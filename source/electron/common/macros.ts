@@ -31,3 +31,5 @@ export const IPC_CHANNEL_NAME = {
   /* ***** ***** ***** ***** 消息通讯 ***** ***** ***** ***** */
   MESSAGE_TRANSMIT: "message-transmit"
 }
+
+export const MAIN_WINDOW_NAME = "_MAIN_"

@@ -2,6 +2,7 @@ import { resolve } from "node:path"
 import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/macros"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
 import { sendLog } from "@main/toolkit/logger"
+import { errorMessage } from "@main/utils/mod/error"
 import { net, app, protocol } from "electron"
 import type { CustomScheme } from "electron"
 
@@ -54,6 +55,13 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
         // "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
       )
     } catch (error) {
+      sendLog(
+        {
+          level: "error",
+          sign: "Protocol Request"
+        },
+        errorMessage(error)
+      )
       return Promise.reject(error)
     }
   }

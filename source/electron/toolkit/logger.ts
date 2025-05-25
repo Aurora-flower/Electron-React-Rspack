@@ -5,6 +5,7 @@
 // Logger.warn('Warning message');
 // Logger.error('Error message');
 
+import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
 
@@ -30,7 +31,7 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
     type: "log",
     // date: date.toLocaleDateString(),
     time: date.toLocaleTimeString(), // "zh-Hant-TW"
-    window: "",
+    window: MAIN_WINDOW_NAME,
     ...options,
     payload: args
   }
@@ -44,6 +45,16 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
   }
   const loggerInstance = LoggerManager.getInstance()
   if (loggerInstance) {
-    loggerInstance.logger.log(info)
+    if (info.level === "error") {
+      loggerInstance.logger.error(info)
+    } else if (info.level === "warn") {
+      loggerInstance.logger.warn(info)
+    } else if (info.level === "info") {
+      loggerInstance.logger.info(info)
+    } else if (info.level === "debug") {
+      loggerInstance.logger.debug(info)
+    } else {
+      loggerInstance.logger.log(info)
+    }
   }
 }
