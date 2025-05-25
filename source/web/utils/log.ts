@@ -9,7 +9,8 @@ export const LOG_COLOR = {
   purple: "color: purple;",
   pink: "color: pink;",
   cyan: "color: cyan;",
-  gray: "color: gray;"
+  gray: "color: gray;",
+  white: "color: white;"
 }
 
 export function webLog(
@@ -20,18 +21,24 @@ export function webLog(
   console.log(
     `%c>>> Web Log Source %c[ ${moduleId} ] - %c$_${sign}_$`,
     LOG_COLOR.cyan,
-    LOG_COLOR.purple,
+    LOG_COLOR.orange,
     LOG_COLOR.pink,
     ...args
   )
 }
 
-export function webError(moduleId: string, sign: string, error: unknown): void {
+export function webError(
+  moduleId: string,
+  sign: string,
+  error: unknown,
+  ...args: unknown[]
+): void {
   console.error(
     `>>> Web Error Source %c[ ${moduleId} ] - %c$_${sign}_$`,
-    LOG_COLOR.blue,
+    LOG_COLOR.cyan,
     LOG_COLOR.yellow,
-    CommonUtility.errorMessage(error)
+    CommonUtility.errorMessage(error),
+    ...args
   )
 }
 

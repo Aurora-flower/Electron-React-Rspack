@@ -1,5 +1,4 @@
 import { webError, webLog } from "@/utils/log"
-import CommonUtility from "@/utils/utility"
 
 export function enableWorker(
   scriptURL: string | URL,
@@ -13,6 +12,6 @@ export function enableWorker(
     worker.terminate() // Stop Worker
   }
   worker.onerror = (error: ErrorEvent): void => {
-    webError("enableWorker", "error", CommonUtility.errorMessage(error))
+    webError("enableWorker", "error", error)
   }
 }

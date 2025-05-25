@@ -1,7 +1,7 @@
 import { debugPixiSprite } from "@/debug/pixiRender/sprite"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
-import { join } from "@/utils/inputs/url"
+import { join } from "@/utils/features/url"
 import { webLog } from "@/utils/log"
 
 // https://pixijs.com/assets/eggHead.png

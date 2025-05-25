@@ -205,6 +205,9 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [❌ rimraf](https://npm.io/package/rimraf)
   - [🚫 yauzl](https://npm.io/package/yauzl)
 
+- **前端工作台**
+  - [💭 storybook](https://storybook.org.cn/)
+
 ---
 
 ### 开发支持体系

@@ -3,8 +3,8 @@ import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite/nineSliceSprite"
 import PixiManager from "@/helpers/render/gremlin/manager"
-import { join } from "@/utils/inputs/url"
-import { webLog } from "@/utils/log"
+import StoreManager from "@/stores/manager"
+import { webError, webLog } from "@/utils/log"
 import type { Texture } from "pixi.js"
 
 // const sprite = createSprite(layerContainer, {
@@ -44,7 +44,12 @@ import type { Texture } from "pixi.js"
 // }
 
 export function debugPixiSprite(): void {
-  const localURL = `local://${join("core/resources/images/sample.png")}`
+  const information = StoreManager.getAppInfo()
+  if (!information) {
+    webError("debugPixiSprite", "error", "AppInfo is null")
+    return
+  }
+  const localURL = `local://${information.core}/resources/images/sample.png`
   // const remoteURL = `remote://${join("core/resources/images/sample.png")}`
   const textureURL = "https://pixijs.com/assets/eggHead.png"
 

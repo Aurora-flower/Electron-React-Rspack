@@ -37,33 +37,45 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
   async function protocolHander(
     request: GlobalRequest
   ): Promise<GlobalResponse> {
+    let signal: string
+    let err: unknown
+    const _fileURL = normalizeDirveLetter(request.url)
+    const info = {
+      url: request.url,
+      headers: Object.fromEntries(request.headers.entries()),
+      _fileURL
+    }
     try {
-      const _fileURL = normalizeDirveLetter(request.url)
       sendLog(
         {
           level: "info",
           sign: "Protocol Request"
         },
-        {
-          url: request.url,
-          headers: Object.fromEntries(request.headers.entries()),
+        info
+      )
+
+      try {
+        return await net.fetch(
           _fileURL
-        }
-      )
-      return await net.fetch(
-        _fileURL
-        // "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
-      )
+          // "https://cn.bing.com/th?id=OHR.KilaueaCaldera_EN-US7764962675_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
+        )
+      } catch (error) {
+        signal = "Request Error"
+        err = errorMessage(error)
+      }
     } catch (error) {
-      sendLog(
-        {
-          level: "error",
-          sign: "Protocol Request"
-        },
-        errorMessage(error)
-      )
-      return Promise.reject(error)
+      signal = "[Fetch Error]"
+      err = errorMessage(error)
     }
+    sendLog(
+      {
+        level: "error",
+        sign: signal
+      },
+      err,
+      info
+    )
+    return await Promise.reject(err)
   }
 
   protocol.handle(scheme, protocolHander)

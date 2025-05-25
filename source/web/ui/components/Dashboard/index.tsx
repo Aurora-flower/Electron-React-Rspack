@@ -1,4 +1,4 @@
-import { DASHBOARD_MAP } from "@/views/components/Dashboard/map/view"
+import { DASHBOARD_MAP } from "@/ui/components/Dashboard/map/view"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"

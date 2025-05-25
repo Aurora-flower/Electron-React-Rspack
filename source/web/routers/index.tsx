@@ -1,7 +1,7 @@
 // import HOC from "@/components/Hoc"
-// import Dashboard from "@/views/components/Dashboard"
-import LayoutView from "@/views/layout"
-import GraphicsPage from "@/views/pages/Graphics"
+// import Dashboard from "@/ui/components/Dashboard"
+import LayoutView from "@/ui/layout"
+import GraphicsPage from "@/ui/pages/Graphics"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"
