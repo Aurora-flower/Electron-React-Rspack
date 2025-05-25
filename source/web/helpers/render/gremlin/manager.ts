@@ -41,7 +41,6 @@ class PixiManager {
       resizeTo: domElement
     })
     domElement.appendChild(app.canvas)
-    webLog("PixiManager", "init", root)
     return app
   }
 

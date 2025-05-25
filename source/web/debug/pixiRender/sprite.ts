@@ -1,11 +1,13 @@
 import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
+import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
 import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite/nineSliceSprite"
 import PixiManager from "@/helpers/render/gremlin/manager"
 import StoreManager from "@/stores/manager"
+import { getRandomColor } from "@/utils/functions/color"
 import { webError, webLog } from "@/utils/log"
-import type { Texture } from "pixi.js"
+import type { Sprite, Texture } from "pixi.js"
 
 // const sprite = createSprite(layerContainer, {
 //   texture,
@@ -50,7 +52,7 @@ export function debugPixiSprite(): void {
     return
   }
   const localURL = `local://${information.core}/resources/images/sample.png`
-  // const remoteURL = `remote://${join("core/resources/images/sample.png")}`
+  const frameURL = `local://${information.core}/resources/images/frame.png`
   const textureURL = "https://pixijs.com/assets/eggHead.png"
 
   /* 获取渲染应用对象 */
@@ -60,48 +62,75 @@ export function debugPixiSprite(): void {
   const layerContainer = getElementByLabel("layer", app.stage)
   if (!layerContainer) return
 
-  loadTexture(localURL)
-
-    /* 2. 图片的加载与显示 - local 本地资源协议测试 */
-    // loadTexture(textureURL)
-    .then((texture: Texture) => {
-      if (!texture) return
-      /* 3. 图片的裁剪透明 */
-      texture.autoCrop().then((cropTexture: Texture) => {
-        createSprite(layerContainer, {
-          texture: cropTexture
-        })
-        webLog("autoCrop", "cropTexture", cropTexture.width, cropTexture.height)
-      })
-
-      /* 5. 图片的切换 */
+  /* 2. 图片的加载与显示 - local 本地资源协议测试 */
+  loadTexture(localURL).then((texture: Texture) => {
+    if (!texture) return
+    /* 3. 图片的裁剪透明 */
+    texture.autoCrop().then((cropTexture: Texture) => {
       const sprite = createSprite(layerContainer, {
-        texture,
+        texture: cropTexture,
         position: {
-          x: 100,
-          y: 0
-        },
-        scale: {
-          x: 0.5,
-          y: 0.5
+          x: 300,
+          y: 300
         }
       })
-      loadTexture(textureURL).then((texture1: Texture) => {
-        setTimeout(() => {
-          sprite.texture = texture1
-        }, 1000 * 3)
+      const rect = createGraphics(layerContainer, {
+        alpha: 0.3
       })
-
-      /* 4. 创建九宫格模式精灵对象 */
-      const nineSprite = createNineSliceSprite(layerContainer, {
-        texture,
-        width: 300,
-        height: 300,
-        leftWidth: 80,
-        rightWidth: 80,
-        topHeight: 80,
-        bottomHeight: 80
-      })
-      nineSprite.position.set(300, 300)
+      rect
+        .rect(
+          sprite.position.x - cropTexture.frame.left,
+          sprite.position.y - cropTexture.frame.top,
+          texture.width,
+          texture.height
+        )
+        .fill(getRandomColor())
+      rect
+        .rect(sprite.position.x, sprite.position.y, sprite.width, sprite.height)
+        .fill(getRandomColor())
+      webLog(
+        "autoCrop",
+        "cropTexture",
+        cropTexture.width,
+        cropTexture.height,
+        layerContainer
+      )
     })
+  })
+
+  let sprite1: Sprite
+
+  loadTexture(frameURL).then(texture => {
+    if (!texture) return
+    /* 5. 图片的切换 */
+    sprite1 = createSprite(layerContainer, {
+      texture,
+      position: {
+        x: 100,
+        y: 100
+      },
+      scale: {
+        x: 0.5,
+        y: 0.5
+      }
+    })
+  })
+
+  loadTexture(textureURL).then((texture1: Texture) => {
+    /* 4. 创建九宫格模式精灵对象 */
+    createNineSliceSprite(layerContainer, {
+      texture: texture1,
+      width: 300,
+      height: 300,
+      leftWidth: 80,
+      rightWidth: 80,
+      topHeight: 80,
+      bottomHeight: 80,
+      x: 400,
+      y: 0
+    })
+    setTimeout(() => {
+      sprite1.texture = texture1
+    }, 1000 * 3)
+  })
 }
