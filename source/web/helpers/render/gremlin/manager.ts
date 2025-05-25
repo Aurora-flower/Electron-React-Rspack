@@ -44,7 +44,10 @@ class PixiManager {
     return app
   }
 
-  static initCanvas(app: Application): void {
+  static initCanvas(app: Application = PixiManager._app): void {
+    if (!app?.stage) {
+      return
+    }
     // 图层
     const basiskarte = new RenderLayer()
     const layer = new RenderLayer()
@@ -71,6 +74,7 @@ class PixiManager {
 
   static stageClear(): void {
     if (PixiManager._app?.stage) {
+      PixiManager._app.stage.removeChildren()
       // PixiManager._app.stage.destroy()
       webLog("PixiManager", "destroy")
     }

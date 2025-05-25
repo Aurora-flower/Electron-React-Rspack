@@ -5,7 +5,7 @@ class CommonUtility {
 
   static throttle<T extends (...args: unknown[]) => unknown>(
     fn: T,
-    delay: number
+    delay = 1000
   ): T {
     let lastCall = 0
     return function (this: unknown, ...args: unknown[]) {
@@ -19,7 +19,7 @@ class CommonUtility {
 
   static debounce<T extends (...args: unknown[]) => unknown>(
     fn: T,
-    delay: number
+    delay = 1000
   ): T {
     let timeoutId: ReturnType<typeof setTimeout> | null = null
     return function (this: unknown, ...args: unknown[]) {
