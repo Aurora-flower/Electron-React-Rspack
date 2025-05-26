@@ -14,3 +14,7 @@ export function join(rel: string, base = location.href): string {
 export function ext(url: string): string {
   return new URL(url).pathname.split(".").pop() || ""
 }
+
+export function replaceNormalize(url: string): string {
+  return url.replace(/^(local:\/\/)([a-zA-Z]):/, "$1$2$")
+}

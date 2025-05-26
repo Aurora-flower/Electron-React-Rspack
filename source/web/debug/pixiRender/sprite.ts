@@ -5,6 +5,7 @@ import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite/nineSliceSprite"
 import PixiManager from "@/helpers/render/gremlin/manager"
 import StoreManager from "@/stores/manager"
+import { replaceNormalize } from "@/utils/features/url"
 import { getRandomColor } from "@/utils/functions/color"
 import { webError, webLog } from "@/utils/log"
 import type { Graphics, Sprite, Texture } from "pixi.js"
@@ -51,8 +52,12 @@ export function debugPixiSprite(): void {
     webError("debugPixiSprite", "error", "AppInfo is null")
     return
   }
-  const localURL = `local://${information.core}/resources/images/sample.png`
-  const frameURL = `local://${information.core}/resources/images/frame.png`
+  const localURL = replaceNormalize(
+    `local://${information.core}/resources/images/sample.png`
+  )
+  const frameURL = replaceNormalize(
+    `local://${information.core}/resources/images/frame.png`
+  )
   const textureURL = "https://pixijs.com/assets/eggHead.png"
 
   /* 获取渲染应用对象 */
