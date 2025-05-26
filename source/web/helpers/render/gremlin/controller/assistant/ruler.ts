@@ -1,14 +1,10 @@
-import type {
-  ContainerParent,
-  LinePoint,
-  PointModel,
-  SizeModel
-} from "@/helpers/render/gremlin/interface"
+import { getMovePoint, getSize } from "@/common/frequently-used/usually"
+import type { ContainerParent } from "@/helpers/render/gremlin/interface"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
 type DrawLineHander = (
-  linePoint: LinePoint,
+  linePoint: LinePointModel,
   flag: RulerType,
   alpha?: number
 ) => void
@@ -19,10 +15,7 @@ type RulerType = "top" | "left"
 
 class Ruler {
   private _parent: ContainerParent = undefined
-  private _size: SizeModel = {
-    width: 0,
-    height: 0
-  }
+  private _size: SizeModel = getSize()
   private _rulerSize = 20
   private _rulerColor = 0x292929
   private _markColor = 0xffffff
@@ -96,10 +89,7 @@ class Ruler {
       const isMajor = x % (this._rulerInterval.x * this._scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
       const alpha = this.getScaleAlpha(isMajor)
-      const linePoint = {
-        from: { x, y: 0 },
-        to: { x, y: scaleLength }
-      }
+      const linePoint = getMovePoint({ x, y: 0 }, { x, y: scaleLength })
       if (drawScaleLine) {
         drawScaleLine(linePoint, "top", alpha)
       }
@@ -117,10 +107,7 @@ class Ruler {
       const isMajor = y % (this._rulerInterval.y * this._scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
       const alpha = this.getScaleAlpha(isMajor)
-      const linePoint = {
-        from: { x: 0, y },
-        to: { x: scaleLength, y }
-      }
+      const linePoint = getMovePoint({ x: 0, y }, { x: scaleLength, y })
       if (drawScaleLine) {
         drawScaleLine(linePoint, "left", alpha)
       }
@@ -137,7 +124,7 @@ class Ruler {
   }
 
   private drawRulerLine(
-    linePoint: LinePoint,
+    linePoint: LinePointModel,
     flag: RulerType,
     alpha?: number
   ): void {

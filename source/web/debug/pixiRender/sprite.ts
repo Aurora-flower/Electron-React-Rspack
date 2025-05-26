@@ -4,6 +4,7 @@ import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
 import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite/nineSliceSprite"
 import PixiManager from "@/helpers/render/gremlin/manager"
+import { calculateMatrixCoordinates } from "@/logic/algorithm/matrix"
 import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
 import { getRandomColor } from "@/utils/functions/color"
@@ -54,6 +55,10 @@ export function debugPixiSprite(): void {
     webError("debugPixiSprite", "error", "AppInfo is null")
     return
   }
+
+  calculateMatrixCoordinates()
+
+  /* 测试文件 - 图片资源 */
   const localURL = replaceNormalize(
     `local://${information.core}/resources/images/sample.png`
   )

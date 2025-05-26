@@ -1,24 +1,18 @@
-import type {
-  ContainerParent,
-  LinePoint,
-  PointModel,
-  SizeModel
-} from "@/helpers/render/gremlin/interface"
+import {
+  getMovePoint,
+  getPoint,
+  getSize
+} from "@/common/frequently-used/usually"
+import type { ContainerParent } from "@/helpers/render/gremlin/interface"
 import type { Container, StrokeInput } from "pixi.js"
 import { Graphics } from "pixi.js"
 
-type DrawLineHander = (linePoint: LinePoint) => void
+type DrawLineHander = (linePoint: LinePointModel) => void
 
 class Grid {
   private _parent: ContainerParent = undefined
-  private _size: SizeModel = {
-    width: 0,
-    height: 0
-  }
-  private _girdInterval: PointModel = {
-    x: 50,
-    y: 50
-  }
+  private _size: SizeModel = getSize()
+  private _girdInterval: PointModel = getPoint(50, 50)
   private _strokeInput: StrokeInput = {
     width: 1,
     color: 0xcccccc,
@@ -52,7 +46,7 @@ class Grid {
     }
   }
 
-  private drawGridLine(linePoint: LinePoint): void {
+  private drawGridLine(linePoint: LinePointModel): void {
     this._grid
       .moveTo(linePoint.from.x, linePoint.from.y)
       .lineTo(linePoint.to.x, linePoint.to.y)
@@ -65,19 +59,13 @@ class Grid {
     drawLine: DrawLineHander = this.drawGridLine.bind(this)
   ): void {
     for (let x = 0; x <= size.width; x += gridInterval.x) {
-      const linePoint = {
-        from: { x, y: 0 },
-        to: { x, y: size.height }
-      }
+      const linePoint = getMovePoint({ x, y: 0 }, { x, y: size.height })
       if (drawLine) {
         drawLine(linePoint)
       }
     }
     for (let y = 0; y <= size.height; y += gridInterval.y) {
-      const linePoint = {
-        from: { x: 0, y },
-        to: { x: size.width, y }
-      }
+      const linePoint = getMovePoint({ x: 0, y }, { x: size.width, y })
       if (drawLine) {
         drawLine(linePoint)
       }

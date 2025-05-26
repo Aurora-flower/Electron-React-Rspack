@@ -1,5 +1,3 @@
-import type { BoundsModel } from "@/helpers/render/gremlin/interface"
-
 // const pixel = 0xffffffff
 // const red = (pixel & 0x00ff0000) >>> 16;
 // const green = (pixel & 0x0000ff00) >>> 8;

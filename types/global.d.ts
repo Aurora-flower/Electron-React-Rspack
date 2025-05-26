@@ -54,9 +54,41 @@ declare global {
     isDev: boolean
   }
 
+  /* ***** ***** ***** ***** 常用的类型定义 ***** ***** ***** ***** */
   type ObjectType<T> = {
     [key: string]: T
   }
+
+  interface PointModel {
+    x: number
+    y: number
+  }
+
+  interface SizeModel {
+    width: number
+    height: number
+  }
+
+  interface SpaceModel {
+    horizontal: number
+    vertical: number
+  }
+
+  interface PaddingModel {
+    left: number
+    right: number
+    top: number
+    bottom: number
+  }
+
+  interface MovePointModel {
+    from: PointModel
+    to: PointModel
+  }
+
+  type ScaleModel = PointModel
+  type LinePointModel = MovePointModel
+  type BoundsModel = SizeModel & PaddingModel
 }
 
 /* ***** ***** ***** ***** 类型扩展覆盖 ***** ***** ***** ***** */

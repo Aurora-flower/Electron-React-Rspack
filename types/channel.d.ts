@@ -45,9 +45,8 @@ interface ChannelConfig<T extends ChannelType> {
 }
 
 type ChannelConfigMap = {
-  [key: string]: ChannelConfig<ChannelType>
   [K in ChannelType]: ChannelConfig<K>
-}
+} & ObjectType<ChannelConfig<ChannelType>>
 
 /**
  * @summary SMS 消息类型定义

@@ -5,6 +5,7 @@ import { getDomElement } from "@/utils/dom"
 import { webLog } from "@/utils/log"
 import { Application, RenderLayer } from "pixi.js"
 
+import { getSize } from "@/common/frequently-used/usually"
 import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
 
 overwritePixi()
@@ -60,10 +61,7 @@ class PixiManager {
       label: PixiManager.elementFlag.layer
     })
     const rulerContainer = createContainer(app.stage)
-    const viewSize = {
-      width: app.renderer.width,
-      height: app.renderer.height
-    }
+    const viewSize = getSize(app.renderer.width, app.renderer.height)
     const grid = new Grid(basiskarteContainer, viewSize)
     grid.draw()
     const ruler = new Ruler(rulerContainer, viewSize)
