@@ -1,3 +1,4 @@
+import debugPixiGraphic from "@/debug/pixiRender/graphics"
 import debugPixiSprite from "@/debug/pixiRender/sprite"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
@@ -16,6 +17,7 @@ export function debugPixiRender(): void {
   //   }
   // )
   // webLog("debug", "matrix", matrix)
+  debugPixiGraphic()
   debugPixiSprite()
 }
 

@@ -4,14 +4,14 @@
 
 import { getPoint, getSize, getSpace } from "@/common/frequently-used/usually"
 
-interface MatrixModel {
+export interface MatrixModel {
   x: number
   y: number
   width: number
   height: number
   row?: number
   column?: number
-  hand?: boolean
+  able: boolean
 }
 
 export function getMatrixItem(
@@ -19,9 +19,9 @@ export function getMatrixItem(
   y = 0,
   width = 0,
   height = 0,
-  row?: number,
-  column?: number,
-  hand?: boolean
+  row = 1,
+  column = 1,
+  able = true
 ): MatrixModel {
   return {
     x,
@@ -30,7 +30,7 @@ export function getMatrixItem(
     height,
     row,
     column,
-    hand
+    able
   }
 }
 

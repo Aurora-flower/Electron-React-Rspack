@@ -8,7 +8,6 @@ import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
 import { getRandomColor } from "@/utils/functions/color"
 import { webError, webLog } from "@/utils/log"
-import { FancyButton } from "@pixi/ui"
 import type { Container } from "pixi.js"
 import type { Texture } from "pixi.js"
 
@@ -22,23 +21,33 @@ import type { Texture } from "pixi.js"
 
 /**
  * @summary local 本地资源协议测试 - pixi 图片的加载与显示 | 图片透明区的裁切 | 混合色效果
- * @returns
  */
-function debugLocalTexture(container: Container, textureURL: string): void {
+export function debugLocalTexture(
+  container: Container,
+  textureURL: string
+): void {
+  const matrixItem = PixiManager.findUsableMatrix()
+  if (!matrixItem) return
   loadTexture(textureURL).then((texture: Texture) => {
     if (!texture) return
-    /* 图片的裁剪透明 */
+    /* 1. 图片的裁剪透明 */
     texture.autoCrop().then((cropTexture: Texture) => {
       const sprite = createSprite(container, {
         texture: cropTexture,
         position: {
-          x: 300,
-          y: 300
+          x: matrixItem.x,
+          y: matrixItem.y
         },
-        tint: 0x036fc2 /* 混合色效果 */
+        /* 2. 混合色效果 */
+        tint: 0x036fc2
+        /* 3. 锚点的影响行为 */
+        // anchor: {
+        //   x: 0.5,
+        //   y: -0.5
+        // }
       })
       const rect = createGraphics(container, {
-        alpha: 0.3
+        alpha: 0.2
       })
       rect
         .rect(
@@ -52,17 +61,23 @@ function debugLocalTexture(container: Container, textureURL: string): void {
         .rect(sprite.position.x, sprite.position.y, sprite.width, sprite.height)
         .fill(getRandomColor())
       webLog(
-        "autoCrop",
-        "cropTexture",
+        "debugPixiSprite",
+        "debugLocalTexture",
+        PixiManager.getMatrix(),
+        matrixItem,
         cropTexture.width,
         cropTexture.height,
         container
       )
     })
   })
+  matrixItem.able = false
 }
 
-function debugSwitchSprite(container: Container, textureURL: string): void {
+export function debugSwitchSprite(
+  container: Container,
+  textureURL: string
+): void {
   const bunnyURL = "https://pixijs.com/assets/bunny.png"
   loadTexture(textureURL).then(texture => {
     if (!texture) return
@@ -98,7 +113,10 @@ function debugSwitchSprite(container: Container, textureURL: string): void {
   })
 }
 
-function debugNineSliceSprite(container: Container, textureURL: string): void {
+export function debugNineSliceSprite(
+  container: Container,
+  textureURL: string
+): void {
   loadTexture(textureURL).then((texture: Texture) => {
     /* 4. 创建九宫格模式精灵对象 */
     createNineSliceSprite(container, {
@@ -122,158 +140,158 @@ function debugNineSliceSprite(container: Container, textureURL: string): void {
 function debugPixiSprite(): void {
   const information = StoreManager.getAppInfo()
   if (!information) {
-    webError("debugPixiSprite", "error", "AppInfo is null")
+    webError("debugPixiSprite", "debugPixiSprite Error", "AppInfo is null")
     return
   }
   const sampleURL = replaceNormalize(
     `local://${information.core}/resources/images/sample.png`
   )
-  const frameURL = replaceNormalize(
-    `local://${information.core}/resources/images/frame.png`
-  )
-  const eggHeadURL = "https://pixijs.com/assets/eggHead.png"
-  const flowerTopURL = "https://pixijs.com/assets/flowerTop.png"
+  // const frameURL = replaceNormalize(
+  //   `local://${information.core}/resources/images/frame.png`
+  // )
+  // const eggHeadURL = "https://pixijs.com/assets/eggHead.png"
+  // const flowerTopURL = "https://pixijs.com/assets/flowerTop.png"
   // const spriteURL = "https://imgur.com/T2vjvYl.png"
   const app = PixiManager.getApp()
   const layerContainer = getElementByLabel("layer", app.stage)
   if (!layerContainer) return
 
   debugLocalTexture(layerContainer, sampleURL)
-  debugSwitchSprite(layerContainer, frameURL)
-  debugNineSliceSprite(layerContainer, eggHeadURL)
-  loadTexture(flowerTopURL).then((texture: Texture) => {
-    // const button = new Button(
-    //   new Graphics({
-    //     position: {
-    //       x: 50,
-    //       y: 50
-    //     }
-    //   })
-    //     .rect(0, 0, 100, 50)
-    //     .fill(0xffffff)
-    // )
+  // debugSwitchSprite(layerContainer, frameURL)
+  // debugNineSliceSprite(layerContainer, eggHeadURL)
+  // loadTexture(flowerTopURL).then((texture: Texture) => {
+  //   // const button = new Button(
+  //   //   new Graphics({
+  //   //     position: {
+  //   //       x: 50,
+  //   //       y: 50
+  //   //     }
+  //   //   })
+  //   //     .rect(0, 0, 100, 50)
+  //   //     .fill(0xffffff)
+  //   // )
 
-    // button.onPress.connect(() => console.log("onPress"))
+  //   // button.onPress.connect(() => console.log("onPress"))
 
-    // const input = new Input({
-    //   bg: texture,
-    //   placeholder: "Enter text",
-    //   padding: {
-    //     top: 11,
-    //     right: 11,
-    //     bottom: 11,
-    //     left: 11
-    //   } // alternatively you can use [11, 11, 11, 11] or [11, 11] or just 11
-    // })
-    // input.position.x = 50
-    // input.position.y = 200
+  //   // const input = new Input({
+  //   //   bg: texture,
+  //   //   placeholder: "Enter text",
+  //   //   padding: {
+  //   //     top: 11,
+  //   //     right: 11,
+  //   //     bottom: 11,
+  //   //     left: 11
+  //   //   } // alternatively you can use [11, 11, 11, 11] or [11, 11] or just 11
+  //   // })
+  //   // input.position.x = 50
+  //   // input.position.y = 200
 
-    // const slider = new Slider({
-    //   bg: texture,
-    //   fill: texture,
-    //   slider: sprite1,
-    //   min: 0,
-    //   max: 100,
-    //   value: 50
-    // })
+  //   // const slider = new Slider({
+  //   //   bg: texture,
+  //   //   fill: texture,
+  //   //   slider: sprite1,
+  //   //   min: 0,
+  //   //   max: 100,
+  //   //   value: 50
+  //   // })
 
-    // slider.onChange.connect(value => {
-    //   console.log(`Slider changed to ${value}`)
-    // })
+  //   // slider.onChange.connect(value => {
+  //   //   console.log(`Slider changed to ${value}`)
+  //   // })
 
-    // slider.position.x = 300
+  //   // slider.position.x = 300
 
-    // const progressBar = new ProgressBar({
-    //   bg: texture,
-    //   fill: texture,
-    //   progress: 50,
-    //   fillPaddings: {
-    //     top: 100,
-    //     right: 100,
-    //     bottom: 100,
-    //     left: 100
-    //   }
-    // })
-    // progressBar.position.x = 500
-    // progressBar.position.y = 100
+  //   // const progressBar = new ProgressBar({
+  //   //   bg: texture,
+  //   //   fill: texture,
+  //   //   progress: 50,
+  //   //   fillPaddings: {
+  //   //     top: 100,
+  //   //     right: 100,
+  //   //     bottom: 100,
+  //   //     left: 100
+  //   //   }
+  //   // })
+  //   // progressBar.position.x = 500
+  //   // progressBar.position.y = 100
 
-    // const scrollbox = new ScrollBox({
-    //   background: 0xffffff,
-    //   width: 200,
-    //   height: 300,
-    //   items: [
-    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
-    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
-    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
-    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
-    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
-    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
-    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor())
-    //   ]
-    // })
+  //   // const scrollbox = new ScrollBox({
+  //   //   background: 0xffffff,
+  //   //   width: 200,
+  //   //   height: 300,
+  //   //   items: [
+  //   //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+  //   //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+  //   //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+  //   //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+  //   //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+  //   //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+  //   //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor())
+  //   //   ]
+  //   // })
 
-    // const radioGroup = new RadioGroup({
-    //   items: [
-    //     new CheckBox({
-    //       style: {
-    //         unchecked: texture,
-    //         checked: texture
-    //       }
-    //     }),
-    //     new CheckBox({
-    //       style: {
-    //         unchecked: texture,
-    //         checked: texture
-    //       }
-    //     }),
-    //     new CheckBox({
-    //       style: {
-    //         unchecked: texture,
-    //         checked: texture
-    //       }
-    //     })
-    //   ],
-    //   elementsMargin: 10,
-    //   type: "vertical"
-    // })
+  //   // const radioGroup = new RadioGroup({
+  //   //   items: [
+  //   //     new CheckBox({
+  //   //       style: {
+  //   //         unchecked: texture,
+  //   //         checked: texture
+  //   //       }
+  //   //     }),
+  //   //     new CheckBox({
+  //   //       style: {
+  //   //         unchecked: texture,
+  //   //         checked: texture
+  //   //       }
+  //   //     }),
+  //   //     new CheckBox({
+  //   //       style: {
+  //   //         unchecked: texture,
+  //   //         checked: texture
+  //   //       }
+  //   //     })
+  //   //   ],
+  //   //   elementsMargin: 10,
+  //   //   type: "vertical"
+  //   // })
 
-    // const checkBox = new CheckBox({
-    //   style: {
-    //     unchecked: texture,
-    //     checked: texture
-    //   }
-    // })
-    const fancyButton = new FancyButton({
-      defaultView: texture,
-      hoverView: texture,
-      pressedView: texture,
-      text: "Click me!",
-      animations: {
-        hover: {
-          props: {
-            scale: {
-              x: 1.1,
-              y: 1.1
-            }
-          },
-          duration: 100
-        },
-        pressed: {
-          props: {
-            scale: {
-              x: 0.9,
-              y: 0.9
-            }
-          },
-          duration: 100
-        }
-      }
-    })
+  //   // const checkBox = new CheckBox({
+  //   //   style: {
+  //   //     unchecked: texture,
+  //   //     checked: texture
+  //   //   }
+  //   // })
+  //   const fancyButton = new FancyButton({
+  //     defaultView: texture,
+  //     hoverView: texture,
+  //     pressedView: texture,
+  //     text: "Click me!",
+  //     animations: {
+  //       hover: {
+  //         props: {
+  //           scale: {
+  //             x: 1.1,
+  //             y: 1.1
+  //           }
+  //         },
+  //         duration: 100
+  //       },
+  //       pressed: {
+  //         props: {
+  //           scale: {
+  //             x: 0.9,
+  //             y: 0.9
+  //           }
+  //         },
+  //         duration: 100
+  //       }
+  //     }
+  //   })
 
-    fancyButton.onPress.connect(() => console.log("Button pressed!"))
+  //   fancyButton.onPress.connect(() => console.log("Button pressed!"))
 
-    layerContainer.addChild(fancyButton)
-  })
+  //   layerContainer.addChild(fancyButton)
+  // })
 }
 
 export default debugPixiSprite
