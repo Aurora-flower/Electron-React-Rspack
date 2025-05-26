@@ -4,13 +4,12 @@ import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
 import { createSprite } from "@/helpers/render/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite/nineSliceSprite"
 import PixiManager from "@/helpers/render/gremlin/manager"
-import { calculateMatrixCoordinates } from "@/logic/algorithm/matrix"
 import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
 import { getRandomColor } from "@/utils/functions/color"
 import { webError, webLog } from "@/utils/log"
 import { FancyButton } from "@pixi/ui"
-import type { Graphics, Sprite } from "pixi.js"
+import type { Container } from "pixi.js"
 import type { Texture } from "pixi.js"
 
 // const sprite = createSprite(layerContainer, {
@@ -19,76 +18,26 @@ import type { Texture } from "pixi.js"
 //     x: 100,
 //     y: 100
 //   }
-//   // tint: 0x036fc2
 // })
-// const spriteMeta = {
-//   naturalWidth: texture.width,
-//   naturalHeight: texture.height,
-//   width: sprite.width,
-//   height: sprite.height
-// }
 
-// const mask = new Graphics({
-//   position: {
-//     x: 100,
-//     y: 100
-//   }
-// })
-// const pixelData = imageData.data
-// const u32Buffer = new Uint32Array(pixelData.buffer) // 创建32位视图
-// const width = canvas.width
-// const height = canvas.height
-// for (let y = 0; y < height; y++) {
-//   const rowStart = y * width // 行起始索引
-//   for (let x = 0; x < width; x++) {
-//     const rgba = u32Buffer[rowStart + x] // 一次性读取32位RGBA值
-//     const alpha = (rgba >>> 24) & 0xff // 提取alpha通道
-//     if (alpha > 0) {
-//       mask.rect(x, y, 1, 1).fill(0xffffff)
-//     }
-//   }
-// }
-
-export function debugPixiSprite(): void {
-  const information = StoreManager.getAppInfo()
-  if (!information) {
-    webError("debugPixiSprite", "error", "AppInfo is null")
-    return
-  }
-
-  calculateMatrixCoordinates()
-
-  /* 测试文件 - 图片资源 */
-  const localURL = replaceNormalize(
-    `local://${information.core}/resources/images/sample.png`
-  )
-  const frameURL = replaceNormalize(
-    `local://${information.core}/resources/images/frame.png`
-  )
-  const textureURL = "https://pixijs.com/assets/eggHead.png"
-  // const bunnyURL = 'https://pixijs.com/assets/bunny.png'
-  // 'https://pixijs.com/assets/flowerTop.png'
-
-  /* 获取渲染应用对象 */
-  const app = PixiManager.getApp()
-
-  /* 渲染区图层（容器）的获取 */
-  const layerContainer = getElementByLabel("layer", app.stage)
-  if (!layerContainer) return
-
-  /* 2. 图片的加载与显示 - local 本地资源协议测试 */
-  loadTexture(localURL).then((texture: Texture) => {
+/**
+ * @summary local 本地资源协议测试 - pixi 图片的加载与显示 | 图片透明区的裁切 | 混合色效果
+ * @returns
+ */
+function debugLocalTexture(container: Container, textureURL: string): void {
+  loadTexture(textureURL).then((texture: Texture) => {
     if (!texture) return
-    /* 3. 图片的裁剪透明 */
+    /* 图片的裁剪透明 */
     texture.autoCrop().then((cropTexture: Texture) => {
-      const sprite = createSprite(layerContainer, {
+      const sprite = createSprite(container, {
         texture: cropTexture,
         position: {
           x: 300,
           y: 300
-        }
+        },
+        tint: 0x036fc2 /* 混合色效果 */
       })
-      const rect = createGraphics(layerContainer, {
+      const rect = createGraphics(container, {
         alpha: 0.3
       })
       rect
@@ -107,18 +56,18 @@ export function debugPixiSprite(): void {
         "cropTexture",
         cropTexture.width,
         cropTexture.height,
-        layerContainer
+        container
       )
     })
   })
+}
 
-  let sprite1: Sprite
-  let rect1: Graphics
-
-  loadTexture(frameURL).then(texture => {
+function debugSiwtchSprite(container: Container, textureURL: string): void {
+  const bunnyURL = "https://pixijs.com/assets/bunny.png"
+  loadTexture(textureURL).then(texture => {
     if (!texture) return
     /* 5. 图片的切换 */
-    sprite1 = createSprite(layerContainer, {
+    const sprite = createSprite(container, {
       texture,
       position: {
         x: 100,
@@ -129,21 +78,27 @@ export function debugPixiSprite(): void {
         y: 0.5
       }
     })
-    rect1 = createGraphics(layerContainer, {
+    const graphic = createGraphics(container, {
       alpha: 0.3,
       position: {
-        x: sprite1.position.x,
-        y: sprite1.position.y
+        x: sprite.position.x,
+        y: sprite.position.y
       }
     })
-    rect1.rect(0, 0, sprite1.width, sprite1.height).fill(getRandomColor())
-    layerContainer.addChild(rect1)
-  })
+    graphic.rect(0, 0, sprite.width, sprite.height).fill(getRandomColor())
 
-  loadTexture(textureURL).then((texture1: Texture) => {
+    loadTexture(bunnyURL).then((bunny: Texture) => {
+      sprite.texture = bunny
+      graphic.setSize(sprite.width, sprite.height)
+    })
+  })
+}
+
+function debugNineSliceSprite(container: Container, textureURL: string): void {
+  loadTexture(textureURL).then((texture: Texture) => {
     /* 4. 创建九宫格模式精灵对象 */
-    createNineSliceSprite(layerContainer, {
-      texture: texture1,
+    createNineSliceSprite(container, {
+      texture,
       width: 300,
       height: 300,
       leftWidth: 80,
@@ -157,12 +112,32 @@ export function debugPixiSprite(): void {
         y: 0.5
       }
     })
-    setTimeout(() => {
-      sprite1.texture = texture1
-      // rect1.position.set(sprite1.position.x, sprite1.position.y)
-      rect1.setSize(sprite1.width, sprite1.height)
-    }, 1000 * 3)
+  })
+}
 
+function debugPixiSprite(): void {
+  const information = StoreManager.getAppInfo()
+  if (!information) {
+    webError("debugPixiSprite", "error", "AppInfo is null")
+    return
+  }
+  const sampleURL = replaceNormalize(
+    `local://${information.core}/resources/images/sample.png`
+  )
+  const frameURL = replaceNormalize(
+    `local://${information.core}/resources/images/frame.png`
+  )
+  const eggHeadURL = "https://pixijs.com/assets/eggHead.png"
+  const flowerTopURL = "https://pixijs.com/assets/flowerTop.png"
+  // const spriteURL = "https://imgur.com/T2vjvYl.png"
+  const app = PixiManager.getApp()
+  const layerContainer = getElementByLabel("layer", app.stage)
+  if (!layerContainer) return
+
+  debugLocalTexture(layerContainer, sampleURL)
+  debugSiwtchSprite(layerContainer, frameURL)
+  debugNineSliceSprite(layerContainer, eggHeadURL)
+  loadTexture(flowerTopURL).then((texture: Texture) => {
     // const button = new Button(
     //   new Graphics({
     //     position: {
@@ -177,7 +152,7 @@ export function debugPixiSprite(): void {
     // button.onPress.connect(() => console.log("onPress"))
 
     // const input = new Input({
-    //   bg: texture1,
+    //   bg: texture,
     //   placeholder: "Enter text",
     //   padding: {
     //     top: 11,
@@ -190,8 +165,8 @@ export function debugPixiSprite(): void {
     // input.position.y = 200
 
     // const slider = new Slider({
-    //   bg: texture1,
-    //   fill: texture1,
+    //   bg: texture,
+    //   fill: texture,
     //   slider: sprite1,
     //   min: 0,
     //   max: 100,
@@ -205,8 +180,8 @@ export function debugPixiSprite(): void {
     // slider.position.x = 300
 
     // const progressBar = new ProgressBar({
-    //   bg: texture1,
-    //   fill: texture1,
+    //   bg: texture,
+    //   fill: texture,
     //   progress: 50,
     //   fillPaddings: {
     //     top: 100,
@@ -237,20 +212,20 @@ export function debugPixiSprite(): void {
     //   items: [
     //     new CheckBox({
     //       style: {
-    //         unchecked: texture1,
-    //         checked: texture1
+    //         unchecked: texture,
+    //         checked: texture
     //       }
     //     }),
     //     new CheckBox({
     //       style: {
-    //         unchecked: texture1,
-    //         checked: texture1
+    //         unchecked: texture,
+    //         checked: texture
     //       }
     //     }),
     //     new CheckBox({
     //       style: {
-    //         unchecked: texture1,
-    //         checked: texture1
+    //         unchecked: texture,
+    //         checked: texture
     //       }
     //     })
     //   ],
@@ -260,15 +235,14 @@ export function debugPixiSprite(): void {
 
     // const checkBox = new CheckBox({
     //   style: {
-    //     unchecked: texture1,
-    //     checked: texture1
+    //     unchecked: texture,
+    //     checked: texture
     //   }
     // })
-
     const fancyButton = new FancyButton({
-      defaultView: texture1,
-      hoverView: texture1,
-      pressedView: texture1,
+      defaultView: texture,
+      hoverView: texture,
+      pressedView: texture,
       text: "Click me!",
       animations: {
         hover: {
@@ -297,3 +271,5 @@ export function debugPixiSprite(): void {
     layerContainer.addChild(fancyButton)
   })
 }
+
+export default debugPixiSprite

@@ -1,16 +1,23 @@
-import { debugPixiSprite } from "@/debug/pixiRender/sprite"
+import debugPixiSprite from "@/debug/pixiRender/sprite"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
+import { calculateMatrixCoordinates } from "@/logic/algorithm/matrix"
 import { join } from "@/utils/features/url"
 import { webLog } from "@/utils/log"
 
-// https://pixijs.com/assets/eggHead.png
-// https://imgur.com/T2vjvYl.png
 export function debugPixiRender(): void {
+  const matrix = calculateMatrixCoordinates(
+    {
+      width: 10000,
+      height: 10000
+    },
+    {
+      x: 0,
+      y: 0
+    }
+  )
   debugPixiSprite()
-
-  /* 1. 坐标起始点的切换 */
-  /* 3. 透明区的裁切 */
+  webLog("debug", "matrix", matrix)
 }
 
 export function debugWorker(): void {

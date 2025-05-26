@@ -36,8 +36,8 @@ export function getMatrixItem(
 
 export function calculateMatrixCoordinates(
   size: SizeModel = getSize(100, 100),
-  space: SpaceModel = getSpace(),
-  interval = getPoint(50, 50)
+  interval = getPoint(50, 50),
+  space: SpaceModel = getSpace()
   // padding = getPadding(),
 ): MatrixModel[] {
   const Space = space ?? getSpace()

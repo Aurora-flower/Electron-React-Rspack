@@ -1,4 +1,4 @@
-import { calculateImageBounds } from "@/helpers/render/gremlin/functions/calculate"
+import { getImageDataBounds } from "@/helpers/render/gremlin/functions/compute/image"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { Rectangle, Texture } from "pixi.js"
 
@@ -18,7 +18,7 @@ export function trimTexture(texture: Texture): Promise<Texture> {
       canvas.height = height // == image.naturalHeight
       context.drawImage(image, 0, 0)
       imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-      const bounds = calculateImageBounds(imageData)
+      const bounds = getImageDataBounds(imageData)
       if (!bounds) return
       context.clearRect(0, 0, width, height)
       context.drawImage(
