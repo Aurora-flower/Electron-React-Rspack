@@ -158,6 +158,9 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **存储与缓存**
   - [🏁 Electron-Store](https://github.com/sindresorhus/electron-store)
   - [🤡 Redux](https://cn.redux.js.org/)
+  - [🙀 Redux-Persist](https://github.com/rt2zz/redux-persist)
+  <!-- - [😽 Valtio](https://valtio.dev/) -->
+  - [😻 Zustand](https://awesomedevin.github.io/zustand-vue/docs/introduce/start/zustand)
 
 - **国际化**
   - [🌎 i18next](https://www.i18next.com/)
@@ -186,6 +189,11 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🎉 Animate.css](https://animate.style/)
   - [🎨 Motion](https://motion.dev/docs/react-quick-start)
   - [👾 Framer motion](https://motion.framer.wiki/introduction)
+
+- **图标方案**
+  - [👽 iconify](https://icon-sets.iconify.design/)
+  - [📂 fontawesome](https://fontawesome.com.cn/v5)
+  - [👹 iconfont](https://www.iconfont.cn/)
 
 ### 辅助集
 
