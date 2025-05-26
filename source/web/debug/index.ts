@@ -1,23 +1,22 @@
 import debugPixiSprite from "@/debug/pixiRender/sprite"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
-import { calculateMatrixCoordinates } from "@/logic/algorithm/matrix"
 import { join } from "@/utils/features/url"
 import { webLog } from "@/utils/log"
 
 export function debugPixiRender(): void {
-  const matrix = calculateMatrixCoordinates(
-    {
-      width: 10000,
-      height: 10000
-    },
-    {
-      x: 0,
-      y: 0
-    }
-  )
+  // const matrix = calculateMatrixCoordinates(
+  //   {
+  //     width: 10000,
+  //     height: 10000
+  //   },
+  //   {
+  //     x: 0,
+  //     y: 0
+  //   }
+  // )
+  // webLog("debug", "matrix", matrix)
   debugPixiSprite()
-  webLog("debug", "matrix", matrix)
 }
 
 export function debugWorker(): void {
