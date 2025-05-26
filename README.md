@@ -179,6 +179,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **组件库**
   - [🟢 PrimeReact UI](https://primereact.cn/installation/)
+  - [🔴 Douyin Semi UI](https://semi.design/zh-CN/start/getting-started)
 
 - **样式方案**
   - [🛏️ Tailwindcss](https://tailwindcss.com/)
