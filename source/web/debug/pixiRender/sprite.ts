@@ -62,7 +62,7 @@ function debugLocalTexture(container: Container, textureURL: string): void {
   })
 }
 
-function debugSiwtchSprite(container: Container, textureURL: string): void {
+function debugSwitchSprite(container: Container, textureURL: string): void {
   const bunnyURL = "https://pixijs.com/assets/bunny.png"
   loadTexture(textureURL).then(texture => {
     if (!texture) return
@@ -87,10 +87,14 @@ function debugSiwtchSprite(container: Container, textureURL: string): void {
     })
     graphic.rect(0, 0, sprite.width, sprite.height).fill(getRandomColor())
 
-    loadTexture(bunnyURL).then((bunny: Texture) => {
-      sprite.texture = bunny
-      graphic.setSize(sprite.width, sprite.height)
-    })
+    const timeout = 3000
+    const timer = setTimeout(() => {
+      loadTexture(bunnyURL).then((bunny: Texture) => {
+        sprite.texture = bunny
+        graphic.setSize(sprite.width, sprite.height)
+        clearTimeout(timer)
+      })
+    }, timeout)
   })
 }
 
@@ -135,7 +139,7 @@ function debugPixiSprite(): void {
   if (!layerContainer) return
 
   debugLocalTexture(layerContainer, sampleURL)
-  debugSiwtchSprite(layerContainer, frameURL)
+  debugSwitchSprite(layerContainer, frameURL)
   debugNineSliceSprite(layerContainer, eggHeadURL)
   loadTexture(flowerTopURL).then((texture: Texture) => {
     // const button = new Button(
