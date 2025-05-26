@@ -8,7 +8,9 @@ import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
 import { getRandomColor } from "@/utils/functions/color"
 import { webError, webLog } from "@/utils/log"
-import type { Graphics, Sprite, Texture } from "pixi.js"
+import { FancyButton } from "@pixi/ui"
+import type { Graphics, Sprite } from "pixi.js"
+import type { Texture } from "pixi.js"
 
 // const sprite = createSprite(layerContainer, {
 //   texture,
@@ -59,6 +61,8 @@ export function debugPixiSprite(): void {
     `local://${information.core}/resources/images/frame.png`
   )
   const textureURL = "https://pixijs.com/assets/eggHead.png"
+  // const bunnyURL = 'https://pixijs.com/assets/bunny.png'
+  // 'https://pixijs.com/assets/flowerTop.png'
 
   /* 获取渲染应用对象 */
   const app = PixiManager.getApp()
@@ -142,12 +146,149 @@ export function debugPixiSprite(): void {
       topHeight: 80,
       bottomHeight: 80,
       x: 400,
-      y: 0
+      y: 0,
+      scale: {
+        x: 0.5,
+        y: 0.5
+      }
     })
     setTimeout(() => {
       sprite1.texture = texture1
       // rect1.position.set(sprite1.position.x, sprite1.position.y)
       rect1.setSize(sprite1.width, sprite1.height)
     }, 1000 * 3)
+
+    // const button = new Button(
+    //   new Graphics({
+    //     position: {
+    //       x: 50,
+    //       y: 50
+    //     }
+    //   })
+    //     .rect(0, 0, 100, 50)
+    //     .fill(0xffffff)
+    // )
+
+    // button.onPress.connect(() => console.log("onPress"))
+
+    // const input = new Input({
+    //   bg: texture1,
+    //   placeholder: "Enter text",
+    //   padding: {
+    //     top: 11,
+    //     right: 11,
+    //     bottom: 11,
+    //     left: 11
+    //   } // alternatively you can use [11, 11, 11, 11] or [11, 11] or just 11
+    // })
+    // input.position.x = 50
+    // input.position.y = 200
+
+    // const slider = new Slider({
+    //   bg: texture1,
+    //   fill: texture1,
+    //   slider: sprite1,
+    //   min: 0,
+    //   max: 100,
+    //   value: 50
+    // })
+
+    // slider.onChange.connect(value => {
+    //   console.log(`Slider changed to ${value}`)
+    // })
+
+    // slider.position.x = 300
+
+    // const progressBar = new ProgressBar({
+    //   bg: texture1,
+    //   fill: texture1,
+    //   progress: 50,
+    //   fillPaddings: {
+    //     top: 100,
+    //     right: 100,
+    //     bottom: 100,
+    //     left: 100
+    //   }
+    // })
+    // progressBar.position.x = 500
+    // progressBar.position.y = 100
+
+    // const scrollbox = new ScrollBox({
+    //   background: 0xffffff,
+    //   width: 200,
+    //   height: 300,
+    //   items: [
+    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor()),
+    //     new Graphics().rect(0, 0, 200, 50).fill(getRandomColor())
+    //   ]
+    // })
+
+    // const radioGroup = new RadioGroup({
+    //   items: [
+    //     new CheckBox({
+    //       style: {
+    //         unchecked: texture1,
+    //         checked: texture1
+    //       }
+    //     }),
+    //     new CheckBox({
+    //       style: {
+    //         unchecked: texture1,
+    //         checked: texture1
+    //       }
+    //     }),
+    //     new CheckBox({
+    //       style: {
+    //         unchecked: texture1,
+    //         checked: texture1
+    //       }
+    //     })
+    //   ],
+    //   elementsMargin: 10,
+    //   type: "vertical"
+    // })
+
+    // const checkBox = new CheckBox({
+    //   style: {
+    //     unchecked: texture1,
+    //     checked: texture1
+    //   }
+    // })
+
+    const fancyButton = new FancyButton({
+      defaultView: texture1,
+      hoverView: texture1,
+      pressedView: texture1,
+      text: "Click me!",
+      animations: {
+        hover: {
+          props: {
+            scale: {
+              x: 1.1,
+              y: 1.1
+            }
+          },
+          duration: 100
+        },
+        pressed: {
+          props: {
+            scale: {
+              x: 0.9,
+              y: 0.9
+            }
+          },
+          duration: 100
+        }
+      }
+    })
+
+    fancyButton.onPress.connect(() => console.log("Button pressed!"))
+
+    layerContainer.addChild(fancyButton)
   })
 }
