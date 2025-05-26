@@ -129,6 +129,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **服务端框架**
   - [🖼️ Node.js](https://nodejs.cn/api/)
+  - [💘 Node指南](https://blog.poetries.top/node-learning-notes/)
   - [🌴 Express](https://www.expressjs.com.cn/)
   <!-- - [📦 Redis](https://redis.io/docs/getting-started/) -->
   <!-- - [🔰 Redis](https://www.redis.net.cn/) -->
@@ -194,6 +195,14 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [👽 iconify](https://icon-sets.iconify.design/)
   - [📂 fontawesome](https://fontawesome.com.cn/v5)
   - [👹 iconfont](https://www.iconfont.cn/)
+  
+- **Css方案**
+  - [💣 Epic Loading](https://epic-spinners.vuestic.dev/)
+  - [💫 fly63 Loading](https://fly63.com/tool/loading/)
+  - [🧡 CSS Loader 3D](https://css-loaders.com/3d/)
+
+- **资源素材**
+  - [💤 设计 - 素材库](https://www.uisdc.com/)
 
 ### 辅助集
 
@@ -280,9 +289,17 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 #### 1. 文档中心
 
+- **技术教程集合**
+  - [💟 菜鸟教程](https://www.runoob.com/)
+  - [💨 W3School](https://www.w3ccoo.com/)
+
 - **技术文档**
   - [🐱 MDN Web Docs](https://developer.mozilla.org/zh-CN/)
   - [🏠 TypeScript文档](https://www.typescriptlang.org/docs/)
+  - [🗯 阮一峰 ES6 文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)
+  - [💌 设计模式](https://www.patterns.dev/#/patterns)
+  - [☠ 廖雪峰 JavaScript 教程](https://liaoxuefeng.com/books/javascript/quick-start/index.html)
+  - [✉️ 现代 JavaScript 教程](https://zh.javascript.info/)
 
 - **规范标准**
   - [🌈 贡献者公约](https://www.contributor-covenant.org/)
@@ -337,3 +354,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **工具**
   - [🛠️ Codesandbox](https://codesandbox.io/)
   - [➰ Unicode 彩色符号](https://www.tsfhdq.cn/mfzj/3491.html)
+
+- **API**
+  - [夏柔免费 API 接口](https://api.aa1.cn/)
+  - [网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi)
