@@ -1,4 +1,3 @@
-// import HOC from "@/components/Hoc"
 // import Dashboard from "@/ui/components/Dashboard"
 import LayoutView from "@/ui/layout"
 import GraphicsPage from "@/ui/pages/Graphics"
@@ -7,8 +6,6 @@ import * as React from "react"
 import type { JSX } from "react"
 import { RouterProvider, createBrowserRouter } from "react-router"
 import type { DOMRouterOpts, RouteObject } from "react-router"
-
-// const EnhancedDashboard = HOC(Dashboard)
 
 const RouteOptions: RouteObject[] = [
   {
