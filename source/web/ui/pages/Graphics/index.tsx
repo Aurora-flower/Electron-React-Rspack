@@ -24,6 +24,7 @@ function GraphicsPage(): JSX.Element {
 
       /* 测试渲染 */
       debugPixiRender()
+      console.log("HOC")
     }
   // )
 

@@ -7,7 +7,7 @@ import PixiManager from "@/helpers/render/gremlin/manager"
 import StoreManager from "@/stores/manager"
 import { getRandomColor } from "@/utils/functions/color"
 import { webError, webLog } from "@/utils/log"
-import type { Sprite, Texture } from "pixi.js"
+import type { Graphics, Sprite, Texture } from "pixi.js"
 
 // const sprite = createSprite(layerContainer, {
 //   texture,
@@ -99,6 +99,7 @@ export function debugPixiSprite(): void {
   })
 
   let sprite1: Sprite
+  let rect1: Graphics
 
   loadTexture(frameURL).then(texture => {
     if (!texture) return
@@ -114,6 +115,15 @@ export function debugPixiSprite(): void {
         y: 0.5
       }
     })
+    rect1 = createGraphics(layerContainer, {
+      alpha: 0.3,
+      position: {
+        x: sprite1.position.x,
+        y: sprite1.position.y
+      }
+    })
+    rect1.rect(0, 0, sprite1.width, sprite1.height).fill(getRandomColor())
+    layerContainer.addChild(rect1)
   })
 
   loadTexture(textureURL).then((texture1: Texture) => {
@@ -131,6 +141,8 @@ export function debugPixiSprite(): void {
     })
     setTimeout(() => {
       sprite1.texture = texture1
+      // rect1.position.set(sprite1.position.x, sprite1.position.y)
+      rect1.setSize(sprite1.width, sprite1.height)
     }, 1000 * 3)
   })
 }
