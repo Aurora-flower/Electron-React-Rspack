@@ -1,3 +1,7 @@
+import { getPadding } from "@/common/frequently-used/usually"
+import { createImageObject } from "@/utils/dom/mod/image"
+import { webLog } from "@/utils/log"
+
 export function getImageDataBounds(imageData: ImageData): BoundsModel | null {
   const pixels = new Uint32Array(imageData.data.buffer) /* 创建 32 位视图 */
   const width = imageData.width
@@ -45,4 +49,14 @@ export function getImageDataBounds(imageData: ImageData): BoundsModel | null {
     width: right - left + 1,
     height: bottom - top + 1
   }
+}
+
+export function nineSliceSprite(
+  original: string,
+  slider: PaddingModel = getPadding()
+): string {
+  createImageObject(original, (image, canvas, context) => {
+    webLog("image", "nineSliceSprite", original, slider, image, canvas, context)
+  })
+  return ""
 }

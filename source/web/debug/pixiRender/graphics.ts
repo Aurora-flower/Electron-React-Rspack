@@ -39,7 +39,6 @@ function debugPixiSetPoint(container: Container): void {
  * @remarks
  * 由于以下原因，当前实现无法正确处理旋转：
  * - 缺少真正的锚点配置
- *
  */
 export function debugGraphicAnchor(container: Container): void {
   const matrixItem = PixiManager.findUsableMatrix()
@@ -54,14 +53,18 @@ export function debugGraphicAnchor(container: Container): void {
     width: 50,
     height: 50
   }
+  const anchor = {
+    x: 0.5,
+    y: 0.5
+  }
   const graphic = createGraphics(child, {
     position: {
       x: size.width * 2,
       y: size.height * 2
     },
     pivot: {
-      x: size.width * 0.5,
-      y: -size.height * 0.5
+      x: size.width * anchor.x,
+      y: -size.height * anchor.y
     }
     // rotation: Math.PI / 4 // PI/4 弧度
   })
