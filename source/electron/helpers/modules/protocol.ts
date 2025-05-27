@@ -46,14 +46,6 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
       _fileURL
     }
     try {
-      sendLog(
-        {
-          level: "info",
-          sign: "Protocol Request"
-        },
-        info
-      )
-
       try {
         return await net.fetch(
           _fileURL
@@ -70,7 +62,8 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
     sendLog(
       {
         level: "error",
-        sign: signal
+        sign: signal,
+        module: module?.id
       },
       err,
       info

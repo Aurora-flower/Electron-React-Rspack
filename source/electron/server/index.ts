@@ -46,7 +46,8 @@ export class AppServer {
       sendLog(
         {
           level: "info",
-          sign: "createHttpServer"
+          sign: "createHttpServer",
+          module: module?.id
         },
         `App Server: http://${this._options?.hostname}:${this._options?.port}`
       )
@@ -62,7 +63,8 @@ export class AppServer {
       sendLog(
         {
           level: "info",
-          sign: "createHttpsServer"
+          sign: "createHttpsServer",
+          module: module?.id
         },
         `App Server: https://${this._options?.hostname}:${this._options?.port}`
       )
@@ -84,7 +86,8 @@ export class AppServer {
       sendLog(
         {
           level: "info",
-          sign: "stopServer"
+          sign: "stopServer",
+          module: module?.id
         },
         "Server Stopped"
       )
@@ -123,7 +126,8 @@ export async function createAppServer(): Promise<void> {
   sendLog(
     {
       level: "info",
-      sign: "createAppServer"
+      sign: "createAppServer",
+      module: module?.id
     },
     `App Server: ${process.env.DEV_SERVER_URL}`,
     options

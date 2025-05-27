@@ -4,7 +4,8 @@ export function command(instruct: string): void {
   sendLog(
     {
       level: "info",
-      sign: "command"
+      sign: "command",
+      module: module?.id
     },
     instruct
   )

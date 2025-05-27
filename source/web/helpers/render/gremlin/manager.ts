@@ -1,6 +1,7 @@
 import { getSize } from "@/common/frequently-used/usually"
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
+import { setupStageHook } from "@/helpers/render/gremlin/event/wheel"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
 import {
@@ -43,6 +44,7 @@ class PixiManager {
       getSize(app.renderer.width, app.renderer.height),
       interval
     )
+    setupStageHook(app)
     return app
   }
 

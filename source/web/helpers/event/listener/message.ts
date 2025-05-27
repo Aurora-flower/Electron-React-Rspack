@@ -16,7 +16,7 @@ export function messageListener(/* this: void */): void {
     if (MESSAGE_IGNORE_SIGN.includes(ev.data.source)) {
       return
     }
-    webLog("messageListener", "onMsg", origin, ev.data, ev.ports, ev.source)
+    webLog("message", "onMsg", origin, ev.data, ev.ports, ev.source)
   })
 
   // enableWindowMessagesListener(event => {

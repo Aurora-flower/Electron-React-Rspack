@@ -88,6 +88,7 @@ declare global {
 
   type ScaleModel = PointModel
   type AnchorModel = PointModel
+  type IntervalModel = PointModel
   type LinePointModel = MovePointModel
   type BoundsModel = SizeModel & PaddingModel
 }

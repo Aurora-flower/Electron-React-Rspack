@@ -19,6 +19,7 @@ interface LogOptions {
   date?: string
   time?: string
   window?: string
+  module?: string | number
   payload?: unknown[]
 }
 
@@ -32,6 +33,7 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
     // date: date.toLocaleDateString(),
     time: date.toLocaleTimeString(), // "zh-Hant-TW"
     window: MAIN_WINDOW_NAME,
+    module: module?.id,
     ...options,
     payload: args
   }
