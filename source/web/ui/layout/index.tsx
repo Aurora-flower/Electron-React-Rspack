@@ -8,7 +8,7 @@ function LayoutView(props: { date: Date }): JSX.Element {
   const dateRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    setFontFamily(dateRef.current, "Crosterian")
+    setFontFamily(dateRef.current, "Dotrice Regular")
   }, [])
 
   webLog("LayoutView", "props", props.date)

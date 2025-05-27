@@ -1,5 +1,6 @@
 import debugPixiGraphic from "@/debug/pixiRender/graphics"
 import debugPixiSprite from "@/debug/pixiRender/sprite"
+import debugPixiText from "@/debug/pixiRender/text"
 import debugPixiUI from "@/debug/pixiRender/ui"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
@@ -9,6 +10,7 @@ import { webLog } from "@/utils/log"
 export function debugPixiRender(): void {
   debugPixiGraphic()
   debugPixiSprite()
+  debugPixiText()
   debugPixiUI()
 }
 

@@ -1,4 +1,13 @@
 @font-face {
+  font-family: "ChaChicle";
+  /* url("../assets/fonts/ChaChicle.woff") format("woff"), */
+  src: url("https://pixijs.com/assets/webfont-loader/ChaChicle.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Dotrice Regular";
   src: url("https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff")
     format("woff");
