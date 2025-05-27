@@ -16,21 +16,15 @@ function debugPixiSetPoint(container: Container): void {
   const matrixItem = PixiManager.findUsableMatrix()
   if (!matrixItem) return
   const child = createContainer(container, {
-    position: {
-      x: matrixItem.x,
-      y: matrixItem.y
-    }
+    position: { x: matrixItem.x, y: matrixItem.y }
   })
   const graphic = createGraphics(child, {
-    position: {
-      x: matrixItem.x,
-      y: matrixItem.y
-    }
+    position: { x: matrixItem.x, y: matrixItem.y }
   })
   graphic
     .rect(-25, -25, matrixItem.width, matrixItem.height)
     .fill(getRandomColor())
-  matrixItem.able = false
+
   webLog("debugPixiGraphic", "debugPixiSetPoint", container, matrixItem)
 }
 
@@ -44,10 +38,7 @@ export function debugGraphicAnchor(container: Container): void {
   const matrixItem = PixiManager.findUsableMatrix()
   if (!matrixItem) return
   const child = createContainer(container, {
-    position: {
-      x: matrixItem.x,
-      y: matrixItem.y
-    }
+    position: { x: matrixItem.x, y: matrixItem.y }
   })
   const size = {
     width: 50,
@@ -69,7 +60,7 @@ export function debugGraphicAnchor(container: Container): void {
     // rotation: Math.PI / 4 // PI/4 弧度
   })
   graphic.rect(0, 0, size.width, size.height).fill(getRandomColor())
-  matrixItem.able = false
+
   webLog("debugPixiGraphic", "debugGraphicAnchor", container, matrixItem)
 }
 

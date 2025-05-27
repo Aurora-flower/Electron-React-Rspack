@@ -133,7 +133,11 @@ class PixiManager {
   }
 
   static findUsableMatrix(): MatrixModel | undefined {
-    return PixiManager._matrix.find(item => item.able)
+    const matrixItem = PixiManager._matrix.find(item => item.able)
+    if (matrixItem) {
+      matrixItem.able = false
+    }
+    return matrixItem
   }
 }
 
