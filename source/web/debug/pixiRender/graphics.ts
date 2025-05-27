@@ -75,7 +75,9 @@ export function debugGraphicAnchor(container: Container): void {
 
 function debugPixiGraphic(): void {
   const app = PixiManager.getApp()
-  const layerContainer = getElementByLabel("layer", app.stage)
+  const label = PixiManager.elementFlag.layer
+  const layerContainer = getElementByLabel(label, app.stage)
+  webLog("debug", "debugPixiGraphic", layerContainer)
   if (!layerContainer) return
   debugPixiSetPoint(layerContainer)
   debugGraphicAnchor(layerContainer)

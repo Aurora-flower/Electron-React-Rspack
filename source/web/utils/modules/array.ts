@@ -4,24 +4,22 @@ import {
   isEffectiveElement
 } from "@/utils/functions/dataType"
 
-export function from(): void {
-  const list = Array.prototype.forEach.bind(
-    Object.entries({
-      a: "1",
-      b: "2",
-      c: "3"
-    })
-    // (v, k) => {
-    //   console.log(v, k);
-    // }
-  )
+// function from(): void {
+//   const list = Array.prototype.forEach.bind(
+//     Object.entries({
+//       a: "1",
+//       b: "2",
+//       c: "3"
+//     })
+//     // (v, k) => {
+//     //   console.log(v, k);
+//     // }
+//   )
 
-  list((v, k) => {
-    console.log(v, k)
-  })
-
-  // console.log(list);
-}
+//   list((v, k) => {
+//     console.log(v, k)
+//   })
+// }
 
 export class ArrayUtility {
   static sumArrayFromIndex(nums: number[], i = 0): number {

@@ -3,6 +3,7 @@ import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 
 export function debugPixiContainer(): void {
   const app = PixiManager.getApp()
-  const layerContainer = getElementByLabel("layer", app.stage)
+  const label = PixiManager.elementFlag.layer
+  const layerContainer = getElementByLabel(label, app.stage)
   if (!layerContainer) return
 }

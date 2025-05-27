@@ -46,6 +46,9 @@ function GraphicsPage(): JSX.Element {
   return (
     <div className="grphics page-base">
       <div className="absolute top-6 left-6 opacity-80">{getTip}</div>
+      {/* <div className="absolute top-6 right-6 opacity-80">
+        SCALE:
+      </div> */}
       <div ref={containerRef} id="graphics" className="w-full h-full" />
     </div>
   )

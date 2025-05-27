@@ -6,17 +6,6 @@ import { join } from "@/utils/features/url"
 import { webLog } from "@/utils/log"
 
 export function debugPixiRender(): void {
-  // const matrix = calculateMatrixCoordinates(
-  //   {
-  //     width: 10000,
-  //     height: 10000
-  //   },
-  //   {
-  //     x: 0,
-  //     y: 0
-  //   }
-  // )
-  // webLog("debug", "matrix", matrix)
   debugPixiGraphic()
   debugPixiSprite()
 }

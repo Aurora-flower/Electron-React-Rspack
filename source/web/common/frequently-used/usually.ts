@@ -1,7 +1,9 @@
+import { formatNumberPrecision } from "@/utils/modules/digits"
+
 export function getSize(width = 0, height = 0): SizeModel {
   return {
-    width: width ?? 0,
-    height: height ?? 0
+    width: formatNumberPrecision(width ?? 0, 2),
+    height: formatNumberPrecision(height ?? 0)
   }
 }
 

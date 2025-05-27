@@ -171,7 +171,8 @@ function debugPixiSprite(): void {
   // const flowerTopURL = "https://pixijs.com/assets/flowerTop.png"
   // const spriteURL = "https://imgur.com/T2vjvYl.png"
   const app = PixiManager.getApp()
-  const layerContainer = getElementByLabel("layer", app.stage)
+  const label = PixiManager.elementFlag.layer
+  const layerContainer = getElementByLabel(label, app.stage)
   if (!layerContainer) return
 
   const sampleURL = replaceNormalize(

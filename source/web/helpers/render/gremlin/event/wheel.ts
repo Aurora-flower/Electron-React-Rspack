@@ -1,36 +1,52 @@
-import {
-  getTargetType,
-  isContainer
-} from "@/helpers/render/gremlin/functions/is"
+import PixiManager from "@/helpers/render/gremlin"
 import { webLog } from "@/utils/log"
-import type { Application, Container, FederatedWheelEvent } from "pixi.js"
+import type { Container, FederatedWheelEvent } from "pixi.js"
 
-export function setupStageHook(app: Application): void {
-  addStageWheel(app.stage)
-  webLog(
-    "wheel",
-    "setupStageHook",
-    getTargetType(app.stage),
-    isContainer(app.stage),
-    app.stage.isInteractive()
-  )
-}
+const ZOOM_SPEED = 0.1
+
+// const SCALE_RATIO = 0.1;
 
 export function addStageWheel(stage: Container): void {
-  stage.interactive = true
-  stage.eventMode = "static"
-  function wheelHandler(e: FederatedWheelEvent): void {
+  const app = PixiManager.getApp()
+  const wheelHandler = (e: FederatedWheelEvent): void => {
     e.preventDefault()
     e.stopPropagation()
-    webLog(
-      "PixiManager",
-      "wheelHandler",
-      e.deltaY,
-      e.deltaX,
-      e.deltaZ,
-      e.deltaMode
-    )
+    stage.cursor = "zoom-in"
+    // stage.cursor = "zoom-out"
+    const delta = e.deltaY
+    const canvasScale = PixiManager.getZoom()
+    const zoomFactor = delta > 0 ? 1 - ZOOM_SPEED : 1 + ZOOM_SPEED
+    const zoom = canvasScale * zoomFactor
+    PixiManager.setZoom(zoom)
+    // PixiManager.initCanvas()
+
+    // const mousePosBefore = e.getLocalPosition(sceneRoot.parent);
+    // const mouseLocalBefore = sceneRoot.toLocal(mousePosBefore);
+    // sceneRoot.scale.set(canvasScale.x, canvasScale.y);
+    // const mouseLocalAfter = sceneRoot.toLocal(mousePosBefore);
+    // sceneRoot.position.x +=
+    //   (mouseLocalAfter.x - mouseLocalBefore.x) * canvasScale.x * SCALE_RATIO;
+    // sceneRoot.position.y +=
+    //   (mouseLocalAfter.y - mouseLocalBefore.y) * canvasScale.y * SCALE_RATIO;
+
+    // webLog(
+    //   "PixiManager",
+    //   "wheelHandler",
+    //   e.deltaY,
+    //   e.deltaX,
+    //   e.deltaZ,
+    //   e.deltaMode,
+    //   stage,
+    //   // stage.getSize(),
+    //   app.renderer.width,
+    //   app.renderer.height
+    // )
   }
 
+  webLog("PixiManager", "addStageWheel", app, stage)
+
   stage.on("wheel", wheelHandler)
+  stage.on("pointerdown", () => {
+    stage.cursor = "default"
+  })
 }

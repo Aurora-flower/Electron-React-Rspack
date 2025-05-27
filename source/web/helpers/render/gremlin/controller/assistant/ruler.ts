@@ -1,5 +1,6 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
+import { webLog } from "@/utils/log"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
@@ -13,6 +14,8 @@ type DrawScaleHander = (val: number, point: PointModel, flag: RulerType) => void
 
 type RulerType = "top" | "left"
 
+const DEFAULT_SCALE_INTERVAL = 10
+
 class Ruler {
   private _parent: ContainerParent = undefined
   private _size: SizeModel = getSize()
@@ -23,7 +26,7 @@ class Ruler {
     x: 10,
     y: 10
   }
-  private _scaleInterval = 10
+  private _scaleInterval = DEFAULT_SCALE_INTERVAL
   private _strokeInput: StrokeInput = {
     width: 1,
     color: this._markColor,
@@ -36,6 +39,11 @@ class Ruler {
   private _topRuler: Graphics = new Graphics()
   private _leftRuler: Graphics = new Graphics()
   private _rulerContainer: Container = new Container()
+
+  setScaleInterval(zoom: number): void {
+    this._scaleInterval = DEFAULT_SCALE_INTERVAL / zoom
+    webLog("Ruler", "setScaleInterval", zoom, this._scaleInterval)
+  }
 
   constructor(parent: Container, size?: SizeModel, storeStyle?: StrokeInput) {
     this._parent = parent

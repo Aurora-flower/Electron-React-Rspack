@@ -1,27 +1,52 @@
-import type { FederatedPointerEvent } from "pixi.js"
+import type { Application, Container, FederatedPointerEvent } from "pixi.js"
 
-class DragEvent {
-  static pointerdown(e: FederatedPointerEvent): void {
-    if (e.button !== 0) return
-  }
-
-  static pointermove(e: FederatedPointerEvent): void {
-    if (e.button !== 0) return
-    // target.cursor = 'move';
-  }
-
-  static pointerup(e: FederatedPointerEvent): void {
-    if (e.button !== 0) return
-  }
-
-  static pointerupoutside(e: FederatedPointerEvent): void {
-    if (e.button !== 0) return
-  }
-}
-
-export default DragEvent
 // const parentPos = e.getLocalPosition(target.parent);
 // const parentPos = target.toLocal(e.global.clone());
 // new Point().copyFrom(e.global.clone())
 // e.stopPropagation();
 // e.preventDefault();
+class DragEvent {
+  private _target: Container
+  private _stage: Container
+
+  constructor(app: Application, target: Container) {
+    this._target = target
+    this._stage = app.stage
+    this._stage.eventMode = "static"
+    this._stage.hitArea = app.screen
+    this._target.on("pointerdown", this.pointerdown)
+    this._stage.on("pointermove", this.pointermove)
+    this._stage.on("pointerup", this.pointerup)
+    this._stage.on("pointerupoutside", this.pointerupoutside)
+  }
+
+  /* 挂载给对象 */
+  pointerdown(e: FederatedPointerEvent): void {
+    if (e.button !== 0) return
+    this._target = e.target
+    this._stage.on("pointermove", this.pointermove)
+  }
+
+  pointermove(e: FederatedPointerEvent): void {
+    if (this._target) {
+      this._target.cursor = "move"
+      this._target.parent.toLocal(
+        e.global.clone(),
+        undefined,
+        this._target.position
+      )
+    }
+  }
+
+  pointerup(e: FederatedPointerEvent): void {
+    if (e.button !== 0) return
+    this._stage.off("pointermove", this.pointermove)
+  }
+
+  pointerupoutside(e: FederatedPointerEvent): void {
+    if (e.button !== 0) return
+    this._stage.off("pointermove", this.pointermove)
+  }
+}
+
+export default DragEvent
