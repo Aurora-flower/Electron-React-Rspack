@@ -1,5 +1,5 @@
 import { debugPixiRender } from "@/debug"
-import PixiManager from "@/helpers/render/gremlin/manager"
+import PixiManager from "@/helpers/render/gremlin"
 import {
   destoryWindowResizeListener,
   enableWindowResizeListener

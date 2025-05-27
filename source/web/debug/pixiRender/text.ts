@@ -1,5 +1,5 @@
+import PixiManager from "@/helpers/render/gremlin"
 import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
-import PixiManager from "@/helpers/render/gremlin/manager"
 
 function debugPixiText(): void {
   const app = PixiManager.getApp()
