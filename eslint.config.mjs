@@ -16,6 +16,7 @@ export default defineConfig([
       "node_modules/",
       "temp/",
       "backup/",
+      "public/resource/scripts/",
       "core/",
       "test/",
       "release/",
@@ -94,6 +95,7 @@ export default defineConfig([
     }
   },
   {
+    // files: ["**/*.ts", "**/*.tsx"],
     rules: {
       "no-multiple-empty-lines": [
         "error",
