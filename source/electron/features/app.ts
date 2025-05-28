@@ -48,7 +48,7 @@ export class AppInfo implements AppInfoModel {
   }
   core = ""
   workspace = ""
-  private static _instance: AppInfo | null = null
+  private static _instance: AppInfo
 
   constructor() {
     this.driveLetter = parse(this.cwd).root

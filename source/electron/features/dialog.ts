@@ -10,8 +10,10 @@ import type {
 } from "electron"
 
 export class AppDialog {
-  private static _instance: AppDialog | null = null
-  private static lastUserChoice: string | string[] | null = null
+  private static _instance: AppDialog
+  private static lastUserChoice: string | string[]
+  private static dialogCount = 0
+
   static getInstance(): AppDialog {
     if (!AppDialog._instance) {
       AppDialog._instance = new AppDialog()
@@ -19,7 +21,7 @@ export class AppDialog {
     return AppDialog._instance
   }
 
-  static getLastUserChoice(): string | string[] | null {
+  static getLastUserChoice(): string | string[] {
     return AppDialog.lastUserChoice
   }
 

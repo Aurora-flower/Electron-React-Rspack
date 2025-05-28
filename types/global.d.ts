@@ -140,9 +140,5 @@ declare module "pixi.js" {
      */
     autoCrop(): Promise<Texture>
   }
-
-  interface Graphics {
-    __dragData?: any
-  }
 }
 export {}

@@ -27,8 +27,7 @@ function debugPixiSetPoint(container: Container): void {
   graphic
     .rect(-25, -25, matrixItem.width, matrixItem.height)
     .fill(getRandomColor())
-  graphic.__dragData = new TargetDrag(graphic)
-  webLog("debugPixiGraphic", "debugPixiSetPoint", container, matrixItem)
+  TargetDrag.markTarget(graphic)
 }
 
 /**
@@ -63,12 +62,12 @@ export function debugGraphicAnchor(container: Container): void {
     // rotation: Math.PI / 4 // PI/4 弧度
   })
   graphic.rect(0, 0, size.width, size.height).fill(getRandomColor())
-
   webLog("debugPixiGraphic", "debugGraphicAnchor", container, matrixItem)
 }
 
 function debugPixiGraphic(): void {
   const app = PixiManager.getApp()
+  if (!app) return
   const label = PixiManager.elementFlag.layer
   const layerContainer = getElementByLabel(label, app.stage)
   webLog("debug", "debugPixiGraphic", layerContainer)

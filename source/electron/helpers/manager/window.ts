@@ -12,7 +12,7 @@ interface WindowState {
 }
 
 class WindowManager {
-  public mainWindow: BrowserWindow | null = null
+  public mainWindow: BrowserWindow
   private static instance: WindowManager
   private windowOptions = WINDOW_OPTIONS
   private windows: Map<string, BrowserWindow> = new Map()

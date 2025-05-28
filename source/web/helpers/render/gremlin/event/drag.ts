@@ -1,4 +1,11 @@
-import type { Application, Container, FederatedPointerEvent } from "pixi.js"
+import { CURSOR } from "@/common/cursor"
+import { webLog } from "@/utils/log"
+import {
+  type Application,
+  type Container,
+  type FederatedPointerEvent,
+  Point
+} from "pixi.js"
 
 // const mousePosBefore = e.getLocalPosition(target.parent)
 // const mouseLocalBefore = target.toLocal(mousePosBefore)
@@ -7,21 +14,24 @@ import type { Application, Container, FederatedPointerEvent } from "pixi.js"
 // const parentPos = target.toLocal(e.global.clone());
 // new Point().copyFrom(e.global.clone())
 
-export function addStageElementDrag(app: Application): void {
+export function addStageDrag(app: Application): void {
   const stage = app.stage
   if (!stage) return
   TargetDrag.init(stage)
 }
 
 export class TargetDrag {
-  private _data = {
-    target: undefined
-  }
-  private static _target: Container
+  private static _instance: TargetDrag
   private static _stage: Container
+  private static _currentTarget: Container | null = null
+  private static _startPosition = new Point()
+  private static _startOffset = new Point()
 
-  constructor(target: Container) {
-    target.on("pointerdown", this.pointerdown)
+  static getInstance(): TargetDrag {
+    if (!TargetDrag._instance) {
+      TargetDrag._instance = new TargetDrag()
+    }
+    return TargetDrag._instance
   }
 
   static init(stage: Container): void {
@@ -31,41 +41,47 @@ export class TargetDrag {
     TargetDrag._stage.on("pointerupoutside", TargetDrag.pointerupoutside)
   }
 
-  /* 挂载给对象 */
-  pointerdown(e: FederatedPointerEvent): void {
+  static markTarget(target: Container): void {
+    target.on("pointerdown", TargetDrag.pointerdown)
+  }
+
+  static pointerdown(e: FederatedPointerEvent): void {
     if (e.button !== 0) return
-    TargetDrag._target = e.target
+    TargetDrag._currentTarget = e.target
+    e.target.cursor = CURSOR.Move
     TargetDrag._stage.on("pointermove", TargetDrag.pointermove)
   }
 
   static pointermove(e: FederatedPointerEvent): void {
-    if (TargetDrag._target) {
-      TargetDrag._target.cursor = "move"
-      TargetDrag._target.parent.toLocal(
-        e.global.clone(),
-        undefined,
-        TargetDrag._target.position
-      )
-      const mousePosBefore = e.getLocalPosition(TargetDrag._target.parent)
-      // const mouseLocalBefore = TargetDrag._target.toLocal(mousePosBefore)
-      // const mouseLocalAfter = TargetDrag._target.toLocal(mousePosBefore);
-      console.log(
-        "[TEST]",
-        // mouseLocalBefore,
-        mousePosBefore,
-        TargetDrag._target,
-        TargetDrag._target.parent
+    const target = TargetDrag._currentTarget
+    if (target) {
+      if (target.parent) {
+        // TODO: 这里是直接更改的图形的坐标，可能需要的是更改 target parent 的坐标
+        target.parent.toLocal(e.global.clone(), undefined, target.position)
+      }
+      webLog(
+        "drag",
+        "TargetDrag-pointermove",
+        target,
+        TargetDrag._startPosition,
+        TargetDrag._startOffset
       )
     }
   }
 
-  static pointerup(e: FederatedPointerEvent): void {
-    if (e.button !== 0) return
-    TargetDrag._stage.off("pointermove", TargetDrag.pointermove)
+  static pointerup(_e: FederatedPointerEvent): void {
+    TargetDrag.offMove()
   }
 
-  static pointerupoutside(e: FederatedPointerEvent): void {
-    if (e.button !== 0) return
+  static pointerupoutside(_e: FederatedPointerEvent): void {
+    TargetDrag.offMove()
+  }
+
+  static offMove(): void {
+    if (TargetDrag._currentTarget) {
+      TargetDrag._currentTarget.cursor = CURSOR.Normal
+      TargetDrag._currentTarget = null
+    }
     TargetDrag._stage.off("pointermove", TargetDrag.pointermove)
   }
 }
