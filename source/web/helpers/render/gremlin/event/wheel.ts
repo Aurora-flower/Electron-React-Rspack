@@ -1,13 +1,12 @@
 import PixiManager from "@/helpers/render/gremlin"
-import { webLog } from "@/utils/log"
-import type { Container, FederatedWheelEvent } from "pixi.js"
+import type { Application, FederatedWheelEvent } from "pixi.js"
 
 const ZOOM_SPEED = 0.1
-
 // const SCALE_RATIO = 0.1;
 
-export function addStageWheel(stage: Container): void {
-  const app = PixiManager.getApp()
+export function addStageWheel(app: Application): void {
+  const stage = app.stage
+  if (!stage) return
   const wheelHandler = (e: FederatedWheelEvent): void => {
     e.preventDefault()
     e.stopPropagation()
@@ -20,8 +19,5 @@ export function addStageWheel(stage: Container): void {
     PixiManager.setZoom(zoom)
     PixiManager.initCanvas()
   }
-
-  webLog("PixiManager", "addStageWheel", app, stage)
-
   stage.on("wheel", wheelHandler)
 }

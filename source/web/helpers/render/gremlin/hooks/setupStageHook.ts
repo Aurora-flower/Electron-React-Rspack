@@ -1,3 +1,4 @@
+import { addStageElementDrag } from "@/helpers/render/gremlin/event/drag"
 import { addStageWheel } from "@/helpers/render/gremlin/event/wheel"
 import {
   getTargetType,
@@ -11,7 +12,9 @@ export function setupStageHook(app: Application): void {
   stage.hitArea = app.screen
   stage.interactive = true
   stage.eventMode = "static"
-  addStageWheel(stage)
+  stage.hitArea = app.screen
+  addStageWheel(app)
+  addStageElementDrag(app)
   webLog(
     "wheel",
     "setupStageHook",
