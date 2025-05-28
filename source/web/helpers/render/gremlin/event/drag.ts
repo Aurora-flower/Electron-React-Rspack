@@ -35,6 +35,10 @@ class DragEvent {
         undefined,
         this._target.position
       )
+      const mousePosBefore = e.getLocalPosition(this._target.parent)
+      const mouseLocalBefore = this._target.toLocal(mousePosBefore)
+      // const mouseLocalAfter = this._target.toLocal(mousePosBefore);
+      console.log("[TEST]", mouseLocalBefore, mousePosBefore)
     }
   }
 

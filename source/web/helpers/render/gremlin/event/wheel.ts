@@ -19,35 +19,9 @@ export function addStageWheel(stage: Container): void {
     const zoom = canvasScale * zoomFactor
     PixiManager.setZoom(zoom)
     PixiManager.initCanvas()
-
-    // const mousePosBefore = e.getLocalPosition(sceneRoot.parent);
-    // const mouseLocalBefore = sceneRoot.toLocal(mousePosBefore);
-    // sceneRoot.scale.set(canvasScale.x, canvasScale.y);
-    // const mouseLocalAfter = sceneRoot.toLocal(mousePosBefore);
-    // sceneRoot.position.x +=
-    //   (mouseLocalAfter.x - mouseLocalBefore.x) * canvasScale.x * SCALE_RATIO;
-    // sceneRoot.position.y +=
-    //   (mouseLocalAfter.y - mouseLocalBefore.y) * canvasScale.y * SCALE_RATIO;
-
-    // webLog(
-    //   "PixiManager",
-    //   "wheelHandler",
-    //   e.deltaY,
-    //   e.deltaX,
-    //   e.deltaZ,
-    //   e.deltaMode,
-    //   stage,
-    //   // stage.getSize(),
-    //   app.renderer.width,
-    //   app.renderer.height
-    // )
-    webLog("wheel", "wheelHandler", e, stage)
   }
 
   webLog("PixiManager", "addStageWheel", app, stage)
 
   stage.on("wheel", wheelHandler)
-  stage.on("pointerdown", () => {
-    stage.cursor = "default"
-  })
 }
