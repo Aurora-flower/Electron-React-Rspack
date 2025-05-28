@@ -5,6 +5,7 @@ import {
 } from "@/common/frequently-used/usually"
 import PixiManager from "@/helpers/render/gremlin"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
+import { formatNumberPrecision } from "@/utils/modules/digits"
 import type { Container, StrokeInput } from "pixi.js"
 import { Graphics } from "pixi.js"
 
@@ -48,8 +49,8 @@ class Grid {
 
   setGridInterval(zoom: number): void {
     this._girdInterval = {
-      x: DEFAULT_GRID_INTERVAL * zoom,
-      y: DEFAULT_GRID_INTERVAL * zoom
+      x: formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0),
+      y: formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0)
     }
   }
 

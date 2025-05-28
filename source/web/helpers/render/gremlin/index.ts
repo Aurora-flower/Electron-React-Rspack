@@ -99,7 +99,7 @@ class PixiManager {
       grid.setGridInterval(zoom)
       grid.draw()
       const ruler = new Ruler(rulerContainer, viewSize)
-      // ruler.setScaleInterval(zoom)
+      ruler.setRulerInterval(zoom)
       ruler.draw()
       // const validHeight = viewSize.height ?? 0
       // layerContainer.pivot.set(-50, -validHeight + 50)

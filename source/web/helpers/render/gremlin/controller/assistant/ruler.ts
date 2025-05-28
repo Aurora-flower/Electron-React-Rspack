@@ -1,6 +1,6 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
-import { webLog } from "@/utils/log"
+import { formatNumberPrecision } from "@/utils/modules/digits"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
@@ -23,9 +23,10 @@ class Ruler {
   private _rulerColor = 0x292929
   private _markColor = 0xffffff
   private _rulerInterval: PointModel = {
-    x: 10,
-    y: 10
+    x: DEFAULT_SCALE_INTERVAL,
+    y: DEFAULT_SCALE_INTERVAL
   }
+  private _zoom = 1
   private _scaleInterval = DEFAULT_SCALE_INTERVAL
   private _strokeInput: StrokeInput = {
     width: 1,
@@ -40,9 +41,12 @@ class Ruler {
   private _leftRuler: Graphics = new Graphics()
   private _rulerContainer: Container = new Container()
 
-  setScaleInterval(zoom: number): void {
-    this._scaleInterval = DEFAULT_SCALE_INTERVAL / zoom
-    webLog("Ruler", "setScaleInterval", zoom, this._scaleInterval)
+  setRulerInterval(zoom: number): void {
+    this._zoom = zoom
+    this._rulerInterval = {
+      x: formatNumberPrecision(DEFAULT_SCALE_INTERVAL * zoom, 0),
+      y: formatNumberPrecision(DEFAULT_SCALE_INTERVAL * zoom, 0)
+    }
   }
 
   constructor(parent: Container, size?: SizeModel, storeStyle?: StrokeInput) {
@@ -53,9 +57,6 @@ class Ruler {
     if (storeStyle) {
       this._strokeInput = storeStyle
     }
-    // if (canvasScale) {
-    //   this._canvasScale = canvasScale
-    // }
   }
 
   draw(): void {
@@ -89,12 +90,12 @@ class Ruler {
 
   private logic(
     size: SizeModel,
-    gridInterval: PointModel,
+    rulerInterval: PointModel,
     drawScaleLine: DrawLineHander = this.drawRulerLine.bind(this),
     drawScaleValue: DrawScaleHander = this.drawRulerValue.bind(this)
   ): void {
-    for (let x = 0; x <= size.width; x += gridInterval.x) {
-      const isMajor = x % (this._rulerInterval.x * this._scaleInterval) === 0
+    for (let x = 0; x <= size.width; x += rulerInterval.x) {
+      const isMajor = x % (rulerInterval.x * this._scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
       const alpha = this.getScaleAlpha(isMajor)
       const linePoint = getMovePoint({ x, y: 0 }, { x, y: scaleLength })
@@ -107,11 +108,12 @@ class Ruler {
           y: scaleLength + 2
         }
         if (drawScaleValue) {
-          drawScaleValue(x, textPoint, "top")
+          const value = formatNumberPrecision(x / this._zoom, 0)
+          drawScaleValue(value, textPoint, "top")
         }
       }
     }
-    for (let y = 0; y <= size.height; y += gridInterval.y) {
+    for (let y = 0; y <= size.height; y += rulerInterval.y) {
       const isMajor = y % (this._rulerInterval.y * this._scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
       const alpha = this.getScaleAlpha(isMajor)
@@ -125,7 +127,8 @@ class Ruler {
           y: y - 2
         }
         if (drawScaleValue) {
-          drawScaleValue(y, textPoint, "left")
+          const value = formatNumberPrecision(y / this._zoom, 0)
+          drawScaleValue(value, textPoint, "left")
         }
       }
     }
