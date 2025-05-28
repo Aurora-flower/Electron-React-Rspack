@@ -3,15 +3,15 @@ import type { WatchOptions } from "gulp"
 import ElectronProcess from "../utils/electron"
 import compile from "./compile"
 
-const instance = ElectronProcess.getInstance()
+const cli = ElectronProcess.getInstance()
 
 // const onceCompile = () => compile(false);
 const watchCompile = (): Promise<void> => compile(false)
 
 async function Run(): Promise<void> {
   // series(instance.stop(), instance.start())
-  await instance.stop()
-  await instance.start()
+  await cli.stop()
+  await cli.start()
   console.log("[electron reload]")
 }
 

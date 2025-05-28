@@ -53,6 +53,26 @@ function getImageLoader(
   return options
 }
 
+function getFontLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
+  return {
+    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+    use: [
+      {
+        loader: "file-loader",
+        options: {
+          name: "[name].[contenthash].[ext]",
+          outputPath: "fonts"
+        }
+      }
+    ],
+    // type: "asset/resource",
+    // generator: {
+    //   filename: "fonts/[name].[hash][ext]"
+    // },
+    exclude: isExclude ? exclude : undefined
+  }
+}
+
 function getSvgLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
     test: /\.svg$/i,
@@ -159,6 +179,8 @@ const LOADER = {
   Css: getCssLoader(),
   CssExclude: getCssLoader(true),
   Image: getImageLoader(),
+  Font: getFontLoader(),
+  FontExclude: getFontLoader(true),
   ImageExclude: getImageLoader(true),
   Svg: getSvgLoader(),
   SvgExclude: getSvgLoader(true),

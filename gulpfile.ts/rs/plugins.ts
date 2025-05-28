@@ -4,8 +4,6 @@ import { configDotenv } from "dotenv"
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
 import { getFileStructure } from "../common/structure"
 
-const ReactRefreshPlugin = require("@rspack/plugin-react-refresh")
-
 function getHtmlRspackPlugin(
   template: string
 ): InstanceType<typeof rspack.HtmlRspackPlugin> {
@@ -41,10 +39,6 @@ function getMiniCssExtractPlugin(): InstanceType<
   return new rspack.CssExtractRspackPlugin({})
 }
 
-function getReactRefreshPlugin(): InstanceType<typeof ReactRefreshPlugin> {
-  return new ReactRefreshPlugin()
-}
-
 function getHotModuleReplacementPlugin(): InstanceType<
   typeof rspack.HotModuleReplacementPlugin
 > {
@@ -55,6 +49,7 @@ function getDefinePlugin(
   options = {}
 ): InstanceType<typeof rspack.DefinePlugin> {
   return new rspack.DefinePlugin({
+    global: "globalThis",
     ...options
     // global: `(typeof globalThis !== "undefined" ? globalThis : window)` // '(typeof globalThis !== "undefined" ? globalThis : window)' | "window"
   })
@@ -98,7 +93,7 @@ function getProvidePlugin(): InstanceType<typeof rspack.ProvidePlugin> {
 function getBundleAnalyzerPlugin(): InstanceType<typeof BundleAnalyzerPlugin> {
   try {
     const BundleAnalyzerPluginOption = {
-      analyzerMode: "static",
+      analyzerMode: "static" as const,
       reportFilename: "report.html",
       openAnalyzer: false,
       generateStatsFile: true,
@@ -119,7 +114,7 @@ const PLUGINS = {
   Provide: getProvidePlugin,
   CssExtract: getMiniCssExtractPlugin,
   BundleAnalyzer: getBundleAnalyzerPlugin,
-  ReactRefresh: getReactRefreshPlugin,
+  // ReactRefresh: getReactRefreshPlugin,
   HMR: getHotModuleReplacementPlugin
 }
 
