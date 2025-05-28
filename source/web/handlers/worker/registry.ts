@@ -8,10 +8,10 @@ export function enableWorker(
   const worker = new Worker(scriptURL, options)
   worker.postMessage(message)
   worker.onmessage = (event): void => {
-    webLog("enableWorker", "Main thread received message", event.data)
+    webLog("registry", "Main thread received message", event.data, scriptURL)
     worker.terminate() // Stop Worker
   }
   worker.onerror = (error: ErrorEvent): void => {
-    webError("enableWorker", "error", error)
+    webError("registry", "enableWorker error", error, scriptURL)
   }
 }

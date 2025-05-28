@@ -1,4 +1,4 @@
-import { getIsPackage } from "@main/helpers/modules/app"
+import { getIsPackage } from "@main/features/app"
 import { isWin } from "@main/node/process/platform"
 import { Notification } from "electron"
 import type { BrowserWindow } from "electron"

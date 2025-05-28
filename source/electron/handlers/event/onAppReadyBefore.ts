@@ -1,4 +1,4 @@
-import { privilegedSchemes } from "@main/helpers/modules/protocol"
+import { privilegedSchemes } from "@main/features/protocol"
 
 async function onAppReadyBefore(): Promise<void> {
   privilegedSchemes()

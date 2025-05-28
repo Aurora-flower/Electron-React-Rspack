@@ -4,7 +4,7 @@ import debugPixiText from "@/debug/pixiRender/text"
 import debugPixiUI from "@/debug/pixiRender/ui"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
-import { join } from "@/utils/features/url"
+import StoreManager from "@/stores/manager"
 import { webLog } from "@/utils/log"
 
 export function debugPixiRender(): void {
@@ -15,7 +15,11 @@ export function debugPixiRender(): void {
 }
 
 export function debugWorker(): void {
-  const workerPath = join("../../core/scripts/javascript/worker.js")
+  const information = StoreManager.getAppInfo()
+  if (!information) {
+    return
+  }
+  const workerPath = "./scripts/worker/index.js"
   enableWorker(workerPath, {
     type: "module"
   })

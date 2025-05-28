@@ -1,7 +1,7 @@
+import { setupAppHooks } from "@main/features/app"
+import { registerProtocolHandle } from "@main/features/protocol"
 import onAppReadyAfter from "@main/handlers/event/onAppReadyAfter"
 import LoggerManager from "@main/helpers/manager/logger"
-import { setupAppHooks } from "@main/helpers/modules/app"
-import { registerProtocolHandle } from "@main/helpers/modules/protocol"
 import { createAppServer } from "@main/server"
 import { app } from "electron"
 

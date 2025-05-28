@@ -1,6 +1,6 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
 import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
-import { getIsPackage } from "@main/helpers/modules/app"
+import { getIsPackage } from "@main/features/app"
 import { resolvePath } from "@main/node/path/resolvePath"
 import { isDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
@@ -52,6 +52,13 @@ class WindowManager {
     return this.windows.get(name)
   }
 
+  public setWindowTitle(name: string, title: string): void {
+    const window = this.windows.get(name)
+    if (window) {
+      window.setTitle(title)
+    }
+  }
+
   public deleteWindow(name: string): void {
     this.windows.delete(name)
   }
@@ -61,6 +68,7 @@ class WindowManager {
   }
 
   public getWindowState(): WindowState | null {
+    // TODO: 获取窗口的属性
     if (!this.mainWindow || this.mainWindow.isDestroyed()) {
       return null
     }
@@ -89,9 +97,7 @@ class WindowManager {
   private setupWindowHooks(): void {
     if (!this.mainWindow) return
     const win = this.mainWindow
-
-    // win.maximize();
-
+    win.maximize()
     if (isDev()) {
       this.mainWindow.webContents.openDevTools({
         mode: "detach",

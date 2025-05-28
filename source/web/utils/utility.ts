@@ -1,8 +1,4 @@
 class CommonUtility {
-  static errorMessage(e: unknown): string | unknown {
-    return e instanceof Error ? e.message : e
-  }
-
   static throttle<T extends (...args: unknown[]) => unknown>(
     fn: T,
     delay = 1000

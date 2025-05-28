@@ -1,4 +1,4 @@
-import CommonUtility from "@/utils/utility"
+import { errorMessage } from "@/utils/filters/error"
 
 export const LOG_COLOR = {
   red: "color: red;",
@@ -37,7 +37,7 @@ export function webError(
     `>>> Web Error Source %c[ ${moduleId} ] - %c$_${sign}_$`,
     LOG_COLOR.cyan,
     LOG_COLOR.yellow,
-    CommonUtility.errorMessage(error),
+    errorMessage(error),
     ...args
   )
 }

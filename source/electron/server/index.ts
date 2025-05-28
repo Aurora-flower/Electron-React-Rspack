@@ -1,7 +1,7 @@
 import * as http from "node:http"
 import * as https from "node:https"
 import { join } from "node:path"
-import { getAppStaticPath } from "@main/helpers/modules/app"
+import { getAppStaticPath } from "@main/features/app"
 import { checkConnection } from "@main/node/net/connection"
 import { sendLog } from "@main/toolkit/logger"
 import type { Application } from "express"
@@ -32,11 +32,24 @@ export class AppServer {
     this.option = options
     if (options?.path) {
       this._application = express()
+      // this._application.use((req, res, next) => {
+      //   res.header("Access-Control-Allow-Origin", "*")
+      //   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+      //   res.header(
+      //     "Access-Control-Allow-Headers",
+      //     "Content-Type, Authorization"
+      //   )
+      //   next()
+      // })
       const middleware = express.static(options.path)
       this._application.use(middleware)
+      const page = join(options.path, "index.html")
       this._application.get("/", (req, res) => {
-        res.sendFile(join(options.path, "index.html"))
+        res.sendFile(page)
       })
+      // this._application.get("*", (/* req, res, next */) => {
+      //   res.sendFile(page)
+      // })
     }
   }
 
@@ -52,6 +65,7 @@ export class AppServer {
         `App Server: http://${this._options?.hostname}:${this._options?.port}`
       )
     })
+    // this._server.on("error", () => {})
   }
 
   private createHttpsServer(): void {

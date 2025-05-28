@@ -1,7 +1,7 @@
 import { writeFile } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { getWebContentsWindow } from "@main/helpers/modules/window"
+import { getWebContentsWindow } from "@main/features/window"
 import { ipcMain, shell } from "electron"
 
 ipcMain.on("print-to-pdf", event => {

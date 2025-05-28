@@ -1,6 +1,5 @@
 import { DATA_TYPE_MODE, isType } from "@/utils/functions/dataType"
-import { webLog } from "@/utils/log"
-import CommonUtility from "@/utils/utility"
+import { webError } from "@/utils/log"
 
 function useClassNames(classNames: Array<unknown>): string {
   try {
@@ -26,7 +25,7 @@ function useClassNames(classNames: Array<unknown>): string {
     )
     return processedClassNames.join(" ").replace(/\bundefined\b/g, "")
   } catch (error: unknown) {
-    webLog("useClassNames", "error", CommonUtility.errorMessage(error))
+    webError("useClassNames", "error", error)
     return ""
   }
 }
