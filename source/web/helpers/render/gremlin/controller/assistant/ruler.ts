@@ -45,9 +45,10 @@ class Ruler {
 
   setRulerInterval(zoom: number): void {
     this._zoom = zoom
+    const value = formatNumberPrecision(DEFAULT_RULER_INTERVAL * zoom, 0)
     this._rulerInterval = {
-      x: formatNumberPrecision(DEFAULT_RULER_INTERVAL * zoom, 0),
-      y: formatNumberPrecision(DEFAULT_RULER_INTERVAL * zoom, 0)
+      x: value,
+      y: value
     }
   }
 
@@ -100,39 +101,33 @@ class Ruler {
     for (let x = 0; x <= size.width; x += rulerInterval.x) {
       const isMajor = x % (rulerInterval.x * this._scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
-      const alpha = this.getScaleAlpha(isMajor)
-      const linePoint = getMovePoint({ x, y: 0 }, { x, y: scaleLength })
       if (drawScaleLine) {
+        const alpha = this.getScaleAlpha(isMajor)
+        const linePoint = getMovePoint({ x, y: 0 }, { x, y: scaleLength })
         drawScaleLine(linePoint, "top", alpha)
       }
-      if (isMajor && x !== 0) {
+      if (isMajor && x !== 0 && drawScaleValue) {
         const textPoint = {
           x: x + 2,
           y: scaleLength + 2
         }
-        if (drawScaleValue) {
-          const value = formatNumberPrecision(x / this._zoom, 0)
-          drawScaleValue(value, textPoint, "top")
-        }
+        drawScaleValue(x, textPoint, "top")
       }
     }
     for (let y = 0; y <= size.height; y += rulerInterval.y) {
       const isMajor = y % (this._rulerInterval.y * this._scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
-      const alpha = this.getScaleAlpha(isMajor)
-      const linePoint = getMovePoint({ x: 0, y }, { x: scaleLength, y })
       if (drawScaleLine) {
+        const alpha = this.getScaleAlpha(isMajor)
+        const linePoint = getMovePoint({ x: 0, y }, { x: scaleLength, y })
         drawScaleLine(linePoint, "left", alpha)
       }
-      if (isMajor && y !== 0) {
+      if (isMajor && y !== 0 && drawScaleValue) {
         const textPoint = {
           x: scaleLength + 2,
           y: y - 2
         }
-        if (drawScaleValue) {
-          const value = formatNumberPrecision(y / this._zoom, 0)
-          drawScaleValue(value, textPoint, "left")
-        }
+        drawScaleValue(y, textPoint, "left")
       }
     }
   }
@@ -153,16 +148,17 @@ class Ruler {
   }
 
   private drawRulerValue(
-    val: number,
+    num: number,
     point: PointModel,
     flag: RulerType
   ): void {
+    const value = formatNumberPrecision(num / this._zoom, 0)
     const style = new TextStyle({
       fontSize: 10,
       fill: this._markColor
     })
     const text = new Text({
-      text: val.toString(),
+      text: value.toString(),
       style
     })
     if (flag === "left") {

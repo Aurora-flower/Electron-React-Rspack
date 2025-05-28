@@ -1,5 +1,6 @@
 import { getSize } from "@/common/frequently-used/usually"
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
+import Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { setupStageHook } from "@/helpers/render/gremlin/hooks/setupStageHook"
 import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
@@ -81,9 +82,9 @@ class PixiManager {
     const layerContainer = createContainer(canvasStage, {
       label: PixiManager.elementFlag.layer
     }) // 绘制图层
-    // const rulerContainer = createContainer(canvasStage, {
-    //   label: PixiManager.elementFlag.staff
-    // }) // 刻度尺
+    const rulerContainer = createContainer(canvasStage, {
+      label: PixiManager.elementFlag.staff
+    }) // 刻度尺
     layerContainer.pivot.set(-50, -50) // 右下
     const width = app.renderer.width
     const height = app.renderer.height
@@ -92,9 +93,9 @@ class PixiManager {
       const grid = new Grid(basiskarte, viewSize)
       grid.setGridInterval(zoom)
       grid.draw()
-      // const ruler = new Ruler(rulerContainer, viewSize)
-      // ruler.setRulerInterval(zoom)
-      // ruler.draw()
+      const ruler = new Ruler(rulerContainer, viewSize)
+      ruler.setRulerInterval(zoom)
+      ruler.draw()
       // const validHeight = viewSize.height ?? 0
       // layerContainer.pivot.set(-50, -validHeight + 50)
       PixiManager._lastZoom = zoom
