@@ -15,11 +15,10 @@ function GraphicsPage(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [, setApp] = React.useState<Application>()
 
-  const callback =
+  const initialize =
     //  CommonUtility.throttle(
     (): void => {
       // TODO: 添加一个函数，用于在窗口大小改变时重新渲染画布
-      PixiManager.stageClear()
       PixiManager.initCanvas()
 
       /* 测试渲染 */
@@ -27,15 +26,14 @@ function GraphicsPage(): JSX.Element {
     }
   // )
 
-  const redraw = React.useCallback(callback, [])
+  const redraw = React.useCallback(initialize, [])
 
   enableWindowResizeListener(redraw)
 
   React.useEffect(() => {
     PixiManager.init(containerRef.current!).then((app: Application) => {
       setApp(app)
-      PixiManager.initCanvas(app)
-      debugPixiRender()
+      redraw()
     })
     return (): void => {
       PixiManager.stageClear()

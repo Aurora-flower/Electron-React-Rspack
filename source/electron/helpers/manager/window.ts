@@ -98,15 +98,8 @@ class WindowManager {
     if (!this.mainWindow) return
     const win = this.mainWindow
     win.maximize()
-    if (isDev()) {
-      this.mainWindow.webContents.openDevTools({
-        mode: "detach",
-        activate: true
-      })
-    }
 
     win.setMinimumSize(800, 600)
-
     win.on("close", e => {
       if (!this.isClosing) {
         e.preventDefault()
@@ -124,6 +117,13 @@ class WindowManager {
         source: "ready",
         payload: "did-finish-load"
       } as Message)
+
+      if (isDev()) {
+        win.webContents.openDevTools({
+          mode: "detach",
+          activate: true
+        })
+      }
     })
 
     win.webContents.on("devtools-opened", () => {

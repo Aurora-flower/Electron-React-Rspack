@@ -20,6 +20,7 @@ class Grid {
     DEFAULT_GRID_INTERVAL,
     DEFAULT_GRID_INTERVAL
   )
+  private _zoom = 1
   private _strokeInput: StrokeInput = {
     width: 1,
     color: 0xcccccc,
@@ -48,10 +49,13 @@ class Grid {
   }
 
   setGridInterval(zoom: number): void {
+    this._zoom = zoom
+    const value = formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0)
     this._girdInterval = {
-      x: formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0),
-      y: formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0)
+      x: value,
+      y: value
     }
+    console.log("[TEST]", zoom, this._girdInterval, value)
   }
 
   draw(): void {

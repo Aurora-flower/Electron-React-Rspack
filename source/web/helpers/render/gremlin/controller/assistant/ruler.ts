@@ -1,5 +1,6 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
+import { webLog } from "@/utils/log"
 import { formatNumberPrecision } from "@/utils/modules/digits"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
@@ -14,7 +15,8 @@ type DrawScaleHander = (val: number, point: PointModel, flag: RulerType) => void
 
 type RulerType = "top" | "left"
 
-const DEFAULT_SCALE_INTERVAL = 10
+const DEFAULT_RULER_INTERVAL = 10
+const DEFAULT_SCALE_INTERVAL = 50
 
 class Ruler {
   private _parent: ContainerParent = undefined
@@ -23,8 +25,8 @@ class Ruler {
   private _rulerColor = 0x292929
   private _markColor = 0xffffff
   private _rulerInterval: PointModel = {
-    x: DEFAULT_SCALE_INTERVAL,
-    y: DEFAULT_SCALE_INTERVAL
+    x: DEFAULT_RULER_INTERVAL,
+    y: DEFAULT_RULER_INTERVAL
   }
   private _zoom = 1
   private _scaleInterval = DEFAULT_SCALE_INTERVAL
@@ -44,8 +46,8 @@ class Ruler {
   setRulerInterval(zoom: number): void {
     this._zoom = zoom
     this._rulerInterval = {
-      x: formatNumberPrecision(DEFAULT_SCALE_INTERVAL * zoom, 0),
-      y: formatNumberPrecision(DEFAULT_SCALE_INTERVAL * zoom, 0)
+      x: formatNumberPrecision(DEFAULT_RULER_INTERVAL * zoom, 0),
+      y: formatNumberPrecision(DEFAULT_RULER_INTERVAL * zoom, 0)
     }
   }
 
@@ -60,6 +62,7 @@ class Ruler {
   }
 
   draw(): void {
+    webLog("Ruler", "draw", "开始绘制标尺", this._size, this._rulerInterval)
     this.drawRulerView()
     this.logic(this._size, this._rulerInterval)
     if (this._parent) {

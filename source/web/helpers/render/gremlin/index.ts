@@ -1,6 +1,5 @@
 import { getSize } from "@/common/frequently-used/usually"
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
-import Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { setupStageHook } from "@/helpers/render/gremlin/hooks/setupStageHook"
 import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
@@ -14,7 +13,7 @@ import { Application } from "pixi.js"
 
 overwritePixi()
 
-const MIN_SCALE = 0.1
+const MIN_SCALE = 0.25
 const MAX_SCALE = 3
 
 // const layer = new RenderLayer()
@@ -33,6 +32,7 @@ class PixiManager {
   private static _matrix: MatrixModel[]
   /* 暂时不考虑非同比例缩放 */
   private static _scale = 1
+  private static _lastZoom = 1
 
   static async init(root: HTMLDivElement | string): Promise<Application> {
     let domElement = root as HTMLDivElement
@@ -65,44 +65,39 @@ class PixiManager {
     if (!app?.stage) {
       return
     }
-
     /* 图层与标尺、网格绘制 */
     const canvasStage = app.stage
     const zoom = PixiManager._scale
+    const lastZoom = PixiManager._lastZoom
+    if (lastZoom === zoom && lastZoom !== 1) {
+      return
+    }
     if (canvasStage.children.length !== 0) {
       canvasStage.removeChildren()
     }
     const basiskarte = createContainer(canvasStage, {
       label: PixiManager.elementFlag.karte
     }) // 背景板图层
-    if (basiskarte.children.length !== 0) {
-      basiskarte.removeChildren()
-    }
     const layerContainer = createContainer(canvasStage, {
       label: PixiManager.elementFlag.layer
     }) // 绘制图层
-    if (layerContainer.children.length !== 0) {
-      layerContainer.removeChildren()
-    }
-    const rulerContainer = createContainer(canvasStage, {
-      label: PixiManager.elementFlag.staff
-    }) // 刻度尺
-    if (rulerContainer.children.length !== 0) {
-      rulerContainer.removeChildren()
-    }
+    // const rulerContainer = createContainer(canvasStage, {
+    //   label: PixiManager.elementFlag.staff
+    // }) // 刻度尺
     layerContainer.pivot.set(-50, -50) // 右下
     const width = app.renderer.width
     const height = app.renderer.height
-    const viewSize = getSize(width / zoom, height / zoom)
+    const viewSize = getSize(width, height)
     requestAnimationFrame(() => {
       const grid = new Grid(basiskarte, viewSize)
       grid.setGridInterval(zoom)
       grid.draw()
-      const ruler = new Ruler(rulerContainer, viewSize)
-      ruler.setRulerInterval(zoom)
-      ruler.draw()
+      // const ruler = new Ruler(rulerContainer, viewSize)
+      // ruler.setRulerInterval(zoom)
+      // ruler.draw()
       // const validHeight = viewSize.height ?? 0
       // layerContainer.pivot.set(-50, -validHeight + 50)
+      PixiManager._lastZoom = zoom
     })
   }
 

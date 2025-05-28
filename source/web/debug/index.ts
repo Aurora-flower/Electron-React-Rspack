@@ -35,9 +35,6 @@ export function debugIPC(): void {
 }
 
 async function debug(): Promise<void> {
-  debugPixiRender()
-  debugWorker()
-  debugIPC()
   webLog("debug", "start debug")
 }
 

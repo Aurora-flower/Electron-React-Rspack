@@ -12,12 +12,9 @@ import {
 //       c: "3"
 //     })
 //     // (v, k) => {
-//     //   console.log(v, k);
 //     // }
 //   )
-
 //   list((v, k) => {
-//     console.log(v, k)
 //   })
 // }
 

@@ -3,6 +3,7 @@ import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { getRandomColor } from "@/utils/functions/color"
+import { webLog } from "@/utils/log"
 import {
   CheckBox,
   FancyButton,
@@ -110,7 +111,7 @@ export function debugPixiUISlider(container: Container): void {
       value: 50
     })
     slider.onChange.connect(value => {
-      console.log(`Slider changed to ${value}`)
+      webLog("ui", "debugPixiUISlider", `Slider changed to ${value}`)
     })
     child.addChild(slider)
   })

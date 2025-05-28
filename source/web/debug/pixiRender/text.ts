@@ -74,7 +74,6 @@ function debugPixiText(): void {
     "https://pixijs.com/assets/webfont-loader/ChaChicle.ttf"
   ).then((font: FontFace) => {
     const Chachicle = font.family
-    console.log("font", font)
     Assets.addBundle("fonts", {
       [Chachicle]: replaceNormalize(
         // `local://${information.core}/resources/fonts/ChaChicle.woff`
