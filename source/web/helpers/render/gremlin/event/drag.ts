@@ -26,6 +26,7 @@ export class TargetDrag {
   private static _currentTarget: Container | null = null
   private static _startPosition = new Point()
   private static _startOffset = new Point()
+  private static _isBox = false
 
   static getInstance(): TargetDrag {
     if (!TargetDrag._instance) {
@@ -42,6 +43,8 @@ export class TargetDrag {
   }
 
   static markTarget(target: Container): void {
+    target.interactive = true
+    target.eventMode = "static"
     target.on("pointerdown", TargetDrag.pointerdown)
   }
 
@@ -49,6 +52,7 @@ export class TargetDrag {
     if (e.button !== 0) return
     TargetDrag._currentTarget = e.target
     e.target.cursor = CURSOR.Move
+    TargetDrag._isBox = e.target.isRefresh ?? false
     TargetDrag._stage.on("pointermove", TargetDrag.pointermove)
   }
 
@@ -56,8 +60,11 @@ export class TargetDrag {
     const target = TargetDrag._currentTarget
     if (target) {
       if (target.parent) {
-        // TODO: 这里是直接更改的图形的坐标，可能需要的是更改 target parent 的坐标
-        target.parent.toLocal(e.global.clone(), undefined, target.position)
+        if (TargetDrag._isBox) {
+          // TODO: 这里是直接更改的图形的坐标，可能需要的是更改 Container 的坐标
+        } else {
+          target.parent.toLocal(e.global.clone(), undefined, target.position)
+        }
       }
       webLog(
         "drag",

@@ -1,3 +1,4 @@
+import { debugPixiContainer } from "@/debug/pixiRender/container"
 import debugPixiGraphic from "@/debug/pixiRender/graphics"
 import debugPixiSprite from "@/debug/pixiRender/sprite"
 import debugPixiText from "@/debug/pixiRender/text"
@@ -12,6 +13,7 @@ export function debugPixiRender(): void {
   debugPixiSprite()
   debugPixiText()
   debugPixiUI()
+  debugPixiContainer()
 }
 
 export function debugWorker(): void {

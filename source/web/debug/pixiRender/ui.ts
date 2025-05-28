@@ -12,7 +12,8 @@ import {
   ScrollBox,
   Slider
 } from "@pixi/ui"
-import { type Container, Graphics } from "pixi.js"
+import type { Container } from "pixi.js"
+import { Graphics } from "pixi.js"
 
 export function debugPixiUIInput(container: Container): void {
   const matrixItem = PixiManager.findUsableMatrix()

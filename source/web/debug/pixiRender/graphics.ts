@@ -1,5 +1,4 @@
 import PixiManager from "@/helpers/render/gremlin"
-import { TargetDrag } from "@/helpers/render/gremlin/event/drag"
 import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
@@ -27,7 +26,6 @@ function debugPixiSetPoint(container: Container): void {
   graphic
     .rect(-25, -25, matrixItem.width, matrixItem.height)
     .fill(getRandomColor())
-  TargetDrag.markTarget(graphic)
 }
 
 /**

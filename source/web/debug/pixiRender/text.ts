@@ -4,7 +4,8 @@ import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
 import { Assets } from "pixi.js"
-import { type Container, HTMLText } from "pixi.js"
+import type { Container } from "pixi.js"
+import { HTMLText } from "pixi.js"
 
 export function debugPixiHTMLText(container: Container): void {
   const matrixItem = PixiManager.findUsableMatrix()

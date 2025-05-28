@@ -140,5 +140,18 @@ declare module "pixi.js" {
      */
     autoCrop(): Promise<Texture>
   }
+
+  interface Container {
+    /**
+     * 获取容器的边界
+     * @returns 返回边界
+     */
+    // getBounds(): BoundsModel
+
+    /**
+     * @summary 是否刷新 container
+     */
+    isRefresh: boolean
+  }
 }
 export {}
