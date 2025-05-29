@@ -6,7 +6,11 @@ export function createText(
   options: TextOptions = {},
   _config = {}
 ): Text {
-  const text = new Text(options)
+  const text = new Text({
+    interactive: true,
+    eventMode: "static",
+    ...options
+  })
   if (parent) {
     parent.addChild(text)
   }

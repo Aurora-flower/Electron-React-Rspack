@@ -6,7 +6,11 @@ export function createRichText(
   options: HTMLTextOptions = {},
   _config = {}
 ): HTMLText {
-  const text = new HTMLText(options)
+  const text = new HTMLText({
+    interactive: true,
+    eventMode: "static",
+    ...options
+  })
   if (parent) {
     parent.addChild(text)
   }

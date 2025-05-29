@@ -43,9 +43,9 @@ export class TargetDrag {
   }
 
   static markTarget(target: Container): void {
-    target.interactive = true
-    target.eventMode = "static"
-    target.on("pointerdown", TargetDrag.pointerdown)
+    if (target.isInteractive()) {
+      target.on("pointerdown", TargetDrag.pointerdown)
+    }
   }
 
   static pointerdown(e: FederatedPointerEvent): void {

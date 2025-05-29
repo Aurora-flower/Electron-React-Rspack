@@ -6,7 +6,11 @@ export function createContainer(
   options: ContainerOptions = {},
   _config = {}
 ): Container {
-  const container = new Container(options)
+  const container = new Container({
+    interactive: true,
+    eventMode: "static",
+    ...options
+  })
   if (parent) {
     parent.addChild(container)
   }

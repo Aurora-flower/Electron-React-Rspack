@@ -16,11 +16,8 @@ function GraphicsPage(): JSX.Element {
   const appRef = React.useRef<Application>(null)
 
   const redraw = React.useCallback((): void => {
-    // TODO: 添加一个函数，用于在窗口大小改变时重新渲染画布
     PixiManager.initCanvas()
-
-    /* 测试渲染 */
-    debugPixiRender()
+    debugPixiRender() /* 测试渲染 */
   }, [])
 
   React.useEffect(() => {

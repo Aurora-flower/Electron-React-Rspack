@@ -8,7 +8,11 @@ export function createSprite(
   },
   _config = {}
 ): Sprite {
-  const sprite = new Sprite(options)
+  const sprite = new Sprite({
+    interactive: true,
+    eventMode: "static",
+    ...options
+  })
   if (parent) {
     parent.addChild(sprite)
   }

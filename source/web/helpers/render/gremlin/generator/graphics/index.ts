@@ -6,7 +6,11 @@ export function createGraphics(
   options: GraphicsOptions = {},
   _config = {}
 ): Graphics {
-  const graphic = new Graphics(options)
+  const graphic = new Graphics({
+    interactive: true,
+    eventMode: "static",
+    ...options
+  })
   if (parent) {
     parent.addChild(graphic)
   }

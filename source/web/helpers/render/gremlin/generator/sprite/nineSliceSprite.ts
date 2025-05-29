@@ -8,7 +8,11 @@ export function createNineSliceSprite(
   },
   _config = {}
 ): Container {
-  const plane9 = new NineSliceSprite(options)
+  const plane9 = new NineSliceSprite({
+    interactive: true,
+    eventMode: "static",
+    ...options
+  })
   if (parent) {
     parent.addChild(plane9)
   }
