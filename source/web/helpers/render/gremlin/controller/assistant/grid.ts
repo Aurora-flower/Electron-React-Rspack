@@ -93,7 +93,7 @@ class Grid {
     this._grid.clear()
   }
 
-  destory(): void {
+  destroy(): void {
     this._grid.destroy()
   }
 

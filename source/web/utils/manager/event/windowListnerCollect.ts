@@ -87,7 +87,7 @@ export function enableWindowResizeListener(
   }
 }
 
-export function destoryWindowResizeListener(
+export function destroyWindowResizeListener(
   callback: EventListener,
   options?: AddEventListenerOptions | boolean
 ): void {
@@ -109,7 +109,7 @@ export function enableWindowMessagesListener(
   }
 }
 
-export function destoryWindowMessagesListener(
+export function destroyWindowMessagesListener(
   callback: EventListener,
   options?: AddEventListenerOptions | boolean
 ): void {

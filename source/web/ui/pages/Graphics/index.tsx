@@ -1,7 +1,7 @@
 import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin"
 import {
-  destoryWindowResizeListener,
+  destroyWindowResizeListener,
   enableWindowResizeListener
 } from "@/utils/manager/event/windowListnerCollect"
 import type { Application } from "pixi.js"
@@ -27,7 +27,7 @@ function GraphicsPage(): JSX.Element {
     })
     enableWindowResizeListener(redraw)
     return (): void => {
-      destoryWindowResizeListener(redraw)
+      destroyWindowResizeListener(redraw)
     }
   }, [redraw])
 
