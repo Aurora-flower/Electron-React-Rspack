@@ -1,10 +1,12 @@
 import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin"
+import { webLog } from "@/utils/log"
 import {
   destoryWindowResizeListener,
   enableWindowResizeListener
 } from "@/utils/manager/event/windowListnerCollect"
 import type { Application } from "pixi.js"
+import { Button } from "primereact/button"
 import * as React from "react"
 import type { JSX } from "react"
 
@@ -15,23 +17,23 @@ function GraphicsPage(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [, setApp] = React.useState<Application>()
 
-  const initialize =
-    //  CommonUtility.throttle(
-    (): void => {
-      // TODO: 添加一个函数，用于在窗口大小改变时重新渲染画布
-      PixiManager.initCanvas()
+  const redraw = React.useCallback((): void => {
+    // TODO: 添加一个函数，用于在窗口大小改变时重新渲染画布
+    PixiManager.initCanvas()
 
-      /* 测试渲染 */
-      debugPixiRender()
-    }
-  // )
+    /* 测试渲染 */
+    debugPixiRender()
+  }, [])
 
-  const redraw = React.useCallback(initialize, [])
+  const setGraphics = React.useCallback((name: string): void => {
+    // TODO: 切换画布的逻辑
+    webLog("Graphics", "setGraphics", name)
+  }, [])
 
   enableWindowResizeListener(redraw)
 
   React.useEffect(() => {
-    PixiManager.init(containerRef.current!).then((app: Application) => {
+    PixiManager.initialize(containerRef.current!).then((app: Application) => {
       setApp(app)
       redraw()
     })
@@ -47,6 +49,10 @@ function GraphicsPage(): JSX.Element {
       {/* <div className="absolute top-6 right-6 opacity-80">
         SCALE:
       </div> */}
+      <div className="absolute top-6 right-6 ">
+        <Button label="ThreeJS" onClick={() => setGraphics("three")} />
+        <Button label="PixiJS" onClick={() => setGraphics("pixi")} />
+      </div>
       <div ref={containerRef} id="graphics" className="w-full h-full" />
     </div>
   )

@@ -2,7 +2,7 @@ import { WINDOW_OPTIONS } from "@main/common/config/window"
 import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
 import { getIsPackage } from "@main/features/app"
 import { resolvePath } from "@main/node/path/resolvePath"
-import { isDev } from "@main/node/process/env"
+import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
 import { BrowserWindow, Menu } from "electron"
 import Logger from "electron-log"
@@ -97,8 +97,8 @@ class WindowManager {
   private setupWindowHooks(): void {
     if (!this.mainWindow) return
     const win = this.mainWindow
+    const isDevelopment = getIsDev()
     win.maximize()
-
     win.setMinimumSize(800, 600)
     win.on("close", e => {
       if (!this.isClosing) {
@@ -117,8 +117,7 @@ class WindowManager {
         source: "ready",
         payload: "did-finish-load"
       } as Message)
-
-      if (isDev()) {
+      if (isDevelopment) {
         win.webContents.openDevTools({
           mode: "detach",
           activate: true

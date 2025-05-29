@@ -35,7 +35,7 @@ class PixiManager {
   private static _scale = 1
   private static _lastZoom = 1
 
-  static async init(root: HTMLDivElement | string): Promise<Application> {
+  static async initialize(root: HTMLDivElement | string): Promise<Application> {
     let domElement = root as HTMLDivElement
     if (typeof root === "string") {
       const element = getDomElement(root, "id") as HTMLDivElement
@@ -50,6 +50,12 @@ class PixiManager {
       resizeTo: domElement
     })
     domElement.appendChild(app.canvas)
+    PixiManager.initMatrx()
+    setupStageHook(app)
+    return app
+  }
+
+  static initMatrx(app: Application = PixiManager._app): void {
     const interval = {
       x: 200,
       y: 200
@@ -58,8 +64,6 @@ class PixiManager {
       getSize(app.renderer.width, app.renderer.height),
       interval
     )
-    setupStageHook(app)
-    return app
   }
 
   static initCanvas(app: Application = PixiManager._app): void {
@@ -75,6 +79,7 @@ class PixiManager {
     }
     if (canvasStage.children.length !== 0) {
       canvasStage.removeChildren()
+      PixiManager.resetMatrix()
     }
     const basiskarte = createContainer(canvasStage, {
       label: PixiManager.elementFlag.karte
@@ -134,6 +139,12 @@ class PixiManager {
       matrixItem.able = false
     }
     return matrixItem
+  }
+
+  static resetMatrix(): void {
+    PixiManager._matrix.map(item => {
+      item.able = true
+    })
   }
 }
 

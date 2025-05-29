@@ -129,6 +129,8 @@ declare global {
   type IntervalModel = PointModel
   type LinePointModel = MovePointModel
   type BoundsModel = SizeModel & PaddingModel
+
+  type AnyModel = AtWill
 }
 
 /* ***** ***** ***** ***** 类型扩展覆盖 ***** ***** ***** ***** */

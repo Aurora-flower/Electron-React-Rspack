@@ -1,4 +1,7 @@
-type OnloadHandler = (this: FileReader, ev: ProgressEvent<FileReader>) => any
+type OnloadHandler = (
+  this: FileReader,
+  ev: ProgressEvent<FileReader>
+) => AnyModel
 
 export function getFileInput(
   event: InputEvent,

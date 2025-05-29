@@ -2,7 +2,8 @@ import { join, parse, sep } from "node:path"
 import { clientNotify } from "@main/features/notification"
 import { isAllWindowClosed } from "@main/features/window"
 import WindowManager from "@main/helpers/manager/window"
-import { isDev } from "@main/node/process/env"
+import { replaceSep } from "@main/node/path/replaceSep"
+import { getIsDev } from "@main/node/process/env"
 import { PLATFORM, getPlatform, isWin } from "@main/node/process/platform"
 import { app } from "electron"
 
@@ -17,11 +18,11 @@ const FILE_NAMES = {
 
 // app-information
 export class AppInfo implements AppInfoModel {
-  name: string = app.getName()
-  appFolder: string = app.getAppPath()
+  name: string = replaceSep(app.getName())
+  appFolder: string = replaceSep(app.getAppPath())
   appUnpackFolder = ""
   sep = sep
-  isDev = isDev()
+  isDev = getIsDev()
   cwd = process.cwd()
   driveLetter = ""
   win32: boolean = isWin()
@@ -52,9 +53,8 @@ export class AppInfo implements AppInfoModel {
 
   constructor() {
     this.driveLetter = parse(this.cwd).root
-    this.appUnpackFolder = this.appFolder.replace(
-      FILE_NAMES.Asar,
-      FILE_NAMES.Unpack
+    this.appUnpackFolder = replaceSep(
+      this.appFolder.replace(FILE_NAMES.Asar, FILE_NAMES.Unpack)
     )
     const aboutPath = Object.keys(this.paths) as AppPathTypes[]
     for (let index = 0; index < aboutPath.length; index++) {
@@ -62,9 +62,9 @@ export class AppInfo implements AppInfoModel {
       if (name === "recent" && !this.win32) {
         continue
       }
-      this.paths[name] = app.getPath(name)
+      this.paths[name] = app.getPath(name).replace(/\\/g, "/")
     }
-    this.core = join(this.appUnpackFolder, FOLDER_NAMES.Core)
+    this.core = replaceSep(join(this.appUnpackFolder, FOLDER_NAMES.Core))
 
     // workspace
   }

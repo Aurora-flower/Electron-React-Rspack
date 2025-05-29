@@ -1,6 +1,6 @@
 import { rspack } from "@rspack/core"
 import type { WatchOptions } from "@rspack/core"
-import { isDev } from "../common/env"
+import { getIsDev } from "../common/env"
 import getRsConfig from "./config"
 
 function rspackCompiler(isClosing = false): Promise<boolean> {
@@ -64,7 +64,7 @@ function rspackCompiler(isClosing = false): Promise<boolean> {
         console.log(
           "[Rspack Compiling...]",
           new Date().toLocaleTimeString(),
-          isDev()
+          getIsDev()
         )
       })
       if (isClosing) {

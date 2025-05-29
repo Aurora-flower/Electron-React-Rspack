@@ -4,6 +4,6 @@ export const ENVIRONMENT = {
   Prod: "production"
 }
 
-export function isDev(): boolean {
+export function getIsDev(): boolean {
   return process.env.NODE_ENV === ENVIRONMENT.Dev
 }

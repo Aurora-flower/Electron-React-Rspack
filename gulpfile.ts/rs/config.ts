@@ -1,6 +1,6 @@
 import { join } from "node:path"
 import type { Mode, RspackOptions } from "@rspack/core"
-import { isDev } from "../common/env"
+import { getIsDev } from "../common/env"
 import { getDirectoryStructure, getFileStructure } from "../common/structure"
 import LOADER from "./loader"
 import {
@@ -22,7 +22,7 @@ function singleConfig(key: string, type: string): Record<string, unknown> {
   const isMain = type === APP_PROCESS_MODE.Electron
   const isPeload = type === APP_PROCESS_MODE.Preload
   const isRenderer = type === APP_PROCESS_MODE.Renderer
-  const isDevelopment = isDev()
+  const isDevelopment = getIsDev()
 
   const baseOptions: RspackOptions = {
     mode: (process.env.NODE_ENV as Mode) || "production",

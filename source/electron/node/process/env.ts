@@ -4,6 +4,6 @@ const ENV_MACRO = {
   Prod: "production"
 }
 
-export function isDev(): boolean {
+export function getIsDev(): boolean {
   return process.env.NODE_ENV === ENV_MACRO.Dev
 }

@@ -18,7 +18,7 @@ export function checkConnection(host: string, port: number): Promise<boolean> {
       socket.destroy()
       resolve(true)
     })
-    socket.on("error", (error: any) => {
+    socket.on("error", (error: AnyModel) => {
       resolve(!EXPECT_CODE.includes(error.code))
     })
   })
