@@ -6,7 +6,6 @@
   "editor.formatOnPaste": false,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.importModuleSpecifierEnding": "auto",
-
   "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
   "[typescript]": {
@@ -15,19 +14,18 @@
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "explicit",
     "source.fixAll.biome": "explicit"
   },
-
   "eslint.validate": ["javascript", "typescript"],
-
   "files.associations": {
     "*.css": "tailwindcss"
   },
-
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json, env.d.ts, .eslint*, eslint*, biome.json, .prettier*, prettier*, *.config.js, *.config.mjs",
@@ -35,7 +33,6 @@
     "README.md": "README.*.md, LICENSE, CHANGELOG.md, CODE_OF_CONDUCT.md",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .editorconfig, .npmrc, .hintrc, electron-builder.yml"
   },
-
   "json.schemas": [
     {
       "fileMatch": ["tsconfig.node.json"],

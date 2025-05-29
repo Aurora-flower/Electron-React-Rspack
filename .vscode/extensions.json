@@ -16,6 +16,7 @@
     "Alibaba-Cloud.tongyi-lingma",
     "rvest.vs-code-prettier-eslint",
     "atommaterial.a-file-icon-vscode",
-    "emmanuelbeziat.vscode-great-icons"
+    "emmanuelbeziat.vscode-great-icons",
+    "DavidAnson.vscode-markdownlint"
   ]
 }
