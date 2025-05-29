@@ -1,6 +1,5 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
-import { webLog } from "@/utils/log"
 import { formatNumberPrecision } from "@/utils/modules/digits"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
@@ -63,7 +62,6 @@ class Ruler {
   }
 
   draw(): void {
-    webLog("Ruler", "draw", "开始绘制标尺", this._size, this._rulerInterval)
     this.drawRulerView()
     this.logic(this._size, this._rulerInterval)
     if (this._parent) {

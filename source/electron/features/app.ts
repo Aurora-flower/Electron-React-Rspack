@@ -65,7 +65,6 @@ export class AppInfo implements AppInfoModel {
       this.paths[name] = app.getPath(name).replace(/\\/g, "/")
     }
     this.core = replaceSep(join(this.appUnpackFolder, FOLDER_NAMES.Core))
-
     // workspace
   }
 

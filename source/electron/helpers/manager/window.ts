@@ -82,9 +82,9 @@ class WindowManager {
       return this.mainWindow
     }
     this.mainWindow = new BrowserWindow(this.windowOptions)
-    if (this.isPackage) {
-      Menu.setApplicationMenu(null) // win.removeMenu(); | win.setMenu(null);
-    }
+    // if (this.isPackage) {
+    Menu.setApplicationMenu(null) // win.removeMenu(); | win.setMenu(null);
+    // }
     if (process.env.DEV_SERVER_URL) {
       this.mainWindow.loadURL(process.env.DEV_SERVER_URL)
     } else {
