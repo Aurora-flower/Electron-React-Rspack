@@ -35,10 +35,7 @@ export function getPadding(
   }
 }
 
-export function getMovePoint(
-  from: PointModel = getPoint(),
-  to: PointModel = getPoint()
-): MovePointModel {
+export function getMovePoint(from: PointModel, to: PointModel): MovePointModel {
   return {
     from,
     to

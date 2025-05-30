@@ -1,6 +1,6 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
-import { formatNumberPrecision } from "@/utils/modules/digits"
+import { formatNumberPrecision, isMultipleOf } from "@/utils/modules/digits"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
@@ -14,24 +14,24 @@ type DrawScaleHander = (val: number, point: PointModel, flag: RulerType) => void
 
 type RulerType = "top" | "left"
 
+const DEFAULT_RULER_COLOR = 0x292929
 const DEFAULT_RULER_INTERVAL = 10
-const DEFAULT_SCALE_INTERVAL = 50
+const DEFAULT_RULER_SIZE = 20
+const DEFAULT_SCALE_INTERVAL = 200
+const DEFAULT_MARK_COLOR = 0xffffff
 
 class Ruler {
   private _parent: ContainerParent = undefined
   private _size: SizeModel = getSize()
-  private _rulerSize = 20
-  private _rulerColor = 0x292929
-  private _markColor = 0xffffff
   private _rulerInterval: PointModel = {
     x: DEFAULT_RULER_INTERVAL,
     y: DEFAULT_RULER_INTERVAL
   }
   private _zoom = 1
-  private _scaleInterval = DEFAULT_SCALE_INTERVAL
+  private _scaleInterval = DEFAULT_SCALE_INTERVAL // Major scale interval
   private _strokeInput: StrokeInput = {
     width: 1,
-    color: this._markColor,
+    color: DEFAULT_MARK_COLOR,
     alpha: 0.3
   }
   // private _canvasScale: PointModel = {
@@ -49,6 +49,7 @@ class Ruler {
       x: value,
       y: value
     }
+    this._scaleInterval = DEFAULT_SCALE_INTERVAL * zoom
   }
 
   constructor(parent: Container, size?: SizeModel, storeStyle?: StrokeInput) {
@@ -63,7 +64,7 @@ class Ruler {
 
   draw(): void {
     this.drawRulerView()
-    this.logic(this._size, this._rulerInterval)
+    this.logic(this._size, this._rulerInterval, this._scaleInterval)
     if (this._parent) {
       this._parent.addChild(this?._rulerContainer)
     }
@@ -71,12 +72,12 @@ class Ruler {
 
   private drawRulerView(): void {
     this._topRuler
-      .rect(0, 0.1, this._size.width, this._rulerSize)
-      .fill(this._rulerColor)
+      .rect(0, 0.1, this._size.width, DEFAULT_RULER_SIZE)
+      .fill(DEFAULT_RULER_COLOR)
       .setStrokeStyle(this._strokeInput)
     this._leftRuler
-      .rect(0.1, 0, this._rulerSize, this._size.height)
-      .fill(this._rulerColor)
+      .rect(0.1, 0, DEFAULT_RULER_SIZE, this._size.height)
+      .fill(DEFAULT_RULER_COLOR)
     this._rulerContainer
       .addChild(this._topRuler, this._leftRuler)
       .setStrokeStyle(this._strokeInput)
@@ -93,11 +94,12 @@ class Ruler {
   private logic(
     size: SizeModel,
     rulerInterval: PointModel,
+    scaleInterval: number,
     drawScaleLine: DrawLineHander = this.drawRulerLine.bind(this),
     drawScaleValue: DrawScaleHander = this.drawRulerValue.bind(this)
   ): void {
     for (let x = 0; x <= size.width; x += rulerInterval.x) {
-      const isMajor = x % (rulerInterval.x * this._scaleInterval) === 0
+      const isMajor = isMultipleOf(x, scaleInterval)
       const scaleLength = this.getScaleLength(isMajor)
       if (drawScaleLine) {
         const alpha = this.getScaleAlpha(isMajor)
@@ -113,7 +115,7 @@ class Ruler {
       }
     }
     for (let y = 0; y <= size.height; y += rulerInterval.y) {
-      const isMajor = y % (this._rulerInterval.y * this._scaleInterval) === 0
+      const isMajor = isMultipleOf(y, scaleInterval)
       const scaleLength = this.getScaleLength(isMajor)
       if (drawScaleLine) {
         const alpha = this.getScaleAlpha(isMajor)
@@ -153,7 +155,7 @@ class Ruler {
     const value = formatNumberPrecision(num / this._zoom, 0)
     const style = new TextStyle({
       fontSize: 10,
-      fill: this._markColor
+      fill: DEFAULT_MARK_COLOR
     })
     const text = new Text({
       text: value.toString(),
