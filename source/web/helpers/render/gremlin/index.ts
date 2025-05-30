@@ -19,9 +19,11 @@ overwritePixi()
 const MIN_SCALE = 0.25
 const MAX_SCALE = 3
 
+export const PIVOT_OFFSET_VALUE = 150
+
 const PIVOT = {
-  x: -100,
-  y: -100
+  x: -PIVOT_OFFSET_VALUE,
+  y: -PIVOT_OFFSET_VALUE
 }
 
 // const layer = new RenderLayer()
@@ -111,6 +113,7 @@ class PixiManager {
       ruler.setRulerInterval(zoom)
       ruler.draw()
       const axis = new Axis(basiskarte, viewSize)
+      axis.setAxisOffset(zoom)
       axis.draw()
       // const validHeight = viewSize.height ?? 0
       // layerContainer.pivot.set(-50, -validHeight + 50)

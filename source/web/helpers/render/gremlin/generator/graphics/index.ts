@@ -8,6 +8,7 @@ export function createGraphics(
   options: GraphicsOptions = {},
   _config = {}
 ): Graphics {
+  // TODO: 一般情况下，都是可交互的，只是通过某些标记 - lock 作为不可交互的判断条件
   const graphic = new Graphics({
     interactive: true,
     eventMode: "static",

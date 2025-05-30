@@ -1,7 +1,8 @@
-import { getSize } from "@/common/frequently-used/usually"
-import PixiManager from "@/helpers/render/gremlin"
+import { getPoint, getSize } from "@/common/frequently-used/usually"
+import PixiManager, { PIVOT_OFFSET_VALUE } from "@/helpers/render/gremlin"
 import { drawLine } from "@/helpers/render/gremlin/generator/graphics"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
+import { formatNumberPrecision } from "@/utils/modules/digits"
 import { type Container, Graphics } from "pixi.js"
 
 class Axis {
@@ -10,11 +11,20 @@ class Axis {
   private _axis: Graphics = new Graphics({
     label: PixiManager.elementFlag.axis
   })
+  private _axisOffset = getPoint(PIVOT_OFFSET_VALUE, PIVOT_OFFSET_VALUE)
 
   constructor(parent: Container, size?: SizeModel) {
     this._parent = parent
     if (size) {
       this._size = size
+    }
+  }
+
+  setAxisOffset(zoom: number): void {
+    const value = formatNumberPrecision(PIVOT_OFFSET_VALUE * zoom, 0)
+    this._axisOffset = {
+      x: value,
+      y: value
     }
   }
 
@@ -33,16 +43,16 @@ class Axis {
     drawLine(
       this._axis,
       {
-        from: { x: 0, y: -100 },
-        to: { x: 0, y: this._size.height }
+        from: { x: this._axisOffset.x, y: 0 },
+        to: { x: this._axisOffset.x, y: this._size.height }
       },
       verticalLineStroke
     )
     drawLine(
       this._axis,
       {
-        from: { x: -100, y: 0 },
-        to: { x: this._size.width, y: 0 }
+        from: { x: 0, y: this._axisOffset.y },
+        to: { x: this._size.width, y: this._axisOffset.y }
       },
       horizontalLineStroke
     )

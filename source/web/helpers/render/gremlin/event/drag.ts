@@ -50,6 +50,7 @@ export class TargetDrag {
       TargetDrag._lastTarget !== target
     ) {
       TargetDrag._lastTarget = target
+      // target.removeAllListeners();
       target.on("pointerdown", TargetDrag.pointerdown)
     }
   }
