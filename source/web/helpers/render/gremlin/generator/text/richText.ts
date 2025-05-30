@@ -1,3 +1,4 @@
+import { TargetDrag } from "@/helpers/render/gremlin/event/drag"
 import type { Container, HTMLTextOptions } from "pixi.js"
 import { HTMLText } from "pixi.js"
 
@@ -6,13 +7,14 @@ export function createRichText(
   options: HTMLTextOptions = {},
   _config = {}
 ): HTMLText {
-  const text = new HTMLText({
+  const richText = new HTMLText({
     interactive: true,
     eventMode: "static",
     ...options
   })
+  TargetDrag.markTarget(richText)
   if (parent) {
-    parent.addChild(text)
+    parent.addChild(richText)
   }
-  return text
+  return richText
 }

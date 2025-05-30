@@ -14,7 +14,7 @@ type DrawLineHander = (linePoint: LinePointModel) => void
 const DEFAULT_GRID_INTERVAL = 50
 
 class Grid {
-  private _parent: ContainerParent = undefined
+  private _parent: ContainerParent
   private _size: SizeModel = getSize()
   private _girdInterval: PointModel = getPoint(
     DEFAULT_GRID_INTERVAL,
@@ -95,12 +95,6 @@ class Grid {
 
   destroy(): void {
     this._grid.destroy()
-  }
-
-  remove(): void {
-    if (this._parent) {
-      this._parent?.removeChild()
-    }
   }
 }
 

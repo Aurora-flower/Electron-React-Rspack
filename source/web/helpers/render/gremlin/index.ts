@@ -1,4 +1,6 @@
-import { getSize } from "@/common/frequently-used/usually"
+import { getPoint, getSize } from "@/common/frequently-used/usually"
+import { debugPixiRender } from "@/debug"
+import Axis from "@/helpers/render/gremlin/controller/assistant/axis"
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
@@ -10,12 +12,17 @@ import {
 } from "@/logic/algorithm/matrix"
 import { getDomElement } from "@/utils/dom"
 import { formatNumberPrecision } from "@/utils/modules/digits"
-import { Application } from "pixi.js"
+import { Application, type Container } from "pixi.js"
 
 overwritePixi()
 
 const MIN_SCALE = 0.25
 const MAX_SCALE = 3
+
+const PIVOT = {
+  x: -100,
+  y: -100
+}
 
 // const layer = new RenderLayer()
 // layer.attach(basiskarteContainer, layerContainer, rulerContainer)
@@ -27,7 +34,9 @@ class PixiManager {
     layer: "_$layer",
     staff: "_$staff",
     grid: "_$grid",
-    ruler: "_$ruler"
+    ruler: "_$ruler",
+    selector: "_$selector",
+    axis: "_$axis"
   }
   private static _app: Application
   private static _matrix: MatrixModel[]
@@ -90,7 +99,7 @@ class PixiManager {
     const rulerContainer = createContainer(canvasStage, {
       label: PixiManager.elementFlag.staff
     }) // 刻度尺
-    layerContainer.pivot.set(-50, -50) // 右下
+    PixiManager.setPivot(layerContainer)
     const width = app.renderer.width
     const height = app.renderer.height
     const viewSize = getSize(width, height)
@@ -101,10 +110,13 @@ class PixiManager {
       const ruler = new Ruler(rulerContainer, viewSize)
       ruler.setRulerInterval(zoom)
       ruler.draw()
+      const axis = new Axis(basiskarte, viewSize)
+      axis.draw()
       // const validHeight = viewSize.height ?? 0
       // layerContainer.pivot.set(-50, -validHeight + 50)
       PixiManager._lastZoom = zoom
     })
+    debugPixiRender(layerContainer) /* 测试渲染 */
   }
 
   static stageClear(): void {
@@ -123,6 +135,17 @@ class PixiManager {
       Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale))
     )
     PixiManager._scale = value
+  }
+
+  static setPivot(
+    layer: Container,
+    x: number = PIVOT.x,
+    y: number = PIVOT.y
+  ): void {
+    const zoom = PixiManager.getZoom()
+    const pivot = getPoint(x * zoom, y * zoom)
+    const root = layer ?? PixiManager._app?.stage
+    root.pivot.set(pivot.x, pivot.y)
   }
 
   static getApp(): Application {

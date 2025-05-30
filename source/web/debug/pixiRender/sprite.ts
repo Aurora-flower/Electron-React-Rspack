@@ -1,6 +1,5 @@
 import PixiManager from "@/helpers/render/gremlin"
 import { nineSliceSprite } from "@/helpers/render/gremlin/functions/compute/image"
-import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
@@ -149,18 +148,12 @@ export function debugNineSliceSprite(
   // })
 }
 
-function debugPixiSprite(): void {
+function debugPixiSprite(layerContainer: Container): void {
   const information = StoreManager.getAppInfo()
   if (!information) {
     webWarn("debugPixiSprite", "Warn", "AppInfo is null")
     return
   }
-
-  const app = PixiManager.getApp()
-  const label = PixiManager.elementFlag.layer
-  const layerContainer = getElementByLabel(label, app.stage)
-  if (!layerContainer) return
-
   const sampleURL = replaceNormalize(
     `local://${information.core}/resources/images/sample.png`
   )

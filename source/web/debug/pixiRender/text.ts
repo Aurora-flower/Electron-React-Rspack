@@ -1,5 +1,4 @@
 import PixiManager from "@/helpers/render/gremlin"
-import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
@@ -60,12 +59,7 @@ export function debugPixiHTMLText(container: Container): void {
   child.addChild(ChaChicle, Lineal, Dotrice, Crosterian)
 }
 
-function debugPixiText(): void {
-  const app = PixiManager.getApp()
-  const label = PixiManager.elementFlag.layer
-  const layerContainer = getElementByLabel(label, app.stage)
-  if (!layerContainer) return
-
+function debugPixiText(layerContainer: Container): void {
   const information = StoreManager.getAppInfo()
   if (!information) {
     return

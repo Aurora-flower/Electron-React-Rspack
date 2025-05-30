@@ -1,5 +1,4 @@
 import PixiManager from "@/helpers/render/gremlin"
-import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { getRandomColor } from "@/utils/functions/color"
@@ -161,11 +160,7 @@ export function debugPixiUIProgressBar(container: Container): void {
   })
 }
 
-function debugPixiUI(): void {
-  const app = PixiManager.getApp()
-  const label = PixiManager.elementFlag.layer
-  const layerContainer = getElementByLabel(label, app.stage)
-  if (!layerContainer) return
+function debugPixiUI(layerContainer: Container): void {
   debugPixiUIFancyButton(layerContainer)
   debugPixiUIInput(layerContainer)
   debugPixiUICheckbox(layerContainer)

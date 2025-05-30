@@ -1,3 +1,4 @@
+import { TargetDrag } from "@/helpers/render/gremlin/event/drag"
 import type { Container, TextOptions } from "pixi.js"
 import { Text } from "pixi.js"
 
@@ -11,6 +12,7 @@ export function createText(
     eventMode: "static",
     ...options
   })
+  TargetDrag.markTarget(text)
   if (parent) {
     parent.addChild(text)
   }

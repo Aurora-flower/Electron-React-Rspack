@@ -11,17 +11,17 @@ export function getTargetType(target: unknown): string | undefined {
 }
 
 export function isContainer(target: unknown): boolean {
-  return getTargetType(target) === PIXI_TARGET_TYPE.Container
+  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Container
 }
 
 export function isGraphics(target: unknown): boolean {
-  return getTargetType(target) === PIXI_TARGET_TYPE.Graphics
+  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Graphics
 }
 
 export function isSprite(target: unknown): boolean {
-  return getTargetType(target) === PIXI_TARGET_TYPE.Sprite
+  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Sprite
 }
 
 export function isText(target: unknown): boolean {
-  return getTargetType(target) === PIXI_TARGET_TYPE.Text
+  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Text
 }

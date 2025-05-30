@@ -1,4 +1,6 @@
 import { CURSOR } from "@/common/cursor"
+import RenderSelector from "@/helpers/render/gremlin/controller/selector"
+import { isContainer } from "@/helpers/render/gremlin/functions/is"
 import { webLog } from "@/utils/log"
 import {
   type Application,
@@ -26,7 +28,7 @@ export class TargetDrag {
   private static _currentTarget: Container | null = null
   private static _startPosition = new Point()
   private static _startOffset = new Point()
-  private static _isBox = false
+  private static _lastTarget: Container
 
   static getInstance(): TargetDrag {
     if (!TargetDrag._instance) {
@@ -37,38 +39,42 @@ export class TargetDrag {
 
   static init(stage: Container): void {
     TargetDrag._stage = stage
-    TargetDrag._stage.on("pointermove", TargetDrag.pointermove)
     TargetDrag._stage.on("pointerup", TargetDrag.pointerup)
     TargetDrag._stage.on("pointerupoutside", TargetDrag.pointerupoutside)
   }
 
   static markTarget(target: Container): void {
-    if (target.isInteractive()) {
+    if (
+      target.isInteractive() &&
+      !isContainer(target) &&
+      TargetDrag._lastTarget !== target
+    ) {
+      TargetDrag._lastTarget = target
       target.on("pointerdown", TargetDrag.pointerdown)
     }
   }
 
   static pointerdown(e: FederatedPointerEvent): void {
+    e.preventDefault()
+    e.stopPropagation()
     if (e.button !== 0) return
     TargetDrag._currentTarget = e.target
     e.target.cursor = CURSOR.Move
-    TargetDrag._isBox = e.target.isRefresh ?? false
+    // e.target.isRefresh ?? false
+    RenderSelector.select(e.target)
     TargetDrag._stage.on("pointermove", TargetDrag.pointermove)
   }
 
-  static pointermove(e: FederatedPointerEvent): void {
+  static pointermove(_e: FederatedPointerEvent): void {
     const target = TargetDrag._currentTarget
     if (target) {
-      if (target.parent) {
-        if (TargetDrag._isBox) {
-          // TODO: 这里是直接更改的图形的坐标，可能需要的是更改 Container 的坐标
-        } else {
-          target.parent.toLocal(e.global.clone(), undefined, target.position)
-        }
-      }
+      /* 1. 更改 图形 与 容器 之间的选择 */
+      /* 2. 组合图形的选中 */
+      // TODO: 这里是直接更改的图形的坐标，可能需要的是更改 Container 的坐标
+      // target.parent.toLocal(e.global.clone(), undefined, target.position)
       webLog(
         "drag",
-        "TargetDrag-pointermove",
+        "pointermove",
         target,
         TargetDrag._startPosition,
         TargetDrag._startOffset

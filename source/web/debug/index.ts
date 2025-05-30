@@ -1,19 +1,21 @@
-import { debugPixiContainer } from "@/debug/pixiRender/container"
-import debugPixiGraphic from "@/debug/pixiRender/graphics"
-import debugPixiSprite from "@/debug/pixiRender/sprite"
-import debugPixiText from "@/debug/pixiRender/text"
-import debugPixiUI from "@/debug/pixiRender/ui"
+// import { debugPixiContainer } from "@/debug/pixiRender/container"
+// import debugPixiGraphic from "@/debug/pixiRender/graphics"
+// import debugPixiSprite from "@/debug/pixiRender/sprite"
+// import debugPixiText from "@/debug/pixiRender/text"
+// import debugPixiUI from "@/debug/pixiRender/ui"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
 import StoreManager from "@/stores/manager"
 import { webLog } from "@/utils/log"
+import type { Container } from "pixi.js"
 
-export function debugPixiRender(): void {
-  debugPixiGraphic()
-  debugPixiSprite()
-  debugPixiText()
-  debugPixiUI()
-  debugPixiContainer()
+export function debugPixiRender(layerContainer: Container): void {
+  if (!layerContainer) return
+  // debugPixiGraphic(layerContainer)
+  // debugPixiSprite(layerContainer)
+  // debugPixiText(layerContainer)
+  // debugPixiUI(layerContainer)
+  // debugPixiContainer(layerContainer)
 }
 
 export function debugWorker(): void {

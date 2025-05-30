@@ -1,5 +1,4 @@
 import PixiManager from "@/helpers/render/gremlin"
-import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
 import { getRandomColor } from "@/utils/functions/color"
@@ -63,13 +62,7 @@ export function debugGraphicAnchor(container: Container): void {
   webLog("debugPixiGraphic", "debugGraphicAnchor", container, matrixItem)
 }
 
-function debugPixiGraphic(): void {
-  const app = PixiManager.getApp()
-  if (!app) return
-  const label = PixiManager.elementFlag.layer
-  const layerContainer = getElementByLabel(label, app.stage)
-  webLog("debug", "debugPixiGraphic", layerContainer)
-  if (!layerContainer) return
+function debugPixiGraphic(layerContainer: Container): void {
   debugPixiSetPoint(layerContainer)
   debugGraphicAnchor(layerContainer)
 }

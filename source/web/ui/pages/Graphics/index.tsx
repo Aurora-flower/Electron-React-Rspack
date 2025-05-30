@@ -1,4 +1,3 @@
-import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin"
 import {
   destroyWindowResizeListener,
@@ -17,7 +16,6 @@ function GraphicsPage(): JSX.Element {
 
   const redraw = React.useCallback((): void => {
     PixiManager.initCanvas()
-    debugPixiRender() /* 测试渲染 */
   }, [])
 
   React.useEffect(() => {

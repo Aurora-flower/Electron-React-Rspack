@@ -2,7 +2,7 @@ import { formatNumberPrecision } from "@/utils/modules/digits"
 
 export function getSize(width = 0, height = 0): SizeModel {
   return {
-    width: formatNumberPrecision(width ?? 0, 2),
+    width: formatNumberPrecision(width ?? 0),
     height: formatNumberPrecision(height ?? 0)
   }
 }
@@ -16,8 +16,8 @@ export function getSpace(horizontal = 0, vertical = 0): SpaceModel {
 
 export function getPoint(x = 0, y = 0): PointModel {
   return {
-    x,
-    y
+    x: formatNumberPrecision(x ?? 0, 2),
+    y: formatNumberPrecision(y ?? 0)
   }
 }
 
