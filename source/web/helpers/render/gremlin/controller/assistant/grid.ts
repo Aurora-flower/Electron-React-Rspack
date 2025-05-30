@@ -3,15 +3,13 @@ import {
   getPoint,
   getSize
 } from "@/common/frequently-used/usually"
-import PixiManager from "@/helpers/render/gremlin"
+import PixiManager, { DEFAULT_GRID_INTERVAL } from "@/helpers/render/gremlin"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
 import { formatNumberPrecision } from "@/utils/modules/digits"
 import type { Container, StrokeInput } from "pixi.js"
 import { Graphics } from "pixi.js"
 
 type DrawLineHander = (linePoint: LinePointModel) => void
-
-const DEFAULT_GRID_INTERVAL = 50
 
 class Grid {
   private _parent: ContainerParent
@@ -25,6 +23,7 @@ class Grid {
     color: 0xcccccc,
     alpha: 0.3
   }
+  private _zoom = 1
   private _grid: Graphics = new Graphics({
     label: PixiManager.elementFlag.grid
   })
@@ -48,6 +47,7 @@ class Grid {
   }
 
   setGridInterval(zoom: number): void {
+    this._zoom = zoom
     const value = formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0)
     this._girdInterval = {
       x: value,
@@ -55,7 +55,8 @@ class Grid {
     }
   }
 
-  draw(): void {
+  draw(scale = this._zoom): void {
+    this.setGridInterval(scale)
     this._grid.setStrokeStyle(this._strokeInput)
     this.logic(this._size, this._girdInterval)
     if (this._parent) {

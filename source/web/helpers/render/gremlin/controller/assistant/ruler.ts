@@ -1,6 +1,7 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
+import { DEFAULT_GRID_INTERVAL } from "@/helpers/render/gremlin"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
-import { formatNumberPrecision, isMultipleOf } from "@/utils/modules/digits"
+import { formatNumberPrecision } from "@/utils/modules/digits"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
@@ -15,17 +16,16 @@ type DrawScaleHander = (val: number, point: PointModel, flag: RulerType) => void
 type RulerType = "top" | "left"
 
 const DEFAULT_RULER_COLOR = 0x292929
-const DEFAULT_RULER_INTERVAL = 10
 const DEFAULT_RULER_SIZE = 20
-const DEFAULT_SCALE_INTERVAL = 200
+const DEFAULT_SCALE_INTERVAL = 10
 const DEFAULT_MARK_COLOR = 0xffffff
 
 class Ruler {
   private _parent: ContainerParent = undefined
   private _size: SizeModel = getSize()
   private _rulerInterval: PointModel = {
-    x: DEFAULT_RULER_INTERVAL,
-    y: DEFAULT_RULER_INTERVAL
+    x: DEFAULT_GRID_INTERVAL,
+    y: DEFAULT_GRID_INTERVAL
   }
   private _zoom = 1
   private _scaleInterval = DEFAULT_SCALE_INTERVAL // Major scale interval
@@ -34,22 +34,18 @@ class Ruler {
     color: DEFAULT_MARK_COLOR,
     alpha: 0.3
   }
-  // private _canvasScale: PointModel = {
-  //   x: 1,
-  //   y: 1
-  // }
   private _topRuler: Graphics = new Graphics()
   private _leftRuler: Graphics = new Graphics()
   private _rulerContainer: Container = new Container()
 
   setRulerInterval(zoom: number): void {
     this._zoom = zoom
-    const value = formatNumberPrecision(DEFAULT_RULER_INTERVAL * zoom, 0)
+    const value = formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0)
     this._rulerInterval = {
       x: value,
       y: value
     }
-    this._scaleInterval = DEFAULT_SCALE_INTERVAL * zoom
+    // this._scaleInterval = DEFAULT_SCALE_INTERVAL * zoom
   }
 
   constructor(parent: Container, size?: SizeModel, storeStyle?: StrokeInput) {
@@ -62,7 +58,8 @@ class Ruler {
     }
   }
 
-  draw(): void {
+  draw(scale = this._zoom): void {
+    this.setRulerInterval(scale)
     this.drawRulerView()
     this.logic(this._size, this._rulerInterval, this._scaleInterval)
     if (this._parent) {
@@ -99,7 +96,7 @@ class Ruler {
     drawScaleValue: DrawScaleHander = this.drawRulerValue.bind(this)
   ): void {
     for (let x = 0; x <= size.width; x += rulerInterval.x) {
-      const isMajor = isMultipleOf(x, scaleInterval)
+      const isMajor = x % (rulerInterval.x * scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
       if (drawScaleLine) {
         const alpha = this.getScaleAlpha(isMajor)
@@ -115,7 +112,7 @@ class Ruler {
       }
     }
     for (let y = 0; y <= size.height; y += rulerInterval.y) {
-      const isMajor = isMultipleOf(y, scaleInterval)
+      const isMajor = y % (rulerInterval.x * scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
       if (drawScaleLine) {
         const alpha = this.getScaleAlpha(isMajor)

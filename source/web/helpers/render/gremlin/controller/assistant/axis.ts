@@ -11,6 +11,7 @@ class Axis {
   private _axis: Graphics = new Graphics({
     label: PixiManager.elementFlag.axis
   })
+  private _zoom = 1
   private _axisOffset = getPoint(PIVOT_OFFSET_VALUE, PIVOT_OFFSET_VALUE)
 
   constructor(parent: Container, size?: SizeModel) {
@@ -21,6 +22,7 @@ class Axis {
   }
 
   setAxisOffset(zoom: number): void {
+    this._zoom = zoom
     const value = formatNumberPrecision(PIVOT_OFFSET_VALUE * zoom, 0)
     this._axisOffset = {
       x: value,
@@ -28,7 +30,8 @@ class Axis {
     }
   }
 
-  draw(): void {
+  draw(scale = this._zoom): void {
+    this.setAxisOffset(scale)
     if (!this._parent) return
     const horizontalLineStroke = {
       width: 3,

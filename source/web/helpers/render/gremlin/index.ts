@@ -21,6 +21,8 @@ const MAX_SCALE = 3
 
 export const PIVOT_OFFSET_VALUE = 150
 
+export const DEFAULT_GRID_INTERVAL = 50
+
 const PIVOT = {
   x: -PIVOT_OFFSET_VALUE,
   y: -PIVOT_OFFSET_VALUE
@@ -101,23 +103,18 @@ class PixiManager {
     const rulerContainer = createContainer(canvasStage, {
       label: PixiManager.elementFlag.staff
     }) // 刻度尺
-    PixiManager.setPivot(layerContainer)
     const width = app.renderer.width
     const height = app.renderer.height
     const viewSize = getSize(width, height)
     requestAnimationFrame(() => {
       const grid = new Grid(basiskarte, viewSize)
-      grid.setGridInterval(zoom)
-      grid.draw()
+      grid.draw(zoom)
       const ruler = new Ruler(rulerContainer, viewSize)
-      ruler.setRulerInterval(zoom)
-      ruler.draw()
+      ruler.draw(zoom)
       const axis = new Axis(basiskarte, viewSize)
-      axis.setAxisOffset(zoom)
-      axis.draw()
-      // const validHeight = viewSize.height ?? 0
-      // layerContainer.pivot.set(-50, -validHeight + 50)
+      axis.draw(zoom)
       PixiManager._lastZoom = zoom
+      PixiManager.setPivot(layerContainer)
     })
     debugPixiRender(layerContainer) /* 测试渲染 */
   }
@@ -146,7 +143,7 @@ class PixiManager {
     y: number = PIVOT.y
   ): void {
     const zoom = PixiManager.getZoom()
-    const pivot = getPoint(x * zoom, y * zoom)
+    const pivot = getPoint(x * zoom, y * zoom) // valid
     const root = layer ?? PixiManager._app?.stage
     root.pivot.set(pivot.x, pivot.y)
   }
