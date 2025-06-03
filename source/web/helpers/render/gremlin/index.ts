@@ -1,5 +1,4 @@
 import { getPoint, getSize } from "@/common/frequently-used/usually"
-import { debugPixiRender } from "@/debug"
 import Axis from "@/helpers/render/gremlin/controller/assistant/axis"
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
@@ -47,7 +46,7 @@ class PixiManager {
   private static _matrix: MatrixModel[]
   /* 暂时不考虑非同比例缩放 */
   private static _scale = 1
-  private static _lastZoom = 1
+  private static _lastZoom = -1
   static basiskarte: Container // 背景板图层
   static layerContainer: Container // 绘制图层
   static rulerContainer: Container // 刻度尺
@@ -93,7 +92,6 @@ class PixiManager {
     }
     /* 图层与标尺、网格绘制 */
     const canvasStage = app.stage
-
     if (canvasStage.children.length !== 0) {
       canvasStage.removeChildren()
       PixiManager.resetMatrix()
@@ -128,15 +126,14 @@ class PixiManager {
       PixiManager.initMatrx()
     }
     const zoom = PixiManager._scale
-    // const lastZoom = PixiManager._lastZoom
-    // if (lastZoom === zoom && lastZoom !== 1) {
-    //   return
-    // }
+    const lastZoom = PixiManager._lastZoom
+    if (lastZoom === zoom) {
+      return
+    }
     requestAnimationFrame(() => {
       PixiManager._grid.draw(zoom)
       PixiManager._ruler.draw(zoom)
       PixiManager._axis.draw(zoom)
-      debugPixiRender(PixiManager.layerContainer) /* 测试渲染 */
       PixiManager._lastZoom = zoom
     })
   }

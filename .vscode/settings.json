@@ -46,5 +46,6 @@
   "[json]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
+  "outline.showVariables": true,
   "i18n-ally.localesPaths": ["source/web/language"]
 }
