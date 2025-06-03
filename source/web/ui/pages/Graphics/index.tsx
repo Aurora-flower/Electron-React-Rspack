@@ -21,7 +21,6 @@ function GraphicsPage(): JSX.Element {
   React.useEffect(() => {
     PixiManager.initialize(containerRef.current!).then((app: Application) => {
       appRef.current = app
-      redraw()
     })
     enableWindowResizeListener(redraw)
     return (): void => {

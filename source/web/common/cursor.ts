@@ -1,6 +1,8 @@
 export const CURSOR = {
   Normal: "default",
-  Move: "move"
+  Move: "move",
+  In: "zoom-in",
+  Out: "zoom-out"
   // auto: "auto",
   // none: "none",
   // context: "context-menu",
@@ -31,8 +33,7 @@ export const CURSOR = {
   // nwse: "nwse-resize",
   // row: "row-resize",
   // all: "all-scroll",
-  // in: "zoom-in",
-  // out: "zoom-out",
+
   // grab: "grab",
   // grabbing: "grabbing"
 }

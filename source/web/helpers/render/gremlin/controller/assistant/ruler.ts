@@ -164,6 +164,16 @@ class Ruler {
     text.position.set(point.x, point.y)
     this._rulerContainer.addChild(text)
   }
+
+  clear(): void {
+    this._rulerContainer.removeChildren()
+  }
+
+  destroy(): void {
+    this._rulerContainer.destroy({
+      children: true
+    })
+  }
 }
 
 export default Ruler

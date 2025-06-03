@@ -61,6 +61,14 @@ class Axis {
     )
     this._parent.addChild(this._axis)
   }
+
+  clear(): void {
+    this._axis.clear()
+  }
+
+  destroy(): void {
+    this._axis.destroy()
+  }
 }
 
 export default Axis

@@ -12,12 +12,13 @@ import {
 } from "@/logic/algorithm/matrix"
 import { getDomElement } from "@/utils/dom"
 import { formatNumberPrecision } from "@/utils/modules/digits"
-import { Application, type Container } from "pixi.js"
+import { Application, type Container, type Point } from "pixi.js"
 
 overwritePixi()
 
 const MIN_SCALE = 0.25
 const MAX_SCALE = 3
+// const SCALE_RATIO = 0.1
 
 export const PIVOT_OFFSET_VALUE = 150
 
@@ -47,6 +48,13 @@ class PixiManager {
   /* 暂时不考虑非同比例缩放 */
   private static _scale = 1
   private static _lastZoom = 1
+  static basiskarte: Container // 背景板图层
+  static layerContainer: Container // 绘制图层
+  static rulerContainer: Container // 刻度尺
+  /* 辅助元素 */
+  private static _grid: Grid
+  private static _ruler: Ruler
+  private static _axis: Axis
 
   static async initialize(root: HTMLDivElement | string): Promise<Application> {
     let domElement = root as HTMLDivElement
@@ -63,7 +71,7 @@ class PixiManager {
       resizeTo: domElement
     })
     domElement.appendChild(app.canvas)
-    PixiManager.initMatrx()
+    PixiManager.initCanvas()
     setupStageHook(app)
     return app
   }
@@ -85,56 +93,72 @@ class PixiManager {
     }
     /* 图层与标尺、网格绘制 */
     const canvasStage = app.stage
-    const zoom = PixiManager._scale
-    const lastZoom = PixiManager._lastZoom
-    if (lastZoom === zoom && lastZoom !== 1) {
-      return
-    }
+
     if (canvasStage.children.length !== 0) {
       canvasStage.removeChildren()
       PixiManager.resetMatrix()
     }
-    const basiskarte = createContainer(canvasStage, {
+    PixiManager.basiskarte = createContainer(canvasStage, {
       label: PixiManager.elementFlag.karte
-    }) // 背景板图层
-    const layerContainer = createContainer(canvasStage, {
+    })
+    PixiManager.layerContainer = createContainer(canvasStage, {
       label: PixiManager.elementFlag.layer
-    }) // 绘制图层
-    const rulerContainer = createContainer(canvasStage, {
+    })
+    PixiManager.rulerContainer = createContainer(canvasStage, {
       label: PixiManager.elementFlag.staff
-    }) // 刻度尺
+    })
+    PixiManager.setPivot(PixiManager.layerContainer)
     const width = app.renderer.width
     const height = app.renderer.height
     const viewSize = getSize(width, height)
-    requestAnimationFrame(() => {
-      const grid = new Grid(basiskarte, viewSize)
-      grid.draw(zoom)
-      const ruler = new Ruler(rulerContainer, viewSize)
-      ruler.draw(zoom)
-      const axis = new Axis(basiskarte, viewSize)
-      axis.draw(zoom)
-      PixiManager._lastZoom = zoom
-      PixiManager.setPivot(layerContainer)
-    })
-    debugPixiRender(layerContainer) /* 测试渲染 */
+    PixiManager._grid = new Grid(PixiManager.basiskarte, viewSize)
+    PixiManager._ruler = new Ruler(PixiManager.rulerContainer, viewSize)
+    PixiManager._axis = new Axis(PixiManager.basiskarte, viewSize)
+    PixiManager.draw()
   }
 
-  static stageClear(): void {
+  static draw(): void {
     if (PixiManager._app?.stage) {
-      PixiManager._app.stage.removeChildren()
-      // PixiManager._app.stage.destroy()
+      if (PixiManager.layerContainer?.children.length > 0) {
+        PixiManager.layerContainer.removeChildren()
+      }
+      PixiManager._grid.clear()
+      PixiManager._axis.clear()
+      PixiManager._ruler.clear()
+      PixiManager.initMatrx()
     }
+    const zoom = PixiManager._scale
+    // const lastZoom = PixiManager._lastZoom
+    // if (lastZoom === zoom && lastZoom !== 1) {
+    //   return
+    // }
+    requestAnimationFrame(() => {
+      PixiManager._grid.draw(zoom)
+      PixiManager._ruler.draw(zoom)
+      PixiManager._axis.draw(zoom)
+      debugPixiRender(PixiManager.layerContainer) /* 测试渲染 */
+      PixiManager._lastZoom = zoom
+    })
   }
 
   static getZoom(): number {
     return PixiManager._scale
   }
 
-  static setZoom(scale: number): void {
-    const value = formatNumberPrecision(
+  static setZoom(scale: number, centerPoint?: Point): void {
+    const oldZoom = PixiManager._scale
+    const newZoom = formatNumberPrecision(
       Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale))
     )
-    PixiManager._scale = value
+    if (oldZoom === newZoom) return
+    PixiManager._scale = newZoom
+    const layer = PixiManager.layerContainer
+    if (layer) {
+      layer.scale.set(newZoom)
+      PixiManager.draw()
+      // TODO: 计算缩放中心偏移、位置偏移、应用缩放、更新辅助元素
+      console.log("缩放中心点", PixiManager._scale, centerPoint)
+    }
   }
 
   static setPivot(
