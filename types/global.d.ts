@@ -97,6 +97,8 @@ declare global {
     [key: string]: T
   }
 
+  type NumberArray = Array<number>
+
   interface PointModel {
     x: number
     y: number
