@@ -10,7 +10,7 @@ import {
   calculateMatrixCoordinates
 } from "@/logic/algorithm/matrix"
 import { getDomElement } from "@/utils/dom"
-import { formatNumberPrecision } from "@/utils/modules/digits"
+import { formatNumberPrecision } from "@/utils/modules/math"
 import { Application, type Container, type Point } from "pixi.js"
 
 overwritePixi()

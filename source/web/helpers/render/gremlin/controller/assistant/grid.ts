@@ -5,7 +5,7 @@ import {
 } from "@/common/frequently-used/usually"
 import PixiManager, { DEFAULT_GRID_INTERVAL } from "@/helpers/render/gremlin"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
-import { formatNumberPrecision } from "@/utils/modules/digits"
+import { formatNumberPrecision } from "@/utils/modules/math"
 import type { Container, StrokeInput } from "pixi.js"
 import { Graphics } from "pixi.js"
 

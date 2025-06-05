@@ -1,7 +1,7 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
 import { DEFAULT_GRID_INTERVAL } from "@/helpers/render/gremlin"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
-import { formatNumberPrecision } from "@/utils/modules/digits"
+import { formatNumberPrecision } from "@/utils/modules/math"
 import { Container, Graphics, Text, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
