@@ -1,5 +1,4 @@
 import { CURSOR } from "@/common/cursor"
-import { debugPixiRender } from "@/debug"
 import PixiManager from "@/helpers/render/gremlin"
 import type { Application, FederatedWheelEvent } from "pixi.js"
 
@@ -10,7 +9,7 @@ export function addStageWheel(app: Application): void {
   const stage = app.stage
   if (!stage) return
   const wheelHandler =
-    //  CommonUtility.throttle(
+    // CommonUtility.throttle(
     (ev: unknown): void => {
       const e = ev as FederatedWheelEvent
       e.preventDefault()
@@ -23,7 +22,6 @@ export function addStageWheel(app: Application): void {
       // const newZoom = canvasScale * zoomFactor
       const mousePosition = e.global.clone() // 获取鼠标在画布上的位置（缩放中心点）
       PixiManager.setZoom(zoomFactor, mousePosition)
-      debugPixiRender(PixiManager.layerContainer) /* 测试渲染 */
     }
   // , 300)
   stage.on("wheel", wheelHandler)
