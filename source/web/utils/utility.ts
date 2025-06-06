@@ -25,6 +25,10 @@ class CommonUtility {
       timeoutId = setTimeout(() => fn.apply(this, args), delay)
     } as T
   }
+
+  static deepCopyJson<T>(json: T): T {
+    return JSON.parse(JSON.stringify(json))
+  }
 }
 
 export default CommonUtility
