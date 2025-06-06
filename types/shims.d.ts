@@ -1,3 +1,5 @@
+/// <reference types="react" />
+
 type CSSModuleClasses = { readonly [key: string]: string }
 
 // declare module "*.css" {

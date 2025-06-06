@@ -29,7 +29,7 @@ type ChannelVoidListener<T extends unknown[] = unknown[]> = (
  * @summary Ipc Channel 处理函数
  */
 type ChannelHandler<T extends ChannelName> = (
-  event: IpcMainInvokeEvent,
+  event: Electron.IpcMainInvokeEvent,
   channel: T,
   ...args: unknown[]
 ) => Promise<unknown>
@@ -40,7 +40,7 @@ type ChannelHandler<T extends ChannelName> = (
 interface ChannelConfig<T extends ChannelType> {
   type: T
   channel: IpcName
-  handler: ChannelHandler
+  handler: ChannelHandler<ChannelName>
   listeners: Record<ChannelName, ChannelListener>
 }
 
