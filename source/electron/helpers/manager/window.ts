@@ -97,6 +97,7 @@ class WindowManager {
   private setupWindowHooks(): void {
     if (!this.mainWindow) return
     const win = this.mainWindow
+    win.resizable = false
     const isDevelopment = getIsDev()
     win.maximize()
     win.setMinimumSize(800, 600)
