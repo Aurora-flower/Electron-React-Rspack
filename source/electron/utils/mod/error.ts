@@ -1,3 +1,3 @@
-export function errorMessage(e: unknown): string | unknown {
+export function errorMessage<T>(e: T): string | T {
   return e instanceof Error ? e.message : e
 }

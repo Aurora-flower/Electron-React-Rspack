@@ -5,23 +5,23 @@ const PIXI_TARGET_TYPE = {
   Text: "Text"
 }
 
-export function getTargetType(target: unknown): string | undefined {
+export function getTargetType<T>(target: T): string {
   const type = target?.constructor?.name ?? ""
   return type.replace("_", "")
 }
 
-export function isContainer(target: unknown): boolean {
+export function isContainer<T>(target: T): boolean {
   return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Container
 }
 
-export function isGraphics(target: unknown): boolean {
+export function isGraphics<T>(target: T): boolean {
   return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Graphics
 }
 
-export function isSprite(target: unknown): boolean {
+export function isSprite<T>(target: T): boolean {
   return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Sprite
 }
 
-export function isText(target: unknown): boolean {
+export function isText<T>(target: T): boolean {
   return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Text
 }

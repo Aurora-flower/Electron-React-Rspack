@@ -32,12 +32,12 @@ class ElectronProcess {
             console.log(`Subprocess Quit code: ${code}`)
             this.electronProcess = null
           })
-          .on("error", (err: unknown) => {
+          .on("error", (err: Error) => {
             console.error("[Electron Error]", errorMessage(err))
             reject(err)
           })
 
-        process.on("uncaughtException", (err: unknown) => {
+        process.on("uncaughtException", (err: Error) => {
           console.error("[Uncaught Exception]", errorMessage(err))
           reject(err)
         })

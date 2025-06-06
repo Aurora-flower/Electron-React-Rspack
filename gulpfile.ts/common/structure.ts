@@ -71,12 +71,14 @@ type DirectoryStructure = typeof DIRECTORY_STRUCTURE & {
   Config: ReturnType<typeof getConfigStructure>
 }
 
+type DirectoryStructureKey = keyof typeof DIRECTORY_STRUCTURE
+
 const _Directory_ = new Proxy(DIRECTORY_STRUCTURE, {
-  get(target, key): GetFolderInfo {
+  get(target, key: DirectoryStructureKey): GetFolderInfo {
     if (!(key in target)) {
       return undefined
     }
-    const baseUrl = join(CWD, target[key as keyof typeof DIRECTORY_STRUCTURE])
+    const baseUrl = join(CWD, target[key])
     if (key === "Output") {
       return getAppStructure(baseUrl)
     } else if (key === "Source") {
@@ -114,16 +116,18 @@ function getFileTrend(form: string, name: string, to = undefined): FileInfo {
 
 type GetFileInfo = ReturnType<typeof getFileTrend>
 
+type FileStructureKey = keyof typeof FILE_STRUCTURE
+
 type FileStructure = {
-  [key in keyof typeof FILE_STRUCTURE]: GetFileInfo
+  [key in FileStructureKey]: GetFileInfo
 }
 
 const _File_ = new Proxy(FILE_STRUCTURE, {
-  get(target, key): GetFileInfo {
+  get(target, key: FileStructureKey): GetFileInfo {
     if (!(key in target)) {
       return undefined
     }
-    const name = target[key as keyof typeof FILE_STRUCTURE]
+    const name = target[key]
     if (typeof key === "string" && key.indexOf("Env") > -1) {
       return getFileTrend(_Directory_.Config.baseUrl, name)
     } else if (typeof key === "string" && ["Page", "Favicon"].includes(key)) {
