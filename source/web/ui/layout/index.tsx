@@ -1,4 +1,4 @@
-import { setFontFamily } from "@/utils/dom/mod/font"
+import { setFontFamily } from "@/utils/features/document/mod/font"
 import { webLog } from "@/utils/log"
 import * as React from "react"
 import type { JSX } from "react"

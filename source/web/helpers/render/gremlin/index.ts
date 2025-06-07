@@ -9,7 +9,7 @@ import {
   type MatrixModel,
   calculateMatrixCoordinates
 } from "@/logic/algorithm/matrix"
-import { getDomElement } from "@/utils/dom"
+import { getDomElement } from "@/utils/features/document"
 import { formatNumberPrecision } from "@/utils/modules/math"
 import { Application, type Container, type Point } from "pixi.js"
 

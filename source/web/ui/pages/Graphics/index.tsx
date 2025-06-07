@@ -19,6 +19,7 @@ function GraphicsPage(): JSX.Element {
   }, [])
 
   React.useEffect(() => {
+    document.title = "测试 - 图形渲染"
     PixiManager.initialize(containerRef.current!).then((app: Application) => {
       appRef.current = app
     })

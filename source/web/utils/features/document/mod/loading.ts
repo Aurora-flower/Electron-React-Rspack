@@ -1,4 +1,4 @@
-import { safeDOM } from "@/utils/dom/mod/opreate"
+import { safeDOM } from "@/utils/features/document/mod/opreate"
 
 export function useLoading(
   selector = "#app",
