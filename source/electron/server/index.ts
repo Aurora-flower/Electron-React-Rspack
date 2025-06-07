@@ -58,7 +58,6 @@ export class AppServer {
     this._server.listen(this._options!.port, () => {
       sendLog(
         {
-          level: "info",
           sign: "createHttpServer",
           module: module?.id
         },
@@ -76,7 +75,6 @@ export class AppServer {
     this._server = https.createServer(credentials, () => {
       sendLog(
         {
-          level: "info",
           sign: "createHttpsServer",
           module: module?.id
         },
@@ -99,7 +97,7 @@ export class AppServer {
     this._server.close((): void => {
       sendLog(
         {
-          level: "info",
+          level: "verbose",
           sign: "stopServer",
           module: module?.id
         },

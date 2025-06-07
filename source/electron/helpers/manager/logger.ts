@@ -15,17 +15,21 @@ class LoggerManager {
 
   constructor() {
     this.initLogger()
-    this.logger.log("LoggerManager initialized")
+    this.logger.verbose("initialized...")
   }
 
   initLogger(): void {
     const logFilePath = "./application.log"
     removeFile(logFilePath)
-    Logger.transports.file.level = "info"
+    Logger.transports.file.level = "verbose"
     Logger.transports.file.format =
       "[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] {scope} {text}"
     Logger.transports.file.resolvePathFn = (): string => logFilePath
     this.logger = Logger
+  }
+
+  setLogLevel(level: Logger.LogLevel): void {
+    this.logger.transports.file.level = level
   }
 }
 

@@ -119,10 +119,10 @@ class WindowManager {
         payload: "did-finish-load"
       } as Message)
       if (isDevelopment) {
-        win.webContents.openDevTools({
-          mode: "detach",
-          activate: true
-        })
+        // win.webContents.openDevTools({
+        //   mode: "detach",
+        //   activate: true
+        // })
       }
     })
 

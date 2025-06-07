@@ -1,20 +1,15 @@
-// Logger.log('message');
-// Logger.trace('Trace message');
-// Logger.debug('Debug message');
-// Logger.info('Info message');
-// Logger.warn('Warning message');
-// Logger.error('Error message');
-
 import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
+// import type Logger from "electron-log"
 
-type LogLevel = "log" | "trace" | "debug" | "info" | "warn" | "error"
+type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "verbose"
 
 interface LogOptions {
   id?: string
   sign?: string
   type?: string
+  // level?: Logger.LogLevel
   level?: LogLevel
   date?: string
   time?: string
@@ -28,7 +23,7 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
   const info: LogOptions = {
     id: "ELECTRON_LOGGER",
     sign: "log",
-    level: "log",
+    level: "trace",
     type: "log",
     // date: date.toLocaleDateString(),
     time: date.toLocaleTimeString(), // "zh-Hant-TW"
@@ -46,17 +41,27 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
     }
   }
   const loggerInstance = LoggerManager.getInstance()
+  // Tip: 除了 log\info\warn\error 的输出、级别设置后是才可以被记录的
   if (loggerInstance) {
-    if (info.level === "error") {
-      loggerInstance.logger.error(info)
-    } else if (info.level === "warn") {
-      loggerInstance.logger.warn(info)
-    } else if (info.level === "info") {
-      loggerInstance.logger.info(info)
+    const payload = [info.sign, ...info.payload]
+    if (info.level === "trace") {
+      // loggerInstance.setLogLevel("silly")
+      loggerInstance.logger.silly(payload)
     } else if (info.level === "debug") {
-      loggerInstance.logger.debug(info)
-    } else {
-      loggerInstance.logger.log(info)
+      loggerInstance.setLogLevel("debug")
+      loggerInstance.logger.debug(payload)
+    } else if (info.level === "info") {
+      loggerInstance.logger.info(payload)
+      // loggerInstance.logger.log(info) // Tip: 同为 info 级别
+    } else if (info.level === "verbose") {
+      loggerInstance.setLogLevel("verbose")
+      loggerInstance.logger.verbose(payload)
+    } else if (info.level === "warn") {
+      loggerInstance.setLogLevel("warn")
+      loggerInstance.logger.warn(payload)
+    } else if (info.level === "error") {
+      loggerInstance.setLogLevel("error")
+      loggerInstance.logger.error(payload)
     }
   }
 }
