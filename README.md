@@ -300,6 +300,9 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [💌 设计模式](https://www.patterns.dev/#/patterns)
   - [☠ 廖雪峰 JavaScript 教程](https://liaoxuefeng.com/books/javascript/quick-start/index.html)
   - [✉️ 现代 JavaScript 教程](https://zh.javascript.info/)
+  
+- **社区文档**
+  - [😼 Github 社区文档]( https://docs.github.com/zh/get-started)
 
 - **规范标准**
   - [🌈 贡献者公约](https://www.contributor-covenant.org/)
@@ -307,7 +310,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 #### 2. 社区生态
 
 - **开发社区**
-  - [🏆 GitHub](https://docs.github.com/zh/get-started)
+  - [🏆 GitHub 文档](https://github.com/)
   - [☕️ 掘金社区](https://juejin.cn/)
 
 - **技术博客**
