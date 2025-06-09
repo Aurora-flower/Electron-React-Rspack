@@ -1,6 +1,6 @@
-import { debugPixiContainer } from "@/debug/pixiRender/container"
+// import { debugPixiContainer } from "@/debug/pixiRender/container"
 // import debugPixiGraphic from "@/debug/pixiRender/graphics"
-// import debugPixiSprite from "@/debug/pixiRender/sprite"
+import debugPixiSprite from "@/debug/pixiRender/sprite"
 // import debugPixiText from "@/debug/pixiRender/text"
 // import debugPixiUI from "@/debug/pixiRender/ui"
 import { enableWorker } from "@/handlers/worker/registry"
@@ -12,10 +12,10 @@ import type { Container } from "pixi.js"
 export function debugPixiRender(layerContainer: Container): void {
   if (!layerContainer) return
   // debugPixiGraphic(layerContainer)
-  // debugPixiSprite(layerContainer)
+  debugPixiSprite(layerContainer)
   // debugPixiText(layerContainer)
   // debugPixiUI(layerContainer)
-  debugPixiContainer(layerContainer)
+  // debugPixiContainer(layerContainer)
 }
 
 export function debugWorker(): void {

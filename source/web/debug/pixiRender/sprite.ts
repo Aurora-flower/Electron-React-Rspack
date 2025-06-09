@@ -128,12 +128,12 @@ export function debugNineSliceSprite(
   loadTexture(textureURL).then((texture: Texture) => {
     createNineSliceSprite(child, {
       texture,
-      width: matrixItem.width,
-      height: matrixItem.height,
-      leftWidth: 60,
-      rightWidth: 60,
-      topHeight: 60,
-      bottomHeight: 60
+      width: 500,
+      height: 500,
+      leftWidth: 10,
+      rightWidth: 10,
+      topHeight: 10,
+      bottomHeight: 10
     })
     webLog("sprite", "createNineSliceSprite", texture.width, texture.height)
   })
@@ -154,18 +154,24 @@ function debugPixiSprite(layerContainer: Container): void {
     webWarn("debugPixiSprite", "Warn", "AppInfo is null")
     return
   }
-  const sampleURL = replaceNormalize(
-    `local://${information.core}/resources/images/sample.png`
-  )
-  debugLocalTexture(layerContainer, sampleURL)
+  // const sampleURL = replaceNormalize(
+  //   `local://${information.core}/resources/images/sample.png`
+  // )
+  // debugLocalTexture(layerContainer, sampleURL)
 
-  const eggHeadURL = "https://pixijs.com/assets/eggHead.png"
-  debugNineSliceSprite(layerContainer, eggHeadURL)
+  // const eggHeadURL = "https://pixijs.com/assets/eggHead.png"
+  // debugNineSliceSprite(layerContainer, eggHeadURL)
 
-  const frameURL = replaceNormalize(
-    `local://${information.core}/resources/images/frame.png`
+  // const frameURL = replaceNormalize(
+  //   `local://${information.core}/resources/images/frame.png`
+  // )
+  // debugSwitchSprite(layerContainer, frameURL)
+
+  const textureURL = replaceNormalize(
+    `local://${information.core}/resources/images/itemBox.png`
   )
-  debugSwitchSprite(layerContainer, frameURL)
+  debugNineSliceSprite(layerContainer, textureURL)
+  console.log("debugPixiSprite")
 }
 
 export default debugPixiSprite
