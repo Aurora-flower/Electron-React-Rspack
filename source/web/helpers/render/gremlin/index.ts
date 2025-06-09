@@ -1,7 +1,9 @@
 import { getPoint, getSize } from "@/common/frequently-used/usually"
 import Axis from "@/helpers/render/gremlin/controller/assistant/axis"
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
-import Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
+import Ruler, {
+  DEFAULT_RULER_SIZE
+} from "@/helpers/render/gremlin/controller/assistant/ruler"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { setupStageHook } from "@/helpers/render/gremlin/hooks/setupStageHook"
 import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
@@ -112,6 +114,7 @@ class PixiManager {
     PixiManager._grid = new Grid(PixiManager.basiskarte, viewSize)
     PixiManager._ruler = new Ruler(PixiManager.rulerContainer, viewSize)
     PixiManager._axis = new Axis(PixiManager.basiskarte, viewSize)
+    PixiManager.basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
     PixiManager.draw()
   }
 

@@ -16,9 +16,9 @@ type DrawScaleHander = (val: number, point: PointModel, flag: RulerType) => void
 type RulerType = "top" | "left"
 
 const DEFAULT_RULER_COLOR = 0x292929
-const DEFAULT_RULER_SIZE = 20
 const DEFAULT_SCALE_INTERVAL = 10
 const DEFAULT_MARK_COLOR = 0xffffff
+export const DEFAULT_RULER_SIZE = 20
 
 class Ruler {
   private _parent: ContainerParent = undefined
@@ -95,6 +95,8 @@ class Ruler {
     drawScaleLine: DrawLineHander = this.drawRulerLine.bind(this),
     drawScaleValue: DrawScaleHander = this.drawRulerValue.bind(this)
   ): void {
+    let countX = 1
+    const rulerStep = DEFAULT_GRID_INTERVAL * DEFAULT_SCALE_INTERVAL
     for (let x = 0; x <= size.width; x += rulerInterval.x) {
       const isMajor = x % (rulerInterval.x * scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
@@ -108,9 +110,11 @@ class Ruler {
           x: x + 2,
           y: scaleLength + 2
         }
-        drawScaleValue(x, textPoint, "top")
+        drawScaleValue(countX * rulerStep, textPoint, "top")
+        countX++
       }
     }
+    let countY = 1
     for (let y = 0; y <= size.height; y += rulerInterval.y) {
       const isMajor = y % (rulerInterval.x * scaleInterval) === 0
       const scaleLength = this.getScaleLength(isMajor)
@@ -124,7 +128,8 @@ class Ruler {
           x: scaleLength + 2,
           y: y - 2
         }
-        drawScaleValue(y, textPoint, "left")
+        drawScaleValue(countY * rulerStep, textPoint, "left")
+        countY++
       }
     }
   }
@@ -134,10 +139,18 @@ class Ruler {
     flag: RulerType,
     alpha?: number
   ): void {
-    const ruler = flag === "top" ? this._topRuler : this._leftRuler
+    const isTopRuler = flag === "top"
+    const ruler = isTopRuler ? this._topRuler : this._leftRuler
     ruler.setStrokeStyle({
       alpha: alpha ?? 0.5
     })
+    if (isTopRuler) {
+      linePoint.from.x += DEFAULT_RULER_SIZE
+      linePoint.to.x += DEFAULT_RULER_SIZE
+    } else {
+      linePoint.from.y += DEFAULT_RULER_SIZE
+      linePoint.to.y += DEFAULT_RULER_SIZE
+    }
     ruler
       .moveTo(linePoint.from.x, linePoint.from.y)
       .lineTo(linePoint.to.x, linePoint.to.y)
@@ -149,7 +162,7 @@ class Ruler {
     point: PointModel,
     flag: RulerType
   ): void {
-    const value = formatNumberPrecision(num / this._zoom, 0)
+    const value = formatNumberPrecision(num, 0)
     const style = new TextStyle({
       fontSize: 10,
       fill: DEFAULT_MARK_COLOR
