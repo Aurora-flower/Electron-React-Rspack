@@ -33,3 +33,6 @@
 - ✅ 部分引入无法使用 import 引入，需要使用 require 引入。如 express - **使用 `import  * as xxx from "xxx"` 引入**
 - ✅ 构建应用的时候报错 `⨯ ENOENT: no such file or directory, scandir 'xxx/app/node_modules/@mapbox/node-pre-gyp'  failedTask=build stackTrace=Error: ENOENT: no such file or directory, scandir '/Users/HuaYing/Desktop/resources/Local/ER/app/node_modules/@mapbox/node-pre-gyp'`  - **降低 electron 版本**
 - ⚠️ 启动时候报错 `Error: Cannot find module 'xxx/ER/gulpfile.ts'` - **调整 node 版本 - 建议 22.14**
+- ✅ 画布滚动缩放时，有时会出现画布错乱 - 如：网格线错格、重复 - **（可能）清除的时机不正确**
+- ✅ 标尺刻度值显示不正确 - **值的显示不需要考虑画布缩放**
+- ✅ 左侧标尺刻度显示偏离主刻度线太多 - **设置文本的旋转锚点为 0.5**
