@@ -9,14 +9,14 @@ function debugPixiStage(): void {
   /* 1. 坐标起始点的切换 */
 }
 
-export function debugPixiRender(): void {
+export function debugPixiAppRender(): void {
   const app = PixiManager.getApp()
   const label = PixiManager.elementFlag.layer
   const layerContainer = getElementByLabel(label, app.stage)
   if (!layerContainer) return
 }
 
-export function debugPixiRenderer(): void {
+export function debugPixiAppRenderer(): void {
   const app = PixiManager.getApp()
   const label = PixiManager.elementFlag.layer
   const layerContainer = getElementByLabel(label, app.stage)
