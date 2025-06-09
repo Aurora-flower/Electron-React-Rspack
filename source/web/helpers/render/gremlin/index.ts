@@ -1,4 +1,5 @@
 import { getPoint, getSize } from "@/common/frequently-used/usually"
+import { debugPixiRender } from "@/debug"
 import Axis from "@/helpers/render/gremlin/controller/assistant/axis"
 import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
 import Ruler, {
@@ -21,14 +22,11 @@ const MIN_SCALE = 0.25
 const MAX_SCALE = 3
 // const SCALE_RATIO = 0.1
 
-export const PIVOT_OFFSET_VALUE = 150
+export const PIVOT_OFFSET_VALUE = 200
 
 export const DEFAULT_GRID_INTERVAL = 50
 
-const PIVOT = {
-  x: -PIVOT_OFFSET_VALUE,
-  y: -PIVOT_OFFSET_VALUE
-}
+const PIVOT = -(PIVOT_OFFSET_VALUE + DEFAULT_RULER_SIZE)
 
 // const layer = new RenderLayer()
 // layer.attach(basiskarteContainer, layerContainer, rulerContainer)
@@ -123,9 +121,6 @@ class PixiManager {
       if (PixiManager.layerContainer?.children.length > 0) {
         PixiManager.layerContainer.removeChildren()
       }
-      PixiManager._grid.clear()
-      PixiManager._axis.clear()
-      PixiManager._ruler.clear()
       PixiManager.initMatrx()
     }
     const zoom = PixiManager._scale
@@ -139,13 +134,14 @@ class PixiManager {
       PixiManager._axis.draw(zoom)
       PixiManager._lastZoom = zoom
     })
+    debugPixiRender(PixiManager.layerContainer)
   }
 
   static getZoom(): number {
     return PixiManager._scale
   }
 
-  static setZoom(scale: number, centerPoint?: Point): void {
+  static setZoom(scale: number, _centerPoint?: Point): void {
     const oldZoom = PixiManager._scale
     const newZoom = formatNumberPrecision(
       Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale))
@@ -157,18 +153,11 @@ class PixiManager {
       layer.scale.set(newZoom)
       PixiManager.draw()
       // TODO: 计算缩放中心偏移、位置偏移、应用缩放、更新辅助元素
-      console.log("缩放中心点", PixiManager._scale, centerPoint)
     }
   }
 
-  static setPivot(
-    layer: Container,
-    x: number = PIVOT.x,
-    y: number = PIVOT.y
-  ): void {
-    const zoom = PixiManager.getZoom()
-    const pivot = getPoint(x * zoom, y * zoom) // valid
-    const root = layer ?? PixiManager._app?.stage
+  static setPivot(root: Container, x: number = PIVOT, y: number = PIVOT): void {
+    const pivot = getPoint(x, y)
     root.pivot.set(pivot.x, pivot.y)
   }
 

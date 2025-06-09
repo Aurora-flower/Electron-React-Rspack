@@ -56,6 +56,7 @@ class Grid {
   }
 
   draw(scale = this._zoom): void {
+    this.clear()
     this.setGridInterval(scale)
     this._grid.setStrokeStyle(this._strokeInput)
     this.logic(this._size, this._girdInterval)

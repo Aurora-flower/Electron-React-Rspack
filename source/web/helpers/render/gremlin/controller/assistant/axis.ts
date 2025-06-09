@@ -31,6 +31,7 @@ class Axis {
   }
 
   draw(scale = this._zoom): void {
+    this.clear()
     this.setAxisOffset(scale)
     if (!this._parent) return
     const horizontalLineStroke = {

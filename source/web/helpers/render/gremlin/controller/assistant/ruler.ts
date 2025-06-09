@@ -61,6 +61,7 @@ class Ruler {
   }
 
   draw(scale = this._zoom): void {
+    this.clear()
     this.setRulerInterval(scale)
     this.drawRulerView()
     this.logic(this._size, this._rulerInterval, this._scaleInterval)
