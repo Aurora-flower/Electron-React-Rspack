@@ -1,4 +1,5 @@
 import { TargetDrag } from "@/helpers/render/gremlin/event/drag"
+import { appendChild } from "@/helpers/render/gremlin/functions/append"
 import { getRandomColor } from "@/utils/functions/color"
 import { Graphics } from "pixi.js"
 import type { Container, GraphicsOptions, StrokeInput } from "pixi.js"
@@ -6,7 +7,9 @@ import type { Container, GraphicsOptions, StrokeInput } from "pixi.js"
 export function createGraphics(
   parent: Container | undefined = undefined,
   options: GraphicsOptions = {},
-  _config = {}
+  _config = {},
+  isTopIndex = false
+  // type: "None" | "Line" | "RectStroke" | "RectFill" | "CircleStroke" | "CircleFill"
 ): Graphics {
   // TODO: 一般情况下，都是可交互的，只是通过某些标记 - lock 作为不可交互的判断条件
   const graphic = new Graphics({
@@ -15,9 +18,7 @@ export function createGraphics(
     ...options
   })
   TargetDrag.markTarget(graphic)
-  if (parent) {
-    parent.addChild(graphic)
-  }
+  appendChild(parent, graphic, isTopIndex)
   return graphic
 }
 

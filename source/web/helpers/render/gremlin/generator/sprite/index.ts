@@ -1,4 +1,5 @@
 import { TargetDrag } from "@/helpers/render/gremlin/event/drag"
+import { appendChild } from "@/helpers/render/gremlin/functions/append"
 import type { Container, SpriteOptions } from "pixi.js"
 import { Sprite, Texture } from "pixi.js"
 
@@ -7,7 +8,8 @@ export function createSprite(
   options: SpriteOptions = {
     texture: Texture.EMPTY
   },
-  _config = {}
+  _config = {},
+  isTopIndex = false
 ): Sprite {
   const sprite = new Sprite({
     interactive: true,
@@ -15,8 +17,6 @@ export function createSprite(
     ...options
   })
   TargetDrag.markTarget(sprite)
-  if (parent) {
-    parent.addChild(sprite)
-  }
+  appendChild(parent, sprite, isTopIndex)
   return sprite
 }
