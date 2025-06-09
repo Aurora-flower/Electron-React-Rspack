@@ -93,11 +93,17 @@ declare global {
     | "grabbing"
 
   /* ***** ***** ***** ***** 常用的类型定义 ***** ***** ***** ***** */
-  type ObjectType<T> = {
+  type ObjectType<T = unknown> = {
     [key: string]: T
   }
 
   type NumberArray = Array<number>
+  type StringArray = Array<string>
+  type ObjectArray<T = unknown> = Array<ObjectType<T>>
+
+  type Constructor<T = unknown> = new (...args: unknown[]) => T
+
+  type AnyModel = AtWill
 
   interface PointModel {
     x: number
@@ -131,8 +137,6 @@ declare global {
   type IntervalModel = PointModel
   type LinePointModel = MovePointModel
   type BoundsModel = SizeModel & PaddingModel
-
-  type AnyModel = AtWill
 }
 
 /* ***** ***** ***** ***** 类型扩展覆盖 ***** ***** ***** ***** */
