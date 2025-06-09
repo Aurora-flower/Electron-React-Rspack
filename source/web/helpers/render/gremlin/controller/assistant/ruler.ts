@@ -1,8 +1,10 @@
 import { getMovePoint, getSize } from "@/common/frequently-used/usually"
 import { DEFAULT_GRID_INTERVAL } from "@/helpers/render/gremlin"
+import { createContainer } from "@/helpers/render/gremlin/generator/container"
+import { createText } from "@/helpers/render/gremlin/generator/text"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
 import { formatNumberPrecision } from "@/utils/modules/math"
-import { Container, Graphics, Text, TextStyle } from "pixi.js"
+import { Container, Graphics, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
 type DrawLineHander = (
@@ -126,7 +128,7 @@ class Ruler {
       if (isMajor && y !== 0 && drawScaleValue) {
         const textPoint = {
           x: scaleLength + 2,
-          y: y - 2
+          y: y + 2
         }
         drawScaleValue(countY * rulerStep, textPoint, "left")
         countY++
@@ -167,15 +169,37 @@ class Ruler {
       fontSize: 10,
       fill: DEFAULT_MARK_COLOR
     })
-    const text = new Text({
+
+    const container = createContainer(this._rulerContainer, {
+      position: {
+        x: point.x,
+        y: point.y
+      }
+    })
+    createText(container, {
       text: value.toString(),
+      angle: flag === "left" ? -90 : 0,
+      anchor: {
+        x: 0.5,
+        y: 0.5
+      },
       style
     })
-    if (flag === "left") {
-      text.angle = -90
-    }
-    text.position.set(point.x, point.y)
-    this._rulerContainer.addChild(text)
+    // const size = text.getSize()
+    // const graphic = createGraphics(
+    //   container,
+    //   {
+    //     angle: flag === "left" ? -90 : 0
+    //   },
+    //   {},
+    //   true
+    // )
+    // graphic.rect(0, 0, size.width, size.height)
+    // graphic.stroke({
+    //   color: 0xda63a1,
+    //   width: 1
+    // })
+    // graphic.pivot.set(size.width * text.anchor.x, size.height * text.anchor.y)
   }
 
   clear(): void {
