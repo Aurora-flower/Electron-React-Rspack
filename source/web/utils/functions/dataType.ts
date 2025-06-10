@@ -6,7 +6,8 @@ export const DATA_TYPE_MODE = {
   Array: "Array",
   Function: "Function",
   Null: "Null",
-  Undefined: "Undefined"
+  Undefined: "Undefined",
+  Symbol: "Symbol"
 }
 
 export function isEffectiveElement(data: unknown): boolean {

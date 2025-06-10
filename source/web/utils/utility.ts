@@ -1,3 +1,5 @@
+import { DATA_TYPE_MODE, getDataType } from "@/utils/functions/dataType"
+
 class CommonUtility {
   static throttle<T extends (...args: unknown[]) => unknown>(
     fn: T,
@@ -27,7 +29,10 @@ class CommonUtility {
   }
 
   static deepCopyJson<T>(json: T): T {
-    return JSON.parse(JSON.stringify(json))
+    if (getDataType(json) === DATA_TYPE_MODE.Symbol) {
+      return json
+    }
+    return JSON.parse(JSON.stringify(json ?? ""))
   }
 }
 
