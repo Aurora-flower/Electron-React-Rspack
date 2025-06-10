@@ -63,7 +63,6 @@ class Stack {
     return this.historySize() > 0
   }
 
-  /* 撤销 */
   undo(): StackElement | undefined {
     if (!this.canUndo()) {
       return undefined
@@ -75,7 +74,6 @@ class Stack {
     if (this.size() >= 1) {
       this.record(commands!)
     }
-    // console.log('undo', this._cache, this._history, this.size());
     return commands
   }
 
@@ -91,7 +89,6 @@ class Stack {
     return this._history.length
   }
 
-  /* 取消撤销 */
   redo(): StackElement | undefined {
     // this.cleanStack();
     if (!this.canRedo()) {
@@ -101,7 +98,6 @@ class Stack {
     if (this.historySize() >= 1) {
       this._stack.push(commands!)
     }
-    // console.log('redo', this._cache, this._stack, this.historySize());
     return commands
   }
 

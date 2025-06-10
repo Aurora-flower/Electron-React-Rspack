@@ -78,4 +78,4 @@ export function isProtoOf(instance: ObjectType, CF: Constructor): boolean {
 // console.log(Function.prototype.__proto__ === Object.prototype); // true
 
 // // 4. 方法调用（通过原型链查找）
-// p.sayName(); // "Alex"（方法定义在 Person.prototype 上）
+// p.sayName(); //（方法定义在 Person.prototype 上）

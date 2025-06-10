@@ -1,10 +1,9 @@
 import { getPoint, getSize } from "@/common/frequently-used/usually"
 import { debugPixiRender } from "@/debug"
-import Axis from "@/helpers/render/gremlin/controller/assistant/axis"
-import Grid from "@/helpers/render/gremlin/controller/assistant/grid"
-import Ruler, {
-  DEFAULT_RULER_SIZE
-} from "@/helpers/render/gremlin/controller/assistant/ruler"
+import type Axis from "@/helpers/render/gremlin/controller/assistant/axis"
+import type Grid from "@/helpers/render/gremlin/controller/assistant/grid"
+import type Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
+import { DEFAULT_RULER_SIZE } from "@/helpers/render/gremlin/controller/assistant/ruler"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { setupStageHook } from "@/helpers/render/gremlin/hooks/setupStageHook"
 import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
@@ -105,14 +104,14 @@ class PixiManager {
     PixiManager.rulerContainer = createContainer(canvasStage, {
       label: PixiManager.elementFlag.staff
     })
-    PixiManager.setPivot(PixiManager.layerContainer)
-    const width = app.renderer.width
-    const height = app.renderer.height
-    const viewSize = getSize(width, height)
-    PixiManager._grid = new Grid(PixiManager.basiskarte, viewSize)
-    PixiManager._ruler = new Ruler(PixiManager.rulerContainer, viewSize)
-    PixiManager._axis = new Axis(PixiManager.basiskarte, viewSize)
-    PixiManager.basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
+    // PixiManager.setPivot(PixiManager.layerContainer)
+    // const width = app.renderer.width
+    // const height = app.renderer.height
+    // const viewSize = getSize(width, height)
+    // PixiManager._grid = new Grid(PixiManager.basiskarte, viewSize)
+    // PixiManager._ruler = new Ruler(PixiManager.rulerContainer, viewSize)
+    // PixiManager._axis = new Axis(PixiManager.basiskarte, viewSize)
+    // PixiManager.basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
     PixiManager.draw()
   }
 
@@ -128,12 +127,12 @@ class PixiManager {
     if (lastZoom === zoom) {
       return
     }
-    requestAnimationFrame(() => {
-      PixiManager._grid.draw(zoom)
-      PixiManager._ruler.draw(zoom)
-      PixiManager._axis.draw(zoom)
-      PixiManager._lastZoom = zoom
-    })
+    // requestAnimationFrame(() => {
+    //   PixiManager._grid.draw(zoom)
+    //   PixiManager._ruler.draw(zoom)
+    //   PixiManager._axis.draw(zoom)
+    //   PixiManager._lastZoom = zoom
+    // })
     debugPixiRender(PixiManager.layerContainer)
   }
 

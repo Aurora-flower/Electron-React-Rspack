@@ -1,7 +1,8 @@
-import { webLog } from "@/utils/log"
+// import { webLog } from "@/utils/log"
 
-function timeStamp(): void {
-  webLog("time", "time stamp", Date.now())
+function timeStamp(): number {
+  // webLog("time", "time stamp", Date.now())
+  return Date.now()
 }
 
 export function delay(

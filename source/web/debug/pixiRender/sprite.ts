@@ -1,5 +1,4 @@
 import PixiManager from "@/helpers/render/gremlin"
-import { nineSliceSprite } from "@/helpers/render/gremlin/functions/compute/image"
 import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
@@ -8,7 +7,7 @@ import { createNineSliceSprite } from "@/helpers/render/gremlin/generator/sprite
 import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
 import { getRandomColor } from "@/utils/functions/color"
-import { webLog, webWarn } from "@/utils/log"
+import { webWarn } from "@/utils/log"
 import type { Container } from "pixi.js"
 import type { Texture } from "pixi.js"
 
@@ -135,12 +134,11 @@ export function debugNineSliceSprite(
       topHeight: 10,
       bottomHeight: 10
     })
-    webLog("sprite", "createNineSliceSprite", texture.width, texture.height)
   })
 
   /* 2. 借助 Canvas 的 API 创建九宫格模式精灵对象 */
   // const nineSpriteURL =
-  nineSliceSprite(textureURL)
+  // nineSliceSprite(textureURL)
   // loadTexture(nineSpriteURL).then((texture: Texture) => {
   //   createSprite(child, {
   //     texture
@@ -171,7 +169,6 @@ function debugPixiSprite(layerContainer: Container): void {
     `local://${information.core}/resources/images/itemBox.png`
   )
   debugNineSliceSprite(layerContainer, textureURL)
-  console.log("debugPixiSprite")
 }
 
 export default debugPixiSprite
