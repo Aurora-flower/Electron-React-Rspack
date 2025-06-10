@@ -26,6 +26,12 @@
     - 状态管理
     - 保存
   - 保存与导出 - JSON | PNG 格式
+
+## Record
+
+- 借助 Canvas 的 API 创建九宫格模式精灵对象
+- Store 存储方式更改为 Zustand 或者采用其他的方式
+- ThreeJS 农场
   
 ## BUG
 
