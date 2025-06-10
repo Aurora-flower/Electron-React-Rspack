@@ -97,6 +97,8 @@ declare global {
     [key: string]: T
   }
 
+  type RecordType<T = unknown> = Record<string, T>
+
   type NumberArray = Array<number>
   type StringArray = Array<string>
   type ObjectArray<T = unknown> = Array<ObjectType<T>>
