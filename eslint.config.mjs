@@ -20,6 +20,7 @@ export default defineConfig([
       "core/",
       "test/",
       "release/",
+      "**/scripts/**/*.js",
       // "*.config.*",
       // "*config.*",
       // "*config.*.*",
