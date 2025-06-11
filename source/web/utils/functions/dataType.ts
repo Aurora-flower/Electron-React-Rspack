@@ -14,23 +14,23 @@ export function isEffectiveElement(data: unknown): boolean {
   return data !== null && data !== undefined
 }
 
-export function getDefaultData(type: keyof typeof DATA_TYPE_MODE): unknown {
-  if (type === DATA_TYPE_MODE.String) {
+export function getDefaultData(dataType: keyof typeof DATA_TYPE_MODE): unknown {
+  if (dataType === DATA_TYPE_MODE.String) {
     return ""
-  } else if (type === DATA_TYPE_MODE.Number) {
+  } else if (dataType === DATA_TYPE_MODE.Number) {
     return 0
-  } else if (type === DATA_TYPE_MODE.Boolean) {
+  } else if (dataType === DATA_TYPE_MODE.Boolean) {
     return false
-  } else if (type === DATA_TYPE_MODE.Object) {
+  } else if (dataType === DATA_TYPE_MODE.Object) {
     return {}
-  } else if (type === DATA_TYPE_MODE.Array) {
+  } else if (dataType === DATA_TYPE_MODE.Array) {
     return []
-  } else if (type === DATA_TYPE_MODE.Function) {
+  } else if (dataType === DATA_TYPE_MODE.Function) {
     return () => null
-  } else if (type === DATA_TYPE_MODE.Null) {
+  } else if (dataType === DATA_TYPE_MODE.Null) {
     return null
   } else {
-    // if (type == DATA_TYPE_MODE.Undefined)
+    // if (dataType == DATA_TYPE_MODE.Undefined)
     return undefined
   }
 }
@@ -48,6 +48,6 @@ export function getDataType(data: unknown): string {
   return Object.prototype.toString.call(data).slice(8, -1)
 }
 
-export function isType(data: unknown, type: string): boolean {
-  return Object.prototype.toString.call(data).slice(8, -1) === type
+export function isType(data: unknown, dataType: string): boolean {
+  return Object.prototype.toString.call(data).slice(8, -1) === dataType
 }

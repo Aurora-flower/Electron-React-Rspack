@@ -15,14 +15,14 @@ interface StorageHook {
   clear: (excludes?: string[]) => void
 }
 
-function useStorage(type: StorageType = "sessionStorage"): StorageHook {
+function useStorage(storageType: StorageType = "sessionStorage"): StorageHook {
   const setStorage = (key: string, value: unknown): void => {
     const valueType = getDataType(value)
-    window[type].setItem(key, JSON.stringify({ type: valueType, value }))
+    window[storageType].setItem(key, JSON.stringify({ type: valueType, value }))
   }
 
   const getStorage = (key: string): string | null => {
-    const value = window[type].getItem(key)
+    const value = window[storageType].getItem(key)
     if (value) {
       const { value: val } = JSON.parse(value)
       return val
@@ -32,11 +32,11 @@ function useStorage(type: StorageType = "sessionStorage"): StorageHook {
   }
 
   const removeStorage = (key: string): void => {
-    window[type].removeItem(key)
+    window[storageType].removeItem(key)
   }
 
   const clear = (excludes?: string[]): void => {
-    const keys = Object.keys(window[type])
+    const keys = Object.keys(window[storageType])
     const defaultExcludes: string[] = []
     const excludesArr = excludes
       ? [...excludes, ...defaultExcludes]
@@ -45,9 +45,9 @@ function useStorage(type: StorageType = "sessionStorage"): StorageHook {
       ? keys.filter(key => !excludesArr.includes(key))
       : keys
     for (const key of excludesKeys) {
-      window[type].removeItem(key)
+      window[storageType].removeItem(key)
     }
-    window[type].clear()
+    window[storageType].clear()
   }
 
   return {

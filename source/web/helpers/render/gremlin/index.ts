@@ -13,7 +13,8 @@ import {
 } from "@/logic/algorithm/matrix"
 import { getDomElement } from "@/utils/features/document"
 import { formatNumberPrecision } from "@/utils/modules/math"
-import { Application, type Container, type Point } from "pixi.js"
+import type { Container, Point } from "pixi.js"
+import { Application } from "pixi.js"
 
 overwritePixi()
 

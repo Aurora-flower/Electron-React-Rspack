@@ -14,14 +14,17 @@ import PLUGINS from "./plugins"
 const FILE = getFileStructure()
 const DIRECTORY = getDirectoryStructure()
 
-function sourcePath(type: string, filename: string): string {
-  return join(DIRECTORY.Source[type] || "", filename)
+function sourcePath(sourceType: string, filename: string): string {
+  return join(DIRECTORY.Source[sourceType] || "", filename)
 }
 
-function singleConfig(key: string, type: string): Record<string, unknown> {
-  const isMain = type === APP_PROCESS_MODE.Electron
-  const isPeload = type === APP_PROCESS_MODE.Preload
-  const isRenderer = type === APP_PROCESS_MODE.Renderer
+function singleConfig(
+  key: string,
+  processType: string
+): Record<string, unknown> {
+  const isMain = processType === APP_PROCESS_MODE.Electron
+  const isPeload = processType === APP_PROCESS_MODE.Preload
+  const isRenderer = processType === APP_PROCESS_MODE.Renderer
   const isDevelopment = getIsDev()
 
   const baseOptions: RspackOptions = {
@@ -51,16 +54,16 @@ function singleConfig(key: string, type: string): Record<string, unknown> {
   const options: RspackOptions = Object.assign(emptyObject, baseOptions, {
     target: BUILD_TARGET[key],
     entry: {
-      [type]: {
+      [processType]: {
         import: sourcePath(
-          type,
+          processType,
           isPeload ? ENTRY_FILENAME.Index : ENTRY_FILENAME.Main
         )
         // runtime: `${key}_runtime`
       }
     },
     output: {
-      path: DIRECTORY.Output[type],
+      path: DIRECTORY.Output[processType],
       filename: "index.js",
       // filename: `${isMain ? "main" : "index"}.js`,
       clean: true
