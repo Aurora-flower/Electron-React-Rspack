@@ -4,7 +4,7 @@ import { getIsPackage } from "@main/features/app"
 import { resolvePath } from "@main/node/path/resolvePath"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
-import { BrowserWindow, Menu } from "electron"
+import { BrowserWindow } from "electron"
 import Logger from "electron-log"
 
 interface WindowState {
@@ -82,9 +82,9 @@ class WindowManager {
       return this.mainWindow
     }
     this.mainWindow = new BrowserWindow(this.windowOptions)
-    if (this.isPackage) {
-      Menu.setApplicationMenu(null) // win.removeMenu(); | win.setMenu(null);
-    }
+    // if (this.isPackage) {
+    //   Menu.setApplicationMenu(null) // win.removeMenu(); | win.setMenu(null);
+    // }
     if (process.env.DEV_SERVER_URL) {
       this.mainWindow.loadURL(process.env.DEV_SERVER_URL)
     } else {
@@ -127,7 +127,7 @@ class WindowManager {
     })
 
     win.webContents.on("devtools-opened", () => {
-      this.mainWindow?.focus()
+      win?.focus()
       win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
         source: "devtools",
         payload: "devtools-opened"

@@ -20,7 +20,10 @@ directories:
 asar: true
 
 asarUnpack:
-  - "core"
+  # - '**/node_modules/**'
+  - '**/core/**'
+
+beforePack: 'scripts/beforePack.js'
 
 # mac:
 #   target:
