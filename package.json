@@ -6,6 +6,7 @@
   "main": "app/electron",
   "private": "true",
   "scripts": {
+    "i": "npm install --legacy-peer-deps",
     "prepare": "husky",
     "preinstall": "patch-package",
     "start": "electron .",
