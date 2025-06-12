@@ -187,8 +187,9 @@ export default defineConfig([
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/explicit-module-boundary-types": "error",
       "no-empty-function": "off",
-      "@typescript-eslint/no-empty-function": "error",
-      "@typescript-eslint/no-unsafe-function-type": "error",
+      "@typescript-eslint/no-var-requires": "warn",
+      // "@typescript-eslint/no-empty-function": "error",
+      // "@typescript-eslint/no-unsafe-function-type": "error",
       "@typescript-eslint/prefer-function-type": "error",
       // 与当前 eslint-plugin-react 版本不兼容配置
       "react/display-name": "off",

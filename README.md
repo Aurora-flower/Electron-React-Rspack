@@ -201,6 +201,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🎉 Animate.css](https://animate.style/)
   - [🎨 Motion](https://motion.dev/docs/react-quick-start)
   - [👾 Framer motion](https://motion.framer.wiki/introduction)
+  - [💦 CSS Tricks](https://css-tricks.com/)
 
 - **图标方案**
   - [👽 iconify](https://icon-sets.iconify.design/)
