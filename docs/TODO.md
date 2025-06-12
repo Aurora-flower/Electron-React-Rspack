@@ -32,7 +32,8 @@
 - 借助 Canvas 的 API 创建九宫格模式精灵对象
 - Store 存储方式更改为 Zustand 或者采用其他的方式
 - ThreeJS 农场
-  
+- 废弃 store manager 模块，而是采用 Redux \ Context 进行状态管理 - 数据缓存不是 react 推荐的做法
+
 ## BUG
 
 - ✅ Rspack 配置调整与优化 - 目前不支持 development 模式，开发环境下编译运行报错
