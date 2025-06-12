@@ -151,7 +151,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **2D渲染引擎**
   - [🧊 Pixi.js](https://pixi.nodejs.cn/8.x/guides/basics/getting-started)
   - [🎯 Pixi.js 示例](https://pixi.nodejs.cn/examples)
-  - [🍀 Pixi.js 图形 API](https://pixijs.download/release/docs/scene.Graphics.html)
+  - [🍀 Pixi.js - V8 版本 API](https://pixijs.download/release/docs/index.html)
   - [⚡ PIXI 文本样式编辑器](https://text-style.pixijs.io)
   - [🧠 Pixi.js 库 API](https://api.pixijs.io/index.html)
   - [🏹 Pixi.js UI](https://pixijs.io/ui/)
