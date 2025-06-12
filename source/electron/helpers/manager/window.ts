@@ -1,9 +1,11 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
 import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
 import { getIsPackage } from "@main/features/application/infomation"
+import { createBrowserWindow } from "@main/features/window"
 import { resolvePath } from "@main/node/path/resolvePath"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
+import type { BrowserWindowConstructorOptions } from "electron"
 import { BrowserWindow } from "electron"
 import Logger from "electron-log"
 
@@ -11,12 +13,52 @@ interface WindowState {
   isLoaded: boolean
 }
 
+function setupMainWindowHooks(win: BrowserWindow): void {
+  if (!win) return
+  // win.resizable = false
+  const isDevelopment = getIsDev()
+  win.maximize()
+  win.setMinimumSize(800, 600)
+  win.on("close", e => {
+    if (!WindowManager.isClosing) {
+      e.preventDefault()
+      WindowManager.safeCloseWindow(win)
+    }
+  })
+
+  win.on("closed", () => {
+    this.mainWindow = null
+    this.isClosing = false
+  })
+
+  win.webContents.on("did-finish-load", () => {
+    win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
+      source: "ready",
+      payload: "did-finish-load"
+    } as Message)
+    if (isDevelopment) {
+      // win.webContents.openDevTools({
+      //   mode: "detach",
+      //   activate: true
+      // })
+    }
+  })
+
+  win.webContents.on("devtools-opened", () => {
+    win?.focus()
+    win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
+      source: "devtools",
+      payload: "devtools-opened"
+    } as Message)
+  })
+}
+
 class WindowManager {
   public mainWindow: BrowserWindow
   private static instance: WindowManager
-  private windowOptions = WINDOW_OPTIONS
+  private windowOptions: BrowserWindowConstructorOptions = WINDOW_OPTIONS
   private windows: Map<string, BrowserWindow> = new Map()
-  private isClosing = false
+  static isClosing = false
 
   get isWindows(): boolean {
     return isWin()
@@ -34,10 +76,18 @@ class WindowManager {
   }
 
   constructor(mainWindow?: BrowserWindow) {
-    if (mainWindow) {
+    if (mainWindow && !this.mainWindow.isDestroyed()) {
       this.mainWindow = mainWindow
     } else {
-      const window = this.createMainWindow()
+      const remoteURL = process.env.DEV_SERVER_URL
+      const localURL = resolvePath("../public/index.html")
+      const url = remoteURL ? remoteURL : localURL
+      const window = createBrowserWindow(
+        url,
+        this.windowOptions,
+        !remoteURL,
+        setupMainWindowHooks
+      )
       if (window) {
         this.addWindow(window, MAIN_WINDOW_NAME)
       }
@@ -49,6 +99,9 @@ class WindowManager {
   }
 
   public getWindow(name: string): BrowserWindow | undefined {
+    if (!this.windows.has(name)) {
+      return undefined
+    }
     return this.windows.get(name)
   }
 
@@ -60,6 +113,9 @@ class WindowManager {
   }
 
   public deleteWindow(name: string): void {
+    if (!this.windows.has(name)) {
+      return
+    }
     this.windows.delete(name)
   }
 
@@ -77,76 +133,17 @@ class WindowManager {
     }
   }
 
-  public createMainWindow(): BrowserWindow {
-    if (this.mainWindow && !this.mainWindow.isDestroyed()) {
-      return this.mainWindow
-    }
-    this.mainWindow = new BrowserWindow(this.windowOptions)
-    // if (this.isPackage) {
-    //   Menu.setApplicationMenu(null) // win.removeMenu(); | win.setMenu(null);
-    // }
-    if (process.env.DEV_SERVER_URL) {
-      this.mainWindow.loadURL(process.env.DEV_SERVER_URL)
-    } else {
-      this.mainWindow.loadFile(resolvePath("../public/index.html"))
-    }
-    this.setupWindowHooks()
-    return this.mainWindow
-  }
-
-  private setupWindowHooks(): void {
-    if (!this.mainWindow) return
-    const win = this.mainWindow
-    // win.resizable = false
-    const isDevelopment = getIsDev()
-    win.maximize()
-    win.setMinimumSize(800, 600)
-    win.on("close", e => {
-      if (!this.isClosing) {
-        e.preventDefault()
-        this.safeCloseWindow()
-      }
-    })
-
-    win.on("closed", () => {
-      this.mainWindow = null
-      this.isClosing = false
-    })
-
-    win.webContents.on("did-finish-load", () => {
-      win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
-        source: "ready",
-        payload: "did-finish-load"
-      } as Message)
-      if (isDevelopment) {
-        // win.webContents.openDevTools({
-        //   mode: "detach",
-        //   activate: true
-        // })
-      }
-    })
-
-    win.webContents.on("devtools-opened", () => {
-      win?.focus()
-      win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
-        source: "devtools",
-        payload: "devtools-opened"
-      } as Message)
-    })
-  }
-
-  private async safeCloseWindow(): Promise<void> {
-    if (!this.mainWindow || this.mainWindow.isDestroyed()) return
+  static async safeCloseWindow(win: BrowserWindow): Promise<void> {
     try {
-      this.isClosing = true
-      await this.beforeWindowClose()
-      this.mainWindow.destroy()
+      WindowManager.isClosing = true
+      await WindowManager.beforeWindowClose()
+      win.destroy()
     } catch (error) {
       Logger.error(error)
     }
   }
 
-  private async beforeWindowClose(): Promise<void> {
+  static async beforeWindowClose(): Promise<void> {
     // TODO(低优先级): 窗口关闭前的处理
   }
 }

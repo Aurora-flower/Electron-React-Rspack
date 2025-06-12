@@ -16,7 +16,7 @@ export function setupAppHooks(): void {
    */
   app.on("activate", () => {
     if (isAllWindowClosed()) {
-      WindowManager.getInstance()?.createMainWindow()
+      WindowManager.getInstance()
     }
   })
 
