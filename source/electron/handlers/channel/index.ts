@@ -1,7 +1,9 @@
-import { getAppInfo } from "@main/features/app"
-import asynchronousMessage from "@main/handlers/channel/message/async-msg"
+import { getAppInfo } from "@main/features/application/infomation"
+import {
+  asynchronousMessage,
+  synchronousMessage
+} from "@main/handlers/channel/message"
 import { transmit } from "@main/handlers/channel/message/sms"
-import synchronousMessage from "@main/handlers/channel/message/sync-msg"
 import type { IpcMainEvent, IpcMainInvokeEvent } from "electron"
 import { ipcMain } from "electron"
 

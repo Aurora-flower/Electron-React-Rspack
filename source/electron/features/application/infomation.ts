@@ -1,10 +1,7 @@
 import { join, parse, sep } from "node:path"
-import { clientNotify } from "@main/features/notification"
-import { isAllWindowClosed } from "@main/features/window"
-import WindowManager from "@main/helpers/manager/window"
 import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
-import { PLATFORM, getPlatform, isWin } from "@main/node/process/platform"
+import { isWin } from "@main/node/process/platform"
 import { app } from "electron"
 
 const FOLDER_NAMES = {
@@ -16,7 +13,6 @@ const FILE_NAMES = {
   Unpack: "app.asar.unpacked"
 }
 
-// app-information
 export class AppInfo implements AppInfoModel {
   name: string = replaceSep(app.getName())
   appFolder: string = replaceSep(app.getAppPath())
@@ -76,6 +72,10 @@ export class AppInfo implements AppInfoModel {
   }
 }
 
+export function getIsPackage(): boolean {
+  return app.isPackaged
+}
+
 export function getAppStaticPath(url?: string): string {
   const isPackaged = AppInfo.getInstance()?.packaged ?? app.isPackaged
   const AppAsar = AppInfo.getInstance()?.appFolder ?? app.getAppPath()
@@ -85,50 +85,4 @@ export function getAppStaticPath(url?: string): string {
 
 export function getAppInfo(): AppInfo {
   return AppInfo.getInstance()
-}
-
-export function getIsPackage(): boolean {
-  return app.isPackaged
-}
-
-export function setupAppHooks(): void {
-  app.on("window-all-closed", () => {
-    if (getPlatform() !== PLATFORM.darwin) {
-      app.quit()
-    }
-  })
-
-  /**
-   * @platform darwin
-   */
-  app.on("activate", () => {
-    if (isAllWindowClosed()) {
-      WindowManager.getInstance()?.createMainWindow()
-    }
-  })
-
-  /**
-   * @platform darwin
-   */
-  app.on("open-url", (event, url) => {
-    clientNotify("Welcome!", `Reference: ${url}`)
-  })
-}
-
-/**
- * @summary 退出应用
- * @param {boolean} force
- * @param {number} code 退出码，默认为 0
- * @remarks
- * 区别:
- * - `quit` 会尝试关闭所有窗口, 将首先发出 `before-quit` 事件。
- *   如果所有窗口都已成功关闭, 则将发出 `will-quit` 事件, 并且默认情况下应用程序将终止。
- * - `exit` 会立即退出，所有窗口都将立即被关闭，而不询问用户。
- */
-export function exitApp(force = false, code = 0): void {
-  if (force) {
-    app.exit(code)
-  } else {
-    app.quit()
-  }
 }

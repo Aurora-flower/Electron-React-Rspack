@@ -1,7 +1,7 @@
 import * as http from "node:http"
 import * as https from "node:https"
 import { join } from "node:path"
-import { getAppStaticPath } from "@main/features/app"
+import { getAppStaticPath } from "@main/features/application/infomation"
 import { checkConnection } from "@main/node/net/connection"
 import { sendLog } from "@main/toolkit/logger"
 import type { Application } from "express"
