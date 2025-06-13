@@ -6,7 +6,7 @@ import type {
   SaveDialogReturnValue
 } from "electron"
 
-export class AppDialog {
+class AppDialog {
   private static _instance: AppDialog
   private static lastUserChoice: string | string[]
   private static dialogCount = 0
@@ -38,3 +38,5 @@ export class AppDialog {
     })
   }
 }
+
+export default AppDialog

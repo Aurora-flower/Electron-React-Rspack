@@ -5,7 +5,7 @@ import type {
   MessageBoxReturnValue
 } from "electron"
 
-export class AppMessage {
+class AppMessage {
   static async showErrorBox(title: string, content: string): Promise<void> {
     dialog.showErrorBox(title, content)
   }
@@ -17,3 +17,5 @@ export class AppMessage {
     return dialog.showMessageBox(window, options)
   }
 }
+
+export default AppMessage

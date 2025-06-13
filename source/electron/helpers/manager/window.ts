@@ -13,7 +13,21 @@ interface WindowState {
   isLoaded: boolean
 }
 
-function setupMainWindowHooks(win: BrowserWindow): void {
+async function safeCloseWindow(win: BrowserWindow): Promise<void> {
+  try {
+    WindowManager.isClosing = true
+    await beforeWindowClose()
+    win.destroy()
+  } catch (error) {
+    Logger.error(error)
+  }
+}
+
+async function beforeWindowClose(): Promise<void> {
+  // TODO(低优先级): 窗口关闭前的处理
+}
+
+function setupWindowHooks(win: BrowserWindow): void {
   if (!win) return
   // win.resizable = false
   const isDevelopment = getIsDev()
@@ -22,7 +36,7 @@ function setupMainWindowHooks(win: BrowserWindow): void {
   win.on("close", e => {
     if (!WindowManager.isClosing) {
       e.preventDefault()
-      WindowManager.safeCloseWindow(win)
+      safeCloseWindow(win)
     }
   })
 
@@ -86,7 +100,7 @@ class WindowManager {
         url,
         this.windowOptions,
         !remoteURL,
-        setupMainWindowHooks
+        setupWindowHooks
       )
       if (window) {
         this.addWindow(window, MAIN_WINDOW_NAME)
@@ -131,20 +145,6 @@ class WindowManager {
     return {
       isLoaded: true
     }
-  }
-
-  static async safeCloseWindow(win: BrowserWindow): Promise<void> {
-    try {
-      WindowManager.isClosing = true
-      await WindowManager.beforeWindowClose()
-      win.destroy()
-    } catch (error) {
-      Logger.error(error)
-    }
-  }
-
-  static async beforeWindowClose(): Promise<void> {
-    // TODO(低优先级): 窗口关闭前的处理
   }
 }
 
