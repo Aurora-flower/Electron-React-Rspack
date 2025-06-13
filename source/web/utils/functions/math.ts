@@ -26,12 +26,17 @@ export function findMinIndex(arr: NumberArray): number {
 }
 
 /**
- * @remarks 弧度和度数的关系: 180 角度 = π 弧度
+ * @remarks 弧度和度数的关系: π 弧度 = 180 角度 （2π 弧度 = 360 角度）
  */
 export function radiansToDegrees(radians: number): number {
-  return radians * (180 / Math.PI)
+  const arc = radians * (180 / Math.PI)
+  return formatNumberPrecision(arc)
 }
 
+/**
+ * @remarks 角度和弧度的关系: 180 角度 = π 弧度
+ */
 export function degreesToRadians(degrees: number): number {
-  return degrees * (Math.PI / 180)
+  const rad = degrees * (Math.PI / 180)
+  return formatNumberPrecision(rad, 10)
 }
