@@ -2,7 +2,7 @@
  * @summary 根据传入的尺寸获取一组矩阵信息
  */
 
-import { getPoint, getSize, getSpace } from "@/common/frequently-used/usually"
+import { getPoint, getSize, getSpace } from "@/utils/functions/usually"
 
 export interface MatrixModel {
   x: number

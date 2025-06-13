@@ -1,8 +1,8 @@
-import { getPoint, getSize } from "@/common/frequently-used/usually"
 import PixiManager, { PIVOT_OFFSET_VALUE } from "@/helpers/render/gremlin"
 import { drawLine } from "@/helpers/render/gremlin/generator/graphics"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
 import { formatNumberPrecision } from "@/utils/functions/math"
+import { getPoint, getSize } from "@/utils/functions/usually"
 import { type Container, Graphics } from "pixi.js"
 
 class Axis {

@@ -1,5 +1,5 @@
-import { getPadding } from "@/common/frequently-used/usually"
 import { createImageObject } from "@/utils/features/document/mod/image"
+import { getPadding } from "@/utils/functions/usually"
 import { webLog } from "@/utils/log"
 
 export function getImageDataBounds(imageData: ImageData): BoundsModel | null {
