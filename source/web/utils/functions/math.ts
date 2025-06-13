@@ -24,3 +24,14 @@ export function findMinIndex(arr: NumberArray): number {
     0
   )
 }
+
+/**
+ * @remarks 弧度和度数的关系: 180 角度 = π 弧度
+ */
+export function radiansToDegrees(radians: number): number {
+  return radians * (180 / Math.PI)
+}
+
+export function degreesToRadians(degrees: number): number {
+  return degrees * (Math.PI / 180)
+}

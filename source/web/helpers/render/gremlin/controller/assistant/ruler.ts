@@ -3,7 +3,7 @@ import { DEFAULT_GRID_INTERVAL } from "@/helpers/render/gremlin"
 import { createContainer } from "@/helpers/render/gremlin/generator/container"
 import { createText } from "@/helpers/render/gremlin/generator/text"
 import type { ContainerParent } from "@/helpers/render/gremlin/interface"
-import { formatNumberPrecision } from "@/utils/modules/math"
+import { formatNumberPrecision } from "@/utils/functions/math"
 import { Container, Graphics, TextStyle } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 

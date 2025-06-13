@@ -1,4 +1,4 @@
-import { formatNumberPrecision } from "@/utils/modules/math"
+import { formatNumberPrecision } from "@/utils/functions/math"
 
 export function getSize(width = 0, height = 0): SizeModel {
   return {
