@@ -52,5 +52,6 @@ export function createBrowserWindow(
   if (setupCallback) {
     setupCallback(window)
   }
+  // createView() // TEST
   return window
 }
