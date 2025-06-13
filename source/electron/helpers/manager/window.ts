@@ -1,6 +1,6 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
 import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
-import { getIsPackage } from "@main/features/application/infomation"
+import { getIsPackage } from "@main/features/application/isPackage"
 import { createBrowserWindow } from "@main/features/window"
 import { resolvePath } from "@main/node/path/resolvePath"
 import { getIsDev } from "@main/node/process/env"

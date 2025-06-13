@@ -1,4 +1,4 @@
-import { setupAppHooks } from "@main/features/application/setup"
+import { setupAppHooks } from "@main/features/application/listeners"
 import { registerProtocolHandle } from "@main/features/protocol"
 import onAppReadyAfter from "@main/handlers/event/onAppReadyAfter"
 import LoggerManager from "@main/helpers/manager/logger"

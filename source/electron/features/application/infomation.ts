@@ -1,4 +1,5 @@
 import { join, parse, sep } from "node:path"
+import { getIsPackage } from "@main/features/application/isPackage"
 import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
@@ -12,6 +13,10 @@ const FILE_NAMES = {
   Asar: "app.asar",
   Unpack: "app.asar.unpacked"
 }
+
+const OUTPUT_FOLDER = "app"
+
+const STATIC_FOLDER = "public"
 
 export class AppInfo implements AppInfoModel {
   name: string = replaceSep(app.getName())
@@ -72,15 +77,11 @@ export class AppInfo implements AppInfoModel {
   }
 }
 
-export function getIsPackage(): boolean {
-  return app.isPackaged
-}
-
 export function getAppStaticPath(url?: string): string {
   const isPackaged = AppInfo.getInstance()?.packaged ?? app.isPackaged
   const AppAsar = AppInfo.getInstance()?.appFolder ?? app.getAppPath()
-  const baseOutput = isPackaged ? "" : "app"
-  return join(AppAsar, baseOutput, "public", url ?? "")
+  const baseOutput = isPackaged ? "" : OUTPUT_FOLDER
+  return join(AppAsar, baseOutput, STATIC_FOLDER, url ?? "")
 }
 
 export function getAppInfo(): AppInfo {
