@@ -14,7 +14,7 @@ export function setClipboard(
   } else {
     sendLog(
       {
-        module: module.id,
+        module: module?.id,
         sign: "SetClipboard",
         level: "warn"
       },

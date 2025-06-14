@@ -10,7 +10,7 @@ export function printToPDF(pdf: string, options: PrintToPDFOptions = {}): void {
     sendLog(
       {
         sign: "print-to-pdf",
-        module: module.id
+        module: module?.id
       },
       data
     )

@@ -8,7 +8,7 @@ export async function transmit(msg: Message): Promise<void> {
     sendLog(
       {
         sign: "transmit",
-        module: module.id,
+        module: module?.id,
         level: "error"
       },
       "window is not ready"

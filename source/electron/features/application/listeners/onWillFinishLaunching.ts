@@ -1,7 +1,6 @@
 import { app } from "electron"
 
 /**
- * @platform win32 |  linux | darwin
  * @summary 当应用程序完成基础的启动的时候被触发。
  * @remarks
  * - 在 `Windows` 和 `Linux` 中, `will-finish-launching` 事件与 `ready` 事件是相同的;
