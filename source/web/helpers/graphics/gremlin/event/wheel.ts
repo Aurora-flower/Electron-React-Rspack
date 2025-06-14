@@ -1,5 +1,5 @@
 import { CURSOR } from "@/common/cursor"
-import PixiManager from "@/helpers/render/gremlin"
+import PixiManager from "@/helpers/graphics/gremlin"
 import type { Application, FederatedWheelEvent } from "pixi.js"
 
 const ZOOM_SPEED = 0.05

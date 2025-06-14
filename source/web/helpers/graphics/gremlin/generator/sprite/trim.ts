@@ -1,5 +1,5 @@
-import { getImageDataBounds } from "@/helpers/render/gremlin/functions/compute/image"
-import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
+import { getImageDataBounds } from "@/helpers/graphics/gremlin/functions/compute/image"
+import { loadTexture } from "@/helpers/graphics/gremlin/generator/assets"
 import { Rectangle, Texture } from "pixi.js"
 
 export function trimTexture(texture: Texture): Promise<Texture> {

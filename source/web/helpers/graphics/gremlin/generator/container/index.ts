@@ -1,4 +1,4 @@
-import { appendChild } from "@/helpers/render/gremlin/functions/append"
+import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
 import type { ContainerOptions } from "pixi.js"
 import { Container } from "pixi.js"
 

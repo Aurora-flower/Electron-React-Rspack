@@ -1,5 +1,5 @@
-import { TargetDrag } from "@/helpers/render/gremlin/event/drag"
-import { appendChild } from "@/helpers/render/gremlin/functions/append"
+import { TargetDrag } from "@/helpers/graphics/gremlin/event/drag"
+import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
 import type { Container, SpriteOptions } from "pixi.js"
 import { Sprite, Texture } from "pixi.js"
 

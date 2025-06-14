@@ -1,6 +1,6 @@
-import PixiManager from "@/helpers/render/gremlin"
-import { loadTexture } from "@/helpers/render/gremlin/generator/assets"
-import { createContainer } from "@/helpers/render/gremlin/generator/container"
+import PixiManager from "@/helpers/graphics/gremlin"
+import { loadTexture } from "@/helpers/graphics/gremlin/generator/assets"
+import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import { getRandomColor } from "@/utils/functions/color"
 import { webLog } from "@/utils/log"
 import {

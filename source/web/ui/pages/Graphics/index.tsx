@@ -1,4 +1,4 @@
-import PixiManager from "@/helpers/render/gremlin"
+import PixiManager from "@/helpers/graphics/gremlin"
 import {
   destroyWindowResizeListener,
   enableWindowResizeListener

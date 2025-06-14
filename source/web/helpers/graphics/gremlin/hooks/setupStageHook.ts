@@ -1,5 +1,5 @@
-import { addStageDrag } from "@/helpers/render/gremlin/event/drag"
-import { addStageWheel } from "@/helpers/render/gremlin/event/wheel"
+import { addStageDrag } from "@/helpers/graphics/gremlin/event/drag"
+import { addStageWheel } from "@/helpers/graphics/gremlin/event/wheel"
 import type { Application } from "pixi.js"
 
 export function setupStageHook(app: Application): void {

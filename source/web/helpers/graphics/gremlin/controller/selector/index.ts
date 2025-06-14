@@ -1,7 +1,7 @@
-import PixiManager from "@/helpers/render/gremlin"
-import { getElementByLabel } from "@/helpers/render/gremlin/functions/filter"
-import { isContainer } from "@/helpers/render/gremlin/functions/is"
-import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
+import PixiManager from "@/helpers/graphics/gremlin"
+import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
+import { isContainer } from "@/helpers/graphics/gremlin/functions/is"
+import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
 import type { Container } from "pixi.js"
 
 class RenderSelector {

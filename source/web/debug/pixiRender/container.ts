@@ -1,6 +1,6 @@
-import PixiManager from "@/helpers/render/gremlin"
-import { createContainer } from "@/helpers/render/gremlin/generator/container"
-import { createGraphics } from "@/helpers/render/gremlin/generator/graphics"
+import PixiManager from "@/helpers/graphics/gremlin"
+import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
+import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
 import { getRandomColor } from "@/utils/functions/color"
 import type { Container } from "pixi.js"
 

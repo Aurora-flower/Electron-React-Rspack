@@ -1,5 +1,5 @@
-import PixiManager from "@/helpers/render/gremlin"
-import { createContainer } from "@/helpers/render/gremlin/generator/container"
+import PixiManager from "@/helpers/graphics/gremlin"
+import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import StoreManager from "@/stores/manager"
 import { replaceNormalize } from "@/utils/features/url"
 import { Assets } from "pixi.js"

@@ -1,6 +1,6 @@
 import { CURSOR } from "@/common/cursor"
-import RenderSelector from "@/helpers/render/gremlin/controller/selector"
-import { isContainer } from "@/helpers/render/gremlin/functions/is"
+import RenderSelector from "@/helpers/graphics/gremlin/controller/selector"
+import { isContainer } from "@/helpers/graphics/gremlin/functions/is"
 import { webLog } from "@/utils/log"
 import {
   type Application,

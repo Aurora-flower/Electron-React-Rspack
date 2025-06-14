@@ -1,11 +1,11 @@
 import { debugPixiRender } from "@/debug"
-import type Axis from "@/helpers/render/gremlin/controller/assistant/axis"
-import type Grid from "@/helpers/render/gremlin/controller/assistant/grid"
-import type Ruler from "@/helpers/render/gremlin/controller/assistant/ruler"
-import { DEFAULT_RULER_SIZE } from "@/helpers/render/gremlin/controller/assistant/ruler"
-import { createContainer } from "@/helpers/render/gremlin/generator/container"
-import { setupStageHook } from "@/helpers/render/gremlin/hooks/setupStageHook"
-import { overwritePixi } from "@/helpers/render/gremlin/overwrite"
+import type Axis from "@/helpers/graphics/gremlin/controller/assistant/axis"
+import type Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
+import type Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
+import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/controller/assistant/ruler"
+import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
+import { setupStageHook } from "@/helpers/graphics/gremlin/hooks/setupStageHook"
+import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import {
   type MatrixModel,
   calculateMatrixCoordinates

@@ -1,5 +1,5 @@
-import { TargetDrag } from "@/helpers/render/gremlin/event/drag"
-import { appendChild } from "@/helpers/render/gremlin/functions/append"
+import { TargetDrag } from "@/helpers/graphics/gremlin/event/drag"
+import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
 import { getRandomColor } from "@/utils/functions/color"
 import { Graphics } from "pixi.js"
 import type { Container, GraphicsOptions, StrokeInput } from "pixi.js"

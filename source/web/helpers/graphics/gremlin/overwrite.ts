@@ -1,4 +1,4 @@
-import { trimTexture } from "@/helpers/render/gremlin/generator/sprite/trim"
+import { trimTexture } from "@/helpers/graphics/gremlin/generator/sprite/trim"
 import { Texture } from "pixi.js"
 
 export function overwritePixi(): void {
