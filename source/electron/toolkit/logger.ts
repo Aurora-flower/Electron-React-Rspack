@@ -34,7 +34,7 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
   }
   if (LoggerManager.isReady) {
     const winM = WindowManager.getInstance()
-    const win = info.window ? winM.getWindow(info.window) : winM.mainWindow
+    const win = info.window ? winM.getWindow(info.window) : winM.getMainWindow()
     if (win) {
       // TODO: 根据 window 对象向渲染进程发送 log 消息
       win.webContents.send("message-transmit", info)

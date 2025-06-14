@@ -1,3 +1,4 @@
+import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import WindowManager from "@main/helpers/manager/window"
 import { resolvePath } from "@main/node/path/resolvePath"
 import { BrowserWindow } from "electron"
@@ -5,7 +6,7 @@ import type { BrowserWindowConstructorOptions, WebContents } from "electron"
 
 export function byNameFindWindow(name = ""): BrowserWindow | null {
   const winM = WindowManager.getInstance()
-  return name ? winM.getWindow(name) : winM.mainWindow
+  return name ? winM.getWindow(name) : winM.getMainWindow()
 }
 
 export function byWebContentsFindWindow(
@@ -41,7 +42,8 @@ export function createBrowserWindow(
   url: string,
   options: BrowserWindowConstructorOptions = {},
   isLocal = false,
-  setupCallback?: (win: BrowserWindow) => void
+  name = MAIN_WINDOW_NAME,
+  setupCallback?: (win: BrowserWindow, name?: string) => void
 ): BrowserWindow {
   const window = new BrowserWindow(options)
   if (isLocal) {
@@ -49,8 +51,10 @@ export function createBrowserWindow(
   } else {
     window.loadURL(process.env.DEV_SERVER_URL)
   }
+  const winM = WindowManager.getInstance()
+  winM.addWindow(name, window)
   if (setupCallback) {
-    setupCallback(window)
+    setupCallback(window, name)
   }
   // createView() // TEST
   return window

@@ -1,7 +1,8 @@
-import setupAppHooks from "@main/features/application/listeners"
 import { registerProtocolHandle } from "@main/features/protocol"
+import { registerIPCChannel } from "@main/handlers/channel"
 import onAppReadyAfter from "@main/handlers/event/onAppReadyAfter"
-import LoggerManager from "@main/helpers/manager/logger"
+import setupAppHooks from "@main/helpers/hooks/setupAppHooks"
+import WindowManager from "@main/helpers/manager/window"
 import { createAppServer } from "@main/server"
 import { app } from "electron"
 
@@ -10,8 +11,9 @@ async function onAppReady(): Promise<void> {
   app
     .whenReady()
     .then(() => {
-      LoggerManager.isReady = true
       registerProtocolHandle()
+      WindowManager.getInstance().createMainWindow()
+      registerIPCChannel()
     })
     .then(onAppReadyAfter)
   setupAppHooks()

@@ -3,7 +3,7 @@ import { sendLog } from "@main/toolkit/logger"
 import type { PrintToPDFOptions } from "electron"
 
 export function printToPDF(pdf: string, options: PrintToPDFOptions = {}): void {
-  const window = WindowManager.getInstance().mainWindow
+  const window = WindowManager.getInstance().getMainWindow()
   if (!window) return
   window.webContents.printToPDF(options).then(data => {
     // TODO: PDF 打印功能

@@ -8,7 +8,7 @@ export function onActivate(): void {
    */
   app.on("activate", () => {
     if (isAllWindowClosed()) {
-      WindowManager.getInstance()
+      WindowManager.getInstance().createMainWindow()
     }
   })
 }
