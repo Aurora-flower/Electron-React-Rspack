@@ -3,8 +3,12 @@ import { webLog } from "@/utils/log"
 import * as React from "react"
 import type { ComponentType, JSX } from "react"
 
+interface HOCProps {
+  logSource: string
+}
+
 /**
- * @summary React 模式 - 高阶组件模式（hoc pattern) - Higher Order Component (HOC)
+ * @summary React 模式 - 高阶组件模式（HOC Pattern) - Higher Order Component (HOC)
  * @description
  * 高阶组件是接收另一个组件的组件，一种能够在多个组件中重用相同逻辑的方法。
  * @remarks
@@ -14,11 +18,6 @@ import type { ComponentType, JSX } from "react"
  * - 该行为不会分布在整个应用程序中，只有一个或几个组件使用该行为。
  * - 该行为向组件添加了许多属性
  */
-
-interface HOCProps {
-  logSource: string
-}
-
 function HOC<P extends HOCProps>(
   Component: ComponentType<P>
 ): ComponentType<P> {

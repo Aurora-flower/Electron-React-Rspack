@@ -1,8 +1,8 @@
 import PixiManager from "@/helpers/graphics/gremlin"
-import {
-  destroyWindowResizeListener,
-  enableWindowResizeListener
-} from "@/utils/manager/event/windowListnerCollect"
+// import {
+//   destroyWindowResizeListener,
+//   enableWindowResizeListener
+// } from "@/utils/manager/event/windowListnerCollect"
 import type { Application } from "pixi.js"
 import * as React from "react"
 import type { JSX } from "react"
@@ -14,20 +14,20 @@ function GraphicsPage(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const appRef = React.useRef<Application>(null)
 
-  const redraw = React.useCallback((): void => {
-    PixiManager.initCanvas()
-  }, [])
+  // const redraw = React.useCallback((): void => {
+  //   PixiManager.initCanvas()
+  // }, [])
 
   React.useEffect(() => {
     document.title = "测试 - 图形渲染"
     PixiManager.initialize(containerRef.current!).then((app: Application) => {
       appRef.current = app
     })
-    enableWindowResizeListener(redraw)
+    // enableWindowResizeListener(redraw)
     return (): void => {
-      destroyWindowResizeListener(redraw)
+      // destroyWindowResizeListener(redraw)
     }
-  }, [redraw])
+  }, [])
 
   return (
     <div className="grphics page-base">

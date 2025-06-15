@@ -1,7 +1,6 @@
 import "pixi.js/unsafe-eval"
 import "./static/stylesheets/main.css"
 import "@/App"
-import { messageListener } from "@/helpers/event/listener/message"
 
 /* ***** ***** ***** ***** plugin hooks ***** ***** ***** ***** */
 import setupPixiJS from "@/plugins/setupPixiJS"
@@ -15,7 +14,7 @@ import "primereact/resources/primereact.min.css"
 import "primeicons/primeicons.css"
 import "primeflex/primeflex.css"
 
-import { enableWindowMessagesListener } from "@/utils/manager/event/windowListnerCollect"
+// import { enableWindowMessagesListener } from "@/utils/manager/event/windowListnerCollect"
 /* ***** ***** ***** ***** primereact css ***** ***** ***** ***** */
 import * as THREE from "three"
 
@@ -27,5 +26,5 @@ void (async function AppInit(): Promise<void> {
   await setupPrimeUI()
   setupPixiJS()
   setupThreeJS()
-  enableWindowMessagesListener(messageListener)
+  // enableWindowMessagesListener(messageListener)
 })()
