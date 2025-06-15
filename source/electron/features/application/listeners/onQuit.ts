@@ -6,7 +6,6 @@ import { app } from "electron"
  */
 export function onWillQuit(): void {
   app.on("quit", (event, exitCode) => {
-    event.preventDefault()
     sendLog(
       {
         module: module?.id,
