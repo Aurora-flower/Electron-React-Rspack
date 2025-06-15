@@ -1,4 +1,4 @@
-import HOCPage from "@/ui/components/HOC/HOCPage"
+import HOCPage from "@/ui/components/HOC/page"
 import LayoutView from "@/ui/layout"
 import Home from "@/ui/pages/Home"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
