@@ -1,14 +1,13 @@
-import HOC from "@/components/patterns/React/HOC"
-import Dashboard from "@/ui/components/Dashboard"
+import HOCPage from "@/ui/components/HOC/HOCPage"
 import LayoutView from "@/ui/layout"
-// import GraphicsPage from "@/ui/pages/Graphics"
+import Home from "@/ui/pages/Home"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"
 import { RouterProvider, createBrowserRouter } from "react-router"
 import type { DOMRouterOpts, RouteObject } from "react-router"
 
-const EnhancedDashboard = HOC(Dashboard)
+const EnhancedHome = HOCPage(Home)
 
 const RouteOptions: RouteObject[] = [
   {
@@ -17,7 +16,7 @@ const RouteOptions: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <EnhancedDashboard logSource="dashboard" />
+        element: <EnhancedHome logSource="dashboard" />
         // element: <GraphicsPage />
       }
     ]

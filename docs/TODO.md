@@ -35,7 +35,7 @@
 - 废弃 store manager 模块，而是采用 Redux \ Context 进行状态管理 - 数据缓存不是 react 推荐的做法
 - 事件管理模块重构优化
 - 渲染区在窗口尺寸发生变化时不重新创建，而是重新绘制网格与标尺，减少不必要的性能消耗
-- （pixi 版本）UI 编辑使用复合组件模式，将组件协调交付给复合组件，组件内部处理逻辑
+- 为 Redux、Render Props Pattern、Container/Presentational Pattern、Hooks Pattern、Compound Pattern、 Higher Order Component Pattern 的应用添加实例测试
 
 ## BUG
 
