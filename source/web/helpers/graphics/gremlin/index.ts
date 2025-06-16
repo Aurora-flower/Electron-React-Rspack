@@ -1,3 +1,6 @@
+/**
+ * @file 基于 pixi.js 的渲染
+ */
 import { debugPixiRender } from "@/debug"
 import { getDomElement } from "@/features/document"
 import type Axis from "@/helpers/graphics/gremlin/controller/assistant/axis"
