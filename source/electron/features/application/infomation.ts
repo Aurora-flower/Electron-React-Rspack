@@ -1,4 +1,5 @@
 import { join, parse, sep } from "node:path"
+import { getAppPath, getPathByName } from "@main/features/application/methods"
 import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
@@ -79,7 +80,7 @@ export class AppInfo implements AppInfoModel {
    */
   // accessibilitySupportEnabled = app.isAccessibilitySupportEnabled()
 
-  appFolder: string = replaceSep(app.getAppPath())
+  appFolder: string = getAppPath()
   appUnpackFolder = ""
   sep = sep
   isDev = getIsDev()
@@ -121,7 +122,7 @@ export class AppInfo implements AppInfoModel {
       if (name === "recent" && !this.win32) {
         continue
       }
-      this.paths[name] = replaceSep(app.getPath(name))
+      this.paths[name] = getPathByName(name)
     }
     this.core = replaceSep(join(this.appUnpackFolder, FOLDER_NAMES.Core))
     // workspace

@@ -2,7 +2,6 @@ import { resolve } from "node:path"
 import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/macros"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
 import { sendLog } from "@main/toolkit/logger"
-import { errorMessage } from "@main/utils/mod/error"
 import { net, app, protocol } from "electron"
 import type { CustomScheme } from "electron"
 
@@ -53,17 +52,17 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
         )
       } catch (error) {
         signal = "Request Error"
-        err = errorMessage(error)
+        err = error
       }
     } catch (error) {
-      signal = "[Fetch Error]"
-      err = errorMessage(error)
+      signal = "Fetch Error"
+      err = error
     }
     sendLog(
       {
+        module: module?.id,
         level: "error",
-        sign: signal,
-        module: module?.id
+        sign: signal
       },
       err,
       info

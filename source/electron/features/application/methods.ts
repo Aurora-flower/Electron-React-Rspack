@@ -1,3 +1,5 @@
+import { replaceSep } from "@main/node/path/replaceSep"
+import { sendLog } from "@main/toolkit/logger"
 import { app } from "electron"
 import type { FocusOptions } from "electron"
 
@@ -39,6 +41,38 @@ export function relaunchApp(): void {
 
 export function getIsReady(): boolean {
   return app.isReady()
+}
+
+export function getPathByName(name: AppPathTypes): string {
+  try {
+    return replaceSep(app.getPath(name))
+  } catch (error) {
+    sendLog(
+      {
+        module: module?.id,
+        sign: "getPathByName Error",
+        level: "error"
+      },
+      error
+    )
+    return ""
+  }
+}
+
+export function getAppPath(): string {
+  try {
+    return replaceSep(app.getAppPath())
+  } catch (error) {
+    sendLog(
+      {
+        module: module?.id,
+        sign: "getAppPath Error",
+        level: "error"
+      },
+      error
+    )
+    return ""
+  }
 }
 
 /* ***** ***** ***** ***** 窗口相关操作 ***** ***** ***** *****  */
