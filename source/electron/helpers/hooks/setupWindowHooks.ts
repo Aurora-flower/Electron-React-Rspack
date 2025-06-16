@@ -6,8 +6,12 @@ import Logger from "electron-log"
 
 async function safeCloseWindow(win: BrowserWindow): Promise<void> {
   try {
+    const winM = WindowManager.getInstance()
     await beforeWindowClose()
     win.destroy()
+    if (!winM.getCloseFlag()) {
+      winM.setCloseFlag(true)
+    }
   } catch (error) {
     Logger.error(error)
   }
@@ -26,10 +30,6 @@ function setupWindowHooks(win: BrowserWindow): void {
   win.on("close", e => {
     e.preventDefault()
     safeCloseWindow(win)
-    const winM = WindowManager.getInstance()
-    if (!winM.getCloseFlag()) {
-      winM.setCloseFlag(true)
-    }
   })
 
   win.on("closed", () => {
@@ -37,6 +37,7 @@ function setupWindowHooks(win: BrowserWindow): void {
     winM.setCloseFlag(false)
   })
 
+  /* ***** ***** ***** ***** webContents Events ***** ***** ***** *****  */
   win.webContents.on("did-finish-load", () => {
     win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
       source: "ready",

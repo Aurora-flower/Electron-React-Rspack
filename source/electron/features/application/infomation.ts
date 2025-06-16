@@ -3,6 +3,7 @@ import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
 import { app } from "electron"
+import type { Dock } from "electron"
 
 const FOLDER_NAMES = {
   Core: "core"
@@ -17,8 +18,67 @@ const OUTPUT_FOLDER = "app"
 
 const STATIC_FOLDER = "public"
 
+/**
+ * @summary 应用信息
+ */
 export class AppInfo implements AppInfoModel {
-  name: string = replaceSep(app.getName())
+  name: string = app.name // app.getName())
+
+  /**
+   * @readonly
+   */
+  packaged = app.isPackaged
+
+  /**
+   * @readonly
+   * @summary 一个 CommandLine 对象，允许读取和操作 Chromium 使用的命令行参数。
+   */
+  // commandLine = app.commandLine
+
+  /**
+   * @readonly
+   * @platform darwin
+   * @summary Dock 图标
+   * @description 一个 Dock | undefined 类型的属性（在 macOS 上是 Dock，在其他平台上则是 undefined），
+   * 它允许对用户 Dock 中的 app 图标执行操作。
+   */
+  dock: Dock = app.dock
+
+  /**
+   * @platform darwin | linux
+   * @summary 返回当前应用角标计数的 Integer 属性。 将计数设置为 0 将隐藏角标。
+   * @remarks
+   * - 在 macOS 上，为该属性设置任何非零整数，会显示在 dock 图标上。
+   * - 在 Linux 上，这个属性只适用于 Unity 启动器。
+   */
+  badgeCount = app.badgeCount
+
+  /**
+   * @summary Electron 用于全局回退的用户代理字符串。
+   * @remarks
+   * - 当用户代理在 webContents 或 session 级别没有被设置时，将使用此用户代理。
+   * 有助于确保整个应用程序具有相同的用户代理。
+   * - 在应用初始化中尽早设置为自定义值，以确保使用的是覆盖的值。
+   */
+  userAgentFallback = app.userAgentFallback
+
+  /**
+   * @summary 当前应用的菜单。
+   * @description
+   * 一个 Menu | null 类型的属性，如果已设置了菜单 (Menu)，则返回 Menu，否则返回 null。 用户可以通过传递一个 Menu 来设置此属性。
+   */
+  // applicationMenu = app.applicationMenu
+
+  /**
+   * @platform darwin | win32
+   * @summary 当前应用的 Accessibility Support (Chrome 的辅助功能)状态。
+   * @remarks
+   * - 默认为禁用
+   * - 手动将此属性设置为 true 可启用 Chrome 的辅助功能支持，允许开发人员在应用程序设置中向用户开放无障碍切换。
+   * - 此 API 必须在 ready 事件触发后调用
+   */
+  // accessibilitySupportEnabled = app.isAccessibilitySupportEnabled()
+
   appFolder: string = replaceSep(app.getAppPath())
   appUnpackFolder = ""
   sep = sep
@@ -28,7 +88,6 @@ export class AppInfo implements AppInfoModel {
   win32: boolean = isWin()
   version = ""
   platform = ""
-  packaged = getIsPackage()
   paths: Record<AppPathTypes, string> = {
     home: "",
     appData: "",
@@ -62,7 +121,7 @@ export class AppInfo implements AppInfoModel {
       if (name === "recent" && !this.win32) {
         continue
       }
-      this.paths[name] = app.getPath(name).replace(/\\/g, "/")
+      this.paths[name] = replaceSep(app.getPath(name))
     }
     this.core = replaceSep(join(this.appUnpackFolder, FOLDER_NAMES.Core))
     // workspace
@@ -77,8 +136,8 @@ export class AppInfo implements AppInfoModel {
 }
 
 export function getAppStaticPath(url?: string): string {
-  const isPackaged = AppInfo.getInstance()?.packaged ?? app.isPackaged
-  const AppAsar = AppInfo.getInstance()?.appFolder ?? app.getAppPath()
+  const isPackaged = AppInfo.getInstance().packaged
+  const AppAsar = AppInfo.getInstance().appFolder
   const baseOutput = isPackaged ? "" : OUTPUT_FOLDER
   return join(AppAsar, baseOutput, STATIC_FOLDER, url ?? "")
 }
@@ -87,11 +146,4 @@ export function getAppInfo(): AppInfo {
   return AppInfo.getInstance()
 }
 
-/* ***** ***** ***** ***** Application Properties ***** ***** ***** *****  */
-export function getIsReady(): boolean {
-  return app.isReady()
-}
-
-export function getIsPackage(): boolean {
-  return app.isPackaged
-}
+/* ***** ***** ***** ***** Application Properties Or Functions ***** ***** ***** *****  */

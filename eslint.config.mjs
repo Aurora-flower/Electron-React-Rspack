@@ -202,4 +202,18 @@ export default defineConfig([
       "react/require-render-return": "off"
     }
   }
+  // TODO: eslint-plugin-import
+  // {
+  //   "plugins": ["import"],
+  //   "rules": {
+  //     "import/no-unresolved": [2, { "commonjs": true }],
+  //     "import/order": [
+  //       "error",
+  //       {
+  //         "groups": [["builtin", "external"], "internal", "parent", "sibling", "index"],
+  //         "newlines-between": "always"
+  //       }
+  //     ]
+  //   }
+  // }
 ])

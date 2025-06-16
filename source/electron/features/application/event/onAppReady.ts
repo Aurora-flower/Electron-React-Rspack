@@ -26,7 +26,6 @@ export async function onAppReadyBefore(): Promise<void> {
 
 async function onAppReadyAfter(): Promise<void> {
   setTheme("dark")
-  LoggerManager.isReady = true
   const win = WindowManager.getInstance().getMainWindow()
   if (win) {
     checkForUpdates(win)
@@ -43,6 +42,7 @@ async function onAppReady(): Promise<void> {
       registerProtocolHandle()
       WindowManager.getInstance().createMainWindow()
       registerIPCChannel()
+      LoggerManager.isReady = true
     })
     .then(onAppReadyAfter)
   setupAppHooks()
