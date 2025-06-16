@@ -1,4 +1,5 @@
 import { debugPixiRender } from "@/debug"
+import { getDomElement } from "@/features/document"
 import type Axis from "@/helpers/graphics/gremlin/controller/assistant/axis"
 import type Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import type Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
@@ -10,7 +11,6 @@ import {
   type MatrixModel,
   calculateMatrixCoordinates
 } from "@/logic/algorithm/matrix"
-import { getDomElement } from "@/utils/features/document"
 import { formatNumberPrecision } from "@/utils/functions/math"
 import { getPoint, getSize } from "@/utils/functions/usually"
 import type { Container, Point } from "pixi.js"

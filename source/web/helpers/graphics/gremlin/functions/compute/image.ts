@@ -1,4 +1,4 @@
-import { createImageObject } from "@/utils/features/document/mod/image"
+import { createImageObject } from "@/features/document/mod/image"
 import { getPadding } from "@/utils/functions/usually"
 import { webLog } from "@/utils/log"
 
