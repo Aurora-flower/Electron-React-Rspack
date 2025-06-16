@@ -1,5 +1,4 @@
 import { join, parse, sep } from "node:path"
-import { getIsPackage } from "@main/features/application/isPackage"
 import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
@@ -86,4 +85,13 @@ export function getAppStaticPath(url?: string): string {
 
 export function getAppInfo(): AppInfo {
   return AppInfo.getInstance()
+}
+
+/* ***** ***** ***** ***** Application Properties ***** ***** ***** *****  */
+export function getIsReady(): boolean {
+  return app.isReady()
+}
+
+export function getIsPackage(): boolean {
+  return app.isPackaged
 }

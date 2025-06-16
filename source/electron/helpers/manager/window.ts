@@ -1,9 +1,7 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
-import { getIsPackage } from "@main/features/application/isPackage"
 import { createBrowserWindow } from "@main/features/window"
 import setupWindowHooks from "@main/helpers/hooks/setupWindowHooks"
 import { resolvePath } from "@main/node/path/resolvePath"
-import { isWin } from "@main/node/process/platform"
 import type { BrowserWindowConstructorOptions } from "electron"
 import type { BrowserWindow } from "electron"
 
@@ -17,14 +15,6 @@ class WindowManager {
   private windowOptions: BrowserWindowConstructorOptions = WINDOW_OPTIONS
   private windows: Map<string, BrowserWindow> = new Map()
   private isClosing = false
-
-  get isWindows(): boolean {
-    return isWin()
-  }
-
-  get isPackage(): boolean {
-    return getIsPackage()
-  }
 
   public static getInstance(): WindowManager {
     const ins = WindowManager.instance
