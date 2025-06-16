@@ -1,7 +1,7 @@
 import { replaceSep } from "@main/node/path/replaceSep"
 import { sendLog } from "@main/toolkit/logger"
 import { app } from "electron"
-import type { FocusOptions } from "electron"
+import type { FileIconOptions, FocusOptions, NativeImage } from "electron"
 
 /**
  * @summary 退出应用
@@ -43,6 +43,30 @@ export function getIsReady(): boolean {
   return app.isReady()
 }
 
+/**
+ * @summary 获取当前应用程序区域
+ */
+export function getLocale(): string {
+  return app.getLocale()
+}
+
+/**
+ * @summary 获取当前应用程序的名称，即为该应用程序 package.json 文件的 name 字段。
+ * @remarks
+ * 根据 npm 的命名规则, 通常 package.json 中的 name 字段是一个短的小写字符串。
+ * 通常还应该指定一个 productName 字段, 是首字母大写的完整名称，用于表示应用程序的名称。
+ * Electron 会优先使用这个字段作为应用名。
+ */
+export function getAppName(): string {
+  return app.getName()
+}
+
+export function setAppName(name: string): void {
+  app.setName(name)
+}
+
+/* ***** ***** ***** ***** 应用路径相关 ***** ***** ***** *****  */
+
 export function getPathByName(name: AppPathTypes): string {
   try {
     return replaceSep(app.getPath(name))
@@ -59,6 +83,27 @@ export function getPathByName(name: AppPathTypes): string {
   }
 }
 
+/**
+ * @summary 重写 name 的路径为 path，一个特定的文件夹或者文件。
+ * @remarks
+ * - 如果路径指向一个不存在的目录，则抛出一个 Error。
+ * 在这种情况下，目录应该以 `fs.mkdirSync` 或类似的方式创建。
+ * - name 参数只能使用 app.getPath 定义过的 name
+ * - 默认, 网页的 cookies 和 缓存 将存储在 sessionData 目录下。
+ *  如果要更改此位置，必须在 app 模块的 ready 事件之前重写 sessionData 路径。
+ */
+export function setPathByName(name: AppPathTypes, path: string): void {
+  app.setPath(name, path)
+}
+
+/**
+ * @summary 获取应用程序的版本号。
+ * @remarks 如果应用程序的 package. json 文件中找不到版本号, 则返回当前包或者可执行文件的版本。
+ */
+export function getAppVesion(): string {
+  return app.getVersion()
+}
+
 export function getAppPath(): string {
   try {
     return replaceSep(app.getAppPath())
@@ -73,6 +118,22 @@ export function getAppPath(): string {
     )
     return ""
   }
+}
+
+/**
+ * @summary 读取文件的关联图标。
+ * @returns {NativeImage}
+ * @remarks
+ * - 在 Windows 上，有 2 种图标：
+ *    - 与某些文件扩展名相关联的图标, 比如 `.mp3` ，`.png` 等。
+ *    - 文件本身就带图标，像是 `.exe`, `.dll`, `.ico`
+ * - 在 Linux 和 macOS 上，图标依赖于与应用程序关联的文件 mime 类型。
+ */
+export async function getFileIcon(
+  path: string,
+  options?: FileIconOptions
+): Promise<NativeImage> {
+  return await app.getFileIcon(path, options)
 }
 
 /* ***** ***** ***** ***** 窗口相关操作 ***** ***** ***** *****  */

@@ -1,3 +1,4 @@
+/// <reference types="electron" />
 /// <reference types="./electron/app.d.ts" />
 /// <reference types="./shims.d.ts" />
 /// <reference types="./channel.d.ts" />
@@ -26,6 +27,16 @@ declare global {
   interface AppInfoModel {
     /* 应用信息 */
     name: string
+    /* Dock 图标 */
+    dock?: Electron.Dock
+    /* 应用角标计数 */
+    badgeCount: number
+    /* 全局回退的用户代理字符串 */
+    userAgentFallback: string
+    /* 应用菜单 */
+    applicationMenu?: Electron.Menu
+    /* 是否开启无障碍支持 */
+    accessibilitySupportEnabled?: boolean
     /* 应用路径 */
     appFolder: string
     /*应用路径 - 未解压 */

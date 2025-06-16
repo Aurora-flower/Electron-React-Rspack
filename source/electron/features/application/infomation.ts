@@ -4,7 +4,6 @@ import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
 import { app } from "electron"
-import type { Dock } from "electron"
 
 const FOLDER_NAMES = {
   Core: "core"
@@ -43,7 +42,7 @@ export class AppInfo implements AppInfoModel {
    * @description 一个 Dock | undefined 类型的属性（在 macOS 上是 Dock，在其他平台上则是 undefined），
    * 它允许对用户 Dock 中的 app 图标执行操作。
    */
-  dock: Dock = app.dock
+  // dock: Dock = app.dock
 
   /**
    * @platform darwin | linux
