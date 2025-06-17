@@ -132,6 +132,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **跨平台框架**
   - [📚 Electron](https://www.electronjs.org/zh/docs/latest/)
   - [📱 Electron-Updater](https://builder.electron.js.cn/auto-update.html)
+  - [💤 Electron 版本发布](https://releases.electronjs.org/)
 
 - **前端框架**
   - [🎮 React](https://zh-hans.react.dev/learn)
