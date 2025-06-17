@@ -1,4 +1,4 @@
-import { MAIN_WINDOW_NAME } from "@main/common/macros"
+import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
 import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
 import { errorMessage } from "@main/utils/mod/error"
@@ -33,14 +33,6 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
     ...options,
     payload: args
   }
-  if (LoggerManager.isReady) {
-    const winM = WindowManager.getInstance()
-    const win = info.window ? winM.getWindow(info.window) : winM.getMainWindow()
-    if (win) {
-      // TODO: 根据 window 对象向渲染进程发送 log 消息
-      win.webContents.send("message-transmit", info)
-    }
-  }
   const loggerInstance = LoggerManager.getInstance()
   // Tip📢: 除了 log\info\warn\error 的输出、级别设置后是才可以被记录的
   if (loggerInstance) {
@@ -67,6 +59,15 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
         errorMessage(args[0]),
         ...info.payload.slice(1)
       ])
+    }
+  }
+
+  if (LoggerManager.isReady) {
+    const winM = WindowManager.getInstance()
+    const win = winM.getWindow(info.window) ?? winM.getMainWindow()
+    if (win) {
+      // TODO: 根据 window 对象向渲染进程发送 log 消息
+      win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, info)
     }
   }
 }

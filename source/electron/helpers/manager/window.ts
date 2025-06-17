@@ -1,4 +1,5 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
+import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import { createBrowserWindow } from "@main/features/window"
 import setupWindowHooks from "@main/helpers/hooks/setupWindowHooks"
 import { resolvePath } from "@main/node/path/resolvePath"
@@ -28,13 +29,15 @@ class WindowManager {
     const remoteURL = process.env.DEV_SERVER_URL
     const localURL = resolvePath("../public/index.html")
     const url = remoteURL ? remoteURL : localURL
-    this.mainWindow = createBrowserWindow(
+    const win = createBrowserWindow(
       url,
       this.windowOptions,
       !remoteURL,
-      "",
       setupWindowHooks
     )
+    this.mainWindow = win
+    const winM = WindowManager.getInstance()
+    winM.addWindow(MAIN_WINDOW_NAME, win)
   }
 
   public addWindow(name: string, window: BrowserWindow): void {

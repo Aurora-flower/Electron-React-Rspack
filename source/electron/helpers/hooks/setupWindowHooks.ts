@@ -1,6 +1,8 @@
 import { IPC_CHANNEL_NAME } from "@main/common/macros"
+import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
 import { getIsDev } from "@main/node/process/env"
+import { sendLog } from "@main/toolkit/logger"
 import type { BrowserWindow } from "electron"
 import Logger from "electron-log"
 
@@ -39,10 +41,19 @@ function setupWindowHooks(win: BrowserWindow): void {
 
   /* ***** ***** ***** ***** webContents Events ***** ***** ***** *****  */
   win.webContents.on("did-finish-load", () => {
+    LoggerManager.isReady = true
     win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
       source: "ready",
       payload: "did-finish-load"
     } as Message)
+    sendLog(
+      {
+        module: module?.id,
+        sign: "did-finish-load",
+        level: "info"
+      },
+      process.execArgv
+    )
     if (isDevelopment) {
       // win.webContents.openDevTools({
       //   mode: "detach",

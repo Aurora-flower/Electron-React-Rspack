@@ -7,7 +7,6 @@ import { registerIPCChannel } from "@main/handlers/channel"
 import setupAppHooks, {
   setupAppHooksOnBeforeReady
 } from "@main/helpers/hooks/setupAppHooks"
-import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
 import { createAppServer } from "@main/server"
 import { loadExtension } from "@main/toolkit/devtool"
@@ -42,7 +41,6 @@ async function onAppReady(): Promise<void> {
       registerProtocolHandle()
       WindowManager.getInstance().createMainWindow()
       registerIPCChannel()
-      LoggerManager.isReady = true
     })
     .then(onAppReadyAfter)
   setupAppHooks()
