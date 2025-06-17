@@ -4,32 +4,28 @@ import { dispatch } from "@/helpers/event/electron"
 import { PRIME_REACT_OPTIONS } from "@/plugins/setupPrimeUI"
 import AppRouter from "@/routers"
 import store from "@/stores"
-import StoreManager from "@/stores/memory/appStorage"
-import { appSliceActions } from "@/stores/reducers/app"
+import { useAppDispatch } from "@/stores/hooks"
+import { setInformation } from "@/stores/reducers/app"
 import { PrimeReactProvider } from "primereact/api"
 import * as React from "react"
 import type { JSX } from "react"
 import { createRoot } from "react-dom/client"
-import { useDispatch } from "react-redux"
 import { Provider } from "react-redux"
 
-// import type { ReactNode, ReactElement } from "react"
-// React.CSSProperties
-// React 思想：每个组件都是独立的，一个完整的应用是由一个个组件组成的，并让数据流在组件之间进行传递、运行起来。
-
+/**
+ * React.CSSProperties React.ReactNode React.ReactElement
+ * @remarks React 思想：每个组件都是独立的，一个完整的应用是由一个个组件组成的，并让数据流在组件之间进行传递、运行起来。
+ */
 function App(): JSX.Element {
-  const dispatchStore = useDispatch()
+  const dispatchStore = useAppDispatch()
 
   React.useEffect(() => {
     dispatch(TRIGGER_CHANNEL_NAME.APP_INFO as TriggerChannelName).then(
       value => {
-        StoreManager.setAppInfo(value as AppInfoModel)
-        dispatchStore(appSliceActions.setInformation(value))
+        dispatchStore(setInformation(value))
       }
     )
-    return (): void => {
-      StoreManager.setAppInfo(null)
-    }
+    return (): void => {}
   }, [dispatchStore])
 
   return (

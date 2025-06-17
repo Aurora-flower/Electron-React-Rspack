@@ -3,9 +3,8 @@
 import debugPixiSprite from "@/debug/pixiRender/sprite"
 // import debugPixiText from "@/debug/pixiRender/text"
 // import debugPixiUI from "@/debug/pixiRender/ui"
-import { enableWorker } from "@/handlers/worker/registry"
+// import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
-import StoreManager from "@/stores/memory/appStorage"
 import { webLog } from "@/utils/log"
 import type { Container } from "pixi.js"
 
@@ -19,14 +18,13 @@ export function debugPixiRender(layerContainer: Container): void {
 }
 
 export function debugWorker(): void {
-  const information = StoreManager.getAppInfo()
-  if (!information) {
-    return
-  }
-  const workerPath = "./scripts/worker/index.js"
-  enableWorker(workerPath, {
-    type: "module"
-  })
+  // if (!information) {
+  //   return
+  // }
+  // const workerPath = "./scripts/worker/index.js"
+  // enableWorker(workerPath, {
+  //   type: "module"
+  // })
 }
 
 export function debugIPC(): void {

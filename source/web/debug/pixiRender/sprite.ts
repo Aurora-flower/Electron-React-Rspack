@@ -1,13 +1,10 @@
-import { replaceNormalize } from "@/features/url"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { loadTexture } from "@/helpers/graphics/gremlin/generator/assets"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
 import { createSprite } from "@/helpers/graphics/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/graphics/gremlin/generator/sprite/nineSliceSprite"
-import StoreManager from "@/stores/memory/appStorage"
 import { getRandomColor } from "@/utils/functions/color"
-import { webWarn } from "@/utils/log"
 import type { Container } from "pixi.js"
 import type { Texture } from "pixi.js"
 
@@ -146,29 +143,25 @@ export function debugNineSliceSprite(
   // })
 }
 
-function debugPixiSprite(layerContainer: Container): void {
-  const information = StoreManager.getAppInfo()
-  if (!information) {
-    webWarn("debugPixiSprite", "Warn", "AppInfo is null")
-    return
-  }
+function debugPixiSprite(_layerContainer: Container): void {
+  // if (!information) {
+  //   webWarn("debugPixiSprite", "Warn", "AppInfo is null")
+  //   return
+  // }
   // const sampleURL = replaceNormalize(
   //   `local://${information.core}/resources/images/sample.png`
   // )
   // debugLocalTexture(layerContainer, sampleURL)
-
   // const eggHeadURL = "https://pixijs.com/assets/eggHead.png"
   // debugNineSliceSprite(layerContainer, eggHeadURL)
-
   // const frameURL = replaceNormalize(
   //   `local://${information.core}/resources/images/frame.png`
   // )
   // debugSwitchSprite(layerContainer, frameURL)
-
-  const textureURL = replaceNormalize(
-    `local://${information.core}/resources/images/itemBox.png`
-  )
-  debugNineSliceSprite(layerContainer, textureURL)
+  // const textureURL = replaceNormalize(
+  //   `local://${information.core}/resources/images/itemBox.png`
+  // )
+  // debugNineSliceSprite(layerContainer, textureURL)
 }
 
 export default debugPixiSprite

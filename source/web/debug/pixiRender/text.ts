@@ -1,8 +1,5 @@
-import { replaceNormalize } from "@/features/url"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
-import StoreManager from "@/stores/memory/appStorage"
-import { Assets } from "pixi.js"
 import type { Container } from "pixi.js"
 import { HTMLText } from "pixi.js"
 
@@ -59,31 +56,30 @@ export function debugPixiHTMLText(container: Container): void {
   child.addChild(ChaChicle, Lineal, Dotrice, Crosterian)
 }
 
-function debugPixiText(layerContainer: Container): void {
-  const information = StoreManager.getAppInfo()
-  if (!information) {
-    return
-  }
-  Assets.load(
-    // `local://${information.core}/resources/fonts/ChaChicle.woff`
-    "https://pixijs.com/assets/webfont-loader/ChaChicle.ttf"
-  ).then((font: FontFace) => {
-    const Chachicle = font.family
-    Assets.addBundle("fonts", {
-      [Chachicle]: replaceNormalize(
-        // `local://${information.core}/resources/fonts/ChaChicle.woff`
-        "https://pixijs.com/assets/webfont-loader/ChaChicle.ttf"
-      ), // https://pixijs.com/assets/webfont-loader/ChaChicle.ttf'
-      "Dotrice Regular": replaceNormalize(
-        `local://${information.core}/resources/fonts/Dotrice-Regular.woff`
-      ), // "https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff"
-      Lineal: "https://pixijs.com/assets/webfont-loader/Lineal.otf",
-      Crosterian: "https://pixijs.com/assets/webfont-loader/Crosterian.woff2"
-    })
-    Assets.loadBundle("fonts").then(() => {
-      debugPixiHTMLText(layerContainer)
-    })
-  })
+function debugPixiText(_layerContainer: Container): void {
+  // if (!information) {
+  //   return
+  // }
+  // Assets.load(
+  //   // `local://${information.core}/resources/fonts/ChaChicle.woff`
+  //   "https://pixijs.com/assets/webfont-loader/ChaChicle.ttf"
+  // ).then((font: FontFace) => {
+  //   const Chachicle = font.family
+  //   Assets.addBundle("fonts", {
+  //     [Chachicle]: replaceNormalize(
+  //       // `local://${information.core}/resources/fonts/ChaChicle.woff`
+  //       "https://pixijs.com/assets/webfont-loader/ChaChicle.ttf"
+  //     ), // https://pixijs.com/assets/webfont-loader/ChaChicle.ttf'
+  //     "Dotrice Regular": replaceNormalize(
+  //       `local://${information.core}/resources/fonts/Dotrice-Regular.woff`
+  //     ), // "https://pixijs.com/assets/webfont-loader/Dotrice-Regular.woff"
+  //     Lineal: "https://pixijs.com/assets/webfont-loader/Lineal.otf",
+  //     Crosterian: "https://pixijs.com/assets/webfont-loader/Crosterian.woff2"
+  //   })
+  //   Assets.loadBundle("fonts").then(() => {
+  //     debugPixiHTMLText(layerContainer)
+  //   })
+  // })
 }
 
 export default debugPixiText

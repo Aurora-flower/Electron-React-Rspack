@@ -14,14 +14,6 @@ import "primereact/resources/primereact.min.css"
 import "primeicons/primeicons.css"
 import "primeflex/primeflex.css"
 
-// import { enableWindowMessagesListener } from "@/utils/manager/event/windowListnerCollect"
-/* ***** ***** ***** ***** primereact css ***** ***** ***** ***** */
-import * as THREE from "three"
-
-new THREE.MeshBasicMaterial({
-  color: 0xff0000 //0xff0000设置材质颜色为红色
-})
-
 void (async function AppInit(): Promise<void> {
   await setupPrimeUI()
   setupPixiJS()

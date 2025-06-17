@@ -1,12 +1,14 @@
-import appReducer from "@/stores/reducers/app"
+import rootReducer from "@/stores/reducers"
 import { configureStore } from "@reduxjs/toolkit"
 
+/**
+ * @summary Redux Store
+ * @description
+ * 一个 Store（configureStore） 由一个或多个 Reducer（createSlice） 组成，
+ * 而一个 Reducer 是由一个 Action Creator（createAction）辅助函数创建的。
+ */
 const stores = configureStore({
-  reducer: {
-    app: appReducer
-  }
+  reducer: rootReducer
 })
 
 export default stores
-
-export type RootState = ReturnType<typeof stores.getState>
