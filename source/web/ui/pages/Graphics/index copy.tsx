@@ -1,3 +1,9 @@
+import PixiManager from "@/helpers/graphics/gremlin"
+// import {
+//   destroyWindowResizeListener,
+//   enableWindowResizeListener
+// } from "@/utils/manager/event/windowListnerCollect"
+import type { Application } from "pixi.js"
 import * as React from "react"
 import type { JSX } from "react"
 
@@ -6,11 +12,21 @@ function GraphicsPage(): JSX.Element {
     "使用鼠标右键平移视窗焦点，使用滚轮缩放视图"
   )
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const appRef = React.useRef<Application>(null)
+
+  // const redraw = React.useCallback((): void => {
+  //   PixiManager.initCanvas()
+  // }, [])
 
   React.useEffect(() => {
     document.title = "测试 - 图形渲染"
-
-    return (): void => {}
+    PixiManager.initialize(containerRef.current!).then((app: Application) => {
+      appRef.current = app
+    })
+    // enableWindowResizeListener(redraw)
+    return (): void => {
+      // destroyWindowResizeListener(redraw)
+    }
   }, [])
 
   return (

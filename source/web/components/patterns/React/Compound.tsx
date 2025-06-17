@@ -5,8 +5,8 @@ import type { JSX } from "react"
 /**
  * @summary React 模式 - 复合模式（Compound Pattern) - Higher Order Component (HOC)
  * @description
- * 复合组件模式允许创建所有协同工作以执行任务的组件。通过共享状态相互依赖，并共同共享逻辑。
- * Compound组件是一种将多个子组件组合成一个逻辑上完整组件的模式。
+ * - 复合组件模式允许创建所有协同工作以执行任务的组件。通过共享状态相互依赖，并共同共享逻辑。
+ * - Compound 组件是一种将多个子组件组合成一个逻辑上完整组件的模式。
  * 它通过组合子组件来简化父子组件间的交互，通常子组件通过父组件来共享状态或行为。
  * 当需要在多个子组件之间共享一些状态或行为时，可以使用 Compound 组件。
  * @remarks
