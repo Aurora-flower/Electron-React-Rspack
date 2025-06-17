@@ -5,7 +5,7 @@ import debugPixiSprite from "@/debug/pixiRender/sprite"
 // import debugPixiUI from "@/debug/pixiRender/ui"
 import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
-import StoreManager from "@/stores/manager"
+import StoreManager from "@/stores/memory/appStorage"
 import { webLog } from "@/utils/log"
 import type { Container } from "pixi.js"
 

@@ -42,7 +42,7 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
     }
   }
   const loggerInstance = LoggerManager.getInstance()
-  // Tip: 除了 log\info\warn\error 的输出、级别设置后是才可以被记录的
+  // Tip📢: 除了 log\info\warn\error 的输出、级别设置后是才可以被记录的
   if (loggerInstance) {
     const payload = [info.sign, ...info.payload]
     if (info.level === "trace") {
@@ -53,7 +53,7 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
       loggerInstance.logger.debug(payload)
     } else if (info.level === "info") {
       loggerInstance.logger.info(payload)
-      // loggerInstance.logger.log(info) // Tip: 同为 info 级别
+      // loggerInstance.logger.log(info) // Tip📢: 同为 info 级别
     } else if (info.level === "verbose") {
       loggerInstance.setLogLevel("verbose")
       loggerInstance.logger.verbose(payload)

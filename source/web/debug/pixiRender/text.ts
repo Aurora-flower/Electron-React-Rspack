@@ -1,7 +1,7 @@
 import { replaceNormalize } from "@/features/url"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
-import StoreManager from "@/stores/manager"
+import StoreManager from "@/stores/memory/appStorage"
 import { Assets } from "pixi.js"
 import type { Container } from "pixi.js"
 import { HTMLText } from "pixi.js"

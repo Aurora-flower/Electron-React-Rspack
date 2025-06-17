@@ -41,7 +41,7 @@ function rspackCompiler(isClosing = false): Promise<boolean> {
       }
       const multiCompiler = rspack(RsConfig)
       multiCompiler.watch(options, (err, stats) => {
-        /* Tip: err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
+        /* Tip📢: err 对象不包含编译错误，必须使用 stats.hasErrors() 单独处理 */
         if (err) {
           console.error("[Rspack Watch Error]", err?.stack || err?.message)
           reject(err)
