@@ -1,6 +1,6 @@
-export function getPrototypeChain(this: AnyModel): string[] {
+export function getPrototypeChain(origin: AnyModel): string[] {
   const chain: string[] = []
-  let proto = Object.getPrototypeOf(this)
+  let proto = Object.getPrototypeOf(origin)
   while (proto && proto !== null) {
     // !== Object.prototype
     chain.push(proto.constructor.name)
