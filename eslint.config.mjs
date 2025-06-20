@@ -74,7 +74,8 @@ export default defineConfig([
     language: "css/css",
     extends: ["css/recommended"],
     rules: {
-      "css/no-invalid-at-rules": "off"
+      "css/no-invalid-at-rules": "off",
+      "css/no-invalid-properties": "warn"
       // [
       //   "error",
       //   {
