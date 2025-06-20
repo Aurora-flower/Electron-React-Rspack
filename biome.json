@@ -10,6 +10,7 @@
     "ignore": [
       "app/**/*",
       "**/node_modules/**/*",
+      "**/submodules/**/*",
       "release/**/*",
       "**/dist/**/*",
       "test/**/*"
