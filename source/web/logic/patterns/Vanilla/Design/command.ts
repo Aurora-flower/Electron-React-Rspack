@@ -5,8 +5,10 @@
 
 interface Order {
   id: string
+  name?: string
   status: "processing" | "completed" | "cancelled" | "pending"
 }
+type OrderList = Array<Order>
 
 /**
  * @summary 示例：在线食品配送平台，支持下订单、跟踪和取消订单
@@ -54,12 +56,58 @@ generalOrderManager.cancelOrder(order.id)
 
 /* ***** ***** 命令模式 ***** *****  */
 
-class OrderManager {
-  private orders: Order[]
+type Executor<T> = (orders: T, ...args: unknown[]) => void
 
+class CommandExecutor<T> {
+  execute: Executor<T>
+
+  constructor(execute: Executor<T>) {
+    this.execute = execute
+  }
+}
+
+type OrderCommandExecutor = CommandExecutor<OrderList>
+
+class OrderManager {
+  private orders: OrderList
   constructor() {
     this.orders = []
   }
+
+  executeCommand(command: OrderCommandExecutor, ...args: unknown[]): any {
+    return command.execute(this.orders, ...args)
+  }
 }
+
+// function PlaceOrderCommand(order: Order, id: string): OrderCommandExecutor {
+//   return new CommandExecutor((orders: OrderList) => {
+//     orders.push({ id, status: "pending" })
+//     return `You have successfully ordered ${order} (${id})`
+//   })
+// }
+
+class PlaceOrderCommand implements OrderCommandExecutor {
+  constructor(
+    private order: Order,
+    private id: string
+  ) {}
+
+  execute(orders: OrderList): void {
+    orders.push({ id: this.id, status: "pending" })
+    console.log(`成功下单 ${this.order.name} (${this.id})`)
+  }
+}
+
+const manager = new OrderManager()
+manager.executeCommand(
+  new PlaceOrderCommand(
+    {
+      status: "pending",
+      name: "测试",
+      id: "1234"
+    },
+    "1234"
+  )
+)
 
 export default OrderManager
