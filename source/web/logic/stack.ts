@@ -21,7 +21,7 @@ export function generateCommandInfo<T>(
 
 class Stack {
   private static instance: Stack
-  private _cache: StackElement | undefined
+  private _cache: StackElement | undefined // Tip: 永远有一份当前的数据
   private _stack: StackElement[] = []
   private _history: StackElement[] = []
 
@@ -40,8 +40,10 @@ class Stack {
     this._history = []
   }
 
-  push(commands: StackElement): void {
-    this.clearHistory()
+  push(commands: StackElement, isClearHistory = true): void {
+    if (isClearHistory) {
+      this.clearHistory()
+    }
     this._stack.push(commands)
     if (this.size() > MAX_COUNT) {
       this._stack.shift()
@@ -67,14 +69,10 @@ class Stack {
     if (!this.canUndo()) {
       return undefined
     }
-    if (this._cache && this.historySize() === 0) {
+    if (this._cache) {
       this.record(this._cache)
     }
-    const commands = this._stack.pop()
-    if (this.size() >= 1) {
-      this.record(commands!)
-    }
-    return commands
+    return this._stack.pop()
   }
 
   peek(): StackElement | undefined {
@@ -94,11 +92,10 @@ class Stack {
     if (!this.canRedo()) {
       return undefined
     }
-    const commands = this._history.pop()
-    if (this.historySize() >= 1) {
-      this._stack.push(commands!)
+    if (this._cache) {
+      this.push(this._cache, false)
     }
-    return commands
+    return this._history.pop()
   }
 
   getCache(): StackElement | undefined {
