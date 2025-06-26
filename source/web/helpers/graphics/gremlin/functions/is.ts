@@ -1,3 +1,4 @@
+import { getConsturorName } from "@/utils/functions/prototype"
 import {
   Container,
   Graphics,
@@ -7,7 +8,7 @@ import {
   Text
 } from "pixi.js"
 
-const PIXI_TARGET_TYPE = {
+export const PIXI_TARGET_TYPE = {
   Container: Container.prototype?.constructor?.name ?? "Container",
   Graphics: Graphics.prototype?.constructor?.name ?? "Graphics",
   Sprite: Sprite.prototype?.constructor?.name ?? "Sprite",
@@ -17,34 +18,39 @@ const PIXI_TARGET_TYPE = {
   HTMLText: HTMLText.prototype?.constructor?.name ?? "HTMLText"
 }
 
-export function getTargetType<T>(target: T): string {
-  const type = target?.constructor?.name ?? ""
-  return type.replace("_", "")
-}
+// export function getTargetType<T>(target: T): string {
+//   return target?.constructor?.name ?? ""
+// }
 
 export function isContainer<T>(target: T): boolean {
-  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Container
+  return (
+    Boolean(target) && getConsturorName(target) === PIXI_TARGET_TYPE.Container
+  )
 }
 
 export function isGraphics<T>(target: T): boolean {
-  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Graphics
+  return (
+    Boolean(target) && getConsturorName(target) === PIXI_TARGET_TYPE.Graphics
+  )
 }
 
 export function isSprite<T>(target: T): boolean {
-  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Sprite
+  return Boolean(target) && getConsturorName(target) === PIXI_TARGET_TYPE.Sprite
 }
 
 export function isText<T>(target: T): boolean {
-  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.Text
+  return Boolean(target) && getConsturorName(target) === PIXI_TARGET_TYPE.Text
 }
 
 export function isNineSliceSprite<T>(target: T): boolean {
   return (
     Boolean(target) &&
-    getTargetType(target) === PIXI_TARGET_TYPE.NineSliceSprite
+    getConsturorName(target) === PIXI_TARGET_TYPE.NineSliceSprite
   )
 }
 
 export function isHTMLText<T>(target: T): boolean {
-  return Boolean(target) && getTargetType(target) === PIXI_TARGET_TYPE.HTMLText
+  return (
+    Boolean(target) && getConsturorName(target) === PIXI_TARGET_TYPE.HTMLText
+  )
 }

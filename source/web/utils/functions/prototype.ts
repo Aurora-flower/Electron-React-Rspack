@@ -9,12 +9,12 @@ export function getPrototypeChain(origin: AnyModel): string[] {
   return chain
 }
 
-export function getConstructor(instance: ObjectType): object {
-  return instance.constructor // Function
+export function getConstructor<T>(instance: T): Constructor<T> | undefined {
+  return instance?.constructor as Constructor<T> | undefined
 }
 
-export function getConsturorName(instance: ObjectType): string {
-  return instance.constructor.name
+export function getConsturorName<T>(instance: T): string {
+  return instance?.constructor?.name ?? ""
 }
 
 // export function getPrototype(instance: ObjectType): object {
