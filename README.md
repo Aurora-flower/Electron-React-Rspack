@@ -141,7 +141,6 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **服务端框架**
   - [🖼️ Node.js](https://nodejs.cn/api/)
-  - [💘 Node指南](https://blog.poetries.top/node-learning-notes/)
   - [🌴 Express](https://www.expressjs.com.cn/)
   <!-- - [📦 Redis](https://redis.io/docs/getting-started/) -->
   <!-- - [🔰 Redis](https://www.redis.net.cn/) -->
@@ -195,6 +194,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **组件库**
   - [🟢 PrimeReact UI](https://primereact.cn/installation/)
+  <!-- - [🐳 PrimeVue UI](https://primevue.org/) -->
   - [🔴 Douyin Semi UI](https://semi.design/zh-CN/start/getting-started)
 
 - **样式方案**
@@ -283,7 +283,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **现代JS特性**
   - [🔥 ES6核心指南](https://es6.ruanyifeng.com/)
-  - [🌙 JavaScript基础](https://www.w3ccoo.com/js/js_intro.html)
+  - [🌙 JavaScript 基础](https://www.w3ccoo.com/js/js_intro.html)
 
 - **数据转换**
   - [🕹️ 数据格式工具](https://transform.tools/)
@@ -291,7 +291,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 #### 3. 安全体系
 
 - **内容安全**
-  - [🐶 CSP策略](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+  - [🐶 CSP 策略](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 
 - **证书管理**
   - [🌟 OpenSSL](https://slproweb.com/products/Win32OpenSSL.html)
@@ -305,14 +305,16 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **技术教程集合**
   - [💟 菜鸟教程](https://www.runoob.com/)
   - [💨 W3School](https://www.w3ccoo.com/)
+  - [🐮 W3School](https://w3schools.org.cn/)
 
 - **技术文档**
   - [🐱 MDN Web Docs](https://developer.mozilla.org/zh-CN/)
-  - [🏠 TypeScript文档](https://www.typescriptlang.org/docs/)
+  - [🏠 TypeScript 文档](https://www.typescriptlang.org/docs/)
   - [🗯 阮一峰 ES6 文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)
   - [💌 设计模式](https://www.patterns.dev/#/patterns)
   - [☠ 廖雪峰 JavaScript 教程](https://liaoxuefeng.com/books/javascript/quick-start/index.html)
   - [✉️ 现代 JavaScript 教程](https://zh.javascript.info/)
+  - [🎅 React-three-fiber](https://fiber.framer.wiki/)
   
 - **社区文档**
   - [😼 Github 社区文档]( https://docs.github.com/zh/get-started)
@@ -328,7 +330,9 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [☕️ 掘金社区](https://juejin.cn/)
 
 - **技术博客**
-  - [💥 David Walsh博客](https://davidwalsh.name)
+  - [💥 David Walsh 博客](https://davidwalsh.name)
+  - [👳 CSS 可视化](https://blog.poetries.top/css-reference)
+  - [💘 Node 指南 - 博客](https://blog.poetries.top/node-learning-notes/)
 
 #### 3. 可视化资源
 
@@ -350,6 +354,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 ### 技术资源集
 
 - **技术博客**
+  - [🐭 前端进阶之旅](https://interview.poetries.top/)
   - [🦄 JS Blog](https://davidwalsh.name)
 
 - **可视化资源**
@@ -373,5 +378,5 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [➰ Unicode 彩色符号](https://www.tsfhdq.cn/mfzj/3491.html)
 
 - **API**
-  - [夏柔免费 API 接口](https://api.aa1.cn/)
-  - [网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi)
+  - [🦷 夏柔免费 API 接口](https://api.aa1.cn/)
+  - [👀 网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi)

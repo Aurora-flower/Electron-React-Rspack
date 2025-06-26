@@ -1,6 +1,9 @@
 import { CURSOR } from "@/common/cursor"
 import RenderSelector from "@/helpers/graphics/gremlin/controller/selector"
 import { isContainer } from "@/helpers/graphics/gremlin/functions/is"
+import type { BaseNodeInfoModel } from "@/logic/algorithm/layout"
+import { formatNumberPrecision } from "@/utils/functions/math"
+import { getPoint } from "@/utils/functions/usually"
 import { webLog } from "@/utils/log"
 import {
   type Application,
@@ -22,6 +25,19 @@ export function addStageDrag(app: Application): void {
   TargetDrag.init(stage)
 }
 
+export function getRecursiveScale(
+  node: Container,
+  prop: "x" | "y" = "x"
+): number {
+  let scale = node.scale[prop]
+  let parent = node.parent
+  while (parent) {
+    scale *= parent.scale[prop]
+    parent = parent.parent
+  }
+  return scale
+}
+
 export class TargetDrag {
   private static _instance: TargetDrag
   private static _stage: Container
@@ -29,6 +45,12 @@ export class TargetDrag {
   private static _startPosition = new Point()
   private static _startOffset = new Point()
   private static _lastTarget: Container
+  private static _pos = new Point()
+  private static _point = getPoint()
+  // private static _lastKey = ""
+  // private static _currentKey = ""
+  private static _currentData: BaseNodeInfoModel
+  static _isDragging = false
 
   static getInstance(): TargetDrag {
     if (!TargetDrag._instance) {
@@ -66,13 +88,38 @@ export class TargetDrag {
     TargetDrag._stage.on("pointermove", TargetDrag.pointermove)
   }
 
-  static pointermove(_e: FederatedPointerEvent): void {
+  static pointermove(e: FederatedPointerEvent): void {
+    e.stopPropagation()
+    e.preventDefault()
     const target = TargetDrag._currentTarget
     if (target) {
       /* 1. 更改 图形 与 容器 之间的选择 */
       /* 2. 组合图形的选中 */
       // TODO: 这里是直接更改的图形的坐标，可能需要的是更改 Container 的坐标
       // target.parent.toLocal(e.global.clone(), undefined, target.position)
+      target.cursor = CURSOR.Move
+      const position = TargetDrag._currentData?.position ?? { x: 0, y: 0 }
+      const newPos = {
+        x: e.clientX,
+        y: e.clientY
+      }
+      const factor = {
+        x: getRecursiveScale(target, "x"),
+        y: getRecursiveScale(target, "y")
+      }
+      const offset = {
+        x: formatNumberPrecision(newPos.x - TargetDrag._pos.x / factor.x),
+        y: formatNumberPrecision(newPos.y - TargetDrag._pos.y / factor.y)
+      }
+      TargetDrag._point = getPoint(offset.x + position.x, offset.y + position.y)
+      // console.log(`移动的距离：${offset.x}:${offset.y}`, isLimitX, isLimitY);
+      TargetDrag._isDragging = true
+      if (TargetDrag._currentTarget) {
+        TargetDrag._currentTarget?.position.set(
+          TargetDrag._point.x,
+          TargetDrag._point.y
+        )
+      }
       webLog(
         "drag",
         "pointermove",

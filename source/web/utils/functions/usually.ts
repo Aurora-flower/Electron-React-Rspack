@@ -17,7 +17,7 @@ export function getSpace(horizontal = 0, vertical = 0): SpaceModel {
 export function getPoint(x = 0, y = 0): PointModel {
   return {
     x: formatNumberPrecision(x ?? 0, 2),
-    y: formatNumberPrecision(y ?? 0)
+    y: formatNumberPrecision(y ?? 0, 2)
   }
 }
 

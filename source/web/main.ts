@@ -8,8 +8,9 @@ import setupPrimeUI from "@/plugins/setupPrimeUI"
 import setupThreeJS from "@/plugins/setupThreeJS"
 
 /* ***** ***** ***** ***** primereact css ***** ***** ***** ***** */
-import "primereact/resources/themes/viva-light/theme.css"
-import "primereact/resources/themes/viva-dark/theme.css"
+// import "primereact/resources/themes/viva-light/theme.css"
+// import "primereact/resources/themes/viva-dark/theme.css"
+import "primereact/resources/themes/lara-light-cyan/theme.css"
 import "primereact/resources/primereact.min.css"
 import "primeicons/primeicons.css"
 import "primeflex/primeflex.css"
