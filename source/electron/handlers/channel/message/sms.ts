@@ -3,8 +3,8 @@ import WindowManager from "@main/helpers/manager/window"
 import { sendLog } from "@main/toolkit/logger"
 
 export async function transmit(msg: Message): Promise<void> {
-  const window = WindowManager.getInstance().getMainWindow()
-  if (!window) {
+  const win = WindowManager.getInstance().getMainWindow()
+  if (!win) {
     sendLog(
       {
         sign: "transmit",
@@ -19,7 +19,7 @@ export async function transmit(msg: Message): Promise<void> {
     msg.payload && typeof msg.payload === "string" && msg.isJson
       ? JSON.parse(msg.payload)
       : msg.payload
-  window.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
+  win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, {
     type: "transmit",
     source: msg.source,
     payload: message

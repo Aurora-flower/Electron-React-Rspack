@@ -11,10 +11,10 @@ class AppMessage {
   }
 
   static async showMessageBox(
-    window: BaseWindow,
+    win: BaseWindow,
     options: MessageBoxOptions
   ): Promise<MessageBoxReturnValue> {
-    return dialog.showMessageBox(window, options)
+    return dialog.showMessageBox(win, options)
   }
 }
 

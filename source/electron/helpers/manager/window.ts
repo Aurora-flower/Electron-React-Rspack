@@ -40,8 +40,8 @@ class WindowManager {
     winM.addWindow(MAIN_WINDOW_NAME, win)
   }
 
-  public addWindow(name: string, window: BrowserWindow): void {
-    this.windows.set(name, window)
+  public addWindow(name: string, win: BrowserWindow): void {
+    this.windows.set(name, win)
   }
 
   public getWindow(name: string): BrowserWindow | undefined {
@@ -52,9 +52,9 @@ class WindowManager {
   }
 
   public setWindowTitle(name: string, title: string): void {
-    const window = this.windows.get(name)
-    if (window) {
-      window.setTitle(title)
+    const win = this.windows.get(name)
+    if (win) {
+      win.setTitle(title)
     }
   }
 

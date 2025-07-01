@@ -43,15 +43,15 @@ export function createBrowserWindow(
   isLocal = false,
   setupCallback?: (win: BrowserWindow) => void
 ): BrowserWindow {
-  const window = new BrowserWindow(options)
+  const win = new BrowserWindow(options)
   if (isLocal) {
-    window.loadFile(resolvePath(url))
+    win.loadFile(resolvePath(url))
   } else {
-    window.loadURL(process.env.DEV_SERVER_URL)
+    win.loadURL(process.env.DEV_SERVER_URL)
   }
   if (setupCallback) {
-    setupCallback(window)
+    setupCallback(win)
   }
   // createView() // TEST
-  return window
+  return win
 }
