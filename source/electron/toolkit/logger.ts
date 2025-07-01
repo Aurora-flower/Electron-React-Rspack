@@ -14,7 +14,7 @@ interface LogOptions {
   level?: LogLevel
   date?: string
   time?: string
-  window?: string
+  win?: string
   module?: string | number
   payload?: unknown[]
 }
@@ -28,7 +28,7 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
     type: "log",
     // date: date.toLocaleDateString(),
     time: date.toLocaleTimeString(), // "zh-Hant-TW"
-    window: MAIN_WINDOW_NAME,
+    win: MAIN_WINDOW_NAME,
     module: module?.id,
     ...options,
     payload: args
@@ -64,9 +64,9 @@ export function sendLog(options: LogOptions, ...args: unknown[]): void {
 
   if (LoggerManager.isReady) {
     const winM = WindowManager.getInstance()
-    const win = winM.getWindow(info.window) ?? winM.getMainWindow()
+    const win = winM.getWindow(info.win) ?? winM.getMainWindow()
     if (win) {
-      // TODO: 根据 window 对象向渲染进程发送 log 消息
+      // TODO: 根据窗口对象向渲染进程发送 log 消息
       win.webContents.send(IPC_CHANNEL_NAME.MESSAGE_TRANSMIT, info)
     }
   }

@@ -61,6 +61,9 @@ export class TargetDrag {
 
   static init(stage: Container): void {
     TargetDrag._stage = stage
+    TargetDrag._stage.on("pointerdown", () => {
+      // TODO: 点击空白区域，取消选中；或者取消 markTarget，为全局元素挂载
+    })
     TargetDrag._stage.on("pointerup", TargetDrag.pointerup)
     TargetDrag._stage.on("pointerupoutside", TargetDrag.pointerupoutside)
   }
@@ -93,6 +96,7 @@ export class TargetDrag {
     e.preventDefault()
     const target = TargetDrag._currentTarget
     if (target) {
+      const parent = target.parent
       /* 1. 更改 图形 与 容器 之间的选择 */
       /* 2. 组合图形的选中 */
       // TODO: 这里是直接更改的图形的坐标，可能需要的是更改 Container 的坐标
@@ -104,8 +108,8 @@ export class TargetDrag {
         y: e.clientY
       }
       const factor = {
-        x: getRecursiveScale(target, "x"),
-        y: getRecursiveScale(target, "y")
+        x: getRecursiveScale(parent, "x"),
+        y: getRecursiveScale(parent, "y")
       }
       const offset = {
         x: formatNumberPrecision(newPos.x - TargetDrag._pos.x / factor.x),

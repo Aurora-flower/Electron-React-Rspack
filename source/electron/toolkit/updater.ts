@@ -16,9 +16,9 @@ export function getAutoUpdater(): AppUpdater {
   return autoUpdater
 }
 
-export function checkForUpdates(window?: BrowserWindow | undefined): void {
+export function checkForUpdates(win?: BrowserWindow | undefined): void {
   const appInfo = getAppInfo()
-  if (!window || !appInfo?.packaged || !appInfo?.win32) {
+  if (!win || !appInfo?.packaged || !appInfo?.win32) {
     return
   }
   const autoUpdaterInstance = getAutoUpdater()
@@ -45,7 +45,7 @@ export function checkForUpdates(window?: BrowserWindow | undefined): void {
   })
 
   autoUpdaterInstance.on("download-progress", progress => {
-    window.setProgressBar(progress.percent / 100)
+    win.setProgressBar(progress.percent / 100)
   })
 
   autoUpdaterInstance.on("update-downloaded", () => {
