@@ -12,7 +12,6 @@ module.exports = {
         "refactor",
         "perf",
         "test",
-        "dep",
         "build",
         "ci",
         "chore",
@@ -25,9 +24,7 @@ module.exports = {
         "merge",
         "bug",
         "del",
-        "asset",
-        "base",
-        "editor"
+        "asset"
       ]
     ],
     "subject-case": [
