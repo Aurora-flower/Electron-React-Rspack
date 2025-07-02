@@ -44,12 +44,22 @@ export class AppServer {
       const middleware = express.static(options.path)
       this._application.use(middleware)
       const page = join(options.path, "index.html")
-      this._application.get("/", (req, res) => {
-        res.sendFile(page)
-      })
-      // this._application.get("*", (/* req, res, next */) => {
+      // this._application.get("/", (req, res) => {
       //   res.sendFile(page)
       // })
+      /**
+       * @summary 添加一个中间件来处理所有未知路由
+       * @description 如果请求的 URL 与任何已注册的路由不匹配，则返回 404 错误。
+       * 这里主要用于解决本地刷新时，前端路由会匹配到任何路由，导致服务端返回 404 错误的问题。
+       * @param {express.Request} req - 请求对象
+       * @param {express.Response} res - 响应对象
+       * @param {express.NextFunction} next - 下一个中间件函数
+       * @returns {void} 对于 SPA，返回 index.html 文件
+       * @remarks 官方文档明确要求通配符路由应使用正则表达式语法
+       */
+      this._application.get(/.*/, (req, res /* next */) => {
+        res.sendFile(page)
+      })
     }
   }
 
