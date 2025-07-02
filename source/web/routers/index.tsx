@@ -1,5 +1,6 @@
 import HOCPage from "@/components/HOC/Page"
 import LayoutView from "@/ui/layout"
+import GraphicsPage from "@/ui/pages/Graphics"
 import Home from "@/ui/pages/Home"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
@@ -17,7 +18,16 @@ const RouteOptions: RouteObject[] = [
       {
         index: true,
         element: <EnhancedHome logSource="dashboard" />
-        // element: <GraphicsPage />
+      }
+    ]
+  },
+  {
+    path: "/graphics",
+    element: <LayoutView date={new Date()} />,
+    children: [
+      {
+        index: true,
+        element: <GraphicsPage />
       }
     ]
   }
