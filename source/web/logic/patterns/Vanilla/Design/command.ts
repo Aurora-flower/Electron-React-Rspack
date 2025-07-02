@@ -74,7 +74,7 @@ class OrderManager {
     this.orders = []
   }
 
-  executeCommand(command: OrderCommandExecutor, ...args: unknown[]): any {
+  executeCommand(command: OrderCommandExecutor, ...args: unknown[]): AnyModel {
     return command.execute(this.orders, ...args)
   }
 }

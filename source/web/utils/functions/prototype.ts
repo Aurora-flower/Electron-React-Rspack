@@ -1,3 +1,27 @@
+/**
+ * @file 原型链相关的辅助函数
+ * @remarks
+ * 实例的 __proto__ 指向构造函数的 prototype 属性
+ *
+ * - Factory.__proto__ === Function.prototype
+ * - Object.__proto__ == Function.prototype
+ * - Function.__proto__ == Function.prototype
+ *
+ * - func.constructor === Function
+ * - obj.constructor === Object
+ * - instance.constructor === Factory
+ *
+ * - Factory.prototype.__proto__ === Object.prototype
+ * - Function.prototype.__proto__ === Object.prototype
+ * - Object.prototype.__proto__ === null
+ *
+ * - instance.__proto__ === Factory.prototype
+ * - target.__proto__ === Object.prototype
+ * - func.__proto__ === Function.prototype
+ *
+ * Tip: 这里的 `Factory` 是指的工厂函数（构造函数）
+ */
+
 export function getPrototypeChain(origin: AnyModel): string[] {
   const chain: string[] = []
   let proto = Object.getPrototypeOf(origin)
