@@ -1,25 +1,26 @@
-import { PIXI_TARGET_TYPE } from "@/helpers/graphics/gremlin/functions/is"
-import { getConsturorName } from "@/utils/functions/prototype"
-import type { Container } from "pixi.js"
+import {
+  isContainer,
+  isGraphics,
+  isHTMLText,
+  isNineSliceSprite,
+  isSprite,
+  isText
+} from "@/helpers/graphics/gremlin/functions/is"
 
-export function deepClonePixiObject(target: Container): Container {
-  const handlers = {
-    [PIXI_TARGET_TYPE.Container]: (target: Container): Container => {
-      return target
-    },
-    [PIXI_TARGET_TYPE.Graphics]: (target: Container): Container => {
-      return target
-    },
-    [PIXI_TARGET_TYPE.Text]: (target: Container): Container => {
-      return target
-    },
-    [PIXI_TARGET_TYPE.Sprite]: (target: Container): Container => {
-      return target
-    },
-    [PIXI_TARGET_TYPE.NineSliceSprite]: (target: Container): Container => {
-      return target
-    }
+export function deepClonePixiObject(target: AnyModel): AnyModel {
+  switch (target) {
+    case isContainer(target):
+      break
+    case isGraphics(target):
+      break
+    case isText(target):
+      break
+    case isHTMLText(target):
+      break
+    case isSprite(target):
+      break
+    case isNineSliceSprite(target):
+      break
   }
-
-  return handlers[getConsturorName(target)](target)
+  return target
 }

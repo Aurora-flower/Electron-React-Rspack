@@ -22,12 +22,12 @@
  * Tip: 这里的 `Factory` 是指的工厂函数（构造函数）
  */
 
-export function getPrototypeChain(origin: AnyModel): string[] {
-  const chain: string[] = []
+export function getPrototypeChain(origin: AnyModel): AnyModel[] {
+  const chain: AnyModel[] = []
   let proto = Object.getPrototypeOf(origin)
   while (proto && proto !== null) {
     // !== Object.prototype
-    chain.push(proto.constructor.name)
+    chain.push(proto.constructor)
     proto = Object.getPrototypeOf(proto)
   }
   return chain
@@ -37,6 +37,12 @@ export function getConstructor<T>(instance: T): Constructor<T> | undefined {
   return instance?.constructor as Constructor<T> | undefined
 }
 
+/**
+ * 获取实例的构造函数名称
+ * @param instance 待获取构造函数的实例
+ * @returns 构造函数名称
+ * @remarks 生产环境下强烈不推荐使用，由于代码混淆，无法获取正确的构造函数名称
+ */
 export function getConsturorName<T>(instance: T): string {
   return instance?.constructor?.name ?? ""
 }
