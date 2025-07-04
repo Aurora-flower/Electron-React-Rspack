@@ -4,17 +4,17 @@ const GETTER_WAY = {
   Name: "name",
   Tag: "tag",
   Class: "class"
-}
+} as const
 
 type ElementGeretterWayKeys = keyof typeof GETTER_WAY
 
 type ElementGetterWayValues = (typeof GETTER_WAY)[ElementGeretterWayKeys]
 
-type FilteredGetterWay = Omit<typeof GETTER_WAY, "Class" | "Tag" | "Name">
+// type FilteredGetterWay = Omit<typeof GETTER_WAY, "Class" | "Tag" | "Name">
 
 export function getDomElement(
   parameter: string,
-  way: (typeof GETTER_WAY)[keyof FilteredGetterWay]
+  way: "id" | "selector" //(typeof GETTER_WAY)[keyof FilteredGetterWay]
 ): HTMLElement | null {
   if (way === GETTER_WAY.Selector) {
     return document.querySelector(parameter) as HTMLElement

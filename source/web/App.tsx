@@ -1,5 +1,5 @@
 import { TRIGGER_CHANNEL_NAME } from "@/common/macro"
-import { getRootElement } from "@/features/document"
+import { getDomElement } from "@/features/document"
 import { dispatch } from "@/helpers/event/electron"
 import { PRIME_REACT_OPTIONS } from "@/plugins/setupPrimeUI"
 import AppRouter from "@/routers"
@@ -38,14 +38,12 @@ function App(): JSX.Element {
 }
 
 void (function AppRender(): void {
-  const root = "#root"
-  const rootElement = getRootElement(root)
-  if (!rootElement) {
-    return
+  const rootElement = getDomElement("#root", "selector")
+  if (rootElement) {
+    createRoot(rootElement).render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
   }
-  createRoot(rootElement).render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  )
 })()

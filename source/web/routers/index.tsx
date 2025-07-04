@@ -6,8 +6,9 @@ import Home from "@/ui/pages/Home"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
 import type { JSX } from "react"
-import { RouterProvider, createBrowserRouter } from "react-router"
-import type { DOMRouterOpts, RouteObject } from "react-router"
+// react-router-dom 是基于 react-router 扩展的版本
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import type { DOMRouterOpts, RouteObject } from "react-router-dom"
 
 const EnhancedHome = HOCPage(Home)
 

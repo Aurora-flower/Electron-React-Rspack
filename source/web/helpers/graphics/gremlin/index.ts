@@ -8,7 +8,6 @@ import type Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import type Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
-import { setupStageHook } from "@/helpers/graphics/gremlin/hooks/setupStageHook"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import {
   type MatrixModel,
@@ -78,8 +77,7 @@ class PixiManager {
     })
     PixiManager._app = app
     domElement.appendChild(app.canvas)
-    PixiManager.initCanvas()
-    setupStageHook(app)
+    // PixiManager.initCanvas()
     return app
   }
 
