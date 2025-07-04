@@ -107,8 +107,8 @@ declare global {
   type ObjectType<T = unknown> = {
     [key: string]: T
   }
-
-  type RecordType<T = unknown> = Record<string, T>
+  type FunctionType = () => void
+  type RecordType<T = unknown> = Record<string | number | symbol, T>
 
   type NumberArray = Array<number>
   type StringArray = Array<string>
