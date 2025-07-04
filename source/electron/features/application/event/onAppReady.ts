@@ -1,4 +1,5 @@
 import commandLines from "@main/features/application/commandLines"
+import { registerAppMenu } from "@main/features/menus/applicationMenu"
 import { registerProtocolHandle } from "@main/features/protocol"
 import { privilegedSchemes } from "@main/features/protocol"
 import { setAsDefaultProtocolClient } from "@main/features/protocol"
@@ -21,6 +22,7 @@ function advanceExecution(): void {
 export async function onAppReadyBefore(): Promise<void> {
   advanceExecution()
   privilegedSchemes()
+  registerAppMenu()
 }
 
 async function onAppReadyAfter(): Promise<void> {
