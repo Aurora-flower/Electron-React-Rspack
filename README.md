@@ -142,8 +142,6 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **服务端框架**
   - [🖼️ Node.js](https://nodejs.cn/api/)
   - [🌴 Express](https://www.expressjs.com.cn/)
-  <!-- - [📦 Redis](https://redis.io/docs/getting-started/) -->
-  <!-- - [🔰 Redis](https://www.redis.net.cn/) -->
   - [👻 Sqlite](https://sqlite.readdevdocs.com/)
 
 #### 2. 图形渲染层
@@ -217,6 +215,8 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **资源素材**
   - [💤 设计 - 素材库](https://www.uisdc.com/)
 
+---
+
 ### 辅助集
 
 - **electron 扩展功能**
@@ -235,9 +235,6 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🔔 lodash](https://www.lodashjs.com/)
   - [❌ rimraf](https://npm.io/package/rimraf)
   - [🚫 yauzl](https://npm.io/package/yauzl)
-
-- **前端工作台**
-  - [💭 storybook](https://storybook.org.cn/)
 
 ---
 
@@ -346,10 +343,13 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 ### 扩展工具集
 
-#### 智能工具
-
 - **AI辅助开发**
   - [🤖 AI 对话工具](https://chat18.aichatos98.com/#/chat)
+
+- **前端工作台**
+  - [💭 storybook](https://storybook.org.cn/)
+
+---
 
 ### 技术资源集
 
@@ -386,11 +386,6 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **开发环境**
   - [🐅 Node 环境下载](https://nodejs.org/zh-cn/download)
 
-- **其他**
-  - [konva.js](https://konvajs.org/)
-  - [🦍 html2canvas - HTML 元素转图片](https://www.html2canvas.cn/)
-  - [🐿 snapdom - HTML 元素转图片](https://zumerlab.github.io/snapdom/)
-
 ---
 
 ### 扩展语言学习
@@ -398,3 +393,14 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - [Python](https://docs.python.org/)
 - [Python 文档](https://docs.python.org/zh-cn/3/)
 - [Rust](https://www.rust-lang.org/zh-CN)
+
+---
+
+### 其他资源
+
+- [🧘 Google Labs](https://labs.google/)
+- [🐒 konva.js](https://konvajs.org/)
+- [🦍 html2canvas - HTML 元素转图片](https://www.html2canvas.cn/)
+- [🐿 snapdom - HTML 元素转图片](https://zumerlab.github.io/snapdom/)
+- [📦 Redis](https://redis.io/docs/getting-started/)
+- [🔰 Redis](https://www.redis.net.cn/)
