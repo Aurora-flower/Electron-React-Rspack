@@ -35,6 +35,12 @@ const PIVOT = -(PIVOT_OFFSET_VALUE + DEFAULT_RULER_SIZE)
 // layer.attach(basiskarteContainer, layerContainer, rulerContainer)
 // app.stage.addChild(layer)
 
+function getRootElement(root: string | HTMLElement): HTMLElement {
+  return typeof root === "string"
+    ? (getDomElement(root, "selector") as HTMLElement)
+    : root
+}
+
 class PixiManager {
   static elementFlag = {
     karte: "_$basiskarte",
@@ -58,20 +64,19 @@ class PixiManager {
   private static _ruler: Ruler
   private static _axis: Axis
 
+  /**
+   * 初始化 pixi 应用程序
+   * @param {HTMLElement} root 挂载元素
+   * @returns {Promise<Application>} 应用实例
+   */
   static async initialize(root: HTMLDivElement | string): Promise<Application> {
-    let domElement = root as HTMLDivElement
-    if (typeof root === "string") {
-      const element = getDomElement(root, "id") as HTMLDivElement
-      if (element) {
-        domElement = element
-      }
-    }
+    const domElement = getRootElement(root)
     const app = new Application()
-    PixiManager._app = app
     await app.init({
       antialias: true,
       resizeTo: domElement
     })
+    PixiManager._app = app
     domElement.appendChild(app.canvas)
     PixiManager.initCanvas()
     setupStageHook(app)

@@ -26,11 +26,12 @@ export function addStageDrag(app: Application): void {
 }
 
 export function getRecursiveScale(
-  node: Container,
-  prop: "x" | "y" = "x"
+  element: Container,
+  prop: "x" | "y",
+  _breakCondition?: (element: Container) => boolean
 ): number {
-  let scale = node.scale[prop]
-  let parent = node.parent
+  let scale = element.scale[prop]
+  let parent = element.parent
   while (parent) {
     scale *= parent.scale[prop]
     parent = parent.parent

@@ -5,7 +5,7 @@ import { webLog } from "@/utils/log"
 import { Card } from "primereact/card"
 import * as React from "react"
 import type { JSX } from "react"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 // import { Button, Toast } from "@douyinfe/semi-ui"
 
 interface CardInfoModel {
@@ -23,7 +23,14 @@ function CardItem<T extends CardInfoModel>(prop: T): JSX.Element {
         cupiditate neque quas!
       </p>
       <div className="flex justify-end">
-        <Link to={prop.route ?? "/"}>跳转</Link>
+        <NavLink
+          to={prop.route ?? "/"}
+          className={({ isActive }) =>
+            isActive ? "text-red-500" : "text-black"
+          }
+        >
+          跳转
+        </NavLink>
       </div>
     </Card>
   )
@@ -61,6 +68,18 @@ function CardList(): JSX.Element {
     },
     {
       label: "CSS Animation"
+    },
+    {
+      label: "Music"
+    },
+    {
+      label: "TODO"
+    },
+    {
+      label: "Voyage"
+    },
+    {
+      label: "Get Job"
     }
   ]
   return (

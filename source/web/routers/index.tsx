@@ -1,6 +1,7 @@
 import HOCPage from "@/components/HOC/Page"
 import LayoutView from "@/ui/layout"
 import GraphicsPage from "@/ui/pages/Graphics"
+import PixiJsGraphics from "@/ui/pages/Graphics/PixiJS"
 import Home from "@/ui/pages/Home"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
@@ -23,11 +24,11 @@ const RouteOptions: RouteObject[] = [
   },
   {
     path: "/graphics",
-    element: <LayoutView date={new Date()} />,
+    element: <GraphicsPage />,
     children: [
       {
         index: true,
-        element: <GraphicsPage />
+        element: <PixiJsGraphics />
       }
     ]
   }
