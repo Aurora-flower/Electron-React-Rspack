@@ -7,7 +7,6 @@ import type Axis from "@/helpers/graphics/gremlin/controller/assistant/axis"
 import type Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import type Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/controller/assistant/ruler"
-import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import {
   type MatrixModel,
@@ -77,7 +76,7 @@ class PixiManager {
     })
     PixiManager._app = app
     domElement.appendChild(app.canvas)
-    // PixiManager.initCanvas()
+    PixiManager.initCanvas(app)
     return app
   }
 
@@ -92,34 +91,11 @@ class PixiManager {
     )
   }
 
-  static initCanvas(app: Application = PixiManager._app): void {
+  static initCanvas(app: Application): void {
     if (!app?.stage) {
       return
     }
-    /* 图层与标尺、网格绘制 */
-    const canvasStage = app.stage
-    if (canvasStage.children.length !== 0) {
-      canvasStage.removeChildren()
-      PixiManager.resetMatrix()
-    }
-    PixiManager.basiskarte = createContainer(canvasStage, {
-      label: PixiManager.elementFlag.karte
-    })
-    PixiManager.layerContainer = createContainer(canvasStage, {
-      label: PixiManager.elementFlag.layer
-    })
-    PixiManager.rulerContainer = createContainer(canvasStage, {
-      label: PixiManager.elementFlag.staff
-    })
-    // PixiManager.setPivot(PixiManager.layerContainer)
-    // const width = app.renderer.width
-    // const height = app.renderer.height
-    // const viewSize = getSize(width, height)
-    // PixiManager._grid = new Grid(PixiManager.basiskarte, viewSize)
-    // PixiManager._ruler = new Ruler(PixiManager.rulerContainer, viewSize)
-    // PixiManager._axis = new Axis(PixiManager.basiskarte, viewSize)
-    // PixiManager.basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
-    PixiManager.draw()
+    // TODO: 图层与标尺、网格绘制、画板（虚拟）的显示
   }
 
   static draw(): void {

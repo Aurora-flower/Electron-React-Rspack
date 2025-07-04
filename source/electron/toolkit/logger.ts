@@ -22,7 +22,7 @@ interface LogOptions {
 export function sendLog(options: LogOptions, ...args: unknown[]): void {
   const date = new Date()
   const info: LogOptions = {
-    id: "ELECTRON_LOGGER",
+    id: "LOGGER",
     sign: "log",
     level: "trace",
     type: "log",
