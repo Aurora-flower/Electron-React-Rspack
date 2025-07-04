@@ -13,7 +13,7 @@ import { app } from "electron"
  */
 function onActivate(): void {
   app.on("activate", (event, hasVisibleWindows) => {
-    if (isAllWindowClosed() && hasVisibleWindows) {
+    if (isAllWindowClosed() && !hasVisibleWindows) {
       WindowManager.getInstance().createMainWindow()
     }
   })
