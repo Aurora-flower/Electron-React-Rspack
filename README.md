@@ -363,6 +363,8 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **其他**
   - [💬 GitHub](https://docs.github.com/zh/get-started)
+  - [🤾 WebAssembly](https://webassembly.org/)
+  - [⚡️ 浏览器插件开发](https://developer.chrome.com/docs/extensions/mv3/getstarted/)
 
 ### 社区资源集
 
@@ -383,3 +385,16 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 - **开发环境**
   - [🐅 Node 环境下载](https://nodejs.org/zh-cn/download)
+
+- **其他**
+  - [konva.js](https://konvajs.org/)
+  - [🦍 html2canvas - HTML 元素转图片](https://www.html2canvas.cn/)
+  - [🐿 snapdom - HTML 元素转图片](https://zumerlab.github.io/snapdom/)
+
+---
+
+### 扩展语言学习
+
+- [Python](https://docs.python.org/)
+- [Python 文档](https://docs.python.org/zh-cn/3/)
+- [Rust](https://www.rust-lang.org/zh-CN)
