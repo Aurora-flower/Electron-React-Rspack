@@ -3,7 +3,7 @@ import { isWin } from "@main/node/process/platform"
 
 export const WINDOW_OPTIONS = {
   icon: resolvePath("../../public/favicon.ico"),
-  title: process.env?.TITLE ?? "Electron-React-Rspack",
+  title: process.env?.TITLE ?? "花楹一间",
   frame: !isWin(),
   webPreferences: {
     webSecurity: true,

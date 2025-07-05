@@ -11,7 +11,6 @@ function PixiJsGraphics(): JSX.Element {
   const renderBoxRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    document.title = "测试 - 图形渲染"
     PixiManager.initialize(renderBoxRef.current!).then((app: Application) => {
       appRef.current = app
     })
@@ -19,9 +18,13 @@ function PixiJsGraphics(): JSX.Element {
   }, [])
 
   return (
-    <div className="w-full h-full !bg-gray-200">
+    <div>
       <div className="tip absolute top-6 left-6 opacity-80">{getTip}</div>
-      <div ref={renderBoxRef} id="graphics" />
+      <div
+        ref={renderBoxRef}
+        className="w-full h-full !bg-blue-200"
+        id="graphics"
+      />
     </div>
   )
 }

@@ -1,0 +1,1 @@
+export const DEFAULT_GRID_INTERVAL = 50

@@ -12,6 +12,10 @@ type ElementGetterWayValues = (typeof GETTER_WAY)[ElementGeretterWayKeys]
 
 // type FilteredGetterWay = Omit<typeof GETTER_WAY, "Class" | "Tag" | "Name">
 
+export function setTitle(title: string): void {
+  document.title = title
+}
+
 export function getDomElement(
   parameter: string,
   way: "id" | "selector" //(typeof GETTER_WAY)[keyof FilteredGetterWay]

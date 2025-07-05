@@ -18,7 +18,7 @@ export function createGraphics(
     ...options
   })
   TargetDrag.markTarget(graphic)
-  appendChild(parent, graphic, isTopIndex)
+  parent && appendChild(parent, graphic, isTopIndex)
   return graphic
 }
 
@@ -71,18 +71,4 @@ export function drawEllipse(
   if (stroke) {
     graphic.stroke(stroke)
   }
-}
-
-export function drawLine(
-  graphic: Graphics,
-  points: {
-    from: PointModel
-    to: PointModel
-  },
-  stroke?: StrokeInput
-): void {
-  graphic
-    .moveTo(points.from.x, points.from.y)
-    .lineTo(points.to.x, points.to.y)
-    .stroke(stroke ?? 0xffffff)
 }

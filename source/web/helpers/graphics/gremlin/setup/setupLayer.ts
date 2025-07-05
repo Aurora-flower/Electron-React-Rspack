@@ -1,4 +1,6 @@
+import PixiManager from "@/helpers/graphics/gremlin"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import type { Container } from "pixi.js"
 
@@ -31,6 +33,8 @@ function initSettingsBasiskarte(basiskarte: Container): void {
     return
   }
   // TODO: 网格绘画
+  const grid = Grid.getInstance()
+  grid.draw(basiskarte, PixiManager.viewSize)
 }
 
 /**

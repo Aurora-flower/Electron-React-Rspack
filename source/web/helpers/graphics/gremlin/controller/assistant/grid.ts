@@ -1,99 +1,71 @@
-import { DEFAULT_GRID_INTERVAL } from "@/helpers/graphics/gremlin"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
-import type { ContainerParent } from "@/helpers/graphics/gremlin/interface"
-import { formatNumberPrecision } from "@/utils/functions/math"
-import { getMovePoint, getPoint, getSize } from "@/utils/functions/usually"
+import { DEFAULT_GRID_INTERVAL } from "@/helpers/graphics/gremlin/constant/defaultValue"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
+import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
+import { getPoint } from "@/utils/functions/usually"
 import type { Container, StrokeInput } from "pixi.js"
 import { Graphics } from "pixi.js"
 
-type DrawLineHander = (linePoint: LinePointModel) => void
-
 class Grid {
-  private _parent: ContainerParent
-  private _size: SizeModel = getSize()
-  private _girdInterval: PointModel = getPoint(
-    DEFAULT_GRID_INTERVAL,
-    DEFAULT_GRID_INTERVAL
-  )
-  private _strokeInput: StrokeInput = {
-    width: 1,
-    color: 0xcccccc,
-    alpha: 0.3
-  }
-  private _zoom = 1
-  private _grid: Graphics = new Graphics({
-    label: ELEMENT_FLAG.Grid
-  })
+  private static _instance: Grid
+  private _grid: Graphics = new Graphics()
+  // constructor(root: Container) {
+  // }
 
-  constructor(
+  public static getInstance(): Grid {
+    if (Grid._instance) {
+      return Grid._instance
+    }
+    return new Grid()
+  }
+
+  draw(
     parent: Container,
     size?: SizeModel,
-    storeStyle?: StrokeInput,
+    strokeInput?: StrokeInput,
     girdInterval?: PointModel
-  ) {
-    this._parent = parent
-    if (size) {
-      this._size = size
+  ): void {
+    const renderSize = size ?? {
+      width: 0,
+      height: 0
     }
-    if (girdInterval) {
-      this._girdInterval = girdInterval
+    const renderInterval =
+      girdInterval ?? getPoint(DEFAULT_GRID_INTERVAL, DEFAULT_GRID_INTERVAL)
+    const style = strokeInput ?? {
+      width: 1,
+      color: 0xcccccc,
+      alpha: 0.3
     }
-    if (storeStyle) {
-      this._strokeInput = storeStyle
-    }
+    this.gridLogic(renderSize, renderInterval, style)
+    viewAppend(parent, [this._grid])
   }
 
-  setGridInterval(zoom: number): void {
-    this._zoom = zoom
-    const value = formatNumberPrecision(DEFAULT_GRID_INTERVAL * zoom, 0)
-    this._girdInterval = {
-      x: value,
-      y: value
-    }
-  }
+  clear(): void {}
 
-  draw(scale = this._zoom): void {
-    this.clear()
-    this.setGridInterval(scale)
-    this._grid.setStrokeStyle(this._strokeInput)
-    this.logic(this._size, this._girdInterval)
-    if (this._parent) {
-      this._parent.addChild(this._grid)
-    }
-  }
+  destory(): void {}
 
-  private drawGridLine(linePoint: LinePointModel): void {
-    this._grid
-      .moveTo(linePoint.from.x, linePoint.from.y)
-      .lineTo(linePoint.to.x, linePoint.to.y)
-      .stroke()
-  }
-
-  private logic(
+  private gridLogic(
     size: SizeModel,
     gridInterval: PointModel,
-    drawLine: DrawLineHander = this.drawGridLine.bind(this)
+    style: StrokeInput
+    // drawLine: DrawLineHander = this.drawGridLine.bind(this)
   ): void {
+    // 避免错误传入 0 值时陷入无限循环
+    if (size.width <= gridInterval.x || size.height <= gridInterval.y) {
+      return
+    }
+
     for (let x = 0; x <= size.width; x += gridInterval.x) {
-      const linePoint = getMovePoint({ x, y: 0 }, { x, y: size.height })
-      if (drawLine) {
-        drawLine(linePoint)
-      }
+      const startPoint: [number, number] = [x, 0]
+      const endPoint: [number, number] = [x, size.height]
+      drawLine([startPoint, endPoint], this._grid, style)
+      console.log([[startPoint, endPoint]])
     }
     for (let y = 0; y <= size.height; y += gridInterval.y) {
-      const linePoint = getMovePoint({ x: 0, y }, { x: size.width, y })
-      if (drawLine) {
-        drawLine(linePoint)
-      }
+      const startPoint: [number, number] = [0, y]
+      const endPoint: [number, number] = [size.width, y]
+      drawLine([startPoint, endPoint], this._grid, style)
+      console.log([[startPoint, endPoint]])
     }
-  }
-
-  clear(): void {
-    this._grid.clear()
-  }
-
-  destroy(): void {
-    this._grid.destroy()
   }
 }
 

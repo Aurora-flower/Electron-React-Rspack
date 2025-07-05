@@ -15,6 +15,6 @@ export function createContainer(
     // TODO: Container 默认值的设置
     ...options
   })
-  viewAppend(parent, container, config)
+  viewAppend(parent, [container], config)
   return container
 }

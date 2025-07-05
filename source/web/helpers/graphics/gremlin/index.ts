@@ -1,14 +1,11 @@
 import { getDomElement } from "@/features/document"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import { setupLayer } from "@/helpers/graphics/gremlin/setup/setupLayer"
+import { getSize } from "@/utils/functions/usually"
 import type { Container } from "pixi.js"
 import { Application } from "pixi.js"
 
 overwritePixi()
-
-export const PIVOT_OFFSET_VALUE = 200
-
-export const DEFAULT_GRID_INTERVAL = 50
 
 function getRootElement(root: string | HTMLElement): HTMLElement {
   return typeof root === "string"
@@ -18,6 +15,15 @@ function getRootElement(root: string | HTMLElement): HTMLElement {
 
 class PixiManager {
   private static _app: Application
+  static viewSize: SizeModel = new Proxy(getSize(), {
+    get(target: SizeModel, p: keyof SizeModel, receiver): number {
+      const app = PixiManager._app
+      if (p === "width" || p === "height") {
+        return app.renderer?.[p]
+      }
+      return Reflect.get(target, p, receiver)
+    }
+  })
 
   /**
    * 初始化 pixi 应用程序
