@@ -1,13 +1,13 @@
 export const ELEMENT_FLAG = {
   /* 底部图层 */
-  Karte: "_$basiskarte",
+  Karte: "_$basiskarte$_",
   /* 渲染图层 */
-  Layer: "_$layer",
+  Layer: "_$layer$_",
   /* 标尺图层 */
-  Ruler: "_$ruler"
+  Staff: "_$staff$_",
 
-  // Grid: "_$grid",
-  // Staff: "_$staff",
+  Ruler: "_$ruler$_",
+  Grid: "_$grid$_"
   // Selector: "_$selector",
   // Axis: "_$axis"
 }

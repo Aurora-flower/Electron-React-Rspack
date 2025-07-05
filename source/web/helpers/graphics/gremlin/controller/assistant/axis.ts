@@ -1,4 +1,4 @@
-import PixiManager, { PIVOT_OFFSET_VALUE } from "@/helpers/graphics/gremlin"
+import { PIVOT_OFFSET_VALUE } from "@/helpers/graphics/gremlin"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics"
 import type { ContainerParent } from "@/helpers/graphics/gremlin/interface"
 import { formatNumberPrecision } from "@/utils/functions/math"
@@ -9,7 +9,7 @@ class Axis {
   private _parent: ContainerParent
   private _size: SizeModel = getSize()
   private _axis: Graphics = new Graphics({
-    label: PixiManager.elementFlag.axis
+    label: ELEMENT_FLAG.axis
   })
   private _zoom = 1
   private _axisOffset = getPoint(PIVOT_OFFSET_VALUE, PIVOT_OFFSET_VALUE)

@@ -1,4 +1,5 @@
-import PixiManager, { DEFAULT_GRID_INTERVAL } from "@/helpers/graphics/gremlin"
+import { DEFAULT_GRID_INTERVAL } from "@/helpers/graphics/gremlin"
+import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import type { ContainerParent } from "@/helpers/graphics/gremlin/interface"
 import { formatNumberPrecision } from "@/utils/functions/math"
 import { getMovePoint, getPoint, getSize } from "@/utils/functions/usually"
@@ -21,7 +22,7 @@ class Grid {
   }
   private _zoom = 1
   private _grid: Graphics = new Graphics({
-    label: PixiManager.elementFlag.grid
+    label: ELEMENT_FLAG.Grid
   })
 
   constructor(

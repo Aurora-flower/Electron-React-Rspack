@@ -1,4 +1,3 @@
-import PixiManager from "@/helpers/graphics/gremlin"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { isContainer } from "@/helpers/graphics/gremlin/functions/is"
 import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
@@ -10,7 +9,7 @@ class RenderSelector {
   static select(gremlin: Container): void {
     const parent = gremlin.parent
     if (isContainer(parent)) {
-      const label = PixiManager.elementFlag.selector
+      const label = ELEMENT_FLAG.selector
       const lastSelector = getElementByLabel(label, parent)
       if (lastSelector) {
         lastSelector.destroy()

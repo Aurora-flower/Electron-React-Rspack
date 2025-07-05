@@ -13,12 +13,12 @@ export function setupLayer(stage: Container): void {
   const layerContainer = createContainer(stage, {
     label: ELEMENT_FLAG.Layer
   })
-  const rulerContainer = createContainer(stage, {
-    label: ELEMENT_FLAG.Ruler
+  const staffContainer = createContainer(stage, {
+    label: ELEMENT_FLAG.Staff
   })
   initSettingsBasiskarte(basiskarte)
   initSettingsUiLayer(layerContainer)
-  initSettingsRuler(rulerContainer)
+  initSettingsStaff(staffContainer)
 }
 
 /* ***** ***** ***** ***** 图层初始化操作 （Initialization）***** ***** ***** ***** */
@@ -36,8 +36,8 @@ function initSettingsBasiskarte(basiskarte: Container): void {
 /**
  * @summary 刻度尺图层初始化操作
  */
-function initSettingsRuler(ruler: Container): void {
-  if (!ruler) {
+function initSettingsStaff(staff: Container): void {
+  if (!staff) {
     return
   }
   // TODO: 标尺绘画
