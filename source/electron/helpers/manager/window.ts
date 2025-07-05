@@ -1,7 +1,7 @@
 import { WINDOW_OPTIONS } from "@main/common/config/window"
 import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import { createBrowserWindow } from "@main/features/window"
-import setupWindowHooks from "@main/helpers/hooks/setupWindowHooks"
+import setupWindow from "@main/helpers/setup/setupWindow"
 import { resolvePath } from "@main/node/path/resolvePath"
 import type { BrowserWindowConstructorOptions } from "electron"
 import type { BrowserWindow } from "electron"
@@ -33,7 +33,7 @@ class WindowManager {
       url,
       this.windowOptions,
       !remoteURL,
-      setupWindowHooks
+      setupWindow
     )
     this.mainWindow = win
     const winM = WindowManager.getInstance()

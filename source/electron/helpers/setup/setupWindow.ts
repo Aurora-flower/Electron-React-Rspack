@@ -23,7 +23,7 @@ async function beforeWindowClose(): Promise<void> {
   // TODO(低优先级): 窗口关闭前的处理
 }
 
-function setupWindowHooks(win: BrowserWindow): void {
+function setupWindow(win: BrowserWindow): void {
   if (!win) return
   // win.resizable = false
   const isDevelopment = getIsDev()
@@ -71,4 +71,4 @@ function setupWindowHooks(win: BrowserWindow): void {
   })
 }
 
-export default setupWindowHooks
+export default setupWindow

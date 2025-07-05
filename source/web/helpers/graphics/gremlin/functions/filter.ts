@@ -7,5 +7,13 @@ export function getElementByLabel(
   if (!root) {
     return null
   }
+  // if (root.children.length > 0) {
+  //   for (const child of root.children) {
+  //     const element = getElementByLabel(label, child)
+  //     if (element) {
+  //       return element
+  //     }
+  //   }
+  // }
   return root.getChildByLabel(label)
 }

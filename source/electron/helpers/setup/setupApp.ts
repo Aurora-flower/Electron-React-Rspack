@@ -3,14 +3,14 @@ import onOpenFile from "@main/features/application/event/onOpenFile"
 import onOpenURL from "@main/features/application/event/onOpenURL"
 import onWindowAllClosed from "@main/features/application/event/onWindowAllColsed"
 
-function setupAppHooks(): void {
+function setupApp(): void {
   onWindowAllClosed()
   onActivate()
 }
 
-export function setupAppHooksOnBeforeReady(): void {
+export function setupAppOnBeforeReady(): void {
   onOpenURL()
   onOpenFile()
 }
 
-export default setupAppHooks
+export default setupApp

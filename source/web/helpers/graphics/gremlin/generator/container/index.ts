@@ -1,18 +1,20 @@
-import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
+import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
 import type { ContainerOptions } from "pixi.js"
 import { Container } from "pixi.js"
 
 export function createContainer(
   parent: Container | undefined = undefined,
   options: ContainerOptions = {},
-  _config = {},
-  isTopIndex = false
+  config: ConfigModel = {
+    isNormalAppend: true,
+    zIndex: 0
+  }
 ): Container {
   const container = new Container({
-    interactive: true,
-    eventMode: "static",
+    // TODO: Container 默认值的设置
     ...options
   })
-  appendChild(parent, container, isTopIndex)
+  viewAppend(parent, container, config)
   return container
 }

@@ -5,10 +5,8 @@ import { privilegedSchemes } from "@main/features/protocol"
 import { setAsDefaultProtocolClient } from "@main/features/protocol"
 import { setTheme } from "@main/features/theme"
 import { registerIPCChannel } from "@main/handlers/channel"
-import setupAppHooks, {
-  setupAppHooksOnBeforeReady
-} from "@main/helpers/hooks/setupAppHooks"
 import WindowManager from "@main/helpers/manager/window"
+import setupApp, { setupAppOnBeforeReady } from "@main/helpers/setup/setupApp"
 import { createAppServer } from "@main/server"
 import { loadExtension } from "@main/toolkit/devtool"
 import { checkForUpdates } from "@main/toolkit/updater"
@@ -35,7 +33,7 @@ async function onAppReadyAfter(): Promise<void> {
 }
 
 async function onAppReady(): Promise<void> {
-  setupAppHooksOnBeforeReady()
+  setupAppOnBeforeReady()
   await createAppServer()
   app
     .whenReady()
@@ -45,7 +43,7 @@ async function onAppReady(): Promise<void> {
       registerIPCChannel()
     })
     .then(onAppReadyAfter)
-  setupAppHooks()
+  setupApp()
 }
 
 export default onAppReady

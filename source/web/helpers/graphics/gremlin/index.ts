@@ -1,37 +1,14 @@
-/**
- * @file 基于 pixi.js 的渲染
- */
-import { debugPixiRender } from "@/debug"
 import { getDomElement } from "@/features/document"
-import type Axis from "@/helpers/graphics/gremlin/controller/assistant/axis"
-import type Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
-import type Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
-import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
-import {
-  type MatrixModel,
-  calculateMatrixCoordinates
-} from "@/logic/algorithm/matrix"
-import { formatNumberPrecision } from "@/utils/functions/math"
-import { getPoint, getSize } from "@/utils/functions/usually"
-import type { Container, Point } from "pixi.js"
+import { setupLayer } from "@/helpers/graphics/gremlin/setup/setupLayer"
+import type { Container } from "pixi.js"
 import { Application } from "pixi.js"
 
 overwritePixi()
 
-const MIN_SCALE = 0.25
-const MAX_SCALE = 3
-// const SCALE_RATIO = 0.1
-
 export const PIVOT_OFFSET_VALUE = 200
 
 export const DEFAULT_GRID_INTERVAL = 50
-
-const PIVOT = -(PIVOT_OFFSET_VALUE + DEFAULT_RULER_SIZE)
-
-// const layer = new RenderLayer()
-// layer.attach(basiskarteContainer, layerContainer, rulerContainer)
-// app.stage.addChild(layer)
 
 function getRootElement(root: string | HTMLElement): HTMLElement {
   return typeof root === "string"
@@ -40,27 +17,7 @@ function getRootElement(root: string | HTMLElement): HTMLElement {
 }
 
 class PixiManager {
-  static elementFlag = {
-    karte: "_$basiskarte",
-    layer: "_$layer",
-    staff: "_$staff",
-    grid: "_$grid",
-    ruler: "_$ruler",
-    selector: "_$selector",
-    axis: "_$axis"
-  }
   private static _app: Application
-  private static _matrix: MatrixModel[]
-  /* 暂时不考虑非同比例缩放 */
-  private static _scale = 1
-  private static _lastZoom = -1
-  static basiskarte: Container // 背景板图层
-  static layerContainer: Container // 绘制图层
-  static rulerContainer: Container // 刻度尺
-  /* 辅助元素 */
-  private static _grid: Grid
-  private static _ruler: Ruler
-  private static _axis: Axis
 
   /**
    * 初始化 pixi 应用程序
@@ -76,93 +33,24 @@ class PixiManager {
     })
     PixiManager._app = app
     domElement.appendChild(app.canvas)
-    PixiManager.initCanvas(app)
+    PixiManager.initDrawingBoard(app.stage)
     return app
   }
 
-  static initMatrx(app: Application = PixiManager._app): void {
-    const interval = {
-      x: 200,
-      y: 200
-    }
-    PixiManager._matrix = calculateMatrixCoordinates(
-      getSize(app.renderer.width, app.renderer.height),
-      interval
-    )
-  }
-
-  static initCanvas(app: Application): void {
-    if (!app?.stage) {
-      return
-    }
-    // TODO: 图层与标尺、网格绘制、画板（虚拟）的显示
-  }
-
-  static draw(): void {
-    if (PixiManager._app?.stage) {
-      if (PixiManager.layerContainer?.children.length > 0) {
-        PixiManager.layerContainer.removeChildren()
-      }
-      PixiManager.initMatrx()
-    }
-    const zoom = PixiManager._scale
-    const lastZoom = PixiManager._lastZoom
-    if (lastZoom === zoom) {
-      return
-    }
-    // requestAnimationFrame(() => {
-    //   PixiManager._grid.draw(zoom)
-    //   PixiManager._ruler.draw(zoom)
-    //   PixiManager._axis.draw(zoom)
-    //   PixiManager._lastZoom = zoom
-    // })
-    debugPixiRender(PixiManager.layerContainer)
-  }
-
-  static getZoom(): number {
-    return PixiManager._scale
-  }
-
-  static setZoom(scale: number, _centerPoint?: Point): void {
-    const oldZoom = PixiManager._scale
-    const newZoom = formatNumberPrecision(
-      Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale))
-    )
-    if (oldZoom === newZoom) return
-    PixiManager._scale = newZoom
-    const layer = PixiManager.layerContainer
-    if (layer) {
-      layer.scale.set(newZoom)
-      PixiManager.draw()
-      // TODO: 计算缩放中心偏移、位置偏移、应用缩放、更新辅助元素
-    }
-  }
-
-  static setPivot(root: Container, x: number = PIVOT, y: number = PIVOT): void {
-    const pivot = getPoint(x, y)
-    root.pivot.set(pivot.x, pivot.y)
-  }
-
   static getApp(): Application {
-    return PixiManager._app
+    return PixiManager._app ?? null
   }
 
-  static getMatrix(): MatrixModel[] {
-    return PixiManager._matrix
-  }
-
-  static findUsableMatrix(): MatrixModel | undefined {
-    const matrixItem = PixiManager._matrix.find(item => item.able)
-    if (matrixItem) {
-      matrixItem.able = false
+  /**
+   * 画板样式初始化操作
+   * @param stage 舞台或者容器
+   */
+  static initDrawingBoard(stage: Container): void {
+    if (!stage) {
+      return
     }
-    return matrixItem
-  }
-
-  static resetMatrix(): void {
-    PixiManager._matrix.map(item => {
-      item.able = true
-    })
+    setupLayer(stage)
+    // setupStage(stage)
   }
 }
 
