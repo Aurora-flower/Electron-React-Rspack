@@ -10,6 +10,6 @@ export function forceExit(): void {
   process.exit(101)
 }
 
-export function getHighAccuracyTime(): [number, number] {
+export function getHighAccuracyTime(): PointArray {
   return process.hrtime()
 }

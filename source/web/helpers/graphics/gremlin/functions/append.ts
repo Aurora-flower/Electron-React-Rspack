@@ -18,7 +18,7 @@ export function appendChild(
 }
 
 export function viewAppend(
-  parent: Container | undefined = undefined,
+  parent: Container,
   children: Array<Container> = [],
   config?: Partial<ConfigModel>
 ): void {

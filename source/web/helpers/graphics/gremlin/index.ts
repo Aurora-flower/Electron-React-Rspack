@@ -4,6 +4,7 @@ import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import {
   initSettingsBasiskarte,
+  initSettingsStaff,
   setupLayer
 } from "@/helpers/graphics/gremlin/setup/setupLayer"
 import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
@@ -72,11 +73,19 @@ class PixiManager {
     if (!stage || scale < 0.25 || scale > 3) {
       return
     }
+    PixiManager.viewScale = scale
     const karte = getElementByLabel(ELEMENT_FLAG.Karte, stage)
     if (karte) {
-      PixiManager.viewScale = scale
       initSettingsBasiskarte(karte, true)
       // TODO: 更新辅助元素（标尺|网格等）
+    }
+    const staff = getElementByLabel(ELEMENT_FLAG.Staff, stage)
+    if (staff) {
+      initSettingsStaff(staff, true)
+    }
+    const layer = getElementByLabel(ELEMENT_FLAG.Layer, stage)
+    if (layer) {
+      // initSettingsUiLayer(layer, true)
     }
   }
 }

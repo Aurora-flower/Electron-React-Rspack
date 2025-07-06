@@ -1,6 +1,7 @@
 import PixiManager from "@/helpers/graphics/gremlin"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
+import Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import { getSize } from "@/utils/functions/usually"
 import type { Container } from "pixi.js"
@@ -36,7 +37,6 @@ export function initSettingsBasiskarte(
   if (!basiskarte) {
     return
   }
-  // TODO: 网格绘画
   const grid = Grid.getInstance()
   if (refresh) {
     grid.release()
@@ -48,11 +48,17 @@ export function initSettingsBasiskarte(
 /**
  * @summary 刻度尺图层初始化操作
  */
-export function initSettingsStaff(staff: Container, _refresh?: boolean): void {
+export function initSettingsStaff(staff: Container, refresh?: boolean): void {
   if (!staff) {
     return
   }
   // TODO: 标尺绘画
+  const ruler = Ruler.getInstance()
+  if (refresh) {
+    ruler.release()
+  }
+  const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
+  ruler.draw(staff, size, PixiManager.viewScale)
 }
 
 /**

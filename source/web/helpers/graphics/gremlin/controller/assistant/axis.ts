@@ -3,7 +3,8 @@ import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics"
 import type { ContainerParent } from "@/helpers/graphics/gremlin/interface"
 import { formatNumberPrecision } from "@/utils/functions/math"
 import { getPoint, getSize } from "@/utils/functions/usually"
-import { type Container, Graphics } from "pixi.js"
+import type { Container } from "pixi.js"
+import { Graphics } from "pixi.js"
 
 class Axis {
   private _parent: ContainerParent

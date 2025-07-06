@@ -2,7 +2,7 @@ import { Graphics } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
 
 export function drawLine(
-  paths: Array<[number, number]>, // 或者使用 Array<[number, number]> 数据类型
+  paths: Array<PointArray>, // 或者使用 MovePointModel 数据类型
   graphics?: Graphics,
   strokeStyle?: StrokeInput,
   isClose?: boolean

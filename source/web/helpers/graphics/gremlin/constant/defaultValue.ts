@@ -1,4 +1,8 @@
+export const DEFAULT_SCALE_INTERVAL = 10
+
 export const DEFAULT_GRID_INTERVAL = 50
+
+export const DEFAULT_COLOR = 0xffffff
 
 /**
  * @summary 默认的销毁参数

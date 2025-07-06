@@ -110,6 +110,7 @@ declare global {
   type FunctionType = () => void
   type RecordType<T = unknown> = Record<string | number | symbol, T>
 
+  type PointArray = [number, number]
   type NumberArray = Array<number>
   type StringArray = Array<string>
   type ObjectArray<T = unknown> = Array<ObjectType<T>>

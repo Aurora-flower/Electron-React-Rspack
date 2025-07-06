@@ -4,7 +4,7 @@ import type { ContainerOptions } from "pixi.js"
 import { Container } from "pixi.js"
 
 export function createContainer(
-  parent: Container | undefined = undefined,
+  parent: Container,
   options: ContainerOptions = {},
   config: ConfigModel = {
     isNormalAppend: true,

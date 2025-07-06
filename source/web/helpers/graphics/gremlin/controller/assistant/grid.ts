@@ -1,13 +1,19 @@
 import { DEFAULT_GRID_INTERVAL } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
-import { getPoint } from "@/utils/functions/usually"
+import { getPoint, getSize } from "@/utils/functions/usually"
 import type { Container, DestroyOptions, StrokeInput } from "pixi.js"
 import { Graphics } from "pixi.js"
 
+const DEFAULT_STROKE_INPUT: StrokeInput = {
+  width: 1,
+  color: 0xcccccc,
+  alpha: 0.3
+}
+
 class Grid {
   private static _instance: Grid
-  _grid: Graphics = new Graphics({
+  private _grid: Graphics = new Graphics({
     // label: Date.now().toString()
   })
 
@@ -28,19 +34,17 @@ class Grid {
     strokeInput?: StrokeInput,
     girdInterval?: PointModel
   ): void {
-    const renderSize = size ?? {
-      width: 0,
-      height: 0
+    const renderSize = size ?? getSize()
+    const renderInterval = girdInterval ?? {
+      x: DEFAULT_GRID_INTERVAL,
+      y: DEFAULT_GRID_INTERVAL
     }
-    const renderInterval =
-      girdInterval ??
-      getPoint(DEFAULT_GRID_INTERVAL * scale, DEFAULT_GRID_INTERVAL * scale)
-    const style = strokeInput ?? {
-      width: 1,
-      color: 0xcccccc,
-      alpha: 0.3
-    }
-    this.gridLogic(renderSize, renderInterval, style)
+    const style = strokeInput ?? DEFAULT_STROKE_INPUT
+    this.gridLogic(
+      renderSize,
+      getPoint(renderInterval.x * scale, renderInterval.y * scale),
+      style
+    )
     requestAnimationFrame(() => {
       if (!parent.children.includes(this._grid)) {
         viewAppend(parent, [this._grid])
@@ -48,18 +52,13 @@ class Grid {
     })
   }
 
-  /**
-   *
-   * @param isClean
-   * @param configuration
-   * 参数名	类型	作用	默认值（不传时）
-   */
   release(
     isClean = false,
     configuration?: DestroyOptions /*DEFAULT_DESTORY_OPTIONS */
   ): void {
     if (isClean) {
       this._grid.destroy(configuration)
+      this._grid = new Graphics()
     } else {
       this._grid.clear()
     }
@@ -76,13 +75,13 @@ class Grid {
       return
     }
     for (let x = 0; x <= size.width; x += gridInterval.x) {
-      const startPoint: [number, number] = [x, 0]
-      const endPoint: [number, number] = [x, size.height]
+      const startPoint: PointArray = [x, 0]
+      const endPoint: PointArray = [x, size.height]
       drawLine([startPoint, endPoint], this._grid, style)
     }
     for (let y = 0; y <= size.height; y += gridInterval.y) {
-      const startPoint: [number, number] = [0, y]
-      const endPoint: [number, number] = [size.width, y]
+      const startPoint: PointArray = [0, y]
+      const endPoint: PointArray = [size.width, y]
       drawLine([startPoint, endPoint], this._grid, style)
     }
   }
