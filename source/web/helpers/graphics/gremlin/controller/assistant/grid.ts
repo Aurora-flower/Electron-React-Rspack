@@ -41,9 +41,11 @@ class Grid {
       alpha: 0.3
     }
     this.gridLogic(renderSize, renderInterval, style)
-    if (!parent.children.includes(this._grid)) {
-      viewAppend(parent, [this._grid])
-    }
+    requestAnimationFrame(() => {
+      if (!parent.children.includes(this._grid)) {
+        viewAppend(parent, [this._grid])
+      }
+    })
   }
 
   /**
