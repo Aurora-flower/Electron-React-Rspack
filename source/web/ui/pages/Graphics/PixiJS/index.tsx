@@ -18,13 +18,9 @@ function PixiJsGraphics(): JSX.Element {
   }, [])
 
   return (
-    <div>
+    <div className="w-full h-full">
       <div className="tip absolute top-6 left-6 opacity-80">{getTip}</div>
-      <div
-        ref={renderBoxRef}
-        className="w-full h-full !bg-blue-200"
-        id="graphics"
-      />
+      <div ref={renderBoxRef} className="w-full h-full" id="graphics" />
     </div>
   )
 }

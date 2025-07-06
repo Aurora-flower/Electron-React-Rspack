@@ -1,6 +1,12 @@
 import { getDomElement } from "@/features/document"
+import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
-import { setupLayer } from "@/helpers/graphics/gremlin/setup/setupLayer"
+import {
+  initSettingsBasiskarte,
+  setupLayer
+} from "@/helpers/graphics/gremlin/setup/setupLayer"
+import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
 import { getSize } from "@/utils/functions/usually"
 import type { Container } from "pixi.js"
 import { Application } from "pixi.js"
@@ -15,6 +21,7 @@ function getRootElement(root: string | HTMLElement): HTMLElement {
 
 class PixiManager {
   private static _app: Application
+  static viewScale = 1
   static viewSize: SizeModel = new Proxy(getSize(), {
     get(target: SizeModel, p: keyof SizeModel, receiver): number {
       const app = PixiManager._app
@@ -38,6 +45,7 @@ class PixiManager {
       resizeTo: domElement
     })
     PixiManager._app = app
+    app.stage.hitArea = app.screen
     domElement.appendChild(app.canvas)
     PixiManager.initDrawingBoard(app.stage)
     return app
@@ -56,7 +64,20 @@ class PixiManager {
       return
     }
     setupLayer(stage)
-    // setupStage(stage)
+    setupStage(stage)
+  }
+
+  static setDrawingBoardScale(scale: number): void {
+    const stage = PixiManager.getApp()?.stage
+    if (!stage || scale < 0.25 || scale > 3) {
+      return
+    }
+    const karte = getElementByLabel(ELEMENT_FLAG.Karte, stage)
+    if (karte) {
+      PixiManager.viewScale = scale
+      initSettingsBasiskarte(karte, true)
+      // TODO: 更新辅助元素（标尺|网格等）
+    }
   }
 }
 
