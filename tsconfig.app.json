@@ -17,6 +17,8 @@
     "paths": {
       "@/*": ["source/web/*"]
     },
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
