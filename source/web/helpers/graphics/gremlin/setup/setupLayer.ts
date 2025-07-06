@@ -2,6 +2,7 @@ import PixiManager from "@/helpers/graphics/gremlin"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
+import { getSize } from "@/utils/functions/usually"
 import type { Container } from "pixi.js"
 
 /**
@@ -28,19 +29,26 @@ export function setupLayer(stage: Container): void {
 /**
  * @summary 底部图层初始化操作
  */
-function initSettingsBasiskarte(basiskarte: Container): void {
+export function initSettingsBasiskarte(
+  basiskarte: Container,
+  refresh?: boolean
+): void {
   if (!basiskarte) {
     return
   }
   // TODO: 网格绘画
   const grid = Grid.getInstance()
-  grid.draw(basiskarte, PixiManager.viewSize)
+  if (refresh) {
+    grid.release()
+  }
+  const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
+  grid.draw(basiskarte, size, PixiManager.viewScale)
 }
 
 /**
  * @summary 刻度尺图层初始化操作
  */
-function initSettingsStaff(staff: Container): void {
+export function initSettingsStaff(staff: Container, _refresh?: boolean): void {
   if (!staff) {
     return
   }
@@ -50,7 +58,10 @@ function initSettingsStaff(staff: Container): void {
 /**
  * @summary 绘制图层初始化操作
  */
-function initSettingsUiLayer(layer: Container): void {
+export function initSettingsUiLayer(
+  layer: Container,
+  _refresh?: boolean
+): void {
   if (!layer) {
     return
   }
