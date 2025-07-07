@@ -3,40 +3,42 @@ import type { WatchOptions } from "@rspack/core"
 import { getIsDev } from "../common/env"
 import getRsConfig from "./config"
 
+const ignored = [
+  /* ***** ***** ***** ***** Folder ***** ***** ***** ***** */
+  "**/node_modules/**",
+  "**/gulpfile.ts/**",
+  "**/.idea/**",
+  "**/.github/**",
+  "**/.husky/**",
+  "**/.vscode/**",
+  "**/.git/**",
+  "**/.husky/**",
+  "**/test/**",
+  "**/app/**",
+  "**/core/**",
+  "**/.cache/**",
+
+  /* ***** ***** ***** ***** File ***** ***** ***** ***** */
+  "**/.hintrc",
+  "**/.npmrc",
+  "**/LICENSE*",
+  "**/*.md",
+  "**/*.git*",
+  "**/*.yml",
+  "**/*.config.js",
+  "**/*.config.mjs",
+  "**/tsconfig.*.json",
+  "**/tsconfig.json",
+  "**/package.json",
+  "**/package-lock.json"
+]
+
 function rspackCompiler(isClosing = false): Promise<boolean> {
   return new Promise((resolve, reject) => {
     const RsConfig = getRsConfig()
     try {
       const options: WatchOptions = {
-        ignored: [
-          /* ***** ***** ***** ***** Folder ***** ***** ***** ***** */
-          "**/node_modules/**",
-          "**/gulpfile.ts/**",
-          "**/.idea/**",
-          "**/.github/**",
-          "**/.husky/**",
-          "**/.vscode/**",
-          "**/.git/**",
-          "**/.husky/**",
-          "**/test/**",
-          "**/app/**",
-          "**/core/**",
-          "**/.cache/**",
-
-          /* ***** ***** ***** ***** File ***** ***** ***** ***** */
-          "**/.hintrc",
-          "**/.npmrc",
-          "**/LICENSE*",
-          "**/*.md",
-          "**/*.git*",
-          "**/*.yml",
-          "**/*.config.js",
-          "**/*.config.mjs",
-          "**/tsconfig.*.json",
-          "**/tsconfig.json",
-          "**/package.json",
-          "**/package-lock.json"
-        ]
+        ignored
         // poll: 1000 * 3
       }
       const multiCompiler = rspack(RsConfig)
