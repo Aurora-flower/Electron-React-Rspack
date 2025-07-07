@@ -3,6 +3,8 @@ import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import {
+  initSettingsBasiskarte,
+  initSettingsStaff,
   initSettingsUiLayer,
   setupLayer
 } from "@/helpers/graphics/gremlin/setup/setupLayer"
@@ -54,6 +56,12 @@ class PixiManager {
   async initialize(root: HTMLDivElement | string): Promise<Application> {
     const domElement = getRootElement(root)
     const app = PixiManager._app
+    // if (PixiManager.isInit) {
+    //   if (PixiManager._currentRoot === domElement) {
+    //     return PixiManager._app
+    //   }
+    //   PixiManager.release()
+    // }
     if (!app?.renderer) {
       await app.init({
         antialias: true,
@@ -61,7 +69,10 @@ class PixiManager {
       })
       app.stage.hitArea = app.screen
       domElement.appendChild(app.canvas)
+      // PixiManager._app = app
+      // PixiManager._currentRoot = domElement
       this.initDrawingBoard(app.stage)
+      // PixiManager.isInit = true
       console.log("setup", domElement)
     }
     webLog("PixiManager", "initialize", domElement)
@@ -98,12 +109,12 @@ class PixiManager {
     PixiManager.viewScale = scale
     const karte = getElementByLabel(ELEMENT_FLAG.Karte, stage)
     if (karte) {
-      // initSettingsBasiskarte(karte, true)
+      initSettingsBasiskarte(karte, true)
       // TODO: 更新辅助元素（标尺|网格等）
     }
     const staff = getElementByLabel(ELEMENT_FLAG.Staff, stage)
     if (staff) {
-      // initSettingsStaff(staff, true)
+      initSettingsStaff(staff, true)
     }
     const layer = getElementByLabel(ELEMENT_FLAG.Layer, stage)
     if (layer) {
@@ -111,7 +122,31 @@ class PixiManager {
     }
   }
 
-  static release(): void {}
+  static release(): void {
+    // const app = PixiManager._app
+    // const root = PixiManager._currentRoot
+    // if (app) {
+    //   try {
+    //     if (root && app.canvas && root.contains(app.canvas)) {
+    //       root.removeChild(app.canvas)
+    //     }
+    //     app.destroy(
+    //       {
+    //         removeView: true
+    //       },
+    //       {
+    //         children: true,
+    //         texture: true
+    //       }
+    //     )
+    //   } catch (e) {
+    //     console.error("Error while destroying PIXI application", e)
+    //   }
+    // }
+    // PixiManager._app = new Application()
+    // PixiManager._currentRoot = null
+    // PixiManager.isInit = false
+  }
 }
 
 export default PixiManager
