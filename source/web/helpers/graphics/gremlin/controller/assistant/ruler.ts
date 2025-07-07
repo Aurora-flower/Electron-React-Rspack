@@ -1,6 +1,7 @@
 import {
   DEFAULT_COLOR,
   DEFAULT_GRID_INTERVAL,
+  DEFAULT_RULER_SIZE,
   DEFAULT_SCALE_INTERVAL
 } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
@@ -14,9 +15,10 @@ type RulerType = "top" | "left"
 
 type DrawScaleHander = (val: number, point: PointModel, flag: RulerType) => void
 
-const DEFAULT_RULER_SIZE = 20
 const DEFAULT_RULER_SCALE_FONT_SIZE = 10
 const DEFAULT_RULER_COLOR = 0x292929
+const DEFAULT_MARK_COLOR = 0xf09b40
+const DEFAULT_MARK_COLOR_MINOR = 0xa5cd50
 
 class Ruler {
   private static _instance: Ruler
@@ -89,18 +91,28 @@ class Ruler {
       fontSize: DEFAULT_RULER_SCALE_FONT_SIZE,
       fill: DEFAULT_COLOR
     })
+
+    const position = {
+      x: point.x,
+      y: point.y
+    }
+
+    if (flag === "left") {
+      position.x = point.x + 5
+    } else if (flag === "top") {
+      position.y = point.y + 5
+    }
+
     createText(this._rulerContainer, {
-      position: {
-        x: point.x + 5,
-        y: point.y + 5
-      },
+      position,
       text: value.toString(),
       angle: flag === "left" ? -90 : 0,
       anchor: {
         x: 0.5,
         y: 0.5
       },
-      style
+      style,
+      alpha: 0.5
     })
   }
 
@@ -115,18 +127,24 @@ class Ruler {
     const getScaleLength = (isMajor: boolean): number => {
       return isMajor ? 12 : 6
     }
-    // const getScaleAlpha = (isMajor: boolean): number => {
-    //   return isMajor ? 0.8 : 0.4
-    // }
-    let countX = 1
-    for (let x = 0; x <= size.width; x += rulerInterval.x) {
-      const isMajor = x % (rulerInterval.x * scaleInterval) === 0
+    const getScaleColor = (isMajor: boolean): string | number => {
+      return isMajor ? DEFAULT_MARK_COLOR : DEFAULT_MARK_COLOR_MINOR
+    }
+    const getScaleAlpha = (isMajor: boolean): number => {
+      return isMajor ? 0.8 : 0.4
+    }
+    let countX = 0
+    const start = DEFAULT_RULER_SIZE
+    for (let x = start; x <= size.width; x += rulerInterval.x) {
+      const isMajor = (x - start) % (rulerInterval.x * scaleInterval) === 0
       const scaleLength = getScaleLength(isMajor)
-      // const alpha = getScaleAlpha(isMajor)
       const startPoint: PointArray = [x, 0]
       const endPoint: PointArray = [x, scaleLength]
-      drawLine([startPoint, endPoint], this._topRuler)
-      if (isMajor && x !== 0) {
+      drawLine([startPoint, endPoint], this._topRuler, {
+        color: getScaleColor(isMajor),
+        alpha: getScaleAlpha(isMajor)
+      })
+      if (isMajor) {
         const textPoint = {
           x: x,
           y: scaleLength
@@ -137,14 +155,17 @@ class Ruler {
     }
 
     let countY = 1
-    for (let y = 0; y <= size.height; y += rulerInterval.y) {
-      const isMajor = y % (rulerInterval.x * scaleInterval) === 0
+    for (let y = start; y <= size.height; y += rulerInterval.y) {
+      const isMajor = (y - start) % (rulerInterval.x * scaleInterval) === 0
       const scaleLength = getScaleLength(isMajor)
       // const alpha = getScaleAlpha(isMajor)
       const startPoint: PointArray = [0, y]
       const endPoint: PointArray = [scaleLength, y]
-      drawLine([startPoint, endPoint], this._leftRuler)
-      if (isMajor && y !== 0 && drawScaleValue) {
+      drawLine([startPoint, endPoint], this._leftRuler, {
+        color: getScaleColor(isMajor),
+        alpha: getScaleAlpha(isMajor)
+      })
+      if (isMajor && y !== start) {
         const textPoint = {
           x: scaleLength,
           y: y

@@ -2,6 +2,8 @@ export const DEFAULT_SCALE_INTERVAL = 10
 
 export const DEFAULT_GRID_INTERVAL = 50
 
+export const DEFAULT_RULER_SIZE = 20
+
 export const DEFAULT_COLOR = 0xffffff
 
 /**

@@ -1,4 +1,5 @@
 import PixiManager from "@/helpers/graphics/gremlin"
+import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
@@ -37,6 +38,7 @@ export function initSettingsBasiskarte(
   if (!basiskarte) {
     return
   }
+  basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
   const grid = Grid.getInstance()
   if (refresh) {
     grid.release()
