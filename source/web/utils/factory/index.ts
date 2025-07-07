@@ -3,15 +3,11 @@ interface Button {
 }
 
 class PrimaryButton implements Button {
-  render(): void {
-    console.log("Rendering primary button")
-  }
+  render(): void {}
 }
 
 class SecondaryButton implements Button {
-  render(): void {
-    console.log("Rendering secondary button")
-  }
+  render(): void {}
 }
 
 export class ButtonFactory {

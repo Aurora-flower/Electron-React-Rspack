@@ -29,7 +29,7 @@ function singleConfig(
   const baseOptions: RspackOptions = {
     mode: (process.env.NODE_ENV as Mode) || "production",
     stats: "verbose",
-    devtool: isDevelopment ? DEVTOOL.SourceMap : DEVTOOL.HiddenSourceMap,
+    devtool: DEVTOOL.SourceMap,
     resolve: {
       mainFiles: ["index", "main"],
       extensions: [".ts", ".js", ".json"],

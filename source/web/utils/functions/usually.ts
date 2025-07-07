@@ -1,7 +1,7 @@
 import { formatNumberPrecision } from "@/utils/functions/math"
 
 export function getSize(width = 0, height = 0, digits = 2): SizeModel {
-  // console.log(arguments)
+  // arguments
   return {
     width: formatNumberPrecision(width ?? 0, digits),
     height: formatNumberPrecision(height ?? 0, digits)

@@ -1,7 +1,13 @@
+import { webLog } from "@/utils/log"
+
 export class PerformanceMetrics {
   static logPageLoadTime(): void {
     if (window.performance) {
-      console.log(`Page load time: ${performance.now()} ms`)
+      webLog(
+        "metrics",
+        "logPageLoadTime",
+        `Page load time: ${performance.now()} ms`
+      )
     }
   }
 }

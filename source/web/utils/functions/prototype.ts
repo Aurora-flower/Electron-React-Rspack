@@ -83,29 +83,3 @@ export function isProtoOf(instance: ObjectType, CF: Constructor): boolean {
 }
 
 /* ***** ***** ***** ***** JS 测试用例 ***** ***** ***** ***** */
-// function Person(name) {
-//   this.name = name;
-// }
-
-// // 扩展原型
-// Person.prototype.sayName = function() {
-//   console.log(this.name);
-// };
-
-// const p = new Person("HuaYing");
-
-// console.log(p.constructor == Person)
-
-// // 1. 实例与构造函数原型的关系
-// console.log(p.__proto__ === Person.prototype); // true
-
-// // 2. 原型链继承
-// console.log(p.__proto__.__proto__ === Object.prototype); // true
-// console.log(Object.prototype.__proto__); // null
-
-// // 3. 构造函数本身的原型链
-// console.log(Person.__proto__ === Function.prototype); // true
-// console.log(Function.prototype.__proto__ === Object.prototype); // true
-
-// // 4. 方法调用（通过原型链查找）
-// p.sayName(); //（方法定义在 Person.prototype 上）
