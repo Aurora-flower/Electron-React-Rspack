@@ -26,11 +26,10 @@ function singleConfig(
   const isPeload = processType === APP_PROCESS_MODE.Preload
   const isRenderer = processType === APP_PROCESS_MODE.Renderer
   const isDevelopment = getIsDev()
-
   const baseOptions: RspackOptions = {
     mode: (process.env.NODE_ENV as Mode) || "production",
     stats: "verbose",
-    devtool: DEVTOOL.SourceMap,
+    devtool: isDevelopment ? DEVTOOL.SourceMap : DEVTOOL.HiddenSourceMap,
     resolve: {
       mainFiles: ["index", "main"],
       extensions: [".ts", ".js", ".json"],

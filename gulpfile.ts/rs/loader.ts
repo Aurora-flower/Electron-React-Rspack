@@ -18,6 +18,7 @@ const JS_PARSER_OPTIONS = {
       "@babel/preset-react",
       "@babel/preset-typescript"
     ]
+    // sourceMaps: true
     // cacheDirectory: true,
     // cacheCompression: false,
     // compact: false
