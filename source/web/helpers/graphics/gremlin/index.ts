@@ -5,6 +5,7 @@ import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import {
   initSettingsBasiskarte,
   initSettingsStaff,
+  initSettingsUiLayer,
   setupLayer
 } from "@/helpers/graphics/gremlin/setup/setupLayer"
 import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
@@ -85,7 +86,7 @@ class PixiManager {
     }
     const layer = getElementByLabel(ELEMENT_FLAG.Layer, stage)
     if (layer) {
-      // initSettingsUiLayer(layer, true)
+      initSettingsUiLayer(layer)
     }
   }
 }

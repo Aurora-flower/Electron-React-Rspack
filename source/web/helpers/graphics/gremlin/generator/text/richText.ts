@@ -1,20 +1,19 @@
-import { TargetDrag } from "@/helpers/graphics/gremlin/event/drag"
-import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import type { Container, HTMLTextOptions } from "pixi.js"
 import { HTMLText } from "pixi.js"
 
-export function createRichText(
-  parent: Container | undefined = undefined,
+export function createText(
+  parent: Container,
   options: HTMLTextOptions = {},
-  _config = {},
-  isTopIndex = false
+  config = {
+    isNormalAppend: true,
+    zIndex: 0
+  }
 ): HTMLText {
   const richText = new HTMLText({
-    interactive: true,
-    eventMode: "static",
+    // TODO: HTMLText 默认值的设置
     ...options
   })
-  TargetDrag.markTarget(richText)
-  appendChild(parent, richText, isTopIndex)
+  viewAppend(parent, [richText], config)
   return richText
 }

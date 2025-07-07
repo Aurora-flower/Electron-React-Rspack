@@ -11,6 +11,7 @@ export function createText(
   }
 ): Text {
   const text = new Text({
+    // TODO: Text 默认值的设置
     ...options
   })
   viewAppend(parent, [text], config)

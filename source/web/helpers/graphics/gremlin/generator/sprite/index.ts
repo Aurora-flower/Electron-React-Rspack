@@ -1,22 +1,19 @@
-import { TargetDrag } from "@/helpers/graphics/gremlin/event/drag"
-import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import type { Container, SpriteOptions } from "pixi.js"
-import { Sprite, Texture } from "pixi.js"
+import { Sprite } from "pixi.js"
 
-export function createSprite(
-  parent: Container | undefined = undefined,
-  options: SpriteOptions = {
-    texture: Texture.EMPTY
-  },
-  _config = {},
-  isTopIndex = false
+export function createText(
+  parent: Container,
+  options: SpriteOptions = {},
+  config = {
+    isNormalAppend: true,
+    zIndex: 0
+  }
 ): Sprite {
   const sprite = new Sprite({
-    interactive: true,
-    eventMode: "static",
+    // TODO: Sprite 默认值的设置
     ...options
   })
-  TargetDrag.markTarget(sprite)
-  appendChild(parent, sprite, isTopIndex)
+  viewAppend(parent, [sprite], config)
   return sprite
 }

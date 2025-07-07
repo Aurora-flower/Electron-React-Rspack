@@ -3,7 +3,12 @@ import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultV
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
+import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
+import {
+  createGraphics,
+  drawRect
+} from "@/helpers/graphics/gremlin/generator/graphics"
 import { getSize } from "@/utils/functions/usually"
 import type { Container } from "pixi.js"
 
@@ -66,12 +71,24 @@ export function initSettingsStaff(staff: Container, refresh?: boolean): void {
 /**
  * @summary 绘制图层初始化操作
  */
-export function initSettingsUiLayer(
-  layer: Container,
-  _refresh?: boolean
-): void {
+export function initSettingsUiLayer(layer: Container, refresh?: boolean): void {
   if (!layer) {
     return
   }
+  if (refresh) {
+    layer.removeChildren()
+  }
+  layer.pivot.set(-DEFAULT_RULER_SIZE)
   // TODO: 画板 + 渲染元素
+  let board = getElementByLabel(ELEMENT_FLAG.Board, layer)
+  if (!board) {
+    board = createContainer(layer, {
+      label: ELEMENT_FLAG.Board
+    })
+  }
+  board.scale.set(PixiManager.viewScale)
+
+  // TEST
+  const graphic = createGraphics(board)
+  drawRect(graphic, { x: 0, y: 0 }, { width: 200, height: 200 })
 }

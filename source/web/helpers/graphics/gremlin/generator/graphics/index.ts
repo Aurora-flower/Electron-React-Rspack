@@ -1,24 +1,23 @@
-import { TargetDrag } from "@/helpers/graphics/gremlin/event/drag"
-import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
+import { DEFAULT_COLOR } from "@/helpers/graphics/gremlin/constant/defaultValue"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
+import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
 import { getRandomColor } from "@/utils/functions/color"
 import { Graphics } from "pixi.js"
 import type { Container, GraphicsOptions, StrokeInput } from "pixi.js"
 
 export function createGraphics(
-  parent: Container | undefined = undefined,
+  parent: Container,
   options: GraphicsOptions = {},
-  _config = {},
-  isTopIndex = false
-  // type: "None" | "Line" | "RectStroke" | "RectFill" | "CircleStroke" | "CircleFill"
+  config: ConfigModel = {
+    isNormalAppend: true,
+    zIndex: 0
+  }
 ): Graphics {
-  // TODO: 一般情况下，都是可交互的，只是通过某些标记 - lock 作为不可交互的判断条件
   const graphic = new Graphics({
-    interactive: true,
-    eventMode: "static",
+    // TODO: Graphics 默认值的设置
     ...options
   })
-  TargetDrag.markTarget(graphic)
-  parent && appendChild(parent, graphic, isTopIndex)
+  viewAppend(parent, [graphic], config)
   return graphic
 }
 
@@ -27,8 +26,8 @@ export function drawRect(
   position: PointModel,
   size: SizeModel,
   isFill = true,
-  stroke?: StrokeInput,
-  color?: number | string
+  color: number | string = DEFAULT_COLOR,
+  stroke?: StrokeInput
 ): void {
   graphic.rect(position.x, position.y, size.width, size.height)
   if (isFill) {
@@ -44,8 +43,8 @@ export function drawCircle(
   position: PointModel,
   radius: number,
   isFill = true,
-  stroke?: StrokeInput,
-  color?: number | string
+  color: number | string = DEFAULT_COLOR,
+  stroke?: StrokeInput
 ): void {
   graphic.circle(position.x, position.y, radius)
   if (isFill) {
@@ -61,8 +60,8 @@ export function drawEllipse(
   position: PointModel,
   radius: PointModel,
   isFill = true,
-  stroke?: StrokeInput,
-  color?: number | string
+  color: number | string = DEFAULT_COLOR,
+  stroke?: StrokeInput
 ): void {
   graphic.ellipse(position.x, position.y, radius.x, radius.y)
   if (isFill) {
