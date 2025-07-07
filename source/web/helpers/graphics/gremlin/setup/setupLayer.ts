@@ -91,4 +91,21 @@ export function initSettingsUiLayer(layer: Container, refresh?: boolean): void {
   // TEST
   const graphic = createGraphics(board)
   drawRect(graphic, { x: 0, y: 0 }, { width: 200, height: 200 })
+
+  const mask = createGraphics(
+    board,
+    {},
+    {
+      isNormalAppend: false,
+      zIndex: board.children.length
+    }
+  )
+  drawRect(
+    mask,
+    { x: 0, y: 0 },
+    { width: 50, height: 50 },
+    {
+      color: "#ee9a40"
+    }
+  )
 }

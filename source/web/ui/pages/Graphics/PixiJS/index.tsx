@@ -11,10 +11,28 @@ function PixiJsGraphics(): JSX.Element {
   const renderBoxRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
-    PixiManager.initialize(renderBoxRef.current!).then((app: Application) => {
-      appRef.current = app
+    requestAnimationFrame(() => {
+      PixiManager.getInstance()
+        .initialize(renderBoxRef.current!)
+        .then((app: Application) => {
+          appRef.current = app
+        })
     })
-    return (): void => {}
+    return (): void => {
+      const app = appRef.current
+      if (app?.renderer) {
+        console.log("销毁app", appRef.current?.renderer)
+        app.destroy(
+          {
+            removeView: true
+          },
+          {
+            children: true
+          }
+        )
+        // PixiManager.getInstance().setApp()
+      }
+    }
   }, [])
 
   return (

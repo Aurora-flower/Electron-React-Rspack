@@ -25,5 +25,6 @@ output
 # ***** ***** ***** ***** File ***** ***** ***** *****
 .DS_Store
 *.log
+* copy.*
 
 components.d.ts
