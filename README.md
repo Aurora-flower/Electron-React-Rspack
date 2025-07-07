@@ -378,6 +378,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **工具**
   - [🛠️ Codesandbox](https://codesandbox.io/)
   - [➰ Unicode 彩色符号](https://www.tsfhdq.cn/mfzj/3491.html)
+  - [🌍 JSON 在线解析格式化](https://json.fans/cn)
 
 - **API**
   - [🦷 夏柔免费 API 接口](https://api.aa1.cn/)
