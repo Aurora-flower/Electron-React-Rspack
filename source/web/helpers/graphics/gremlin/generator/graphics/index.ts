@@ -5,6 +5,12 @@ import { getRandomColor } from "@/utils/functions/color"
 import { Graphics } from "pixi.js"
 import type { Container, GraphicsOptions, StrokeInput } from "pixi.js"
 
+type GraphicsConfig = ConfigModel & {
+  isFill?: boolean
+  color?: number | string
+  stroke?: StrokeInput
+}
+
 export function createGraphics(
   parent: Container,
   options: GraphicsOptions = {},
@@ -25,49 +31,47 @@ export function drawRect(
   graphic: Graphics,
   position: PointModel,
   size: SizeModel,
-  isFill = true,
-  color: number | string = DEFAULT_COLOR,
-  stroke?: StrokeInput
+  config: GraphicsConfig = {
+    isFill: true,
+    color: DEFAULT_COLOR
+  }
 ): void {
   graphic.rect(position.x, position.y, size.width, size.height)
-  if (isFill) {
-    graphic.fill(color ?? getRandomColor())
+  if (config.isFill) {
+    graphic.fill(config.color ?? getRandomColor())
   }
-  if (stroke) {
-    graphic.stroke(stroke)
-  }
+  graphic.stroke(config.stroke)
 }
 
 export function drawCircle(
   graphic: Graphics,
   position: PointModel,
   radius: number,
-  isFill = true,
-  color: number | string = DEFAULT_COLOR,
-  stroke?: StrokeInput
+  config: GraphicsConfig = {
+    isFill: true,
+    color: DEFAULT_COLOR
+  }
 ): void {
   graphic.circle(position.x, position.y, radius)
-  if (isFill) {
-    graphic.fill(color ?? getRandomColor())
+  if (config.isFill) {
+    graphic.fill(config.color ?? getRandomColor())
   }
-  if (stroke) {
-    graphic.stroke(stroke)
-  }
+  graphic.stroke(config.stroke)
 }
 
 export function drawEllipse(
   graphic: Graphics,
   position: PointModel,
   radius: PointModel,
-  isFill = true,
-  color: number | string = DEFAULT_COLOR,
-  stroke?: StrokeInput
+  config: GraphicsConfig = {
+    isFill: true,
+    color: DEFAULT_COLOR
+  }
 ): void {
   graphic.ellipse(position.x, position.y, radius.x, radius.y)
-  if (isFill) {
-    graphic.fill(color ?? getRandomColor())
+  if (config.isFill) {
+    graphic.fill(config.color ?? getRandomColor())
   }
-  if (stroke) {
-    graphic.stroke(stroke)
-  }
+
+  graphic.stroke(config.stroke)
 }
