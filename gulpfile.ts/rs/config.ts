@@ -37,6 +37,34 @@ function singleConfig(
       symlinks: false
     },
     module: {
+      parser: {
+        // asset 模块的解析器选项
+        asset: {
+          dataUrlCondition: {
+            maxSize: 16192
+          }
+        },
+        // javascript 模块的解析器选项
+        javascript: {
+          dynamicImportMode: "lazy",
+          dynamicImportPrefetch: false,
+          dynamicImportPreload: false,
+          url: true,
+          importMeta: true
+        },
+        // CSS 模块的解析器选项
+        css: {
+          namedExports: true
+        },
+        // css/auto 模块的解析器选项
+        "css/auto": {
+          namedExports: true
+        },
+        // css/module 模块的解析器选项
+        "css/module": {
+          namedExports: true
+        }
+      },
       rules: [
         LOADER.JsExclude,
         LOADER.TsExclude,
@@ -46,7 +74,7 @@ function singleConfig(
         LOADER.FontExclude
       ]
     },
-    plugins: [PLUGINS.CssExtract(), PLUGINS.Define()]
+    plugins: []
   }
 
   const emptyObject = Object.create(null)
@@ -66,6 +94,7 @@ function singleConfig(
       filename: "index.js",
       // filename: `${isMain ? "main" : "index"}.js`,
       clean: true
+      // globalObject: "this"
     }
   })
 
@@ -73,16 +102,18 @@ function singleConfig(
     options.resolve!.alias = {
       "@main": DIRECTORY.Source.main
     }
-    options.plugins = options.plugins!.concat([PLUGINS.Env(isDevelopment)])
     // options.externals = []
   }
 
-  if (isPeload) {
+  if (isMain || isPeload) {
     options.plugins = options.plugins!.concat([PLUGINS.Env(isDevelopment)])
   }
 
   if (isRenderer) {
-    // options.output!.publicPath = "/"
+    options.experiments = {
+      css: true
+    }
+    options.output!.publicPath = "/"
     options.resolve!.alias = {
       "@": DIRECTORY.Source.renderer
     }
@@ -90,7 +121,7 @@ function singleConfig(
       ".tsx",
       ".css"
     ])
-    options.externals = ["primereact"]
+    // options.externals = ["primereact"]
     options.plugins = options.plugins!.concat(
       [
         PLUGINS.Html(FILE.Page.from),
@@ -99,7 +130,8 @@ function singleConfig(
             from: DIRECTORY.Static.resource,
             to: DIRECTORY.Output.renderer
           }
-        ])
+        ]),
+        PLUGINS.CssExtract()
         // PLUGINS.BundleAnalyzer(),
       ].filter(Boolean)
     )

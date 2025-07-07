@@ -28,7 +28,6 @@
   - 保存与导出 - JSON | PNG 格式
 - 推荐算法
 - 断点续传
-- 编译后的代码都是压缩的，可读性差，需要在开发模式下看到源代码映射
 
 ## Record
 
@@ -50,4 +49,6 @@
 - ✅ 标尺刻度值显示不正确 - **值的显示不需要考虑画布缩放**
 - ✅ 左侧标尺刻度显示偏离主刻度线太多 - **设置文本的旋转锚点为 0.5**
 - ✅ 画布缩放时，layer 图层元素的坐标存在偏移的情况 - **不能直接把节点设置在 layer 图层，然后去设置 layer 的缩放**
+- ✅ 重构后，构建完成打开时报错 `jsonp_chunk_loading:85 Uncaught ReferenceError: global is not defined` - **更改 web 代码的 target 由 electron-renderer 改为 web**
+- ✅ 编译后的代码都是压缩的，可读性差，需要在开发模式下看到源代码映射 - **更改 loader 为 swc-loader**
 - PIXI 创建的时机有问题，初次进入页面多创建了 canvas 元素，页面的网格与标尺不显示

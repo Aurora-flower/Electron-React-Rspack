@@ -14,7 +14,7 @@ export const APP_PROCESS_MODE = {
 export const BUILD_TARGET = {
   Electron: "electron-main",
   Preload: "electron-preload",
-  Renderer: "electron-renderer"
+  Renderer: "web" // "electron-renderer"
 } as const
 
 // Record<string, DevTool>

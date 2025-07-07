@@ -50,6 +50,7 @@ function getDefinePlugin(
 ): InstanceType<typeof rspack.DefinePlugin> {
   return new rspack.DefinePlugin({
     global: "globalThis",
+    // global: "window",
     ...options
     // global: `(typeof globalThis !== "undefined" ? globalThis : window)` // '(typeof globalThis !== "undefined" ? globalThis : window)' | "window"
   })

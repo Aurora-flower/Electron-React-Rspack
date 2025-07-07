@@ -9,29 +9,29 @@ import { rspack } from "@rspack/core"
 const NODE_MODULES = /node_modules/
 
 /* ***** ***** ***** ***** Parser ***** ***** ***** ***** */
-const JS_PARSER_OPTIONS = {
-  // @babel/core
-  loader: "babel-loader",
-  options: {
-    presets: [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
-    ]
-    // sourceMaps: true
-    // cacheDirectory: true,
-    // cacheCompression: false,
-    // compact: false
-  }
-}
+// const JS_PARSER_OPTIONS = {
+//   // @babel/core
+//   loader: "babel-loader",
+//   options: {
+//     presets: [
+//       "@babel/preset-env",
+//       "@babel/preset-react",
+//       "@babel/preset-typescript"
+//     ]
+//     // sourceMaps: true
+//     // cacheDirectory: true,
+//     // cacheCompression: false,
+//     // compact: false
+//   }
+// }
 
-const TS_PARSER_OPTIONS = {
-  loader: "ts-loader",
-  options: {
-    transpileOnly: true,
-    happyPackMode: true
-  }
-}
+// const TS_PARSER_OPTIONS = {
+//   loader: "ts-loader",
+//   options: {
+//     transpileOnly: true,
+//     happyPackMode: true
+//   }
+// }
 
 /* ***** ***** ***** ***** Loader ***** ***** ***** ***** */
 function getImageLoader(
@@ -108,9 +108,17 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
         // }
       }
     ],
-    // type: "css",
+    options: {
+      modules: true
+    },
+    type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
+  //   {
+  //   test: /\.less$/,
+  //   type: 'css/auto',
+  //   use: ['less-loader'],
+  // },
   return options
 }
 
@@ -118,8 +126,19 @@ function getCssLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
 
 function getJsLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
-    test: /\.jsx?$/,
+    test: /\.jsx?/,
     // use: [JS_PARSER_OPTIONS],
+    use: {
+      loader: "builtin:swc-loader",
+      options: {
+        jsc: {
+          parser: {
+            syntax: "ecmascript",
+            jsx: true
+          }
+        }
+      }
+    },
     type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
@@ -128,36 +147,23 @@ function getJsLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
 
 function getTsLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
   const options = {
-    test: /\.tsx?$/,
-    use: [
-      // {
-      //   loader: "builtin:swc-loader",
-      //   options: {
-      //     jsc: {
-      //      // parser: {
-      //      //   syntax: "ecmascript",
-      //      //   jsx: true
-      //      // },
-      //       parser: {
-      //         syntax: "typescript",
-      //         tsx: true
-      //       },
-      //       transform: {
-      //         react: {
-      //           runtime: "automatic",
-      //           development: isDev,
-      //           refresh: isDev
-      //         },
-      //         optimizer: {
-      //           simplify: true
-      //         }
-      //       }
-      //     }
-      //   }
-      // },
-      JS_PARSER_OPTIONS,
-      TS_PARSER_OPTIONS
-    ],
+    test: /\.tsx?/,
+    // use: [
+    //   JS_PARSER_OPTIONS,
+    //   TS_PARSER_OPTIONS
+    // ],
+    use: {
+      loader: "builtin:swc-loader",
+      options: {
+        jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: true
+          }
+        }
+      }
+    },
+    type: "javascript/auto",
     exclude: isExclude ? exclude : undefined
   }
   return options
