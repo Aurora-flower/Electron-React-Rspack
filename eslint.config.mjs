@@ -1,4 +1,4 @@
-import { fixupConfigRules } from "@eslint/compat"
+// import { fixupConfigRules } from "@eslint/compat"
 import css from "@eslint/css"
 import js from "@eslint/js"
 import json from "@eslint/json"
