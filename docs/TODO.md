@@ -2,38 +2,118 @@
 
 > ✅  ❎  ⚠️
 
-## FEATURE & Record & Optimize
+---
 
-- ✅ HTTPS 本地服务支持（**目前只支持 http**）
-- 应用构建输出，安装界面与选项优化
-- 应用启动时的 loading 效果
-- iconify 的使用
-- 事件监听模块整理 - message | window | document
-- 主进程与渲染进程通信模块整理
-  - sender 模式无返回值，但可能需要一个执行标识与执行状态的反馈
-- PIXI 示例编辑器
-  - Scene 解析模块
-    - Index 索引方式更改为 ID 索引方式
-    - 原数据 - 易读写数据 - Pixi 数据之间代理关系与处理模块
-  - 场景渲染
-  - 编辑操作
-    - 编辑控件
-    - 拖拽操作
+## Record
+
+### Electron 主进程
+
+1. 通讯方式
+
+    - 窗口之间通讯
+    - 渲染进程与主进程的通讯
+    - 面板（组件）与窗口的通讯
+
+2. 快捷键绑定
+
+    - 全局按键绑定与逻辑处理
+
+3. 窗口管理
+
+    - ✅ 窗口管理模块，用于查找与创建窗口
+    - 窗口操作模块
+
+4. Node 模块 - 将所有 Node 模块都进行封装，用于统一调用（也为了学习）
+
+### 渲染进程
+
+- 组件之间的通讯
+
+#### PIXI 示例编辑器
+
+1. 设定数据结构
+
+    - 如何区分解析 cocos creator 文件、unity 文件、（内置）自定义的 json 文件，并去创建一个项目？
+    - 在 json 数据、container 渲染数据、（cocos、unity）源数据之间怎么去转换、联动修改？
+
+2. 状态栈管理
+
+    - 结构树操作、渲染区操作、属性编辑操作的状态栈管理
+
+3. 操作设定
+
+    - 选中框
+    - 坐标控制器 - 点击矩形拖拽时随意方向（非 Layout 容器元素），点击坐标拖拽时只能沿着轴线方向
+    - 快速操作 - 快速对齐（相对父元素）
+    - 节点碰撞检测与吸附效果
+    - 节点碰撞对齐辅助线
+
+4. 渲染
+
+    - ✅ 应用初始化模块
+    - ✅ 画板初始显示与特殊设置
+    - stage 事件 - 右键移动拖动画布
+    - stage 事件 - 点击元素选中、拖拽
+    - stage 事件 - 滚轮控制画布缩放
+    - 节点创建函数 - sprite | text | container | graphics | nineSliceSprite | htmlText
     - 组件之间的数据交互与同步协作模块设计
-    - API 命令
-    - 状态管理
-    - 保存
-  - 保存与导出 - JSON | PNG 格式
-- 推荐算法
-- 断点续传
-- 借助 Canvas 的 API 创建九宫格模式精灵对象(**目前是借助 Texture API 实现**)
-- Store 存储方式更改为 Zustand 或者采用其他的方式
-- ThreeJS 农场
-- 废弃 store manager 模块，而是采用 Redux \ Context 进行状态管理 - 数据缓存不是 react 推荐的做法
-- 事件管理模块重构优化
-- 渲染区在窗口尺寸发生变化时不重新创建，而是重新绘制网格与标尺，减少不必要的性能消耗
-- 为 Redux、Render Props Pattern、Container/Presentational Pattern、Hooks Pattern、Compound Pattern、 Higher Order Component Pattern 的应用添加实例测试
-- 更改创建逻辑后，虽然解决了二次进入页面的报错问题，但是对性能的消耗也是较大的，需要优化
+
+5. 解析
+
+    - 对于 Cocos 文件，初始化解析数据后，Index 索引方式更改为 ID 索引方式
+
+6. 保存与导出
+
+    - PNG 图片保存 - 用于生成预览图
+    - JSON 文件保存 - 自定义处理数据
+    - 源文件保存
+
+---
+
+## Learning
+
+### 设计模式
+
+#### React
+
+1. 设计模式
+
+2. 渲染模式
+
+#### Vue
+
+1. 设计模式
+
+2. 渲染模式
+
+3. 性能模式
+
+#### VanillaJS
+
+1. 设计模式
+
+    - Singleton 单例模式
+    - Factory 工厂模式
+    - Command 命令模式
+    - Flyweight 享元模式（轻量级）
+    - Observer 观察者模式
+    - Mediator/Middleware 中间件模式
+    - Proxy 代理模式
+    - Minxin 混入模式
+    - Module 模块模式
+    - Prototype 原型模式
+    - Provider 提供者模式
+    - Static Import 静态导入模式
+
+2. 渲染模式
+
+3. 性能模式
+
+---
+
+## FEATURE & Optimize
+
+---
 
 ## BUG
 

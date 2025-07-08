@@ -362,6 +362,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
   - [🌻 Shields](https://shields.io/)
 
 - **其他**
+  - [🧚 VanillaJS](http://vanilla-js.com/)
   - [💬 GitHub](https://docs.github.com/zh/get-started)
   - [🤾 WebAssembly](https://webassembly.org/)
   - [⚡️ 浏览器插件开发](https://developer.chrome.com/docs/extensions/mv3/getstarted/)
