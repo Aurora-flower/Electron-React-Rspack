@@ -8,6 +8,7 @@ import {
 } from "@/helpers/graphics/gremlin/functions/is"
 
 export function deepClonePixiObject(target: AnyModel): AnyModel {
+  // TODO: 节点克隆
   switch (target) {
     case isContainer(target):
       break

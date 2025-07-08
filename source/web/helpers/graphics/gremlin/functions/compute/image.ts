@@ -55,6 +55,7 @@ export function nineSliceSprite(
   original: string,
   slider: PaddingModel = getPadding()
 ): string {
+  // TODO: 九宫格绘制 - canvas 分区截图，然后汇成一个图片进行绘制
   createImageObject(original, (image, canvas, context) => {
     webLog("image", "nineSliceSprite", original, slider, image, canvas, context)
   })

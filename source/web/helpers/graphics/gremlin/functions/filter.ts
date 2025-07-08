@@ -7,6 +7,7 @@ export function getElementByLabel(
   if (!root) {
     return null
   }
+  // TODO: 节点的递归查找
   // if (root.children.length > 0) {
   //   for (const child of root.children) {
   //     const element = getElementByLabel(label, child)
