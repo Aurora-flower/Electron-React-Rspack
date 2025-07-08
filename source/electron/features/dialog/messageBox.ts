@@ -3,7 +3,7 @@ import type {
   BaseWindow,
   MessageBoxOptions,
   MessageBoxReturnValue
-} from "electron/main"
+} from "electron"
 
 class AppMessage {
   static async showErrorBox(title: string, content: string): Promise<void> {

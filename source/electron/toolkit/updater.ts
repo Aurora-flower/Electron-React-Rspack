@@ -1,6 +1,6 @@
 import { getAppInfo } from "@main/features/application/infomation"
-import type { BrowserWindow } from "electron/main"
-import { Notification } from "electron/main"
+import type { BrowserWindow } from "electron"
+import { Notification } from "electron"
 import Logger from "electron-log"
 import type { AppUpdater } from "electron-updater"
 import { autoUpdater } from "electron-updater"

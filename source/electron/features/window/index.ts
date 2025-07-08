@@ -3,8 +3,8 @@ import { resolvePath } from "@main/node/path/resolvePath"
 import type {
   BrowserWindowConstructorOptions,
   WebContents
-} from "electron/main"
-import { BrowserWindow } from "electron/main"
+} from "electron"
+import { BrowserWindow } from "electron"
 
 export function byNameFindWindow(name = ""): BrowserWindow | null {
   const winM = WindowManager.getInstance()
@@ -46,7 +46,7 @@ export function createBrowserWindow(
   isLocal = false,
   setupCallback?: (win: BrowserWindow) => void
 ): BrowserWindow {
-  const win: AnyModel = new BrowserWindow(options as AnyModel)
+  const win = new BrowserWindow(options)
   if (isLocal) {
     win.loadFile(resolvePath(url))
   } else {

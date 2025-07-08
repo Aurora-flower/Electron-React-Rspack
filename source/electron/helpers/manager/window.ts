@@ -6,7 +6,7 @@ import { resolvePath } from "@main/node/path/resolvePath"
 import type {
   BrowserWindow,
   BrowserWindowConstructorOptions
-} from "electron/main"
+} from "electron"
 
 interface WindowState {
   isLoaded: boolean

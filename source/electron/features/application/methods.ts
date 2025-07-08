@@ -1,8 +1,7 @@
 import { replaceSep } from "@main/node/path/replaceSep"
 import { sendLog } from "@main/toolkit/logger"
 import { app } from "electron"
-import type { NativeImage } from "electron/common"
-import type { FileIconOptions, FocusOptions } from "electron/main"
+import type { FileIconOptions, FocusOptions, NativeImage } from "electron"
 
 /**
  * @summary 退出应用
