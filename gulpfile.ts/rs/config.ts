@@ -1,5 +1,5 @@
 import { join } from "node:path"
-import type { Mode, RspackOptions } from "@rspack/core"
+import { type Mode, type RspackOptions, rspack } from "@rspack/core"
 import { getIsDev } from "../common/env"
 import { getDirectoryStructure, getFileStructure } from "../common/structure"
 import LOADER from "./loader"
@@ -10,6 +10,11 @@ import {
   ENTRY_FILENAME
 } from "./macro"
 import PLUGINS from "./plugins"
+
+const ReactRefreshRspackPlugin = require("@rspack/plugin-react-refresh")
+
+// Target browsers, see: https://github.com/browserslist/browserslist
+const targets = ["last 2 versions", "> 0.2%", "not dead", "Firefox ESR"]
 
 const PARSER_CONFIG = {
   // asset 模块的解析器选项
@@ -61,7 +66,7 @@ function singleConfig(
     devtool: DEVTOOL.SourceMap,
     resolve: {
       mainFiles: ["index", "main"],
-      extensions: [".ts", ".js", ".json", ".node"],
+      extensions: ["...", ".ts", ".js", ".json", ".node"],
       enforceExtension: false,
       symlinks: false
     },
@@ -73,7 +78,8 @@ function singleConfig(
         LOADER.Css,
         LOADER.Image,
         LOADER.TextExclude,
-        LOADER.FontExclude
+        LOADER.FontExclude,
+        LOADER.SvgExclude
       ]
     },
     plugins: []
@@ -134,10 +140,22 @@ function singleConfig(
             to: DIRECTORY.Output.renderer
           }
         ]),
-        PLUGINS.CssExtract()
+        PLUGINS.CssExtract(),
+        isDevelopment ? new ReactRefreshRspackPlugin() : null
         // PLUGINS.BundleAnalyzer(),
       ].filter(Boolean)
     )
+    options.infrastructureLogging = {
+      level: "verbose"
+    }
+    options.optimization = {
+      minimizer: [
+        new rspack.SwcJsMinimizerRspackPlugin(),
+        new rspack.LightningCssMinimizerRspackPlugin({
+          minimizerOptions: { targets }
+        })
+      ]
+    }
   }
 
   return options
