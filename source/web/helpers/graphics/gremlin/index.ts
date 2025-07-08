@@ -91,7 +91,7 @@ class PixiManager {
     if (layer) {
       initSettingsUiLayer(layer)
     }
-    console.log("缩放设置", PixiManager._app.stage)
+    console.log("缩放设置", karte, staff, layer, PixiManager._app)
   }
 }
 

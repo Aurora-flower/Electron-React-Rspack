@@ -46,7 +46,7 @@ export function initSettingsBasiskarte(
   }
   basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
   if (refresh) {
-    Grid.release()
+    Grid.release(true)
   }
   const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
   Grid.draw(basiskarte, size, PixiManager.viewScale)
@@ -61,7 +61,7 @@ export function initSettingsStaff(staff: Container, refresh?: boolean): void {
   }
   // TODO: 标尺绘画
   if (refresh) {
-    Ruler.release()
+    Ruler.release(true)
   }
   const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
   Ruler.draw(staff, size, PixiManager.viewScale)
