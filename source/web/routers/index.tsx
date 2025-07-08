@@ -1,12 +1,12 @@
+import type { JSX } from "react"
+import * as React from "react"
+import type { DOMRouterOpts, RouteObject } from "react-router-dom"
+// react-router-dom 是基于 react-router 扩展的版本
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import HOCPage from "@/components/HOC/Page"
 import LayoutView from "@/ui/layout"
 import GraphicsPage from "@/ui/pages/Graphics"
 import Home from "@/ui/pages/Home"
-import * as React from "react"
-import type { JSX } from "react"
-// react-router-dom 是基于 react-router 扩展的版本
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import type { DOMRouterOpts, RouteObject } from "react-router-dom"
 
 const PixiJsGraphics = React.lazy(() => import("@/ui/pages/Graphics/PixiJS"))
 

@@ -1,10 +1,10 @@
+import type { Container } from "pixi.js"
+import { Application } from "pixi.js"
 import { getDomElement } from "@/features/document"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import { setupLayer } from "@/helpers/graphics/gremlin/setup/setupLayer"
 import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
 import { getSize } from "@/utils/functions/usually"
-import type { Container } from "pixi.js"
-import { Application } from "pixi.js"
 
 overwritePixi()
 

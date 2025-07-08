@@ -1,7 +1,9 @@
 import commandLines from "@main/features/application/commandLines"
-import { registerProtocolHandle } from "@main/features/protocol"
-import { privilegedSchemes } from "@main/features/protocol"
-import { setAsDefaultProtocolClient } from "@main/features/protocol"
+import {
+  privilegedSchemes,
+  registerProtocolHandle,
+  setAsDefaultProtocolClient
+} from "@main/features/protocol"
 import { setTheme } from "@main/features/theme"
 import { registerIPCChannel } from "@main/handlers/channel"
 import WindowManager from "@main/helpers/manager/window"

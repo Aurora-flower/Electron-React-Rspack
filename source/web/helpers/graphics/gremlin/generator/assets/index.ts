@@ -1,6 +1,5 @@
+import { Assets, Texture } from "pixi.js"
 import { webError } from "@/utils/log"
-import { Assets } from "pixi.js"
-import { Texture } from "pixi.js"
 
 export async function loadTexture(spriteURL: string): Promise<Texture> {
   try {

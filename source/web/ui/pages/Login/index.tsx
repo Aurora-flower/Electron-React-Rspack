@@ -1,6 +1,7 @@
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
-import * as React from "react"
+
 import type { JSX } from "react"
+import * as React from "react"
 
 function LoginPage(): JSX.Element {
   return (

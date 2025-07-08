@@ -1,3 +1,4 @@
+import type { Container, Texture } from "pixi.js"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { loadTexture } from "@/helpers/graphics/gremlin/generator/assets"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
@@ -5,8 +6,6 @@ import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
 import { createSprite } from "@/helpers/graphics/gremlin/generator/sprite"
 import { createNineSliceSprite } from "@/helpers/graphics/gremlin/generator/sprite/nineSliceSprite"
 import { getRandomColor } from "@/utils/functions/color"
-import type { Container } from "pixi.js"
-import type { Texture } from "pixi.js"
 
 // const sprite = createSprite(layerContainer, {
 //   texture,

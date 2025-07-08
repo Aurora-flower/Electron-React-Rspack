@@ -1,4 +1,4 @@
-import { PLATFORM, getPlatform } from "@main/node/process/platform"
+import { getPlatform, PLATFORM } from "@main/node/process/platform"
 import { app } from "electron"
 
 /**

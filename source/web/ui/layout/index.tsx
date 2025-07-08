@@ -1,8 +1,8 @@
+import type { JSX } from "react"
+import * as React from "react"
+import { Outlet } from "react-router-dom"
 import { setFontFamily } from "@/features/document/mod/font"
 import { webLog } from "@/utils/log"
-import * as React from "react"
-import type { JSX } from "react"
-import { Outlet } from "react-router-dom"
 
 function LayoutView(props: { date: Date }): JSX.Element {
   const dateRef = React.useRef<HTMLDivElement>(null)

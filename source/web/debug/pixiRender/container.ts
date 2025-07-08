@@ -1,8 +1,8 @@
+import type { Container } from "pixi.js"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
 import { getRandomColor } from "@/utils/functions/color"
-import type { Container } from "pixi.js"
 
 export function debugPixiDrag(container: Container): void {
   const matrixItem1 = PixiManager.findUsableMatrix()

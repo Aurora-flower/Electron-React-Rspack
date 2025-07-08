@@ -1,7 +1,7 @@
-import { webLog } from "@/utils/log"
+import type { ComponentType, JSX } from "react"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
-import type { ComponentType, JSX } from "react"
+import { webLog } from "@/utils/log"
 
 interface HOCProps {
   [k: string]: AnyModel

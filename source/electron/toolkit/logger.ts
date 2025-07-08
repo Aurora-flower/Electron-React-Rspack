@@ -2,6 +2,7 @@ import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
 import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
 import { errorMessage } from "@main/utils/mod/error"
+
 // import type Logger from "electron-log"
 
 type LogLevel = "trace" | "debug" | "info" | "warn" | "error" | "verbose"

@@ -1,5 +1,5 @@
-import { series, watch } from "gulp"
 import type { WatchOptions } from "gulp"
+import { series, watch } from "gulp"
 import { debounce } from "lodash"
 import ElectronProcess from "../utils/electron"
 import compile from "./compile"

@@ -1,9 +1,8 @@
-import { backHistory } from "@/features/window/history"
-
 import { Button } from "primereact/button"
-import * as React from "react"
 import type { JSX } from "react"
+import * as React from "react"
 import { Outlet, useNavigate } from "react-router-dom"
+import { backHistory } from "@/features/window/history"
 
 function GraphicsPage(): JSX.Element {
   const _navigate = useNavigate()

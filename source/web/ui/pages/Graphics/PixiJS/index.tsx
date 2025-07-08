@@ -1,7 +1,7 @@
-import PixiManager from "@/helpers/graphics/gremlin"
 import type { Application } from "pixi.js"
-import * as React from "react"
 import type { JSX } from "react"
+import * as React from "react"
+import PixiManager from "@/helpers/graphics/gremlin"
 
 function PixiJsGraphics(): JSX.Element {
   const [getTip] = React.useState<string>(

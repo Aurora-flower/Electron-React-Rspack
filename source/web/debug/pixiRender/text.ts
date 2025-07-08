@@ -1,7 +1,7 @@
-import PixiManager from "@/helpers/graphics/gremlin"
-import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import type { Container } from "pixi.js"
 import { HTMLText } from "pixi.js"
+import PixiManager from "@/helpers/graphics/gremlin"
+import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 
 export function debugPixiHTMLText(container: Container): void {
   const matrixItem = PixiManager.findUsableMatrix()

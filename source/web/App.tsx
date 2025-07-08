@@ -1,3 +1,8 @@
+import { PrimeReactProvider } from "primereact/api"
+import type { JSX } from "react"
+import * as React from "react"
+import { createRoot } from "react-dom/client"
+import { Provider } from "react-redux"
 import { TRIGGER_CHANNEL_NAME } from "@/common/macro"
 import { getDomElement } from "@/features/document"
 import { dispatch } from "@/helpers/event/electron"
@@ -6,11 +11,6 @@ import AppRouter from "@/routers"
 import store from "@/stores"
 import { useAppDispatch } from "@/stores/hooks"
 import { setInformation } from "@/stores/reducers/app"
-import { PrimeReactProvider } from "primereact/api"
-import * as React from "react"
-import type { JSX } from "react"
-import { createRoot } from "react-dom/client"
-import { Provider } from "react-redux"
 
 /**
  * React.CSSProperties React.ReactNode React.ReactElement

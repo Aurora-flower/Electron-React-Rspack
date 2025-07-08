@@ -1,6 +1,6 @@
-import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import type { Container, NineSliceSpriteOptions } from "pixi.js"
 import { NineSliceSprite, Texture } from "pixi.js"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 
 export function createNineSliceSprite(
   parent: Container | undefined = undefined,

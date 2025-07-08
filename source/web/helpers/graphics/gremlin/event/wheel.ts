@@ -1,8 +1,8 @@
+import type { Container, FederatedWheelEvent } from "pixi.js"
 import { CURSOR } from "@/common/cursor"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { formatNumberPrecision } from "@/utils/functions/math"
 import CommonUtility from "@/utils/utility"
-import type { Container, FederatedWheelEvent } from "pixi.js"
 
 const ZOOM_SPEED = 0.05
 // const SCALE_RATIO = 0.1;

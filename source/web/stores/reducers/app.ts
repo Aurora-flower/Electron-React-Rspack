@@ -1,6 +1,6 @@
+import { createSlice } from "@reduxjs/toolkit"
 import setInformationAction from "@/stores/actions/setInformation"
 import type { AppState } from "@/stores/interface/appSlice"
-import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   information: null

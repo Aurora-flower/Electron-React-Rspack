@@ -1,7 +1,7 @@
-import { DASHBOARD_MAP } from "@/ui/components/Dashboard/map/view"
+import type { JSX } from "react"
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as React from "react"
-import type { JSX } from "react"
+import { DASHBOARD_MAP } from "@/ui/components/Dashboard/map/view"
 
 function DashboardCard(props: {
   title: string

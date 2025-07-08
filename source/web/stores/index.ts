@@ -1,5 +1,5 @@
-import rootReducer from "@/stores/reducers"
 import { configureStore } from "@reduxjs/toolkit"
+import rootReducer from "@/stores/reducers"
 
 /**
  * @summary Redux Store

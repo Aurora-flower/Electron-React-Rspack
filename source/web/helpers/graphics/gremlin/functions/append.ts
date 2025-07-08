@@ -1,5 +1,5 @@
-import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
 import type { Container } from "pixi.js"
+import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
 
 export function appendChild(
   parent: Container,

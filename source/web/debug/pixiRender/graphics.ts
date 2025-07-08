@@ -1,9 +1,9 @@
+import type { Container } from "pixi.js"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
 import { getRandomColor } from "@/utils/functions/color"
 import { webLog } from "@/utils/log"
-import type { Container } from "pixi.js"
 
 /**
  * @summary rect 点位绘制与 graphics 点位绘制的区别

@@ -1,9 +1,9 @@
+import type { Container, GraphicsOptions, StrokeInput } from "pixi.js"
+import { Graphics } from "pixi.js"
 import { DEFAULT_COLOR } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
 import { getRandomColor } from "@/utils/functions/color"
-import { Graphics } from "pixi.js"
-import type { Container, GraphicsOptions, StrokeInput } from "pixi.js"
 
 type GraphicsConfig = ConfigModel & {
   isFill?: boolean

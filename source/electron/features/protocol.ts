@@ -2,8 +2,8 @@ import { resolve } from "node:path"
 import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/macros"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
 import { sendLog } from "@main/toolkit/logger"
-import { net, app, protocol } from "electron"
 import type { CustomScheme } from "electron"
+import { app, net, protocol } from "electron"
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,

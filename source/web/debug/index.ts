@@ -1,12 +1,13 @@
 // import { debugPixiContainer } from "@/debug/pixiRender/container"
 // import debugPixiGraphic from "@/debug/pixiRender/graphics"
+
+import type { Container } from "pixi.js"
 import debugPixiSprite from "@/debug/pixiRender/sprite"
 // import debugPixiText from "@/debug/pixiRender/text"
 // import debugPixiUI from "@/debug/pixiRender/ui"
 // import { enableWorker } from "@/handlers/worker/registry"
 import { sender } from "@/helpers/event/electron"
 import { webLog } from "@/utils/log"
-import type { Container } from "pixi.js"
 
 export function debugPixiRender(layerContainer: Container): void {
   if (!layerContainer) return

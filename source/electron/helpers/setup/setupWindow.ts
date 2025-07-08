@@ -3,8 +3,8 @@ import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
 import { getIsDev } from "@main/node/process/env"
 import { sendLog } from "@main/toolkit/logger"
-import Logger from "electron-log"
 import type { BrowserWindow } from "electron/main"
+import Logger from "electron-log"
 
 async function safeCloseWindow(win: BrowserWindow): Promise<void> {
   try {

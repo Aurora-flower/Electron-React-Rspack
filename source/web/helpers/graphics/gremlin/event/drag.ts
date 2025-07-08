@@ -1,3 +1,9 @@
+import {
+  type Application,
+  type Container,
+  type FederatedPointerEvent,
+  Point
+} from "pixi.js"
 import { CURSOR } from "@/common/cursor"
 import RenderSelector from "@/helpers/graphics/gremlin/controller/selector"
 import { isContainer } from "@/helpers/graphics/gremlin/functions/is"
@@ -5,12 +11,6 @@ import type { BaseNodeInfoModel } from "@/logic/algorithm/layout"
 import { formatNumberPrecision } from "@/utils/functions/math"
 import { getPoint } from "@/utils/functions/usually"
 import { webLog } from "@/utils/log"
-import {
-  type Application,
-  type Container,
-  type FederatedPointerEvent,
-  Point
-} from "pixi.js"
 
 // const mousePosBefore = e.getLocalPosition(target.parent)
 // const mouseLocalBefore = target.toLocal(mousePosBefore)

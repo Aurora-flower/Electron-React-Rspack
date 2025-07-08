@@ -1,6 +1,7 @@
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
-import * as React from "react"
+
 import type { JSX } from "react"
+import * as React from "react"
 
 /**
  * @summary React 模式 - 复合模式（Compound Pattern) - Higher Order Component (HOC)

@@ -1,3 +1,4 @@
+import type { Container } from "pixi.js"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
@@ -10,7 +11,6 @@ import {
   drawRect
 } from "@/helpers/graphics/gremlin/generator/graphics"
 import { getSize } from "@/utils/functions/usually"
-import type { Container } from "pixi.js"
 
 /**
  * @summary 配置图层，对图层的初始特殊处理

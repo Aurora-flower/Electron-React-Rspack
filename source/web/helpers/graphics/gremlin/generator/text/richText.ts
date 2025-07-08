@@ -1,6 +1,6 @@
-import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import type { Container, HTMLTextOptions } from "pixi.js"
 import { HTMLText } from "pixi.js"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 
 export function createHTMLText(
   parent: Container | undefined = undefined,

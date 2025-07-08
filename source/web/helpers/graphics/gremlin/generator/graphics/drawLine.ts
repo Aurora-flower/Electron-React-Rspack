@@ -1,5 +1,5 @@
-import { Graphics } from "pixi.js"
 import type { StrokeInput } from "pixi.js"
+import { Graphics } from "pixi.js"
 
 export function drawLine(
   paths: Array<PointArray>, // 或者使用 MovePointModel 数据类型

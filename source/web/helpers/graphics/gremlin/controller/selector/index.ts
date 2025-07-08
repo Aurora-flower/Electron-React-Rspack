@@ -1,7 +1,7 @@
+import type { Container } from "pixi.js"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { isContainer } from "@/helpers/graphics/gremlin/functions/is"
 import { createGraphics } from "@/helpers/graphics/gremlin/generator/graphics"
-import type { Container } from "pixi.js"
 
 class RenderSelector {
   static selector: string

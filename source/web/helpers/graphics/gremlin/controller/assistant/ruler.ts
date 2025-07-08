@@ -1,3 +1,5 @@
+import type { DestroyOptions } from "pixi.js"
+import { Container, Graphics, TextStyle } from "pixi.js"
 import {
   DEFAULT_COLOR,
   DEFAULT_GRID_INTERVAL,
@@ -8,8 +10,6 @@ import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import { createText } from "@/helpers/graphics/gremlin/generator/text"
 import { getPoint } from "@/utils/functions/usually"
-import { Container, Graphics, TextStyle } from "pixi.js"
-import type { DestroyOptions } from "pixi.js"
 
 type RulerType = "top" | "left"
 
