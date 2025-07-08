@@ -8,7 +8,9 @@
   "files": {
     "ignoreUnknown": false,
     "includes": [
+      "**",
       "!**/app/**/*",
+      "!**/core/**/*",
       "!**/node_modules/**/*",
       "!**/submodules/**/*",
       "!**/release/**/*",
@@ -33,7 +35,9 @@
         "useSelfClosingElements": "warn"
       },
       "correctness": {
-        "noUnusedImports": "error"
+        "noUnusedImports": "error",
+        "noUnusedVariables": "warn",
+        "noUnusedFunctionParameters": "warn"
       },
       "suspicious": {
         "noExplicitAny": "info",
