@@ -1,9 +1,9 @@
-import { dialog } from "electron"
 import type {
   BaseWindow,
   MessageBoxOptions,
   MessageBoxReturnValue
 } from "electron"
+import { dialog } from "electron"
 
 class AppMessage {
   static async showErrorBox(title: string, content: string): Promise<void> {

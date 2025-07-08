@@ -1,9 +1,6 @@
 import WindowManager from "@main/helpers/manager/window"
 import { resolvePath } from "@main/node/path/resolvePath"
-import type {
-  BrowserWindowConstructorOptions,
-  WebContents
-} from "electron"
+import type { BrowserWindowConstructorOptions, WebContents } from "electron"
 import { BrowserWindow } from "electron"
 
 export function byNameFindWindow(name = ""): BrowserWindow | null {
