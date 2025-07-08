@@ -179,3 +179,4 @@
 - ✅ 重构后，构建完成打开时报错 `jsonp_chunk_loading:85 Uncaught ReferenceError: global is not defined` - **更改 web 代码的 target 由 electron-renderer 改为 web**
 - ✅ 编译后的代码都是压缩的，可读性差，需要在开发模式下看到源代码映射 - **更改 loader 为 swc-loader**
 - ✅ PIXI 创建的时机有问题，初次进入页面多创建了 canvas 元素，页面的网格与标尺不显示 - **pixi application 未正确的销毁，再次进入发生报错引起的**
+- ✅ 升级 biome 依赖后，配置报错 - **执行`npx @biomejs/biome migrate --write`命令进行升级**

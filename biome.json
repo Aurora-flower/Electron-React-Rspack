@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -7,13 +7,13 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      "app/**/*",
-      "**/node_modules/**/*",
-      "**/submodules/**/*",
-      "release/**/*",
-      "**/dist/**/*",
-      "test/**/*"
+    "includes": [
+      "!**/app/**/*",
+      "!**/node_modules/**/*",
+      "!**/submodules/**/*",
+      "!**/release/**/*",
+      "!**/dist/**/*",
+      "!**/test/**/*"
     ]
   },
   "formatter": {
@@ -22,9 +22,7 @@
     "formatWithErrors": true,
     "lineEnding": "lf"
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
@@ -39,11 +37,10 @@
       },
       "suspicious": {
         "noExplicitAny": "info",
-        "noSuspiciousSemicolonInJsx": "error"
-      },
-      "nursery": {
+        "noSuspiciousSemicolonInJsx": "error",
         "noOctalEscape": "error"
       },
+      "nursery": {},
       "complexity": {
         "noStaticOnlyClass": "off"
       }
