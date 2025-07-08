@@ -28,7 +28,8 @@
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "tsconfig.json": "tsconfig.*.json, env.d.ts, .eslint*, eslint*, biome.json, .prettier*, prettier*, *.config.js, *.config.mjs",
+    "tsconfig.json": "tsconfig.*.json, env.d.ts,",
+    "biome.json": "*.config.js, *.config.mjs, .prettier*, prettier*",
     ".gitignore": ".git*",
     "README.md": "README.*.md, LICENSE, CHANGELOG.md, CODE_OF_CONDUCT.md",
     "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .editorconfig, .npmrc, .hintrc, electron-builder.yml"
