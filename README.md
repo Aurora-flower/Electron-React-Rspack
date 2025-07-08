@@ -392,9 +392,9 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 
 ### 扩展语言学习
 
-- [Python](https://docs.python.org/)
-- [Python 文档](https://docs.python.org/zh-cn/3/)
-- [Rust](https://www.rust-lang.org/zh-CN)
+- [🧙 Python](https://docs.python.org/)
+- [👼 Python 文档](https://docs.python.org/zh-cn/3/)
+- [🦸 Rust](https://www.rust-lang.org/zh-CN)
 
 ---
 
@@ -406,3 +406,4 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - [🐿 snapdom - HTML 元素转图片](https://zumerlab.github.io/snapdom/)
 - [📦 Redis](https://redis.io/docs/getting-started/)
 - [🔰 Redis](https://www.redis.net.cn/)
+- [🧛 Puppeteer](https://pptr.nodejs.cn/)
