@@ -21,23 +21,19 @@ const DEFAULT_MARK_COLOR = 0xf09b40
 const DEFAULT_MARK_COLOR_MINOR = 0xa5cd50
 
 class Ruler {
-  private static _instance: Ruler
-  private _topRuler: Graphics = new Graphics()
-  private _leftRuler: Graphics = new Graphics()
-  private _rulerContainer: Container = new Container()
+  // private static _instance: Ruler
+  private static _topRuler: Graphics
+  private static _leftRuler: Graphics
+  private static _rulerContainer: Container
 
-  public static getInstance(): Ruler {
-    if (!Ruler._instance) {
-      Ruler._instance = new Ruler()
-    }
-    return Ruler._instance
-  }
+  // public static getInstance(): Ruler {
+  //   if (!Ruler._instance) {
+  //     Ruler._instance = new Ruler()
+  //   }
+  //   return Ruler._instance
+  // }
 
-  constructor() {
-    this._rulerContainer.addChild(this._topRuler, this._leftRuler)
-  }
-
-  draw(
+  static draw(
     parent: Container,
     size: SizeModel,
     scale = 1,
@@ -48,39 +44,38 @@ class Ruler {
       y: DEFAULT_GRID_INTERVAL
     }
     // setStrokeStyle
-    this._topRuler
+    Ruler._rulerContainer = new Container()
+    Ruler._topRuler = new Graphics()
       .rect(0, 0.1, size.width, DEFAULT_RULER_SIZE)
       .fill(DEFAULT_RULER_COLOR)
-    this._leftRuler
+    Ruler._leftRuler = new Graphics()
       .rect(0.1, 0, DEFAULT_RULER_SIZE, size.height)
       .fill(DEFAULT_RULER_COLOR)
-    this.rulerLogic(
+    Ruler._rulerContainer.addChild(Ruler._topRuler, Ruler._leftRuler)
+    Ruler.rulerLogic(
       size,
       getPoint(renderInterval.x * scale, renderInterval.y * scale)
     )
     requestAnimationFrame(() => {
-      if (!parent.children.includes(this._rulerContainer)) {
-        viewAppend(parent, [this._rulerContainer])
+      if (!parent.children.includes(Ruler._rulerContainer)) {
+        viewAppend(parent, [Ruler._rulerContainer])
       }
     })
   }
 
-  release(
+  static release(
     isClean = false,
     configuration?: DestroyOptions /*DEFAULT_DESTORY_OPTIONS */
   ): void {
     if (isClean) {
-      this._rulerContainer.destroy(configuration)
-      this._rulerContainer = new Container()
+      Ruler._rulerContainer.destroy(configuration)
     } else {
-      this._rulerContainer.removeChildren()
+      Ruler._rulerContainer.removeChildren()
     }
-    this._topRuler = new Graphics()
-    this._leftRuler = new Graphics()
-    this._rulerContainer.addChild(this._topRuler, this._leftRuler)
+    Ruler._rulerContainer.addChild(Ruler._topRuler, Ruler._leftRuler)
   }
 
-  private drawRulerValue(
+  private static drawRulerValue(
     num: number,
     point: PointModel,
     flag: RulerType
@@ -103,7 +98,7 @@ class Ruler {
       position.y = point.y + 5
     }
 
-    createText(this._rulerContainer, {
+    createText(Ruler._rulerContainer, {
       position,
       text: value.toString(),
       angle: flag === "left" ? -90 : 0,
@@ -116,12 +111,12 @@ class Ruler {
     })
   }
 
-  private rulerLogic(
+  private static rulerLogic(
     size: SizeModel,
     rulerInterval: PointModel,
     scaleInterval: number = DEFAULT_SCALE_INTERVAL,
     step: number = DEFAULT_GRID_INTERVAL,
-    drawScaleValue: DrawScaleHander = this.drawRulerValue.bind(this)
+    drawScaleValue: DrawScaleHander = Ruler.drawRulerValue.bind(Ruler)
   ): void {
     const rulerStep = step * scaleInterval
     const getScaleLength = (isMajor: boolean): number => {
@@ -140,7 +135,7 @@ class Ruler {
       const scaleLength = getScaleLength(isMajor)
       const startPoint: PointArray = [x, 0]
       const endPoint: PointArray = [x, scaleLength]
-      drawLine([startPoint, endPoint], this._topRuler, {
+      drawLine([startPoint, endPoint], Ruler._topRuler, {
         color: getScaleColor(isMajor),
         alpha: getScaleAlpha(isMajor)
       })
@@ -161,7 +156,7 @@ class Ruler {
       // const alpha = getScaleAlpha(isMajor)
       const startPoint: PointArray = [0, y]
       const endPoint: PointArray = [scaleLength, y]
-      drawLine([startPoint, endPoint], this._leftRuler, {
+      drawLine([startPoint, endPoint], Ruler._leftRuler, {
         color: getScaleColor(isMajor),
         alpha: getScaleAlpha(isMajor)
       })

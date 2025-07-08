@@ -29,6 +29,7 @@ export function setupLayer(stage: Container): void {
   initSettingsBasiskarte(basiskarte)
   initSettingsUiLayer(layerContainer)
   initSettingsStaff(staffContainer)
+  console.log("初始化", stage)
 }
 
 /* ***** ***** ***** ***** 图层初始化操作 （Initialization）***** ***** ***** ***** */
@@ -44,12 +45,11 @@ export function initSettingsBasiskarte(
     return
   }
   basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
-  const grid = Grid.getInstance()
   if (refresh) {
-    grid.release()
+    Grid.release()
   }
   const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
-  grid.draw(basiskarte, size, PixiManager.viewScale)
+  Grid.draw(basiskarte, size, PixiManager.viewScale)
 }
 
 /**
@@ -60,12 +60,11 @@ export function initSettingsStaff(staff: Container, refresh?: boolean): void {
     return
   }
   // TODO: 标尺绘画
-  const ruler = Ruler.getInstance()
   if (refresh) {
-    ruler.release()
+    Ruler.release()
   }
   const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
-  ruler.draw(staff, size, PixiManager.viewScale)
+  Ruler.draw(staff, size, PixiManager.viewScale)
 }
 
 /**
