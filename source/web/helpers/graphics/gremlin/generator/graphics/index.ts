@@ -12,7 +12,7 @@ type GraphicsConfig = ConfigModel & {
 }
 
 export function createGraphics(
-  parent: Container,
+  parent: Container | undefined = undefined,
   options: GraphicsOptions = {},
   config: ConfigModel = {
     isNormalAppend: true,
@@ -23,7 +23,9 @@ export function createGraphics(
     // TODO: Graphics 默认值的设置
     ...options
   })
-  viewAppend(parent, [graphic], config)
+  if (parent) {
+    viewAppend(parent, [graphic], config)
+  }
   return graphic
 }
 

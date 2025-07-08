@@ -1,13 +1,6 @@
 import { getDomElement } from "@/features/document"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
-import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
-import {
-  initSettingsBasiskarte,
-  initSettingsStaff,
-  initSettingsUiLayer,
-  setupLayer
-} from "@/helpers/graphics/gremlin/setup/setupLayer"
+import { setupLayer } from "@/helpers/graphics/gremlin/setup/setupLayer"
 import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
 import { getSize } from "@/utils/functions/usually"
 import type { Container } from "pixi.js"
@@ -78,20 +71,20 @@ class PixiManager {
       return
     }
     PixiManager.viewScale = scale
-    const karte = getElementByLabel(ELEMENT_FLAG.Karte, stage)
-    if (karte) {
-      initSettingsBasiskarte(karte, true)
-      // TODO: 更新辅助元素（标尺|网格等）
-    }
-    const staff = getElementByLabel(ELEMENT_FLAG.Staff, stage)
-    if (staff) {
-      initSettingsStaff(staff, true)
-    }
-    const layer = getElementByLabel(ELEMENT_FLAG.Layer, stage)
-    if (layer) {
-      initSettingsUiLayer(layer)
-    }
-    console.log("缩放设置", karte, staff, layer, PixiManager._app)
+    // const karte = getElementByLabel(ELEMENT_FLAG.Karte, stage)
+    // if (karte) {
+    //   initSettingsBasiskarte(karte, true)
+    //   // TODO: 更新辅助元素（标尺|网格等）
+    // }
+    // const staff = getElementByLabel(ELEMENT_FLAG.Staff, stage)
+    // if (staff) {
+    //   initSettingsStaff(staff, true)
+    // }
+    // const layer = getElementByLabel(ELEMENT_FLAG.Layer, stage)
+    // if (layer) {
+    //   initSettingsUiLayer(layer)
+    // }
+    // console.log("缩放设置", karte, staff, layer, PixiManager._app)
   }
 }
 

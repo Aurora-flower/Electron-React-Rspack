@@ -4,7 +4,7 @@ import type { ContainerOptions } from "pixi.js"
 import { Container } from "pixi.js"
 
 export function createContainer(
-  parent: Container,
+  parent: Container | undefined = undefined,
   options: ContainerOptions = {},
   config: ConfigModel = {
     isNormalAppend: true,
@@ -15,6 +15,8 @@ export function createContainer(
     // TODO: Container 默认值的设置
     ...options
   })
-  viewAppend(parent, [container], config)
+  if (parent) {
+    viewAppend(parent, [container], config)
+  }
   return container
 }

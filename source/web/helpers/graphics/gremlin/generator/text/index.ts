@@ -3,7 +3,7 @@ import type { Container, TextOptions } from "pixi.js"
 import { Text } from "pixi.js"
 
 export function createText(
-  parent: Container,
+  parent: Container | undefined = undefined,
   options: TextOptions = {},
   config = {
     isNormalAppend: true,
@@ -14,6 +14,8 @@ export function createText(
     // TODO: Text 默认值的设置
     ...options
   })
-  viewAppend(parent, [text], config)
+  if (parent) {
+    viewAppend(parent, [text], config)
+  }
   return text
 }

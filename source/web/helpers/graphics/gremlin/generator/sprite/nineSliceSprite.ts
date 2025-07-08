@@ -1,5 +1,4 @@
-import { TargetDrag } from "@/helpers/graphics/gremlin/event/drag"
-import { appendChild } from "@/helpers/graphics/gremlin/functions/append"
+import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import type { Container, NineSliceSpriteOptions } from "pixi.js"
 import { NineSliceSprite, Texture } from "pixi.js"
 
@@ -8,16 +7,17 @@ export function createNineSliceSprite(
   options: NineSliceSpriteOptions = {
     texture: Texture.EMPTY
   },
-  _config = {},
-  isTopIndex = false
-): Container {
-  const plane9 = new NineSliceSprite({
-    interactive: true,
-    eventMode: "static",
+  config = {
+    isNormalAppend: true,
+    zIndex: 0
+  }
+): NineSliceSprite {
+  const sprite = new NineSliceSprite({
+    // TODO: NineSliceSprite 默认值的设置
     ...options
   })
-  TargetDrag.markTarget(plane9)
-  appendChild(parent, plane9, isTopIndex)
-  return plane9
+  if (parent) {
+    viewAppend(parent, [sprite], config)
+  }
+  return sprite
 }
-// clipping

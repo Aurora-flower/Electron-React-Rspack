@@ -1,10 +1,12 @@
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import type { Container, SpriteOptions } from "pixi.js"
-import { Sprite } from "pixi.js"
+import { Sprite, Texture } from "pixi.js"
 
-export function createText(
-  parent: Container,
-  options: SpriteOptions = {},
+export function createSprite(
+  parent: Container | undefined = undefined,
+  options: SpriteOptions = {
+    texture: Texture.EMPTY
+  },
   config = {
     isNormalAppend: true,
     zIndex: 0
@@ -14,6 +16,8 @@ export function createText(
     // TODO: Sprite 默认值的设置
     ...options
   })
-  viewAppend(parent, [sprite], config)
+  if (parent) {
+    viewAppend(parent, [sprite], config)
+  }
   return sprite
 }

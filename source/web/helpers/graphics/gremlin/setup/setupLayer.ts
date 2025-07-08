@@ -101,10 +101,20 @@ export function initSettingsUiLayer(layer: Container, refresh?: boolean): void {
   )
   drawRect(
     mask,
-    { x: 0, y: 0 },
+    { x: 100, y: 100 },
     { width: 50, height: 50 },
     {
+      isFill: true,
       color: "#ee9a40"
     }
   )
+
+  setTimeout(() => {
+    board.removeChild(mask)
+  }, 1000)
+
+  setTimeout(() => {
+    mask.position.x = 200
+    layer.addChild(mask)
+  }, 3000)
 }
