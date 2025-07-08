@@ -1,6 +1,6 @@
 import { safeDOM } from "@/features/document/mod/opreate"
 
-export function useLoading(
+export function loading(
   selector = "#app",
   containerId = "loader",
   className = "app-loading-wrap"

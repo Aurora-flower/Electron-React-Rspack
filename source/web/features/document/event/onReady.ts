@@ -1,4 +1,4 @@
-import { useLoading } from "@/features/document/mod/loading"
+import { loading } from "@/features/document/mod/loading"
 
 export function domReady(
   condition: DocumentReadyState[] = ["complete", "interactive"] // "complete" | "interactive" | "loading"
@@ -18,7 +18,7 @@ export function domReady(
 
 export function domLoadAfter(): void {
   let timer: AnyModel // number
-  const { appendLoading, removeLoading } = useLoading()
+  const { appendLoading, removeLoading } = loading()
   document.addEventListener("DOMContentLoaded", () => {
     domReady().then(() => {
       appendLoading()
