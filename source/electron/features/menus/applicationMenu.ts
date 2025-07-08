@@ -1,6 +1,6 @@
 import { sendLog } from "@main/toolkit/logger"
-import type { BrowserWindow } from "electron"
 import { Menu, MenuItem } from "electron"
+import type { BrowserWindow } from "electron/main"
 
 export function registerAppMenu(): void {
   const menu = new Menu()

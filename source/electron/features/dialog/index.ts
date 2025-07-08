@@ -4,7 +4,7 @@ import type {
   OpenDialogReturnValue,
   SaveDialogOptions,
   SaveDialogReturnValue
-} from "electron"
+} from "electron/main"
 
 class AppDialog {
   private static _instance: AppDialog

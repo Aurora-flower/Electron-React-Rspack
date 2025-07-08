@@ -1,9 +1,9 @@
 import { getAppInfo } from "@main/features/application/infomation"
-import { Notification } from "electron"
-import type { BrowserWindow } from "electron"
 import Logger from "electron-log"
 import { autoUpdater } from "electron-updater"
 import type { AppUpdater } from "electron-updater"
+import { Notification } from "electron/main"
+import type { BrowserWindow } from "electron/main"
 
 export function getAutoUpdater(): AppUpdater {
   Logger.transports.file.level = "verbose"

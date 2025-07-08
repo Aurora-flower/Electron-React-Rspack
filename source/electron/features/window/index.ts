@@ -1,7 +1,10 @@
 import WindowManager from "@main/helpers/manager/window"
 import { resolvePath } from "@main/node/path/resolvePath"
-import { BrowserWindow } from "electron"
-import type { BrowserWindowConstructorOptions, WebContents } from "electron"
+import { BrowserWindow } from "electron/main"
+import type {
+  BrowserWindowConstructorOptions,
+  WebContents
+} from "electron/main"
 
 export function byNameFindWindow(name = ""): BrowserWindow | null {
   const winM = WindowManager.getInstance()
