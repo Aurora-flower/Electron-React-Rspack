@@ -193,6 +193,8 @@ export default defineConfig([
       // "@typescript-eslint/no-empty-function": "error",
       // "@typescript-eslint/no-unsafe-function-type": "error",
       "@typescript-eslint/prefer-function-type": "error",
+      // TODO: eslint-plugin-css
+      // "css/no-important": "warn",
       // 与当前 eslint-plugin-react 版本不兼容配置
       "react/display-name": "off",
       "react/jsx-key": "off",

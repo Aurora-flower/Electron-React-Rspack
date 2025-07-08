@@ -46,7 +46,7 @@ export function createBrowserWindow(
   isLocal = false,
   setupCallback?: (win: BrowserWindow) => void
 ): BrowserWindow {
-  const win = new BrowserWindow(options)
+  const win: AnyModel = new BrowserWindow(options as AnyModel)
   if (isLocal) {
     win.loadFile(resolvePath(url))
   } else {
