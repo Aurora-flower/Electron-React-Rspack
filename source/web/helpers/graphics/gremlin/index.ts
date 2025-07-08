@@ -10,9 +10,7 @@ import {
 } from "@/helpers/graphics/gremlin/setup/setupLayer"
 import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
 import { getSize } from "@/utils/functions/usually"
-import { webLog } from "@/utils/log"
-// import { timeStamp } from "console"
-import type { Container } from "pixi.js"
+import type { Container, DestroyOptions, RendererDestroyOptions } from "pixi.js"
 import { Application } from "pixi.js"
 
 overwritePixi()
@@ -24,9 +22,7 @@ function getRootElement(root: string | HTMLElement): HTMLElement {
 }
 
 class PixiManager {
-  // static isInit = false
-  private static _instance: PixiManager
-  private static _app: Application = new Application()
+  private static _app: Application
   static viewScale = 1
   static viewSize: SizeModel = new Proxy(getSize(), {
     get(target: SizeModel, p: keyof SizeModel, receiver): number {
@@ -38,71 +34,46 @@ class PixiManager {
     }
   })
 
-  // constructor() {
-  // }
-
-  static getInstance(): PixiManager {
-    if (!PixiManager._instance) {
-      PixiManager._instance = new PixiManager()
-    }
-    return PixiManager._instance
-  }
-
   /**
    * 初始化 pixi 应用程序
    * @param {HTMLElement} root 挂载元素
    * @returns {Promise<Application>} 应用实例
    */
-  async initialize(root: HTMLDivElement | string): Promise<Application> {
+  static async initialize(root: HTMLDivElement | string): Promise<Application> {
     const domElement = getRootElement(root)
-    const app = PixiManager._app
-    // if (PixiManager.isInit) {
-    //   if (PixiManager._currentRoot === domElement) {
-    //     return PixiManager._app
-    //   }
-    //   PixiManager.release()
-    // }
-    if (!app?.renderer) {
-      await app.init({
-        antialias: true,
-        resizeTo: domElement
-      })
-      app.stage.hitArea = app.screen
-      domElement.appendChild(app.canvas)
-      // PixiManager._app = app
-      // PixiManager._currentRoot = domElement
-      this.initDrawingBoard(app.stage)
-      // PixiManager.isInit = true
-      console.log("setup", domElement)
+    const app = new Application()
+    await app.init({
+      antialias: true,
+      resizeTo: domElement
+    })
+    app.stage.hitArea = app.screen
+    for (const child of domElement.children) {
+      if (child.tagName === "CANVAS") child.remove()
     }
-    webLog("PixiManager", "initialize", domElement)
+    domElement.appendChild(app.canvas)
+    PixiManager.initDrawingBoard(app.stage)
+    PixiManager._app = app
     return app
   }
 
-  getApp(): Application | null {
-    return PixiManager._app
-  }
-
-  setApp(app?: Application): void {
-    PixiManager._app = app ?? new Application()
+  static getApp(): Application {
+    return PixiManager._app ?? null
   }
 
   /**
    * 画板样式初始化操作
    * @param stage 舞台或者容器
    */
-  private initDrawingBoard(stage: Container): void {
+  static initDrawingBoard(stage: Container): void {
     if (!stage) {
       return
     }
-    // requestAnimationFrame(() => {
     setupLayer(stage)
     setupStage(stage)
-    // })
   }
 
   static setDrawingBoardScale(scale: number): void {
-    const stage = PixiManager._instance.getApp()?.stage
+    const stage = PixiManager.getApp()?.stage
     if (!stage || scale < 0.25 || scale > 3) {
       return
     }
@@ -122,30 +93,20 @@ class PixiManager {
     }
   }
 
-  static release(): void {
-    // const app = PixiManager._app
-    // const root = PixiManager._currentRoot
-    // if (app) {
-    //   try {
-    //     if (root && app.canvas && root.contains(app.canvas)) {
-    //       root.removeChild(app.canvas)
-    //     }
-    //     app.destroy(
-    //       {
-    //         removeView: true
-    //       },
-    //       {
-    //         children: true,
-    //         texture: true
-    //       }
-    //     )
-    //   } catch (e) {
-    //     console.error("Error while destroying PIXI application", e)
-    //   }
-    // }
-    // PixiManager._app = new Application()
-    // PixiManager._currentRoot = null
-    // PixiManager.isInit = false
+  static destroy(
+    rendererDestroyOptions: RendererDestroyOptions = {
+      removeView: true
+    },
+    options: DestroyOptions = {}
+  ): void {
+    const plugins = Application._plugins.slice(0).reverse()
+    for (const plugin of plugins) {
+      plugin.destroy.call(PixiManager._app)
+    }
+    PixiManager._app.stage.destroy(options)
+    // PixiManager._app.stage = null
+    PixiManager._app.renderer.destroy(rendererDestroyOptions)
+    // PixiManager._app.renderer = null
   }
 }
 
