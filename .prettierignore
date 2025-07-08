@@ -1,4 +1,21 @@
-# Lock files
+/temp
+/template
+/backup
+test/
+.cache
+private
+node_modules
+/app
+/release
+dist
+out
+output
+.idea
+.vscode
+.DS_Store
+*.log
+* copy.*
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+components.d.ts

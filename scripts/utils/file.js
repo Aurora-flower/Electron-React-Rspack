@@ -15,7 +15,7 @@ function existsSync(localPath, type) {
       : type === "Directory"
         ? stats.isDirectory()
         : !!stats
-  } catch (error) {
+  } catch (_error) {
     return false
   }
 }
