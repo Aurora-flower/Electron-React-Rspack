@@ -15,6 +15,10 @@ function PixiJsGraphics(): JSX.Element {
       appRef.current = app
     })
     return (): void => {
+      // const plugins = Application._plugins.slice(0).reverse()
+      // for (const plugin of plugins) {
+      //   console.log(plugin)
+      // }
       appRef.current?.destroy(
         {
           removeView: true

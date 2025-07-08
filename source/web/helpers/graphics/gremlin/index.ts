@@ -10,7 +10,7 @@ import {
 } from "@/helpers/graphics/gremlin/setup/setupLayer"
 import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
 import { getSize } from "@/utils/functions/usually"
-import type { Container, DestroyOptions, RendererDestroyOptions } from "pixi.js"
+import type { Container } from "pixi.js"
 import { Application } from "pixi.js"
 
 overwritePixi()
@@ -91,22 +91,6 @@ class PixiManager {
     if (layer) {
       initSettingsUiLayer(layer)
     }
-  }
-
-  static destroy(
-    rendererDestroyOptions: RendererDestroyOptions = {
-      removeView: true
-    },
-    options: DestroyOptions = {}
-  ): void {
-    const plugins = Application._plugins.slice(0).reverse()
-    for (const plugin of plugins) {
-      plugin.destroy.call(PixiManager._app)
-    }
-    PixiManager._app.stage.destroy(options)
-    // PixiManager._app.stage = null
-    PixiManager._app.renderer.destroy(rendererDestroyOptions)
-    // PixiManager._app.renderer = null
   }
 }
 
