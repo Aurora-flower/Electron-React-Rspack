@@ -25,7 +25,7 @@ class WindowManager {
   }
 
   public createMainWindow(): void {
-    const remoteURL = process.env.DEV_SERVER_URL
+    const remoteURL = process.env.DEV_SERVER_URL // "http://192.168.3.71:8080/"
     const localURL = resolvePath("../public/index.html")
     const url = remoteURL ? remoteURL : localURL
     const win = createBrowserWindow(

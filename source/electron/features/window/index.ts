@@ -47,7 +47,7 @@ export function createBrowserWindow(
   if (isLocal) {
     win.loadFile(resolvePath(url))
   } else {
-    win.loadURL(process.env.DEV_SERVER_URL)
+    win.loadURL(url)
   }
   if (setupCallback) {
     setupCallback(win)
