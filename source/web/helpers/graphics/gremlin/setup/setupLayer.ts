@@ -11,6 +11,7 @@ import {
   drawRect
 } from "@/helpers/graphics/gremlin/generator/graphics"
 import { getSize } from "@/utils/functions/usually"
+import { webLog } from "@/utils/log"
 
 /**
  * @summary 配置图层，对图层的初始特殊处理
@@ -29,7 +30,9 @@ export function setupLayer(stage: Container): void {
   initSettingsBasiskarte(basiskarte)
   initSettingsUiLayer(layerContainer)
   initSettingsStaff(staffContainer)
-  console.log("初始化", stage)
+
+  const board = getElementByLabel(ELEMENT_FLAG.Board, stage)
+  webLog("setupLayer", "初始化画布样板", stage, board)
 }
 
 /* ***** ***** ***** ***** 图层初始化操作 （Initialization）***** ***** ***** ***** */
@@ -37,17 +40,11 @@ export function setupLayer(stage: Container): void {
 /**
  * @summary 底部图层初始化操作
  */
-export function initSettingsBasiskarte(
-  basiskarte: Container,
-  refresh?: boolean
-): void {
+export function initSettingsBasiskarte(basiskarte: Container): void {
   if (!basiskarte) {
     return
   }
   basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
-  if (refresh) {
-    Grid.release(true)
-  }
   const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
   Grid.draw(basiskarte, size, PixiManager.viewScale)
 }
@@ -55,13 +52,9 @@ export function initSettingsBasiskarte(
 /**
  * @summary 刻度尺图层初始化操作
  */
-export function initSettingsStaff(staff: Container, refresh?: boolean): void {
+export function initSettingsStaff(staff: Container): void {
   if (!staff) {
     return
-  }
-  // TODO: 标尺绘画
-  if (refresh) {
-    Ruler.release(true)
   }
   const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
   Ruler.draw(staff, size, PixiManager.viewScale)
@@ -70,12 +63,9 @@ export function initSettingsStaff(staff: Container, refresh?: boolean): void {
 /**
  * @summary 绘制图层初始化操作
  */
-export function initSettingsUiLayer(layer: Container, refresh?: boolean): void {
+export function initSettingsUiLayer(layer: Container): void {
   if (!layer) {
     return
-  }
-  if (refresh) {
-    layer.removeChildren()
   }
   layer.pivot.set(-DEFAULT_RULER_SIZE)
   // TODO: 画板 + 渲染元素
@@ -89,32 +79,19 @@ export function initSettingsUiLayer(layer: Container, refresh?: boolean): void {
 
   // TEST
   const graphic = createGraphics(board)
-  drawRect(graphic, { x: 0, y: 0 }, { width: 200, height: 200 })
+  drawRect(graphic, { x: 100, y: 100 }, { width: 200, height: 200 })
+}
 
-  const mask = createGraphics(
-    board,
-    {},
-    {
-      isNormalAppend: false,
-      zIndex: board.children.length
-    }
-  )
-  drawRect(
-    mask,
-    { x: 100, y: 100 },
-    { width: 50, height: 50 },
-    {
-      isFill: true,
-      color: "#ee9a40"
-    }
-  )
+/* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */
 
-  setTimeout(() => {
-    board.removeChild(mask)
-  }, 1000)
+export function updateBasiskarte(_basiskarte: Container): void {
+  // TODO: 更新辅助元素 - 网格
+}
 
-  setTimeout(() => {
-    mask.position.x = 200
-    layer.addChild(mask)
-  }, 3000)
+export function updateStaff(_staff: Container): void {
+  // TODO: 更新辅助元素 - 标尺
+}
+
+export function updateLayer(_layer: Container): void {
+  // TODO: 更新画板缩放
 }

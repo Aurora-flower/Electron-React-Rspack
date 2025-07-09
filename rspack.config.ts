@@ -1,3 +1,6 @@
+/***
+ * @file 此文件仅是用来测试构建的
+ */
 import { join } from "node:path"
 import { defineConfig } from "@rspack/cli"
 import { rspack } from "@rspack/core"
