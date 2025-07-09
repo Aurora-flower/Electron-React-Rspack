@@ -16,12 +16,11 @@ interface CardInfoModel {
 
 function CardItem<T extends CardInfoModel>(prop: T): JSX.Element {
   return (
-    <Card title={prop.label}>
+    <Card title={prop.label} className="overflow-auto scrollbar-hide">
       <p className="m-0">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-        consequuntur error repudiandae numquam deserunt quisquam repellat libero
-        asperiores earum nam nobis, culpa ratione quam perferendis esse,
-        cupiditate neque quas!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis illo
+        porro distinctio quam vel quo, fuga reiciendis inventore labore quos eum
+        eveniet enim eos nesciunt nobis sapiente ducimus quod delectus?
       </p>
       <div className="flex justify-end">
         <NavLink
@@ -81,13 +80,37 @@ function CardList(): JSX.Element {
     },
     {
       label: "Get Job"
+    },
+    {
+      label: "Python Speader"
+    },
+    {
+      label: "Rust"
+    },
+    {
+      label: "C++"
+    },
+    {
+      label: "C#"
     }
   ]
   return (
-    <div className={useClassNames(["card-list", "flex", "flex-wrap"])}>
+    <div
+      className={useClassNames([
+        "card-list",
+        "h-full overflow-y-auto",
+        "flex flex-wrap",
+        "justify-start"
+      ])}
+    >
       {cardListInfo.map(item => (
         <div
-          className="card-wrap w-[calc(25%-2rem)] m-[1rem]"
+          className={[
+            "card-wrap scrollbar-hide",
+            "w-[calc(25%-2rem)] h-[calc(25%-2rem)]",
+            "overflow-y-auto",
+            "m-[1rem]"
+          ].join(" ")}
           key={getRandomColor()}
         >
           <CardItem {...item} />
@@ -106,7 +129,7 @@ function Home(): JSX.Element {
   // TODO: 做个入口页面 - 进入 ThreeJS | PixiJS | Canvas | WebGL | WebAssembly | WebSocket | WebRTC | WebSocket 示例界面
 
   return (
-    <div className="page-base overflow-y-auto">
+    <div className="page-base">
       <CardList />
     </div>
   )
