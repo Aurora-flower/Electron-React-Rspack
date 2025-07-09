@@ -2,19 +2,19 @@ import type { Container } from "pixi.js"
 
 export function getElementByLabel(
   label: string,
-  root: Container
+  root: Container,
+  isRecursive: boolean = true
 ): Container | null {
   if (!root) {
     return null
   }
-  // TODO: 节点的递归查找
-  // if (root.children.length > 0) {
-  //   for (const child of root.children) {
-  //     const element = getElementByLabel(label, child)
-  //     if (element) {
-  //       return element
-  //     }
-  //   }
-  // }
+  if (isRecursive) {
+    for (const child of root.children) {
+      const element = getElementByLabel(label, child, isRecursive)
+      if (element) {
+        return element
+      }
+    }
+  }
   return root.getChildByLabel(label)
 }
