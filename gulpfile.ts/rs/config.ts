@@ -87,7 +87,7 @@ function singleConfig(
 
   const emptyObject = Object.create(null)
   const options: RspackOptions = Object.assign(emptyObject, baseOptions, {
-    target: BUILD_TARGET[key],
+    target: BUILD_TARGET[key as keyof typeof BUILD_TARGET],
     entry: {
       [processType]: {
         import: sourcePath(

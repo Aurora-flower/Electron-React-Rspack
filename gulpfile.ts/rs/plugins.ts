@@ -92,19 +92,14 @@ function getProvidePlugin(): InstanceType<typeof rspack.ProvidePlugin> {
 }
 
 function getBundleAnalyzerPlugin(): InstanceType<typeof BundleAnalyzerPlugin> {
-  try {
-    const BundleAnalyzerPluginOption = {
-      analyzerMode: "static" as const,
-      reportFilename: "report.html",
-      openAnalyzer: false,
-      generateStatsFile: true,
-      statsFilename: "stats.json"
-    }
-    return new BundleAnalyzerPlugin(BundleAnalyzerPluginOption)
-  } catch (error) {
-    console.log("BundleAnalyzerPlugin error:", error?.message)
-    return null
+  const BundleAnalyzerPluginOption = {
+    analyzerMode: "static" as const,
+    reportFilename: "report.html",
+    openAnalyzer: false,
+    generateStatsFile: true,
+    statsFilename: "stats.json"
   }
+  return new BundleAnalyzerPlugin(BundleAnalyzerPluginOption)
 }
 
 const PLUGINS = {
