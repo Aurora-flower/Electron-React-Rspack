@@ -150,11 +150,11 @@ export default defineConfig([
           {
             "from": joinPath("./public/resource"),
             "to": joinPath("./app/public")
-          },
-          {
-            "from": joinPath("./core"),
-            "to": joinPath("./app/core")
           }
+          // {
+          //   "from": joinPath("./core"),
+          //   "to": joinPath("./app/core")
+          // }
         ]
       }),
       EnvPlugin()

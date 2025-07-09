@@ -161,14 +161,14 @@ function getTsLoader(isExclude = false, exclude = NODE_MODULES): RuleSetRule {
           parser: {
             syntax: "typescript",
             tsx: true
-          },
-          transform: {
-            react: {
-              runtime: "automatic",
-              development: true,
-              refresh: true
-            }
           }
+          // transform: {
+          //   react: {
+          //     runtime: "automatic",
+          //     development: isDevelopment,
+          //     refresh: isDevelopment
+          //   }
+          // }
         }
       }
     },

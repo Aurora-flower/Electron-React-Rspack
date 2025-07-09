@@ -11,8 +11,6 @@ import {
 } from "./macro"
 import PLUGINS from "./plugins"
 
-const ReactRefreshRspackPlugin = require("@rspack/plugin-react-refresh")
-
 // Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ["last 2 versions", "> 0.2%", "not dead", "Firefox ESR"]
 
@@ -84,7 +82,6 @@ function singleConfig(
     },
     plugins: []
   }
-
   const emptyObject = Object.create(null)
   const options: RspackOptions = Object.assign(emptyObject, baseOptions, {
     target: BUILD_TARGET[key as keyof typeof BUILD_TARGET],
@@ -111,7 +108,7 @@ function singleConfig(
       "@main": DIRECTORY.Source.main
       // electron: require.resolve("electron"),
     }
-    // options.externals = [];
+    options.externals = []
   }
 
   if (isMain || isPeload) {
@@ -140,8 +137,7 @@ function singleConfig(
             to: DIRECTORY.Output.renderer
           }
         ]),
-        PLUGINS.CssExtract(),
-        isDevelopment ? new ReactRefreshRspackPlugin() : null
+        PLUGINS.CssExtract()
         // PLUGINS.BundleAnalyzer(),
       ].filter(Boolean)
     )
