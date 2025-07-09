@@ -6,6 +6,8 @@ export const DEFAULT_RULER_SIZE = 20
 
 export const DEFAULT_COLOR = 0xffffff
 
+export const DEFAULT_INIT_VIEW_SCALE = 0.5
+
 /**
  * @summary 默认的销毁参数
  */
@@ -24,11 +26,11 @@ export interface DestroyOptionsDocs {
   sprite?: boolean
 }
 
-export const DEFAULT_DESTROY_OPTIONS: DestroyOptionsDocs = {
+export const DEFAULT_DESTROY_OPTIONS: Readonly<DestroyOptionsDocs> = {
   children: true,
   sprite: false,
   context: false,
   texture: false,
   textureSource: false,
   style: false
-}
+} as const

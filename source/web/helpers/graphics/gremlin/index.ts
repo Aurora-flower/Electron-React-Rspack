@@ -1,9 +1,9 @@
 import type { Container } from "pixi.js"
 import { Application } from "pixi.js"
 import { getDomElement } from "@/features/document"
+import { DEFAULT_INIT_VIEW_SCALE } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
-import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
 import {
   setupLayer,
   updateBasiskarte,
@@ -12,8 +12,7 @@ import {
 } from "@/helpers/graphics/gremlin/setup/setupLayer"
 import { setupStage } from "@/helpers/graphics/gremlin/setup/setupStage"
 import { getSize } from "@/utils/functions/usually"
-
-overwritePixi()
+import { webLog } from "@/utils/log"
 
 function getRootElement(root: string | HTMLElement): HTMLElement {
   return typeof root === "string"
@@ -21,9 +20,12 @@ function getRootElement(root: string | HTMLElement): HTMLElement {
     : root
 }
 
+const MAX_SCALE = 2.5
+const MIN_SCALE = 0.25
+
 class PixiManager {
-  private static _app: Application
-  static viewScale = 1
+  private static _app: Application | null = null
+  static viewScale = DEFAULT_INIT_VIEW_SCALE
   static viewSize: SizeModel = new Proxy(getSize(), {
     get(target: SizeModel, p: keyof SizeModel, receiver): number {
       const app = PixiManager._app
@@ -56,7 +58,7 @@ class PixiManager {
     return app
   }
 
-  static getApp(): Application {
+  static getApp(): Application | null {
     return PixiManager._app ?? null
   }
 
@@ -74,7 +76,7 @@ class PixiManager {
 
   static setDrawingBoardScale(scale: number): void {
     const stage = PixiManager.getApp()?.stage
-    if (!stage || scale < 0.25 || scale > 3) {
+    if (!stage || scale < MIN_SCALE || scale > MAX_SCALE) {
       return
     }
     PixiManager.viewScale = scale
@@ -91,6 +93,12 @@ class PixiManager {
       updateLayer(layer)
     }
     // console.log("缩放设置", karte, staff, layer, PixiManager._app)
+  }
+
+  static destroy(): void {
+    PixiManager.viewScale = DEFAULT_INIT_VIEW_SCALE
+    webLog("PixiManager", "destroy", PixiManager._app)
+    PixiManager._app = null
   }
 }
 

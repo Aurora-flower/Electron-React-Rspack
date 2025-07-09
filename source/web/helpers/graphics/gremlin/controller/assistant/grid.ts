@@ -12,24 +12,25 @@ const DEFAULT_STROKE_INPUT: StrokeInput = {
 }
 
 class Grid {
-  // private static _instance: Grid
   private static _grid: Graphics
 
-  // public static getInstance(): Grid {
-  //   if (!Grid._instance) {
-  //     Grid._instance = new Grid()
-  //   }
-  //   return Grid._instance
-  // }
+  static init(parent: Container, size: SizeModel): void {
+    Grid.reCreate()
+    console.log("init grid", parent, Grid._grid)
+    requestAnimationFrame(() => {
+      if (!parent.children.includes(Grid._grid)) {
+        viewAppend(parent, [Grid._grid])
+      }
+    })
+    Grid.draw(size)
+  }
 
   static draw(
-    parent: Container,
     size: SizeModel,
     scale = 1,
     strokeInput?: StrokeInput,
     girdInterval?: PointModel
   ): void {
-    Grid._grid = new Graphics()
     const renderSize = size ?? getSize()
     const renderInterval = girdInterval ?? {
       x: DEFAULT_GRID_INTERVAL,
@@ -41,11 +42,6 @@ class Grid {
       getPoint(renderInterval.x * scale, renderInterval.y * scale),
       style
     )
-    requestAnimationFrame(() => {
-      if (!parent.children.includes(Grid._grid)) {
-        viewAppend(parent, [Grid._grid])
-      }
-    })
   }
 
   static release(
@@ -79,6 +75,15 @@ class Grid {
       const endPoint: PointArray = [size.width, y]
       drawLine([startPoint, endPoint], Grid._grid, style)
     }
+  }
+
+  static reCreate(): void {
+    Grid._grid = new Graphics()
+  }
+
+  static destory(): void {
+    Grid.release(true)
+    Grid.reCreate()
   }
 }
 

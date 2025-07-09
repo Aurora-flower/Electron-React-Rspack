@@ -31,8 +31,20 @@ export function setupLayer(stage: Container): void {
   initSettingsUiLayer(layerContainer)
   initSettingsStaff(staffContainer)
 
-  const board = getElementByLabel(ELEMENT_FLAG.Board, stage)
-  webLog("setupLayer", "初始化画布样板", stage, board)
+  webLog("setupLayer", "初始化画布样板", stage)
+}
+
+function getViewSize(): SizeModel {
+  return getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
+}
+
+function drawingAssistant(flag: 0 | 1 = 0): void {
+  const size = getViewSize()
+  if (flag === 0) {
+    Grid.draw(size, PixiManager.viewScale)
+  } else if (flag === 1) {
+    Ruler.draw(size, PixiManager.viewScale)
+  }
 }
 
 /* ***** ***** ***** ***** 图层初始化操作 （Initialization）***** ***** ***** ***** */
@@ -45,8 +57,8 @@ export function initSettingsBasiskarte(basiskarte: Container): void {
     return
   }
   basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
-  const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
-  Grid.draw(basiskarte, size, PixiManager.viewScale)
+  const size = getViewSize()
+  Grid.init(basiskarte, size)
 }
 
 /**
@@ -56,8 +68,8 @@ export function initSettingsStaff(staff: Container): void {
   if (!staff) {
     return
   }
-  const size = getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
-  Ruler.draw(staff, size, PixiManager.viewScale)
+  const size = getViewSize()
+  Ruler.init(staff, size)
 }
 
 /**
@@ -84,14 +96,25 @@ export function initSettingsUiLayer(layer: Container): void {
 
 /* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */
 
-export function updateBasiskarte(_basiskarte: Container): void {
+export function updateBasiskarte(basiskarte: Container): void {
   // TODO: 更新辅助元素 - 网格
+  Grid.release()
+  drawingAssistant(0)
+  webLog("setupLayer", "updateBasiskarte", basiskarte)
 }
 
 export function updateStaff(_staff: Container): void {
   // TODO: 更新辅助元素 - 标尺
+  Ruler.release()
+  drawingAssistant(1)
 }
 
-export function updateLayer(_layer: Container): void {
+export function updateLayer(layer: Container): void {
   // TODO: 更新画板缩放
+  const board = getElementByLabel(ELEMENT_FLAG.Board, layer)
+  if (!board) {
+    return
+  }
+  board.scale.set(PixiManager.viewScale)
+  webLog("setupLayer", "updateLayer", PixiManager.viewScale)
 }

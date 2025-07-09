@@ -9,7 +9,7 @@ import {
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import { createText } from "@/helpers/graphics/gremlin/generator/text"
-import { getPoint } from "@/utils/functions/usually"
+import { getPoint, getSize } from "@/utils/functions/usually"
 
 type RulerType = "top" | "left"
 
@@ -21,46 +21,48 @@ const DEFAULT_MARK_COLOR = 0xf09b40
 const DEFAULT_MARK_COLOR_MINOR = 0xa5cd50
 
 class Ruler {
-  // private static _instance: Ruler
+  private static _size: SizeModel = getSize()
   private static _topRuler: Graphics
   private static _leftRuler: Graphics
+  private static _scaleLabel: Container
   private static _rulerContainer: Container
 
-  // public static getInstance(): Ruler {
-  //   if (!Ruler._instance) {
-  //     Ruler._instance = new Ruler()
-  //   }
-  //   return Ruler._instance
-  // }
-
-  static draw(
-    parent: Container,
-    size: SizeModel,
-    scale = 1,
-    girdInterval?: PointModel
-  ): void {
-    const renderInterval = girdInterval ?? {
-      x: DEFAULT_GRID_INTERVAL,
-      y: DEFAULT_GRID_INTERVAL
-    }
-    // setStrokeStyle
-    Ruler._rulerContainer = new Container()
-    Ruler._topRuler = new Graphics()
-      .rect(0, 0.1, size.width, DEFAULT_RULER_SIZE)
-      .fill(DEFAULT_RULER_COLOR)
-    Ruler._leftRuler = new Graphics()
-      .rect(0.1, 0, DEFAULT_RULER_SIZE, size.height)
-      .fill(DEFAULT_RULER_COLOR)
-    Ruler._rulerContainer.addChild(Ruler._topRuler, Ruler._leftRuler)
-    Ruler.rulerLogic(
-      size,
-      getPoint(renderInterval.x * scale, renderInterval.y * scale)
+  static init(parent: Container, size: SizeModel): void {
+    Ruler._size = size
+    Ruler.reCreate()
+    Ruler._rulerContainer.addChild(
+      Ruler._topRuler,
+      Ruler._leftRuler,
+      Ruler._scaleLabel
     )
     requestAnimationFrame(() => {
       if (!parent.children.includes(Ruler._rulerContainer)) {
         viewAppend(parent, [Ruler._rulerContainer])
       }
     })
+    Ruler.drawRulerBackground(size)
+    Ruler.draw(size)
+  }
+
+  private static drawRulerBackground(size: SizeModel): void {
+    Ruler._topRuler
+      .rect(0, 0.1, size.width, DEFAULT_RULER_SIZE)
+      .fill(DEFAULT_RULER_COLOR)
+    Ruler._leftRuler
+      .rect(0.1, 0, DEFAULT_RULER_SIZE, size.height)
+      .fill(DEFAULT_RULER_COLOR)
+  }
+
+  static draw(size: SizeModel, scale = 1, girdInterval?: PointModel): void {
+    const renderInterval = girdInterval ?? {
+      x: DEFAULT_GRID_INTERVAL,
+      y: DEFAULT_GRID_INTERVAL
+    }
+    // setStrokeStyle
+    Ruler.rulerLogic(
+      size,
+      getPoint(renderInterval.x * scale, renderInterval.y * scale)
+    )
   }
 
   static release(
@@ -70,9 +72,11 @@ class Ruler {
     if (isClean) {
       Ruler._rulerContainer.destroy(configuration)
     } else {
-      Ruler._rulerContainer.removeChildren()
+      Ruler._scaleLabel.removeChildren()
+      Ruler._topRuler.clear()
+      Ruler._leftRuler.clear()
+      Ruler.drawRulerBackground(Ruler._size)
     }
-    Ruler._rulerContainer.addChild(Ruler._topRuler, Ruler._leftRuler)
   }
 
   private static drawRulerValue(
@@ -98,7 +102,7 @@ class Ruler {
       position.y = point.y + 5
     }
 
-    createText(Ruler._rulerContainer, {
+    createText(Ruler._scaleLabel, {
       position,
       text: value.toString(),
       angle: flag === "left" ? -90 : 0,
@@ -169,6 +173,19 @@ class Ruler {
         countY++
       }
     }
+  }
+
+  static reCreate(): void {
+    Ruler._topRuler = new Graphics()
+    Ruler._leftRuler = new Graphics()
+    Ruler._scaleLabel = new Container()
+    Ruler._rulerContainer = new Container()
+  }
+
+  static destory(): void {
+    Ruler.release(true)
+    Ruler._size = getSize()
+    Ruler.reCreate()
   }
 }
 

@@ -2,6 +2,7 @@ import type { Application } from "pixi.js"
 import type { JSX } from "react"
 import * as React from "react"
 import PixiManager from "@/helpers/graphics/gremlin"
+import { DEFAULT_DESTROY_OPTIONS } from "@/helpers/graphics/gremlin/constant/defaultValue"
 
 function PixiJsGraphics(): JSX.Element {
   const [getTip] = React.useState<string>(
@@ -23,14 +24,10 @@ function PixiJsGraphics(): JSX.Element {
         {
           removeView: true
         },
-        {
-          children: true,
-          texture: true,
-          textureSource: true,
-          context: true
-        }
+        DEFAULT_DESTROY_OPTIONS
       )
       appRef.current = null
+      PixiManager.destroy()
     }
   }, [])
 

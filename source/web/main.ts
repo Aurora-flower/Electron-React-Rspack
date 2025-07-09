@@ -14,6 +14,9 @@ import "primereact/resources/themes/lara-light-cyan/theme.css"
 import "primereact/resources/primereact.min.css"
 import "primeicons/primeicons.css"
 import "primeflex/primeflex.css"
+import { overwritePixi } from "@/helpers/graphics/gremlin/overwrite"
+
+overwritePixi()
 
 void (async function AppInit(): Promise<void> {
   await setupPrimeUI()
