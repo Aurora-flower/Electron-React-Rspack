@@ -5,134 +5,113 @@
 
 ## 前言
 
-该项目旨在学习如何结合 **Electron** 和 **React** 构建桌面应用，并使用 **Rspack** 作为构建工具。它是一个基础的示范项目，适用于希望了解如何在桌面应用中使用现代 Web 技术的开发者。
+> 学习使用 **Electron + React + Rspack** 构建桌面应用的基础模板，适合探索现代 Web 技术在桌面端的应用。
 
-**PS**:
+**说明**：
 
-在不断学习的过程中，细节可能会有所调整。未来，我会不断补充和融入在日常工作中接触到的技术栈，并尽量保持代码的可复用性。
+- 项目持续迭代，代码结构可能调整
+- 保持核心功能模块的可复用性
+- ⚠️ Sponsor 按钮仅为占位符，并无赞助渠道
 
-**`Sponsor` 按钮是无用的，只是为了显示在 GitHub 仓库上，请忽略。**
+**项目状态说明**：
 
----
-
-**Email: `yanl_802@163.com`**
-
-**WIKI: [Electron-React-Rspack](https://deepwiki.com/Aurora-flower/Electron-React-Rspack)**
-
----
-
-**Chinese** | [English](./README.EN.md)
+- 当前项目仍处于开发迭代阶段，部分模块实现与整体架构存在差异
+- 如遇到功能问题或设计缺陷，欢迎通过 [Issues](https://github.com/Aurora-flower/Electron-React-Rspack/issues) 提出讨论
+- 后续将持续引入工业级技术实践，优化代码复用性和架构一致性
 
 ---
 
-## 基本介绍
+**邮箱**：<yanl_802@163.com>  
+**文档**：[Electron-React-Rspack Wiki](https://deepwiki.com/Aurora-flower/Electron-React-Rspack)  
+**英文** | [English](./README.EN.md)
 
-### 适用人群
+---
 
-- **初学者**：适合刚接触 Electron 或 React 的开发者作为学习和实践的入门项目。项目中我尽量添加清晰规范的注释，并封装一些常用函数和日常开发中常见的方法，帮助提高理解和使用效率。
-- **中高级开发者**：本项目也适合作为基础模板，开发者可以基于此项目进行功能拓展和架构优化。
+**贡献者公约**：
 
-### 历史版本与最新分支 📌
+请遵循 [Contributor Covenant](https://www.contributor-covenant.org/) 准则
 
-- 请通过 `tags` 查看历史版本
-- `main` 分支为最新版本，`dev` 分支为上个大迭代的版本， `future` 分支为下个大迭代的版本， `next` 分支为下个小迭代的版本。
+---
 
-### 补丁策略
+## 核心功能
 
-- 使用 `electron-builder` 与 `electron-updater` 实现增量更新。
-- 使用 `patch-package`，用于持久化修改 `node_modules` 中的第三方库(依赖包)的问题。
+### 编辑器项目
 
-### 项目列表
+| 项目         | 状态   | 技术栈    | 功能描述                          |
+|--------------|--------|-----------|-----------------------------------|
+| **2D 编辑器** | 进行中 | PixiJS    | 解析 Cocos2.x 场景文件，也支持创建与导出 json 格式项目   |
+| **3D 编辑器** | 规划中 | ThreeJS   | 解析 Unity/Cocos3.x 场景文件，也支持创建与导出 json 格式项目      |
 
-- PIXIJS 项目（进行中）
+**输出能力**：
 
-- **PixiJS 项目 - 2D 编辑器**（进行中）：
-  - **功能描述**：解析游戏引擎资源文件（包括 Cocos Creator 2.x 的场景文件），生成对应的结构化 `.json` 文件
-  - **导出选项**：
-    - 覆盖原始资源文件（直接修改源文件）
-    - 生成预览图（保留原始文件，额外输出可视化结果）
-
-- **ThreeJS 项目 - 3D 编辑器**（待定）：
-  - **功能描述**：解析游戏引擎资源文件（包括 Cocos Creator 3.x 的场景文件与 Unity 的场景文件），生成对应的结构化 `.json` 文件
+- 创建 json 格式项目，支持与 cocos、unity 的文件互转
+- 生成结构化 JSON
+- 资源文件覆盖/预览图生成
+- 对源文件直接修改
 
 ---
 
 ## 快速开始
 
-1. 安装依赖
+### 安装与运行
 
-    ```shell
-    npm install
+```shell
+# 安装依赖
+npm install --legacy-peer-deps  # 推荐使用兼容模式
 
-    # 安装新依赖
-    npm install --no-save-dev [package-name] # prod
-    npm install [package-name] # dev
+# 启动开发环境
+npm run dev
 
-    # 查看依赖可用版本
-    npm show [package-name] versions
-    ```
+# 单独安装模块（默认添加至 devDependencies）
+npm install --no-save-dev [package-name] # prod
+npm install [package-name] # dev
 
-2. 运行项目
-
-    ```shell
-    npm run dev
-    ```
-
-3. 提交修改
-
-    ```shell
-    # 提交格式 - [类型](模块名称|功能命名): 修改描述
-    git commit -m "feat(file): 文件处理模块"
-    ```
-
-**注意** 📢:
-
-每次执行 `commit` 时会触发 `pre-commit` 钩子，钩子中执行预定义的脚本命名，并检查 `commit` 信息是否符合规范。当存在错误，则会阻止提交。
-
-**可以使用 `-n/--no-verify` 选项来跳过钩子。对于没有此标志的命令，请使用 `HUSKY=0` 暂时禁用钩子。**
+# 查看依赖可用版本
+npm show [package-name] versions
+```
 
 **提示**:
 
-如果出现以下错误，请将 node 版本更改为 22.14.0 版本。（比如: **[nvm](https://nvm.p6p.net/)** 工具）
+_如果出现以下错误，请将 node 版本更改为 22.14.0 版本。（如: **[nvm](https://nvm.p6p.net/)** 工具）_
 
-```text
-Error: Cannot find module 'xxx/gulpfile.ts'
-```
-
----
-
-## 安装问题
-
-1. electron 的安装
-
-    由于网络错误，请尝试添加以下环境变量：
-
-    ```text
-    # 废弃 (deprecated) - 可通过配置环境变量的方式来设置
-    electron_mirror=https://npmmirror.com/mirrors/electron/
-    electron_builder_binaries_mirror=https://npmmirror.com/mirrors/electron-builder-binaries/
-    ```
-
-2. install 错误
-
-    由于 audit 提示风险，所以安装时报错并提示使用 `--force` 或 `--legacy-peer-deps` 的选项。
-
-    ```text
-    # 一般使用兼容安装
-    npm install --legacy-peer-deps
-    ```
-
-    PS: 哪怕不主动更新依赖，并固定版本，也会有错误提示。所以通过固定版本避免风险提示的方式行不通。
-
----
-
-## 自签名证书
-
-使用 OpenSSL 一键生成私钥和证书（无密码保护）
+### Git 操作
 
 ```shell
+# 添加远程仓库
+git remote add origin <remote-url>
+
+# 提交代码（强制规范 - [类型](模块名称|功能命名): 修改描述）
+git commit -m "feat(file): 新增文件处理模块"
+
+# 推送代码并跟踪远程分支
+git push --set-upstream origin <branch>
+
+# 放弃本地所有提交
+git reset --hard <remote/branch>
+```
+
+**注意** 📢:
+
+_每次执行 `commit` 时会触发 `pre-commit` 钩子，钩子中执行预定义的脚本命名，并检查 `commit` 信息是否符合规范。当存在错误，则会阻止提交。_
+
+**可以使用 `-n/--no-verify` 选项来跳过钩子。对于没有此标志的命令，请使用 `HUSKY=0` 暂时禁用钩子。**
+
+### 自签名证书
+
+当需要启动 https 服务时，使用 OpenSSL 一键生成私钥和证书并修改配置。
+
+```shell
+# 生成私钥和证书（无密码保护）
 openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 365 -subj "/CN=localhost"
 ```
+
+### 更新策略
+
+- 增量更新
+  electron-builder + electron-updater 自动更新
+
+- 热修复
+  patch-package 持久化修复第三方依赖
 
 ---
 
@@ -338,11 +317,15 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **开发社区**
   - [🏆 GitHub 文档](https://github.com/)
   - [☕️ 掘金社区](https://juejin.cn/)
+  - [🖇 Stack Overflow](https://stackoverflow.com/)
 
 - **技术博客**
   - [💥 David Walsh 博客](https://davidwalsh.name)
   - [👳 CSS 可视化](https://blog.poetries.top/css-reference)
   - [💘 Node 指南 - 博客](https://blog.poetries.top/node-learning-notes/)
+
+- **社区资源**
+  - [📤 GitHub 趋势](https://github.com/trending)
 
 #### 3. 可视化资源
 
