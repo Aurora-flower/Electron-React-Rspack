@@ -43,7 +43,7 @@ const CHANNEL_CONFIG_MAP: ChannelConfigMap = {
 async function setupReceiverHooks(
   event: IpcMainEvent,
   channel: TriggerChannelName,
-  ...args: unknown[]
+  ...args: ArrayType
 ): Promise<void> {
   const listener = CHANNEL_CONFIG_MAP.Receiver.listeners?.[channel]
   if (!listener) throw new Error(`Channel ${channel} has no handler`)
@@ -53,7 +53,7 @@ async function setupReceiverHooks(
 async function setupTriggerHooks(
   event: IpcMainInvokeEvent,
   channel: ReceiverChannelName,
-  ...args: unknown[]
+  ...args: ArrayType
 ): Promise<unknown> {
   const listener = CHANNEL_CONFIG_MAP.Trigger.listeners?.[channel]
   if (!listener) throw new Error(`Channel ${channel} has no handler`)
@@ -63,7 +63,7 @@ async function setupTriggerHooks(
 async function setupMessageHooks(
   event: IpcMainEvent,
   channel: MessagenerChannelName,
-  ...args: unknown[]
+  ...args: ArrayType
 ): Promise<void> {
   const listener = CHANNEL_CONFIG_MAP.Messenger.listeners?.[channel]
   if (!listener) throw new Error(`Channel ${channel} has no handler`)

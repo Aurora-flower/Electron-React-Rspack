@@ -17,10 +17,10 @@ interface LogOptions {
   time?: string
   win?: string
   module?: string | number
-  payload?: unknown[]
+  payload?: ArrayType
 }
 
-export function sendLog(options: LogOptions, ...args: unknown[]): void {
+export function sendLog(options: LogOptions, ...args: ArrayType): void {
   const date = new Date()
   const info: LogOptions = {
     id: "LOGGER",

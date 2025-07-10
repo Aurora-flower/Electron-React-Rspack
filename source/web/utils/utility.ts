@@ -1,4 +1,4 @@
-import { DATA_TYPE_MODE, getDataType } from "@/utils/functions/dataType"
+import { DATA_TYPE_MODE, is } from "@/utils/functions/dataType"
 
 class CommonUtility {
   /**
@@ -7,12 +7,12 @@ class CommonUtility {
    * - 比如，用户在滚动页面时触发滚动事件，使用节流可以保证在一定时间内只处理一次滚动事件，避免频繁处理带来的性能问题。
    * - 应用场景：滚动、窗口大小调整等。
    */
-  static throttle<T extends (...args: unknown[]) => unknown>(
+  static throttle<T extends (...args: ArrayType) => unknown>(
     fn: T,
     delay = 1000
   ): T {
     let lastCall = 0
-    return function (this: unknown, ...args: unknown[]) {
+    return function (this: unknown, ...args: ArrayType) {
       const now = Date.now()
       if (now - lastCall >= delay) {
         lastCall = now
@@ -27,12 +27,12 @@ class CommonUtility {
    * - 比如，用户输入框输入时，防抖可以确保用户停止输入一段时间后，才去执行请求，而不是每次键入都触发请求。
    * - 应用场景：搜索输入框、表单验证等。
    */
-  static debounce<T extends (...args: unknown[]) => unknown>(
+  static debounce<T extends (...args: ArrayType) => unknown>(
     fn: T,
     delay = 1000
   ): T {
     let timeoutId: ReturnType<typeof setTimeout> | null = null
-    return function (this: unknown, ...args: unknown[]) {
+    return function (this: unknown, ...args: ArrayType) {
       if (timeoutId) {
         clearTimeout(timeoutId)
       }
@@ -41,7 +41,7 @@ class CommonUtility {
   }
 
   static deepCopyJson<T>(json: T): T {
-    if (getDataType(json) === DATA_TYPE_MODE.Symbol) {
+    if (is(json, DATA_TYPE_MODE.Symbol)) {
       return json
     }
     return JSON.parse(JSON.stringify(json ?? ""))

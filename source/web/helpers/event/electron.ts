@@ -1,6 +1,6 @@
 export async function dispatch(
   channel: TriggerChannelName,
-  ...args: unknown[]
+  ...args: ArrayType
 ): Promise<unknown> {
   if (!window.IPC) {
     return null
@@ -10,7 +10,7 @@ export async function dispatch(
 
 export async function emitter(
   channel: ReceiverChannelName,
-  ...args: unknown[]
+  ...args: ArrayType
 ): Promise<unknown> {
   if (!window.IPC) {
     return null
@@ -20,7 +20,7 @@ export async function emitter(
 
 export async function sender(
   channel: MessagenerChannelName,
-  ...args: unknown[]
+  ...args: ArrayType
 ): Promise<unknown> {
   if (!window.IPC) {
     return null

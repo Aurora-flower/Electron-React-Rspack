@@ -2,7 +2,8 @@
   "include": [
     "types/global.d.ts",
     "types/electron/*.d.ts",
-    "source/electron/**/*.ts"
+    "source/electron/**/*.ts",
+    "source/preload/**/*.ts"
   ],
   "exclude": ["node_modules"],
   "compilerOptions": {

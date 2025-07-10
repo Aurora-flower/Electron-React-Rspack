@@ -9,13 +9,13 @@ declare global {
     IPC: {
       emitter: (
         channel: ReceiverChannelName,
-        ...args: unknown[]
+        ...args: ArrayType
       ) => Promise<unknown>
       dispatch: (
         channel: TriggerChannelName,
-        ...args: unknown[]
+        ...args: ArrayType
       ) => Promise<unknown>
-      sender: (channel: MessagenerChannelName, ...args: unknown[]) => void
+      sender: (channel: MessagenerChannelName, ...args: ArrayType) => void
     }
   }
 
@@ -108,6 +108,7 @@ declare global {
     [key: string]: T
   }
   type FunctionType = () => void
+  type ArrayType<T = unknown> = Array<T>
   type RecordType<T = unknown> = Record<string | number | symbol, T>
 
   type PointArray = [number, number]
@@ -115,7 +116,7 @@ declare global {
   type StringArray = Array<string>
   type ObjectArray<T = unknown> = Array<ObjectType<T>>
 
-  type Constructor<T = unknown> = new (...args: unknown[]) => T
+  type Constructor<T = unknown> = new (...args: ArrayType) => T
 
   type AnyModel = AtWill
 

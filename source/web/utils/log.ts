@@ -16,7 +16,7 @@ export const LOG_COLOR = {
 export function webLog(
   moduleId: string,
   sign: string,
-  ...args: unknown[]
+  ...args: ArrayType
 ): void {
   console.log(
     `%c>>> Web Log Source %c[ ${moduleId} ] - %c$_${sign}_$`,
@@ -31,7 +31,7 @@ export function webError(
   moduleId: string,
   sign: string,
   error: unknown,
-  ...args: unknown[]
+  ...args: ArrayType
 ): void {
   console.error(
     `>>> Web Error Source %c[ ${moduleId} ] - %c$_${sign}_$`,
@@ -45,7 +45,7 @@ export function webError(
 export function webWarn(
   moduleId: string,
   sign: string,
-  ...args: unknown[]
+  ...args: ArrayType
 ): void {
   console.warn(
     `%c>>> Web Warn Source %c[ ${moduleId} ] - %c$_${sign}_$`,

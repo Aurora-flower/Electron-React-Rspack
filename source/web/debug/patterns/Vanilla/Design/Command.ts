@@ -56,7 +56,7 @@ generalOrderManager.cancelOrder(order.id)
 
 /* ***** ***** 命令模式 ***** *****  */
 
-type Executor<T> = (orders: T, ...args: unknown[]) => void
+type Executor<T> = (orders: T, ...args: ArrayType) => void
 
 class CommandExecutor<T> {
   execute: Executor<T>
@@ -74,7 +74,7 @@ class OrderManager {
     this.orders = []
   }
 
-  executeCommand(command: OrderCommandExecutor, ...args: unknown[]): AnyModel {
+  executeCommand(command: OrderCommandExecutor, ...args: ArrayType): AnyModel {
     return command.execute(this.orders, ...args)
   }
 }

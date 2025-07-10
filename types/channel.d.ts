@@ -18,10 +18,10 @@ type ChannelName =
 /**
  * @summary Ipc 监听函数
  */
-type ChannelListener<T extends unknown[] = unknown[]> = (
+type ChannelListener<T extends ArrayType = ArrayType> = (
   ...args: T
 ) => Promise<unknown> | unknown
-type ChannelVoidListener<T extends unknown[] = unknown[]> = (
+type ChannelVoidListener<T extends ArrayType = ArrayType> = (
   ...args: T
 ) => Promise<void> | void
 
@@ -31,7 +31,7 @@ type ChannelVoidListener<T extends unknown[] = unknown[]> = (
 type ChannelHandler<T extends ChannelName> = (
   event: Electron.IpcMainInvokeEvent,
   channel: T,
-  ...args: unknown[]
+  ...args: ArrayType
 ) => Promise<unknown>
 
 /**

@@ -6,9 +6,9 @@ import { contextBridge, ipcRenderer } from "electron"
 // })
 
 contextBridge.exposeInMainWorld("IPC", {
-  dispatch: (...args: unknown[]) => ipcRenderer.invoke("dispatch", ...args),
-  emitter: (...args: unknown[]) => ipcRenderer.send("emitter", ...args),
-  sender: (...args: unknown[]) => ipcRenderer.send("sender", ...args)
+  dispatch: (...args: ArrayType) => ipcRenderer.invoke("dispatch", ...args),
+  emitter: (...args: ArrayType) => ipcRenderer.send("emitter", ...args),
+  sender: (...args: ArrayType) => ipcRenderer.send("sender", ...args)
 })
 
 ipcRenderer.on(

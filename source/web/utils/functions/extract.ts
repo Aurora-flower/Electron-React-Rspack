@@ -1,4 +1,4 @@
-import { targetHasOwnProperty } from "@/features/modules/object"
+import { targetHasOwnProperty } from "@/features/vanilla/object"
 import CommonUtility from "@/utils/utility"
 
 /**
