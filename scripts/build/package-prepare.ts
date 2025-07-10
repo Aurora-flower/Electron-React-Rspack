@@ -35,10 +35,14 @@ async function clonePackageJSON(): Promise<DistPackage> {
     dependencies
     // devDependencies
   } = JSON.parse(raw) as PackageJson
+  // const [major, minor, patch] = version.split(".")
+  // let patchNum = parseInt(patch)
+  // patchNum++
   const distPackage: DistPackage = {
     name,
     main: relative(outDir, main),
     author,
+    // version: `${major}.${minor}.${patchNum}`,
     version,
     license,
     description,
