@@ -69,4 +69,9 @@ export class ArrayUtility {
     arr.length = newLength
     return arr
   }
+
+  static insert(arr: ArrayType, index: number, ...items: ArrayType): ArrayType {
+    arr.splice(index, 0, ...items)
+    return arr
+  }
 }
