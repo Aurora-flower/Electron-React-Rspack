@@ -6,10 +6,10 @@ import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
-import {
-  createGraphics,
-  drawRect
-} from "@/helpers/graphics/gremlin/generator/graphics"
+// import {
+//   createGraphics,
+//   drawRect
+// } from "@/helpers/graphics/gremlin/generator/graphics"
 import { getSize } from "@/utils/functions/usually"
 import { webLog } from "@/utils/log"
 
@@ -90,8 +90,8 @@ export function initSettingsUiLayer(layer: Container): void {
   board.scale.set(PixiManager.viewScale)
 
   // TEST
-  const graphic = createGraphics(board)
-  drawRect(graphic, { x: 100, y: 100 }, { width: 200, height: 200 })
+  // const graphic = createGraphics(board)
+  // drawRect(graphic, { x: 100, y: 100 }, { width: 200, height: 200 })
 }
 
 /* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */

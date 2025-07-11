@@ -4,7 +4,7 @@ import * as React from "react"
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
 import { TRIGGER_CHANNEL_NAME } from "@/common/macro"
-import { getDomElement } from "@/features/document"
+import { queryElement } from "@/features/document/dom-utils/query"
 import { dispatch } from "@/helpers/event/electron"
 import { PRIME_REACT_OPTIONS } from "@/plugins/setupPrimeUI"
 import AppRouter from "@/routers"
@@ -38,7 +38,7 @@ function App(): JSX.Element {
 }
 
 void (function AppRender(): void {
-  const rootElement = getDomElement("#root", "selector")
+  const rootElement = queryElement("#root", "selector")
   if (rootElement) {
     createRoot(rootElement).render(
       <Provider store={store}>

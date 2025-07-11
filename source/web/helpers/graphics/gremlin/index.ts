@@ -1,9 +1,11 @@
 import type { Container } from "pixi.js"
 import { Application } from "pixi.js"
-import { getDomElement } from "@/features/document"
+import { queryElement } from "@/features/document/dom-utils/query"
+import { removeElementsByTag } from "@/features/document/dom-utils/remove"
 import { DEFAULT_INIT_VIEW_SCALE } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
+import { setupApp } from "@/helpers/graphics/gremlin/setup/setupApp"
 import {
   setupLayer,
   updateBasiskarte,
@@ -16,7 +18,7 @@ import { webLog } from "@/utils/log"
 
 function getRootElement(root: string | HTMLElement): HTMLElement {
   return typeof root === "string"
-    ? (getDomElement(root, "selector") as HTMLElement)
+    ? (queryElement(root, "selector") as HTMLElement)
     : root
 }
 
@@ -47,14 +49,13 @@ class PixiManager {
     await app.init({
       antialias: true,
       resizeTo: domElement
+      // backgroundAlpha: 0
     })
-    app.stage.hitArea = app.screen
-    for (const child of domElement.children) {
-      if (child.tagName === "CANVAS") child.remove()
-    }
+    removeElementsByTag(domElement, "CANVAS")
     domElement.appendChild(app.canvas)
     PixiManager.initDrawingBoard(app.stage)
     PixiManager._app = app
+    setupApp(app)
     return app
   }
 
