@@ -1,10 +1,10 @@
-import { isEffective } from "@/utils/functions/dataType"
+import { isVaildData } from "@/utils/functions/dataType"
 
 export function extractElementsAtDepth(
   arr: ArrayType,
   targetDepth = 0,
   collectAllElements = false,
-  filterFn: (element: unknown) => boolean = isEffective,
+  filterFn: (element: unknown) => boolean = isVaildData,
   currentDepth = 0
 ): ArrayType {
   const result: ArrayType = []

@@ -14,8 +14,8 @@ type DataType = keyof typeof DATA_TYPE_MODE
 
 type DataTypeValues = (typeof DATA_TYPE_MODE)[DataType]
 
-export function isEffective(data: unknown): boolean {
-  return data !== null && data !== undefined
+export function isVaildData(data: unknown): boolean {
+  return data !== null && data !== undefined // isEffective
 }
 
 export function getDefaultData(dataType: DataType): unknown {
