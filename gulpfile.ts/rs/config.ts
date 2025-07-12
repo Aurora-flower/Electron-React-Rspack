@@ -1,5 +1,6 @@
 import { join } from "node:path"
-import { type Mode, type RspackOptions, rspack } from "@rspack/core"
+import type { Mode, RspackOptions } from "@rspack/core"
+import { rspack } from "@rspack/core"
 import { getIsDev } from "../common/env"
 import { getDirectoryStructure, getFileStructure } from "../common/structure"
 import LOADER from "./loader"
