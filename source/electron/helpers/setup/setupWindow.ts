@@ -27,7 +27,7 @@ function setupWindow(win: BrowserWindow): void {
   if (!win) return
   // win.resizable = false
   const isDevelopment = getIsDev()
-  win.maximize()
+  // win.maximize()
   win.setMinimumSize(800, 600)
   win.on("close", e => {
     e.preventDefault()

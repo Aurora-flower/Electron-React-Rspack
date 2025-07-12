@@ -9,7 +9,9 @@ import {
   isContainer,
   isViewContainer
 } from "@/helpers/graphics/gremlin/functions/is"
-import { webLog } from "@/utils/log"
+import { formatNumberPrecision } from "@/utils/functions/math"
+import { nowTime } from "@/utils/functions/time"
+// import { webLog } from "@/utils/log"
 
 // const mousePosBefore = e.getLocalPosition(target.parent)
 // const mouseLocalBefore = target.toLocal(mousePosBefore)
@@ -19,69 +21,135 @@ import { webLog } from "@/utils/log"
 // new Point().copyFrom(e.global.clone())
 
 export function addStageDrag(stage: Container): void {
-  TargetDrag.init(stage)
+  StageDrag.init(stage)
 }
 
-export class TargetDrag {
+class StageDrag {
+  /* ***** ***** ***** ***** 公共参数 ***** ***** ***** *****  */
   private static _stage: Container
-  private static _pos: Point
-  private static _point: Point
+  private static _flag = -1
   private static _currentTarget: Container | null = null
+  private static _currentTargetParent: Container | null = null
+  private static _point: Point // GlobalPoint
 
-  static init(stage: Container): void {
-    TargetDrag._stage = stage
-    TargetDrag._stage.on("pointerdown", TargetDrag.pointerdown)
-    TargetDrag._stage.on("pointerup", TargetDrag.pointerup)
-    TargetDrag._stage.on("pointerupoutside", TargetDrag.pointerupoutside)
+  /* ***** ***** ***** ***** 左键参数 ***** ***** ***** *****  */
+  private static _pos: Point
+
+  /* ***** ***** ***** ***** 右键参数 ***** ***** ***** *****  */
+  private static _lastPos: AnyModel
+  private static _velocity: Point
+  private static _time: number
+  private static _inertia: AnyModel
+
+  /* ***** ***** ***** ***** 公共事件 ***** ***** ***** *****  */
+  public static init(stage: Container): void {
+    StageDrag._stage = stage
+    StageDrag._stage.on("pointerover", (e: FederatedPointerEvent) => {
+      const target = e.target
+      if (isViewContainer(target)) {
+        target.cursor = CURSOR.Pointer
+        // TODO: 当鼠标进入某个特定的元素范围时的逻辑
+      }
+    })
+    StageDrag._stage.on("pointerdown", StageDrag.pointerdown)
+    StageDrag._stage.on("pointerup", StageDrag.pointerup)
+    StageDrag._stage.on("pointerupoutside", StageDrag.pointerupoutside)
   }
 
-  static reset(): void {
-    TargetDrag._pos = new Point()
-    TargetDrag._point = new Point()
-    TargetDrag._currentTarget = null
+  public static reset(): void {
+    // StageDrag._pos = new Point()
+    // StageDrag._point = new Point()
+    // StageDrag._velocity = new Point()
+    StageDrag._flag = -1
+    StageDrag._currentTarget = StageDrag._currentTargetParent = null
   }
 
-  static pointerdown(e: FederatedPointerEvent): void {
+  private static pointerdown(e: FederatedPointerEvent): void {
     e.preventDefault()
     e.stopPropagation()
-    if (e.button !== 0) return
     const target = e.target
     const parent = target.parent
-    target.cursor = CURSOR.Pointer
-    if (isContainer(target)) {
-      // TODO: 点击空白区域，取消选中；
-      return
-    }
-    const originalPosition = parent.position.clone()
-    const startPoint = e.global.clone()
-    webLog(
-      "TargetDrag",
-      "pointerdown",
-      e.target,
-      parent,
-      startPoint,
-      originalPosition
-    )
+    StageDrag._currentTarget = target
+    StageDrag._currentTargetParent = parent
+    // if (isViewContainer(parent)) {
+    //   // 不符合的、无效的容器
+    //   return
+    // }
+    // e.getLocalPosition(parent),
+    // target.toLocal(target.position, StageDrag._stage)
     // const clientPosition = {
     //   x: e.clientX,
     //   y: e.clientY
     // }
-    Selector.select(target)
-    TargetDrag._currentTarget = target
-    TargetDrag._pos = originalPosition
-    TargetDrag._point = startPoint
-    TargetDrag._stage.on("pointermove", TargetDrag.pointermove)
+    const startPoint = e.global.clone()
+    StageDrag._point = startPoint
+
+    const btn = e.button
+    StageDrag._flag = btn
+    if (btn === 0) {
+      // 鼠标左键点击逻辑
+      StageDrag.targetPointerdown(e)
+    } else if (btn === 1) {
+      // 滚轮点击逻辑
+    } else if (btn === 2) {
+      // 鼠标右键点击逻辑
+      StageDrag.stagePointerdown(e)
+    }
+    StageDrag._stage.on("pointermove", StageDrag.pointermove)
   }
 
-  static pointermove(e: FederatedPointerEvent): void {
+  private static pointermove(e: FederatedPointerEvent): void {
     e.stopPropagation()
     e.preventDefault()
-    const target = TargetDrag._currentTarget
-    const targetContainer = target?.parent
+    // const target = e.target
+    // if (isViewContainer(target)) {
+    //   target.cursor = CURSOR.Move
+    // }
+    if (StageDrag._flag === 0) {
+      StageDrag.targetPointermove(e)
+    } else if (StageDrag._flag === 2) {
+      StageDrag.stagePointermove(e)
+    }
+  }
+
+  private static pointerup(e: FederatedPointerEvent): void {
+    StageDrag.offMove(e)
+  }
+
+  private static pointerupoutside(e: FederatedPointerEvent): void {
+    const target = e.target
+    if (isViewContainer(target)) {
+      target.cursor = CURSOR.Normal
+    }
+    StageDrag.offMove(e)
+  }
+
+  private static offMove(_e: FederatedPointerEvent): void {
+    if (StageDrag._currentTarget) {
+      StageDrag.reset()
+    }
+    StageDrag._stage.off("pointermove", StageDrag.pointermove)
+  }
+
+  /* ***** ***** ***** ***** 左键事件 ***** ***** ***** *****  */
+
+  private static targetPointerdown(_e: FederatedPointerEvent): void {
+    const target = StageDrag._currentTarget!
+    if (isContainer(target)) {
+      // TODO: 点击空白区域，取消选中；
+      return
+    }
+    const targetContainer = StageDrag._currentTargetParent!
+    const originalPosition = targetContainer.position.clone()
+    Selector.select(target)
+    StageDrag._pos = originalPosition
+  }
+
+  private static targetPointermove(e: FederatedPointerEvent): void {
+    const targetContainer = StageDrag._currentTargetParent
     if (!targetContainer || isViewContainer(targetContainer)) {
       return
     }
-    targetContainer.cursor = CURSOR.Move
     // target.parent.toLocal(e.global.clone(), undefined, target.position)
     // TODO: 当拖动面板直系子元素时，无效考虑累积缩放
     const ancestor = targetContainer.parent
@@ -91,36 +159,35 @@ export class TargetDrag {
     }
     const endPoint = e.global.clone()
     const offset = {
-      x: (endPoint.x - TargetDrag._point.x) / scale.x,
-      y: (endPoint.y - TargetDrag._point.y) / scale.y
+      x: (endPoint.x - StageDrag._point.x) / scale.x,
+      y: (endPoint.y - StageDrag._point.y) / scale.y
     }
     const pos = new Point(
-      TargetDrag._pos.x + offset.x,
-      TargetDrag._pos.y + offset.y
+      StageDrag._pos.x + offset.x,
+      StageDrag._pos.y + offset.y
     )
     targetContainer.position.copyFrom(pos) // ObservablePoint
-
     // TODO: 对一些相关元素进行处理
-    const selector = getElementByLabel(ELEMENT_FLAG.Selector, TargetDrag._stage)
+    const selector = getElementByLabel(ELEMENT_FLAG.Selector, StageDrag._stage)
     if (selector) {
-      const pos = target.getGlobalPosition().clone()
+      const pos = targetContainer.getGlobalPosition().clone()
       Selector.move(pos)
     }
   }
 
-  static pointerup(_e: FederatedPointerEvent): void {
-    TargetDrag.offMove()
+  /* ***** ***** ***** ***** 右键事件 ***** ***** ***** *****  */
+  private static stagePointerdown(e: FederatedPointerEvent): void {
+    const _target = e.target
+    StageDrag._time = nowTime()
+    StageDrag._velocity = new Point()
   }
 
-  static pointerupoutside(_e: FederatedPointerEvent): void {
-    TargetDrag.offMove()
-  }
+  private static stagePointermove(e: FederatedPointerEvent): void {
+    const _target = e.target
+    const startTime = StageDrag._time
+    const endTime = nowTime()
+    const time = formatNumberPrecision(endTime - startTime, 0)
 
-  private static offMove(): void {
-    if (TargetDrag._currentTarget) {
-      TargetDrag._currentTarget.cursor = CURSOR.Normal
-      TargetDrag.reset()
-    }
-    TargetDrag._stage.off("pointermove", TargetDrag.pointermove)
+    console.log("StageDrag", "stagePointermove", time)
   }
 }
