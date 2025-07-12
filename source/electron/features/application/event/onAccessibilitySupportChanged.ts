@@ -9,7 +9,7 @@ import { app } from "electron"
 function onAccessibilitySupportChanged(): void {
   app.on(
     "accessibility-support-changed",
-    (event, accessibilitySupportEnabled) => {
+    (_event, accessibilitySupportEnabled) => {
       if (accessibilitySupportEnabled) {
         // 辅助功能已启用
       } else {

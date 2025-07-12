@@ -8,13 +8,13 @@ export function getElementByLabel(
   if (!root) {
     return null
   }
-  if (isRecursive) {
-    for (const child of root.children) {
-      const element = getElementByLabel(label, child, isRecursive)
-      if (element) {
-        return element
-      }
-    }
-  }
-  return root.getChildByLabel(label)
+  // if (isRecursive) {
+  //   for (const child of root.children) {
+  //     const element = getElementByLabel(label, child, isRecursive)
+  //     if (element) {
+  //       return element
+  //     }
+  //   }
+  // }
+  return root.getChildByLabel(label, isRecursive)
 }

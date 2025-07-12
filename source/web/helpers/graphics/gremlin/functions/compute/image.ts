@@ -51,6 +51,12 @@ export function getImageDataBounds(imageData: ImageData): BoundsModel | null {
   }
 }
 
+/**
+ * 使用 canvas 对图像进行九宫格绘制
+ * @param original 图片路径
+ * @param slider 基本边距信息
+ * @returns
+ */
 export function nineSliceSprite(
   original: string,
   slider: PaddingModel = getPadding()

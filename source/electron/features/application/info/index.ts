@@ -1,5 +1,9 @@
 import { join, parse, sep } from "node:path"
-import { getAppPath, getPathByName } from "@main/features/application/methods"
+import {
+  getAppPath,
+  getAppVesion,
+  getPathByName
+} from "@main/features/application/methods/appPath"
 import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
@@ -19,30 +23,71 @@ const OUTPUT_FOLDER = "app"
 const STATIC_FOLDER = "public"
 
 /**
+ * @summary 应用信息模型
+ */
+
+const AppPaths: Record<AppPathTypes, string> = {
+  home: "",
+  appData: "",
+  userData: "",
+  sessionData: "",
+  temp: "",
+  exe: "",
+  module: "",
+  desktop: "",
+  documents: "",
+  downloads: "",
+  music: "",
+  pictures: "",
+  videos: "",
+  logs: "",
+  recent: "",
+  crashDumps: ""
+}
+
+/**
  * @summary 应用信息
  */
 export class AppInfo implements AppInfoModel {
   name: string = app.name // app.getName())
-
-  /**
-   * @readonly
-   */
   packaged = app.isPackaged
+  appFolder: string = getAppPath()
+  appUnpackFolder = ""
+  sep = sep
+  isDev = getIsDev()
+  cwd = process.cwd()
+  driveLetter = ""
+  win32: boolean = isWin()
+  version = getAppVesion()
+  platform = ""
+  paths = AppPaths
+  core = ""
+  workspace = ""
+  private static _instance: AppInfo
 
-  /**
-   * @readonly
-   * @summary 一个 CommandLine 对象，允许读取和操作 Chromium 使用的命令行参数。
-   */
-  // commandLine = app.commandLine
+  constructor() {
+    this.driveLetter = parse(this.cwd).root
+    this.appUnpackFolder = replaceSep(
+      this.appFolder.replace(FILE_NAMES.Asar, FILE_NAMES.Unpack)
+    )
+    this.initAppPaths()
+    this.core = replaceSep(join(this.appUnpackFolder, FOLDER_NAMES.Core))
+    // TODO: 定义 workspace 路径
+  }
 
-  /**
-   * @readonly
-   * @platform darwin
-   * @summary Dock 图标
-   * @description 一个 Dock | undefined 类型的属性（在 macOS 上是 Dock，在其他平台上则是 undefined），
-   * 它允许对用户 Dock 中的 app 图标执行操作。
-   */
-  // dock: Dock = app.dock
+  private initAppPaths(): void {
+    ;(Object.keys(this.paths) as AppPathTypes[]).forEach(name => {
+      if (name === "recent" && !this.win32) return
+      this.paths[name] = getPathByName(name)
+    })
+  }
+
+  static getInstance(): AppInfo {
+    if (!AppInfo._instance) {
+      AppInfo._instance = new AppInfo()
+    }
+    return AppInfo._instance
+  }
 
   /**
    * @platform darwin | linux
@@ -63,6 +108,21 @@ export class AppInfo implements AppInfoModel {
   userAgentFallback = app.userAgentFallback
 
   /**
+   * @readonly
+   * @summary 一个 CommandLine 对象，允许读取和操作 Chromium 使用的命令行参数。
+   */
+  // commandLine = app.commandLine
+
+  /**
+   * @readonly
+   * @platform darwin
+   * @summary Dock 图标
+   * @description 一个 Dock | undefined 类型的属性（在 macOS 上是 Dock，在其他平台上则是 undefined），
+   * 它允许对用户 Dock 中的 app 图标执行操作。
+   */
+  // dock: Dock = app.dock
+
+  /**
    * @summary 当前应用的菜单。
    * @description
    * 一个 Menu | null 类型的属性，如果已设置了菜单 (Menu)，则返回 Menu，否则返回 null。 用户可以通过传递一个 Menu 来设置此属性。
@@ -78,70 +138,15 @@ export class AppInfo implements AppInfoModel {
    * - 此 API 必须在 ready 事件触发后调用
    */
   // accessibilitySupportEnabled = app.isAccessibilitySupportEnabled()
-
-  appFolder: string = getAppPath()
-  appUnpackFolder = ""
-  sep = sep
-  isDev = getIsDev()
-  cwd = process.cwd()
-  driveLetter = ""
-  win32: boolean = isWin()
-  version = ""
-  platform = ""
-  paths: Record<AppPathTypes, string> = {
-    home: "",
-    appData: "",
-    userData: "",
-    sessionData: "",
-    temp: "",
-    exe: "",
-    module: "",
-    desktop: "",
-    documents: "",
-    downloads: "",
-    music: "",
-    pictures: "",
-    videos: "",
-    logs: "",
-    recent: "",
-    crashDumps: ""
-  }
-  core = ""
-  workspace = ""
-  private static _instance: AppInfo
-
-  constructor() {
-    this.driveLetter = parse(this.cwd).root
-    this.appUnpackFolder = replaceSep(
-      this.appFolder.replace(FILE_NAMES.Asar, FILE_NAMES.Unpack)
-    )
-    const aboutPath = Object.keys(this.paths) as AppPathTypes[]
-    for (let index = 0; index < aboutPath.length; index++) {
-      const name = aboutPath[index]
-      if (name === "recent" && !this.win32) {
-        continue
-      }
-      this.paths[name] = getPathByName(name)
-    }
-    this.core = replaceSep(join(this.appUnpackFolder, FOLDER_NAMES.Core))
-    // workspace
-  }
-
-  static getInstance(): AppInfo {
-    if (!AppInfo._instance) {
-      AppInfo._instance = new AppInfo()
-    }
-    return AppInfo._instance
-  }
 }
 
 export function getAppStaticPath(url?: string): string {
-  const isPackaged = AppInfo.getInstance().packaged
-  const AppAsar = AppInfo.getInstance().appFolder
-  const baseOutput = isPackaged ? "" : OUTPUT_FOLDER
-  return join(AppAsar, baseOutput, STATIC_FOLDER, url ?? "")
+  const { packaged, appFolder } = AppInfo.getInstance()
+  const baseOutput = packaged ? "" : OUTPUT_FOLDER
+  return join(appFolder, baseOutput, STATIC_FOLDER, url ?? "")
 }
 
+// 提供给渲染进程的方法
 export function getAppInfo(): AppInfo {
   return AppInfo.getInstance()
 }

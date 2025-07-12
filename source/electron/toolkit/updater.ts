@@ -1,4 +1,4 @@
-import { getAppInfo } from "@main/features/application/infomation"
+import { AppInfo } from "@main/features/application/info"
 import type { BrowserWindow } from "electron"
 import { Notification } from "electron"
 import Logger from "electron-log"
@@ -17,7 +17,7 @@ export function getAutoUpdater(): AppUpdater {
 }
 
 export function checkForUpdates(win?: BrowserWindow | undefined): void {
-  const appInfo = getAppInfo()
+  const appInfo = AppInfo.getInstance()
   if (!win || !appInfo?.packaged || !appInfo?.win32) {
     return
   }

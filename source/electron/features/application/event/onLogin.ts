@@ -9,7 +9,7 @@ import { app } from "electron"
  * - 当 callback 在缺少用户名和密码的时候被调用，身份验证请求将被取消，同时将返回身份验证错误到页面。
  */
 function onLogin(): void {
-  app.on("login", (event, webContents, details, authInfo, callback) => {
+  app.on("login", (event, _webContents, _details, _authInfo, callback) => {
     event.preventDefault()
     callback("username", "secret")
   })

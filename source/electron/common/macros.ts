@@ -20,6 +20,9 @@ export const FILE_EXTENSIONS_CATEGORY = {
   Json: [".json", ".json5"]
 }
 
+/**
+ * @summary IPC 通信频道名称
+ */
 export const IPC_CHANNEL_NAME = {
   /* ***** ***** ***** ***** 窗口 ***** ***** ***** ***** */
   WINDOW_CREATE: "window-create",

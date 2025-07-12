@@ -1,4 +1,4 @@
-import { getAppInfo } from "@main/features/application/infomation"
+import { getAppInfo } from "@main/features/application/info"
 import {
   asynchronousMessage,
   synchronousMessage

@@ -12,7 +12,7 @@ import { app } from "electron"
  * 单击应用程序的坞站或任务栏图标时
  */
 function onActivate(): void {
-  app.on("activate", (event, hasVisibleWindows) => {
+  app.on("activate", (_event, hasVisibleWindows) => {
     if (isAllWindowClosed() && !hasVisibleWindows) {
       WindowManager.getInstance().createMainWindow()
     }
