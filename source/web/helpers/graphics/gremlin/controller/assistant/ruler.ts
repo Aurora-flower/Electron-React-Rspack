@@ -10,7 +10,7 @@ import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import { createText } from "@/helpers/graphics/gremlin/generator/text"
-import { formatNumberPrecision } from "@/utils/functions/math"
+import { roundToDecimal } from "@/utils/functions/math"
 import { getPoint, getSize } from "@/utils/functions/usually"
 
 type RulerType = "top" | "left"
@@ -86,7 +86,7 @@ class Ruler {
     point: PointModel,
     flag: RulerType
   ): void {
-    // const value = formatNumberPrecision(num, 0)
+    // const value = roundToDecimal(num, 0)
     const value = num
     const style = new TextStyle({
       fontSize: DEFAULT_RULER_SCALE_FONT_SIZE,
@@ -103,7 +103,7 @@ class Ruler {
     }
     createText(Ruler._scaleLabel, {
       position,
-      text: formatNumberPrecision(value, 0),
+      text: roundToDecimal(value, 0),
       angle: flag === "left" ? -90 : 0,
       anchor: {
         x: 0.5,

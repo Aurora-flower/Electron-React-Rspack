@@ -1,10 +1,10 @@
-import { formatNumberPrecision } from "@/utils/functions/math"
+import { roundToDecimal } from "@/utils/functions/math"
 
 export function getSize(width = 0, height = 0, digits = 2): SizeModel {
   // arguments
   return {
-    width: formatNumberPrecision(width ?? 0, digits),
-    height: formatNumberPrecision(height ?? 0, digits)
+    width: roundToDecimal(width ?? 0, digits),
+    height: roundToDecimal(height ?? 0, digits)
   }
 }
 
@@ -17,8 +17,8 @@ export function getSpace(horizontal = 0, vertical = 0): SpaceModel {
 
 export function getPoint(x = 0, y = 0, digits = 2): PointModel {
   return {
-    x: formatNumberPrecision(x ?? 0, digits),
-    y: formatNumberPrecision(y ?? 0, digits)
+    x: roundToDecimal(x ?? 0, digits),
+    y: roundToDecimal(y ?? 0, digits)
   }
 }
 
@@ -30,10 +30,10 @@ export function getPadding(
   digits = 2
 ): PaddingModel {
   return {
-    left: formatNumberPrecision(left ?? 0, digits),
-    right: formatNumberPrecision(right ?? 0, digits),
-    top: formatNumberPrecision(top ?? 0, digits),
-    bottom: formatNumberPrecision(bottom ?? 0, digits)
+    left: roundToDecimal(left ?? 0, digits),
+    right: roundToDecimal(right ?? 0, digits),
+    top: roundToDecimal(top ?? 0, digits),
+    bottom: roundToDecimal(bottom ?? 0, digits)
   }
 }
 

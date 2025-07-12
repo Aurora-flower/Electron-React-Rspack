@@ -3,7 +3,7 @@ import type { Container, FederatedWheelEvent } from "pixi.js"
 import PixiManager from "@/helpers/graphics/gremlin"
 // import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 // import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
-import { formatNumberPrecision } from "@/utils/functions/math"
+import { roundToDecimal } from "@/utils/functions/math"
 
 // import CommonUtility from "@/utils/utility"
 
@@ -22,7 +22,7 @@ export function addStageWheel(stage: Container): void {
       // stage.cursor = e.deltaY > 0 ? CURSOR.Out : CURSOR.In
       const delta = e.deltaY
       const canvasScale = PixiManager.viewScale
-      const zoomFactor = formatNumberPrecision(
+      const zoomFactor = roundToDecimal(
         delta > 0 ? canvasScale - ZOOM_SPEED : canvasScale + ZOOM_SPEED
       )
       // TODO: 以鼠标为中心缩放

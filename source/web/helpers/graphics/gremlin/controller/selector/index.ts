@@ -3,7 +3,7 @@ import { Graphics } from "pixi.js"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
-import { formatNumberPrecision } from "@/utils/functions/math"
+import { roundToDecimal } from "@/utils/functions/math"
 import { getSize } from "@/utils/functions/usually"
 
 const BORAD_WIDTH = 3
@@ -59,8 +59,8 @@ class Selector {
     const pos = target.getGlobalPosition().clone()
     Selector.move(pos)
     Selector._selector.pivot.set(
-      formatNumberPrecision((size.width * 0.5) / scale.x - BORAD_WIDTH),
-      formatNumberPrecision((size.height * 0.5) / scale.y - BORAD_WIDTH)
+      roundToDecimal((size.width * 0.5) / scale.x - BORAD_WIDTH),
+      roundToDecimal((size.height * 0.5) / scale.y - BORAD_WIDTH)
     )
     Selector._selector
       .rect(borderOffset, borderOffset, size.width, size.height)

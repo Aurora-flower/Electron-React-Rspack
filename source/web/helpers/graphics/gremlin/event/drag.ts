@@ -9,7 +9,7 @@ import {
   isContainer,
   isViewContainer
 } from "@/helpers/graphics/gremlin/functions/is"
-import { formatNumberPrecision } from "@/utils/functions/math"
+import { roundToDecimal } from "@/utils/functions/math"
 import { nowTime } from "@/utils/functions/time"
 // import { webLog } from "@/utils/log"
 
@@ -186,7 +186,7 @@ class StageDrag {
     const _target = e.target
     const startTime = StageDrag._time
     const endTime = nowTime()
-    const time = formatNumberPrecision(endTime - startTime, 0)
+    const time = roundToDecimal(endTime - startTime, 0)
 
     console.log("StageDrag", "stagePointermove", time)
   }

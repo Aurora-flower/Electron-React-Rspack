@@ -14,6 +14,7 @@ export const ELEMENT_FLAG = {
   /* 画板容器 */
   Board: "_$board$_",
   /* 选择器容器 */
-  Selector: "_$selector"
-  // Axis: "_$axis"
+  Selector: "_$selector",
+  /* 坐标轴容器 */
+  Axis: "_$axis"
 }

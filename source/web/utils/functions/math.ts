@@ -1,10 +1,10 @@
 // digits
-export function formatNumberPrecision(num: number, digits = 2): number {
+export function roundToDecimal(num: number, digits = 2): number {
   return Number(num.toFixed(digits))
 }
 
 export function isMultipleOf(value: number, base: number): boolean {
-  return value % formatNumberPrecision(base, 0) === 0
+  return value % roundToDecimal(base, 0) === 0
 }
 
 export function findMaxIndex(arr: NumberArray): number {
@@ -30,7 +30,7 @@ export function findMinIndex(arr: NumberArray): number {
  */
 export function radiansToDegrees(radians: number): number {
   const arc = radians * (180 / Math.PI)
-  return formatNumberPrecision(arc)
+  return roundToDecimal(arc)
 }
 
 /**
@@ -38,5 +38,5 @@ export function radiansToDegrees(radians: number): number {
  */
 export function degreesToRadians(degrees: number): number {
   const rad = degrees * (Math.PI / 180)
-  return formatNumberPrecision(rad, 10)
+  return roundToDecimal(rad, 10)
 }
