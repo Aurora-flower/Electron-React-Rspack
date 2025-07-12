@@ -21,6 +21,8 @@ export function createGraphics(
 ): Graphics {
   const graphic = new Graphics({
     // TODO: Graphics 默认值的设置
+    interactive: true,
+    eventMode: "static",
     ...options
   })
   if (parent) {
@@ -74,6 +76,5 @@ export function drawEllipse(
   if (config.isFill) {
     graphic.fill(config.color ?? getRandomColor())
   }
-
   graphic.stroke(config.stroke)
 }

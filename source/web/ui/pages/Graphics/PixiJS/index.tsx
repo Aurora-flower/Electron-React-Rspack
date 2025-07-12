@@ -18,7 +18,6 @@ function PixiJsGraphics(): JSX.Element {
     return (): void => {
       // const plugins = Application._plugins.slice(0).reverse()
       // for (const plugin of plugins) {
-      //   console.log(plugin)
       // }
       appRef.current?.destroy(
         {

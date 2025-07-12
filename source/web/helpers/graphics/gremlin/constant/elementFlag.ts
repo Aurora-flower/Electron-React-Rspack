@@ -1,4 +1,6 @@
 export const ELEMENT_FLAG = {
+  /* 舞台容器 */
+  Stage: "_$stage$_",
   /* 底部图层 */
   Karte: "_$basiskarte$_",
   /* 渲染图层 */
@@ -10,7 +12,8 @@ export const ELEMENT_FLAG = {
   /* 网格容器 */
   Grid: "_$grid$_",
   /* 画板容器 */
-  Board: "_$board$_"
-  // Selector: "_$selector",
+  Board: "_$board$_",
+  /* 选择器容器 */
+  Selector: "_$selector"
   // Axis: "_$axis"
 }

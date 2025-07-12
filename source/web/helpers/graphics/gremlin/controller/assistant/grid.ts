@@ -1,6 +1,7 @@
 import type { Container, DestroyOptions, StrokeInput } from "pixi.js"
 import { Graphics } from "pixi.js"
 import { DEFAULT_GRID_INTERVAL } from "@/helpers/graphics/gremlin/constant/defaultValue"
+import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import { getPoint, getSize } from "@/utils/functions/usually"
@@ -14,15 +15,14 @@ const DEFAULT_STROKE_INPUT: StrokeInput = {
 class Grid {
   private static _grid: Graphics
 
-  static init(parent: Container, size: SizeModel): void {
+  static init(parent: Container, size: SizeModel, scale = 1): void {
     Grid.reCreate()
-    console.log("init grid", parent, Grid._grid)
     requestAnimationFrame(() => {
       if (!parent.children.includes(Grid._grid)) {
         viewAppend(parent, [Grid._grid])
       }
     })
-    Grid.draw(size)
+    Grid.draw(size, scale)
   }
 
   static draw(
@@ -78,7 +78,9 @@ class Grid {
   }
 
   static reCreate(): void {
-    Grid._grid = new Graphics()
+    Grid._grid = new Graphics({
+      label: ELEMENT_FLAG.Grid
+    })
   }
 
   static destory(): void {

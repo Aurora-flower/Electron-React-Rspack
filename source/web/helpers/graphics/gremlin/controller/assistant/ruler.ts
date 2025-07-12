@@ -6,9 +6,11 @@ import {
   DEFAULT_RULER_SIZE,
   DEFAULT_SCALE_INTERVAL
 } from "@/helpers/graphics/gremlin/constant/defaultValue"
+import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import { createText } from "@/helpers/graphics/gremlin/generator/text"
+import { formatNumberPrecision } from "@/utils/functions/math"
 import { getPoint, getSize } from "@/utils/functions/usually"
 
 type RulerType = "top" | "left"
@@ -27,7 +29,7 @@ class Ruler {
   private static _scaleLabel: Container
   private static _rulerContainer: Container
 
-  static init(parent: Container, size: SizeModel): void {
+  static init(parent: Container, size: SizeModel, scale = 1): void {
     Ruler._size = size
     Ruler.reCreate()
     Ruler._rulerContainer.addChild(
@@ -41,7 +43,7 @@ class Ruler {
       }
     })
     Ruler.drawRulerBackground(size)
-    Ruler.draw(size)
+    Ruler.draw(size, scale)
   }
 
   private static drawRulerBackground(size: SizeModel): void {
@@ -90,21 +92,18 @@ class Ruler {
       fontSize: DEFAULT_RULER_SCALE_FONT_SIZE,
       fill: DEFAULT_COLOR
     })
-
     const position = {
       x: point.x,
       y: point.y
     }
-
     if (flag === "left") {
       position.x = point.x + 5
     } else if (flag === "top") {
       position.y = point.y + 5
     }
-
     createText(Ruler._scaleLabel, {
       position,
-      text: value.toString(),
+      text: formatNumberPrecision(value, 0),
       angle: flag === "left" ? -90 : 0,
       anchor: {
         x: 0.5,
@@ -179,7 +178,9 @@ class Ruler {
     Ruler._topRuler = new Graphics()
     Ruler._leftRuler = new Graphics()
     Ruler._scaleLabel = new Container()
-    Ruler._rulerContainer = new Container()
+    Ruler._rulerContainer = new Container({
+      label: ELEMENT_FLAG.Ruler
+    })
   }
 
   static destory(): void {

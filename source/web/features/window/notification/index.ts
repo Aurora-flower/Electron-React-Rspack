@@ -1,4 +1,4 @@
-import { selfCleanTimer } from "@/utils/timer"
+import { selfCleanTimer } from "@/utils/functions/timer"
 
 export function advancedNotification(): void {
   // 高级通知

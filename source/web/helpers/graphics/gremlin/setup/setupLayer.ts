@@ -4,12 +4,14 @@ import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultV
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
+import Selector from "@/helpers/graphics/gremlin/controller/selector"
+import Controller from "@/helpers/graphics/gremlin/controller/selector/controller"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
-// import {
-//   createGraphics,
-//   drawRect
-// } from "@/helpers/graphics/gremlin/generator/graphics"
+import {
+  createGraphics,
+  drawRect
+} from "@/helpers/graphics/gremlin/generator/graphics"
 import { getSize } from "@/utils/functions/usually"
 import { webLog } from "@/utils/log"
 
@@ -58,7 +60,7 @@ export function initSettingsBasiskarte(basiskarte: Container): void {
   }
   basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
   const size = getViewSize()
-  Grid.init(basiskarte, size)
+  Grid.init(basiskarte, size, PixiManager.viewScale)
 }
 
 /**
@@ -69,7 +71,7 @@ export function initSettingsStaff(staff: Container): void {
     return
   }
   const size = getViewSize()
-  Ruler.init(staff, size)
+  Ruler.init(staff, size, PixiManager.viewScale)
 }
 
 /**
@@ -79,6 +81,9 @@ export function initSettingsUiLayer(layer: Container): void {
   if (!layer) {
     return
   }
+  Selector.init(layer)
+  Controller.init(layer)
+
   layer.pivot.set(-DEFAULT_RULER_SIZE)
   // TODO: 画板 + 渲染元素
   let board = getElementByLabel(ELEMENT_FLAG.Board, layer)
@@ -90,8 +95,24 @@ export function initSettingsUiLayer(layer: Container): void {
   board.scale.set(PixiManager.viewScale)
 
   // TEST
-  // const graphic = createGraphics(board)
-  // drawRect(graphic, { x: 100, y: 100 }, { width: 200, height: 200 })
+  const parent = createContainer(board, {
+    label: "parent",
+    position: {
+      x: 100,
+      y: 100
+    },
+    scale: {
+      x: 0.7,
+      y: 0.7
+    }
+  })
+  const graphic = createGraphics(parent, {
+    scale: {
+      x: 0.7,
+      y: 0.7
+    }
+  })
+  drawRect(graphic, { x: 0, y: 0 }, { width: 100, height: 100 })
 }
 
 /* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */

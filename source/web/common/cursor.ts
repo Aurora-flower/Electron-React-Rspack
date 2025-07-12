@@ -1,4 +1,5 @@
 export const CURSOR = {
+  Pointer: "pointer",
   Normal: "default",
   Move: "move",
   In: "zoom-in",
@@ -7,7 +8,6 @@ export const CURSOR = {
   // none: "none",
   // context: "context-menu",
   // help: "help",
-  // pointer: "pointer",
   // progress: "progress",
   // wait: "wait",
   // cell: "cell",

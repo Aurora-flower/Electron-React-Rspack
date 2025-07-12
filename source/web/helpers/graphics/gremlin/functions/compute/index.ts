@@ -5,6 +5,9 @@ export function getCumulativeScale(
   prop: "x" | "y",
   _breakCondition?: (element: Container) => boolean
 ): number {
+  if (!element) {
+    return 1
+  }
   let scale = element.scale[prop]
   let parent = element.parent
   while (parent) {

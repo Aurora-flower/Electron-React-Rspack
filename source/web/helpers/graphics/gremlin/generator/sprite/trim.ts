@@ -1,6 +1,6 @@
 import { Rectangle, Texture } from "pixi.js"
-import { getImageDataBounds } from "@/helpers/graphics/gremlin/functions/compute/image"
 import { loadTexture } from "@/helpers/graphics/gremlin/generator/assets"
+import { getImageDataBounds } from "@/utils/functions/image"
 
 export function trimTexture(texture: Texture): Promise<Texture> {
   return new Promise(resolve => {

@@ -150,7 +150,7 @@
 
 ---
 
-## FEATURE & Optimize
+## FEATURE
 
 ### Example
 
@@ -165,6 +165,10 @@
 - Python Django
 - Node.js
 - Python FastAPI
+
+### Optimize
+
+- PIXI Grid | Ruler | Axis 的渲染，我认为不应该随缩放滚动效果
 
 ---
 

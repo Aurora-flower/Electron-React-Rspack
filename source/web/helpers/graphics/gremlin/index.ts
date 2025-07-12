@@ -4,6 +4,7 @@ import { queryElement } from "@/features/document/dom-utils/query"
 import { removeElementsByTag } from "@/features/document/dom-utils/remove"
 import { DEFAULT_INIT_VIEW_SCALE } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { setupApp } from "@/helpers/graphics/gremlin/setup/setupApp"
 import {
@@ -94,6 +95,9 @@ class PixiManager {
       updateLayer(layer)
     }
     // console.log("缩放设置", karte, staff, layer, PixiManager._app)
+
+    // TODO: 其他的更新操作
+    Selector.draw()
   }
 
   static destroy(): void {

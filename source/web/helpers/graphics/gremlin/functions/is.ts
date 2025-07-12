@@ -15,9 +15,9 @@ export function isContainer<T>(target: T): boolean {
   )
 }
 
-// export function isViewContainer<T>(target: T): boolean {
-//   return Boolean(target) && target instanceof ViewContainer
-// }
+export function isViewContainer<T>(target: T): boolean {
+  return Boolean(target) && target instanceof ViewContainer
+}
 
 export function isGraphics<T>(target: T): boolean {
   return Boolean(target) && target instanceof Graphics
