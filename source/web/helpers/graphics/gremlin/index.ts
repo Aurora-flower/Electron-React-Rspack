@@ -23,8 +23,8 @@ function getRootElement(root: string | HTMLElement): HTMLElement {
     : root
 }
 
-const MAX_SCALE = 2.5
-const MIN_SCALE = 0.25
+const MAX_SCALE = 3
+const MIN_SCALE = 0.5
 
 class PixiManager {
   private static _app: Application | null = null

@@ -44,6 +44,7 @@ class Selector {
     if (!target) {
       return
     }
+    // TODO: 当缩放为 0.25 时，选中框发生偏移的问题
     const targetContainer = target.parent
     const ancestorContainer = targetContainer.parent
     const scale = {
