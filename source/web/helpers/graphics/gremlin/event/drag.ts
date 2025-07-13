@@ -1,6 +1,7 @@
 import type { Container, FederatedPointerEvent } from "pixi.js"
 import { Point } from "pixi.js"
 import { CURSOR } from "@/common/cursor"
+import PixiManager from "@/helpers/graphics/gremlin"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
@@ -36,7 +37,8 @@ class StageDrag {
   private static _pos: Point
 
   /* ***** ***** ***** ***** 右键参数 ***** ***** ***** *****  */
-  private static _lastPos: AnyModel
+  private static _layer: Container | null = null
+  private static _pivot: Point
   private static _velocity: Point
   private static _time: number
   private static _inertia: AnyModel
@@ -61,7 +63,10 @@ class StageDrag {
     // StageDrag._point = new Point()
     // StageDrag._velocity = new Point()
     StageDrag._flag = -1
-    StageDrag._currentTarget = StageDrag._currentTargetParent = null
+    StageDrag._currentTarget =
+      StageDrag._currentTargetParent =
+      StageDrag._layer =
+        null
   }
 
   private static pointerdown(e: FederatedPointerEvent): void {
@@ -177,17 +182,40 @@ class StageDrag {
 
   /* ***** ***** ***** ***** 右键事件 ***** ***** ***** *****  */
   private static stagePointerdown(e: FederatedPointerEvent): void {
-    const _target = e.target
     StageDrag._time = nowTime()
     StageDrag._velocity = new Point()
+    const layer = getElementByLabel(ELEMENT_FLAG.Layer, StageDrag._stage)
+    if (layer) {
+      const endPoint = e.global.clone()
+      StageDrag._point = endPoint
+      StageDrag._pivot = layer.pivot.clone()
+      StageDrag._layer = layer
+    }
   }
 
   private static stagePointermove(e: FederatedPointerEvent): void {
-    const _target = e.target
-    const startTime = StageDrag._time
-    const endTime = nowTime()
-    const time = roundToDecimal(endTime - startTime, 0)
-
-    console.log("StageDrag", "stagePointermove", time)
+    const layer = StageDrag._layer
+    if (!layer) {
+      return
+    }
+    const scale = {
+      x: getCumulativeScale(layer.parent, "x"),
+      y: getCumulativeScale(layer.parent, "y")
+    }
+    // const startTime = StageDrag._time
+    // const endTime = nowTime()
+    // const deltaTime = roundToDecimal(endTime - startTime, 0)
+    const endPoint = e.global.clone()
+    const offset = {
+      x: (endPoint.x - StageDrag._point.x) / scale.x,
+      y: (endPoint.y - StageDrag._point.y) / scale.y
+    }
+    const pivot = {
+      x: roundToDecimal(StageDrag._pivot.x - offset.x, 2),
+      y: roundToDecimal(StageDrag._pivot.y - offset.y, 2)
+    }
+    layer.pivot.set(pivot.x, pivot.y)
+    PixiManager.setPivot(layer.pivot.clone())
+    console.log("pivot", PixiManager.recordPivot)
   }
 }

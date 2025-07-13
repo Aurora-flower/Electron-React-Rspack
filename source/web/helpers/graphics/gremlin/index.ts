@@ -1,8 +1,11 @@
-import type { Container } from "pixi.js"
+import type { Container, PointData } from "pixi.js"
 import { Application } from "pixi.js"
 import { queryElement } from "@/features/document/dom-utils/query"
 import { removeElementsByTag } from "@/features/document/dom-utils/remove"
-import { DEFAULT_INIT_VIEW_SCALE } from "@/helpers/graphics/gremlin/constant/defaultValue"
+import {
+  DEFAULT_INIT_VIEW_SCALE,
+  DEFAULT_RULER_SIZE
+} from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
@@ -28,6 +31,7 @@ const MIN_SCALE = 0.5
 
 class PixiManager {
   private static _app: Application | null = null
+  static recordPivot: PointData
   static viewScale = DEFAULT_INIT_VIEW_SCALE
   static viewSize: SizeModel = new Proxy(getSize(), {
     get(target: SizeModel, p: keyof SizeModel, receiver): number {
@@ -82,6 +86,7 @@ class PixiManager {
       return
     }
     PixiManager.viewScale = scale
+
     const karte = getElementByLabel(ELEMENT_FLAG.Karte, stage)
     if (karte) {
       updateBasiskarte(karte)
@@ -104,6 +109,16 @@ class PixiManager {
     PixiManager.viewScale = DEFAULT_INIT_VIEW_SCALE
     webLog("PixiManager", "destroy", PixiManager._app)
     PixiManager._app = null
+  }
+
+  static setPivot(point: PointModel): void {
+    if (!PixiManager._app) {
+      return
+    }
+    PixiManager.recordPivot = {
+      x: (point.x + DEFAULT_RULER_SIZE) / PixiManager.viewScale,
+      y: (point.y + DEFAULT_RULER_SIZE) / PixiManager.viewScale
+    }
   }
 }
 

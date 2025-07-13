@@ -83,8 +83,8 @@ export function initSettingsUiLayer(layer: Container): void {
   }
   Selector.init(layer)
   Controller.init(layer)
-
   layer.pivot.set(-DEFAULT_RULER_SIZE)
+  PixiManager.recordPivot = layer.pivot.clone()
   // TODO: 画板 + 渲染元素
   let board = getElementByLabel(ELEMENT_FLAG.Board, layer)
   if (!board) {
@@ -97,10 +97,10 @@ export function initSettingsUiLayer(layer: Container): void {
   // TEST
   const parent = createContainer(board, {
     label: "parent",
-    position: {
-      x: 100,
-      y: 100
-    },
+    // position: {
+    //   x: 100,
+    //   y: 100
+    // },
     scale: {
       x: 0.7,
       y: 0.7
@@ -136,6 +136,10 @@ export function updateLayer(layer: Container): void {
   if (!board) {
     return
   }
+  layer.pivot.set(
+    PixiManager.recordPivot.x * PixiManager.viewScale - DEFAULT_RULER_SIZE,
+    PixiManager.recordPivot.y * PixiManager.viewScale - DEFAULT_RULER_SIZE
+  )
   board.scale.set(PixiManager.viewScale)
   webLog("setupLayer", "updateLayer", PixiManager.viewScale)
 }
