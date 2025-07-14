@@ -17,7 +17,7 @@ interface AppServerOptions {
 }
 
 export function applicationHooks(app: Application): void {
-  app.get("/", (req, res) => {
+  app.get("/", (_req, res) => {
     res.send("Hello World")
   })
 }

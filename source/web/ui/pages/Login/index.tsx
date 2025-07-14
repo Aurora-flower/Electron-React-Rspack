@@ -1,6 +1,5 @@
-// biome-ignore lint/correctness/noUnusedImports: <explanation>
-
 import type { JSX } from "react"
+// biome-ignore lint/correctness/noUnusedImports: React is used in JSX runtime
 import * as React from "react"
 
 function LoginPage(): JSX.Element {

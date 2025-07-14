@@ -10,6 +10,7 @@
     "includes": [
       "**",
       "!**/app/**/*",
+      "!**/docs/**/*",
       "!**/core/**/*",
       "!**/node_modules/**/*",
       "!**/submodules/**/*",

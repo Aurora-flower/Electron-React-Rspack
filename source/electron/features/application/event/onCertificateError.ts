@@ -8,7 +8,7 @@ import { app } from "electron"
 function onCertificateError(): void {
   app.on(
     "certificate-error",
-    (event, webContents, url, error, certificate, callback) => {
+    (event, _webContents, url, _error, _certificate, callback) => {
       if (url === "https://github.com") {
         // Verification logic.
         event.preventDefault()

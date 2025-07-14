@@ -8,7 +8,7 @@ import { app } from "electron"
 function onSelectClientCertificate(): void {
   app.on(
     "select-client-certificate",
-    (event, webContents, url, list, callback) => {
+    (event, _webContents, _url, list, callback) => {
       event.preventDefault()
       callback(list[0])
     }

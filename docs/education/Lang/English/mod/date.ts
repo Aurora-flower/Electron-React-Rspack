@@ -49,8 +49,8 @@ const Month = {
   /* Nov */
   11: "November",
   /* Dec */
-  12: "December",
-};
+  12: "December"
+}
 
 /**
  * @summary 星期
@@ -74,7 +74,7 @@ const Week = {
   /* Sat */
   6: "Saturday",
   /* Sun */
-  7: "Sunday",
-};
+  7: "Sunday"
+}
 
-export { Month, Week };
+export { Month, Week }

@@ -41,7 +41,7 @@ const CHANNEL_CONFIG_MAP: ChannelConfigMap = {
 }
 
 async function setupReceiverHooks(
-  event: IpcMainEvent,
+  _event: IpcMainEvent,
   channel: TriggerChannelName,
   ...args: ArrayType
 ): Promise<void> {
@@ -51,7 +51,7 @@ async function setupReceiverHooks(
 }
 
 async function setupTriggerHooks(
-  event: IpcMainInvokeEvent,
+  _event: IpcMainInvokeEvent,
   channel: ReceiverChannelName,
   ...args: ArrayType
 ): Promise<unknown> {
@@ -61,7 +61,7 @@ async function setupTriggerHooks(
 }
 
 async function setupMessageHooks(
-  event: IpcMainEvent,
+  _event: IpcMainEvent,
   channel: MessagenerChannelName,
   ...args: ArrayType
 ): Promise<void> {

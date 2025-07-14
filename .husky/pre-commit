@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 # npm audit
 # npm outdated
-# npm run biome:lint
+npm run biome:lint

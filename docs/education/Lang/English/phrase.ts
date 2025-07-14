@@ -1,2 +1,2 @@
 // sentence
-const phrase = {};
+export const phrase = {}

@@ -1,5 +1,5 @@
 import type { ComponentType, JSX } from "react"
-// biome-ignore lint/correctness/noUnusedImports: <explanation>
+// biome-ignore lint/correctness/noUnusedImports: React is used in JSX runtime
 import * as React from "react"
 import { webLog } from "@/utils/log"
 

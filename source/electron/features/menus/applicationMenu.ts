@@ -47,7 +47,7 @@ export function registerAppMenu(): void {
         {
           label: "打开调试工具",
           accelerator: "CmdOrCtrl+Shift+I",
-          click: (menuItem, window: BrowserWindow): void => {
+          click: (_menuItem, window: BrowserWindow): void => {
             window.webContents.openDevTools()
             // win.webContents.openDevTools({
             //   mode: "detach",
@@ -63,7 +63,7 @@ export function registerAppMenu(): void {
         {
           label: "刷新",
           accelerator: "CmdOrCtrl+R",
-          click: (menuItem, window: BrowserWindow): void => {
+          click: (_menuItem, window: BrowserWindow): void => {
             window.reload()
             sendLog({
               module: module?.id,

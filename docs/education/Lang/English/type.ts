@@ -1,51 +1,51 @@
-import type { PartOfSpeechKeys } from "./mod/classify";
+import type { PartOfSpeechKeys } from "./mod/classify"
 
 interface Relative {
   /* 词根 */
-  root?: string;
+  root?: string
   /* 复数 */
-  plural?: string;
+  plural?: string
   /* 单数 */
-  singular?: string;
+  singular?: string
   /* 第三人称单数 - third person singular */
-  tps?: string;
+  tps?: string
   /* 第三人称复数 - third person plural */
-  tpp?: string;
+  tpp?: string
   /* 过去式 - Past tense */
-  past?: string;
+  past?: string
   /* 过去分词 - Past participle */
-  pastParticiple?: string;
+  pastParticiple?: string
   /* 现在式 - Present tense */
-  present?: string;
+  present?: string
   /* 现在分词 - Present participle */
-  presentParticiple?: string;
+  presentParticiple?: string
   /* 将来式 - Future tense */
-  future?: string;
+  future?: string
   /* 近义词 - synonym */
-  synonym?: string;
+  synonym?: string
   /* 反义词 - antonym */
-  antonym?: string;
+  antonym?: string
 }
 
 type Translate = {
-  [key in PartOfSpeechKeys]?: string[];
-};
+  [key in PartOfSpeechKeys]?: string[]
+}
 
 export interface Vocabulary {
   /* 释义 */
-  interpret: string;
+  interpret: string
   /* 音标 (英) */
-  pronunciation: string;
+  pronunciation: string
   /* 拆解记忆 */
-  memory: string[];
+  memory: string[]
   /* 例句 */
-  example: string;
+  example: string
   /* 翻译 */
-  translate: Translate;
+  translate: Translate
   /* 词义 */
-  relative: Relative;
+  relative: Relative
   /* 相似词汇 - Similar words */
-  similar: string[];
+  similar: string[]
   /* 易混淆词汇 - Confusing words */
-  confuse: string[];
+  confuse: string[]
 }

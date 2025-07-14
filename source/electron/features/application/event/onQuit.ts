@@ -5,7 +5,7 @@ import { app } from "electron"
  * @summary 在应用程序退出时发出。
  */
 function onWillQuit(): void {
-  app.on("quit", (event, exitCode) => {
+  app.on("quit", (_event, exitCode) => {
     sendLog(
       {
         module: module?.id,

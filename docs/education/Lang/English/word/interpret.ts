@@ -1,4 +1,4 @@
-import type { Vocabulary } from "../type";
+import type { Vocabulary } from "../type"
 
 const interpret: Vocabulary = {
   interpret: "解释或理解某些事情的含义",
@@ -7,7 +7,7 @@ const interpret: Vocabulary = {
     "The professor will interpret the meaning of the text for the students.",
   memory: ["inter", "pret"],
   translate: {
-    v: ["解释", "口译", "演绎", "翻译"],
+    v: ["解释", "口译", "演绎", "翻译"]
   },
   relative: {
     plural: "interprets",
@@ -18,10 +18,10 @@ const interpret: Vocabulary = {
     pastParticiple: "interpreted",
     presentParticiple: "interpreting",
     synonym: "explain",
-    antonym: "misinterpret",
+    antonym: "misinterpret"
   },
   similar: ["explain", "translate", "clarify", "decipher"],
-  confuse: ["translate", "explain"],
-};
+  confuse: ["translate", "explain"]
+}
 
-export default interpret;
+export default interpret
