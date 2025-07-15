@@ -3,7 +3,7 @@ import {
   getAppPath,
   getAppVesion,
   getPathByName
-} from "@main/features/application/methods/appPath"
+} from "@main/features/application/methods/path"
 import { replaceSep } from "@main/node/path/replaceSep"
 import { getIsDev } from "@main/node/process/env"
 import { isWin } from "@main/node/process/platform"
@@ -47,9 +47,16 @@ const AppPaths: Record<AppPathTypes, string> = {
 
 /**
  * @summary 应用信息
+ * @remarks
+ * - 如果 app.getPath('logs') 被调用前没有先调用 app.setAppLogsPath() ，将创建一个相当于调用 app.setAppLogsPath() 却没有 path 参数的默认日志目录。
+ * - 用户的应用程序数据目录，默认情况下指向：
+ *    - %APPDATA% - Windows
+ *    - $XDG_CONFIG_HOME | ~/.config - Linux
+ *    - ~/Library/Application Support - macOS
  */
 export class AppInfo implements AppInfoModel {
   name: string = app.name // app.getName())
+  // locale: string = getLocale()
   packaged = app.isPackaged
   appFolder: string = getAppPath()
   appUnpackFolder = ""

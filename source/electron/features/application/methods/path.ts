@@ -30,7 +30,7 @@ export function getPathByName(name: AppPathTypes): string {
  * 在这种情况下，目录应该以 `fs.mkdirSync` 或类似的方式创建。
  * - name 参数只能使用 app.getPath 定义过的 name
  * - 默认, 网页的 cookies 和 缓存 将存储在 sessionData 目录下。
- *  如果要更改此位置，必须在 app 模块的 ready 事件之前重写 sessionData 路径。
+ * 如果要更改此位置，必须在 app 模块的 ready 事件之前重写 sessionData 路径。
  */
 export function setPathByName(name: AppPathTypes, path: string): void {
   app.setPath(name, path)
@@ -74,4 +74,17 @@ export async function getFileIcon(
   options?: FileIconOptions
 ): Promise<NativeImage> {
   return await app.getFileIcon(path, options)
+}
+
+/**
+ * @summary 设置或创建一个应用程序日志目录
+ * @param path 自定义日志路径
+ * @remarks
+ * - 必须是绝对路径
+ * - 没有指定 path 参数将导致此目录
+ * 在 `macOS` 下被设置为 `~/Library/Logs/YourAppName`;
+ * 在 `Linux` 和 `Windows`_` 下将被设置到 `userData` 目录中。
+ */
+export function setAppLogsPath(path?: string): void {
+  app.setAppLogsPath(path)
 }
