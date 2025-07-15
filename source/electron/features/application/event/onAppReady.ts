@@ -2,7 +2,7 @@ import commandLines from "@main/features/application/commandLines"
 import {
   privilegedSchemes,
   registerProtocolHandle,
-  setAsDefaultProtocolClient
+  setClientProtocol
 } from "@main/features/protocol"
 import { setTheme } from "@main/features/theme"
 import { registerIPCChannel } from "@main/handlers/channel"
@@ -14,7 +14,7 @@ import { checkForUpdates } from "@main/toolkit/updater"
 import { app } from "electron"
 
 function advanceExecution(): void {
-  setAsDefaultProtocolClient()
+  setClientProtocol()
   commandLines()
 }
 

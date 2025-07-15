@@ -1,9 +1,9 @@
-import { resolve } from "node:path"
 import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/macros"
+import { setAsDefaultProtocolClient } from "@main/features/application/methods/protocol"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
 import { sendLog } from "@main/toolkit/logger"
 import type { CustomScheme } from "electron"
-import { app, net, protocol } from "electron"
+import { net, protocol } from "electron"
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,
@@ -73,11 +73,10 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
   protocol.handle(scheme, protocolHander)
 }
 
-export function setAsDefaultProtocolClient(): void {
-  const execPath = process?.execPath
-  const argv = [] // process.argv.slice(1)
+export function setClientProtocol(): void {
+  let argv = []
   if (process.defaultApp && process.argv.length >= 2) {
-    argv.push(resolve(process.argv[1]))
+    argv = process.argv.slice(1)
   }
-  app.setAsDefaultProtocolClient(CLIENT_SCHEMA, execPath, argv)
+  setAsDefaultProtocolClient(CLIENT_SCHEMA, argv)
 }

@@ -1,3 +1,7 @@
+import type {
+  ApplicationInfoForProtocolReturnValue,
+  NativeImage
+} from "electron"
 import { app } from "electron"
 
 /**
@@ -46,4 +50,65 @@ export function removeAsDefaultProtocolClient(
 ): boolean {
   const execPath = path ?? process?.execPath
   return app.removeAsDefaultProtocolClient(protocol, execPath, args)
+}
+
+/**
+ * @summary 检查当前可执行程序是否是协议(也就是URI scheme) 的默认处理程序。
+ * @param protocol - 协议名称。
+ * @param args - 命令行参数。
+ * @param path - 可选，指定可执行文件的路径。
+ * @returns {boolean}
+ * @remarks
+ * - args、path 均是 win32 系统下支持的参数。
+ * - API 的实现：API 在内部使用 Windows 注册表和 `LSSetDefaultHandlerForURLScheme`。
+ */
+export function isDefaultProtocolClient(
+  protocol: string,
+  args: StringArray = [],
+  path?: string
+): boolean {
+  const execPath = path ?? process?.execPath
+  return app.isDefaultProtocolClient(protocol, execPath, args)
+}
+
+/**
+ * @summary 获取处理协议的应用程序名称
+ * @param url 要检查的协议名称的 URL。至少包含 `://` (例如：'https://') 的完整 URL。
+ * @returns {string} 处理协议的应用程序名称，或如果没有处理程序返回的空字符串。
+ * @remarks
+ * - 不要依赖于无法保证保持不变的精确格式。Linux 上期望不同格式，可能带有 `.desktop` 后缀。
+ */
+export function getApplicationNameForProtocol(url: string): string {
+  return app.getApplicationNameForProtocol(url)
+}
+
+type ApplicationInfoForProtocolModel = {
+  /**
+   * @summary 应用程序图标。
+   */
+  icon: NativeImage
+  /**
+   * @summary 应用程序安装路径。
+   */
+  path: string
+  /**
+   * @summary 应用程序显示名称。
+   */
+  name: string
+}
+
+/**
+ * @platform drawin | win32
+ * @summary 获取处理协议的应用程序信息
+ * @param url 要检查的协议名称的 URL。至少包含 `://` (例如：'https://') 的完整 URL。
+ * @returns {ApplicationInfoForProtocolModel} 处理协议的应用程序名称，或如果没有处理程序返回的空字符串。
+ * @remarks
+ * - 不要依赖于无法保证保持不变的精确格式。Linux 上期望不同格式，可能带有 `.desktop` 后缀。
+ */
+export async function getApplicationInfoForProtocol(
+  url: string
+): Promise<ApplicationInfoForProtocolModel> {
+  return app.getApplicationInfoForProtocol(
+    url
+  ) as Promise<ApplicationInfoForProtocolReturnValue>
 }
