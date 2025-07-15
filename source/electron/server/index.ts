@@ -57,7 +57,7 @@ export class AppServer {
        * @returns {void} 对于 SPA，返回 index.html 文件
        * @remarks 官方文档明确要求通配符路由应使用正则表达式语法
        */
-      this._application.get(/.*/, (req, res /* next */) => {
+      this._application.get(/.*/, (_req, res /* next */) => {
         res.sendFile(page)
       })
     }
