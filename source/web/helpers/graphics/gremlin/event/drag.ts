@@ -184,7 +184,7 @@ class StageDrag {
   private static stagePointerdown(e: FederatedPointerEvent): void {
     StageDrag._time = nowTime()
     StageDrag._velocity = new Point()
-    const layer = getElementByLabel(ELEMENT_FLAG.Layer, StageDrag._stage)
+    const layer = getElementByLabel(ELEMENT_FLAG.Root, StageDrag._stage)
     if (layer) {
       const endPoint = e.global.clone()
       StageDrag._point = endPoint
@@ -217,5 +217,10 @@ class StageDrag {
     layer.pivot.set(pivot.x, pivot.y)
     PixiManager.setPivot(layer.pivot.clone())
     console.log("pivot", PixiManager.recordPivot)
+    // TODO: 对一些相关元素进行处理
+    const selector = getElementByLabel(ELEMENT_FLAG.Selector, StageDrag._stage)
+    if (selector) {
+      Selector.refresh()
+    }
   }
 }

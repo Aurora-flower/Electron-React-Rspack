@@ -1,9 +1,9 @@
 import type { Container, DestroyOptions } from "pixi.js"
 import { Graphics } from "pixi.js"
+import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
-import { roundToDecimal } from "@/utils/functions/math"
 import { getSize } from "@/utils/functions/usually"
 
 const BORAD_WIDTH = 3
@@ -34,6 +34,14 @@ class Selector {
     Selector.draw()
   }
 
+  static refresh(): void {
+    const target = Selector._target
+    if (target) {
+      const pos = target.getGlobalPosition().clone()
+      Selector.move(pos)
+    }
+  }
+
   static move(point: PointModel): void {
     Selector._selector.position.copyFrom(point)
   }
@@ -58,10 +66,6 @@ class Selector {
     )
     const pos = target.getGlobalPosition().clone()
     Selector.move(pos)
-    Selector._selector.pivot.set(
-      roundToDecimal((size.width * 0.5) / scale.x - BORAD_WIDTH),
-      roundToDecimal((size.height * 0.5) / scale.y - BORAD_WIDTH)
-    )
     Selector._selector
       .rect(borderOffset, borderOffset, size.width, size.height)
       .stroke(STORKE_STYLE)
@@ -71,6 +75,7 @@ class Selector {
     Selector._selector = new Graphics({
       label: ELEMENT_FLAG.Selector
     })
+    Selector._selector.pivot.set(DEFAULT_RULER_SIZE)
   }
 
   static release(

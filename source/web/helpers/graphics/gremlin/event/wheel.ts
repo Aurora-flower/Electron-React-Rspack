@@ -1,18 +1,11 @@
 import type { Container, FederatedWheelEvent } from "pixi.js"
-// import { CURSOR } from "@/common/cursor"
 import PixiManager from "@/helpers/graphics/gremlin"
-// import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
-// import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import { roundToDecimal } from "@/utils/functions/math"
-
-// import CommonUtility from "@/utils/utility"
 
 const ZOOM_SPEED = 0.05
 // const SCALE_RATIO = 0.1;
 
 export function addStageWheel(stage: Container): void {
-  // const board = getElementByLabel(ELEMENT_FLAG.Board, stage)
-
   const wheelHandler =
     // CommonUtility.throttle((ev): void => {
     // const e = ev as FederatedWheelEvent

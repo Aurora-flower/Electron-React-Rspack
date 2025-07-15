@@ -85,17 +85,22 @@ export function initSettingsUiLayer(layer: Container): void {
   Controller.init(layer)
   layer.pivot.set(-DEFAULT_RULER_SIZE)
   PixiManager.recordPivot = layer.pivot.clone()
+  const root = createContainer(layer, {
+    label: ELEMENT_FLAG.Root
+  })
+  root.scale.set(PixiManager.viewScale)
+
   // TODO: 画板 + 渲染元素
-  let board = getElementByLabel(ELEMENT_FLAG.Board, layer)
-  if (!board) {
-    board = createContainer(layer, {
-      label: ELEMENT_FLAG.Board
-    })
-  }
-  board.scale.set(PixiManager.viewScale)
+  const virtualCanvas = createContainer(root, {
+    label: ELEMENT_FLAG.Board
+  })
+  const view = createGraphics(virtualCanvas, {
+    alpha: 0.2
+  })
+  drawRect(view, { x: 0, y: 0 }, { width: 1334, height: 750 })
 
   // TEST
-  const parent = createContainer(board, {
+  const parent = createContainer(virtualCanvas, {
     label: "parent",
     // position: {
     //   x: 100,
@@ -107,12 +112,21 @@ export function initSettingsUiLayer(layer: Container): void {
     }
   })
   const graphic = createGraphics(parent, {
+    label: "child",
     scale: {
       x: 0.7,
       y: 0.7
     }
   })
-  drawRect(graphic, { x: 0, y: 0 }, { width: 100, height: 100 })
+  drawRect(
+    graphic,
+    { x: 0, y: 0 },
+    { width: 100, height: 100 },
+    {
+      isFill: true,
+      color: "#b06bd6"
+    }
+  )
 }
 
 /* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */
@@ -132,14 +146,14 @@ export function updateStaff(_staff: Container): void {
 
 export function updateLayer(layer: Container): void {
   // TODO: 更新画板缩放
-  const board = getElementByLabel(ELEMENT_FLAG.Board, layer)
-  if (!board) {
+  const root = getElementByLabel(ELEMENT_FLAG.Root, layer)
+  if (!root) {
     return
   }
-  layer.pivot.set(
+  root.pivot.set(
     PixiManager.recordPivot.x * PixiManager.viewScale - DEFAULT_RULER_SIZE,
     PixiManager.recordPivot.y * PixiManager.viewScale - DEFAULT_RULER_SIZE
   )
-  board.scale.set(PixiManager.viewScale)
+  root.scale.set(PixiManager.viewScale)
   webLog("setupLayer", "updateLayer", PixiManager.viewScale)
 }

@@ -11,6 +11,8 @@ export const ELEMENT_FLAG = {
   Ruler: "_$ruler$_",
   /* 网格容器 */
   Grid: "_$grid$_",
+  /* 渲染根节点容器 */
+  Root: "_$root$_",
   /* 画板容器 */
   Board: "_$board$_",
   /* 选择器容器 */
