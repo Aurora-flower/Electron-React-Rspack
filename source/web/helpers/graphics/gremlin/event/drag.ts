@@ -1,7 +1,6 @@
 import type { Container, FederatedPointerEvent } from "pixi.js"
 import { Point } from "pixi.js"
 import { CURSOR } from "@/common/cursor"
-import PixiManager from "@/helpers/graphics/gremlin"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
@@ -199,8 +198,8 @@ class StageDrag {
       return
     }
     const scale = {
-      x: getCumulativeScale(layer.parent, "x"),
-      y: getCumulativeScale(layer.parent, "y")
+      x: getCumulativeScale(layer, "x"),
+      y: getCumulativeScale(layer, "y")
     }
     // const startTime = StageDrag._time
     // const endTime = nowTime()
@@ -215,8 +214,6 @@ class StageDrag {
       y: roundToDecimal(StageDrag._pivot.y - offset.y, 2)
     }
     layer.pivot.set(pivot.x, pivot.y)
-    PixiManager.setPivot(layer.pivot.clone())
-    console.log("pivot", PixiManager.recordPivot)
     // TODO: 对一些相关元素进行处理
     const selector = getElementByLabel(ELEMENT_FLAG.Selector, StageDrag._stage)
     if (selector) {

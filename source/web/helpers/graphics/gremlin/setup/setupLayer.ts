@@ -84,7 +84,6 @@ export function initSettingsUiLayer(layer: Container): void {
   Selector.init(layer)
   Controller.init(layer)
   layer.pivot.set(-DEFAULT_RULER_SIZE)
-  PixiManager.recordPivot = layer.pivot.clone()
   const root = createContainer(layer, {
     label: ELEMENT_FLAG.Root
   })
@@ -150,10 +149,7 @@ export function updateLayer(layer: Container): void {
   if (!root) {
     return
   }
-  root.pivot.set(
-    PixiManager.recordPivot.x * PixiManager.viewScale - DEFAULT_RULER_SIZE,
-    PixiManager.recordPivot.y * PixiManager.viewScale - DEFAULT_RULER_SIZE
-  )
   root.scale.set(PixiManager.viewScale)
   webLog("setupLayer", "updateLayer", PixiManager.viewScale)
+  console.log("root_pivot", root.pivot.clone())
 }
