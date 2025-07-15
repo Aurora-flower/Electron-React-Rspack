@@ -8,7 +8,7 @@ import { dialog } from "electron"
 
 class AppDialog {
   private static _instance: AppDialog
-  private static lastUserChoice: string | string[]
+  private static lastUserChoice: string | StringArray
   private static dialogCount = 0
 
   static getInstance(): AppDialog {
@@ -18,7 +18,7 @@ class AppDialog {
     return AppDialog._instance
   }
 
-  static getLastUserChoice(): string | string[] {
+  static getLastUserChoice(): string | StringArray {
     return AppDialog.lastUserChoice
   }
 

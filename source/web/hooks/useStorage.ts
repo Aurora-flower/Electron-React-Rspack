@@ -12,7 +12,7 @@ interface StorageHook {
   setStorage: (key: string, value: unknown) => void
   getStorage: (key: string) => string | null
   removeStorage: (key: string) => void
-  clear: (excludes?: string[]) => void
+  clear: (excludes?: StringArray) => void
 }
 
 function useStorage(storageType: StorageType = "sessionStorage"): StorageHook {
@@ -35,9 +35,9 @@ function useStorage(storageType: StorageType = "sessionStorage"): StorageHook {
     window[storageType].removeItem(key)
   }
 
-  const clear = (excludes?: string[]): void => {
+  const clear = (excludes?: StringArray): void => {
     const keys = Object.keys(window[storageType])
-    const defaultExcludes: string[] = []
+    const defaultExcludes: StringArray = []
     const excludesArr = excludes
       ? [...excludes, ...defaultExcludes]
       : defaultExcludes

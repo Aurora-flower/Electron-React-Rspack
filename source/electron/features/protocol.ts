@@ -74,13 +74,10 @@ export function registerProtocolHandle(scheme: string = DEFAULT_SCHEMA): void {
 }
 
 export function setAsDefaultProtocolClient(): void {
-  if (process.defaultApp) {
-    if (process.argv.length >= 2) {
-      app.setAsDefaultProtocolClient(CLIENT_SCHEMA, process.execPath, [
-        resolve(process.argv[1])
-      ])
-    }
-  } else {
-    app.setAsDefaultProtocolClient(CLIENT_SCHEMA)
+  const execPath = process?.execPath
+  const argv = [] // process.argv.slice(1)
+  if (process.defaultApp && process.argv.length >= 2) {
+    argv.push(resolve(process.argv[1]))
   }
+  app.setAsDefaultProtocolClient(CLIENT_SCHEMA, execPath, argv)
 }

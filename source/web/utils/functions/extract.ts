@@ -9,7 +9,7 @@ import CommonUtility from "@/utils/utility"
  */
 export function extractPartial<T>(
   origin: NonNullable<T>,
-  keys: string[] = []
+  keys: StringArray = []
 ): Partial<T> {
   const keySet = keys.length > 0 ? new Set(keys) : new Set(Object.keys(origin))
   const result = Object.fromEntries(

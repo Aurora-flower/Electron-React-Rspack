@@ -36,7 +36,7 @@ export function getSystemLocale(): string {
 
 /**
  * @summary 获取系统首选语言
- * @returns {string[]} 从最喜欢到最不喜欢的用户首选系统语言，包括国家代码（如果适用）
+ * @returns {StringArray} 从最喜欢到最不喜欢的用户首选系统语言，包括国家代码（如果适用）
  * @remarks
  * -  用户可以在 Windows 或 macOS 上通过语言和区域设置、修改、添加此列表。
  * - API 的实现:
@@ -45,6 +45,6 @@ export function getSystemLocale(): string {
  *    - 在 `Linux` 上使用 `g_get_language_names`
  * - 使用场景: 决定应用程序的呈现语言。
  */
-export function getPreferredSystemLanguages(): string[] {
+export function getPreferredSystemLanguages(): StringArray {
   return app.getPreferredSystemLanguages()
 }
