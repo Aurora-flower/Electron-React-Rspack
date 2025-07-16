@@ -108,6 +108,7 @@ declare global {
     [key: string]: T
   }
   type FunctionType = () => void
+  type StringOrNumber = string | number
   type ArrayType<T = unknown> = Array<T>
   type RecordType<T = unknown> = Record<string | number | symbol, T>
 
@@ -118,7 +119,7 @@ declare global {
 
   type Constructor<T = unknown> = new (...args: ArrayType) => T
 
-  type AnyModel = AtWill
+  type AnyModel = any
 
   interface PointModel {
     x: number
