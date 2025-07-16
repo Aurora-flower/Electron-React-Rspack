@@ -92,6 +92,21 @@ function CardList(): JSX.Element {
     },
     {
       label: "C#"
+    },
+    {
+      label: "Video Editor"
+    },
+    {
+      label: "Midea Player"
+    },
+    {
+      label: "Excel"
+    },
+    {
+      label: "WebRTC"
+    },
+    {
+      label: "WebSocket"
     }
   ]
   return (
@@ -125,8 +140,6 @@ function Home(): JSX.Element {
   React.useEffect(() => {
     webLog("Home", "Information", information)
   }, [information])
-
-  // TODO: 做个入口页面 - 进入 ThreeJS | PixiJS | Canvas | WebGL | WebAssembly | WebSocket | WebRTC | WebSocket 示例界面
 
   return (
     <div className="page-base">
