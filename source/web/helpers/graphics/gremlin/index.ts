@@ -77,6 +77,10 @@ class PixiManager {
     setupStage(stage)
   }
 
+  static isVaildScale(scale: number): boolean {
+    return scale >= MIN_SCALE && scale <= MAX_SCALE
+  }
+
   static setDrawingBoardScale(scale: number): void {
     const stage = PixiManager.getApp()?.stage
     if (!stage || scale < MIN_SCALE || scale > MAX_SCALE) {

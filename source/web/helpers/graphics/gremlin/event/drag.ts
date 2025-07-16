@@ -36,7 +36,7 @@ class StageDrag {
   private static _pos: Point
 
   /* ***** ***** ***** ***** 右键参数 ***** ***** ***** *****  */
-  private static _layer: Container | null = null
+  private static _root: Container | null = null
   private static _pivot: Point
   private static _velocity: Point
   private static _time: number
@@ -64,7 +64,7 @@ class StageDrag {
     StageDrag._flag = -1
     StageDrag._currentTarget =
       StageDrag._currentTargetParent =
-      StageDrag._layer =
+      StageDrag._root =
         null
   }
 
@@ -183,23 +183,23 @@ class StageDrag {
   private static stagePointerdown(e: FederatedPointerEvent): void {
     StageDrag._time = nowTime()
     StageDrag._velocity = new Point()
-    const layer = getElementByLabel(ELEMENT_FLAG.Root, StageDrag._stage)
-    if (layer) {
+    const root = getElementByLabel(ELEMENT_FLAG.Root, StageDrag._stage)
+    if (root) {
       const endPoint = e.global.clone()
       StageDrag._point = endPoint
-      StageDrag._pivot = layer.pivot.clone()
-      StageDrag._layer = layer
+      StageDrag._pivot = root.pivot.clone()
+      StageDrag._root = root
     }
   }
 
   private static stagePointermove(e: FederatedPointerEvent): void {
-    const layer = StageDrag._layer
-    if (!layer) {
+    const root = StageDrag._root
+    if (!root) {
       return
     }
     const scale = {
-      x: getCumulativeScale(layer, "x"),
-      y: getCumulativeScale(layer, "y")
+      x: getCumulativeScale(root, "x"),
+      y: getCumulativeScale(root, "y")
     }
     // const startTime = StageDrag._time
     // const endTime = nowTime()
@@ -213,7 +213,7 @@ class StageDrag {
       x: roundToDecimal(StageDrag._pivot.x - offset.x, 2),
       y: roundToDecimal(StageDrag._pivot.y - offset.y, 2)
     }
-    layer.pivot.set(pivot.x, pivot.y)
+    root.pivot.set(pivot.x, pivot.y)
     // TODO: 对一些相关元素进行处理
     const selector = getElementByLabel(ELEMENT_FLAG.Selector, StageDrag._stage)
     if (selector) {
