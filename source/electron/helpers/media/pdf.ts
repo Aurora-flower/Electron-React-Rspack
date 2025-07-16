@@ -1,6 +1,6 @@
 import WindowManager from "@main/helpers/manager/window"
 import { sendLog } from "@main/toolkit/logger"
-import type { PrintToPDFOptions } from "electron"
+import type { PrintToPDFOptions } from "electron/main"
 
 export function printToPDF(
   _pdf: string,

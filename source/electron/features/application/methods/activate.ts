@@ -1,8 +1,9 @@
 /**
  * @file 应用级别窗口相关操作 - appActivation
  */
-import type { FocusOptions } from "electron"
+
 import { app } from "electron"
+import type { FocusOptions } from "electron/main"
 
 /**
  * @summary

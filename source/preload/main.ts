@@ -1,5 +1,5 @@
-import type { IpcRendererEvent } from "electron"
 import { contextBridge, ipcRenderer } from "electron"
+import type { IpcRendererEvent } from "electron/main"
 
 // const windowLoaded = new Promise(resolve => {
 //   window.onload = resolve

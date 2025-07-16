@@ -4,8 +4,8 @@ import {
   synchronousMessage
 } from "@main/handlers/channel/message"
 import { transmit } from "@main/handlers/channel/message/sms"
-import type { IpcMainEvent, IpcMainInvokeEvent } from "electron"
 import { ipcMain } from "electron"
+import type { IpcMainEvent, IpcMainInvokeEvent } from "electron/main"
 
 const TRIGGER_LISTENERS: Record<TriggerChannelName, ChannelListener> = {
   /* ***** ***** ***** ***** Application ***** ***** ***** ***** */

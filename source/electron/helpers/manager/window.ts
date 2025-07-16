@@ -3,7 +3,10 @@ import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import { createBrowserWindow } from "@main/features/window"
 import setupWindow from "@main/helpers/setup/setupWindow"
 import { resolvePath } from "@main/node/path/resolvePath"
-import type { BrowserWindow, BrowserWindowConstructorOptions } from "electron"
+import type {
+  BrowserWindow,
+  BrowserWindowConstructorOptions
+} from "electron/main"
 
 interface WindowState {
   isLoaded: boolean

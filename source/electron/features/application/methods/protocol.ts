@@ -1,8 +1,6 @@
-import type {
-  ApplicationInfoForProtocolReturnValue,
-  NativeImage
-} from "electron"
 import { app } from "electron"
+import type { NativeImage } from "electron/common"
+import type { ApplicationInfoForProtocolReturnValue } from "electron/main"
 
 /**
  * @summary 设置当前可执行文件为协议处理程序

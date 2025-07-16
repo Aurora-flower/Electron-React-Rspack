@@ -1,4 +1,4 @@
-import type { IpcMainEvent } from "electron"
+import type { IpcMainEvent } from "electron/main"
 
 export async function asynchronousMessage(event: IpcMainEvent): Promise<void> {
   event.sender.send("asynchronous-reply", "async-pong")

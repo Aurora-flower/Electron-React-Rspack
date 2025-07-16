@@ -4,8 +4,9 @@
  */
 import { replaceSep } from "@main/node/path/replaceSep"
 import { sendLog } from "@main/toolkit/logger"
-import type { FileIconOptions, NativeImage } from "electron"
 import { app } from "electron"
+import type { NativeImage } from "electron/common"
+import type { FileIconOptions } from "electron/main"
 
 export function getPathByName(name: AppPathTypes): string {
   try {

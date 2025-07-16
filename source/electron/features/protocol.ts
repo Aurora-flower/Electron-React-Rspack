@@ -2,8 +2,8 @@ import { CLIENT_SCHEMA, DEFAULT_SCHEMA } from "@main/common/macros"
 import { setAsDefaultProtocolClient } from "@main/features/application/methods/protocol"
 import { normalizeDirveLetter } from "@main/helpers/function/driveLetter"
 import { sendLog } from "@main/toolkit/logger"
-import type { CustomScheme } from "electron"
 import { net, protocol } from "electron"
+import type { CustomScheme } from "electron/main"
 
 export function privilegedSchemes(
   scheme: string = DEFAULT_SCHEMA,
