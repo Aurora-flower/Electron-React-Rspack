@@ -100,25 +100,45 @@ export function initSettingsUiLayer(layer: Container): void {
 
   // TEST
   const parent = createContainer(virtualCanvas, {
-    label: "parent",
+    label: "parent"
     // position: {
     //   x: 100,
     //   y: 100
     // },
-    scale: {
-      x: 0.7,
-      y: 0.7
-    }
+    // scale: {
+    //   x: 0.7,
+    //   y: 0.7
+    // }
   })
-  const graphic = createGraphics(parent, {
-    label: "child",
+  const graphic1 = createGraphics(parent, {
+    label: "child1",
     scale: {
       x: 0.7,
       y: 0.7
     }
   })
   drawRect(
-    graphic,
+    graphic1,
+    { x: 0, y: 0 },
+    { width: 100, height: 100 },
+    {
+      isFill: true,
+      color: "#b06bd6"
+    }
+  )
+  const graphic2 = createGraphics(parent, {
+    label: "child2",
+    position: {
+      x: 1334 - 70,
+      y: 750 - 70
+    },
+    scale: {
+      x: 0.7,
+      y: 0.7
+    }
+  })
+  drawRect(
+    graphic2,
     { x: 0, y: 0 },
     { width: 100, height: 100 },
     {
@@ -151,5 +171,4 @@ export function updateLayer(layer: Container): void {
   }
   root.scale.set(PixiManager.viewScale)
   webLog("setupLayer", "updateLayer", PixiManager.viewScale)
-  console.log("root_pivot", root.pivot.clone())
 }
