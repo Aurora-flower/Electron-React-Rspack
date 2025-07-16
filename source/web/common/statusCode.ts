@@ -206,4 +206,4 @@ export const StatusCode = {
 
   /* 用户需要提供身份验证来获取网络访问入口 */
   NetworkAuthenticationRequired: 511
-}
+};
