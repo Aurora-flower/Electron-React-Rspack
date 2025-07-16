@@ -79,6 +79,10 @@ class Gremlin {
     return scale >= MIN_SCALE && scale <= MAX_SCALE
   }
 
+  static isVaildScale(scale: number): boolean {
+    return scale >= MIN_SCALE && scale <= MAX_SCALE
+  }
+
   static setDrawingBoardScale(scale: number): void {
     const stage = Gremlin.app?.stage
     if (!stage || !isVaildScale(scale)) {
