@@ -38,11 +38,11 @@ beforePack: "scripts/beforePack.js"
 #     - squirrel
 #     - portable
 
-publish:
-  provider: generic
-  url: http://192.168.3.27:3000/release/
-  channel: latest
 # publish:
-#   provider: github
-#   owner: Aurora-flower
-#   repo: Electron-React-Rspack
+#   provider: generic
+#   url: http://192.168.3.27:3000/release/
+#   channel: latest
+publish:
+  provider: github
+  owner: Aurora-flower
+  repo: Electron-React-Rspack
