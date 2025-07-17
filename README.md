@@ -380,6 +380,7 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 36
 - **API**
   - [🦷 夏柔免费 API 接口](https://api.aa1.cn/)
   - [👀 网易云音乐接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi)
+  - [🚖 服务测试](https://httpbin.org/)
 
 - **开发环境**
   - [🐅 Node 环境下载](https://nodejs.org/zh-cn/download)
