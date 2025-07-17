@@ -26,7 +26,7 @@ export function exitApp(force = false, code = 0): void {
  * 当指定了 args 时，args 将作为命令行参数传递。
  * 当指定了 execPath 时，execPath 将被执行以重新启动，而不是当前应用程序。
  * @remarks
- * - 请注意，此方法在执行时并不会退出应用程序。
+ * - 注意📢: 此方法在执行时并不会退出应用程序。
  * 在调用 `app.relaunch` 后，必须调用 `app.quit` 或 `app.exit` 才能使应用程序重新启动。
  * - 当多次调用 `app.relaunch` 时，当前实例退出后将启动多个实例。
  */
