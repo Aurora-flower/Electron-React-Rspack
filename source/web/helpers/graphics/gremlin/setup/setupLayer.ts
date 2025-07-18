@@ -36,10 +36,11 @@ export function setupLayer(stage: Container): void {
 
 function drawingAssistant(flag: 0 | 1 = 0): void {
   const size = PixiManager.viewSize
+  const scale = PixiManager.viewScale
   if (flag === 0) {
-    Grid.draw(size, PixiManager.viewScale)
+    Grid.draw(size, scale)
   } else if (flag === 1) {
-    Ruler.draw(size, PixiManager.viewScale)
+    Ruler.draw(size, scale)
   }
   webLog("setupLayer", "drawingAssistant", size)
 }
