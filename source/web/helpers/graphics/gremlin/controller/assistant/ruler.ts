@@ -12,6 +12,7 @@ import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine
 import { createText } from "@/helpers/graphics/gremlin/generator/text"
 import { roundToDecimal } from "@/utils/functions/math"
 import { getPoint, getSize } from "@/utils/functions/usually"
+import { webLog } from "@/utils/log"
 
 type RulerType = "top" | "left"
 
@@ -44,6 +45,7 @@ class Ruler {
     })
     Ruler.drawRulerBackground(size)
     Ruler.draw(size, scale)
+    webLog("ruler", "init", size)
   }
 
   private static drawRulerBackground(size: SizeModel): void {

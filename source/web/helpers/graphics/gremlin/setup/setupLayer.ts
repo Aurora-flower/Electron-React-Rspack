@@ -12,7 +12,6 @@ import {
   createGraphics,
   drawRect
 } from "@/helpers/graphics/gremlin/generator/graphics"
-import { getSize } from "@/utils/functions/usually"
 import { webLog } from "@/utils/log"
 
 /**
@@ -32,21 +31,17 @@ export function setupLayer(stage: Container): void {
   initSettingsBasiskarte(basiskarte)
   initSettingsUiLayer(layerContainer)
   initSettingsStaff(staffContainer)
-
   webLog("setupLayer", "初始化画布样板", stage)
 }
 
-function getViewSize(): SizeModel {
-  return getSize(PixiManager.viewSize.width, PixiManager.viewSize.height)
-}
-
 function drawingAssistant(flag: 0 | 1 = 0): void {
-  const size = getViewSize()
+  const size = PixiManager.viewSize
   if (flag === 0) {
     Grid.draw(size, PixiManager.viewScale)
   } else if (flag === 1) {
     Ruler.draw(size, PixiManager.viewScale)
   }
+  webLog("setupLayer", "drawingAssistant", size)
 }
 
 /* ***** ***** ***** ***** 图层初始化操作 （Initialization）***** ***** ***** ***** */
@@ -59,8 +54,9 @@ export function initSettingsBasiskarte(basiskarte: Container): void {
     return
   }
   basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
-  const size = getViewSize()
+  const size = PixiManager.viewSize
   Grid.init(basiskarte, size, PixiManager.viewScale)
+  webLog("setupLayer", "initSettingsBasiskarte", basiskarte)
 }
 
 /**
@@ -70,8 +66,9 @@ export function initSettingsStaff(staff: Container): void {
   if (!staff) {
     return
   }
-  const size = getViewSize()
+  const size = PixiManager.viewSize
   Ruler.init(staff, size, PixiManager.viewScale)
+  webLog("setupLayer", "initSettingsStaff", staff)
 }
 
 /**
@@ -146,6 +143,7 @@ export function initSettingsUiLayer(layer: Container): void {
       color: "#b06bd6"
     }
   )
+  webLog("setupLayer", "initSettingsUiLayer", layer)
 }
 
 /* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */

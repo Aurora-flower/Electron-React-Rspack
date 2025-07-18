@@ -30,15 +30,26 @@ class PixiManager {
   private static _app: Application | null = null
   static recordPivot: PointData
   static viewScale = DEFAULT_INIT_VIEW_SCALE
-  static viewSize: SizeModel = new Proxy(getSize(), {
-    get(target: SizeModel, p: keyof SizeModel, receiver): number {
-      const app = PixiManager._app
-      if (p === "width" || p === "height") {
-        return app ? app.renderer?.[p] : 0
-      }
-      return Reflect.get(target, p, receiver)
+  static get viewSize(): SizeModel {
+    const renderer = PixiManager._app?.renderer
+    return getSize(renderer?.width ?? 0, renderer?.height ?? 0)
+  }
+
+  static set viewSize(size: SizeModel) {
+    const app = PixiManager._app
+    if (app) {
+      app.renderer.resize(size.width, size.height)
     }
-  })
+  }
+  // new Proxy(getSize(), {
+  //   get(target: SizeModel, p: keyof SizeModel, receiver): number {
+  //     const app = PixiManager._app
+  //     if (p === "width" || p === "height") {
+  //       return app ? app.renderer?.[p] : 0
+  //     }
+  //     return Reflect.get(target, p, receiver)
+  //   }
+  // })
 
   /**
    * 初始化 pixi 应用程序
@@ -55,8 +66,8 @@ class PixiManager {
     })
     removeElementsByTag(domElement, "CANVAS")
     domElement.appendChild(app.canvas)
-    PixiManager.initDrawingBoard(app.stage)
     PixiManager._app = app
+    PixiManager.initDrawingBoard(app.stage)
     setupApp(app)
     return app
   }
@@ -87,7 +98,6 @@ class PixiManager {
       return
     }
     PixiManager.viewScale = scale
-
     const karte = getElementByLabel(ELEMENT_FLAG.Karte, stage)
     if (karte) {
       updateBasiskarte(karte)

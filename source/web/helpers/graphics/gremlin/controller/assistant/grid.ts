@@ -5,6 +5,7 @@ import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import { getPoint, getSize } from "@/utils/functions/usually"
+import { webLog } from "@/utils/log"
 
 const DEFAULT_STROKE_INPUT: StrokeInput = {
   width: 1,
@@ -23,6 +24,7 @@ class Grid {
       }
     })
     Grid.draw(size, scale)
+    webLog("grid", "init", size)
   }
 
   static draw(

@@ -6,9 +6,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import HOCPage from "@/components/HOC/Page"
 import LayoutView from "@/ui/layout"
 import GraphicsPage from "@/ui/pages/Graphics"
+import PixiJsGraphics from "@/ui/pages/Graphics/PixiJS"
 import Home from "@/ui/pages/Home"
 
-const PixiJsGraphics = React.lazy(() => import("@/ui/pages/Graphics/PixiJS"))
+// const PixiJsGraphics = React.lazy(() => import("@/ui/pages/Graphics/PixiJS"))
 
 const EnhancedHome = HOCPage(Home)
 
