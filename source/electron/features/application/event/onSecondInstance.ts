@@ -1,3 +1,5 @@
+import WindowManager from "@main/helpers/manager/window"
+import { sendLog } from "@main/toolkit/logger"
 import { app } from "electron"
 
 /**
@@ -10,7 +12,23 @@ import { app } from "electron"
 function onSecondInstance(): void {
   app.on(
     "second-instance",
-    (_event, _argv, _workingDirectory, _additionalData) => {}
+    (_event, _argv, _workingDirectory, additionalData) => {
+      // 输出第二实例的数据
+      sendLog(
+        {
+          id: "app-second-instance",
+          type: "info",
+          sign: "second-instance-data:"
+        },
+        additionalData
+      )
+      const winM = WindowManager.getInstance()
+      const win = winM.getMainWindow()
+      if (win) {
+        if (win.isMinimized()) win.restore()
+        win.focus()
+      }
+    }
   )
 }
 
