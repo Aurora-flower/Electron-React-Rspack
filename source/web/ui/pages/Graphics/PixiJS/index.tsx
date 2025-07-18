@@ -2,7 +2,7 @@ import type { Application } from "pixi.js"
 import type { JSX } from "react"
 import * as React from "react"
 import PixiManager from "@/helpers/graphics/gremlin"
-import { DEFAULT_DESTROY_OPTIONS } from "@/helpers/graphics/gremlin/constant/defaultValue"
+import { DEFAULT_DESTROY_OPTIONS } from "@/helpers/graphics/gremlin/options/destroyOptions"
 
 function PixiJsGraphics(): JSX.Element {
   // const [getTip] = React.useState<string>(
