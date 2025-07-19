@@ -2,7 +2,7 @@ export const ELEMENT_FLAG = {
   /* 舞台容器 */
   Stage: "_$stage$_",
   /* 底部图层 */
-  Karte: "_$basiskarte$_",
+  Basis: "_$basis-layer$_",
   /* 渲染图层 */
   Layer: "_$layer$_",
   /* 标尺图层 */

@@ -21,7 +21,7 @@ export function addStageWheel(stage: Container): void {
         delta > 0 ? canvasScale - ZOOM_SPEED : canvasScale + ZOOM_SPEED
       )
       // TODO: 以鼠标为中心缩放
-      // if (PixiManager.isVaildScale(scale)) {
+      // if (isVaildScale(scale)) {
       //   const zoomFactor = roundToDecimal(PixiManager.viewScale - scale, 2)
       //   const root = getElementByLabel(ELEMENT_FLAG.Root, stage)
       //   if (root) {
