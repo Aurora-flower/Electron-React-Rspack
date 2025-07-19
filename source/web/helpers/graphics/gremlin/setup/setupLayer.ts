@@ -19,8 +19,8 @@ import { webLog } from "@/utils/log"
  */
 export function setupLayer(stage: Container): void {
   // TODO: 图层与标尺、网格绘制、画板（虚拟）的显示
-  const basiskarte = createContainer(stage, {
-    label: ELEMENT_FLAG.Karte
+  const basisLayer = createContainer(stage, {
+    label: ELEMENT_FLAG.Basis
   })
   const layerContainer = createContainer(stage, {
     label: ELEMENT_FLAG.Layer
@@ -28,7 +28,7 @@ export function setupLayer(stage: Container): void {
   const staffContainer = createContainer(stage, {
     label: ELEMENT_FLAG.Staff
   })
-  initSettingsBasiskarte(basiskarte)
+  initSettingsBasisLayer(basisLayer)
   initSettingsUiLayer(layerContainer)
   initSettingsStaff(staffContainer)
   webLog("setupLayer", "初始化画布样板", stage)
@@ -50,14 +50,14 @@ function drawingAssistant(flag: 0 | 1 = 0): void {
 /**
  * @summary 底部图层初始化操作
  */
-export function initSettingsBasiskarte(basiskarte: Container): void {
-  if (!basiskarte) {
+export function initSettingsBasisLayer(basisLayer: Container): void {
+  if (!basisLayer) {
     return
   }
-  basiskarte.pivot.set(-DEFAULT_RULER_SIZE)
+  basisLayer.pivot.set(-DEFAULT_RULER_SIZE)
   const size = PixiManager.viewSize
-  Grid.init(basiskarte, size, PixiManager.viewScale)
-  webLog("setupLayer", "initSettingsBasiskarte", basiskarte)
+  Grid.init(basisLayer, size, PixiManager.viewScale)
+  webLog("setupLayer", "initSettingsBasisLayer", basisLayer)
 }
 
 /**
@@ -149,25 +149,40 @@ export function initSettingsUiLayer(layer: Container): void {
 
 /* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */
 
-export function updateBasiskarte(basiskarte: Container): void {
+function updateBasisLayer(stage: Container): void {
+  const basis = getElementByLabel(ELEMENT_FLAG.Basis, stage)
+  if (!basis) {
+    return
+  }
   // TODO: 更新辅助元素 - 网格
   Grid.release()
   drawingAssistant(0)
-  webLog("setupLayer", "updateBasiskarte", basiskarte)
+  webLog("setupLayer", "updateBasisLayer", basis)
 }
 
-export function updateStaff(_staff: Container): void {
+function updateStaff(stage: Container): void {
+  const staff = getElementByLabel(ELEMENT_FLAG.Staff, stage)
+  if (!staff) {
+    return
+  }
   // TODO: 更新辅助元素 - 标尺
   Ruler.release()
   drawingAssistant(1)
 }
 
-export function updateLayer(layer: Container): void {
+function updateLayer(stage: Container): void {
   // TODO: 更新画板缩放
-  const root = getElementByLabel(ELEMENT_FLAG.Root, layer)
-  if (!root) {
+  const layer = getElementByLabel(ELEMENT_FLAG.Layer, stage)
+  const root = getElementByLabel(ELEMENT_FLAG.Root, layer ?? stage)
+  if (!root || !layer) {
     return
   }
   root.scale.set(PixiManager.viewScale)
   webLog("setupLayer", "updateLayer", PixiManager.viewScale)
+}
+
+export function updateRenderer(stage: Container): void {
+  updateBasisLayer(stage)
+  updateStaff(stage)
+  updateLayer(stage)
 }
