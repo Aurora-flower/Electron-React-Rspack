@@ -16,7 +16,7 @@ export function createContainer(
     ...options
   })
   if (parent) {
-    viewAppend(parent, [container], config)
+    viewAppend(parent, container, config)
   }
   return container
 }

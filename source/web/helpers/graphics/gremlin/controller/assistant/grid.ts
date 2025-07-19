@@ -20,7 +20,7 @@ class Grid {
     Grid.reCreate()
     requestAnimationFrame(() => {
       if (!parent.children.includes(Grid._grid)) {
-        viewAppend(parent, [Grid._grid])
+        viewAppend(parent, Grid._grid)
       }
     })
     Grid.draw(size, scale)

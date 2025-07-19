@@ -17,7 +17,7 @@ class Controller {
     )
     requestAnimationFrame(() => {
       if (!parent.children.includes(Controller._controller)) {
-        viewAppend(parent, [Controller._controller])
+        viewAppend(parent, Controller._controller)
       }
     })
   }

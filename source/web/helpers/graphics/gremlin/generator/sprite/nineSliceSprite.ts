@@ -17,7 +17,7 @@ export function createNineSliceSprite(
     ...options
   })
   if (parent) {
-    viewAppend(parent, [sprite], config)
+    viewAppend(parent, sprite, config)
   }
   return sprite
 }

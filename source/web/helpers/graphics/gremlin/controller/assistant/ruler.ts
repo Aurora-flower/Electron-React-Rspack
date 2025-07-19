@@ -40,7 +40,7 @@ class Ruler {
     )
     requestAnimationFrame(() => {
       if (!parent.children.includes(Ruler._rulerContainer)) {
-        viewAppend(parent, [Ruler._rulerContainer])
+        viewAppend(parent, Ruler._rulerContainer)
       }
     })
     Ruler.drawRulerBackground(size)
