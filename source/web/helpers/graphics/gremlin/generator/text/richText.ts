@@ -15,7 +15,7 @@ export function createHTMLText(
     ...options
   })
   if (parent) {
-    viewAppend(parent, [richText], config)
+    viewAppend(parent, richText, config)
   }
   return richText
 }

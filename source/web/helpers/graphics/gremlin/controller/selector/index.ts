@@ -24,7 +24,7 @@ class Selector {
     Selector.reCreate()
     requestAnimationFrame(() => {
       if (!parent.children.includes(Selector._selector)) {
-        viewAppend(parent, [Selector._selector])
+        viewAppend(parent, Selector._selector)
       }
     })
   }

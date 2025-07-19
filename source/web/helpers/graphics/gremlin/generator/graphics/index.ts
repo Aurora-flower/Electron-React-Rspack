@@ -26,7 +26,7 @@ export function createGraphics(
     ...options
   })
   if (parent) {
-    viewAppend(parent, [graphic], config)
+    viewAppend(parent, graphic, config)
   }
   return graphic
 }

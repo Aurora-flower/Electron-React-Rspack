@@ -15,7 +15,7 @@ export function createText(
     ...options
   })
   if (parent) {
-    viewAppend(parent, [text], config)
+    viewAppend(parent, text, config)
   }
   return text
 }
