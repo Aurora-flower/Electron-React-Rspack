@@ -1,6 +1,6 @@
 import type { Container, FederatedPointerEvent } from "pixi.js"
 import { Point } from "pixi.js"
-import { CURSOR } from "@/common/cursor"
+import { CURSOR } from "@/common/constant/cursor"
 import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
