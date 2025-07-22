@@ -67,3 +67,15 @@ export function nineSliceSprite(
   })
   return ""
 }
+
+/**
+ * 获取图片主色
+ * @param image 图片地址
+ * @param callback 回调函数
+ */
+export function getImageDominantColor(
+  // image: string,
+  // callback: (color: string) => void
+): string {
+  return ""
+}
