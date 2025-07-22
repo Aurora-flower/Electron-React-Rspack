@@ -6,7 +6,12 @@ import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import Controller from "@/helpers/graphics/gremlin/controller/selector/controller"
-import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
+import {
+  getBasisLayer,
+  getRoot,
+  getStaffLayer,
+  getUiLayer
+} from "@/helpers/graphics/gremlin/functions/query/find"
 import { createContainer } from "@/helpers/graphics/gremlin/generator/container"
 import {
   createGraphics,
@@ -23,7 +28,7 @@ export function setupLayer(stage: Container): void {
     label: ELEMENT_FLAG.Basis
   })
   const layerContainer = createContainer(stage, {
-    label: ELEMENT_FLAG.Layer
+    label: ELEMENT_FLAG.UI
   })
   const staffContainer = createContainer(stage, {
     label: ELEMENT_FLAG.Staff
@@ -150,7 +155,7 @@ export function initSettingsUiLayer(layer: Container): void {
 /* ***** ***** ***** ***** 图层样板更新 (Update) ***** ***** ***** ***** */
 
 function updateBasisLayer(stage: Container): void {
-  const basis = getElementByLabel(ELEMENT_FLAG.Basis, stage)
+  const basis = getBasisLayer(stage)
   if (!basis) {
     return
   }
@@ -161,7 +166,7 @@ function updateBasisLayer(stage: Container): void {
 }
 
 function updateStaff(stage: Container): void {
-  const staff = getElementByLabel(ELEMENT_FLAG.Staff, stage)
+  const staff = getStaffLayer(stage)
   if (!staff) {
     return
   }
@@ -172,8 +177,8 @@ function updateStaff(stage: Container): void {
 
 function updateLayer(stage: Container): void {
   // TODO: 更新画板缩放
-  const layer = getElementByLabel(ELEMENT_FLAG.Layer, stage)
-  const root = getElementByLabel(ELEMENT_FLAG.Root, layer ?? stage)
+  const layer = getUiLayer(stage)
+  const root = getRoot(layer ?? stage)
   if (!root || !layer) {
     return
   }
