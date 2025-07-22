@@ -1,3 +1,4 @@
+import { getOrigin } from "@/features/window/location"
 import { webLog } from "@/utils/log"
 
 const MESSAGE_IGNORE_SIGN = [
@@ -11,8 +12,7 @@ const MESSAGE_IGNORE_SIGN = [
 export function messageListener(event: Event): void {
   const ev = event as MessageEvent
   // event.stopImmediatePropagation()
-  // const origin = ev.origin || location.href
-  const origin = ev.origin || location.href
+  const origin = ev.origin || getOrigin()
   if (MESSAGE_IGNORE_SIGN.includes(ev.data.source)) {
     return
   }

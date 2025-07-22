@@ -61,7 +61,7 @@ class PixiManager {
     return app
   }
 
-  static getApp(): Application | null {
+  static get app(): Application | null {
     return PixiManager._app ?? null
   }
 
@@ -72,7 +72,7 @@ class PixiManager {
   static initDrawingBoard = setupPixiApp
 
   static setDrawingBoardScale(scale: number): void {
-    const stage = PixiManager.getApp()?.stage
+    const stage = PixiManager.app?.stage
     if (!stage || !isVaildScale(scale)) {
       return
     }

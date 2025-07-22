@@ -4,7 +4,7 @@ export const ELEMENT_FLAG = {
   /* 底部图层 */
   Basis: "_$basis-layer$_",
   /* 渲染图层 */
-  Layer: "_$layer$_",
+  UI: "_$layer$_",
   /* 标尺图层 */
   Staff: "_$staff$_",
   /* 标尺容器 */

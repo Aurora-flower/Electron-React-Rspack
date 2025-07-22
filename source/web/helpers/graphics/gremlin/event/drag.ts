@@ -1,14 +1,16 @@
 import type { Container, FederatedPointerEvent } from "pixi.js"
 import { Point } from "pixi.js"
 import { CURSOR } from "@/common/constant/cursor"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
-import { getElementByLabel } from "@/helpers/graphics/gremlin/functions/filter"
 import {
   isContainer,
   isViewContainer
 } from "@/helpers/graphics/gremlin/functions/is"
+import {
+  getRoot,
+  getSelector
+} from "@/helpers/graphics/gremlin/functions/query/find"
 import { roundToDecimal } from "@/utils/functions/math"
 import { nowTime } from "@/utils/functions/time"
 // import { webLog } from "@/utils/log"
@@ -172,7 +174,7 @@ class StageDrag {
     )
     targetContainer.position.copyFrom(pos) // ObservablePoint
     // TODO: 对一些相关元素进行处理
-    const selector = getElementByLabel(ELEMENT_FLAG.Selector, StageDrag._stage)
+    const selector = getSelector(StageDrag._stage)
     if (selector) {
       const pos = targetContainer.getGlobalPosition().clone()
       Selector.move(pos)
@@ -183,7 +185,7 @@ class StageDrag {
   private static stagePointerdown(e: FederatedPointerEvent): void {
     StageDrag._time = nowTime()
     StageDrag._velocity = new Point()
-    const root = getElementByLabel(ELEMENT_FLAG.Root, StageDrag._stage)
+    const root = getRoot(StageDrag._stage)
     if (root) {
       const endPoint = e.global.clone()
       StageDrag._point = endPoint
@@ -215,7 +217,7 @@ class StageDrag {
     }
     root.pivot.set(pivot.x, pivot.y)
     // TODO: 对一些相关元素进行处理
-    const selector = getElementByLabel(ELEMENT_FLAG.Selector, StageDrag._stage)
+    const selector = getSelector(StageDrag._stage)
     if (selector) {
       Selector.refresh()
     }

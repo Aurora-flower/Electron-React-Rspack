@@ -1,6 +1,7 @@
+import { getOrigin } from "@/features/window/location"
 import { webError } from "@/utils/log"
 
-export function join(rel: string, base = location.href): string {
+export function join(rel: string, base = getOrigin()): string {
   try {
     const baseURL = `${base}${base.endsWith("/") ? "" : "/"}`
     const url = new URL(rel, baseURL)
