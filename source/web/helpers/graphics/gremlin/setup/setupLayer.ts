@@ -79,6 +79,8 @@ export function initSettingsStaff(staff: Container): void {
 
 /**
  * @summary 绘制图层初始化操作
+ * @remarks
+ * - pivot 的设置显示是考虑到缩放的
  */
 export function initSettingsUiLayer(layer: Container): void {
   if (!layer) {
