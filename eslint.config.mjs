@@ -122,28 +122,13 @@ export default defineConfig([
         "error",
         {
           blankLine: "always",
-          prev: "export",
-          next: "*"
-        },
-        {
-          blankLine: "always",
-          prev: "function",
+          prev: ["export", "function", "class"],
           next: "*"
         },
         {
           blankLine: "always",
           prev: "import",
-          next: "function"
-        },
-        {
-          blankLine: "always",
-          prev: "import",
-          next: "const"
-        },
-        {
-          blankLine: "always",
-          prev: "import",
-          next: "export"
+          next: ["function", "const", "let", "var", "export", "class"]
         }
       ],
       "@typescript-eslint/no-unused-vars": [
