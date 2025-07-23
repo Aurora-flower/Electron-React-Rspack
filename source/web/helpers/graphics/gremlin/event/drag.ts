@@ -1,5 +1,6 @@
 import type { Container, FederatedPointerEvent } from "pixi.js"
 import { Point } from "pixi.js"
+import { MouseBtnCode } from "@/common/constant/btnCode"
 import { CURSOR } from "@/common/constant/cursor"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
@@ -89,15 +90,14 @@ class StageDrag {
     // }
     const startPoint = e.global.clone()
     StageDrag._point = startPoint
-
-    const btn = e.button
-    StageDrag._flag = btn
-    if (btn === 0) {
+    const btnCode = e.button
+    StageDrag._flag = btnCode
+    if (btnCode === MouseBtnCode.Left) {
       // 鼠标左键点击逻辑
       StageDrag.targetPointerdown(e)
-    } else if (btn === 1) {
-      // 滚轮点击逻辑
-    } else if (btn === 2) {
+    } else if (btnCode === MouseBtnCode.Middle) {
+      // 鼠标中键或滚轮点击逻辑
+    } else if (btnCode === MouseBtnCode.Right) {
       // 鼠标右键点击逻辑
       StageDrag.stagePointerdown(e)
     }
@@ -111,9 +111,9 @@ class StageDrag {
     // if (isViewContainer(target)) {
     //   target.cursor = CURSOR.Move
     // }
-    if (StageDrag._flag === 0) {
+    if (StageDrag._flag === MouseBtnCode.Left) {
       StageDrag.targetPointermove(e)
-    } else if (StageDrag._flag === 2) {
+    } else if (StageDrag._flag === MouseBtnCode.Right) {
       StageDrag.stagePointermove(e)
     }
   }
