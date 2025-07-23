@@ -2,7 +2,8 @@
   "extends": "./tsconfig.base.json",
   "include": [
     "types/global.d.ts",
-    "types/web/*.d.ts",
+    "types/web/**/*.d.ts",
+    "types/common/*.d.ts",
     "env.d.ts",
     "components.d.ts",
     "source/web/**/*.css",
