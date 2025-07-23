@@ -1,6 +1,3 @@
 [submodule "core"]
 	path = core
 	url = https://github.com/Aurora-flower/ER_CORE.git
-[submodule "submodules/PythonWork"]
-	path = submodules/PythonWork
-	url = https://github.com/Aurora-flower/Python-Work-Module.git

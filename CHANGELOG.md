@@ -24,5 +24,3 @@
 > 说明：以下模块处于早期阶段，功能未完备
 
 - `core/` - 核心运行时模块（含环境管理/脚本引擎/扩展机制）
-- `submodules/PythonWork` - Python 功能模块（API/爬虫/文件处理）
-- `submodules/RustWork` - Rust 功能模块（API/系统级操作）
