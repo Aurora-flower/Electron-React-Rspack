@@ -1,7 +1,8 @@
 {
   "include": [
     "types/global.d.ts",
-    "types/electron/*.d.ts",
+    "types/electron/**/*.d.ts",
+    "types/common/*.d.ts",
     "source/electron/**/*.ts",
     "source/preload/**/*.ts"
   ],
