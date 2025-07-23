@@ -1,2 +1,0 @@
-// sentence
-export const phrase = {}
