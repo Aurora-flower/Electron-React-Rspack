@@ -106,6 +106,7 @@ function singleConfig(
 
   if (isMain) {
     options.resolve!.alias = {
+      "@common": DIRECTORY.Source.common,
       "@main": DIRECTORY.Source.main
       // electron: require.resolve("electron"),
     }

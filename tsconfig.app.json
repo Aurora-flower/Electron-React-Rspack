@@ -7,6 +7,7 @@
     "env.d.ts",
     "components.d.ts",
     "source/web/**/*.css",
+    "source/common/**/*.ts",
     "source/web/**/*.ts",
     "source/web/**/*.tsx"
   ],
@@ -16,7 +17,8 @@
     "typeRoots": ["./node_modules/@types", "./types"],
     "types": ["css-modules", "react", "react-dom", "react-router", "three"],
     "paths": {
-      "@/*": ["source/web/*"]
+      "@/*": ["source/web/*"],
+      "@common/*": ["source/common/*"]
     },
     "jsx": "preserve",
     "experimentalDecorators": true,
