@@ -6,7 +6,7 @@ import {
   DEFAULT_RULER_SIZE,
   DEFAULT_SCALE_INTERVAL
 } from "@/helpers/graphics/gremlin/constant/defaultValue"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import { createText } from "@/helpers/graphics/gremlin/generator/text"

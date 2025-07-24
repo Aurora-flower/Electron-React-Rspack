@@ -1,6 +1,6 @@
 import type { Container } from "pixi.js"
 import PixiManager from "@/helpers/graphics/gremlin"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 
 export function byLabelFindChild(
   label: string,
