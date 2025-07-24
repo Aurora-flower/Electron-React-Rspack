@@ -3,12 +3,12 @@ import { join } from "node:path"
 // process.chdir('/Users')
 const CWD = process.cwd()
 
+/* ***** ***** ***** ***** Folder(Directory) Structure ***** ***** ***** ***** */
 interface ReturnInfo {
   baseUrl: string
   [key: string]: string
 }
 
-/* ***** ***** ***** ***** Folder(Directory) Structure ***** ***** ***** ***** */
 const DIRECTORY_STRUCTURE = {
   Output: "app",
   Static: "public",
@@ -76,7 +76,7 @@ type DirectoryStructureKey = keyof typeof DIRECTORY_STRUCTURE
 const _Directory_ = new Proxy(DIRECTORY_STRUCTURE, {
   get(target, key: DirectoryStructureKey): GetFolderInfo {
     if (!(key in target)) {
-      return undefined
+      return ""
     }
     const baseUrl = join(CWD, target[key])
     if (key === "Output") {
@@ -107,7 +107,11 @@ interface FileInfo {
   to?: string
 }
 
-function getFileTrend(form: string, name: string, to = undefined): FileInfo {
+function getFileTrend(
+  form: string = "",
+  name: string = "",
+  to?: string
+): FileInfo {
   return {
     from: join(form, name),
     to: to && join(to, name)
@@ -124,9 +128,6 @@ type FileStructure = {
 
 const _File_ = new Proxy(FILE_STRUCTURE, {
   get(target, key: FileStructureKey): GetFileInfo {
-    if (!(key in target)) {
-      return undefined
-    }
     const name = target[key]
     if (typeof key === "string" && key.indexOf("Env") > -1) {
       return getFileTrend(_Directory_.Config.baseUrl, name)
@@ -137,6 +138,7 @@ const _File_ = new Proxy(FILE_STRUCTURE, {
         _Directory_.Output.renderer
       )
     }
+    return getFileTrend()
   }
 }) as unknown as FileStructure
 
