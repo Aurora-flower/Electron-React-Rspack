@@ -1,7 +1,7 @@
 import type { Container } from "pixi.js"
 import { Graphics } from "pixi.js"
 import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultValue"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { drawLine } from "@/helpers/graphics/gremlin/generator/graphics/drawLine"
 import type { ContainerParent } from "@/helpers/graphics/gremlin/interface"
 import { roundToDecimal } from "@/utils/functions/math"

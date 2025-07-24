@@ -1,5 +1,5 @@
 import PixiManager from "@/helpers/graphics/gremlin"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { byLabelFindChild } from "@/helpers/graphics/gremlin/functions/query/find"
 
 function debugPixiStage(): void {

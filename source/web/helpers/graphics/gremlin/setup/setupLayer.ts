@@ -1,7 +1,7 @@
 import type { Container } from "pixi.js"
 import PixiManager from "@/helpers/graphics/gremlin"
 import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultValue"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
 import Ruler from "@/helpers/graphics/gremlin/controller/assistant/ruler"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"

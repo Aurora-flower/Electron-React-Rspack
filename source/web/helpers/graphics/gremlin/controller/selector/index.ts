@@ -1,7 +1,7 @@
 import type { Container, DestroyOptions } from "pixi.js"
 import { Graphics } from "pixi.js"
 import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultValue"
-import { ELEMENT_FLAG } from "@/helpers/graphics/gremlin/constant/elementFlag"
+import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 import { viewAppend } from "@/helpers/graphics/gremlin/functions/append"
 import { getCumulativeScale } from "@/helpers/graphics/gremlin/functions/compute"
 import { getSize } from "@/utils/functions/usually"

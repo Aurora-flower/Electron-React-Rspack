@@ -2,7 +2,11 @@ import type { PointData } from "pixi.js"
 import { Application } from "pixi.js"
 import { queryElement } from "@/features/document/dom-utils/query"
 import { removeElementsByTag } from "@/features/document/dom-utils/remove"
-import { DEFAULT_INIT_VIEW_SCALE } from "@/helpers/graphics/gremlin/constant/defaultValue"
+import {
+  DEFAULT_INIT_VIEW_SCALE,
+  MAX_SCALE,
+  MIN_SCALE
+} from "@/helpers/graphics/gremlin/constant/defaultValue"
 import { isVaildScale } from "@/helpers/graphics/gremlin/constant/helper"
 import Selector from "@/helpers/graphics/gremlin/controller/selector"
 import { setupPixiApp } from "@/helpers/graphics/gremlin/setup"

@@ -7,7 +7,7 @@ import {
   isText
 } from "@/helpers/graphics/gremlin/functions/is"
 
-export function deepClonePixiObject(target: AnyModel): AnyModel {
+function deepClonePixiObject(target: AnyModel): AnyModel {
   // TODO: 节点克隆
   switch (target) {
     case isContainer(target):
@@ -25,3 +25,5 @@ export function deepClonePixiObject(target: AnyModel): AnyModel {
   }
   return target
 }
+
+export default deepClonePixiObject
