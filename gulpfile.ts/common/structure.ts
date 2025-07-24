@@ -33,9 +33,11 @@ function getSourceStructure(baseUrl: string): ReturnInfo & {
   main: string
   preload: string
   renderer: string
+  common: string
 } {
   return {
     baseUrl,
+    common: join(baseUrl, "common"),
     main: join(baseUrl, "electron"),
     preload: join(baseUrl, "preload"),
     renderer: join(baseUrl, "web")

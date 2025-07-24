@@ -3,6 +3,7 @@
     "types/global.d.ts",
     "types/electron/**/*.d.ts",
     "types/common/*.d.ts",
+    "source/common/**/*.ts",
     "source/electron/**/*.ts",
     "source/preload/**/*.ts"
   ],
@@ -22,7 +23,8 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
-      "@main/*": ["source/electron/*"]
+      "@main/*": ["source/electron/*"],
+      "@common/*": ["source/common/*"]
     }
   }
 }
