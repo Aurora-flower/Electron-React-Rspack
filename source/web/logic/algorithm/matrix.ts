@@ -1,5 +1,5 @@
 /**
- * @summary 根据传入的尺寸获取一组矩阵信息
+ * @file 获取一组矩阵信息
  */
 
 import { getPoint, getSize, getSpace } from "@/utils/functions/usually"
@@ -34,6 +34,9 @@ export function getMatrixItem(
   }
 }
 
+/**
+ * @summary 根据传入的尺寸获取一组矩阵信息
+ */
 export function calculateMatrixCoordinates(
   size: SizeModel = getSize(100, 100),
   interval = getPoint(50, 50),

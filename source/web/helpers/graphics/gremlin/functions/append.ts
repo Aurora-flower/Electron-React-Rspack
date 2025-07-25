@@ -1,6 +1,6 @@
 import type { Container } from "pixi.js"
 // import { isContainer } from "@/helpers/graphics/gremlin/functions/is"
-import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
+// import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
 
 // export function appendChild(
 //   parent: Container,
@@ -20,8 +20,8 @@ import type { ConfigModel } from "@/helpers/graphics/gremlin/interface"
 
 export function viewAppend(
   parent: Container,
-  children: Array<Container> | Container = [],
-  _config?: Partial<ConfigModel>
+  children: Array<Container> | Container = []
+  // _config?: Partial<ConfigModel>
 ): void {
   // if (!parent) return //  config?.isNormalAppend, config?.zIndex
   // TODO: 需要支持控制添加的层级

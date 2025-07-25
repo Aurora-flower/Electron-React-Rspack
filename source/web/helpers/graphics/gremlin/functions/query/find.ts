@@ -1,5 +1,5 @@
 import type { Container } from "pixi.js"
-import PixiManager from "@/helpers/graphics/gremlin"
+import Gremlin from "@/helpers/graphics/gremlin"
 import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 
 export function byLabelFindChild(
@@ -25,8 +25,8 @@ export function getChildByLabel(
   label: string,
   root?: Container
 ): Container | null {
-  if (!PixiManager.app) return null
-  return byLabelFindChild(label, root ?? PixiManager.app.stage)
+  if (!Gremlin.app) return null
+  return byLabelFindChild(label, root ?? Gremlin.app.stage)
 }
 
 export function getSelector(parent?: Container): Container | null {

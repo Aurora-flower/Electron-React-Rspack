@@ -20,24 +20,24 @@ function getRootElement(root: string | HTMLElement): HTMLElement {
     : root
 }
 
-class PixiManager {
+class Gremlin {
   private static _app: Application | null = null
   static recordPivot: PointData
   static viewScale = DEFAULT_INIT_VIEW_SCALE
   static get viewSize(): SizeModel {
-    const renderer = PixiManager._app?.renderer
+    const renderer = Gremlin._app?.renderer
     return getSize(renderer?.width ?? 0, renderer?.height ?? 0)
   }
 
   static set viewSize(size: SizeModel) {
-    const app = PixiManager._app
+    const app = Gremlin._app
     if (app) {
       app.renderer.resize(size.width, size.height)
     }
   }
   // new Proxy(getSize(), {
   //   get(target: SizeModel, p: keyof SizeModel, receiver): number {
-  //     const app = PixiManager._app
+  //     const app = Gremlin._app
   //     if (p === "width" || p === "height") {
   //       return app ? app.renderer?.[p] : 0
   //     }
@@ -60,13 +60,13 @@ class PixiManager {
     })
     removeElementsByTag(domElement, "CANVAS")
     domElement.appendChild(app.canvas)
-    PixiManager._app = app
-    PixiManager.initDrawingBoard(app)
+    Gremlin._app = app
+    Gremlin.initDrawingBoard(app)
     return app
   }
 
   static get app(): Application | null {
-    return PixiManager._app ?? null
+    return Gremlin._app ?? null
   }
 
   /**
@@ -80,23 +80,23 @@ class PixiManager {
   }
 
   static setDrawingBoardScale(scale: number): void {
-    const stage = PixiManager.app?.stage
+    const stage = Gremlin.app?.stage
     if (!stage || !isVaildScale(scale)) {
       return
     }
-    PixiManager.viewScale = scale
+    Gremlin.viewScale = scale
     updateRenderer(stage)
-    // console.log("缩放设置", karte, staff, layer, PixiManager._app)
+    // console.log("缩放设置", karte, staff, layer, Gremlin._app)
 
     // TODO: 其他的更新操作
     Selector.draw()
   }
 
   static destroy(): void {
-    PixiManager.viewScale = DEFAULT_INIT_VIEW_SCALE
-    webLog("PixiManager", "destroy", PixiManager._app)
-    PixiManager._app = null
+    Gremlin.viewScale = DEFAULT_INIT_VIEW_SCALE
+    webLog("Gremlin", "destroy", Gremlin._app)
+    Gremlin._app = null
   }
 }
 
-export default PixiManager
+export default Gremlin

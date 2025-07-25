@@ -1,4 +1,4 @@
-import { IPC_CHANNEL_NAME } from "@main/common/macros"
+import { IPC_CHANNEL_NAME } from "@common/constant/mod/channel"
 import WindowManager from "@main/helpers/manager/window"
 import { sendLog } from "@main/toolkit/logger"
 

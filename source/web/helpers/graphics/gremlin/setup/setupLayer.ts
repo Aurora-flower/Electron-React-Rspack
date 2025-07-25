@@ -1,5 +1,5 @@
 import type { Container } from "pixi.js"
-import PixiManager from "@/helpers/graphics/gremlin"
+import Gremlin from "@/helpers/graphics/gremlin"
 import { DEFAULT_RULER_SIZE } from "@/helpers/graphics/gremlin/constant/defaultValue"
 import ELEMENT_FLAG from "@/helpers/graphics/gremlin/constant/elementFlag"
 import Grid from "@/helpers/graphics/gremlin/controller/assistant/grid"
@@ -24,15 +24,24 @@ import { webLog } from "@/utils/log"
  */
 export function setupLayer(stage: Container): void {
   // TODO: 图层与标尺、网格绘制、画板（虚拟）的显示
-  const basisLayer = createContainer(stage, {
-    label: ELEMENT_FLAG.Basis
-  })
-  const layerContainer = createContainer(stage, {
-    label: ELEMENT_FLAG.UI
-  })
-  const staffContainer = createContainer(stage, {
-    label: ELEMENT_FLAG.Staff
-  })
+  const basisLayer = createContainer(
+    {
+      label: ELEMENT_FLAG.Basis
+    },
+    stage
+  )
+  const layerContainer = createContainer(
+    {
+      label: ELEMENT_FLAG.UI
+    },
+    stage
+  )
+  const staffContainer = createContainer(
+    {
+      label: ELEMENT_FLAG.Staff
+    },
+    stage
+  )
   initSettingsBasisLayer(basisLayer)
   initSettingsUiLayer(layerContainer)
   initSettingsStaff(staffContainer)
@@ -40,8 +49,8 @@ export function setupLayer(stage: Container): void {
 }
 
 function drawingAssistant(flag: 0 | 1 = 0): void {
-  const size = PixiManager.viewSize
-  const scale = PixiManager.viewScale
+  const size = Gremlin.viewSize
+  const scale = Gremlin.viewScale
   if (flag === 0) {
     Grid.draw(size, scale)
   } else if (flag === 1) {
@@ -60,8 +69,8 @@ export function initSettingsBasisLayer(basisLayer: Container): void {
     return
   }
   basisLayer.pivot.set(-DEFAULT_RULER_SIZE)
-  const size = PixiManager.viewSize
-  Grid.init(basisLayer, size, PixiManager.viewScale)
+  const size = Gremlin.viewSize
+  Grid.init(basisLayer, size, Gremlin.viewScale)
   webLog("setupLayer", "initSettingsBasisLayer", basisLayer)
 }
 
@@ -72,8 +81,14 @@ export function initSettingsStaff(staff: Container): void {
   if (!staff) {
     return
   }
-  const size = PixiManager.viewSize
-  Ruler.init(staff, size, PixiManager.viewScale)
+  const size = Gremlin.viewSize
+  Ruler.init(staff, size, Gremlin.viewScale)
+  // const tips = "使用鼠标右键平移视窗焦点，使用滚轮缩放视图"
+  // createText({
+  //   text: tips,
+  //   fontSize: 12,
+  //   fill: 0xffffff
+  // }, staff)
   webLog("setupLayer", "initSettingsStaff", staff)
 }
 
@@ -89,39 +104,54 @@ export function initSettingsUiLayer(layer: Container): void {
   Selector.init(layer)
   Controller.init(layer)
   layer.pivot.set(-DEFAULT_RULER_SIZE)
-  const root = createContainer(layer, {
-    label: ELEMENT_FLAG.Root
-  })
-  root.scale.set(PixiManager.viewScale)
+  const root = createContainer(
+    {
+      label: ELEMENT_FLAG.Root
+    },
+    layer
+  )
+  root.scale.set(Gremlin.viewScale)
 
   // TODO: 画板 + 渲染元素
-  const virtualCanvas = createContainer(root, {
-    label: ELEMENT_FLAG.Board
-  })
-  const view = createGraphics(virtualCanvas, {
-    alpha: 0.2
-  })
+  const virtualCanvas = createContainer(
+    {
+      label: ELEMENT_FLAG.Board
+    },
+    root
+  )
+  const view = createGraphics(
+    {
+      alpha: 0.2
+    },
+    virtualCanvas
+  )
   drawRect(view, { x: 0, y: 0 }, { width: 1334, height: 750 })
 
   // TEST
-  const parent = createContainer(virtualCanvas, {
-    label: "parent"
-    // position: {
-    //   x: 100,
-    //   y: 100
-    // },
-    // scale: {
-    //   x: 0.7,
-    //   y: 0.7
-    // }
-  })
-  const graphic1 = createGraphics(parent, {
-    label: "child1",
-    scale: {
-      x: 0.7,
-      y: 0.7
-    }
-  })
+  const parent = createContainer(
+    {
+      label: "parent"
+      // position: {
+      //   x: 100,
+      //   y: 100
+      // },
+      // scale: {
+      //   x: 0.7,
+      //   y: 0.7
+      // }
+    },
+    virtualCanvas
+  )
+  const graphic1 = createGraphics(
+    {
+      label: "child1",
+      scale: {
+        x: 0.7,
+        y: 0.7
+      }
+    },
+    parent
+  )
   drawRect(
     graphic1,
     { x: 0, y: 0 },
@@ -131,17 +161,20 @@ export function initSettingsUiLayer(layer: Container): void {
       color: "#b06bd6"
     }
   )
-  const graphic2 = createGraphics(parent, {
-    label: "child2",
-    position: {
-      x: 1334 - 70,
-      y: 750 - 70
+  const graphic2 = createGraphics(
+    {
+      label: "child2",
+      position: {
+        x: 1334 - 70,
+        y: 750 - 70
+      },
+      scale: {
+        x: 0.7,
+        y: 0.7
+      }
     },
-    scale: {
-      x: 0.7,
-      y: 0.7
-    }
-  })
+    parent
+  )
   drawRect(
     graphic2,
     { x: 0, y: 0 },
@@ -184,8 +217,8 @@ function updateLayer(stage: Container): void {
   if (!root || !layer) {
     return
   }
-  root.scale.set(PixiManager.viewScale)
-  webLog("setupLayer", "updateLayer", PixiManager.viewScale)
+  root.scale.set(Gremlin.viewScale)
+  webLog("setupLayer", "updateLayer", Gremlin.viewScale)
 }
 
 export function updateRenderer(stage: Container): void {
