@@ -7,8 +7,11 @@
 test/
 
 .cache
-
-private
+.virtual
+.inputs
+.packages
+.private
+.stories
 
 node_modules
 
