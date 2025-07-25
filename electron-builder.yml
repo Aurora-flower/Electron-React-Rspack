@@ -12,7 +12,7 @@ copyright: Copyright © 2025 ${productName} ${author}
 buildDependenciesFromSource: true
 
 directories:
-  app: app
+  app: app # packages
   output: release
 
 # files:
