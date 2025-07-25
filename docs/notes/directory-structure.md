@@ -9,3 +9,7 @@
 ---
 
 ## 目录结构 - Directory Structure
+
+### 输出目录 - Output Directory
+
+### 源目录 - Source Directory

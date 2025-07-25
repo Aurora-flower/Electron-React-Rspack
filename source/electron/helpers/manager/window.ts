@@ -1,12 +1,9 @@
-import { WINDOW_OPTIONS } from "@main/common/config/window"
+import { MAIN_WINDOW_OPTIONS } from "@main/common/config/window"
 import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import { createBrowserWindow } from "@main/features/window"
 import setupWindow from "@main/helpers/setup/setupWindow"
 import { resolvePath } from "@main/node/path/resolvePath"
-import type {
-  BrowserWindow,
-  BrowserWindowConstructorOptions
-} from "electron/main"
+import type { BrowserWindow } from "electron/main"
 
 interface WindowState {
   isLoaded: boolean
@@ -15,7 +12,6 @@ interface WindowState {
 class WindowManager {
   private mainWindow: BrowserWindow
   private static instance: WindowManager
-  private windowOptions: BrowserWindowConstructorOptions = WINDOW_OPTIONS
   private windows: Map<string, BrowserWindow> = new Map()
   private isClosing = false
 
@@ -33,7 +29,7 @@ class WindowManager {
     const url = remoteURL ? remoteURL : localURL
     const win = createBrowserWindow(
       url,
-      this.windowOptions,
+      MAIN_WINDOW_OPTIONS,
       !remoteURL,
       setupWindow
     )

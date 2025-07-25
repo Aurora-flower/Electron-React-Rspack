@@ -103,17 +103,20 @@ class Ruler {
     } else if (flag === "top") {
       position.y = point.y + 5
     }
-    createText(Ruler._scaleLabel, {
-      position,
-      text: roundToDecimal(value, 0),
-      angle: flag === "left" ? -90 : 0,
-      anchor: {
-        x: 0.5,
-        y: 0.5
+    createText(
+      {
+        position,
+        text: roundToDecimal(value, 0),
+        angle: flag === "left" ? -90 : 0,
+        anchor: {
+          x: 0.5,
+          y: 0.5
+        },
+        style,
+        alpha: 0.5
       },
-      style,
-      alpha: 0.5
-    })
+      Ruler._scaleLabel
+    )
   }
 
   private static rulerLogic(

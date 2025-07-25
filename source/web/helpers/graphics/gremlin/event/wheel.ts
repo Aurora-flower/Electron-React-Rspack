@@ -1,5 +1,5 @@
 import type { Container, FederatedWheelEvent } from "pixi.js"
-import PixiManager from "@/helpers/graphics/gremlin"
+import Gremlin from "@/helpers/graphics/gremlin"
 import { roundToDecimal } from "@/utils/functions/math"
 
 const ZOOM_SPEED = 0.05
@@ -14,13 +14,13 @@ export function addStageWheel(stage: Container): void {
       e.stopPropagation()
       // stage.cursor = e.deltaY > 0 ? CURSOR.Out : CURSOR.In
       const delta = e.deltaY
-      const canvasScale = PixiManager.viewScale
+      const canvasScale = Gremlin.viewScale
       const scale = roundToDecimal(
         delta > 0 ? canvasScale - ZOOM_SPEED : canvasScale + ZOOM_SPEED
       )
       // TODO: 以鼠标为中心缩放
       // if (isVaildScale(scale)) {
-      //   const zoomFactor = roundToDecimal(PixiManager.viewScale - scale, 2)
+      //   const zoomFactor = roundToDecimal(Gremlin.viewScale - scale, 2)
       //   const root = getRoot(stage)
       //   if (root) {
       //     // const mousePosition = e.global.clone() // 获取鼠标在画布上的位置（缩放中心点）
@@ -30,7 +30,7 @@ export function addStageWheel(stage: Container): void {
       //   }
       // }
 
-      PixiManager.setDrawingBoardScale(scale)
+      Gremlin.setDrawingBoardScale(scale)
     }
   // }, 300)
   stage.on("wheel", wheelHandler)

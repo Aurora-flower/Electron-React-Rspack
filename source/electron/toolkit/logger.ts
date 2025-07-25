@@ -1,4 +1,5 @@
-import { IPC_CHANNEL_NAME, MAIN_WINDOW_NAME } from "@main/common/macros"
+import { IPC_CHANNEL_NAME } from "@common/constant/mod/channel"
+import { MAIN_WINDOW_NAME } from "@main/common/macros"
 import LoggerManager from "@main/helpers/manager/logger"
 import WindowManager from "@main/helpers/manager/window"
 import { errorMessage } from "@main/utils/mod/error"

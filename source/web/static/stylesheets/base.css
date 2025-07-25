@@ -1,4 +1,4 @@
-/* semantic color variables for this project */
+/* 此项目的语义颜色变量 - semantic color variables for this project */
 :root {
   --color-white: #ffffff;
   --color-black: #000000;
@@ -62,6 +62,7 @@ body {
   background: var(--color-background);
 }
 
+/* *********************** 禁止用户选择 - Disable user selection *********************** */
 @supports (user-select: none) {
   body {
     -webkit-user-select: none; /* Safari/Chrome */
@@ -69,4 +70,13 @@ body {
     -ms-user-select: none; /* IE/Edge */
     user-select: none; /* 标准属性 */
   }
+}
+
+/* *********************** 允许点击穿透 - Allow click through *********************** */
+.overlay {
+  pointer-events: none; /* 允许点击穿透 */
+}
+
+.beneath {
+  pointer-events: auto; /* 确保下面的元素能正常接收点击 */
 }
