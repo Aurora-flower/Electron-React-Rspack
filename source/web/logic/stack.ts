@@ -141,9 +141,12 @@ class Stack {
     this._count = 0
   }
 
-  push(commands: CommandElement, isCleanHistory: boolean = true): void {
-    if (isCleanHistory) {
-      this.clearHistory()
+  push(commands: CommandElement, isRecord: boolean = true): void {
+    // if (isCleanHistory) {
+    //   this.clearHistory()
+    // }
+    if (isRecord) {
+      this.appendCache(commands)
     }
     this._state.push(commands)
     if (this.stateSize() > MAX_COUNT) {
@@ -153,7 +156,7 @@ class Stack {
   }
 
   record(commands: CommandElement): void {
-    this._history.push(commands)
+    this._history.push(commands) // 是否使用 unshift
     if (this.historySize() > MAX_COUNT) {
       this._history.shift()
     }

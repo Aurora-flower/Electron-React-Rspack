@@ -19,7 +19,7 @@ class LoggerManager {
   }
 
   initLogger(): void {
-    const logFilePath = "./application.log"
+    const logFilePath = "./.cache/application.log"
     removeFile(logFilePath)
     Logger.transports.file.level = "verbose"
     Logger.transports.file.format =
