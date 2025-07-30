@@ -3,15 +3,16 @@ import * as React from "react"
 import type { DOMRouterOpts, RouteObject } from "react-router-dom"
 // react-router-dom 是基于 react-router 扩展的版本
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import HOCPage from "@/components/HOC/Page"
+// import HOCPage from "@/components/HOC/Page"
 import LayoutView from "@/ui/layout"
 import GraphicsPage from "@/ui/pages/Graphics"
 import PixiJsGraphics from "@/ui/pages/Graphics/PixiJS"
-import Home from "@/ui/pages/Home"
+
+// import Home from "@/ui/pages/Home"
 
 // const PixiJsGraphics = React.lazy(() => import("@/ui/pages/Graphics/PixiJS"))
 
-const EnhancedHome = HOCPage(Home)
+// const EnhancedHome = HOCPage(Home)
 
 const RouteOptions: RouteObject[] = [
   {
@@ -20,7 +21,8 @@ const RouteOptions: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <EnhancedHome logSource="dashboard" />
+        // element: <EnhancedHome logSource="dashboard" />,
+        element: <PixiJsGraphics />
       }
     ]
   },
