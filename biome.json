@@ -16,7 +16,8 @@
       "!**/submodules/**/*",
       "!**/release/**/*",
       "!**/dist/**/*",
-      "!**/test/**/*"
+      "!**/test/**/*",
+      "!**/types/**/*"
     ]
   },
   "formatter": {

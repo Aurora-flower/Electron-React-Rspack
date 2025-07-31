@@ -1,3 +1,8 @@
+/**
+ * @file 创建 Store 管理
+ * @description
+ * 推荐 zustand 创建 Store
+ */
 import { configureStore } from "@reduxjs/toolkit"
 import rootReducer from "@/stores/reducers"
 

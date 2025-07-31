@@ -123,6 +123,7 @@ function singleConfig(
     }
     options.output!.publicPath = "/"
     options.resolve!.alias = {
+      "@common": DIRECTORY.Source.common,
       "@": DIRECTORY.Source.renderer
     }
     options.resolve!.extensions = options.resolve!.extensions?.concat([
