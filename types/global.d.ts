@@ -124,7 +124,7 @@ declare global {
   interface PointModel {
     x: number
     y: number
-  }
+  } // 对应 pixi.js PointData
 
   interface SizeModel {
     width: number

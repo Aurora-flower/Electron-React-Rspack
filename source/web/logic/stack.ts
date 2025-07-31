@@ -178,6 +178,7 @@ class Stack {
     if (!this.canRedo()) {
       return
     }
+    this._count++
     if (this.cacheSize() > 0) {
       const commands = this.dropCache()
       this.push(commands!)
