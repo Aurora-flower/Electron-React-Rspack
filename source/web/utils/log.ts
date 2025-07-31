@@ -1,4 +1,4 @@
-import { errorMessage } from "@/utils/filters/error"
+import { errorMessage } from "@common/filters/error"
 
 export const LOG_COLOR = {
   red: "color: red;",
